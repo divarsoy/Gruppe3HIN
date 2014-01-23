@@ -33,7 +33,7 @@ git add -A
 9. Du ser nå at det er en fil som må commites. Det betyr å legge til endringen i prosjektet med kun en setning som forteller hva du har gjort. Tast inn følgende for å commite:
 git commit -a
 
-10. Det kommer nå opp en texteditor. (Vim, tror jeg) Skriv inn en setning øverst i vinduet og (trykk :w:q i vim) lagre og quite. 
+10. Det kommer nå opp en texteditor. (Vim, tror jeg) Skriv inn en setning øverst i vinduet (trykk på 'Insert' knappen for å kunne begynne å skrive i Vim) og (trykk :w 'enter' :q 'enter' i vim for å) lagre og quite. (Vim er en eldre texteditor med masse muligheter, men den kan være vanskelig å bruke de første gangene)
 
 11. Tast så inn følgende for å push endringene dine til github:
 git push origin master
@@ -43,7 +43,7 @@ Du har nå lastet opp dine endringer. For framtiden trenger du bare å bruke pun
 Nyttige kommandoer:
 
 Status for din Git. (Trenger du å legge til en commit, er det noen filer som bør legges til?):
-Git status
+git status
 
 For å se eksterne gitreservoairer, tast:
-Git remote -v
+git remote -v
