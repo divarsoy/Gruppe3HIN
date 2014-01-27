@@ -18,7 +18,7 @@ git pull origin
 -> Dag A. Ivarsøy <-
 -> Andreas Dyrøy Jansson <-
 -> Silje Thune Hauknes <-
-->
+-> Eivind Johan Skreddernes <-
 ->
 ->
 
