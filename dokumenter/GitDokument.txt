@@ -18,7 +18,11 @@ git pull origin
 -> Dag A. Ivarsøy <-
 -> Andreas Dyrøy Jansson <-
 -> Silje Thune Hauknes <-
+<<<<<<< HEAD
 -> Eivind Johan Skreddernes <-
+=======
+-> Pål Gerrard Gaare-Skogsrud <-
+>>>>>>> cc2953377220fc9e454abaa55422ee00167616d9
 ->
 ->
 
