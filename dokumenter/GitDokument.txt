@@ -17,8 +17,9 @@ git pull origin
 
 -> Dag A. Ivarsøy <-
 -> Andreas Dyrøy Jansson <-
--> Test av konflikt
-->
+-> Silje Thune Hauknes <-
+-> Eivind Johan Skreddernes <-
+-> Pål Gerrard Gaare-Skogsrud <-
 ->
 ->
 
