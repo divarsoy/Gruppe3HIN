@@ -30,7 +30,7 @@ namespace SysUt14Gr03.Models
     }
 }
 
-namespace SysUt14Gr03
+namespace SysUt14Gr03.Models
 {
     public static class IdentityHelper
     {

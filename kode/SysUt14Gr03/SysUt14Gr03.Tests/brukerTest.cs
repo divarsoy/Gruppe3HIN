@@ -8,12 +8,12 @@ namespace SysUt14Gr03.Tests
     public class brukerTest
     {
 
-        Bruker bruker;
+        BrukerEksempel bruker;
 
         [TestInitialize()]
         public void Initialize()
         {
-            bruker = new Bruker();
+            bruker = new BrukerEksempel();
         }
 
 

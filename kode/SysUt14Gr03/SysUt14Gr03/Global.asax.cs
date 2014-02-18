@@ -6,6 +6,8 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Security;
 using System.Web.SessionState;
+using System.Data.Entity;
+using SysUt14Gr03.Models;
 
 namespace SysUt14Gr03
 {
@@ -16,6 +18,9 @@ namespace SysUt14Gr03
             // Code that runs on application startup
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            // Setter opp databasen
+            Database.SetInitializer(new DataBaseInit());
         }
     }
 }

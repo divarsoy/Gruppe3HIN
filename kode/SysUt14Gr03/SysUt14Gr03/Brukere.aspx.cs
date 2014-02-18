@@ -11,11 +11,11 @@ namespace SysUt14Gr03
 {
     public partial class Brukere : System.Web.UI.Page
     {
-        public Bruker bruker; 
+        public BrukerEksempel bruker; 
         
         protected void Page_Load(object sender, EventArgs e)
         {
-            bruker = new Bruker();
+            bruker = new BrukerEksempel();
             bruker.Etternavn = "Dag";
             bruker.Fornavn = "Ivarsøy";
         }
