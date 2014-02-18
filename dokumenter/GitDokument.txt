@@ -20,8 +20,7 @@ git pull origin
 -> Silje Thune Hauknes <-
 -> Eivind Johan Skreddernes <-
 -> Pål Gerrard Gaare-Skogsrud <-
-->
-->
+-> Frederik Johnsen <-
 
 7. Lagre fila
 
