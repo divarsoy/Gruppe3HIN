@@ -289,7 +289,6 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BrukerPreferanse.cs" />
-    <Compile Include="Models\DataBaseInit.cs" />
     <Compile Include="Models\Gruppe.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Kommentar.cs" />
