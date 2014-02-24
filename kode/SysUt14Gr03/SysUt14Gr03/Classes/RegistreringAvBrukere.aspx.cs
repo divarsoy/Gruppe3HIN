@@ -15,10 +15,18 @@ namespace SysUt14Gr03.Classes
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+   
         }
 
-        
+        protected void opprettBruker(string _etternavn, string _fornavn, string _epost)
+        {
+            using (var db = new Context())
+            {
+                var nyBruker = new Bruker { Etternavn = etternavn, Fornavn = fornavn, Epost = epost };
+                db.Bruker.Add(nyBruker);
+                db.SaveChanges();
+            }
+        }
 
         protected void bt_adm_reg_Click(object sender, EventArgs e)
         {
