@@ -37,7 +37,7 @@ namespace SysUt14Gr03
                 msg.To.Add(email);
 
                 updatePassword(email, newPassword);
-                
+
                 msg.Subject = "tilsendt nytt passord";
 
                 msg.Body = "Hei " + Email.Text.Trim() + "!\n" + "Her har du et nytt passord for din bruker: " + newPassword + "\nVi vil anbefale deg å å skifte passord når du får logget deg inn til noe som er mer personlig";
