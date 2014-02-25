@@ -167,6 +167,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Epost.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="HowToQueryTheDatabase.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="lostPassword.aspx" />
     <Content Include="packages.config" />
@@ -289,6 +290,7 @@
       <DependentUpon>changeUser.aspx</DependentUpon>
     </Compile>
     <Compile Include="Classes\BrukerEksempel.cs" />
+    <Compile Include="Classes\Queries.cs" />
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -312,6 +314,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="HowToQueryTheDatabase.aspx.cs">
+      <DependentUpon>HowToQueryTheDatabase.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HowToQueryTheDatabase.aspx.designer.cs">
+      <DependentUpon>HowToQueryTheDatabase.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
