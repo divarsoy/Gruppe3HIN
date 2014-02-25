@@ -18,9 +18,8 @@ namespace SysUt14Gr03.Models
         public bool Aktivert { get; set; }
         public bool Aktiv { get; set; }
         public DateTime opprettet { get; set; }
-        public int brukerPreferanse_id { get; set; }
 
-        public virtual BrukerPreferanse BrukerPreferanse { get; set; }
+        public virtual ICollection<BrukerPreferanse> BrukerPreferanser { get; set; }
         public virtual ICollection<Rettighet> Rettigheter { get; set; }
         public virtual ICollection<Moete> Moeter { get; set; }
         public virtual ICollection<Kommentar> Kommentarer { get; set; }
