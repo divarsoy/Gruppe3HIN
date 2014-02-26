@@ -38,6 +38,7 @@ namespace SysUt14Gr03.Models
                     m.ToTable("BrukerTeamMapping");
                 });
 
+            // Mange til mange forhold Teams <=> Grupper
             modelBuilder.Entity<Team>()
                 .HasMany(t => t.Grupper)
                 .WithMany(t => t.Teams)
@@ -48,6 +49,7 @@ namespace SysUt14Gr03.Models
                     m.ToTable("GruppeTeamMapping");
                 });
 
+            // Mange til mange forhold Moeter <=> Brukere
             modelBuilder.Entity<Moete>()
                 .HasMany(t => t.Brukere)
                 .WithMany(t => t.Moeter)
@@ -58,6 +60,7 @@ namespace SysUt14Gr03.Models
                     m.ToTable("BrukerMoeteMapping");
                 });
 
+            // Mange til mange forhold Oppgaver <=> Brukere
             modelBuilder.Entity<Oppgave>()
                 .HasMany(t => t.Brukere)
                 .WithMany(t => t.Oppgaver)
