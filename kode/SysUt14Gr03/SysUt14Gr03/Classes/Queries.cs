@@ -17,6 +17,26 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+
+        // Henter brukere som har epost _Epost
+        static public List<Bruker> GetBruker(string _Epost)
+        {
+            using (var context = new Context())
+            {
+                var IQueryList = context.Brukere.Where(p => p.Epost == _Epost);
+                if (IQueryList.Any())
+                {
+                    return IQueryList.ToList<Bruker>();
+                }
+                else
+                {
+                    return null;
+                }
+                
+            }
+        }
+        
+
         static public List<Bruker> GetAlleAktiveBrukere()
         {
             using (var context = new Context())
@@ -26,6 +46,28 @@ namespace SysUt14Gr03.Classes
                                    select bruker).ToList<Bruker>();
                 return brukerListe;
             
+            }
+        }
+
+        static public Team GetTeam(int _team_id)
+        {
+            using (var context = new Context())
+            {
+                var team = context.Teams.Find(_team_id);
+                return team;
+            }
+
+        }
+
+        static public List<Team> GetAlleAktiveTeam()
+        {
+            using (var context = new Context())
+            {
+                var teamListe = (from teams in context.Teams
+                                   where teams.Aktiv == true
+                                   select teams).ToList<Team>();
+                return teamListe;
+
             }
         }
 
