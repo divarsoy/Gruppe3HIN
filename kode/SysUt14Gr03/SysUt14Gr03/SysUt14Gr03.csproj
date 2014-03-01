@@ -160,6 +160,7 @@
     <Content Include="Account\OpenAuthProviders.ascx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\RegisterExternalLogin.aspx" />
+    <Content Include="AdministratorForside.aspx" />
     <Content Include="AdministrerTeam.aspx" />
     <Content Include="AktiverKonto.aspx" />
     <Content Include="Brukere.aspx" />
@@ -169,6 +170,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Pictures\blomst.jpg" />
     <Content Include="OpprettTeam.aspx" />
     <Content Include="RegistreringAvBrukere.aspx" />
     <Content Include="Rettigheter.aspx" />
@@ -265,6 +267,13 @@
     </Compile>
     <Compile Include="Account\RegisterExternalLogin.aspx.designer.cs">
       <DependentUpon>RegisterExternalLogin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdministratorForside.aspx.cs">
+      <DependentUpon>AdministratorForside.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdministratorForside.aspx.designer.cs">
+      <DependentUpon>AdministratorForside.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdministrerTeam.aspx.cs">
       <DependentUpon>AdministrerTeam.aspx</DependentUpon>
