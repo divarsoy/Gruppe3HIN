@@ -162,12 +162,13 @@
     <Content Include="Account\RegisterExternalLogin.aspx" />
     <Content Include="AktiverKonto.aspx" />
     <Content Include="Brukere.aspx" />
+    <Content Include="BrukerForside.aspx" />
     <Content Include="changeUser.aspx" />
-    <Content Include="Classes\BrukerForside.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="RegistreringAvBrukere.aspx" />
     <Content Include="Rettigheter.aspx" />
     <Content Include="Epost.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -287,6 +288,13 @@
     <Compile Include="Brukere.aspx.designer.cs">
       <DependentUpon>Brukere.aspx</DependentUpon>
     </Compile>
+    <Compile Include="BrukerForside.aspx.cs">
+      <DependentUpon>BrukerForside.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BrukerForside.aspx.designer.cs">
+      <DependentUpon>BrukerForside.aspx</DependentUpon>
+    </Compile>
     <Compile Include="changeUser.aspx.cs">
       <DependentUpon>changeUser.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -294,14 +302,7 @@
     <Compile Include="changeUser.aspx.designer.cs">
       <DependentUpon>changeUser.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Classes\BrukerEksempel.cs" />
-    <Compile Include="Classes\BrukerForside.aspx.cs">
-      <DependentUpon>BrukerForside.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Classes\BrukerForside.aspx.designer.cs">
-      <DependentUpon>BrukerForside.aspx</DependentUpon>
-    </Compile>
+    <Compile Include="BrukerEksempel.cs" />
     <Compile Include="Classes\Queries.cs" />
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
@@ -316,6 +317,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RegistreringAvBrukere.aspx.cs">
+      <DependentUpon>RegistreringAvBrukere.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RegistreringAvBrukere.aspx.designer.cs">
+      <DependentUpon>RegistreringAvBrukere.aspx</DependentUpon>
     </Compile>
     <Compile Include="Rettigheter.aspx.cs">
       <DependentUpon>Rettigheter.aspx</DependentUpon>
