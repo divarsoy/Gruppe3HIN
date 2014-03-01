@@ -52,7 +52,6 @@
     <Compile Include="brukerTest.cs" />
     <Compile Include="OpprettTeamTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegistreringAvBrukereTest.cs" />
     <Compile Include="UnitTest1.cs" />
   </ItemGroup>
   <ItemGroup>
