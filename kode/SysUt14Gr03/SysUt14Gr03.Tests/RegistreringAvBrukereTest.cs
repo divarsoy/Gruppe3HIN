@@ -10,5 +10,6 @@ namespace SysUt14Gr03.Tests
     [TestClass]
     class RegistreringAvBrukereTest
     {
+
     }
 }
