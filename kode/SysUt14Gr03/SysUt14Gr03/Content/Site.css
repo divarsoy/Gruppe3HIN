@@ -27,7 +27,15 @@ input[type="password"] {
     }
 }
 
-.kalender {
-    border: solid 1px black;
+.kolonner {
     height: 200px;
+}
+
+.kant {
+    border: 1px solid black;
+    height: 200px;
+}
+
+.redText {
+    color: red;
 }
