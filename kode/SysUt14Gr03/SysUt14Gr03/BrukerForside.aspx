@@ -2,6 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
     <h1>Dette er en tittel</h1>
+
     <div class="col-md-6">
         <p>Første kolonne</p>
     </div>

@@ -4,15 +4,18 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using SysUt14Gr03.Classes;
 using SysUt14Gr03.Models;
 
-namespace SysUt14Gr03.Classes
+namespace SysUt14Gr03
 {
-    public partial class WebForm1 : System.Web.UI.Page
+    public partial class RegistreringAvBrukere : System.Web.UI.Page
     {
         private string etternavn;
         private string fornavn;
         private string epost;
+        private Bruker bruker;
+        private bool emailUnq = true;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -31,10 +34,28 @@ namespace SysUt14Gr03.Classes
 
         protected void bt_adm_reg_Click(object sender, EventArgs e)
         {
-            etternavn = tb_reg_etternavn.Text;
-            fornavn = tb_reg_fornavn.Text;
-            epost = tb_reg_epost.Text;
+            if (tb_reg_etternavn.Text.Length < 256)
+                etternavn = tb_reg_etternavn.Text;
+            else
+                FeilmeldingEtternavn.Visible = true;
+            if (tb_reg_fornavn.Text.Length < 256)
+                fornavn = tb_reg_fornavn.Text;
+            else
+                FeilMeldingFornavn.Visible = true;
+                
+            for (int i = 0; i < Queries.GetAlleAktiveBrukere().Count; i++)
+            {
+                bruker = Queries.GetBruker(i);
+                if (bruker.Epost == tb_reg_epost.Text)
+                emailUnq = false;
+            }
+
+            if (emailUnq && tb_reg_epost.Text.Length < 256)
+                epost = tb_reg_epost.Text;
+            else
+                FeilMeldingEpost.Visible = true;
         }
+
 
 
     }

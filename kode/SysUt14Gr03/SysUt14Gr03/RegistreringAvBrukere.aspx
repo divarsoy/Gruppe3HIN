@@ -1,28 +1,22 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RegistreringAvBrukere.aspx.cs" Inherits="SysUt14Gr03.Classes.WebForm1" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="RegistreringAvBrukere.aspx.cs" Inherits="SysUt14Gr03.RegistreringAvBrukere" %>
 
-<!DOCTYPE html>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body style="height: 193px; width: 250px">
-    <form id="form1" runat="server">
-        <p>
-            &nbsp;</p>
-        <p>
-            Etternavn<asp:TextBox ID="tb_reg_etternavn" runat="server" OnTextChanged="TextBox1_TextChanged" Width="170px"></asp:TextBox>
-        </p>
-        Fornavn<asp:TextBox ID="tb_reg_fornavn" runat="server" OnTextChanged="tb_reg_fornavn_TextChanged" Width="168px"></asp:TextBox>
-        <p>
-            Epost<asp:TextBox ID="tb_reg_epost" runat="server" OnTextChanged="tb_reg_epost_TextChanged" Width="168px"></asp:TextBox>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        </p>
-        <p style="margin-left: 40px">
-            <asp:Button ID="bt_adm_reg" runat="server" OnClick="Button1_Click" Text="Registrer Bruker" />
-        </p>
-        <p>
-            &nbsp;</p>
-    </form>
-</body>
-</html>
+    <h1>Registrer ny bruker</h1>
+    <div class="col-md-1">
+        <p>Etternavn</p>
+        <p>Fornavn</p>
+        <p>Epost</p>
+    </div>
+    <div class="col-md-11">
+        <p><asp:TextBox ID="tb_reg_etternavn" runat="server" Width="166px"></asp:TextBox></p>
+        <p><asp:TextBox ID="tb_reg_fornavn" runat="server"  Width="168px"></asp:TextBox></p>
+        <p><asp:TextBox ID="tb_reg_epost" runat="server"  Width="168px"></asp:TextBox></p>
+        <p><asp:Button ID="bt_adm_reg" runat="server"  Text="Registrer Bruker" OnClick="bt_adm_reg_Click" /></p>
+        <p><asp:Label ID="FeilmeldingEtternavn" runat="server" ForeColor="Red" Text="Etternavn kan ikke være lenger enn 256 tegn" Visible="False"></asp:Label> </p>
+        <p><asp:Label ID="FeilMeldingFornavn" runat="server" ForeColor="Red" Text="Fornavn kan ikke være lenger enn 256 tegn" Visible="False"></asp:Label> </p>
+        <p><asp:Label ID="FeilMeldingEpost" runat="server" ForeColor="Red" Text="Epost kan ikke være lenger enn 256 tegn og må ikke være registrert tidligere" Visible="False"></asp:Label> </p>
+    </div>
+        
+</asp:Content>
+

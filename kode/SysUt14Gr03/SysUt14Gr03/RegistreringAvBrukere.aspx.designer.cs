@@ -7,19 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SysUt14Gr03.Classes {
+namespace SysUt14Gr03 {
     
     
-    public partial class WebForm1 {
-        
-        /// <summary>
-        /// form1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+    public partial class RegistreringAvBrukere {
         
         /// <summary>
         /// tb_reg_etternavn control.
@@ -56,5 +47,32 @@ namespace SysUt14Gr03.Classes {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button bt_adm_reg;
+        
+        /// <summary>
+        /// FeilmeldingEtternavn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label FeilmeldingEtternavn;
+        
+        /// <summary>
+        /// FeilMeldingFornavn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label FeilMeldingFornavn;
+        
+        /// <summary>
+        /// FeilMeldingEpost control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label FeilMeldingEpost;
     }
 }
