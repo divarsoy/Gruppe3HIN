@@ -57,7 +57,9 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web.DataVisualization" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -158,13 +160,20 @@
     <Content Include="Account\OpenAuthProviders.ascx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\RegisterExternalLogin.aspx" />
+    <Content Include="AdministratorForside.aspx" />
+    <Content Include="AdministrerTeam.aspx" />
     <Content Include="AktiverKonto.aspx" />
     <Content Include="Brukere.aspx" />
+    <Content Include="BrukerForside.aspx" />
     <Content Include="changeUser.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Pictures\blomst.jpg" />
+    <Content Include="OpprettTeam.aspx" />
+    <Content Include="RegistreringAvBrukere.aspx" />
+    <Content Include="Rettigheter.aspx" />
     <Content Include="Epost.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="HowToQueryTheDatabase.aspx" />
@@ -175,6 +184,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Account\Web.config" />
+    <None Include="Properties\PublishProfiles\SysUt14Gr03.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -258,6 +268,20 @@
     <Compile Include="Account\RegisterExternalLogin.aspx.designer.cs">
       <DependentUpon>RegisterExternalLogin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AdministratorForside.aspx.cs">
+      <DependentUpon>AdministratorForside.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdministratorForside.aspx.designer.cs">
+      <DependentUpon>AdministratorForside.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdministrerTeam.aspx.cs">
+      <DependentUpon>AdministrerTeam.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdministrerTeam.aspx.designer.cs">
+      <DependentUpon>AdministrerTeam.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AktiverKonto.aspx.cs">
       <DependentUpon>AktiverKonto.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -282,6 +306,13 @@
     <Compile Include="Brukere.aspx.designer.cs">
       <DependentUpon>Brukere.aspx</DependentUpon>
     </Compile>
+    <Compile Include="BrukerForside.aspx.cs">
+      <DependentUpon>BrukerForside.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BrukerForside.aspx.designer.cs">
+      <DependentUpon>BrukerForside.aspx</DependentUpon>
+    </Compile>
     <Compile Include="changeUser.aspx.cs">
       <DependentUpon>changeUser.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -289,7 +320,7 @@
     <Compile Include="changeUser.aspx.designer.cs">
       <DependentUpon>changeUser.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Classes\BrukerEksempel.cs" />
+    <Compile Include="BrukerEksempel.cs" />
     <Compile Include="Classes\Queries.cs" />
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
@@ -304,6 +335,27 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OpprettTeam.aspx.cs">
+      <DependentUpon>OpprettTeam.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OpprettTeam.aspx.designer.cs">
+      <DependentUpon>OpprettTeam.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RegistreringAvBrukere.aspx.cs">
+      <DependentUpon>RegistreringAvBrukere.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RegistreringAvBrukere.aspx.designer.cs">
+      <DependentUpon>RegistreringAvBrukere.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Rettigheter.aspx.cs">
+      <DependentUpon>Rettigheter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Rettigheter.aspx.designer.cs">
+      <DependentUpon>Rettigheter.aspx</DependentUpon>
     </Compile>
     <Compile Include="Epost.aspx.cs">
       <DependentUpon>Epost.aspx</DependentUpon>

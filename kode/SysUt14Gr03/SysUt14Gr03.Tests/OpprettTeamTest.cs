@@ -8,8 +8,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace SysUt14Gr03.Tests
 {
     [TestClass]
-    class RegistreringAvBrukereTest
+    class OpprettTeamTest
     {
-
+        // noko meir kommer her
     }
 }
