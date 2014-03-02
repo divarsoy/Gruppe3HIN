@@ -12,7 +12,8 @@ namespace SysUt14Gr03
 {
     public partial class changeUser : System.Web.UI.Page
     {
-        private int userID = 1;
+        private Login getInfo;
+        private int userID;
         private string oldDBPassword = "johnsen";
         private lostPassword updatePassord;
         private string newPassword;
@@ -21,7 +22,9 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            getInfo = new Login();
             updatePassord = new lostPassword();
+            userID = getInfo.getBrukerID();
         }
         protected void btnPasswordChange_Click(object sender, EventArgs e)
         {

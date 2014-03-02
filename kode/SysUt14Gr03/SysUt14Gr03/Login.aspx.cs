@@ -11,6 +11,8 @@ namespace SysUt14Gr03
 {
     public partial class Login : Page
     {
+        private List<Bruker> brukerList;
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -23,7 +25,7 @@ namespace SysUt14Gr03
             
             if (brukerListR != null)
             {
-                List<Bruker> brukerList = brukerListR.ToList<Bruker>();
+                brukerList = brukerListR.ToList<Bruker>();
                 string oppgittPassord = Password.Text;
                 string riktigPassord = brukerList[0].Passord;
 
@@ -37,6 +39,18 @@ namespace SysUt14Gr03
             
             // Feil brukernavn eller passord
             InvalidCredentialsMessage.Visible = true;
+        }
+        public int getBrukerID()
+        {
+            return brukerList[0].Bruker_id;
+        }
+        public string getBrukerNavn()
+        {
+            return brukerList[0].Brukernavn;
+        }
+        public string getEmail()
+        {
+            return brukerList[0].Epost;
         }
     }
 }
