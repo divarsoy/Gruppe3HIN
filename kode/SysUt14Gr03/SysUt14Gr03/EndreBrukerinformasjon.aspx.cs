@@ -11,7 +11,7 @@ namespace SysUt14Gr03
 {
     public partial class EndreBrukerinformasjon : System.Web.UI.Page
     {
-        private List<Bruker> brukerListe;
+       // private List<Bruker> brukerListe;
 
         protected void Page_Load(object sender, EventArgs e)
         {
