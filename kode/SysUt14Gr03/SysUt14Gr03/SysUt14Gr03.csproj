@@ -172,6 +172,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="EndreBrukerinformasjon.aspx" />
     <Content Include="Pictures\blomst.jpg" />
     <Content Include="OpprettTeam.aspx" />
     <Content Include="RegistreringAvBrukere.aspx" />
@@ -351,6 +352,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EndreBrukerinformasjon.aspx.cs">
+      <DependentUpon>EndreBrukerinformasjon.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EndreBrukerinformasjon.aspx.designer.cs">
+      <DependentUpon>EndreBrukerinformasjon.aspx</DependentUpon>
     </Compile>
     <Compile Include="OpprettTeam.aspx.cs">
       <DependentUpon>OpprettTeam.aspx</DependentUpon>
