@@ -22,15 +22,6 @@ namespace SysUt14Gr03 {
         protected global::System.Web.UI.WebControls.CheckBoxList cbl_team;
         
         /// <summary>
-        /// bt_arkivereTeam control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button bt_arkivereTeam;
-        
-        /// <summary>
         /// bt_endreTeam control.
         /// </summary>
         /// <remarks>
@@ -38,5 +29,14 @@ namespace SysUt14Gr03 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button bt_endreTeam;
+        
+        /// <summary>
+        /// bt_arkivereTeam control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button bt_arkivereTeam;
     }
 }

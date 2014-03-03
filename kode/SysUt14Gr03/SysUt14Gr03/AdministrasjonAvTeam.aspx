@@ -2,6 +2,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
         <asp:CheckBoxList ID="cbl_team" runat="server">
         </asp:CheckBoxList>
+        <asp:Button ID="bt_endreTeam" runat="server" Text="Endre Team" OnClick="bt_endreTeam_Click" />
         <asp:Button ID="bt_arkivereTeam" runat="server" Text="Arkivere Team" />
-        <asp:Button ID="bt_endreTeam" runat="server" Text="Endre Team" />
 </asp:Content>
