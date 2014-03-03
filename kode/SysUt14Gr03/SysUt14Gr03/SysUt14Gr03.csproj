@@ -160,19 +160,21 @@
     <Content Include="Account\OpenAuthProviders.ascx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\RegisterExternalLogin.aspx" />
+    <Content Include="AdministrasjonAvGruppe.aspx" />
     <Content Include="AdministrasjonAvTeam.aspx" />
     <Content Include="AdministrasjonAvTeamBrukere.aspx" />
     <Content Include="AdministratorForside.aspx" />
     <Content Include="AdministrerTeam.aspx" />
     <Content Include="AktiverKonto.aspx" />
     <Content Include="Brukere.aspx" />
-    <Content Include="BrukerForside.aspx" />
+    <Content Include="Default.aspx" />
     <Content Include="changeUser.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="EndreBrukerinformasjon.aspx" />
+    <Content Include="OpprettGruppe.aspx" />
     <Content Include="Pictures\blomst.jpg" />
     <Content Include="OpprettTeam.aspx" />
     <Content Include="RegistreringAvBrukere.aspx" />
@@ -218,7 +220,6 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Site.Master" />
@@ -270,6 +271,13 @@
     </Compile>
     <Compile Include="Account\RegisterExternalLogin.aspx.designer.cs">
       <DependentUpon>RegisterExternalLogin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdministrasjonAvGruppe.aspx.cs">
+      <DependentUpon>AdministrasjonAvGruppe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdministrasjonAvGruppe.aspx.designer.cs">
+      <DependentUpon>AdministrasjonAvGruppe.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdministrasjonAvTeam.aspx.cs">
       <DependentUpon>AdministrasjonAvTeam.aspx</DependentUpon>
@@ -323,12 +331,12 @@
     <Compile Include="Brukere.aspx.designer.cs">
       <DependentUpon>Brukere.aspx</DependentUpon>
     </Compile>
-    <Compile Include="BrukerForside.aspx.cs">
-      <DependentUpon>BrukerForside.aspx</DependentUpon>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="BrukerForside.aspx.designer.cs">
-      <DependentUpon>BrukerForside.aspx</DependentUpon>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="changeUser.aspx.cs">
       <DependentUpon>changeUser.aspx</DependentUpon>
@@ -346,19 +354,19 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
     <Compile Include="EndreBrukerinformasjon.aspx.cs">
       <DependentUpon>EndreBrukerinformasjon.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="EndreBrukerinformasjon.aspx.designer.cs">
       <DependentUpon>EndreBrukerinformasjon.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OpprettGruppe.aspx.cs">
+      <DependentUpon>OpprettGruppe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OpprettGruppe.aspx.designer.cs">
+      <DependentUpon>OpprettGruppe.aspx</DependentUpon>
     </Compile>
     <Compile Include="OpprettTeam.aspx.cs">
       <DependentUpon>OpprettTeam.aspx</DependentUpon>
