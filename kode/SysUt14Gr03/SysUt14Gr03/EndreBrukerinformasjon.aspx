@@ -7,7 +7,7 @@
     <h2>Endre Brukerinformasjon</h2>
     <p></p>
     
-    <asp:GridView RowStyle-HorizontalAlign="Center" ID="gridViewEndre" runat="server" AutoGenerateColumns="false" DataKeyNames="Bruker_id" OnRowEditing="gridViewEndre_RowEditing" OnRowCancelingEdit="gridViewEndre_RowCancelingEdit" OnRowUpdating="gridViewEndre_RowUpdating" ShowFooter="False" ShowHeader="True">
+    <asp:GridView RowStyle-HorizontalAlign="Center" ID="gridViewEndre" runat="server" AutoGenerateColumns="false" DataKeyNames="Bruker_id" OnRowEditing="gridViewEndre_RowEditing" OnRowCancelingEdit="gridViewEndre_RowCancelingEdit" OnRowUpdating="gridViewEndre_RowUpdating" OnRowCommand="gridViewEndre_RowCommand" ShowFooter="False" ShowHeader="True">
 
         <Columns>
             <asp:TemplateField HeaderText="Etternavn">
@@ -42,10 +42,17 @@
                     <asp:CheckBox ID="cboxAktiv" Checked='<%#Bind("Aktiv") %>' runat="server" />
                      </EditItemTemplate>
             </asp:TemplateField>
+            <asp:TemplateField HeaderText="Aktiveringslink" Visible="false">
+        <EditItemTemplate>
+            <asp:Button ID="btnSendNy"  
+            CommandArgument="<%# ((GridViewRow) Container).RowIndex %>
+            " CommandName="Send" runat="server" Text="Send Ny" />
+        </EditItemTemplate>
+        </asp:TemplateField> 
              <asp:CommandField ShowEditButton="true" />
         </Columns>
       
     </asp:GridView>
-    <asp:Button ID="btnLagre" OnClick="btnLagre_Click" Text="Lagre" runat="server" />
+  
        
 </asp:Content>
