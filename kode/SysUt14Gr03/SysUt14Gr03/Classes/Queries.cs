@@ -69,6 +69,8 @@ namespace SysUt14Gr03.Classes
         }
          * */
 
+
+
         static public Team GetTeam(int _team_id)
         {
             using (var context = new Context())
@@ -91,10 +93,24 @@ namespace SysUt14Gr03.Classes
             }
         }
 
-        static public List<Gruppe> GetAlleAktiveGrupper()
+        static public List<Oppgave> GetAlleAktiveOppgaver()
         {
             using (var context = new Context())
             {
+                var oppgaveListe = (from oppgaver in context.Oppgaver
+                                 where oppgaver.Aktiv == true
+                                 select oppgaver).ToList<Oppgave>();
+                return oppgaveListe;
+
+            }
+        }
+
+        static public List<Gruppe> GetAlleAktiveGrupper()
+        {
+            List<Team> teams;
+            using (var context = new Context())
+            {
+                // teams = context.Teams.Include(x => x.).ToList();
                 var gruppeListe = (from grupper in context.Grupper
                                  where grupper.Aktiv == true
                                  select grupper).ToList<Gruppe>();

@@ -22,12 +22,12 @@ namespace SysUt14Gr03
             }
         }
 
-        /*
+        
         protected void lsbGrupper_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Gjør noe med valgt gruppe
             int index = lsbGrupper.SelectedIndex;
-            gruppeListe = Queries.GetAlleAktiveGrupper();
+            //gruppeListe = Queries.GetAlleAktiveGrupper();
             List<Team> teamList = gruppeListe[index].Teams.ToList<Team>();
             for (int i = 0; i < teamList.Count; i++)
             {
@@ -35,18 +35,19 @@ namespace SysUt14Gr03
             }
             lsbTeam.Visible = true;
         }
-         * */
+         
 
-        /*
+        
         protected void btnVisTeam_Click(object sender, EventArgs e)
         {
             int index = lsbGrupper.SelectedIndex;
+            
             List<Team> teamList = gruppeListe[index].Teams.ToList<Team>();
             for (int i = 0; i < teamList.Count; i++)
             {
                 lsbTeam.Items.Add(teamList[i].Navn);
             }
         }
-         * */
+         
     }
 }

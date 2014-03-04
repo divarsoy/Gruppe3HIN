@@ -175,6 +175,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="EndreBrukerinformasjon.aspx" />
     <Content Include="OpprettGruppe.aspx" />
+    <Content Include="OpprettTidsfristPaaOppgave.aspx" />
     <Content Include="Pictures\blomst.jpg" />
     <Content Include="OpprettTeam.aspx" />
     <Content Include="RegistreringAvBrukere.aspx" />
@@ -374,6 +375,13 @@
     </Compile>
     <Compile Include="OpprettTeam.aspx.designer.cs">
       <DependentUpon>OpprettTeam.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OpprettTidsfristPaaOppgave.aspx.cs">
+      <DependentUpon>OpprettTidsfristPaaOppgave.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OpprettTidsfristPaaOppgave.aspx.designer.cs">
+      <DependentUpon>OpprettTidsfristPaaOppgave.aspx</DependentUpon>
     </Compile>
     <Compile Include="RegistreringAvBrukere.aspx.cs">
       <DependentUpon>RegistreringAvBrukere.aspx</DependentUpon>
