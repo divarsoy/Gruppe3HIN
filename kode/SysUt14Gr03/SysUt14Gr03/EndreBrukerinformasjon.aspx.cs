@@ -71,7 +71,7 @@ namespace SysUt14Gr03
             gridViewEndre.EditIndex = -1;
             visBrukere();
         }
-        private void sendBekreftelse(string epost)
+        private void sendBekreftelse(string epost, string fornavn)
         {
 
 
@@ -95,7 +95,7 @@ namespace SysUt14Gr03
                 //har begynt å lage en aktiverkonto side 
                 ActivationUrl = Server.HtmlEncode("http://localhost:60154/AktiverKonto.aspx?Epost=" + email + "&Token=" + token);
 
-                msg.Body = "Hei " + "kakskiv" + "!\n" + "Takk for at du registrerte deg hos oss\n" + " <a href='" + ActivationUrl + "'>Klikk her for å aktivere</a>  din konto.";
+                msg.Body = "Hei " + fornavn + "!\n" + "Takk for at du registrerte deg hos oss\n" + " <a href='" + ActivationUrl + "'>Klikk her for å aktivere</a>  din konto.";
                 msg.IsBodyHtml = true;
                 smtp.Credentials = new NetworkCredential("sysut14gr03@gmail.com", password);
                 smtp.Port = 587;
@@ -121,7 +121,8 @@ namespace SysUt14Gr03
             {
                 int index = Convert.ToInt32(e.CommandArgument.ToString());
                 TextBox tbEmail = (TextBox)gridViewEndre.Rows[index].FindControl("tbEpost");
-                sendBekreftelse(tbEmail.Text);
+                TextBox tbFirstname = (TextBox)gridViewEndre.Rows[index].FindControl("tbFornavn");
+                sendBekreftelse(tbEmail.Text, tbFirstname.Text);
             }
         }
     }
