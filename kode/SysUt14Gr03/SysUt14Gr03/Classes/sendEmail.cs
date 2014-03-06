@@ -17,9 +17,6 @@ namespace SysUt14Gr03.Classes
 
         public void sendEpost(string epost, string message, string subject, string activationURL, List<Bruker> users, ArrayList brukere)
         {
-            string email = string.Empty;
-            email = epost;
-
             try
             {
                 msg = new MailMessage();
@@ -27,13 +24,14 @@ namespace SysUt14Gr03.Classes
 
                 //bruker gruppe eposten som avsender
                 msg.From = new MailAddress("sysut14gr03@gmail.com");
-                if(users != null || brukere != null)
-                {
+                if(users != null)
                     for (int i = 0; i < users.Count; i++)
                         msg.To.Add(users[i].ToString());
-                }
+                else if(brukere != null)
+                    for (int i = 0; i < users.Count; i++)
+                        msg.To.Add(brukere[i].ToString());
                 else
-                    msg.To.Add(email);
+                    msg.To.Add(epost);
 
                 msg.Subject = subject;
 
@@ -55,7 +53,5 @@ namespace SysUt14Gr03.Classes
                 return;
             }
         }
-
-        public object userr { get; set; }
     }
 }
