@@ -176,6 +176,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="HistorikkStattestikk.aspx" />
     <Content Include="EndreBrukerinformasjon.aspx" />
+    <Content Include="EpostPreferanser.aspx" />
     <Content Include="OpprettGruppe.aspx" />
     <Content Include="OpprettTidsfristPaaOppgave.aspx" />
     <Content Include="Pictures\blomst.jpg" />
@@ -373,6 +374,13 @@
     </Compile>
     <Compile Include="EndreBrukerinformasjon.aspx.designer.cs">
       <DependentUpon>EndreBrukerinformasjon.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EpostPreferanser.aspx.cs">
+      <DependentUpon>EpostPreferanser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EpostPreferanser.aspx.designer.cs">
+      <DependentUpon>EpostPreferanser.aspx</DependentUpon>
     </Compile>
     <Compile Include="OpprettGruppe.aspx.cs">
       <DependentUpon>OpprettGruppe.aspx</DependentUpon>
