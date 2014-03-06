@@ -77,11 +77,11 @@ namespace SysUt14Gr03
             try
             {
                 passord = ComputeHash(Password.Text, new SHA256CryptoServiceProvider());
-                Email.Text = epost;
-                Username.Text = brukernavn;
-                Aftername.Text = etternavn;
-                Firstname.Text = fornavn;
-                Im_adress.Text = imAdresse;
+               epost = Email.Text;
+                brukernavn = Username.Text;
+                etternavn = Aftername.Text;
+                fornavn = Firstname.Text;
+                imAdresse = Im_adress.Text;
 
                 // confirmUser(Username.Text, Aftername.Text, Firstname.Text, Email.Text, Im_adress.Text, password);
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('Kontoen din er aktivert');", true);

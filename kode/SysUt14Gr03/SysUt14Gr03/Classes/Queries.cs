@@ -49,6 +49,28 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        /*
+         * Ikke klar
+        static public List<Team> GetTeamFromGruppe(int _gruppe_id)
+        {
+            using (var context = new Context())
+            {
+                var IQueryList = context.Teams.Where(p => p. == _gruppe_id);
+                if (IQueryList.Any())
+                {
+                    return IQueryList.ToList<Bruker>();
+                }
+                else
+                {
+                    return null;
+                }
+
+            }
+        }
+         * */
+
+
+
         static public Team GetTeam(int _team_id)
         {
             using (var context = new Context())
@@ -67,6 +89,32 @@ namespace SysUt14Gr03.Classes
                                    where teams.Aktiv == true
                                    select teams).ToList<Team>();
                 return teamListe;
+
+            }
+        }
+
+        static public List<Oppgave> GetAlleAktiveOppgaver()
+        {
+            using (var context = new Context())
+            {
+                var oppgaveListe = (from oppgaver in context.Oppgaver
+                                 where oppgaver.Aktiv == true
+                                 select oppgaver).ToList<Oppgave>();
+                return oppgaveListe;
+
+            }
+        }
+
+        static public List<Gruppe> GetAlleAktiveGrupper()
+        {
+            List<Team> teams;
+            using (var context = new Context())
+            {
+                // teams = context.Teams.Include(x => x.).ToList();
+                var gruppeListe = (from grupper in context.Grupper
+                                 where grupper.Aktiv == true
+                                 select grupper).ToList<Gruppe>();
+                return gruppeListe;
 
             }
         }

@@ -10,33 +10,33 @@
 namespace SysUt14Gr03 {
     
     
-    public partial class BrukerForside {
+    public partial class AdministrasjonAvTeam {
         
         /// <summary>
-        /// tempButton control.
+        /// cbl_team control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button tempButton;
+        protected global::System.Web.UI.WebControls.CheckBoxList cbl_team;
         
         /// <summary>
-        /// Calendar1 control.
+        /// bt_arkivereTeam control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar Calendar1;
+        protected global::System.Web.UI.WebControls.Button bt_arkivereTeam;
         
         /// <summary>
-        /// Image1 control.
+        /// bt_endreTeam control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image1;
+        protected global::System.Web.UI.WebControls.Button bt_endreTeam;
     }
 }

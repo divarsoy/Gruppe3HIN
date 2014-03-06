@@ -10,33 +10,42 @@
 namespace SysUt14Gr03 {
     
     
-    public partial class BrukerForside {
+    public partial class AdministrasjonAvTeamBrukere {
         
         /// <summary>
-        /// tempButton control.
+        /// cbl_TeamBrukere control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button tempButton;
+        protected global::System.Web.UI.WebControls.CheckBoxList cbl_TeamBrukere;
         
         /// <summary>
-        /// Calendar1 control.
+        /// bt_fjerneBruker control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar Calendar1;
+        protected global::System.Web.UI.WebControls.Button bt_fjerneBruker;
         
         /// <summary>
-        /// Image1 control.
+        /// cbl_brukere control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image1;
+        protected global::System.Web.UI.WebControls.CheckBoxList cbl_brukere;
+        
+        /// <summary>
+        /// bt_leggeTilBruker control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button bt_leggeTilBruker;
     }
 }

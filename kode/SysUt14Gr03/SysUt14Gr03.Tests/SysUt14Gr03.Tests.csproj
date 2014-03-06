@@ -55,6 +55,7 @@
     <Compile Include="RegistreringAvBrukereTest.cs" />
     <Compile Include="lostPasswordTest.cs" />
     <Compile Include="changeUserinfoTest.cs" />
+    <Compile Include="UnitTest1.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SysUt14Gr03\SysUt14Gr03.csproj">
