@@ -12,6 +12,8 @@ namespace SysUt14Gr03
     public partial class OpprettTeam : System.Web.UI.Page
     {
         private List<Bruker> brukerListe;
+        private string teamNavn;
+        private Classes.sendEmail sendMsg;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -48,7 +50,7 @@ namespace SysUt14Gr03
                 }
             }
 
-            string teamNavn = txtTeamNavn.Text;
+            teamNavn = txtTeamNavn.Text;
 
             if (teamNavn != string.Empty && selectedUsers.Count > 0)
             {
@@ -59,6 +61,7 @@ namespace SysUt14Gr03
                     var nyttTeam = new Team { Navn = teamNavn, Aktiv = true, Opprettet = DateTime.Now, Brukere = selectedUsers };
                     db.Teams.Add(nyttTeam);
                     db.SaveChanges();
+                    this.sendEpost();
                 }
             }
             else
@@ -71,6 +74,13 @@ namespace SysUt14Gr03
         {
             // Popup spør om bekreftelse
             // Går tilbake til forrige side
+        }
+        public void sendEpost()
+        {
+            string message = "Du har nu har blitt valgt ut til og bli medlem av det nye Teamet: " + teamNavn;
+            string subject = "Medlem av ny team";
+            
+            sendMsg.sendEpost(null, message, subject, null, brukerListe);
         }
     }
 }
