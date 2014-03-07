@@ -49,7 +49,7 @@ namespace SysUt14Gr03
                 {
                     Opprettet = DateTime.Now,
                     Aktiv = true,
-                    userStory = tbBeskrivelse.Text,
+                    UserStory = tbBeskrivelse.Text,
                     Estimat = estimering,
                     Brukere = selectedBruker,
                     Prosjekt_id = prosjekt_id,

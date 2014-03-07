@@ -283,6 +283,90 @@ namespace SysUt14Gr03.Migrations
             prosjekter.ForEach(element => context.Prosjekter.AddOrUpdate(prosjekt => prosjekt.Navn, element));
             context.SaveChanges();
 
+            var statuser = new List <Status> {
+                new Status {
+                    Navn = "Klar",
+                    Oppgaver = new List<Oppgave>()
+                },
+                new Status {
+                    Navn = "Startet",
+                    Oppgaver = new List<Oppgave>()
+                },
+                new Status {
+                    Navn = "Under arbeid",
+                    Oppgaver = new List<Oppgave>()
+                },
+                new Status {
+                    Navn = "Ferdig",
+                    Oppgaver = new List<Oppgave>()
+                }
+            };
+            statuser.ForEach(element => context.Status.AddOrUpdate(status => status.Navn, element));
+            context.SaveChanges();
+
+            var prioriteringer = new List <Prioritering> {
+                new Prioritering {
+                    Navn = "1",
+                    Oppgaver = new List<Oppgave>()
+                },
+                                new Prioritering {
+                    Navn = "2",
+                    Oppgaver = new List<Oppgave>()
+                },
+                                new Prioritering {
+                    Navn = "3",
+                    Oppgaver = new List<Oppgave>()
+                },
+                                new Prioritering {
+                    Navn = "4",
+                    Oppgaver = new List<Oppgave>()
+                },
+                                new Prioritering {
+                    Navn = "5",
+                    Oppgaver = new List<Oppgave>()
+                },
+                                new Prioritering {
+                    Navn = "6",
+                    Oppgaver = new List<Oppgave>()
+                },
+                                new Prioritering {
+                    Navn = "7",
+                    Oppgaver = new List<Oppgave>()
+                },
+                                new Prioritering {
+                    Navn = "8",
+                    Oppgaver = new List<Oppgave>()
+                },
+                                new Prioritering {
+                    Navn = "9",
+                    Oppgaver = new List<Oppgave>()
+                },
+                                new Prioritering {
+                    Navn = "10",
+                    Oppgaver = new List<Oppgave>()
+                }
+            };
+
+            prioriteringer.ForEach(element => context.Prioriteringer.AddOrUpdate(prioritering => prioritering.Navn, element));
+            context.SaveChanges();
+
+            /*
+            var oppgaver = new List <Oppgave> {
+            new Oppgave {
+                Tittel = "Opprette notat",
+                UserStory = "Som bruker ønsker jeg å kunne opprette et notat",
+                Krav = "Notatet skal ikke overgå en side",
+                Estimat = 3,
+                BruktTid = 0,
+                Aktiv = true,
+                Opprettet = DateTime.Now,
+                Prosjekt_id = context.Prosjekter.FirstOrDefault(prosjekt => prosjekt.Navn == "Rød Elv").Prosjekt_id,
+                OppgaveGruppe_id = 
+
+            }
+             
+        }
+            */
             /*
              * var brukerRettigheter = new List<BrukerRettigheter>
             {
