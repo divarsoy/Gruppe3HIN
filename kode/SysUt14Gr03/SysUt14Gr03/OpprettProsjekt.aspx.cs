@@ -27,15 +27,6 @@ namespace SysUt14Gr03
                 teamListe = Queries.GetAlleAktiveTeam();
                 gruppeListe = Queries.GetAlleAktiveGrupper();
 
-
-                using (var context = new Context())
-                {
-                    System.Windows.Forms.BindingSource bindingSource1 = new System.Windows.Forms.BindingSource();
-                    bindingSource1.DataSource = context.Prosjekter.ToList<Prosjekt>();
-                    gridViewProsjekt.DataSource = bindingSource1;
-                    gridViewProsjekt.DataBind();
-                }
-
                 for (int i = 0; i < teamListe.Count(); i++)
                 {
                     Team team = teamListe[i];
@@ -75,6 +66,7 @@ namespace SysUt14Gr03
 
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('Prosjektet ble lagret');", true);
+          
             Response.Redirect("OpprettProsjekt.aspx");
 
         }

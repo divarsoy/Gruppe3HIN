@@ -26,7 +26,7 @@ namespace SysUt14Gr03
                 for (int i = 0; i < brukerListe.Count; i++)
                 {
                     Bruker bruker = brukerListe[i];
-                   // ddlBrukere.Items.Add(new ListItem(bruker.Fornavn, bruker.Bruker_id.ToString()));
+                    ddlBrukere.Items.Add(new ListItem(bruker.Fornavn, bruker.Bruker_id.ToString()));
                 }
                 for (int i = 0; i < prosjektListe.Count; i++)
                 {
