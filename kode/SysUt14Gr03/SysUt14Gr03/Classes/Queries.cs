@@ -56,6 +56,16 @@ namespace SysUt14Gr03.Classes
                                      where prosjekter.Aktiv == true
                                      select prosjekter).ToList<Prosjekt>();
                 return prosjektListe;
+
+            }
+        }
+        static public List<Prioritering> GetAllePrioriteringer(){
+
+            using (var context = new Context())
+            {
+                var priori = (from prioriteringer in context.Prioriteringer
+                              select prioriteringer).ToList<Prioritering>();
+                return priori;
             }
         }
         /*
@@ -114,17 +124,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
-        static public List<Prosjekt> GetAlleAktiveProsjekter()
-        {
-            using (var context = new Context())
-            {
-                var prosjektListe = (from prosjekter in context.Prosjekter
-                                    where prosjekter.Aktiv == true
-                                    select prosjekter).ToList<Prosjekt>();
-                return prosjektListe;
-
-            }
-        }
+      
 
         static public List<Gruppe> GetAlleAktiveGrupper()
         {

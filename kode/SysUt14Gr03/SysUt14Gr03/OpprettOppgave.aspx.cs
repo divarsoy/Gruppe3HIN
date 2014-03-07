@@ -14,26 +14,29 @@ namespace SysUt14Gr03
         private List<Bruker> brukerListe;
         private List<Bruker> selectedBruker = new List<Bruker>();
         private List<Prosjekt> prosjektListe;
+        private List<Prioritering> pri;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 brukerListe = Queries.GetAlleAktiveBrukere();
                 prosjektListe = Queries.GetAlleAktiveProsjekter();
+                pri = Queries.GetAllePrioriteringer();
                 for (int i = 0; i < brukerListe.Count; i++)
                 {
                     Bruker bruker = brukerListe[i];
-                    ddlBrukere.Items.Add(new ListItem(bruker.Fornavn, bruker.Bruker_id.ToString()));
+                   // ddlBrukere.Items.Add(new ListItem(bruker.Fornavn, bruker.Bruker_id.ToString()));
                 }
                 for (int i = 0; i < prosjektListe.Count; i++)
                 {
                     Prosjekt prosjekt = prosjektListe[i];
                     ddlProsjekt.Items.Add(new ListItem(prosjekt.Navn, prosjekt.Prosjekt_id.ToString()));
                 }
-                using (var context = new Context())
+                for (int i = 0; i < pri.Count; i++)
                 {
-                    Prioritering pri = context.Prioriteringer.First<Prioritering>();
-                    ddlPrioritet.Items.Add(new ListItem(pri.Navn, pri.Prioritering_id.ToString()));
+                    Prioritering priori = pri[i];
+                    ddlPrioritet.Items.Add(new ListItem(priori.Navn, priori.Prioritering_id.ToString()));
                 }
             }
         }
@@ -43,7 +46,7 @@ namespace SysUt14Gr03
             {
                 int priorietring_id = Convert.ToInt32(ddlPrioritet.SelectedValue);
                 int prosjekt_id = Convert.ToInt32(ddlProsjekt.SelectedValue);
-                float estimering = (float)Convert.ToDouble(TbEstimering.Text);
+                float estimering = Convert.ToInt16(TbEstimering.Text);
 
                 var oppgave = new Oppgave
                 {
