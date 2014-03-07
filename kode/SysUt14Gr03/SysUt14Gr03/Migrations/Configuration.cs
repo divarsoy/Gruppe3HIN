@@ -248,6 +248,41 @@ namespace SysUt14Gr03.Migrations
             jpolden.Teams.Add(charlie);
             pholm.Teams.Add(charlie);
 
+            var prosjekter = new List<Prosjekt> {
+                new Prosjekt {
+                    Navn = "Rød Elv",
+                    Aktiv = true,
+                    StartDato = DateTime.Now,
+                    SluttDato = DateTime.Now.AddMonths(3),
+                    Opprettet = DateTime.Now,
+                    Team_id = context.Teams.FirstOrDefault(team => team.Navn == "Alpha").Team_id,
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "mlarsen").Bruker_id,
+                    Oppgaver = new List<Oppgave>()
+                },
+                new Prosjekt {
+                    Navn = "Blå spurv",
+                    Aktiv = true,
+                    StartDato = DateTime.Now,
+                    SluttDato = DateTime.Now.AddMonths(4),
+                    Opprettet = DateTime.Now,
+                    Team_id = context.Teams.FirstOrDefault(team => team.Navn == "Bravo").Team_id,
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "mlarsen").Bruker_id,
+                    Oppgaver = new List<Oppgave>()
+                },
+                new Prosjekt {
+                    Navn = "Grå ulv",
+                    Aktiv = true,
+                    StartDato = DateTime.Now,
+                    SluttDato = DateTime.Now.AddMonths(5),
+                    Opprettet = DateTime.Now,
+                    Team_id = context.Teams.FirstOrDefault(team => team.Navn == "Charlie").Team_id,
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "mlarsen").Bruker_id,
+                    Oppgaver = new List<Oppgave>()
+                }
+            };
+            prosjekter.ForEach(element => context.Prosjekter.AddOrUpdate(prosjekt => prosjekt.Navn, element));
+            context.SaveChanges();
+
             /*
              * var brukerRettigheter = new List<BrukerRettigheter>
             {
