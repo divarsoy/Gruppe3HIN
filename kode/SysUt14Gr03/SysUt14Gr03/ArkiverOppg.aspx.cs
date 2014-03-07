@@ -57,12 +57,12 @@ namespace SysUt14Gr03
             {
                 Oppgave oppgaver = context.Oppgaver.Where(b => b.Oppgave_id == oppgave_id).First();
                 oppgaver.Tittel = tbTittel.Text;
-                oppgaver.Estimat = Convert.TotbEstimat.Text;
-                oppgaver.BruktTid = tbBruktTid.Text;
-                oppgaver.Tidsfrist = tbTidsfrist.Text;
-                oppgaver.Opprettet = tbOpprettet.Text;
-                oppgaver.Prosjekt = tbProsjekt.Text;
-                oppgaver.Status = tbStatus.Text;
+                oppgaver.Estimat = Convert.ToInt16(tbEstimat.Text);
+                oppgaver.BruktTid = Convert.ToInt32(tbBruktTid.Text);
+                oppgaver.Tidsfrist = Convert.ToDateTime(tbTidsfrist.Text);
+                oppgaver.Opprettet = Convert.ToDateTime(tbOpprettet.Text);
+                oppgaver.Prosjekt_id = Convert.ToInt32(tbProsjekt.Text);
+                oppgaver.Status_id = Convert.ToInt32(tbStatus.Text);
                 oppgaver.Aktiv = Convert.ToBoolean(cbAktiv.Checked);
                 context.SaveChanges();
             }
