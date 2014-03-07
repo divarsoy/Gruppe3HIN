@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -11,7 +13,10 @@ namespace SysUt14Gr03
 {
     public partial class EndreBrukerinformasjon : System.Web.UI.Page
     {
-       // private List<Bruker> brukerListe;
+        private string password = "blahimmel";
+        private int bruker_id;
+        private MailMessage msg;
+        private Classes.sendEmail sendMsg;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -19,7 +24,6 @@ namespace SysUt14Gr03
             {
                 visBrukere();
             }
-
         }
 
         private void visBrukere()
@@ -35,23 +39,24 @@ namespace SysUt14Gr03
         protected void gridViewEndre_RowEditing(object sender, GridViewEditEventArgs e)
         {
             gridViewEndre.EditIndex = e.NewEditIndex;
+            gridViewEndre.Columns[4].Visible = true;
             visBrukere();
         }
 
         protected void gridViewEndre_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             gridViewEndre.EditIndex = -1;
+            gridViewEndre.Columns[4].Visible = false;
             visBrukere();
         }
 
         protected void gridViewEndre_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
-            int bruker_id = (int)gridViewEndre.DataKeys[e.RowIndex].Value;
+            bruker_id = (int)gridViewEndre.DataKeys[e.RowIndex].Value;
             System.Web.UI.WebControls.TextBox tbEtternavn = (TextBox)gridViewEndre.Rows[e.RowIndex].FindControl("tbEtternavn");
             System.Web.UI.WebControls.TextBox tbFornavn = (TextBox)gridViewEndre.Rows[e.RowIndex].FindControl("tbFornavn");
             System.Web.UI.WebControls.TextBox tbEpost = (TextBox)gridViewEndre.Rows[e.RowIndex].FindControl("tbEpost");
             System.Web.UI.WebControls.CheckBox cbAktiv = (CheckBox)gridViewEndre.Rows[e.RowIndex].FindControl("cboxAktiv");
-
 
             using (var context = new Context())
             {
@@ -62,13 +67,29 @@ namespace SysUt14Gr03
                 bruker.Aktiv = Convert.ToBoolean(cbAktiv.Checked);
                 context.SaveChanges();
             }
+            gridViewEndre.Columns[4].Visible = false;
             gridViewEndre.EditIndex = -1;
             visBrukere();
         }
-
-        protected void btnLagre_Click(object sender, EventArgs e)
+        private void sendBekreftelse(string epost, string fornavn)
         {
+            Guid token = Guid.NewGuid();
+            msg.Subject = "Bekreftelses epost for konto aktivering";
+            string ActivationUrl = Server.HtmlEncode("http://localhost:60154/AktiverKonto.aspx?Epost=" + email + "&Token=" + token);
+            msg.Body = "Hei " + fornavn + "!\n" + "Takk for at du registrerte deg hos oss\n" + " <a href='" + ActivationUrl + "'>Klikk her for å aktivere</a>  din konto.";
 
+            sendMsg.sendEpost(epost, msg.Body, msg.Subject, ActivationUrl, null);
+        }
+
+        protected void gridViewEndre_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Send")
+            {
+                int index = Convert.ToInt32(e.CommandArgument.ToString());
+                TextBox tbEmail = (TextBox)gridViewEndre.Rows[index].FindControl("tbEpost");
+                TextBox tbFirstname = (TextBox)gridViewEndre.Rows[index].FindControl("tbFornavn");
+                sendBekreftelse(tbEmail.Text, tbFirstname.Text);
+            }
         }
     }
 }

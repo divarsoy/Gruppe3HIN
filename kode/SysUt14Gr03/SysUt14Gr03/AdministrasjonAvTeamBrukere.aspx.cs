@@ -26,7 +26,13 @@ namespace SysUt14Gr03
 
             for (int i = 0; i < brukerListe.Count; i++)
             {
-                if(brukerListe[i].Team)
+                using (var db = new Context()) {
+                    foreach(Bruker brk in brukerListe){
+                        ICollection<Team> team = brk.Teams;
+                        Bruker.Team hehe = brk.Teams;
+                    }
+                }
+                
             }
 
                 if (cbl_brukere.Items.Count == 0)
@@ -38,8 +44,6 @@ namespace SysUt14Gr03
                     }
                 }
         }
-
-
 
     }
 }
