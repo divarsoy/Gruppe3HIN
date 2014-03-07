@@ -179,6 +179,8 @@
     <Content Include="EndreBrukerinformasjon.aspx" />
     <Content Include="EpostPreferanser.aspx" />
     <Content Include="OpprettGruppe.aspx" />
+    <Content Include="OpprettOppgave.aspx" />
+    <Content Include="OpprettProsjekt.aspx" />
     <Content Include="OpprettTidsfristPaaOppgave.aspx" />
     <Content Include="Pictures\blomst.jpg" />
     <Content Include="OpprettTeam.aspx" />
@@ -403,6 +405,20 @@
     </Compile>
     <Compile Include="HistorikkStattestikk.aspx.designer.cs">
       <DependentUpon>HistorikkStattestikk.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OpprettOppgave.aspx.cs">
+      <DependentUpon>OpprettOppgave.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OpprettOppgave.aspx.designer.cs">
+      <DependentUpon>OpprettOppgave.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OpprettProsjekt.aspx.cs">
+      <DependentUpon>OpprettProsjekt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OpprettProsjekt.aspx.designer.cs">
+      <DependentUpon>OpprettProsjekt.aspx</DependentUpon>
     </Compile>
     <Compile Include="OpprettTeam.aspx.cs">
       <DependentUpon>OpprettTeam.aspx</DependentUpon>

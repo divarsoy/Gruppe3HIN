@@ -48,7 +48,16 @@ namespace SysUt14Gr03.Classes
             
             }
         }
-
+        static public List<Prosjekt> GetAlleAktiveProsjekter()
+        {
+            using (var context = new Context())
+            {
+                var prosjektListe = (from prosjekter in context.Prosjekter
+                                     where prosjekter.Aktiv == true
+                                     select prosjekter).ToList<Prosjekt>();
+                return prosjektListe;
+            }
+        }
         /*
          * Ikke klar
         static public List<Team> GetTeamFromGruppe(int _gruppe_id)
