@@ -387,7 +387,6 @@
       <DependentUpon>EndreBrukerinformasjon.aspx</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\DatabaseInitializer.cs" />
     <Compile Include="EpostPreferanser.aspx.cs">
       <DependentUpon>EpostPreferanser.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
