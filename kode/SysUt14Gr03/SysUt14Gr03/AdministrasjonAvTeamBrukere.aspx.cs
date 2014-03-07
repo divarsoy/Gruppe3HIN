@@ -26,7 +26,7 @@ namespace SysUt14Gr03
 
             for (int i = 0; i < brukerListe.Count; i++)
             {
-                if(brukerListe[i].)
+                if(brukerListe[i].Team)
             }
 
                 if (cbl_brukere.Items.Count == 0)
