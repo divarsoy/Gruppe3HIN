@@ -9,8 +9,8 @@ namespace SysUt14Gr03.Models
         [Key]
         public int Oppgave_id { get; set; }
         public string Tittel { get; set; }
-        public string userStory { get; set; }
-        public string krav { get; set; }
+        public string UserStory { get; set; }
+        public string Krav { get; set; }
         public float? Estimat { get; set; }
         public float? BruktTid { get; set; }
         public DateTime? Tidsfrist { get; set; }

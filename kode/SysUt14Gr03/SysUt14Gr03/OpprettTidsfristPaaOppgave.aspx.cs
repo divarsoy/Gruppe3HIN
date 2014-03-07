@@ -23,9 +23,9 @@ namespace SysUt14Gr03
             Oppgave test1 = new Oppgave();
             Oppgave test2 = new Oppgave();
             test1.Tittel = "Oppgave 1";
-            test1.krav = "Skriv 800 sider om scrum";
+            test1.Krav = "Skriv 800 sider om scrum";
             test2.Tittel = "Oppgave 2";
-            test2.krav = "Skriv 500 sider om planning poker";
+            test2.Krav = "Skriv 500 sider om planning poker";
             oppgaveListe.Add(test1);
             oppgaveListe.Add(test2);
 
@@ -74,7 +74,7 @@ namespace SysUt14Gr03
             // Vis valgt oppgave på siden
             index = lsbOppgaver.SelectedIndex;
             Oppgave oppgave = oppgaveListe[index];
-            txtInfo.Text = oppgave.Tittel + oppgave.krav + oppgave.Tidsfrist;
+            txtInfo.Text = oppgave.Tittel + oppgave.Krav + oppgave.Tidsfrist;
             txtInfo.Visible = true;
             pnlDato.Visible = true;
             if (ddlTime.Items.Count == 0)
