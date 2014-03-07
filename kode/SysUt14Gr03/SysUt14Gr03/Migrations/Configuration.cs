@@ -206,6 +206,48 @@ namespace SysUt14Gr03.Migrations
 
             context.SaveChanges();
 
+            var teams = new List<Team> {
+                new Team {
+                    Navn = "Alpha",
+                    Aktiv = true,
+                    Opprettet = DateTime.Now,
+                    Brukere = new List<Bruker>(),
+                    Prosjekter = new List<Prosjekt>(),
+                    Grupper = new List<Gruppe>()
+                },
+                 new Team {
+                    Navn = "Bravo",
+                    Aktiv = true,
+                    Opprettet = DateTime.Now,
+                    Brukere = new List<Bruker>(),
+                    Prosjekter = new List<Prosjekt>(),
+                    Grupper = new List<Gruppe>()
+                },
+                 new Team {
+                    Navn = "Charlie",
+                    Aktiv = true,
+                    Opprettet = DateTime.Now,
+                    Brukere = new List<Bruker>(),
+                    Prosjekter = new List<Prosjekt>(),
+                    Grupper = new List<Gruppe>()
+                }
+            };
+
+            teams.ForEach(element => context.Teams.AddOrUpdate(team => team.Navn, element));
+            context.SaveChanges();
+
+            Team alpha = context.Teams.FirstOrDefault(Team => Team.Navn == "Alpha");
+            lmartinsen.Teams.Add(alpha);
+            mlarsen.Teams.Add(alpha);
+
+            Team bravo = context.Teams.FirstOrDefault(Team => Team.Navn == "Bravo");
+            hhansen.Teams.Add(bravo);
+            aaskoy.Teams.Add(bravo);
+
+            Team charlie = context.Teams.FirstOrDefault(Team => Team.Navn == "Charlie");
+            jpolden.Teams.Add(charlie);
+            pholm.Teams.Add(charlie);
+
             /*
              * var brukerRettigheter = new List<BrukerRettigheter>
             {
