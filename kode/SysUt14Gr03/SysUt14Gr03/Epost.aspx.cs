@@ -11,52 +11,25 @@ namespace SysUt14Gr03
 {
     public partial class Epost : System.Web.UI.Page
     {
+        private MailMessage msg;
+        private Classes.sendEmail sendMsg;
+        private string ActivationUrl;
+        private string email;
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
         protected void CreateUser_Click(object sender, EventArgs e)
         {
+            Guid token = Guid.NewGuid();
+            email = Email.Text.Trim();
+            msg.Subject = "Bekreftelses epost for konto aktivering";
+            //har begynt å lage en aktiverkonto side 
+            ActivationUrl = Server.HtmlEncode("http://localhost:60154/AktiverKonto.aspx?Epost=" + email + "&Token=" + token);
+            msg.Body = "Hei " + UserName.Text.Trim() + "!\n" + "Takk for at du registrerte deg hos oss\n" + " <a href='" + ActivationUrl + "'>Klikk her for å aktivere</a>  din konto.";
 
-            MailMessage msg;
-
-            string ActivationUrl = string.Empty;
-            string email = string.Empty;
-
-            try
-            {
-                Guid token = Guid.NewGuid();
-
-                msg = new MailMessage();
-                SmtpClient smtp = new SmtpClient();
-                email = Email.Text.Trim();
-                //bruker gruppe eposten som avsender
-                msg.From = new MailAddress("sysut14gr03@gmail.com");
-                msg.To.Add(email);
-
-                msg.Subject = "Bekreftelses epost for konto aktivering";
-
-                //har begynt å lage en aktiverkonto side 
-                ActivationUrl = Server.HtmlEncode("http://localhost:60154/AktiverKonto.aspx?Epost=" + email + "&Token=" + token);
-
-                msg.Body = "Hei " + UserName.Text.Trim() + "!\n" + "Takk for at du registrerte deg hos oss\n" + " <a href='" + ActivationUrl + "'>Klikk her for å aktivere</a>  din konto.";
-                msg.IsBodyHtml = true;
-                smtp.Credentials = new NetworkCredential("sysut14gr03@gmail.com", "blahimmel");
-                smtp.Port = 587;
-                smtp.Host = "smtp.gmail.com";
-                smtp.EnableSsl = true;
-                smtp.Send(msg);
-
-
-                clear_controls();
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('En link for å aktivere kontoen din er sendt til eposten din');", true);
-
-            }
-            catch (Exception ex)
-            {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('Error occured : " + ex.Message.ToString() + "');", true);
-                return;
-            }
+            sendMsg.sendEpost(email, msg.Body, msg.Subject, ActivationUrl, null, null);
         }
         private void clear_controls()
         {

@@ -52,7 +52,9 @@
     <Compile Include="brukerTest.cs" />
     <Compile Include="OpprettTeamTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="lostPasswordTest.cs" />
+    <Compile Include="changeUserinfoTest.cs" />
+    <Compile Include="EpostPreferanserTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SysUt14Gr03\SysUt14Gr03.csproj">

@@ -166,6 +166,8 @@
     <Content Include="AdministratorForside.aspx" />
     <Content Include="AdministrerTeam.aspx" />
     <Content Include="AktiverKonto.aspx" />
+    <Content Include="ArkiverGruppe.aspx" />
+    <Content Include="ArkiverOppg.aspx" />
     <Content Include="Brukere.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="changeUser.aspx" />
@@ -173,8 +175,12 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="HistorikkStattestikk.aspx" />
     <Content Include="EndreBrukerinformasjon.aspx" />
+    <Content Include="EpostPreferanser.aspx" />
     <Content Include="OpprettGruppe.aspx" />
+    <Content Include="OpprettOppgave.aspx" />
+    <Content Include="OpprettProsjekt.aspx" />
     <Content Include="OpprettTidsfristPaaOppgave.aspx" />
     <Content Include="Pictures\blomst.jpg" />
     <Content Include="OpprettTeam.aspx" />
@@ -224,6 +230,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Site.Master" />
+    <Content Include="VelkomstSkjerm.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -325,12 +332,29 @@
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="ArkiverGruppe.aspx.cs">
+      <DependentUpon>ArkiverGruppe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ArkiverGruppe.aspx.designer.cs">
+      <DependentUpon>ArkiverGruppe.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ArkiverOppg.aspx.cs">
+      <DependentUpon>ArkiverOppg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ArkiverOppg.aspx.designer.cs">
+      <DependentUpon>ArkiverOppg.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Brukere.aspx.cs">
       <DependentUpon>Brukere.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Brukere.aspx.designer.cs">
       <DependentUpon>Brukere.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\sendEmail.cs">
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -364,12 +388,40 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DatabaseInitializer.cs" />
+    <Compile Include="EpostPreferanser.aspx.cs">
+      <DependentUpon>EpostPreferanser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EpostPreferanser.aspx.designer.cs">
+      <DependentUpon>EpostPreferanser.aspx</DependentUpon>
+    </Compile>
     <Compile Include="OpprettGruppe.aspx.cs">
       <DependentUpon>OpprettGruppe.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="OpprettGruppe.aspx.designer.cs">
       <DependentUpon>OpprettGruppe.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HistorikkStattestikk.aspx.cs">
+      <DependentUpon>HistorikkStattestikk.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HistorikkStattestikk.aspx.designer.cs">
+      <DependentUpon>HistorikkStattestikk.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OpprettOppgave.aspx.cs">
+      <DependentUpon>OpprettOppgave.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OpprettOppgave.aspx.designer.cs">
+      <DependentUpon>OpprettOppgave.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OpprettProsjekt.aspx.cs">
+      <DependentUpon>OpprettProsjekt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OpprettProsjekt.aspx.designer.cs">
+      <DependentUpon>OpprettProsjekt.aspx</DependentUpon>
     </Compile>
     <Compile Include="OpprettTeam.aspx.cs">
       <DependentUpon>OpprettTeam.aspx</DependentUpon>
@@ -461,6 +513,13 @@
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="VelkomstSkjerm.aspx.cs">
+      <DependentUpon>VelkomstSkjerm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="VelkomstSkjerm.aspx.designer.cs">
+      <DependentUpon>VelkomstSkjerm.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
