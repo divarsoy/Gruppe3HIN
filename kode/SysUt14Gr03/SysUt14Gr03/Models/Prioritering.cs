@@ -12,6 +12,6 @@ namespace SysUt14Gr03.Models
         public int Prioritering_id { get; set; }
         public string Navn { get; set; }
 
-        public virtual ICollection<Oppgave> Oppgaver { get; set; }
+        public virtual List<Oppgave> Oppgaver { get; set; }
     }
 }

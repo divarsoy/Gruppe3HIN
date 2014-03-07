@@ -10,6 +10,6 @@ namespace SysUt14Gr03.Models
         public int Rettighet_id { get; set; }
         public string RettighetNavn { get; set; }
 
-        public virtual ICollection<Bruker> Brukere { get; set; }
+        public virtual List<Bruker> Brukere { get; set; }
     }
 }
