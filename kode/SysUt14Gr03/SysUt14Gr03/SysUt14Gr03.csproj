@@ -168,6 +168,7 @@
     <Content Include="AktiverKonto.aspx" />
     <Content Include="ArkiverGruppe.aspx" />
     <Content Include="Brukere.aspx" />
+    <Content Include="ArkiverOppg.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="changeUser.aspx" />
     <Content Include="Contact.aspx" />
@@ -341,6 +342,13 @@
     </Compile>
     <Compile Include="Brukere.aspx.designer.cs">
       <DependentUpon>Brukere.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ArkiverOppg.aspx.cs">
+      <DependentUpon>ArkiverOppg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ArkiverOppg.aspx.designer.cs">
+      <DependentUpon>ArkiverOppg.aspx</DependentUpon>
     </Compile>
     <Compile Include="Classes\sendEmail.cs">
       <SubType>ASPXCodeBehind</SubType>

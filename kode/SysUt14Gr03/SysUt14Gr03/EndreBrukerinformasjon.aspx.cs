@@ -75,10 +75,10 @@ namespace SysUt14Gr03
         {
             Guid token = Guid.NewGuid();
             msg.Subject = "Bekreftelses epost for konto aktivering";
-            string ActivationUrl = Server.HtmlEncode("http://localhost:60154/AktiverKonto.aspx?Epost=" + email + "&Token=" + token);
+            string ActivationUrl = Server.HtmlEncode("http://localhost:60154/AktiverKonto.aspx?Epost=" + epost + "&Token=" + token);
             msg.Body = "Hei " + fornavn + "!\n" + "Takk for at du registrerte deg hos oss\n" + " <a href='" + ActivationUrl + "'>Klikk her for å aktivere</a>  din konto.";
 
-            sendMsg.sendEpost(epost, msg.Body, msg.Subject, ActivationUrl, null);
+            sendMsg.sendEpost(epost, msg.Body, msg.Subject, ActivationUrl, null, null);
         }
 
         protected void gridViewEndre_RowCommand(object sender, GridViewCommandEventArgs e)
