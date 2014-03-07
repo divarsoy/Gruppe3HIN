@@ -247,6 +247,8 @@ namespace SysUt14Gr03.Migrations
             Team charlie = context.Teams.FirstOrDefault(Team => Team.Navn == "Charlie");
             jpolden.Teams.Add(charlie);
             pholm.Teams.Add(charlie);
+            context.SaveChanges();
+
 
             var prosjekter = new List<Prosjekt> {
                 new Prosjekt {
@@ -348,6 +350,32 @@ namespace SysUt14Gr03.Migrations
             };
 
             prioriteringer.ForEach(element => context.Prioriteringer.AddOrUpdate(prioritering => prioritering.Navn, element));
+            context.SaveChanges();
+
+            var grupper = new List<Gruppe> {
+                new Gruppe {
+                    Navn = "Gruppe 1",
+                    Aktiv = true,
+                    Opprettet = DateTime.Now,
+                    Prosjekter = new List<Prosjekt>(),
+                    Teams = new List<Team>()
+                },
+                new Gruppe {
+                    Navn = "Gruppe 2",
+                    Aktiv = true,
+                    Opprettet = DateTime.Now,
+                    Prosjekter = new List<Prosjekt>(),
+                    Teams = new List<Team>()
+                }
+            };
+            grupper.ForEach(element => context.Grupper.AddOrUpdate(gruppe => gruppe.Navn, element));
+            context.SaveChanges();
+
+            Gruppe gruppe1 = context.Grupper.FirstOrDefault(Gruppe => Gruppe.Navn == "Gruppe 1");
+            Gruppe gruppe2 = context.Grupper.FirstOrDefault(Gruppe => Gruppe.Navn == "Gruppe 2");
+            gruppe1.Teams.Add(alpha);
+            gruppe1.Teams.Add(bravo);
+            gruppe2.Teams.Add(charlie);
             context.SaveChanges();
 
             /*
