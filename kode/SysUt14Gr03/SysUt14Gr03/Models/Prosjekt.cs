@@ -23,6 +23,6 @@ namespace SysUt14Gr03.Models
         public virtual Team Team { get; set; }
         public virtual Gruppe Gruppe { get; set; }
         public virtual Bruker Bruker { get; set; }
-        public virtual ICollection<Oppgave> Oppgaver { get; set; }
+        public virtual List<Oppgave> Oppgaver { get; set; }
     }
 }

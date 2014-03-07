@@ -10,6 +10,6 @@ namespace SysUt14Gr03.Models
         public int OppgaveGruppe_id { get; set; }
         public string navn { get; set; }
 
-        public virtual ICollection<Oppgave> Oppgaver { get; set; }
+        public virtual List<Oppgave> Oppgaver { get; set; }
     }
 }

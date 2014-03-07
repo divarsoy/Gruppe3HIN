@@ -14,8 +14,8 @@ namespace SysUt14Gr03.Models
         public bool Aktiv { get; set; }
         public DateTime Opprettet { get; set; }
 
-        public virtual ICollection<Bruker> Brukere { get; set; }
-        public virtual ICollection<Prosjekt> Prosjekter { get; set; }
-        public virtual ICollection<Gruppe> Grupper { get; set; }
+        public virtual List<Bruker> Brukere { get; set; }
+        public virtual List<Prosjekt> Prosjekter { get; set; }
+        public virtual List<Gruppe> Grupper { get; set; }
     }
 }
