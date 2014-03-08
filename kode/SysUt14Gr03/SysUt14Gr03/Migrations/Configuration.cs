@@ -552,7 +552,45 @@ namespace SysUt14Gr03.Migrations
 
             oppgaver.ForEach(element => context.Oppgaver.AddOrUpdate(oppgave => oppgave.Tittel, element));
             context.SaveChanges();
-            
+
+            Oppgave oppgave1 = context.Oppgaver.FirstOrDefault(oppgave => oppgave.Tittel == "Opprette notat");
+            lmartinsen.Oppgaver.Add(oppgave1);
+            mlarsen.Oppgaver.Add(oppgave1);
+
+            Oppgave oppgave2 = context.Oppgaver.FirstOrDefault(oppgave => oppgave.Tittel == "Redigere notat");
+            lmartinsen.Oppgaver.Add(oppgave2);
+
+            Oppgave oppgave3 = context.Oppgaver.FirstOrDefault(oppgave => oppgave.Tittel == "Slette notat");
+            mlarsen.Oppgaver.Add(oppgave3);
+
+            Oppgave oppgave4 = context.Oppgaver.FirstOrDefault(oppgave => oppgave.Tittel == "Opprette bruker");
+            lmartinsen.Oppgaver.Add(oppgave4);
+
+            Oppgave oppgave5 = context.Oppgaver.FirstOrDefault(oppgave => oppgave.Tittel == "Opprette Prosjekt");
+            hhansen.Oppgaver.Add(oppgave5);
+            aaskoy.Oppgaver.Add(oppgave5);
+
+            Oppgave oppgave6 = context.Oppgaver.FirstOrDefault(oppgave => oppgave.Tittel == "Administrere prosjekt");
+            hhansen.Oppgaver.Add(oppgave6);
+
+            Oppgave oppgave7 = context.Oppgaver.FirstOrDefault(oppgave => oppgave.Tittel == "Arkivere prosjekt");
+            aaskoy.Oppgaver.Add(oppgave7);
+
+            Oppgave oppgave8 = context.Oppgaver.FirstOrDefault(oppgave => oppgave.Tittel == "Opprette møte");
+            jpolden.Oppgaver.Add(oppgave8);
+            pholm.Oppgaver.Add(oppgave8);
+
+            Oppgave oppgave9 = context.Oppgaver.FirstOrDefault(oppgave => oppgave.Tittel == "Redigere møte");
+            jpolden.Oppgaver.Add(oppgave9);
+
+            Oppgave oppgave10 = context.Oppgaver.FirstOrDefault(oppgave => oppgave.Tittel == "Slette et møte");
+            pholm.Oppgaver.Add(oppgave10);
+
+            Oppgave oppgave11 = context.Oppgaver.FirstOrDefault(oppgave => oppgave.Tittel == "Påmelding til møte");
+            jpolden.Oppgaver.Add(oppgave11);
+
+            context.SaveChanges();
+
             /*
              * var brukerRettigheter = new List<BrukerRettigheter>
             {
