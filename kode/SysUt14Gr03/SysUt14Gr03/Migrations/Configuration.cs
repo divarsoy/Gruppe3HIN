@@ -177,45 +177,55 @@ namespace SysUt14Gr03.Migrations
 
             var brukerPreferanser = new List<BrukerPreferanse> {
                 new BrukerPreferanse {
-                    EpostTeam = false,
-                    EpostProsjekt = false,
-                    EpostOppgave = false,
-                    EpostKommentar = false,
+                    EpostTeam = true,
+                    EpostProsjekt = true,
+                    EpostOppgave = true,
+                    EpostKommentar = true,
+                    EpostTidsfrist = true,
+                    EpostRapport = true,
                     Bruker_id = brukere.Single(bruker => bruker.Brukernavn == "lmartinsen" ).Bruker_id
                 },
                 new BrukerPreferanse {
-                    EpostTeam = false,
-                    EpostProsjekt = false,
-                    EpostOppgave = false,
-                    EpostKommentar = false,
+                    EpostTeam = true,
+                    EpostProsjekt = true,
+                    EpostOppgave = true,
+                    EpostKommentar = true,
                     Bruker_id = brukere.Single(bruker => bruker.Brukernavn == "mlarsen" ).Bruker_id
                 },
                 new BrukerPreferanse {
-                    EpostTeam = false,
-                    EpostProsjekt = false,
-                    EpostOppgave = false,
-                    EpostKommentar = false,
+                    EpostTeam = true,
+                    EpostProsjekt = true,
+                    EpostOppgave = true,
+                    EpostKommentar = true,
+                    EpostTidsfrist = true,
+                    EpostRapport = true,
                     Bruker_id = brukere.Single(bruker => bruker.Brukernavn == "hhansen" ).Bruker_id
                 },
                 new BrukerPreferanse {
-                    EpostTeam = false,
-                    EpostProsjekt = false,
-                    EpostOppgave = false,
-                    EpostKommentar = false,
+                    EpostTeam = true,
+                    EpostProsjekt = true,
+                    EpostOppgave = true,
+                    EpostKommentar = true,
+                    EpostTidsfrist = true,
+                    EpostRapport = true,
                     Bruker_id = brukere.Single(bruker => bruker.Brukernavn == "aaskoy" ).Bruker_id
                 },
                 new BrukerPreferanse {
-                    EpostTeam = false,
-                    EpostProsjekt = false,
-                    EpostOppgave = false,
-                    EpostKommentar = false,
+                    EpostTeam = true,
+                    EpostProsjekt = true,
+                    EpostOppgave = true,
+                    EpostKommentar = true,
+                    EpostTidsfrist = true,
+                    EpostRapport = true,
                     Bruker_id = brukere.Single(bruker => bruker.Brukernavn == "jpolden" ).Bruker_id
                 },
                 new BrukerPreferanse {
-                    EpostTeam = false,
-                    EpostProsjekt = false,
-                    EpostOppgave = false,
-                    EpostKommentar = false,
+                    EpostTeam = true,
+                    EpostProsjekt = true,
+                    EpostOppgave = true,
+                    EpostKommentar = true,
+                    EpostTidsfrist = true,
+                    EpostRapport = true,
                     Bruker_id = brukere.Single(bruker => bruker.Brukernavn == "pholm" ).Bruker_id
                 }
             };
@@ -790,7 +800,7 @@ namespace SysUt14Gr03.Migrations
                 },
             };
 
-            kommentarer.ForEach(element => context.Kommentarer.AddOrUpdate(kommentar => kommentar.Tekst, element));
+            kommentarer.ForEach(element => context.Kommentarer.AddOrUpdate(kommentar => kommentar.Tekst));
             context.SaveChanges();
 
         }
