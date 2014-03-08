@@ -16,6 +16,7 @@ namespace SysUt14Gr03.Models
         public DateTime? Tidsfrist { get; set; }
         public bool Aktiv { get; set; }
         public DateTime Opprettet { get; set; }
+        public DateTime? Oppdatert { get; set; }
 
         public int Prosjekt_id { get; set; }
         public int? OppgaveGruppe_id { get; set; }

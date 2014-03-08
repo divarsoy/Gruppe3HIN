@@ -61,7 +61,14 @@ namespace SysUt14Gr03.Migrations
                     Aktivert = true,
                     Aktiv = true,
                     opprettet = DateTime.Now,
-                    Rettigheter = new List<Rettighet>()
+                    BrukerPreferanser = new List<BrukerPreferanse>(),
+                    Rettigheter = new List<Rettighet>(),
+                    Moeter = new List<Moete>(),
+                    Kommentarer = new List<Kommentar>(),
+                    Logger = new List<Logg>(),
+                    Oppgaver = new List<Oppgave>(),
+                    Prosjekter = new List<Prosjekt>(),
+                    Teams = new List<Team>()
                 },
                 new Bruker {
                     Etternavn = "Larsen",
@@ -74,7 +81,14 @@ namespace SysUt14Gr03.Migrations
                     Aktivert = true,
                     Aktiv = true,
                     opprettet = DateTime.Now,
-                    Rettigheter = new List<Rettighet>()
+                    BrukerPreferanser = new List<BrukerPreferanse>(),
+                    Rettigheter = new List<Rettighet>(),
+                    Moeter = new List<Moete>(),
+                    Kommentarer = new List<Kommentar>(),
+                    Logger = new List<Logg>(),
+                    Oppgaver = new List<Oppgave>(),
+                    Prosjekter = new List<Prosjekt>(),
+                    Teams = new List<Team>()
                 },
                 new Bruker {
                     Etternavn = "Hansen",
@@ -87,7 +101,14 @@ namespace SysUt14Gr03.Migrations
                     Aktivert = true,
                     Aktiv = true,
                     opprettet = DateTime.Now,
-                    Rettigheter = new List<Rettighet>()
+                    BrukerPreferanser = new List<BrukerPreferanse>(),
+                    Rettigheter = new List<Rettighet>(),
+                    Moeter = new List<Moete>(),
+                    Kommentarer = new List<Kommentar>(),
+                    Logger = new List<Logg>(),
+                    Oppgaver = new List<Oppgave>(),
+                    Prosjekter = new List<Prosjekt>(),
+                    Teams = new List<Team>()
                 },
                 new Bruker {
                     Etternavn = "Askøy",
@@ -100,7 +121,14 @@ namespace SysUt14Gr03.Migrations
                     Aktivert = true,
                     Aktiv = true,
                     opprettet = DateTime.Now,
-                    Rettigheter = new List<Rettighet>()
+                    BrukerPreferanser = new List<BrukerPreferanse>(),
+                    Rettigheter = new List<Rettighet>(),
+                    Moeter = new List<Moete>(),
+                    Kommentarer = new List<Kommentar>(),
+                    Logger = new List<Logg>(),
+                    Oppgaver = new List<Oppgave>(),
+                    Prosjekter = new List<Prosjekt>(),
+                    Teams = new List<Team>()
                 },
                 new Bruker {
                     Etternavn = "Jan",
@@ -113,7 +141,14 @@ namespace SysUt14Gr03.Migrations
                     Aktivert = true,
                     Aktiv = true,
                     opprettet = DateTime.Now,
-                    Rettigheter = new List<Rettighet>()
+                    BrukerPreferanser = new List<BrukerPreferanse>(),
+                    Rettigheter = new List<Rettighet>(),
+                    Moeter = new List<Moete>(),
+                    Kommentarer = new List<Kommentar>(),
+                    Logger = new List<Logg>(),
+                    Oppgaver = new List<Oppgave>(),
+                    Prosjekter = new List<Prosjekt>(),
+                    Teams = new List<Team>()
                 },
                 new Bruker {
                     Etternavn = "Holm",
@@ -126,7 +161,14 @@ namespace SysUt14Gr03.Migrations
                     Aktivert = true,
                     Aktiv = true,
                     opprettet = DateTime.Now,
-                    Rettigheter = new List<Rettighet>()
+                    BrukerPreferanser = new List<BrukerPreferanse>(),
+                    Rettigheter = new List<Rettighet>(),
+                    Moeter = new List<Moete>(),
+                    Kommentarer = new List<Kommentar>(),
+                    Logger = new List<Logg>(),
+                    Oppgaver = new List<Oppgave>(),
+                    Prosjekter = new List<Prosjekt>(),
+                    Teams = new List<Team>()
                 }
             };
 
@@ -591,60 +633,166 @@ namespace SysUt14Gr03.Migrations
 
             context.SaveChanges();
 
-            /*
-             * var brukerRettigheter = new List<BrukerRettigheter>
-            {
-                new BrukerRettigheter {
-                    Bruker_id = brukere.Single(bruker => bruker.Brukernavn == "lmartinsen").Bruker_id, 
-                    Rettighet_id = rettigheter.Single(rettighet => rettighet.RettighetNavn == "Utvikler").Rettighet_id
-                }
+            var kommentarer = new List<Kommentar> {
+                new Kommentar {
+                    Tekst = "@mlarsen Har du fått startet på oppgaven?",
+                    Aktiv = true,
+                    Opprettet = DateTime.Now,
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "lmartinsen").Bruker_id,
+                    Oppgave_id = context.Oppgaver.FirstOrDefault(oppgave => oppgave.Tittel == "Opprette notat").Oppgave_id
+                },
+                new Kommentar {
+                    Tekst = "Ja, jeg fikk startet på den i går",
+                    Aktiv = true,
+                    Opprettet = DateTime.Now.AddMinutes(2),
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "mlarsen").Bruker_id,
+                    Oppgave_id = context.Oppgaver.FirstOrDefault(oppgave => oppgave.Tittel == "Opprette notat").Oppgave_id
+                },
+                new Kommentar {
+                    Tekst = "Står fast på linje 3",
+                    Aktiv = true,
+                    Opprettet = DateTime.Now,
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "lmartinsen").Bruker_id,
+                    Oppgave_id = context.Oppgaver.FirstOrDefault(oppgave => oppgave.Tittel == "Redigere notat").Oppgave_id
+                },
+                new Kommentar {
+                    Tekst = "Prøv med et array istedet",
+                    Aktiv = true,
+                    Opprettet = DateTime.Now.AddMinutes(2),
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "mlarsen").Bruker_id,
+                    Oppgave_id = context.Oppgaver.FirstOrDefault(oppgave => oppgave.Tittel == "Redigere notat").Oppgave_id
+                },
+                new Kommentar {
+                    Tekst = "Woohoooo... Det virker",
+                    Aktiv = true,
+                    Opprettet = DateTime.Now,
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "lmartinsen").Bruker_id,
+                    Oppgave_id = context.Oppgaver.FirstOrDefault(oppgave => oppgave.Tittel == "Slette notat").Oppgave_id
+                },
+                new Kommentar {
+                    Tekst = "Bra jobba Martinsen!",
+                    Aktiv = true,
+                    Opprettet = DateTime.Now.AddMinutes(2),
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "mlarsen").Bruker_id,
+                    Oppgave_id = context.Oppgaver.FirstOrDefault(oppgave => oppgave.Tittel == "Slette notat").Oppgave_id
+                },
+                new Kommentar {
+                    Tekst = "@mlarsen Har du fått startet på oppgaven?",
+                    Aktiv = true,
+                    Opprettet = DateTime.Now,
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "lmartinsen").Bruker_id,
+                    Oppgave_id = context.Oppgaver.FirstOrDefault(oppgave => oppgave.Tittel == "Opprette bruker").Oppgave_id
+                },
+                new Kommentar {
+                    Tekst = "Ja, jeg fikk startet på den i går",
+                    Aktiv = true,
+                    Opprettet = DateTime.Now.AddMinutes(2),
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "mlarsen").Bruker_id,
+                    Oppgave_id = context.Oppgaver.FirstOrDefault(oppgave => oppgave.Tittel == "Opprette bruker").Oppgave_id
+                },
+                new Kommentar {
+                    Tekst = "@aaskoy Fant du noen løsning?",
+                    Aktiv = true,
+                    Opprettet = DateTime.Now,
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "hhansen").Bruker_id,
+                    Oppgave_id = context.Oppgaver.FirstOrDefault(oppgave => oppgave.Tittel == "Opprette Prosjekt").Oppgave_id
+                },
+                new Kommentar {
+                    Tekst = "Ja, vi kan bruke brukerklassen",
+                    Aktiv = true,
+                    Opprettet = DateTime.Now.AddMinutes(2),
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "aaskoy").Bruker_id,
+                    Oppgave_id = context.Oppgaver.FirstOrDefault(oppgave => oppgave.Tittel == "Opprette Prosjekt").Oppgave_id
+                },
+                                new Kommentar {
+                    Tekst = "Vet du hvordan vi kan beregne estimert tid?",
+                    Aktiv = true,
+                    Opprettet = DateTime.Now,
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "hhansen").Bruker_id,
+                    Oppgave_id = context.Oppgaver.FirstOrDefault(oppgave => oppgave.Tittel == "Administrere prosjekt").Oppgave_id
+                },
+                new Kommentar {
+                    Tekst = "Ja bare legg oppgavene i en liste og gå igjennom de med en foreach loop",
+                    Aktiv = true,
+                    Opprettet = DateTime.Now.AddMinutes(2),
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "aaskoy").Bruker_id,
+                    Oppgave_id = context.Oppgaver.FirstOrDefault(oppgave => oppgave.Tittel == "Administrere prosjekt").Oppgave_id
+                },
+                new Kommentar {
+                    Tekst = "Aaskoy, du er genial!",
+                    Aktiv = true,
+                    Opprettet = DateTime.Now,
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "hhansen").Bruker_id,
+                    Oppgave_id = context.Oppgaver.FirstOrDefault(oppgave => oppgave.Tittel == "Arkivere prosjekt").Oppgave_id
+                },
+                new Kommentar {
+                    Tekst = "Takk :-)",
+                    Aktiv = true,
+                    Opprettet = DateTime.Now.AddMinutes(2),
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "aaskoy").Bruker_id,
+                    Oppgave_id = context.Oppgaver.FirstOrDefault(oppgave => oppgave.Tittel == "Arkivere prosjekt").Oppgave_id
+                },
+                new Kommentar {
+                    Tekst = "@pholm Rekker vi å bli ferdig innen fristen?",
+                    Aktiv = true,
+                    Opprettet = DateTime.Now,
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "jpolden").Bruker_id,
+                    Oppgave_id = context.Oppgaver.FirstOrDefault(oppgave => oppgave.Tittel == "Opprette møte").Oppgave_id
+                },
+                new Kommentar {
+                    Tekst = "Ja, vi har god margin",
+                    Aktiv = true,
+                    Opprettet = DateTime.Now.AddMinutes(2),
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "pholm").Bruker_id,
+                    Oppgave_id = context.Oppgaver.FirstOrDefault(oppgave => oppgave.Tittel == "Opprette møte").Oppgave_id
+                },
+                new Kommentar {
+                    Tekst = "Vi har kundemøte i morgen",
+                    Aktiv = true,
+                    Opprettet = DateTime.Now,
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "jpolden").Bruker_id,
+                    Oppgave_id = context.Oppgaver.FirstOrDefault(oppgave => oppgave.Tittel == "Redigere møte").Oppgave_id
+                },
+                new Kommentar {
+                    Tekst = "Ja, jeg så det",
+                    Aktiv = true,
+                    Opprettet = DateTime.Now.AddMinutes(2),
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "pholm").Bruker_id,
+                    Oppgave_id = context.Oppgaver.FirstOrDefault(oppgave => oppgave.Tittel == "Redigere møte").Oppgave_id
+                },
+                new Kommentar {
+                    Tekst = "Kanskje vi burde arkivere møtene istedet for å slette de?",
+                    Aktiv = true,
+                    Opprettet = DateTime.Now,
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "jpolden").Bruker_id,
+                    Oppgave_id = context.Oppgaver.FirstOrDefault(oppgave => oppgave.Tittel == "Slette et møte").Oppgave_id
+                },
+                new Kommentar {
+                    Tekst = "Nei, møtene bør slettes. Det vil bli for mye rot i kalenderen om vi arkiverer de",
+                    Aktiv = true,
+                    Opprettet = DateTime.Now.AddMinutes(2),
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "pholm").Bruker_id,
+                    Oppgave_id = context.Oppgaver.FirstOrDefault(oppgave => oppgave.Tittel == "Slette et møte").Oppgave_id
+                },
+                new Kommentar {
+                    Tekst = "Ja! kunden godkjente oppgaven",
+                    Aktiv = true,
+                    Opprettet = DateTime.Now,
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "jpolden").Bruker_id,
+                    Oppgave_id = context.Oppgaver.FirstOrDefault(oppgave => oppgave.Tittel == "Påmelding til møte").Oppgave_id
+                },
+                new Kommentar {
+                    Tekst = "Jepp, det var en meget god presentasjon jpolden!",
+                    Aktiv = true,
+                    Opprettet = DateTime.Now.AddMinutes(2),
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "pholm").Bruker_id,
+                    Oppgave_id = context.Oppgaver.FirstOrDefault(oppgave => oppgave.Tittel == "Påmelding til møte").Oppgave_id
+                },
             };
 
-*/
-            /*
-            //Setter opp rettigheter
-            Rettighet rettighetBrukerAdmin = new Rettighet { RettighetNavn = "Brukeradmin" };
-            Rettighet rettighetProsjektLeder = new Rettighet { RettighetNavn = "Prosjektleder" };
-            Rettighet rettighetUtvikler = new Rettighet { RettighetNavn = "Utvikler" };
-
-            context.Rettigheter.AddOrUpdate<Rettighet>(rettighetBrukerAdmin);
-            context.Rettigheter.AddOrUpdate<Rettighet>(rettighetProsjektLeder);
-            context.Rettigheter.AddOrUpdate<Rettighet>(rettighetUtvikler);
+            kommentarer.ForEach(element => context.Kommentarer.AddOrUpdate(kommentar => kommentar.Tekst, element));
             context.SaveChanges();
 
-            var brukere = new List<Bruker>();
-            int antallBrukere = 6;
-
-            //Genererer brukerne
-            for (int i = 0; i < antallBrukere; i++)
-            {
-
-                Bruker bruker = new Bruker
-                {
-                    Etternavn = FakeO.Name.Last(),
-                    Fornavn = FakeO.Name.First(),
-                    Brukernavn = FakeO.Internet.UserName(),
-                    Epost = FakeO.Internet.Email(),
-                    Passord = "Passord må krypteres!",
-                    IM = FakeO.Internet.UserName(),
-                    Token = "Må generere Token!",
-                    Aktivert = true,
-                    Aktiv = true,
-                    opprettet = DateTime.Now,
-                };
-                //bruker.Rettigheter.Add(rettighetUtvikler);
-                bruker.BrukerPreferanser.Add(new BrukerPreferanse
-                {
-                    EpostTeam = false,
-                    EpostProsjekt = false,
-                    EpostOppgave = false,
-                    EpostKommentar = false
-                });
-                context.Brukere.Add(bruker);
-                //base.Seed(context);
-                context.SaveChanges();
-            }
- * */
         }
     }
 }
