@@ -291,10 +291,6 @@ namespace SysUt14Gr03.Migrations
                     Oppgaver = new List<Oppgave>()
                 },
                 new Status {
-                    Navn = "Startet",
-                    Oppgaver = new List<Oppgave>()
-                },
-                new Status {
                     Navn = "Under arbeid",
                     Oppgaver = new List<Oppgave>()
                 },
@@ -373,28 +369,190 @@ namespace SysUt14Gr03.Migrations
 
             Gruppe gruppe1 = context.Grupper.FirstOrDefault(Gruppe => Gruppe.Navn == "Gruppe 1");
             Gruppe gruppe2 = context.Grupper.FirstOrDefault(Gruppe => Gruppe.Navn == "Gruppe 2");
+
             gruppe1.Teams.Add(alpha);
             gruppe1.Teams.Add(bravo);
             gruppe2.Teams.Add(charlie);
             context.SaveChanges();
 
-            /*
+            var oppgavegrupper = new List <OppgaveGruppe> {
+                new OppgaveGruppe {
+                    Navn = "Administrative Oppgaver",
+                    Oppgaver = new List<Oppgave>()
+                },
+                new OppgaveGruppe {
+                    Navn = "Funksjonelle oppgaver",
+                    Oppgaver = new List<Oppgave>()
+                }
+            };
+            oppgavegrupper.ForEach(element => context.OppgaveGrupper.AddOrUpdate(oppgavegruppe => oppgavegruppe.Navn, element));
+            context.SaveChanges();
+          
             var oppgaver = new List <Oppgave> {
-            new Oppgave {
-                Tittel = "Opprette notat",
-                UserStory = "Som bruker ønsker jeg å kunne opprette et notat",
-                Krav = "Notatet skal ikke overgå en side",
-                Estimat = 3,
-                BruktTid = 0,
-                Aktiv = true,
-                Opprettet = DateTime.Now,
-                Prosjekt_id = context.Prosjekter.FirstOrDefault(prosjekt => prosjekt.Navn == "Rød Elv").Prosjekt_id,
-                OppgaveGruppe_id = 
+                new Oppgave {
+                    Tittel = "Opprette notat",
+                    UserStory = "Som bruker ønsker jeg å kunne opprette et notat",
+                    Krav = "Notatet skal ikke overgå en side",
+                    Estimat = 3,
+                    BruktTid = 3,
+                    Aktiv = true,
+                    Opprettet = DateTime.Now,
+                    Prosjekt_id = context.Prosjekter.FirstOrDefault(prosjekt => prosjekt.Navn == "Rød Elv").Prosjekt_id,
+                    OppgaveGruppe_id = context.OppgaveGrupper.FirstOrDefault(oppgaveGruppe => oppgaveGruppe.Navn == "Administrative Oppgaver").OppgaveGruppe_id,
+                    Prioritering_id = context.Prioriteringer.FirstOrDefault(prioritering => prioritering.Navn == "1").Prioritering_id,
+                    Status_id = context.Status.FirstOrDefault(status => status.Navn == "Ferdig").Status_id,
+                    Kommentarer = new List<Kommentar>(),
+                    Brukere = new List<Bruker>()
+                },
+                new Oppgave {
+                    Tittel = "Redigere notat",
+                    UserStory = "Som bruker ønsker jeg å kunne redigere et notat",
+                    Krav = "Notatet skal ikke overgå en side",
+                    Estimat = 6,
+                    BruktTid = 3,
+                    Aktiv = true,
+                    Opprettet = DateTime.Now,
+                    Prosjekt_id = context.Prosjekter.FirstOrDefault(prosjekt => prosjekt.Navn == "Rød Elv").Prosjekt_id,
+                    OppgaveGruppe_id = context.OppgaveGrupper.FirstOrDefault(oppgaveGruppe => oppgaveGruppe.Navn == "Administrative Oppgaver").OppgaveGruppe_id,
+                    Prioritering_id = context.Prioriteringer.FirstOrDefault(prioritering => prioritering.Navn == "2").Prioritering_id,
+                    Status_id = context.Status.FirstOrDefault(status => status.Navn == "Under Arbeid").Status_id,
+                    Kommentarer = new List<Kommentar>(),
+                    Brukere = new List<Bruker>()
+                },
+                new Oppgave {
+                    Tittel = "Slette notat",
+                    UserStory = "Som bruker ønsker jeg å kunne slette et notat",
+                    Krav = "Notatet skal ikke overgå en side",
+                    Estimat = 2,
+                    BruktTid = 0,
+                    Aktiv = true,
+                    Opprettet = DateTime.Now,
+                    Prosjekt_id = context.Prosjekter.FirstOrDefault(prosjekt => prosjekt.Navn == "Rød Elv").Prosjekt_id,
+                    OppgaveGruppe_id = context.OppgaveGrupper.FirstOrDefault(oppgaveGruppe => oppgaveGruppe.Navn == "Administrative Oppgaver").OppgaveGruppe_id,
+                    Prioritering_id = context.Prioriteringer.FirstOrDefault(prioritering => prioritering.Navn == "3").Prioritering_id,
+                    Status_id = context.Status.FirstOrDefault(status => status.Navn == "Klar").Status_id,
+                    Kommentarer = new List<Kommentar>(),
+                    Brukere = new List<Bruker>()
+                },
+                new Oppgave {
+                    Tittel = "Opprette bruker",
+                    UserStory = "Som administrator ønsker jeg å kunne opprette en ny bruker",
+                    Krav = "Brukeren må ikke finnes i databasen fra før av",
+                    Estimat = 4,
+                    BruktTid = 0,
+                    Aktiv = true,
+                    Opprettet = DateTime.Now,
+                    Prosjekt_id = context.Prosjekter.FirstOrDefault(prosjekt => prosjekt.Navn == "Rød Elv").Prosjekt_id,
+                    Status_id = context.Status.FirstOrDefault(status => status.Navn == "Klar").Status_id,
+                    Kommentarer = new List<Kommentar>(),
+                    Brukere = new List<Bruker>()
+                },
+                new Oppgave {
+                    Tittel = "Opprette Prosjekt",
+                    UserStory = "Som bruker ønsker jeg å kunne opprette et prosjekt",
+                    Krav = "Prosjektet må være unikt",
+                    Estimat = 4,
+                    BruktTid = 0,
+                    Aktiv = true,
+                    Opprettet = DateTime.Now,
+                    Prosjekt_id = context.Prosjekter.FirstOrDefault(prosjekt => prosjekt.Navn == "Blå spurv").Prosjekt_id,
+                    Status_id = context.Status.FirstOrDefault(status => status.Navn == "Klar").Status_id,
+                    Kommentarer = new List<Kommentar>(),
+                    Brukere = new List<Bruker>()
+                },
+                new Oppgave {
+                    Tittel = "Administrere prosjekt",
+                    UserStory = "Som bruker ønsker jeg å kunne administrere et prosjekt",
+                    Krav = "Prosjektet må være aktivt",
+                    Estimat = 6,
+                    BruktTid = 0,
+                    Tidsfrist = DateTime.Now.AddDays(7),
+                    Aktiv = true,
+                    Opprettet = DateTime.Now,
+                    Prosjekt_id = context.Prosjekter.FirstOrDefault(prosjekt => prosjekt.Navn == "Blå spurv").Prosjekt_id,
+                    Status_id = context.Status.FirstOrDefault(status => status.Navn == "Klar").Status_id,
+                    Kommentarer = new List<Kommentar>(),
+                    Brukere = new List<Bruker>()
+                },
+                new Oppgave {
+                    Tittel = "Arkivere prosjekt",
+                    UserStory = "Som bruker ønsker jeg å kunne arkivere et prosjekt",
+                    Krav = "Prosjektet må være aktivt",
+                    Estimat = 2,
+                    BruktTid = 0,
+                    Aktiv = true,
+                    Opprettet = DateTime.Now,
+                    Prosjekt_id = context.Prosjekter.FirstOrDefault(prosjekt => prosjekt.Navn == "Blå spurv").Prosjekt_id,
+                    Status_id = context.Status.FirstOrDefault(status => status.Navn == "Klar").Status_id,
+                    Kommentarer = new List<Kommentar>(),
+                    Brukere = new List<Bruker>()
+                },
+                new Oppgave {
+                    Tittel = "Opprette møte",
+                    UserStory = "Som bruker ønsker jeg å kunne opprette et møte",
+                    Krav = "Må spesifisere minst en deltaker",
+                    Estimat = 4,
+                    BruktTid = 4,
+                    Aktiv = true,
+                    Opprettet = DateTime.Now,
+                    Prosjekt_id = context.Prosjekter.FirstOrDefault(prosjekt => prosjekt.Navn == "Grå ulv").Prosjekt_id,
+                    OppgaveGruppe_id = context.OppgaveGrupper.FirstOrDefault(oppgaveGruppe => oppgaveGruppe.Navn == "Funksjonelle oppgaver").OppgaveGruppe_id,
+                    Prioritering_id = context.Prioriteringer.FirstOrDefault(prioritering => prioritering.Navn == "1").Prioritering_id,
+                    Status_id = context.Status.FirstOrDefault(status => status.Navn == "Ferdig").Status_id,
+                    Kommentarer = new List<Kommentar>(),
+                    Brukere = new List<Bruker>()
+                },
+                new Oppgave {
+                    Tittel = "Redigere møte",
+                    UserStory = "Som bruker ønsker jeg å kunne redigere et møte",
+                    Krav = "Møtetidspunkt må ikke ha vært",
+                    Estimat = 3,
+                    BruktTid = 1,
+                    Aktiv = true,
+                    Opprettet = DateTime.Now,
+                    Prosjekt_id = context.Prosjekter.FirstOrDefault(prosjekt => prosjekt.Navn == "Grå ulv").Prosjekt_id,
+                    OppgaveGruppe_id = context.OppgaveGrupper.FirstOrDefault(oppgaveGruppe => oppgaveGruppe.Navn == "Funksjonelle oppgaver").OppgaveGruppe_id,
+                    Prioritering_id = context.Prioriteringer.FirstOrDefault(prioritering => prioritering.Navn == "2").Prioritering_id,
+                    Status_id = context.Status.FirstOrDefault(status => status.Navn == "Under Arbeid").Status_id,
+                    Kommentarer = new List<Kommentar>(),
+                    Brukere = new List<Bruker>()
+                },
+                new Oppgave {
+                    Tittel = "Slette et møte",
+                    UserStory = "Som bruker ønsker jeg å kunne slette et møte",
+                    Krav = "Møtetidspunkt må ikke ha vært",
+                    Estimat = 2,
+                    BruktTid = 0,
+                    Aktiv = true,
+                    Opprettet = DateTime.Now,
+                    Prosjekt_id = context.Prosjekter.FirstOrDefault(prosjekt => prosjekt.Navn == "Grå ulv").Prosjekt_id,
+                    OppgaveGruppe_id = context.OppgaveGrupper.FirstOrDefault(oppgaveGruppe => oppgaveGruppe.Navn == "Funksjonelle oppgaver").OppgaveGruppe_id,
+                    Prioritering_id = context.Prioriteringer.FirstOrDefault(prioritering => prioritering.Navn == "3").Prioritering_id,
+                    Status_id = context.Status.FirstOrDefault(status => status.Navn == "Klar").Status_id,
+                    Kommentarer = new List<Kommentar>(),
+                    Brukere = new List<Bruker>()
+                },
+                new Oppgave {
+                    Tittel = "Påmelding til møte",
+                    UserStory = "Som bruker ønsker jeg å kunne melde meg på et møte",
+                    Krav = "Brukeren må ikke allede være påmeldt møtet",
+                    Estimat = 2,
+                    BruktTid = 0,
+                    Tidsfrist = DateTime.Now.AddDays(11),
+                    Aktiv = true,
+                    Opprettet = DateTime.Now,
+                    Prosjekt_id = context.Prosjekter.FirstOrDefault(prosjekt => prosjekt.Navn == "Rød Elv").Prosjekt_id,
+                    OppgaveGruppe_id = context.OppgaveGrupper.FirstOrDefault(oppgaveGruppe => oppgaveGruppe.Navn == "Administrative Oppgaver").OppgaveGruppe_id,
+                    Prioritering_id = context.Prioriteringer.FirstOrDefault(prioritering => prioritering.Navn == "1").Prioritering_id,
+                    Status_id = context.Status.FirstOrDefault(status => status.Navn == "Klar").Status_id,
+                    Kommentarer = new List<Kommentar>(),
+                    Brukere = new List<Bruker>()
+                },             
+            };
 
-            }
-             
-        }
-            */
+            oppgaver.ForEach(element => context.Oppgaver.AddOrUpdate(oppgave => oppgave.Tittel, element));
+            context.SaveChanges();
+            
             /*
              * var brukerRettigheter = new List<BrukerRettigheter>
             {

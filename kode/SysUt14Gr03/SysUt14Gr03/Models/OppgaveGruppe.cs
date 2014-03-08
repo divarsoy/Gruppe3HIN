@@ -8,7 +8,7 @@ namespace SysUt14Gr03.Models
     {
         [Key]
         public int OppgaveGruppe_id { get; set; }
-        public string navn { get; set; }
+        public string Navn { get; set; }
 
         public virtual List<Oppgave> Oppgaver { get; set; }
     }
