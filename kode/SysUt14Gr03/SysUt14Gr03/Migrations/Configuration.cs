@@ -50,6 +50,26 @@ namespace SysUt14Gr03.Migrations
             context.SaveChanges();
 
             var brukere = new List<Bruker> {
+               new Bruker {
+                    Etternavn = "Åsgård",
+                    Fornavn = "Jane",
+                    Brukernavn = "jaasgaard",
+                    Epost = "janeaasgaard@gmail.com",
+                    Passord = "Passord må krypteres!",
+                    IM = "jaasgaard",
+                    Token = "Må generere Token!",
+                    Aktivert = true,
+                    Aktiv = true,
+                    opprettet = DateTime.Now,
+                    BrukerPreferanser = new List<BrukerPreferanse>(),
+                    Rettigheter = new List<Rettighet>(),
+                    Moeter = new List<Moete>(),
+                    Kommentarer = new List<Kommentar>(),
+                    Logger = new List<Logg>(),
+                    Oppgaver = new List<Oppgave>(),
+                    Prosjekter = new List<Prosjekt>(),
+                    Teams = new List<Team>()
+                },
                 new Bruker {
                     Etternavn = "Martinsen",
                     Fornavn = "Lars",
@@ -175,7 +195,16 @@ namespace SysUt14Gr03.Migrations
             brukere.ForEach(element => context.Brukere.AddOrUpdate(bruker => bruker.Etternavn, element));
             context.SaveChanges();
 
-            var brukerPreferanser = new List<BrukerPreferanse> {
+            var brukerPreferanser = new List<BrukerPreferanse> {                
+                new BrukerPreferanse {
+                    EpostTeam = true,
+                    EpostProsjekt = true,
+                    EpostOppgave = true,
+                    EpostKommentar = true,
+                    EpostTidsfrist = true,
+                    EpostRapport = true,
+                    Bruker_id = brukere.Single(bruker => bruker.Brukernavn == "jaasgaard" ).Bruker_id
+                },
                 new BrukerPreferanse {
                     EpostTeam = true,
                     EpostProsjekt = true,
@@ -190,6 +219,8 @@ namespace SysUt14Gr03.Migrations
                     EpostProsjekt = true,
                     EpostOppgave = true,
                     EpostKommentar = true,
+                    EpostTidsfrist = true,
+                    EpostRapport = true,
                     Bruker_id = brukere.Single(bruker => bruker.Brukernavn == "mlarsen" ).Bruker_id
                 },
                 new BrukerPreferanse {
@@ -237,9 +268,11 @@ namespace SysUt14Gr03.Migrations
             Rettighet BrukerRettighetProsjektleder = context.Rettigheter.FirstOrDefault(rettighet => rettighet.RettighetNavn == "Prosjektleder");
             Rettighet BrukerRettighetBrukeradmin = context.Rettigheter.FirstOrDefault(rettighet => rettighet.RettighetNavn == "BrukerAdmin");
 
+            Bruker jaasgaard = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "jaasgaard");
+            jaasgaard.Rettigheter.Add(BrukerRettighetBrukeradmin);
 
             Bruker lmartinsen = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "lmartinsen");
-            lmartinsen.Rettigheter.Add(BrukerRettighetBrukeradmin);
+            lmartinsen.Rettigheter.Add(BrukerRettighetUtvikler);
 
             Bruker mlarsen = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "mlarsen");
             mlarsen.Rettigheter.Add(BrukerRettighetProsjektleder);
@@ -449,6 +482,7 @@ namespace SysUt14Gr03.Migrations
                     BruktTid = 3,
                     Aktiv = true,
                     Opprettet = DateTime.Now,
+                    Oppdatert = DateTime.Now.AddDays(2),
                     Prosjekt_id = context.Prosjekter.FirstOrDefault(prosjekt => prosjekt.Navn == "Rød Elv").Prosjekt_id,
                     OppgaveGruppe_id = context.OppgaveGrupper.FirstOrDefault(oppgaveGruppe => oppgaveGruppe.Navn == "Administrative Oppgaver").OppgaveGruppe_id,
                     Prioritering_id = context.Prioriteringer.FirstOrDefault(prioritering => prioritering.Navn == "1").Prioritering_id,
@@ -464,6 +498,7 @@ namespace SysUt14Gr03.Migrations
                     BruktTid = 3,
                     Aktiv = true,
                     Opprettet = DateTime.Now,
+                    Oppdatert = DateTime.Now.AddDays(2),
                     Prosjekt_id = context.Prosjekter.FirstOrDefault(prosjekt => prosjekt.Navn == "Rød Elv").Prosjekt_id,
                     OppgaveGruppe_id = context.OppgaveGrupper.FirstOrDefault(oppgaveGruppe => oppgaveGruppe.Navn == "Administrative Oppgaver").OppgaveGruppe_id,
                     Prioritering_id = context.Prioriteringer.FirstOrDefault(prioritering => prioritering.Navn == "2").Prioritering_id,
@@ -547,6 +582,7 @@ namespace SysUt14Gr03.Migrations
                     BruktTid = 4,
                     Aktiv = true,
                     Opprettet = DateTime.Now,
+                    Oppdatert = DateTime.Now.AddDays(2),
                     Prosjekt_id = context.Prosjekter.FirstOrDefault(prosjekt => prosjekt.Navn == "Grå ulv").Prosjekt_id,
                     OppgaveGruppe_id = context.OppgaveGrupper.FirstOrDefault(oppgaveGruppe => oppgaveGruppe.Navn == "Funksjonelle oppgaver").OppgaveGruppe_id,
                     Prioritering_id = context.Prioriteringer.FirstOrDefault(prioritering => prioritering.Navn == "1").Prioritering_id,
@@ -562,6 +598,7 @@ namespace SysUt14Gr03.Migrations
                     BruktTid = 1,
                     Aktiv = true,
                     Opprettet = DateTime.Now,
+                    Oppdatert = DateTime.Now.AddDays(2),
                     Prosjekt_id = context.Prosjekter.FirstOrDefault(prosjekt => prosjekt.Navn == "Grå ulv").Prosjekt_id,
                     OppgaveGruppe_id = context.OppgaveGrupper.FirstOrDefault(oppgaveGruppe => oppgaveGruppe.Navn == "Funksjonelle oppgaver").OppgaveGruppe_id,
                     Prioritering_id = context.Prioriteringer.FirstOrDefault(prioritering => prioritering.Navn == "2").Prioritering_id,
@@ -803,6 +840,260 @@ namespace SysUt14Gr03.Migrations
             kommentarer.ForEach(element => context.Kommentarer.AddOrUpdate(kommentar => kommentar.Tekst));
             context.SaveChanges();
 
+            var logger = new List <Logg> {
+                new Logg {
+                    Hendelse = "Opprettet 'mlarsen' som ny bruker",
+                    Opprettet = DateTime.Now,
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "jaasgaard").Bruker_id
+                },           
+                new Logg {
+                    Hendelse = "Opprettet 'hhansen' som ny bruker",
+                    Opprettet = DateTime.Now,
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "jaasgaard").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "Opprettet 'aaskoy' som ny bruker",
+                    Opprettet = DateTime.Now,
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "jaasgaard").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "Opprettet 'jpolden' som ny bruker",
+                    Opprettet = DateTime.Now,
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "jaasgaard").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "Opprettet 'pholm' som ny bruker",
+                    Opprettet = DateTime.Now,
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "jaasgaard").Bruker_id
+                },                
+                new Logg {
+                    Hendelse = "'jaasgaard' ble opprettet som ny bruker",
+                    Opprettet = DateTime.Now,
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "jaasgaard").Bruker_id,
+                },
+                new Logg {
+                    Hendelse = "'lmartinsen' ble opprettet som ny bruker",
+                    Opprettet = DateTime.Now,
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "lmartinsen").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "'mlarsen' ble opprettet som ny bruker",
+                    Opprettet = DateTime.Now,
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "mlarsen").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "'hhansen' ble opprettet som ny bruker",
+                    Opprettet = DateTime.Now,
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "hhansen").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "'aaskoy' ble opprettet som ny bruker",
+                    Opprettet = DateTime.Now,
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "aaskoy").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "'jpolden' ble opprettet som ny bruker",
+                    Opprettet = DateTime.Now,
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "jpolden").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "'pholm' ble opprettet som ny bruker",
+                    Opprettet = DateTime.Now,
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "pholm").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "Opprettet team 'Alpha'",
+                    Opprettet = DateTime.Now.AddMinutes(10),
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "mlarsen").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "Opprettet team 'Bravo'",
+                    Opprettet = DateTime.Now.AddMinutes(10),
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "mlarsen").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "Opprettet team 'Charlie'",
+                    Opprettet = DateTime.Now.AddMinutes(10),
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "mlarsen").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "La til bruker 'lmartinsen' i team 'Alpha'",
+                    Opprettet = DateTime.Now.AddMinutes(10),
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "mlarsen").Bruker_id
+                },              
+                new Logg {
+                    Hendelse = "La til bruker 'mlarsen' i team 'Alpha'",
+                    Opprettet = DateTime.Now.AddMinutes(10),
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "mlarsen").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "La til bruker 'hhansen' i team 'Bravo'",
+                    Opprettet = DateTime.Now.AddMinutes(10),
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "mlarsen").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "La til bruker 'aaskoy' i team 'Bravo'",
+                    Opprettet = DateTime.Now.AddMinutes(10),
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "mlarsen").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "La til bruker 'jpolden' i team 'Charlie'",
+                    Opprettet = DateTime.Now.AddMinutes(10),
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "mlarsen").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "La til bruker 'pholm' i team 'Charlie'",
+                    Opprettet = DateTime.Now.AddMinutes(10),
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "mlarsen").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "'lmartinsen' ble lagt til i team 'Alpha'",
+                    Opprettet = DateTime.Now.AddMinutes(10),
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "lmartinsen").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "'mlarsen' ble lagt til i team 'Alpha'",
+                    Opprettet = DateTime.Now.AddMinutes(10),
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "mlarsen").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "'hhansen' ble lagt til i team 'Bravo'",
+                    Opprettet = DateTime.Now.AddMinutes(10),
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "hhansen").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "'aaskoy' ble lagt til i team 'Bravo'",
+                    Opprettet = DateTime.Now.AddMinutes(10),
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "aaskoy").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "'jpolden' ble lagt til i team 'Charlie'",
+                    Opprettet = DateTime.Now.AddMinutes(10),
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "jpolden").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "'pholm' ble lagt til i team 'Charlie'",
+                    Opprettet = DateTime.Now.AddMinutes(10),
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "pholm").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "Team 'Alpha' ble lagt til i prosjektet 'Rød Elv",
+                    Opprettet = DateTime.Now.AddMinutes(15),
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "mlarsen").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "Team 'Bravo' ble lagt til i prosjektet 'Blå spurv",
+                    Opprettet = DateTime.Now.AddMinutes(15),
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "mlarsen").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "Team 'Charlie' ble lagt til i prosjektet 'Grå Ulv",
+                    Opprettet = DateTime.Now.AddMinutes(15),
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "mlarsen").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "'lmartinsen' ble lagt til i prosjektet 'Rød Elv'",
+                    Opprettet = DateTime.Now.AddMinutes(15),
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "lmartinsen").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "'mlarsen' ble lagt til i prosjektet 'Rød Elv",
+                    Opprettet = DateTime.Now.AddMinutes(15),
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "mlarsen").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "'hhansen' ble lagt til i prosjektet 'Blå spurv'",
+                    Opprettet = DateTime.Now.AddMinutes(15),
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "hhansen").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "'aaskoy' ble lagt til i prosjektet 'Blå spurv'",
+                    Opprettet = DateTime.Now.AddMinutes(15),
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "aaskoy").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "'jpolden' ble lagt til i prosjektet 'Grå Ulv'",
+                    Opprettet = DateTime.Now.AddMinutes(15),
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "jpolden").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "'pholm' ble lagt til i prosjektet 'Grå Ulv'",
+                    Opprettet = DateTime.Now.AddMinutes(15),
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "pholm").Bruker_id
+                },             
+                new Logg {
+                    Hendelse = "lmartinsen påtok seg oppgaven 'Opprette notat'",
+                    Opprettet = DateTime.Now.AddMinutes(15),
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "lmartinsen").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "mlarsen påtok seg oppgaven 'Opprette notat'",
+                    Opprettet = DateTime.Now.AddMinutes(15),
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "mlarsen").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "lmartinsen påtok seg oppgaven 'Redigere notat'",
+                    Opprettet = DateTime.Now.AddMinutes(15),
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "lmartinsen").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "mlarsen påtok seg oppgaven 'Slette notat'",
+                    Opprettet = DateTime.Now.AddMinutes(15),
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "mlarsen").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "lmartinsen påtok seg oppgaven 'Opprette bruker'",
+                    Opprettet = DateTime.Now.AddMinutes(15),
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "lmartinsen").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "hhansen påtok seg oppgaven 'Opprette Prosjekt'",
+                    Opprettet = DateTime.Now.AddMinutes(15),
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "hhansen").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "aaskoy påtok seg oppgaven 'Opprette Prosjekt'",
+                    Opprettet = DateTime.Now.AddMinutes(15),
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "aaskoy").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "hhansen påtok seg oppgaven 'Administrere Prosjekt'",
+                    Opprettet = DateTime.Now.AddMinutes(15),
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "hhansen").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "aaskoy påtok seg oppgaven 'Arkivere Prosjekt'",
+                    Opprettet = DateTime.Now.AddMinutes(15),
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "aaskoy").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "jpolden påtok seg oppgaven 'Opprette møte'",
+                    Opprettet = DateTime.Now.AddMinutes(15),
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "jpolden").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "jholm påtok seg oppgaven 'Opprette møte'",
+                    Opprettet = DateTime.Now.AddMinutes(15),
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "pholm").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "jpolden påtok seg oppgaven 'Redigere møte'",
+                    Opprettet = DateTime.Now.AddMinutes(15),
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "jpolden").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "pholm påtok seg oppgaven 'Slette et møte'",
+                    Opprettet = DateTime.Now.AddMinutes(15),
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "pholm").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "jpolden påtok seg oppgaven 'Påmelding til møte'",
+                    Opprettet = DateTime.Now.AddMinutes(15),
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "jpolden").Bruker_id
+                }
+            };
+            logger.ForEach(element => context.Logger.AddOrUpdate(logg => logg.Hendelse, element));
+            context.SaveChanges();
         }
     }
 }
