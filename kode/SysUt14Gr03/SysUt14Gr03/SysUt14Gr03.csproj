@@ -161,6 +161,7 @@
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\RegisterExternalLogin.aspx" />
     <Content Include="AdministrasjonAvGruppe.aspx" />
+    <Content Include="AdministrasjonAvProsjekt.aspx" />
     <Content Include="AdministrasjonAvTeam.aspx" />
     <Content Include="AdministrasjonAvTeamBrukere.aspx" />
     <Content Include="AdministratorForside.aspx" />
@@ -286,6 +287,13 @@
     </Compile>
     <Compile Include="AdministrasjonAvGruppe.aspx.designer.cs">
       <DependentUpon>AdministrasjonAvGruppe.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdministrasjonAvProsjekt.aspx.cs">
+      <DependentUpon>AdministrasjonAvProsjekt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdministrasjonAvProsjekt.aspx.designer.cs">
+      <DependentUpon>AdministrasjonAvProsjekt.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdministrasjonAvTeam.aspx.cs">
       <DependentUpon>AdministrasjonAvTeam.aspx</DependentUpon>
