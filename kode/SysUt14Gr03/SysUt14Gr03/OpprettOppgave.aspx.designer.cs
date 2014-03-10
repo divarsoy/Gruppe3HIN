@@ -13,6 +13,15 @@ namespace SysUt14Gr03 {
     public partial class OpprettOppgave {
         
         /// <summary>
+        /// tbTittel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbTittel;
+        
+        /// <summary>
         /// tbBeskrivelse control.
         /// </summary>
         /// <remarks>
@@ -38,6 +47,51 @@ namespace SysUt14Gr03 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlBrukere;
+        
+        /// <summary>
+        /// lbBrukere control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox lbBrukere;
+        
+        /// <summary>
+        /// btnBrukere control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnBrukere;
+        
+        /// <summary>
+        /// lbOppgaver control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox lbOppgaver;
+        
+        /// <summary>
+        /// btnVelg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnVelg;
+        
+        /// <summary>
+        /// btnFjern control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnFjern;
         
         /// <summary>
         /// lbAvhengighet control.
