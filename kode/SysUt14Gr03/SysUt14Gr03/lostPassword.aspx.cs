@@ -31,7 +31,7 @@ namespace SysUt14Gr03
             msg.Subject = "tilsendt nytt passord";
             msg.Body = "Hei " + email + "!\n" + "Her har du et nytt passord for din bruker: " + newPassword + "\nVi vil anbefale deg å å skifte passord når du får logget deg inn til noe som er mer personlig";
 
-            sendMsg.sendEpost(email, msg.Body, msg.Subject, null, null);
+            sendMsg.sendEpost(email, msg.Body, msg.Subject, null, null, null);
         }
         public static string CreatePassword(int length)
         {

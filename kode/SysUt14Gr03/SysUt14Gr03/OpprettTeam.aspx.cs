@@ -80,7 +80,7 @@ namespace SysUt14Gr03
             string message = "Du har nu har blitt valgt ut til og bli medlem av det nye Teamet: " + teamNavn;
             string subject = "Medlem av ny team";
             
-            sendMsg.sendEpost(null, message, subject, null, brukerListe);
+            sendMsg.sendEpost(null, message, subject, null, brukerListe, null);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace SysUt14Gr03
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             // Setter opp databasen
-            //Database.SetInitializer();
+            //Database.SetInitializer(new DatabaseInitializer());
         }
     }
 }

@@ -9,13 +9,14 @@ namespace SysUt14Gr03.Models
         [Key]
         public int Oppgave_id { get; set; }
         public string Tittel { get; set; }
-        public string userStory { get; set; }
-        public string krav { get; set; }
+        public string UserStory { get; set; }
+        public string Krav { get; set; }
         public float? Estimat { get; set; }
         public float? BruktTid { get; set; }
         public DateTime? Tidsfrist { get; set; }
         public bool Aktiv { get; set; }
         public DateTime Opprettet { get; set; }
+        public DateTime? Oppdatert { get; set; }
 
         public int Prosjekt_id { get; set; }
         public int? OppgaveGruppe_id { get; set; }
@@ -26,8 +27,8 @@ namespace SysUt14Gr03.Models
         public virtual OppgaveGruppe OppgaveGruppe { get; set; }
         public virtual Prioritering Prioritering { get; set; }
         public virtual Status Status { get; set; }
-        public virtual ICollection<Kommentar> Kommentarer { get; set; }
-        public virtual ICollection<Bruker> Brukere { get; set; }
+        public virtual List<Kommentar> Kommentarer { get; set; }
+        public virtual List<Bruker> Brukere { get; set; }
 
 
     }

@@ -29,7 +29,7 @@ namespace SysUt14Gr03
             ActivationUrl = Server.HtmlEncode("http://localhost:60154/AktiverKonto.aspx?Epost=" + email + "&Token=" + token);
             msg.Body = "Hei " + UserName.Text.Trim() + "!\n" + "Takk for at du registrerte deg hos oss\n" + " <a href='" + ActivationUrl + "'>Klikk her for å aktivere</a>  din konto.";
 
-            sendMsg.sendEpost(email, msg.Body, msg.Subject, ActivationUrl, null);
+            sendMsg.sendEpost(email, msg.Body, msg.Subject, ActivationUrl, null, null);
         }
         private void clear_controls()
         {
