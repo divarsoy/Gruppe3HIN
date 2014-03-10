@@ -12,6 +12,7 @@ namespace SysUt14Gr03.Models
         public string UserStory { get; set; }
         public string Krav { get; set; }
         public float? Estimat { get; set; }
+        public float? RemainingTime { get; set; }
         public float? BruktTid { get; set; }
         public DateTime? Tidsfrist { get; set; }
         public bool Aktiv { get; set; }
