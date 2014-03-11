@@ -31,6 +31,15 @@ namespace SysUt14Gr03 {
         protected global::System.Web.UI.WebControls.TextBox tbBeskrivelse;
         
         /// <summary>
+        /// tbKrav control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbKrav;
+        
+        /// <summary>
         /// TbEstimering control.
         /// </summary>
         /// <remarks>
@@ -58,6 +67,15 @@ namespace SysUt14Gr03 {
         protected global::System.Web.UI.WebControls.ListBox lbBrukere;
         
         /// <summary>
+        /// lblFeil control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblFeil;
+        
+        /// <summary>
         /// btnBrukere control.
         /// </summary>
         /// <remarks>
@@ -67,40 +85,22 @@ namespace SysUt14Gr03 {
         protected global::System.Web.UI.WebControls.Button btnBrukere;
         
         /// <summary>
-        /// lbOppgaver control.
+        /// GridViewOppg control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox lbOppgaver;
+        protected global::System.Web.UI.WebControls.GridView GridViewOppg;
         
         /// <summary>
-        /// btnVelg control.
+        /// ddlStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnVelg;
-        
-        /// <summary>
-        /// btnFjern control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnFjern;
-        
-        /// <summary>
-        /// lbAvhengighet control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox lbAvhengighet;
+        protected global::System.Web.UI.WebControls.DropDownList ddlStatus;
         
         /// <summary>
         /// ddlPrioritet control.
@@ -119,6 +119,15 @@ namespace SysUt14Gr03 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlProsjekt;
+        
+        /// <summary>
+        /// lblCheck control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCheck;
         
         /// <summary>
         /// btnOpprett control.
