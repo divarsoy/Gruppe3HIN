@@ -59,6 +59,15 @@ namespace SysUt14Gr03.Classes
 
             }
         }
+        static public List<Status> GetAlleStatuser()
+        {
+            using (var context = new Context())
+            {
+                var status = (from statuser in context.Status
+                              select statuser).ToList<Status>();
+                return status;
+            }
+        }
         static public List<Prioritering> GetAllePrioriteringer(){
 
             using (var context = new Context())
