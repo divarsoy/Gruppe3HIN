@@ -185,6 +185,7 @@
     <Content Include="OpprettOppgave.aspx" />
     <Content Include="OpprettProsjekt.aspx" />
     <Content Include="OpprettTidsfristPaaOppgave.aspx" />
+    <Content Include="PameldingTilOppgave.aspx" />
     <Content Include="Pictures\blomst.jpg" />
     <Content Include="OpprettTeam.aspx" />
     <Content Include="RegistreringAvBrukere.aspx" />
@@ -459,6 +460,13 @@
     </Compile>
     <Compile Include="OpprettTidsfristPaaOppgave.aspx.designer.cs">
       <DependentUpon>OpprettTidsfristPaaOppgave.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PameldingTilOppgave.aspx.cs">
+      <DependentUpon>PameldingTilOppgave.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PameldingTilOppgave.aspx.designer.cs">
+      <DependentUpon>PameldingTilOppgave.aspx</DependentUpon>
     </Compile>
     <Compile Include="RegistreringAvBrukere.aspx.cs">
       <DependentUpon>RegistreringAvBrukere.aspx</DependentUpon>

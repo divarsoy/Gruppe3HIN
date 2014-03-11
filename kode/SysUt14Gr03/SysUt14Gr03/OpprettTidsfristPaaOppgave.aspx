@@ -6,7 +6,7 @@
         <asp:ListBox ID="lsbOppgaver" runat="server" OnSelectedIndexChanged="lsbOppgaver_SelectedIndexChanged"></asp:ListBox>
         <asp:Button ID="btnDetaljer" runat="server" OnClick="btnDetaljer_Click" Text="Vis detaljer" />
         <br />
-        <asp:TextBox ID="txtInfo" runat="server" ReadOnly="True"></asp:TextBox>
+        <asp:TextBox ID="txtInfo" runat="server" ReadOnly="True" TextMode="MultiLine"></asp:TextBox>
         <asp:Panel ID="pnlDato" visible="false" runat="server">
             <asp:Calendar ID="calCalendar" runat="server"></asp:Calendar>
             Klokkeslett
