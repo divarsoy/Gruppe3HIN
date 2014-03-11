@@ -176,6 +176,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="EstimerResttidPaOppgave.aspx" />
     <Content Include="HistorikkStattestikk.aspx" />
     <Content Include="EndreBrukerinformasjon.aspx" />
     <Content Include="EpostPreferanser.aspx" />
@@ -394,6 +395,13 @@
     </Compile>
     <Compile Include="EndreBrukerinformasjon.aspx.designer.cs">
       <DependentUpon>EndreBrukerinformasjon.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EstimerResttidPaOppgave.aspx.cs">
+      <DependentUpon>EstimerResttidPaOppgave.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EstimerResttidPaOppgave.aspx.designer.cs">
+      <DependentUpon>EstimerResttidPaOppgave.aspx</DependentUpon>
     </Compile>
     <Compile Include="KommentarPaOppgave.aspx.cs">
       <DependentUpon>KommentarPaOppgave.aspx</DependentUpon>
