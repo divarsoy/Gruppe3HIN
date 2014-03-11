@@ -15,14 +15,22 @@ namespace SysUt14Gr03
         private List<Bruker> selectedBruker = new List<Bruker>();
         private List<Prosjekt> prosjektListe;
         private List<Prioritering> pri;
+        private List<Oppgave> visOppgaver;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
+                visOppgaver = Queries.GetAlleAktiveOppgaver();
                 brukerListe = Queries.GetAlleAktiveBrukere();
                 prosjektListe = Queries.GetAlleAktiveProsjekter();
                 pri = Queries.GetAllePrioriteringer();
+
+                for (int i = 0; i < visOppgaver.Count; i++)
+                {
+                    Oppgave oppg = visOppgaver[i];
+                    lbOppgaver.Items.Add(new ListItem(oppg.Tittel, oppg.Oppgave_id.ToString()));
+                }
                 for (int i = 0; i < brukerListe.Count; i++)
                 {
                     Bruker bruker = brukerListe[i];
@@ -31,6 +39,7 @@ namespace SysUt14Gr03
                 for (int i = 0; i < prosjektListe.Count; i++)
                 {
                     Prosjekt prosjekt = prosjektListe[i];
+
                     ddlProsjekt.Items.Add(new ListItem(prosjekt.Navn, prosjekt.Prosjekt_id.ToString()));
                 }
                 for (int i = 0; i < pri.Count; i++)
@@ -42,18 +51,28 @@ namespace SysUt14Gr03
         }
         private void OpprettOppg()
         {
+            
             using (var context = new Context())
             {
                 int priorietring_id = Convert.ToInt32(ddlPrioritet.SelectedValue);
                 int prosjekt_id = Convert.ToInt32(ddlProsjekt.SelectedValue);
                 float estimering = Convert.ToInt16(TbEstimering.Text);
 
+                foreach (ListItem s in lbBrukere.Items)
+                {
+                    string navn = s.Value;
+                    Bruker bruk = context.Brukere.Where(b => b.Fornavn == navn).First();
+                    selectedBruker.Add(brukerListe[bruk.Bruker_id]);
+                }
+
                 var oppgave = new Oppgave
                 {
                     Opprettet = DateTime.Now,
+                    Tittel = tbTittel.Text,
                     Aktiv = true,
                     UserStory = tbBeskrivelse.Text,
                     Estimat = estimering,
+                    
                     Brukere = selectedBruker,
                     Prosjekt_id = prosjekt_id,
                     Prioritering_id = priorietring_id
@@ -66,18 +85,22 @@ namespace SysUt14Gr03
 
         protected void btnOpprett_Click(object sender, EventArgs e)
         {
-
-
-            // Legger til valgte brukere
-            for (int i = 0; i < ddlBrukere.Items.Count; i++)
-            {
-                if (ddlBrukere.Items[i].Selected)
-                {
-                    selectedBruker.Add(brukerListe[i]);
-                    //numberSelected++;
-                }
-            }
             OpprettOppg();
+        }
+
+        protected void btnBrukere_Click(object sender, EventArgs e)
+        {
+            lbBrukere.Items.Add(ddlBrukere.SelectedItem.ToString());
+        }
+
+        protected void btnVelg_Click(object sender, EventArgs e)
+        {
+            lbAvhengighet.Items.Add(lbOppgaver.SelectedItem.ToString());
+        }
+
+        protected void btnFjern_Click(object sender, EventArgs e)
+        {
+            lbAvhengighet.Items.Remove(lbOppgaver.SelectedItem.ToString());
         }
     }
 }
