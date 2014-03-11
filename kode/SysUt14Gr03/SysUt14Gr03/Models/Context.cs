@@ -28,9 +28,9 @@ namespace SysUt14Gr03.Models
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
 
             // Mange til mange forhold Teams <=> Brukere
-            modelBuilder.Entity<Team>()
-                .HasMany(t => t.Brukere)
-                .WithMany(t => t.Teams)
+            modelBuilder.Entity<Bruker>()
+                .HasMany(t => t.Teams)
+                .WithMany(t => t.Brukere)
                 .Map(m =>
                 {
                     m.MapLeftKey("Bruker_id");
@@ -50,9 +50,9 @@ namespace SysUt14Gr03.Models
                 });
 
             // Mange til mange forhold Moeter <=> Brukere
-            modelBuilder.Entity<Moete>()
-                .HasMany(t => t.Brukere)
-                .WithMany(t => t.Moeter)
+            modelBuilder.Entity<Bruker>()
+                .HasMany(t => t.Moeter)
+                .WithMany(t => t.Brukere)
                 .Map(m =>
                 {
                     m.MapLeftKey("Moete_id");
@@ -61,9 +61,9 @@ namespace SysUt14Gr03.Models
                 });
 
             // Mange til mange forhold Oppgaver <=> Brukere
-            modelBuilder.Entity<Oppgave>()
-                .HasMany(t => t.Brukere)
-                .WithMany(t => t.Oppgaver)
+            modelBuilder.Entity<Bruker>()
+                .HasMany(t => t.Oppgaver)
+                .WithMany(t => t.Brukere)
                 .Map(m =>
                 {
                     m.MapLeftKey("Oppgave_id");
@@ -71,9 +71,9 @@ namespace SysUt14Gr03.Models
                     m.ToTable("BrukerOppgaver");
                 });
 
-            modelBuilder.Entity<Rettighet>()
-                .HasMany(t => t.Brukere)
-                .WithMany(t => t.Rettigheter)
+            modelBuilder.Entity<Bruker>()
+                .HasMany(t => t.Rettigheter)
+                .WithMany(t => t.Brukere)
                 .Map(m =>
                 {
                     m.MapLeftKey("Rettighet_id");
