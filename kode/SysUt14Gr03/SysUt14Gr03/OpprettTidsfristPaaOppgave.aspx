@@ -7,6 +7,7 @@
         <asp:Button ID="btnDetaljer" runat="server" OnClick="btnDetaljer_Click" Text="Vis detaljer" />
         <br />
         <asp:TextBox ID="txtInfo" runat="server" ReadOnly="True" TextMode="MultiLine"></asp:TextBox>
+        <hr />
         <asp:Panel ID="pnlDato" visible="false" runat="server">
             <asp:Calendar ID="calCalendar" runat="server"></asp:Calendar>
             Klokkeslett
