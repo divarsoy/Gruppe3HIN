@@ -97,8 +97,8 @@ namespace SysUt14Gr03
 
         public void sendEpost()
         {
-            string message = "Du har nu har blitt valgt ut til og bli medlem av det nye Teamet: " + teamNavn;
-            string subject = "Medlem av ny team";
+            string message = "Du har blitt medlem av det nye Teamet: " + teamNavn;
+            string subject = "Medlem av nytt team";
 
             sendMsg = new sendEmail(); //Frederik pls
             sendMsg.sendEpost(null, message, subject, null, brukerListe, null);
