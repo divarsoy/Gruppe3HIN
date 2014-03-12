@@ -180,6 +180,7 @@
     <Content Include="HistorikkStattestikk.aspx" />
     <Content Include="EndreBrukerinformasjon.aspx" />
     <Content Include="EpostPreferanser.aspx" />
+    <Content Include="InvitasjonAvBruker.aspx" />
     <Content Include="KommentarPaOppgave.aspx" />
     <Content Include="OpprettGruppe.aspx" />
     <Content Include="OpprettOppgave.aspx" />
@@ -402,6 +403,13 @@
     </Compile>
     <Compile Include="EstimerResttidPaOppgave.aspx.designer.cs">
       <DependentUpon>EstimerResttidPaOppgave.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InvitasjonAvBruker.aspx.cs">
+      <DependentUpon>InvitasjonAvBruker.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InvitasjonAvBruker.aspx.designer.cs">
+      <DependentUpon>InvitasjonAvBruker.aspx</DependentUpon>
     </Compile>
     <Compile Include="KommentarPaOppgave.aspx.cs">
       <DependentUpon>KommentarPaOppgave.aspx</DependentUpon>
