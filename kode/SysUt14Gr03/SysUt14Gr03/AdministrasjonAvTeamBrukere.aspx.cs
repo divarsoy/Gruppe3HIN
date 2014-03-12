@@ -11,39 +11,71 @@ namespace SysUt14Gr03
 {
     public partial class AdministrasjonAvTeamBrukere : System.Web.UI.Page
     {
-        private Team valgtTeam;
+        static int teamId = -1;
+        private List<Bruker> team_brukerListe;
         private List<Bruker> brukerListe;
-        private List<Bruker> brukerPaaTeamListe;
 
-        public static Team SetValgtTeam(Team value)
+        public static void SetValgtTeam(int value)
         { 
-           return value;
+           teamId = value;
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            team_brukerListe = Queries.GetAlleBrukerePaaTeam(teamId);
             brukerListe = Queries.GetAlleAktiveBrukere();
 
-            for (int i = 0; i < brukerListe.Count; i++)
+
+            if (cbl_brukere.Items.Count == 0 && teamId != -1)
             {
-                using (var db = new Context()) {
-                    foreach(Bruker brk in brukerListe){
-                        ICollection<Team> team = brk.Teams;
-                        Bruker.Team hehe = brk.Teams;
-                    }
+                for (int i = 0; i < brukerListe.Count(); i++)
+                {
+                    Bruker bruker = brukerListe[i];
+                    cbl_brukere.Items.Add(bruker.Etternavn + ", " + bruker.Fornavn);
                 }
-                
             }
 
-                if (cbl_brukere.Items.Count == 0)
+            if (cbl_TeamBrukere.Items.Count == 0 && teamId != -1)
+            {
+                for (int i = 0; i < team_brukerListe.Count(); i++)
                 {
-                    for (int i = 0; i < brukerListe.Count(); i++)
-                    {
-                        Bruker bruker = brukerListe[i];
-                        cbl_brukere.Items.Add(bruker.Etternavn + ", " + bruker.Fornavn);
-                    }
+                    Bruker bruker = team_brukerListe[i];
+                    cbl_TeamBrukere.Items.Add(bruker.Etternavn + ", " + bruker.Fornavn);
                 }
+            }
+
+            if (teamId == -1)
+            {
+                bt_leggeTilBruker.Visible = false;
+                bt_fjerneBruker.Visible = false;
+
+            }
+            
         }
+
+        protected void bt_fjerneBruker_Click(object sender, EventArgs e)
+        {
+            foreach(ListItem i in cbl_TeamBrukere.Items) {
+                if(i.Selected){
+                    Queries.UpdateBrukerePaaTeam(Queries.GetTeamById(teamId), Queries.GetBrukerByName(i.Text), 2);
+                }    
+            }
+            Response.Redirect(Request.RawUrl);  
+        }
+
+        protected void bt_leggeTilBruker_Click(object sender, EventArgs e)
+        {
+            foreach (ListItem i in cbl_brukere.Items)
+            {
+                if (i.Selected)
+                {
+                    Queries.UpdateBrukerePaaTeam(Queries.GetTeamById(teamId), Queries.GetBrukerByName(i.Text), 1);
+                }
+            }
+            Response.Redirect(Request.RawUrl);
+        }
+
+
 
     }
 }

@@ -6,8 +6,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using SysUt14Gr03.Classes;
 using SysUt14Gr03.Models;
-using SysUt14Gr03.AdministrasjonAvTeamBrukere;
-
 
 namespace SysUt14Gr03
 {
@@ -31,8 +29,12 @@ namespace SysUt14Gr03
 
         protected void bt_endreTeam_Click(object sender, EventArgs e)
         {
-            AdministrasjonAvTeamBrukere.SetValgtTeam(teamListe[cbl_team.SelectedIndex - 1]);
+            Team valgtTeam = Queries.GetTeamByName(cbl_team.SelectedValue);
+            
+            AdministrasjonAvTeamBrukere.SetValgtTeam(valgtTeam.Team_id);
 
+            Response.Redirect("http://localhost:60154/AdministrasjonAvTeamBrukere.aspx");
+//           Server.Transfer("/AdministrasjonAvTeamBrukere.aspx");
         }
 
     }

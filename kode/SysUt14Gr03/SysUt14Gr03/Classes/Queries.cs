@@ -48,6 +48,37 @@ namespace SysUt14Gr03.Classes
             
             }
         }
+
+        static public List<Bruker> GetAlleBrukerePaaTeam(int valgtTeam_id)
+        {
+            using (var context = new Context())
+            {
+                List<Team> teamene = context.Teams.Where(x => x.Team_id == valgtTeam_id).ToList();
+                if (teamene.Count > 0)
+                {
+                    Team team = teamene[0];
+                    return team.Brukere;
+                }
+                else
+                {
+                    List<Bruker> tomListe = new List<Bruker>();
+                    return tomListe;
+                }
+
+                
+            }
+        }
+
+        static public Bruker GetBrukerByName(string brukerNavn)
+        {
+            using (var context = new Context())
+            {
+                List<Bruker> allSelectedBrukere = context.Brukere.Where(x => (x.Etternavn + ", " + x.Fornavn) == brukerNavn).ToList();
+                Bruker valgtBruker = allSelectedBrukere[0];
+                return valgtBruker;
+            }
+        }
+
         static public List<Prosjekt> GetAlleAktiveProsjekter()
         {
             using (var context = new Context())
@@ -112,6 +143,26 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        static public Team GetTeamByName(string teamName)
+        {
+            using (var context = new Context())
+            {
+                List<Team> allSelectedTeams = context.Teams.Where(x => x.Navn == teamName).ToList();
+                Team valgtTeam = allSelectedTeams[0];
+                return valgtTeam;
+            }
+        }
+
+        static public Team GetTeamById(int teamId)
+        {
+            using (var context = new Context())
+            {
+                List<Team> allSelectedTeams = context.Teams.Where(x => x.Team_id == teamId).ToList();
+                Team valgtTeam = allSelectedTeams[0];
+                return valgtTeam;
+            }
+        }
+
         static public List<Oppgave> GetAlleAktiveOppgaver()
         {
             using (var context = new Context())
@@ -157,5 +208,22 @@ namespace SysUt14Gr03.Classes
             return query;
         }
         */
+
+        /* Legger til eller fjerner brukere på et team
+        Brukes i AdministrasjonAvTeamBrukere */
+        public static void UpdateBrukerePaaTeam(Team teamAAOppdatere, Bruker brukerAAOppdatere, int LeggTil1Fjern2)
+        {
+            using (var context = new Context())
+            {
+                Team _teamAAOppdatere = context.Teams.FirstOrDefault(Team => Team.Navn == teamAAOppdatere.Navn);
+                if (LeggTil1Fjern2 == 1)
+                    _teamAAOppdatere.Brukere.Add(brukerAAOppdatere);
+                else if (LeggTil1Fjern2 == 2)
+                    _teamAAOppdatere.Brukere.Remove(brukerAAOppdatere);
+
+                context.SaveChanges();
+            }
+            
+        }
     }
 }
