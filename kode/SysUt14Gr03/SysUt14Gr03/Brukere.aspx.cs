@@ -22,10 +22,22 @@ namespace SysUt14Gr03
         //                              where b.Teams.Any(t => t.Navn == "Alpha")
         //                              select b);
        //}
-
-            bruker = new BrukerEksempel();
-            bruker.Etternavn = "Dag";
-            bruker.Fornavn = "Ivarsøy";
+            int team_id = 2;
+            using (var context = new Context())
+            {
+                var brukerListe = (from bruker in context.Brukere
+                                   where bruker.Teams.Any(team => team.Team_id == team_id)
+                                   select bruker);
+                
+                List<string> liste = new List<string>();
+                foreach (var bruker in brukerListe) {
+                    liste.Add(bruker.Brukernavn);
+                }
+                //return brukerListe;
+             }
+            //bruker = new BrukerEksempel();
+            //bruker.Etternavn = "Dag";
+            //bruker.Fornavn = "Ivarsøy";
         }
     }
 }
