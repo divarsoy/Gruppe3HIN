@@ -13,7 +13,7 @@ namespace SysUt14Gr03
 {
     public partial class EndreBrukerinformasjon : System.Web.UI.Page
     {
-        private string password = "blahimmel";
+   
         private int bruker_id;
         private MailMessage msg;
         private Classes.sendEmail sendMsg;
