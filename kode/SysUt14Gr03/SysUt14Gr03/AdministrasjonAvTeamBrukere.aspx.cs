@@ -55,13 +55,14 @@ namespace SysUt14Gr03
 
         protected void bt_fjerneBruker_Click(object sender, EventArgs e)
         {
+        
             foreach(ListItem i in cbl_TeamBrukere.Items) {
                 if(i.Selected){
-                    Queries.UpdateBrukerePaaTeam(Queries.GetTeamById(teamId), Queries.GetBrukerByName(i.Text), 2);
+                  //  Queries.UpdateBrukerePaaTeam(Queries.GetTeamById(teamId), team_brukerListe[(cbl_TeamBrukere.g - 1)], 2);
                 }    
             }
             Response.Redirect(Request.RawUrl);  
-        }
+        } 
 
         protected void bt_leggeTilBruker_Click(object sender, EventArgs e)
         {
@@ -69,10 +70,15 @@ namespace SysUt14Gr03
             {
                 if (i.Selected)
                 {
-                    Queries.UpdateBrukerePaaTeam(Queries.GetTeamById(teamId), Queries.GetBrukerByName(i.Text), 1);
+                  /*  Queries.UpdateBrukerePaaTeam(Queries.GetTeamById(teamId), Queries.GetBrukerByName(i.Text), 1); */
                 }
             }
             Response.Redirect(Request.RawUrl);
+        }
+
+        protected void cbl_TeamBrukere_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            bt_fjerneBruker.Visible = false;
         }
 
 

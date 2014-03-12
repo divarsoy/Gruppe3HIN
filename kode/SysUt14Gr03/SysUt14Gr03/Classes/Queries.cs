@@ -69,15 +69,6 @@ namespace SysUt14Gr03.Classes
             }
         }
 
-        static public Bruker GetBrukerByName(string brukerNavn)
-        {
-            using (var context = new Context())
-            {
-                List<Bruker> allSelectedBrukere = context.Brukere.Where(x => (x.Etternavn + ", " + x.Fornavn) == brukerNavn).ToList();
-                Bruker valgtBruker = allSelectedBrukere[0];
-                return valgtBruker;
-            }
-        }
 
         static public List<Prosjekt> GetAlleAktiveProsjekter()
         {

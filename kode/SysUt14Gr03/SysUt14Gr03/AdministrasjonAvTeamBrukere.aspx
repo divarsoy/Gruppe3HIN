@@ -11,7 +11,7 @@
     </div>
     
     <div class="col-md-6">
-        <asp:CheckBoxList ID="cbl_TeamBrukere" runat="server">
+        <asp:CheckBoxList ID="cbl_TeamBrukere" runat="server" OnSelectedIndexChanged="cbl_TeamBrukere_SelectedIndexChanged">
         </asp:CheckBoxList>
     </div>
 
