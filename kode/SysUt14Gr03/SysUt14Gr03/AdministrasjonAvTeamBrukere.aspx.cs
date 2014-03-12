@@ -12,7 +12,6 @@ namespace SysUt14Gr03
     public partial class AdministrasjonAvTeamBrukere : System.Web.UI.Page
     {
         private List<Bruker> brukerListe;
-        private List<Bruker> brukerPaaTeamListe;
 
         protected void Page_Load(object sender, EventArgs e)
         {

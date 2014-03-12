@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using SysUt14Gr03.Models;
@@ -107,7 +109,6 @@ namespace SysUt14Gr03.Classes
 
         static public List<Gruppe> GetAlleAktiveGrupper()
         {
-            List<Team> teams;
             using (var context = new Context())
             {
                 // teams = context.Teams.Include(x => x.).ToList();
@@ -136,5 +137,57 @@ namespace SysUt14Gr03.Classes
             return query;
         }
         */
+        public static string getProsjektNavn(int prosjekt_id)
+        {
+            using (SqlCommand command = new SqlCommand())
+            {
+                string prosjektNavn = string.Empty;
+                string query = "SELECT * FROM Prosjekt WHERE Bruker_id = " + prosjekt_id + "'";
+                command.Connection = new SqlConnection(ConfigurationManager.ConnectionStrings["sysUt14Gr03"].ConnectionString);
+
+                var reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        prosjektNavn = reader.GetString(1);
+                    }
+                }
+                else
+                {
+                    prosjektNavn = "Fikk ikke hentet ut informasjon fra tabellen Prosjekt";
+                }
+                reader.Close();
+                command.Connection.Close();
+                return prosjektNavn;
+            }
+        }
+        public static string getStatusNavn(int status_id)
+        {
+            using (SqlCommand command = new SqlCommand())
+            {
+                string statusNavn = string.Empty;
+                string query = "SELECT * FROM Status WHERE Bruker_id = " + status_id + "'";
+                command.Connection = new SqlConnection(ConfigurationManager.ConnectionStrings["sysUt14Gr03"].ConnectionString);
+
+                var reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        statusNavn = reader.GetString(1);
+                    }
+                }
+                else
+                {
+                    statusNavn = "Fikk ikke hentet ut informasjon fra tabellen Prosjekt";
+                }
+                reader.Close();
+                command.Connection.Close();
+                return statusNavn;
+            }
+        }
     }
 }
