@@ -90,7 +90,17 @@ namespace SysUt14Gr03.Classes
             }
         }
 
-
+        static public List<Team> GetAlleTeamsEnBrukerErMedI(int _bruker_id)
+        {
+            int bruker_id = _bruker_id;
+            using (var context = new Context())
+            {
+                var teamListe = (from team in context.Teams
+                                 where team.Brukere.Any(bruker => bruker.Bruker_id == bruker_id)
+                                 select team).ToList();
+                return teamListe;
+            }
+        }
         /*
          * Ikke klar
         static public List<Team> GetTeamFromGruppe(int _gruppe_id)
