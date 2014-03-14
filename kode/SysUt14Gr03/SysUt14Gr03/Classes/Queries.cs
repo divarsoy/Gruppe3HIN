@@ -23,7 +23,7 @@ namespace SysUt14Gr03.Classes
         {
             using (var context = new Context())
             {
-                var IQueryList = context.Brukere.Where(p => p.Epost == _Epost);
+                var IQueryList = context.Brukere.Where(bruker => bruker.Epost == _Epost);
                 if (IQueryList.Any())
                 {
                     return IQueryList.ToList<Bruker>();
@@ -199,7 +199,19 @@ namespace SysUt14Gr03.Classes
             }
         }
 
-      
+        static public List<Oppgave> GetAlleAktiveOppgaverDag()
+        {
+            using (var context = new Context())
+            {
+                var oppgaveListe = context.Oppgaver
+                                  .Include("Brukere")
+                                  .ToList();
+
+//                                    .Where(oppgave => oppgave.Aktiv == true)                                    
+                return oppgaveListe;
+
+            }
+        }
 
         static public List<Gruppe> GetAlleAktiveGrupper()
         {

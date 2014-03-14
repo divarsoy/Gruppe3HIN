@@ -28,6 +28,8 @@ namespace SysUt14Gr03
                 var brukerListe = (from bruker in context.Brukere
                                    where bruker.Teams.Any(team => team.Team_id == team_id)
                                    select bruker).ToList();
+                 
+
                 List<string> liste = new List<string>();
                 foreach (var brukers in brukerListe) {
                     liste.Add(brukers.Brukernavn);
