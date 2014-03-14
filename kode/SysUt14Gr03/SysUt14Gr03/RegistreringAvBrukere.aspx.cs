@@ -49,11 +49,16 @@ namespace SysUt14Gr03
                 fornavn = tb_reg_fornavn.Text;
             else
                 FeilMeldingFornavn.Visible = true;
+
+            /*using (var context = new Context())
+            {
+                Bruker bruker = context.Brukere.FirstOrDefault(Bruker => Bruker.Epost == tb_reg_epost.Text);
+            }*/
                 
             for (int i = 0; i < Queries.GetAlleAktiveBrukere().Count; i++)
             {
                 Bruker bruker = Queries.GetBruker(i);
-                if (bruker.Epost == tb_reg_epost.Text)
+                if ((string)bruker.Epost == tb_reg_epost.Text)
                     emailUnq = false;
             }
 
