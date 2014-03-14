@@ -42,10 +42,9 @@
     <div class="kolonner col-md-10">
         <h3>Din aktivitet</h3>
         <asp:ListView ID="lvActivity" runat="server" SelectMethod="lvActivity_GetData"></asp:ListView>
-        <asp:ListBox ID="Projects" runat="server" OnClick="lbProjects" ItemType="SysUt14Gr03.Models.Prosjekt"></asp:ListBox>
-        <asp:ListBox ID="Meetings" runat="server" OnClick="lbMeetings" ItemType="SysUt14Gr03.Models.Moete"></asp:ListBox>
-        <asp:ListBox ID="Team" runat="server" OnClick="team" ItemType="SysUt14Gr03.Models.Team"></asp:ListBox>
-        <asp:ListBox ID="Gruppe" runat="server" OnClick="lbGruppe" ItemType="SysUt14Gr03.Models.Gruppe"></asp:ListBox>
+        <asp:ListBox ID="Project" runat="server" OnSelectedIndexChanged="Projects_SelectedIndexChanged" ItemType="SysUt14Gr03.Models.Prosjekt"></asp:ListBox>
+        <asp:ListBox ID="Meeting" runat="server" OnSelectedIndexChanged="Meetings_SelectedIndexChanged" ItemType="SysUt14Gr03.Models.Moete"></asp:ListBox>
+        <asp:ListBox ID="Team" runat="server" OnSelectedIndexChanged="Team_SelectedIndexChanged" ItemType="SysUt14Gr03.Models.Team"></asp:ListBox>
     </div>
     <div class="kolonner col-md-2">
        <a>muligheter for mer</a>

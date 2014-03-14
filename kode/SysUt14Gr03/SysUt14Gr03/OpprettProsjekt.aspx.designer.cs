@@ -10,105 +10,96 @@
 namespace SysUt14Gr03 {
     
     
-    public partial class HistorikkStattestikk {
+    public partial class OpprettProsjekt {
         
         /// <summary>
-        /// tempButton control.
+        /// tbProsjektnavn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button tempButton;
+        protected global::System.Web.UI.WebControls.TextBox tbProsjektnavn;
         
         /// <summary>
-        /// Graph control.
+        /// tbProsjektleder control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Graph;
+        protected global::System.Web.UI.WebControls.TextBox tbProsjektleder;
         
         /// <summary>
-        /// MonhtlyGraph control.
+        /// dropGruppe control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.DataVisualization.Charting.Chart MonhtlyGraph;
+        protected global::System.Web.UI.WebControls.DropDownList dropGruppe;
         
         /// <summary>
-        /// Image1 control.
+        /// dropTeam control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image1;
+        protected global::System.Web.UI.WebControls.DropDownList dropTeam;
         
         /// <summary>
-        /// btnUserInfo control.
+        /// cal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnUserInfo;
+        protected global::System.Web.UI.WebControls.Calendar cal;
         
         /// <summary>
-        /// lvStatistics control.
+        /// tbStart control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListView lvStatistics;
+        protected global::System.Web.UI.WebControls.TextBox tbStart;
         
         /// <summary>
-        /// lvHistory control.
+        /// btnStart control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListView lvHistory;
+        protected global::System.Web.UI.WebControls.Button btnStart;
         
         /// <summary>
-        /// lvActivity control.
+        /// tbSlutt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListView lvActivity;
+        protected global::System.Web.UI.WebControls.TextBox tbSlutt;
         
         /// <summary>
-        /// Project control.
+        /// btnSlutt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox Project;
+        protected global::System.Web.UI.WebControls.Button btnSlutt;
         
         /// <summary>
-        /// Meeting control.
+        /// btnLagre control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox Meeting;
-        
-        /// <summary>
-        /// Team control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox Team;
+        protected global::System.Web.UI.WebControls.Button btnLagre;
     }
 }

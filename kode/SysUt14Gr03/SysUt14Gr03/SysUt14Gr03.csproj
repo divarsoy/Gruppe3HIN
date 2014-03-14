@@ -161,25 +161,32 @@
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\RegisterExternalLogin.aspx" />
     <Content Include="AdministrasjonAvGruppe.aspx" />
+    <Content Include="AdministrasjonAvProsjekt.aspx" />
     <Content Include="AdministrasjonAvTeam.aspx" />
     <Content Include="AdministrasjonAvTeamBrukere.aspx" />
     <Content Include="AdministratorForside.aspx" />
     <Content Include="AdministrerTeam.aspx" />
     <Content Include="AktiverKonto.aspx" />
     <Content Include="ArkiverGruppe.aspx" />
-    <Content Include="Brukere.aspx" />
     <Content Include="ArkiverOppg.aspx" />
+    <Content Include="Brukere.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="changeUser.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="EstimerResttidPaOppgave.aspx" />
     <Content Include="HistorikkStattestikk.aspx" />
     <Content Include="EndreBrukerinformasjon.aspx" />
     <Content Include="EpostPreferanser.aspx" />
+    <Content Include="InvitasjonAvBruker.aspx" />
+    <Content Include="KommentarPaOppgave.aspx" />
     <Content Include="OpprettGruppe.aspx" />
+    <Content Include="OpprettOppgave.aspx" />
+    <Content Include="OpprettProsjekt.aspx" />
     <Content Include="OpprettTidsfristPaaOppgave.aspx" />
+    <Content Include="PameldingTilOppgave.aspx" />
     <Content Include="Pictures\blomst.jpg" />
     <Content Include="OpprettTeam.aspx" />
     <Content Include="RegistreringAvBrukere.aspx" />
@@ -228,6 +235,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Site.Master" />
+    <Content Include="VelkomstSkjerm.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -284,6 +292,13 @@
     <Compile Include="AdministrasjonAvGruppe.aspx.designer.cs">
       <DependentUpon>AdministrasjonAvGruppe.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AdministrasjonAvProsjekt.aspx.cs">
+      <DependentUpon>AdministrasjonAvProsjekt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdministrasjonAvProsjekt.aspx.designer.cs">
+      <DependentUpon>AdministrasjonAvProsjekt.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AdministrasjonAvTeam.aspx.cs">
       <DependentUpon>AdministrasjonAvTeam.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -336,19 +351,19 @@
     <Compile Include="ArkiverGruppe.aspx.designer.cs">
       <DependentUpon>ArkiverGruppe.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Brukere.aspx.cs">
-      <DependentUpon>Brukere.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Brukere.aspx.designer.cs">
-      <DependentUpon>Brukere.aspx</DependentUpon>
-    </Compile>
     <Compile Include="ArkiverOppg.aspx.cs">
       <DependentUpon>ArkiverOppg.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ArkiverOppg.aspx.designer.cs">
       <DependentUpon>ArkiverOppg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Brukere.aspx.cs">
+      <DependentUpon>Brukere.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Brukere.aspx.designer.cs">
+      <DependentUpon>Brukere.aspx</DependentUpon>
     </Compile>
     <Compile Include="Classes\sendEmail.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -383,6 +398,28 @@
     <Compile Include="EndreBrukerinformasjon.aspx.designer.cs">
       <DependentUpon>EndreBrukerinformasjon.aspx</DependentUpon>
     </Compile>
+    <Compile Include="EstimerResttidPaOppgave.aspx.cs">
+      <DependentUpon>EstimerResttidPaOppgave.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EstimerResttidPaOppgave.aspx.designer.cs">
+      <DependentUpon>EstimerResttidPaOppgave.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InvitasjonAvBruker.aspx.cs">
+      <DependentUpon>InvitasjonAvBruker.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InvitasjonAvBruker.aspx.designer.cs">
+      <DependentUpon>InvitasjonAvBruker.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="KommentarPaOppgave.aspx.cs">
+      <DependentUpon>KommentarPaOppgave.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KommentarPaOppgave.aspx.designer.cs">
+      <DependentUpon>KommentarPaOppgave.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="EpostPreferanser.aspx.cs">
       <DependentUpon>EpostPreferanser.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -404,6 +441,20 @@
     <Compile Include="HistorikkStattestikk.aspx.designer.cs">
       <DependentUpon>HistorikkStattestikk.aspx</DependentUpon>
     </Compile>
+    <Compile Include="OpprettOppgave.aspx.cs">
+      <DependentUpon>OpprettOppgave.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OpprettOppgave.aspx.designer.cs">
+      <DependentUpon>OpprettOppgave.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OpprettProsjekt.aspx.cs">
+      <DependentUpon>OpprettProsjekt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OpprettProsjekt.aspx.designer.cs">
+      <DependentUpon>OpprettProsjekt.aspx</DependentUpon>
+    </Compile>
     <Compile Include="OpprettTeam.aspx.cs">
       <DependentUpon>OpprettTeam.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -417,6 +468,13 @@
     </Compile>
     <Compile Include="OpprettTidsfristPaaOppgave.aspx.designer.cs">
       <DependentUpon>OpprettTidsfristPaaOppgave.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PameldingTilOppgave.aspx.cs">
+      <DependentUpon>PameldingTilOppgave.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PameldingTilOppgave.aspx.designer.cs">
+      <DependentUpon>PameldingTilOppgave.aspx</DependentUpon>
     </Compile>
     <Compile Include="RegistreringAvBrukere.aspx.cs">
       <DependentUpon>RegistreringAvBrukere.aspx</DependentUpon>
@@ -463,11 +521,6 @@
     <Compile Include="lostPassword.aspx.designer.cs">
       <DependentUpon>lostPassword.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201402251356435_changedBrukerPrefs.cs" />
-    <Compile Include="Migrations\201402251356435_changedBrukerPrefs.Designer.cs">
-      <DependentUpon>201402251356435_changedBrukerPrefs.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BrukerPreferanse.cs" />
     <Compile Include="Models\Gruppe.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -499,6 +552,13 @@
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="VelkomstSkjerm.aspx.cs">
+      <DependentUpon>VelkomstSkjerm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="VelkomstSkjerm.aspx.designer.cs">
+      <DependentUpon>VelkomstSkjerm.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -512,11 +572,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201402251356435_changedBrukerPrefs.resx">
-      <DependentUpon>201402251356435_changedBrukerPrefs.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

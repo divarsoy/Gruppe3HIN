@@ -5,14 +5,17 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.Providers.Entities;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using SysUt14Gr03.Models;
+using SysUt14Gr03.Classes;
+using System.Web.Security;
 
 namespace SysUt14Gr03
 {
     public partial class HistorikkStattestikk : System.Web.UI.Page
     {
-        private string username = "Cindy Larkin";
         private int brukerID;
         private Login getInfo;
         private Models.Bruker user;
@@ -32,7 +35,8 @@ namespace SysUt14Gr03
             context = new Models.Context();
             status = new Models.Status();
 
-            brukerID = 1; // getInfo.getBrukerID();
+            brukerID = 1;
+            //brukerID = Convert.ToInt32(Membership.GetUser(HttpContext.Current.User.Identity.Name).ProviderUserKey);
 
             this.gragh();
         }
@@ -45,15 +49,72 @@ namespace SysUt14Gr03
         {
 
         }
-        protected IQueryable lbProjects()
+
+        // The return type can be changed to IEnumerable, however to support
+        // paging and sorting, the following parameters must be added:
+        //     int maximumRows
+        //     int startRowIndex
+        //     out int totalRowCount
+        //     string sortByExpression
+        public IQueryable lvStatistics_GetData()
         {
             return null;
         }
-        protected void lbMeetings()
+        public IQueryable lvHistory_GetData()
         {
-
+            return null;
         }
-        protected ArrayList team()
+        public IQueryable lvActivity_GetData()
+        {
+            return null;
+        }
+
+        protected void Projects_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            List<Prosjekt> prosjektList = Queries.GetAlleProsjektFraBrukerErMedI(brukerID);
+
+            if (Project.Items.Count == 0)
+            {
+                for (int i = 0; i < prosjektList.Count(); i++)
+                {
+                    Prosjekt prosjekt = prosjektList[i];
+
+                    Project.Items.Add("Navn: " + prosjekt.Navn);
+                }
+            }
+        }
+
+        protected void Meetings_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            List<Moete> moeteList = Queries.GetAlleMoeterFraBrukerErMedI(brukerID);
+
+            if (Meeting.Items.Count == 0)
+            {
+                for (int i = 0; i < moeteList.Count(); i++)
+                {
+                    Moete moete = moeteList[i];
+
+                    Meeting.Items.Add("Navn: " + prosjekt.Navn);
+                }
+            }
+        }
+
+        protected void Team_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            List<Team> teamList = Queries.GetAlleTeamsEnBrukerErMedI(brukerID);
+
+            if (Team.Items.Count == 0)
+            {
+                for (int i = 0; i < teamList.Count(); i++)
+                {
+                    Team team = teamList[i];
+
+                    Team.Items.Add("Navn: " + team.Navn);
+                }
+            }
+        }
+
+        /*protected ArrayList team()
         {
             using (SqlCommand command = new SqlCommand())
             {
@@ -81,29 +142,6 @@ namespace SysUt14Gr03
                 command.Connection.Close();
                 return list;
             }
-        }
-        protected void lbGruppe(object sender, EventArgs e)
-        {
-
-        }
-
-        // The return type can be changed to IEnumerable, however to support
-        // paging and sorting, the following parameters must be added:
-        //     int maximumRows
-        //     int startRowIndex
-        //     out int totalRowCount
-        //     string sortByExpression
-        public IQueryable lvStatistics_GetData()
-        {
-            return null;
-        }
-        public IQueryable lvHistory_GetData()
-        {
-            return null;
-        }
-        public IQueryable lvActivity_GetData()
-        {
-            return null;
-        }
+        }*/
     }
 }

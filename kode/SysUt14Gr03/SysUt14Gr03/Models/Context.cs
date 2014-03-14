@@ -28,14 +28,14 @@ namespace SysUt14Gr03.Models
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
 
             // Mange til mange forhold Teams <=> Brukere
-            modelBuilder.Entity<Team>()
-                .HasMany(t => t.Brukere)
-                .WithMany(t => t.Teams)
+            modelBuilder.Entity<Bruker>()
+                .HasMany(t => t.Teams)
+                .WithMany(t => t.Brukere)
                 .Map(m =>
                 {
                     m.MapLeftKey("Bruker_id");
-                    m.MapRightKey("team_id");
-                    m.ToTable("BrukerTeamMapping");
+                    m.MapRightKey("Team_id");
+                    m.ToTable("BrukerTeams");
                 });
 
             // Mange til mange forhold Teams <=> Grupper
@@ -44,31 +44,41 @@ namespace SysUt14Gr03.Models
                 .WithMany(t => t.Teams)
                 .Map(m =>
                 {
-                    m.MapLeftKey("gruppe_id");
-                    m.MapRightKey("team_id");
-                    m.ToTable("GruppeTeamMapping");
+                    m.MapLeftKey("Gruppe_id");
+                    m.MapRightKey("Team_id");
+                    m.ToTable("GruppeTeams");
                 });
 
             // Mange til mange forhold Moeter <=> Brukere
-            modelBuilder.Entity<Moete>()
-                .HasMany(t => t.Brukere)
-                .WithMany(t => t.Moeter)
+            modelBuilder.Entity<Bruker>()
+                .HasMany(t => t.Moeter)
+                .WithMany(t => t.Brukere)
                 .Map(m =>
                 {
-                    m.MapLeftKey("moete_id");
-                    m.MapRightKey("bruker_id");
-                    m.ToTable("BrukerMoeteMapping");
+                    m.MapLeftKey("Moete_id");
+                    m.MapRightKey("Bruker_id");
+                    m.ToTable("BrukerMoeter");
                 });
 
             // Mange til mange forhold Oppgaver <=> Brukere
-            modelBuilder.Entity<Oppgave>()
-                .HasMany(t => t.Brukere)
-                .WithMany(t => t.Oppgaver)
+            modelBuilder.Entity<Bruker>()
+                .HasMany(t => t.Oppgaver)
+                .WithMany(t => t.Brukere)
                 .Map(m =>
                 {
-                    m.MapLeftKey("oppgave_id");
-                    m.MapRightKey("bruker_id");
-                    m.ToTable("BrukerOppgaveMapping");
+                    m.MapLeftKey("Oppgave_id");
+                    m.MapRightKey("Bruker_id");
+                    m.ToTable("BrukerOppgaver");
+                });
+
+            modelBuilder.Entity<Bruker>()
+                .HasMany(t => t.Rettigheter)
+                .WithMany(t => t.Brukere)
+                .Map(m =>
+                {
+                    m.MapLeftKey("Rettighet_id");
+                    m.MapRightKey("Bruker_id");
+                    m.ToTable("BrukerRettigheter");
                 });
 
             base.OnModelCreating(modelBuilder);

@@ -13,6 +13,6 @@ namespace SysUt14Gr03.Models
         public string Tekst { get; set; }
         public DateTime Opprettet { get; set; }
 
-        public virtual ICollection<Bruker> Brukere { get; set; }
+        public virtual List<Bruker> Brukere { get; set; }
     }
 }

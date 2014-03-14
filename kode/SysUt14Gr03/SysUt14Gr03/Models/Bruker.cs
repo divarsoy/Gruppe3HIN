@@ -19,13 +19,18 @@ namespace SysUt14Gr03.Models
         public bool Aktiv { get; set; }
         public DateTime opprettet { get; set; }
 
-        public virtual ICollection<BrukerPreferanse> BrukerPreferanser { get; set; }
-        public virtual ICollection<Rettighet> Rettigheter { get; set; }
-        public virtual ICollection<Moete> Moeter { get; set; }
-        public virtual ICollection<Kommentar> Kommentarer { get; set; }
-        public virtual ICollection<Logg> Logger { get; set; }
-        public virtual ICollection<Oppgave> Oppgaver { get; set; }
-        public virtual ICollection<Prosjekt> Prosjekter { get; set; }
-        public virtual ICollection<Team> Teams { get; set; }
+        public virtual List<BrukerPreferanse> BrukerPreferanser { get; set; }
+        public virtual List<Rettighet> Rettigheter { get; set; }
+        public virtual List<Moete> Moeter { get; set; }
+        public virtual List<Kommentar> Kommentarer { get; set; }
+        public virtual List<Logg> Logger { get; set; }
+        public virtual List<Oppgave> Oppgaver { get; set; }
+        public virtual List<Prosjekt> Prosjekter { get; set; }
+        public virtual List<Team> Teams { get; set; }
+
+        public override string ToString()
+        {
+            return Fornavn + " " + Etternavn;
+        }
     }
 }

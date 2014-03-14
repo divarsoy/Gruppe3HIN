@@ -17,24 +17,24 @@ namespace SysUt14Gr03
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            //oppgaveListe = Queries.GetAlleAktiveOppgaver();
-            oppgaveListe = new List<Oppgave>();
+            oppgaveListe = Queries.GetAlleAktiveOppgaver();
+            //oppgaveListe = new List<Oppgave>();
            // oppgaveListe.Add(new Oppgave( { Title = "Oppgave 1" }));
-            Oppgave test1 = new Oppgave();
-            Oppgave test2 = new Oppgave();
-            test1.Tittel = "Oppgave 1";
-            test1.krav = "Skriv 800 sider om scrum";
-            test2.Tittel = "Oppgave 2";
-            test2.krav = "Skriv 500 sider om planning poker";
-            oppgaveListe.Add(test1);
-            oppgaveListe.Add(test2);
+            //Oppgave test1 = new Oppgave();
+            //Oppgave test2 = new Oppgave();
+           // test1.Tittel = "Oppgave 1";
+           // test1.Krav = "Skriv 800 sider om scrum";
+            //test2.Tittel = "Oppgave 2";
+            //test2.Krav = "Skriv 500 sider om planning poker";
+            //oppgaveListe.Add(test1);
+            //oppgaveListe.Add(test2);
 
             if (lsbOppgaver.Items.Count == 0)
             {
                 for (int i = 0; i < oppgaveListe.Count(); i++)
                 {
                     Oppgave oppgave = oppgaveListe[i];
-                    lsbOppgaver.Items.Add(oppgave.Tittel);
+                    lsbOppgaver.Items.Add(new ListItem(oppgave.Tittel, oppgave.Oppgave_id.ToString()));
                 }
             }
 
@@ -54,10 +54,21 @@ namespace SysUt14Gr03
                 int minutt = Convert.ToInt32(ddlMinutt.SelectedItem.ToString());
                 TimeSpan timespan = new TimeSpan(time, minutt, 0);
                 dato = dato.Add(timespan);
-                FristOK.Text = "Frist satt til " + dato.ToString() + " på " + oppgaveListe[index].Tittel;
-                FristOK.Visible = true;
                 
-                // Her smeller vi den inn i databasen...
+
+                using (var context = new Context())
+                {
+                    int oppgave_id = Convert.ToInt32(lsbOppgaver.SelectedValue);
+
+                    Oppgave oppgave = context.Oppgaver.FirstOrDefault(o => o.Oppgave_id == oppgave_id);
+
+                    oppgave.Tidsfrist = dato;
+                    context.SaveChanges();
+
+                    FristOK.Text = "Frist satt til " + dato.ToString() + " på " + oppgaveListe[index].Tittel;
+                    FristOK.Visible = true;
+
+                }
             }
             else
             {
@@ -73,9 +84,7 @@ namespace SysUt14Gr03
             Feilmelding.Visible = false;
             // Vis valgt oppgave på siden
             index = lsbOppgaver.SelectedIndex;
-            Oppgave oppgave = oppgaveListe[index];
-            txtInfo.Text = oppgave.Tittel + oppgave.krav + oppgave.Tidsfrist;
-            txtInfo.Visible = true;
+            
             pnlDato.Visible = true;
             if (ddlTime.Items.Count == 0)
             {
@@ -95,9 +104,14 @@ namespace SysUt14Gr03
                         ddlMinutt.Items.Add("" + i);
                 }
             }
-            
 
+        }
 
+        protected void btnDetaljer_Click(object sender, EventArgs e)
+        {
+            Oppgave oppgave = oppgaveListe[index];
+            txtInfo.Text = oppgave.Tittel + "\n" + oppgave.Krav + "\n" + oppgave.Tidsfrist;
+            txtInfo.Visible = true;
         }
     }
 }

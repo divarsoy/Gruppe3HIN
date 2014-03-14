@@ -10,42 +10,42 @@
 namespace SysUt14Gr03 {
     
     
-    public partial class CancelOppg {
+    public partial class KommentarPaOppgave {
         
         /// <summary>
-        /// gridViewOppgave control.
+        /// ddlOppgave control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gridViewOppgave;
+        protected global::System.Web.UI.WebControls.DropDownList ddlOppgave;
         
         /// <summary>
-        /// lblKommentar control.
+        /// txtKommentar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblKommentar;
+        protected global::System.Web.UI.WebControls.TextBox txtKommentar;
         
         /// <summary>
-        /// tbKommentar control.
+        /// lblFeil control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbKommentar;
+        protected global::System.Web.UI.WebControls.Label lblFeil;
         
         /// <summary>
-        /// btnSend control.
+        /// btnKommentar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSend;
+        protected global::System.Web.UI.WebControls.Button btnKommentar;
     }
 }

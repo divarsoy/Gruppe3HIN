@@ -12,7 +12,7 @@ namespace SysUt14Gr03.Models
         public bool Aktiv { get; set; }
         public DateTime Opprettet { get; set; }
 
-        public virtual ICollection<Prosjekt> Prosjekter { get; set; }
-        public virtual ICollection<Team> Teams { get; set; }
+        public virtual List<Prosjekt> Prosjekter { get; set; }
+        public virtual List<Team> Teams { get; set; }
     }
 }

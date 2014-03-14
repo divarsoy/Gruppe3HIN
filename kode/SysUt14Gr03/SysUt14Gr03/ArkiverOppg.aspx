@@ -1,8 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ArkiverOppg.aspx.cs" Inherits="SysUt14Gr03.CancelOppg" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <br/><br/>
-    <asp:GridView RowStyle-HorizontalAlign="Center" ID="gridViewOppgave" runat="server" AutoGenerateColumns="false" DataKeyNames="Gruppe_id" OnRowEditing="gridViewGroup_RowEditing" OnRowCancelingEdit="gridViewGroup_RowCancelingEdit" OnRowUpdating="gridViewGroup_RowUpdating" ShowFooter="False" ShowHeader="True">         
+    <br/><br/><br/><br/>
+    <asp:GridView RowStyle-HorizontalAlign="Center" ID="gridViewOppgave" runat="server" AutoGenerateColumns="false" DataKeyNames="Oppgave_id" OnRowEditing="gridViewGroup_RowEditing" OnRowCancelingEdit="gridViewGroup_RowCancelingEdit" OnRowUpdating="gridViewGroup_RowUpdating" ShowFooter="False" ShowHeader="True">         
         <Columns>
             <asp:TemplateField HeaderText="Tittel">
                 <ItemTemplate>
@@ -22,10 +22,10 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Brukt tid">
                 <ItemTemplate>
-                      <asp:Label ID="lbBruktTid" runat="server" Text='<%#Bind("Brukttid") %>'></asp:Label>                
+                      <asp:Label ID="lbBruktTid" runat="server" Text='<%#Bind("BruktTid") %>'></asp:Label>                
                 </ItemTemplate>          
                 <EditItemTemplate>
-                    <asp:TextBox ID="tbBruktTid" runat="server" Text='<%#Bind("Brukttid") %>'></asp:TextBox>
+                    <asp:TextBox ID="tbBruktTid" runat="server" Text='<%#Bind("BruktTid") %>'></asp:TextBox>
                 </EditItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Tidsfrist">
@@ -46,18 +46,18 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Prosjekt">
                 <ItemTemplate>
-                      <asp:Label ID="lbProsjekt" runat="server" Text='<%#Bind("Prosjekt") %>'></asp:Label>                
+                      <asp:Label ID="lbProsjekt" runat="server" Text='<%#Bind("Prosjekt.Navn") %>'></asp:Label>                
                 </ItemTemplate>          
                 <EditItemTemplate>
-                    <asp:TextBox ID="tbProsjekt" runat="server" Text='<%#Bind("Prosjekt") %>'></asp:TextBox>
+                    <asp:TextBox ID="tbProsjekt" runat="server" Text='<%#Bind("Prosjekt.Navn") %>'></asp:TextBox>
                 </EditItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Status">
                 <ItemTemplate>
-                      <asp:Label ID="lbStatus" runat="server" Text='<%#Bind("Status") %>'></asp:Label>                
+                      <asp:Label ID="lbStatus" runat="server" Text='<%#Bind("Status.Navn") %>'></asp:Label>                
                 </ItemTemplate>          
                 <EditItemTemplate>
-                    <asp:TextBox ID="tbStatus" runat="server" Text='<%#Bind("Status") %>'></asp:TextBox>
+                    <asp:TextBox ID="tbStatus" runat="server" Text='<%#Bind("Status.Navn") %>'></asp:TextBox>
                 </EditItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Aktiv">
@@ -82,4 +82,7 @@
         <SortedDescendingCellStyle BackColor="#D4DFE1" />
         <SortedDescendingHeaderStyle BackColor="#15524A" />
     </asp:GridView>
+    <asp:Label ID="lblKommentar" runat="server" Text="Begrunnelse: " Visible="false"></asp:Label>
+    <asp:TextBox ID="tbKommentar" runat="server" Visible="false" TextMode="MultiLine"></asp:TextBox>
+    <asp:Button ID="btnSend" runat="server" Text="Send" Width="92px" Visible="false" OnClick="btnSend_Click" />
 </asp:Content>

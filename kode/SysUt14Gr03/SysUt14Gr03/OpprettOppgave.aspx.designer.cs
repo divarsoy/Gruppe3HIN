@@ -10,105 +10,132 @@
 namespace SysUt14Gr03 {
     
     
-    public partial class HistorikkStattestikk {
+    public partial class OpprettOppgave {
         
         /// <summary>
-        /// tempButton control.
+        /// tbTittel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button tempButton;
+        protected global::System.Web.UI.WebControls.TextBox tbTittel;
         
         /// <summary>
-        /// Graph control.
+        /// tbBeskrivelse control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Graph;
+        protected global::System.Web.UI.WebControls.TextBox tbBeskrivelse;
         
         /// <summary>
-        /// MonhtlyGraph control.
+        /// tbKrav control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.DataVisualization.Charting.Chart MonhtlyGraph;
+        protected global::System.Web.UI.WebControls.TextBox tbKrav;
         
         /// <summary>
-        /// Image1 control.
+        /// TbEstimering control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image1;
+        protected global::System.Web.UI.WebControls.TextBox TbEstimering;
         
         /// <summary>
-        /// btnUserInfo control.
+        /// ddlBrukere control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnUserInfo;
+        protected global::System.Web.UI.WebControls.DropDownList ddlBrukere;
         
         /// <summary>
-        /// lvStatistics control.
+        /// lbBrukere control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListView lvStatistics;
+        protected global::System.Web.UI.WebControls.ListBox lbBrukere;
         
         /// <summary>
-        /// lvHistory control.
+        /// lblFeil control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListView lvHistory;
+        protected global::System.Web.UI.WebControls.Label lblFeil;
         
         /// <summary>
-        /// lvActivity control.
+        /// btnBrukere control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListView lvActivity;
+        protected global::System.Web.UI.WebControls.Button btnBrukere;
         
         /// <summary>
-        /// Project control.
+        /// GridViewOppg control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox Project;
+        protected global::System.Web.UI.WebControls.GridView GridViewOppg;
         
         /// <summary>
-        /// Meeting control.
+        /// ddlStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox Meeting;
+        protected global::System.Web.UI.WebControls.DropDownList ddlStatus;
         
         /// <summary>
-        /// Team control.
+        /// ddlPrioritet control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox Team;
+        protected global::System.Web.UI.WebControls.DropDownList ddlPrioritet;
+        
+        /// <summary>
+        /// ddlProsjekt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlProsjekt;
+        
+        /// <summary>
+        /// lblCheck control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCheck;
+        
+        /// <summary>
+        /// btnOpprett control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnOpprett;
     }
 }

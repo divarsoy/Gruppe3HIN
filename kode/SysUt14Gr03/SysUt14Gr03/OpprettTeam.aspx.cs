@@ -12,8 +12,8 @@ namespace SysUt14Gr03
     public partial class OpprettTeam : System.Web.UI.Page
     {
         private List<Bruker> brukerListe;
+        List<Bruker> selectedBrukers;
         private string teamNavn;
-        private Classes.sendEmail sendMsg;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -40,9 +40,11 @@ namespace SysUt14Gr03
             // Hvor mange brukere er valgt
             //int numberSelected = 0;
             List<Bruker> selectedUsers = new List<Bruker>();
+            selectedBrukers = new List<Bruker>();
 
             // Legger til valgte brukere
-            for (int i = 0; i < cblBrukere.Items.Count; i++) {
+            for (int i = 0; i < cblBrukere.Items.Count; i++)
+            {
                 if (cblBrukere.Items[i].Selected)
                 {
                     selectedUsers.Add(brukerListe[i]);
@@ -52,21 +54,38 @@ namespace SysUt14Gr03
 
             teamNavn = txtTeamNavn.Text;
 
-            if (teamNavn != string.Empty && selectedUsers.Count > 0)
+            using (var context = new Context())
             {
-                TeamOK.Visible = true;
-                // Legger teamet inn i databasen:
-                using (var db = new Context())
+
+                for (int i = 0; i < selectedUsers.Count; i++)
                 {
-                    var nyttTeam = new Team { Navn = teamNavn, Aktiv = true, Opprettet = DateTime.Now, Brukere = selectedUsers };
-                    db.Teams.Add(nyttTeam);
-                    db.SaveChanges();
-                    this.sendEpost();
+                    int id = selectedUsers[i].Bruker_id;
+                    Bruker bruker = context.Brukere.Where(b => b.Bruker_id == id).First();
+                    selectedBrukers.Add(bruker);
                 }
-            }
-            else
-            {
-                NoUsersSelected.Visible = true;
+
+                if (teamNavn != string.Empty && selectedUsers.Count > 0)
+                {
+                    TeamOK.Visible = true;
+                    // Legger teamet inn i databasen:
+                    
+                        var nyttTeam = new Team
+                        {
+                            Navn = teamNavn,
+                            Aktiv = true,
+                            Opprettet = DateTime.Now,
+                            Brukere = selectedBrukers
+                        };
+
+                        context.Teams.Add(nyttTeam);
+                        context.SaveChanges();
+                        this.sendEpost();
+                    
+                }
+                else
+                {
+                    NoUsersSelected.Visible = true;
+                }
             }
         }
 
@@ -75,13 +94,19 @@ namespace SysUt14Gr03
             // Popup spør om bekreftelse
             // Går tilbake til forrige side
         }
+
         public void sendEpost()
         {
-            sendMsg = new sendEmail();
-            string message = "Du har nu har blitt valgt ut til og bli medlem av det nye Teamet: " + teamNavn;
-            string subject = "Medlem av ny team";
-            
-            sendMsg.sendEpost(null, message, subject, null, brukerListe, null);
+            BrukerPreferanse preferanse = new BrukerPreferanse();
+            if (preferanse.EpostTeam == true)
+            {
+                sendEmail sendMsg = new sendEmail();
+
+                string message = "Du ble lagt til et nytt team: " + teamNavn + "\nDato: " + DateTime.Now + "\nLagt til av: " + User.Identity.Name;
+                string subject = "Medlem av nytt team";
+
+                sendMsg.sendEpost(null, message, subject, null, selectedBrukers, null);
+            }
         }
     }
 }

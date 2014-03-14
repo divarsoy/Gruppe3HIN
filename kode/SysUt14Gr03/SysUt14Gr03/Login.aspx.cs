@@ -6,6 +6,10 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using SysUt14Gr03.Classes;
 using SysUt14Gr03.Models;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace SysUt14Gr03
 {
@@ -26,12 +30,17 @@ namespace SysUt14Gr03
             if (brukerListR != null)
             {
                 brukerList = brukerListR.ToList<Bruker>();
+                Bruker bruker = brukerList[0];
                 string oppgittPassord = Password.Text;
                 string riktigPassord = brukerList[0].Passord;
+                var manager = new UserManager();
+                ApplicationUser user = manager.Find(UserName.Text, Password.Text);
+                user.Id = "" + bruker.Bruker_id;
 
                 if (string.Compare(oppgittPassord, riktigPassord, false) == 0)
                 {
                     // Logg inn bruker
+                    IdentityHelper.SignIn(manager, user, RememberMe.Checked);
                     Response.Redirect("brukere.aspx", true);
                 }
             }

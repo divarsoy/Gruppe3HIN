@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -13,8 +15,6 @@ namespace SysUt14Gr03
     {
         private int oppgave_id;
         private Label prosjektid;
-        private int prosjekt_id;
-        private int status_id;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -25,12 +25,13 @@ namespace SysUt14Gr03
         }
         private void visOppgaver()
         {
+            lblKommentar.Visible = false;
+            tbKommentar.Visible = false;
+            btnSend.Visible = false;
             using (var context = new Context())
             {
                 System.Windows.Forms.BindingSource bindingSource1 = new System.Windows.Forms.BindingSource();
                 bindingSource1.DataSource = context.Oppgaver.ToList<Oppgave>();
-                string prosjektNavn = Queries.getProsjektNavn(prosjekt_id);
-                string statusNavn = Queries.getStatusNavn(prosjekt_id);
                 gridViewOppgave.DataSource = bindingSource1;
                 gridViewOppgave.DataBind();
             }
@@ -60,22 +61,45 @@ namespace SysUt14Gr03
             System.Web.UI.WebControls.TextBox tbStatus = (TextBox)gridViewOppgave.Rows[e.RowIndex].FindControl("tbStatus");
             System.Web.UI.WebControls.CheckBox cbAktiv = (CheckBox)gridViewOppgave.Rows[e.RowIndex].FindControl("cboxAktiv");
 
-            prosjekt_id = Convert.ToInt32(tbProsjekt.Text);
-            status_id = Convert.ToInt32(tbStatus.Text);
-
             using (var context = new Context())
             {
                 Oppgave oppgaver = context.Oppgaver.Where(b => b.Oppgave_id == oppgave_id).First();
                 oppgaver.Tittel = tbTittel.Text;
                 oppgaver.Estimat = float.Parse(tbEstimat.Text);
                 oppgaver.BruktTid = float.Parse(tbBruktTid.Text);
+                oppgaver.Estimat = Convert.ToInt16(tbEstimat.Text);
+                oppgaver.BruktTid = Convert.ToInt32(tbBruktTid.Text);
                 oppgaver.Tidsfrist = Convert.ToDateTime(tbTidsfrist.Text);
                 oppgaver.Opprettet = Convert.ToDateTime(tbOpprettet.Text);
-                oppgaver.Prosjekt_id = Convert.ToInt32(tbProsjekt.Text);
-                oppgaver.Status_id = Convert.ToInt32(tbStatus.Text);
+                oppgaver.Prosjekt.Navn = tbProsjekt.Text;
+                oppgaver.Status.Navn = tbStatus.Text;
                 oppgaver.Aktiv = Convert.ToBoolean(cbAktiv.Checked);
                 context.SaveChanges();
+
+                if (oppgaver.Aktiv == false)
+                    this.btnSend_Click(sender, e);
             }
+            gridViewOppgave.EditIndex = -1;
+            visOppgaver();
+        }
+        public void InsertBegrunnelseTilOppaveTabel(int id, string tekst)
+        {
+            using (SqlCommand command = new SqlCommand())
+            {
+                command.Connection = new SqlConnection(ConfigurationManager.ConnectionStrings["sysUt14Gr03"].ConnectionString);
+                command.CommandText = @"insert into Oppgave(Kommentarer) values('" + tekst + "') where Oppgave_id='" + id + "'";
+                command.Connection.Open();
+                command.ExecuteNonQuery();
+                command.Connection.Close();
+            }
+        }
+
+        protected void btnSend_Click(object sender, EventArgs e)
+        {
+            lblKommentar.Visible = true;
+            tbKommentar.Visible = true;
+            btnSend.Visible = true;
+            this.InsertBegrunnelseTilOppaveTabel(oppgave_id, tbKommentar.Text);
             gridViewOppgave.EditIndex = -1;
             visOppgaver();
         }

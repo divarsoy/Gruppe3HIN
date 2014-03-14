@@ -50,7 +50,35 @@ namespace SysUt14Gr03.Classes
             
             }
         }
+        static public List<Prosjekt> GetAlleAktiveProsjekter()
+        {
+            using (var context = new Context())
+            {
+                var prosjektListe = (from prosjekter in context.Prosjekter
+                                     where prosjekter.Aktiv == true
+                                     select prosjekter).ToList<Prosjekt>();
+                return prosjektListe;
 
+            }
+        }
+        static public List<Status> GetAlleStatuser()
+        {
+            using (var context = new Context())
+            {
+                var status = (from statuser in context.Status
+                              select statuser).ToList<Status>();
+                return status;
+            }
+        }
+        static public List<Prioritering> GetAllePrioriteringer(){
+
+            using (var context = new Context())
+            {
+                var priori = (from prioriteringer in context.Prioriteringer
+                              select prioriteringer).ToList<Prioritering>();
+                return priori;
+            }
+        }
         /*
          * Ikke klar
         static public List<Team> GetTeamFromGruppe(int _gruppe_id)
@@ -107,6 +135,8 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+      
+
         static public List<Gruppe> GetAlleAktiveGrupper()
         {
             using (var context = new Context())
@@ -117,6 +147,53 @@ namespace SysUt14Gr03.Classes
                                  select grupper).ToList<Gruppe>();
                 return gruppeListe;
 
+            }
+        }
+
+        static public List<Bruker> GetAlleBrukereIEtTeam(int _team_id)
+        {
+            int team_id = _team_id;
+            using (var context = new Context())
+            {
+                var brukerListe = (from bruker in context.Brukere
+                                   where bruker.Teams.Any(team => team.Team_id == team_id)
+                                   select bruker).ToList();
+
+                return brukerListe;
+            }
+        }
+
+        static public List<Prosjekt> GetAlleProsjektFraBrukerErMedI(int bruker_id)
+        {
+            using (var context = new Context())
+            {
+                var teamListe = (from prosjekt in context.Prosjekter
+                                 where prosjekt.Team.Prosjekter.Any(bruker => bruker.Bruker_id == bruker_id)
+                                 select prosjekt).ToList<Prosjekt>();
+                return teamListe;
+            }
+        }
+
+        static public List<Moete> GetAlleMoeterFraBrukerErMedI(int bruker_id)
+        {
+            using (var context = new Context())
+            {
+                var moeteListe = (from moeter in context.Moeter
+                                 where moeter.Brukere.Any(bruker => bruker.Bruker_id == bruker_id)
+                                 select moeter).ToList<Moete>();
+                return moeteListe;
+            }
+        }
+
+        static public List<Team> GetAlleTeamsEnBrukerErMedI(int _bruker_id)
+        {
+            int bruker_id = _bruker_id;
+            using (var context = new Context())
+            {
+                var teamListe = (from team in context.Teams
+                                 where team.Brukere.Any(bruker => bruker.Bruker_id == bruker_id)
+                                 select team).ToList();
+                return teamListe;
             }
         }
 
@@ -144,9 +221,9 @@ namespace SysUt14Gr03.Classes
                 string prosjektNavn = string.Empty;
                 string query = "SELECT * FROM Prosjekt WHERE Bruker_id = " + prosjekt_id + "'";
                 command.Connection = new SqlConnection(ConfigurationManager.ConnectionStrings["sysUt14Gr03"].ConnectionString);
-
+                
                 var reader = command.ExecuteReader();
-
+                
                 if (reader.HasRows)
                 {
                     while (reader.Read())

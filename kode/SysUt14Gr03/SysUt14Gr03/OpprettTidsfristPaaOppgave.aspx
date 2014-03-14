@@ -4,7 +4,10 @@
     <p></p>
     <asp:Panel ID="pnlOppgaver" runat="server">
         <asp:ListBox ID="lsbOppgaver" runat="server" OnSelectedIndexChanged="lsbOppgaver_SelectedIndexChanged"></asp:ListBox>
-        <asp:TextBox ID="txtInfo" visble="false" runat="server" ReadOnly="True" TextMode="MultiLine"></asp:TextBox>
+        <asp:Button ID="btnDetaljer" runat="server" OnClick="btnDetaljer_Click" Text="Vis detaljer" />
+        <br />
+        <asp:TextBox ID="txtInfo" runat="server" ReadOnly="True" TextMode="MultiLine"></asp:TextBox>
+        <hr />
         <asp:Panel ID="pnlDato" visible="false" runat="server">
             <asp:Calendar ID="calCalendar" runat="server"></asp:Calendar>
             Klokkeslett
