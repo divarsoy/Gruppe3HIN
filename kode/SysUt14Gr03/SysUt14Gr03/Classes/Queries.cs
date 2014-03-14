@@ -37,6 +37,15 @@ namespace SysUt14Gr03.Classes
                 
             }
         }
+
+        static public Status GetStatus(int _status_id)
+        {
+            using (var context = new Context())
+            {
+                var result = context.Status.Where(status => status.Status_id == _status_id).FirstOrDefault();
+                return result;
+            }
+        }
         
 
         static public List<Bruker> GetAlleAktiveBrukere()
@@ -102,29 +111,9 @@ namespace SysUt14Gr03.Classes
             }
         }
 
-        static public List<Bruker> GetAlleBrukereIEtTeam(int _team_id) {
-            int team_id = _team_id;
-            using (var context = new Context())
-            {
-                var brukerListe = (from bruker in context.Brukere
-                                   where bruker.Teams.Any(team => team.Team_id == team_id)
-                                   select bruker).ToList();
-                
-                return brukerListe;
-            }
-        }
 
-        static public List<Team> GetAlleTeamsEnBrukerErMedI(int _bruker_id)
-        {
-            int bruker_id = _bruker_id;
-            using (var context = new Context())
-            {
-                var teamListe = (from team in context.Teams
-                                 where team.Brukere.Any(bruker => bruker.Bruker_id == bruker_id)
-                                 select team).ToList();
-                return teamListe;
-            }
-        }
+
+
         /*
          * Ikke klar
         static public List<Team> GetTeamFromGruppe(int _gruppe_id)
@@ -251,6 +240,9 @@ namespace SysUt14Gr03.Classes
                 return teamListe;
             }
         }
+
+
+
 
         static public List<Moete> GetAlleMoeterFraBrukerErMedI(int bruker_id)
         {
