@@ -22,13 +22,13 @@ namespace SysUt14Gr03 {
         protected global::System.Web.UI.WebControls.Label lb_navn_paa_team;
         
         /// <summary>
-        /// TextBox1 control.
+        /// tb_TeamNavn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox tb_TeamNavn;
         
         /// <summary>
         /// cbl_TeamBrukere control.

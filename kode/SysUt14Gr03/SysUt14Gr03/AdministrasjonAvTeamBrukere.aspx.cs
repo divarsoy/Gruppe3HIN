@@ -25,6 +25,10 @@ namespace SysUt14Gr03
             team_brukerListe = Queries.GetAlleBrukerePaaTeam(teamId);
             brukerListe = Queries.GetAlleAktiveBrukere();
 
+            if (teamId != -1)
+            {
+                tb_TeamNavn.Text = "" + (string)Queries.GetTeamById(teamId).Navn;
+            }
 
             if (cbl_brukere.Items.Count == 0 && teamId != -1)
             {
