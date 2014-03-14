@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Net;
+using System.Net.Mail;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using SysUt14Gr03.Classes;
@@ -16,6 +18,11 @@ namespace SysUt14Gr03
         private string epost;
         private Bruker bruker;
         private bool emailUnq = true;
+
+        private MailMessage msg;
+        private Classes.sendEmail sendMsg;
+        private string ActivationUrl;
+        private string email;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -45,9 +52,9 @@ namespace SysUt14Gr03
                 
             for (int i = 0; i < Queries.GetAlleAktiveBrukere().Count; i++)
             {
-                bruker = Queries.GetBruker(i);
+                Bruker bruker = Queries.GetBruker(i);
                 if (bruker.Epost == tb_reg_epost.Text)
-                emailUnq = false;
+                    emailUnq = false;
             }
 
             if (emailUnq && tb_reg_epost.Text.Length < 256)
@@ -56,7 +63,17 @@ namespace SysUt14Gr03
                 FeilMeldingEpost.Visible = true;
         }
 
+        public void EpostFullforReg()
+        {
+            Guid token = Guid.NewGuid();
+            email = tb_reg_epost.Text.Trim();
+            msg.Subject = "Bekreftelses epost for konto aktivering";
+            //har begynt å lage en aktiverkonto side 
+            ActivationUrl = Server.HtmlEncode("http://localhost:60154/AktiverKonto.aspx?Epost=" + email + "&Token=" + token);
+            msg.Body = "Hei " + tb_reg_fornavn.Text.Trim() + "!\n" + "Takk for at du registrerte deg hos oss\n" + " <a href='" + ActivationUrl + "'>Klikk her for å aktivere</a>  din konto.";
 
+            sendMsg.sendEpost(email, msg.Body, msg.Subject, ActivationUrl, null, null);
+        }
 
     }
 }
