@@ -27,5 +27,15 @@ namespace SysUt14Gr03
             }
         }
 
+        protected void bt_endreTeam_Click(object sender, EventArgs e)
+        {
+            Team valgtTeam = Queries.GetTeamByName(cbl_team.SelectedValue);
+            
+            AdministrasjonAvTeamBrukere.SetValgtTeam(valgtTeam.Team_id);
+
+            Response.Redirect("http://localhost:60154/AdministrasjonAvTeamBrukere.aspx");
+//           Server.Transfer("/AdministrasjonAvTeamBrukere.aspx");
+        }
+
     }
 }
