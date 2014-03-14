@@ -85,22 +85,22 @@ namespace SysUt14Gr03 {
         protected global::System.Web.UI.WebControls.ListView lvActivity;
         
         /// <summary>
-        /// Projects control.
+        /// Project control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox Projects;
+        protected global::System.Web.UI.WebControls.ListBox Project;
         
         /// <summary>
-        /// Meetings control.
+        /// Meeting control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox Meetings;
+        protected global::System.Web.UI.WebControls.ListBox Meeting;
         
         /// <summary>
         /// Team control.
@@ -110,14 +110,5 @@ namespace SysUt14Gr03 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ListBox Team;
-        
-        /// <summary>
-        /// Gruppe control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox Gruppe;
     }
 }

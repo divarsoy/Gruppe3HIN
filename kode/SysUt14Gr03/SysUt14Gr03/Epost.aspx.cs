@@ -18,7 +18,8 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            msg = new MailMessage();
+            sendMsg = new Classes.sendEmail();
         }
         protected void CreateUser_Click(object sender, EventArgs e)
         {

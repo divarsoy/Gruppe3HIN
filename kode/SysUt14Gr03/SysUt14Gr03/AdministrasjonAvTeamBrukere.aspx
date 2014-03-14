@@ -6,7 +6,7 @@
     <div class="col-md-0">
 
         <asp:Label ID="lb_navn_paa_team" runat="server" Text="Team-Navn"></asp:Label>
-        <asp:TextBox ID="TextBox1" runat="server" Height="16px" Width="146px"></asp:TextBox>
+        <asp:TextBox ID="tb_TeamNavn" runat="server" Height="22px" Width="146px"></asp:TextBox>
 
     </div>
     

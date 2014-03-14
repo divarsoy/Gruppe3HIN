@@ -14,17 +14,24 @@ namespace SysUt14Gr03
         static int teamId = -1;
         private List<Bruker> team_brukerListe;
         private List<Bruker> brukerListe;
+<<<<<<< HEAD
+=======
 
         public static void SetValgtTeam(int value)
         { 
            teamId = value;
         }
+>>>>>>> d9777054baa36089430d0c5011c010dcb33ecb38
 
         protected void Page_Load(object sender, EventArgs e)
         {
             team_brukerListe = Queries.GetAlleBrukerePaaTeam(teamId);
             brukerListe = Queries.GetAlleAktiveBrukere();
 
+            if (teamId != -1)
+            {
+                tb_TeamNavn.Text = "" + (string)Queries.GetTeamById(teamId).Navn;
+            }
 
             if (cbl_brukere.Items.Count == 0 && teamId != -1)
             {

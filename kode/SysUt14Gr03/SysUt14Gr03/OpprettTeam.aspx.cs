@@ -12,8 +12,8 @@ namespace SysUt14Gr03
     public partial class OpprettTeam : System.Web.UI.Page
     {
         private List<Bruker> brukerListe;
+        List<Bruker> selectedBrukers;
         private string teamNavn;
-        private sendEmail sendMsg;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -40,7 +40,7 @@ namespace SysUt14Gr03
             // Hvor mange brukere er valgt
             //int numberSelected = 0;
             List<Bruker> selectedUsers = new List<Bruker>();
-            List<Bruker> selectedBrukers = new List<Bruker>();
+            selectedBrukers = new List<Bruker>();
 
             // Legger til valgte brukere
             for (int i = 0; i < cblBrukere.Items.Count; i++)
@@ -97,11 +97,16 @@ namespace SysUt14Gr03
 
         public void sendEpost()
         {
-            string message = "Du har blitt medlem av det nye Teamet: " + teamNavn;
-            string subject = "Medlem av nytt team";
+            BrukerPreferanse preferanse = new BrukerPreferanse();
+            if (preferanse.EpostTeam == true)
+            {
+                sendEmail sendMsg = new sendEmail();
 
-            sendMsg = new sendEmail(); //Frederik pls
-            sendMsg.sendEpost(null, message, subject, null, brukerListe, null);
+                string message = "Du ble lagt til et nytt team: " + teamNavn + "\nDato: " + DateTime.Now + "\nLagt til av: " + User.Identity.Name;
+                string subject = "Medlem av nytt team";
+
+                sendMsg.sendEpost(null, message, subject, null, selectedBrukers, null);
+            }
         }
     }
 }

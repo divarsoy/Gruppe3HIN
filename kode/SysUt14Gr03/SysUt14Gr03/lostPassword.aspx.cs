@@ -15,14 +15,14 @@ namespace SysUt14Gr03
 {
     public partial class lostPassword : System.Web.UI.Page
     {
-        private string password = "blahimmel";
         private string newPassword = CreatePassword(10);
         private MailMessage msg;
         private Classes.sendEmail sendMsg;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            msg = new MailMessage();
+            sendMsg = new Classes.sendEmail();
         }
         protected void sendPasswordButton_Click(object sender, EventArgs e)
         {

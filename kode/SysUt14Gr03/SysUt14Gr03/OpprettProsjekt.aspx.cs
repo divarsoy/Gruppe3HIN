@@ -50,22 +50,21 @@ namespace SysUt14Gr03
 
             if (tbProsjektnavn.Text != String.Empty && tbStart.Text != String.Empty && tbSlutt.Text != String.Empty)
             {
+
                 dtStart = Convert.ToDateTime(tbStart.Text);
                 dtSlutt = Convert.ToDateTime(tbSlutt.Text);
                 team_id = Convert.ToInt32(dropTeam.SelectedValue);
                 bruker_id = Convert.ToInt32(ddlBrukere.SelectedValue);
-
-
-                using (var context = new Context())
-                {
-                    var nyttProsjekt = new Prosjekt { Navn = tbProsjektnavn.Text, Bruker_id = bruker_id, Aktiv = true, Opprettet = DateTime.Now, Team_id = team_id, StartDato = dtStart, SluttDato = dtSlutt };
-                    context.Prosjekter.Add(nyttProsjekt);
-                    context.SaveChanges();
-                }
-
+            
+            using (var context = new Context())
+            {
+                var nyttProsjekt = new Prosjekt { Navn = tbProsjektnavn.Text, Bruker_id = bruker_id, Aktiv = true, Opprettet = DateTime.Now, Team_id = team_id, StartDato = dtStart, SluttDato = dtSlutt };
+                context.Prosjekter.Add(nyttProsjekt);
+                context.SaveChanges();
+                this.sendEpost();
+            }
 
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('Prosjektet ble lagret');", true);
-
                 Response.Redirect("OpprettProsjekt.aspx");
             }
             else
@@ -74,7 +73,8 @@ namespace SysUt14Gr03
                 lblFeil.ForeColor = Color.Red;
                 lblFeil.Text = "Feltene kan ikke være tomme";
             }
-        }
+            }
+    
 
         protected void btnStart_Click(object sender, EventArgs e)
         {
@@ -85,6 +85,21 @@ namespace SysUt14Gr03
         protected void btnSlutt_Click(object sender, EventArgs e)
         {
             tbSlutt.Text = cal.SelectedDate.ToShortDateString();
+        }
+
+        public void sendEpost()
+        {
+            BrukerPreferanse preferanse = new BrukerPreferanse();
+            if(preferanse.EpostProsjekt == true)
+            {
+                //List<Bruker> brukerListe = Queries.GetAlleBrukereIEtTeam(team_id);
+                sendEmail sendMsg = new sendEmail();
+
+                string message = "Du ble lagt til et nytt prosjekt: " + tbProsjektnavn.Text + "\nDato: " + DateTime.Now + "\nLagt til av: " + User.Identity.Name;
+                string subject = "Medlem av nytt team";
+
+                sendMsg.sendEpost(null, message, subject, null, brukerListe, null);
+            }
         }
     }
 }
