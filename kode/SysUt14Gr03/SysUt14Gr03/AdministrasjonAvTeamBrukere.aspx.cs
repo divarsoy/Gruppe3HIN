@@ -55,22 +55,24 @@ namespace SysUt14Gr03
 
         protected void bt_fjerneBruker_Click(object sender, EventArgs e)
         {
-        
-            foreach(ListItem i in cbl_TeamBrukere.Items) {
-                if(i.Selected){
-                  //  Queries.UpdateBrukerePaaTeam(Queries.GetTeamById(teamId), team_brukerListe[(cbl_TeamBrukere.g - 1)], 2);
-                }    
+
+            for (int i = 0; i < cbl_TeamBrukere.Items.Count; i++)
+            {
+                if (cbl_TeamBrukere.Items[i].Selected)
+                {
+                    Queries.UpdateBrukerePaaTeam(Queries.GetTeamById(teamId), team_brukerListe[i], 2);
+                }
             }
             Response.Redirect(Request.RawUrl);  
         } 
 
         protected void bt_leggeTilBruker_Click(object sender, EventArgs e)
         {
-            foreach (ListItem i in cbl_brukere.Items)
+            for (int i = 0; i < cbl_TeamBrukere.Items.Count; i++)
             {
-                if (i.Selected)
+                if (cbl_TeamBrukere.Items[i].Selected)
                 {
-                  /*  Queries.UpdateBrukerePaaTeam(Queries.GetTeamById(teamId), Queries.GetBrukerByName(i.Text), 1); */
+                    Queries.UpdateBrukerePaaTeam(Queries.GetTeamById(teamId), team_brukerListe[i], 1);
                 }
             }
             Response.Redirect(Request.RawUrl);
