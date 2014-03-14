@@ -77,7 +77,7 @@ namespace SysUt14Gr03
             try
             {
                 passord = ComputeHash(Password.Text, new SHA256CryptoServiceProvider());
-               epost = Email.Text;
+                epost = Email.Text;
                 brukernavn = Username.Text;
                 etternavn = Aftername.Text;
                 fornavn = Firstname.Text;

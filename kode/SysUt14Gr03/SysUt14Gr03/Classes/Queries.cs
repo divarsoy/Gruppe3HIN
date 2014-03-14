@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using SysUt14Gr03.Models;
@@ -215,7 +217,6 @@ namespace SysUt14Gr03.Classes
 
         static public List<Gruppe> GetAlleAktiveGrupper()
         {
-            List<Team> teams;
             using (var context = new Context())
             {
                 // teams = context.Teams.Include(x => x.).ToList();
@@ -224,6 +225,53 @@ namespace SysUt14Gr03.Classes
                                  select grupper).ToList<Gruppe>();
                 return gruppeListe;
 
+            }
+        }
+
+        static public List<Bruker> GetAlleBrukereIEtTeam(int _team_id)
+        {
+            int team_id = _team_id;
+            using (var context = new Context())
+            {
+                var brukerListe = (from bruker in context.Brukere
+                                   where bruker.Teams.Any(team => team.Team_id == team_id)
+                                   select bruker).ToList();
+
+                return brukerListe;
+            }
+        }
+
+        static public List<Prosjekt> GetAlleProsjektFraBrukerErMedI(int bruker_id)
+        {
+            using (var context = new Context())
+            {
+                var teamListe = (from prosjekt in context.Prosjekter
+                                 where prosjekt.Team.Prosjekter.Any(bruker => bruker.Bruker_id == bruker_id)
+                                 select prosjekt).ToList<Prosjekt>();
+                return teamListe;
+            }
+        }
+
+        static public List<Moete> GetAlleMoeterFraBrukerErMedI(int bruker_id)
+        {
+            using (var context = new Context())
+            {
+                var moeteListe = (from moeter in context.Moeter
+                                 where moeter.Brukere.Any(bruker => bruker.Bruker_id == bruker_id)
+                                 select moeter).ToList<Moete>();
+                return moeteListe;
+            }
+        }
+
+        static public List<Team> GetAlleTeamsEnBrukerErMedI(int _bruker_id)
+        {
+            int bruker_id = _bruker_id;
+            using (var context = new Context())
+            {
+                var teamListe = (from team in context.Teams
+                                 where team.Brukere.Any(bruker => bruker.Bruker_id == bruker_id)
+                                 select team).ToList();
+                return teamListe;
             }
         }
 
@@ -245,6 +293,59 @@ namespace SysUt14Gr03.Classes
         }
         */
 
+        public static string getProsjektNavn(int prosjekt_id)
+        {
+            using (SqlCommand command = new SqlCommand())
+            {
+                string prosjektNavn = string.Empty;
+                string query = "SELECT * FROM Prosjekt WHERE Bruker_id = " + prosjekt_id + "'";
+                command.Connection = new SqlConnection(ConfigurationManager.ConnectionStrings["sysUt14Gr03"].ConnectionString);
+                
+                var reader = command.ExecuteReader();
+                
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        prosjektNavn = reader.GetString(1);
+                    }
+                }
+                else
+                {
+                    prosjektNavn = "Fikk ikke hentet ut informasjon fra tabellen Prosjekt";
+                }
+                reader.Close();
+                command.Connection.Close();
+                return prosjektNavn;
+            }
+        }
+        public static string getStatusNavn(int status_id)
+        {
+            using (SqlCommand command = new SqlCommand())
+            {
+                string statusNavn = string.Empty;
+                string query = "SELECT * FROM Status WHERE Bruker_id = " + status_id + "'";
+                command.Connection = new SqlConnection(ConfigurationManager.ConnectionStrings["sysUt14Gr03"].ConnectionString);
+
+                var reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        statusNavn = reader.GetString(1);
+                    }
+                }
+                else
+                {
+                    statusNavn = "Fikk ikke hentet ut informasjon fra tabellen Prosjekt";
+                }
+                reader.Close();
+                command.Connection.Close();
+                return statusNavn;
+            }
+        }
+
         /* Legger til eller fjerner brukere på et team
         Brukes i AdministrasjonAvTeamBrukere */
         public static void UpdateBrukerePaaTeam(Team teamAAOppdatere, Bruker brukerAAOppdatere, int LeggTil1Fjern2)
@@ -260,6 +361,7 @@ namespace SysUt14Gr03.Classes
                 context.SaveChanges();
             }
             
+
         }
     }
 }

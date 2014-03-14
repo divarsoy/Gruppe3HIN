@@ -35,14 +35,7 @@
                     <asp:TextBox ID="tbSlutt" runat="server"  Text='<%#Bind("Sluttdato") %>'></asp:TextBox>
                 </EditItemTemplate>
             </asp:TemplateField>
-             <asp:TemplateField HeaderText="Gruppe">
-                <ItemTemplate>
-                    <asp:Label ID="lbGruppe" runat="server" Text='<%#Bind("Gruppe.Navn") %>'></asp:Label>
-                </ItemTemplate>
-                <EditItemTemplate>
-                    <asp:TextBox ID="tbGruppe" runat="server"  Text='<%#Bind("Gruppe.Navn") %>'></asp:TextBox>
-                </EditItemTemplate>
-            </asp:TemplateField>
+            
               <asp:TemplateField HeaderText="Team">
                 <ItemTemplate>
               

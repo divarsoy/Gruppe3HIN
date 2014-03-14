@@ -2,12 +2,10 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
    <h2>Opprett Prosjekt</h2>
    <p>Prosjektnavn:  <asp:TextBox ID="tbProsjektnavn" runat="server" Height="25px" ></asp:TextBox>
-       <asp:RegularExpressionValidator runat="server" ControlToValidate="tbProsjektnavn" ErrorMessage="Feltet kan ikke være tomt"></asp:RegularExpressionValidator>
+    
    </p>
-   <p>Prosjektleder: <asp:TextBox ID="tbProsjektleder" runat="server" Height="26px" ></asp:TextBox>
-       <asp:RegularExpressionValidator runat="server" ControlToValidate="tbProsjektleder" ErrorMessage="Feltet kan ikke være tomt"></asp:RegularExpressionValidator>
+   <p>Prosjektleder: <asp:DropDownList ID="ddlBrukere" runat="server"></asp:DropDownList>
    </p>
-   <p>Gruppe:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        <asp:DropDownList ID="dropGruppe" runat="server"></asp:DropDownList></p>
     <p>Team:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;         <asp:DropDownList ID="dropTeam" runat="server" Height="22px"></asp:DropDownList>
     <asp:Calendar ID="cal" runat="server" Width="293px"></asp:Calendar>
    <p>Startdato:     <asp:TextBox ID="tbStart" runat="server" Height="23px" ></asp:TextBox><asp:Button ID="btnStart" Text="Sett Startdato" OnClick="btnStart_Click" runat="server" Width="112px" Height="30px" />
@@ -15,5 +13,5 @@
    <p>Sluttdato:     <asp:TextBox ID="tbSlutt" runat="server" Height="23px" Width="122px" ></asp:TextBox><asp:Button ID="btnSlutt" Text="Sett Sluttdato" OnClick="btnSlutt_Click" runat="server" Width="112px" Height="30px" />
     </p>
     <asp:Button ID="btnLagre" runat="server" Text="Lagre" OnClick="btnLagre_Click" Width="193px"/>
-  
+    <asp:Label ID="lblFeil" runat="server" Visible="False"></asp:Label>
 </asp:Content>

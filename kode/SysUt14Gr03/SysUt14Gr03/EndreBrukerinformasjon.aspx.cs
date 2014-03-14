@@ -13,13 +13,14 @@ namespace SysUt14Gr03
 {
     public partial class EndreBrukerinformasjon : System.Web.UI.Page
     {
-   
         private int bruker_id;
         private MailMessage msg;
         private Classes.sendEmail sendMsg;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            msg = new MailMessage();
+            sendMsg = new sendEmail();
             if (!IsPostBack)
             {
                 visBrukere();
