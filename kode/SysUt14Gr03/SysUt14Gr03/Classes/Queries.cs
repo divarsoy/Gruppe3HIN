@@ -292,7 +292,7 @@ namespace SysUt14Gr03.Classes
             return query;
         }
         */
-<<<<<<< HEAD
+
         public static string getProsjektNavn(int prosjekt_id)
         {
             using (SqlCommand command = new SqlCommand())
@@ -344,7 +344,7 @@ namespace SysUt14Gr03.Classes
                 command.Connection.Close();
                 return statusNavn;
             }
-=======
+        }
 
         /* Legger til eller fjerner brukere på et team
         Brukes i AdministrasjonAvTeamBrukere */
@@ -361,7 +361,7 @@ namespace SysUt14Gr03.Classes
                 context.SaveChanges();
             }
             
->>>>>>> d9777054baa36089430d0c5011c010dcb33ecb38
+
         }
     }
 }
