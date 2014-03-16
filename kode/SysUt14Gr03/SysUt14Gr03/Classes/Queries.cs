@@ -317,6 +317,14 @@ namespace SysUt14Gr03.Classes
         }
         */
 
+        public static Prosjekt getProsjekt (int prosjekt_id)
+        {
+            using (var context = new Context()) {
+                Prosjekt prosjekt = context.Prosjekter.Find(prosjekt_id);
+                return prosjekt;
+            }
+        }
+
         public static string getProsjektNavn(int prosjekt_id)
         {
             using (SqlCommand command = new SqlCommand())
