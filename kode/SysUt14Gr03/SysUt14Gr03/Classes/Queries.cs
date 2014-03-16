@@ -196,6 +196,7 @@ namespace SysUt14Gr03.Classes
             {
                 var oppgaveListe = context.Oppgaver
                                   .Include("Brukere")
+                                  .Include("Kommentarer")
                                   .ToList();
 
 //                                    .Where(oppgave => oppgave.Aktiv == true)                                    

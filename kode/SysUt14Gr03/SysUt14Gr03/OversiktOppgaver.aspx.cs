@@ -24,19 +24,29 @@ namespace SysUt14Gr03
 
             TableHeaderRow headerRow = new TableHeaderRow();
             TableHeaderCell tittelHeaderCell = new TableHeaderCell();
-            TableHeaderCell brukerHeaderCell = new TableHeaderCell();
             TableHeaderCell statusHeaderCell = new TableHeaderCell();
+            TableHeaderCell estimatHeaderCell = new TableHeaderCell();
+            TableHeaderCell bruktTidHeaderCell = new TableHeaderCell();
+            TableHeaderCell remainingTimeHeaderCell = new TableHeaderCell();
+            TableHeaderCell brukerHeaderCell = new TableHeaderCell();
+            TableHeaderCell kommentarerHeaderCell = new TableHeaderCell();
 
             tittelHeaderCell.Text = "Tittel";
-            brukerHeaderCell.Text = "Brukere";
             statusHeaderCell.Text = "Status";
+            estimatHeaderCell.Text = "Estimat";
+            bruktTidHeaderCell.Text = "Brukt tid";
+            remainingTimeHeaderCell.Text = "Gjenstående tid";
+            brukerHeaderCell.Text = "Brukere";
+            kommentarerHeaderCell.Text = "Kommentarer";
+
             headerRow.Cells.Add(tittelHeaderCell);
-            headerRow.Cells.Add(brukerHeaderCell);
             headerRow.Cells.Add(statusHeaderCell);
+            headerRow.Cells.Add(estimatHeaderCell);
+            headerRow.Cells.Add(bruktTidHeaderCell);
+            headerRow.Cells.Add(remainingTimeHeaderCell);
+            headerRow.Cells.Add(brukerHeaderCell);
+            headerRow.Cells.Add(kommentarerHeaderCell);
             Table1.Rows.Add(headerRow);
-
-
-
 
             foreach (Oppgave oppgave in query)
             {
@@ -47,16 +57,29 @@ namespace SysUt14Gr03
                 }
                 TableRow tRow = new TableRow();
                 TableCell tittelCell = new TableCell();
-                TableCell brukerCell = new TableCell();
                 TableCell statusCell = new TableCell();
-                
+                TableCell estimatCell = new TableCell();
+                TableCell bruktTidCell = new TableCell();
+                TableCell remainingCell = new TableCell();
+                TableCell brukerCell = new TableCell();
+                TableCell kommentarCell = new TableCell();
+                                
                 tittelCell.Text = oppgave.Tittel;
-                brukerCell.Text = brukereIOppgave.ToString();
                 statusCell.Text = Queries.GetStatus(oppgave.Status_id).Navn;
+                estimatCell.Text = oppgave.Estimat.ToString();
+                bruktTidCell.Text = oppgave.BruktTid.ToString();
+                remainingCell.Text = oppgave.RemainingTime.ToString();
+                brukerCell.Text = brukereIOppgave.ToString();
+                kommentarCell.Text = oppgave.Kommentarer.Count.ToString();
 
                 tRow.Cells.Add(tittelCell);
-                tRow.Cells.Add(brukerCell);
                 tRow.Cells.Add(statusCell);
+                tRow.Cells.Add(estimatCell);
+                tRow.Cells.Add(bruktTidCell);
+                tRow.Cells.Add(remainingCell);
+                tRow.Cells.Add(brukerCell);
+                tRow.Cells.Add(kommentarCell);
+
                 Table1.Rows.Add(tRow);                
             }
             Table1.CssClass = "table";
