@@ -61,9 +61,9 @@ namespace SysUt14Gr03.Models
                 });
 
             // Mange til mange forhold Oppgaver <=> Brukere
-            modelBuilder.Entity<Bruker>()
-                .HasMany(t => t.Oppgaver)
-                .WithMany(t => t.Brukere)
+            modelBuilder.Entity<Oppgave>()
+                .HasMany(t => t.Brukere)
+                .WithMany(t => t.Oppgaver)
                 .Map(m =>
                 {
                     m.MapLeftKey("Oppgave_id");
