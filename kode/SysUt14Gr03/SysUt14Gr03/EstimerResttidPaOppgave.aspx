@@ -13,6 +13,9 @@
         <asp:Label ID="lblBrukt" runat="server" Visible="false"></asp:Label>
     </p>
     <p> 
+        <asp:Label ID="lblRest" runat="server" Visible="false"></asp:Label>
+    </p>
+    <p> 
         <asp:TextBox ID="txtTimer" runat="server" MaxLength="3" TextMode="Number"></asp:TextBox>
     </p>
     <p> 

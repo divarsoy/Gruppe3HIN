@@ -65,8 +65,10 @@ namespace SysUt14Gr03
         {
             lblEstimat.Visible = true;
             lblBrukt.Visible = true;
+            lblRest.Visible = true;
             lblEstimat.Text = "Estimat: " + oppgaveListe[ddlOppgaver.SelectedIndex].Estimat.ToString();
             lblBrukt.Text = "Brukt: " + oppgaveListe[ddlOppgaver.SelectedIndex].BruktTid.ToString();
+            lblRest.Text = "Resterende tid: " + oppgaveListe[ddlOppgaver.SelectedIndex].RemainingTime.ToString();
         }
 
     }
