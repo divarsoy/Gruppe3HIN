@@ -197,9 +197,25 @@ namespace SysUt14Gr03.Classes
                 var oppgaveListe = context.Oppgaver
                                   .Include("Brukere")
                                   .Include("Kommentarer")
-                                  .ToList();
+                                  .Where(oppgave => oppgave.Aktiv == true)
+                                  .OrderBy(oppgave => oppgave.Tittel)
+                                  .ToList();                      
+                return oppgaveListe;
 
-//                                    .Where(oppgave => oppgave.Aktiv == true)                                    
+            }
+        }
+
+        static public List<Oppgave> GetAlleAktiveOppgaverForProsjekt(int _prosjekt_id)
+        {
+            using (var context = new Context())
+            {
+                var oppgaveListe = context.Oppgaver
+                                  .Include("Brukere")
+                                  .Include("Kommentarer")
+                                  .Where(oppgave => oppgave.Prosjekt_id == _prosjekt_id)
+                                  .Where(oppgave => oppgave.Aktiv == true)
+                                  .OrderBy(oppgave => oppgave.Tittel)
+                                  .ToList();
                 return oppgaveListe;
 
             }

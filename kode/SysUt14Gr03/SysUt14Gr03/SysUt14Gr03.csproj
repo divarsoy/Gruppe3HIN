@@ -368,6 +368,8 @@
     <Compile Include="Classes\sendEmail.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Classes\Tabeller.cs" />
+    <Compile Include="Classes\Validator.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

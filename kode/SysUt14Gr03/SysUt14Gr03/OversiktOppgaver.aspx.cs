@@ -8,6 +8,7 @@ using SysUt14Gr03.Classes;
 using SysUt14Gr03.Models;
 using SysUt14Gr03;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace SysUt14Gr03
 {
@@ -15,85 +16,33 @@ namespace SysUt14Gr03
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //System.Windows.Forms.BindingSource bindingSource1 = new System.Windows.Forms.BindingSource();
-            //bindingSource1.DataSource = Queries.GetAlleAktiveOppgaverDag();
-            //ListView1.DataSource = bindingSource1;
-            //ListView1.DataBind();
-            //ListView1.ItemType = Models.Oppgave;
-            var query = Queries.GetAlleAktiveOppgaverDag();
+            bool queryStatus = true;
+            List<Oppgave> query = null;
 
-            TableHeaderRow headerRow = new TableHeaderRow();
-            TableHeaderCell tittelHeaderCell = new TableHeaderCell();
-            TableHeaderCell statusHeaderCell = new TableHeaderCell();
-            TableHeaderCell estimatHeaderCell = new TableHeaderCell();
-            TableHeaderCell bruktTidHeaderCell = new TableHeaderCell();
-            TableHeaderCell remainingTimeHeaderCell = new TableHeaderCell();
-            TableHeaderCell brukerHeaderCell = new TableHeaderCell();
-            TableHeaderCell kommentarerHeaderCell = new TableHeaderCell();
-
-            tittelHeaderCell.Text = "Tittel";
-            statusHeaderCell.Text = "Status";
-            estimatHeaderCell.Text = "Estimat";
-            bruktTidHeaderCell.Text = "Brukt tid";
-            remainingTimeHeaderCell.Text = "Gjenstående tid";
-            brukerHeaderCell.Text = "Brukere";
-            kommentarerHeaderCell.Text = "Kommentarer";
-
-            headerRow.Cells.Add(tittelHeaderCell);
-            headerRow.Cells.Add(statusHeaderCell);
-            headerRow.Cells.Add(estimatHeaderCell);
-            headerRow.Cells.Add(bruktTidHeaderCell);
-            headerRow.Cells.Add(remainingTimeHeaderCell);
-            headerRow.Cells.Add(brukerHeaderCell);
-            headerRow.Cells.Add(kommentarerHeaderCell);
-            Table1.Rows.Add(headerRow);
-
-            foreach (Oppgave oppgave in query)
+            if (Request.QueryString["prosjekt_id"] != null)
             {
-                StringBuilder brukereIOppgave = new StringBuilder();
-                foreach (Bruker bruker in oppgave.Brukere)
+                int prosjekt_id = Validator.KonverterTilTall(Request.QueryString["prosjekt_id"]);
+                if (prosjekt_id > 0)
                 {
-                    brukereIOppgave.Append(bruker.Brukernavn + " ");
+                    query = Queries.GetAlleAktiveOppgaverForProsjekt(prosjekt_id);
+                    if (query.Count == 0)
+                    {
+                        lblTilbakemelding.Text = "Du har valgt et ikke eksisterende prosjekt";
+                        queryStatus = false;
+                    }
                 }
-                TableRow tRow = new TableRow();
-                TableCell tittelCell = new TableCell();
-                TableCell statusCell = new TableCell();
-                TableCell estimatCell = new TableCell();
-                TableCell bruktTidCell = new TableCell();
-                TableCell remainingCell = new TableCell();
-                TableCell brukerCell = new TableCell();
-                TableCell kommentarCell = new TableCell();
-                                
-                tittelCell.Text = oppgave.Tittel;
-                statusCell.Text = Queries.GetStatus(oppgave.Status_id).Navn;
-                estimatCell.Text = oppgave.Estimat.ToString();
-                bruktTidCell.Text = oppgave.BruktTid.ToString();
-                remainingCell.Text = oppgave.RemainingTime.ToString();
-                brukerCell.Text = brukereIOppgave.ToString();
-                kommentarCell.Text = oppgave.Kommentarer.Count.ToString();
-
-                tRow.Cells.Add(tittelCell);
-                tRow.Cells.Add(statusCell);
-                tRow.Cells.Add(estimatCell);
-                tRow.Cells.Add(bruktTidCell);
-                tRow.Cells.Add(remainingCell);
-                tRow.Cells.Add(brukerCell);
-                tRow.Cells.Add(kommentarCell);
-
-                Table1.Rows.Add(tRow);                
             }
-            Table1.CssClass = "table";
+            else
+            {
+                query = Queries.GetAlleAktiveOppgaverDag();
+            }
 
-
-            //ListView1.InsertItem(query.Oppgave.Tittel);
-
+            if (!IsPostBack && queryStatus)
+            {
+                Table oppgaveTable = Tabeller.HentOppgaveTabell(query);
+                oppgaveTable.CssClass = "table";
+                PlaceHolderTable.Controls.Add(oppgaveTable);
+            }
         }
-        public void test()
-        {
-
-        }
-
-
-        //Default loader inn innlogget brukers oppgaver som er påbegynt eller som er klare
     }
 }
