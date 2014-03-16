@@ -10,7 +10,4 @@
         <asp:Button ID="btnLagre" runat="server" OnClick="btnLagre_Click" Text="Lagre" />
         <asp:Button ID="btnAvbryt" runat="server" Text="Avbryt" OnClick="btnAvbryt_Click" />
     </p>
-    <p> 
-        <asp:Label ID="lblTest" runat="server" Text="Label"></asp:Label>
-    </p>
-</asp:Content>
+    </asp:Content>

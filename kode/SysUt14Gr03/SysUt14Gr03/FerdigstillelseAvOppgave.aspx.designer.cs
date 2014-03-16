@@ -10,33 +10,24 @@
 namespace SysUt14Gr03 {
     
     
-    public partial class EpostPreferanser {
+    public partial class FerdigstillelseAvOppgave {
         
         /// <summary>
-        /// cblElementer control.
+        /// lsbOppgaver control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList cblElementer;
+        protected global::System.Web.UI.WebControls.ListBox lsbOppgaver;
         
         /// <summary>
-        /// btnLagre control.
+        /// btnFerdig control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnLagre;
-        
-        /// <summary>
-        /// btnAvbryt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAvbryt;
+        protected global::System.Web.UI.WebControls.Button btnFerdig;
     }
 }
