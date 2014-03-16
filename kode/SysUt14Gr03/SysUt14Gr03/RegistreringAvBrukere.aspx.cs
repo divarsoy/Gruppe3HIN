@@ -16,7 +16,6 @@ namespace SysUt14Gr03
         private string etternavn;
         private string fornavn;
         private string epost;
-        private Bruker bruker;
         private bool emailUnq = true;
 
         private MailMessage msg;
@@ -50,17 +49,35 @@ namespace SysUt14Gr03
             else
                 FeilMeldingFornavn.Visible = true;
 
-            /*using (var context = new Context())
+            using (var context = new Context())
             {
-                Bruker bruker = context.Brukere.FirstOrDefault(Bruker => Bruker.Epost == tb_reg_epost.Text);
-            }*/
                 
-            for (int i = 0; i < Queries.GetAlleAktiveBrukere().Count; i++)
-            {
-                Bruker bruker = Queries.GetBruker(i);
-                if ((string)bruker.Epost == tb_reg_epost.Text)
+                var query = context.Brukere.FirstOrDefault(bruker =>bruker.Epost == tb_reg_epost.Text);
+                if (query != null)
+                {
                     emailUnq = false;
+//                    string _epost = query.Epost;
+                }
+                    
+               /* string nyEpost = tb_reg_epost.Text;
+                if(_epost == tb_reg_epost.Text)
+                {
+                    emailUnq = false;
+                } */
             }
+                
+          /*  for (int i = 0; i < Queries.GetAlleAktiveBrukere().Count; i++)
+            {
+                using (var context = new Context())
+                {
+                    Bruker _bruker = context.Brukere.Find(i);
+                    Epost _epost = _bruker.Epost;
+
+                    if (_epost == tb_reg_epost.Text)
+                        emailUnq = false;
+                }
+                
+            } */
 
             if (emailUnq && tb_reg_epost.Text.Length < 256)
                 epost = tb_reg_epost.Text;
