@@ -76,7 +76,6 @@
                             <ul class="dropdown-menu">
                                 <li> <a runat="server" href="~/OpprettTeam">Opprett nytt Team</a></li>
                                 <li> <a runat="server" href="~/AdministrasjonAvTeam">Administrasjon</a></li>
-                                <li> <a runat="server" href="~/AdministrerTeam">Administrere Team</a></li>
 
                             </ul>
                         </li>
@@ -97,6 +96,8 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Oppgaver <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li> <a runat="server" href="~/OpprettTidsfristPaaOppgave">Opprett tidsfrist</a></li>
+                                <li> <a runat="server" href="~/KommentarPaOppgave">Kommentér oppgave</a></li>
+                                <li> <a runat="server" href="~/PameldingTilOppgave">Påmeld bruker på oppgave</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -110,7 +111,7 @@
                         <AnonymousTemplate>
                             <ul class="nav navbar-nav navbar-right">
                                 <!-- <li><a runat="server" href="~/RegistreringAvBrukere">Registrer</a></li> -->
-                                <!-- <li><a runat="server" href="~/Login">Logg in</a></li> -->
+                                <li><a runat="server" href="~/Login">Logg in</a></li>
                             </ul>
                         </AnonymousTemplate>
                         <LoggedInTemplate>
