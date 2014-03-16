@@ -48,10 +48,12 @@ namespace SysUt14Gr03
 
                 Bruker bruker = context.Brukere.FirstOrDefault(b => b.Bruker_id == bruker_id);
                 Oppgave oppgave = context.Oppgaver.FirstOrDefault(o => o.Oppgave_id == oppgave_id);
+                Status status = context.Status.FirstOrDefault(s => s.Status_id == 2);
 
                 List<Bruker> tmpBruker = oppgave.Brukere;
                 tmpBruker.Add(bruker);
                 oppgave.Brukere = tmpBruker;
+                oppgave.Status = status;
                 context.SaveChanges();
 
                 lblMelding.Text = "Bruker " + bruker.ToString() + " lagt til på " + oppgave.Tittel;

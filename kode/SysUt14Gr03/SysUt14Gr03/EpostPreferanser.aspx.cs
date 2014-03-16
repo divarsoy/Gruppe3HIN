@@ -16,6 +16,7 @@ namespace SysUt14Gr03
     public partial class EpostPreferanser : System.Web.UI.Page
     {
         private List<string> elementer = new List<string>();
+        private BrukerPreferanse brukerPrefs;
         public int brukerId { get; set; }
         public bool[] selectedItems { get; set; }
         public string brukernavn { get; set; }
@@ -24,7 +25,10 @@ namespace SysUt14Gr03
         protected void Page_Load(object sender, EventArgs e)
         {
             // Får innlogget brukerId
-            brukerId = 1;
+            brukerId = 2;
+
+            
+            
             if (cblElementer.Items.Count == 0)
             {
                 cblElementer.Items.Add("lagt til i team");
@@ -34,6 +38,26 @@ namespace SysUt14Gr03
                 cblElementer.Items.Add("tildelt en tidsfrist på oppgave");
                 cblElementer.Items.Add("rapportert");
             }
+
+            if (!IsPostBack)
+            {
+                brukerPrefs = Queries.GetEpostPreferanser(brukerId);
+
+                if (brukerPrefs != null)
+                {
+                    // Setter valgte verdier
+                    cblElementer.Items[0].Selected = brukerPrefs.EpostTeam;
+                    cblElementer.Items[1].Selected = brukerPrefs.EpostProsjekt;
+                    cblElementer.Items[2].Selected = brukerPrefs.EpostOppgave;
+                    cblElementer.Items[3].Selected = brukerPrefs.EpostKommentar;
+                    cblElementer.Items[4].Selected = brukerPrefs.EpostTidsfrist;
+                    cblElementer.Items[5].Selected = brukerPrefs.EpostRapport;
+                }
+            }
+            
+            
+
+            
         }
         /// <summary>
         /// 
@@ -56,10 +80,6 @@ namespace SysUt14Gr03
 
         public String lagrePreferanser(bool test)
         {
-
-            var nyBrukerpreferanser = new BrukerPreferanse { Bruker_id = brukerId, EpostTeam = selectedItems[0], EpostProsjekt = selectedItems[1], EpostOppgave = selectedItems[2], EpostKommentar = selectedItems[3], EpostTidsfrist = selectedItems[4], EpostRapport = selectedItems[5] };
-            string info;
-
             if (!test)
             {
                 selectedItems = new bool[cblElementer.Items.Count];
@@ -68,10 +88,35 @@ namespace SysUt14Gr03
                 {
                     selectedItems[i] = cblElementer.Items[i].Selected;
                 }
+            }
+            
+
+            var nyBrukerpreferanser = new BrukerPreferanse { 
+                Bruker_id = brukerId, 
+                EpostTeam = selectedItems[0], 
+                EpostProsjekt = selectedItems[1], 
+                EpostOppgave = selectedItems[2], 
+                EpostKommentar = selectedItems[3], 
+                EpostTidsfrist = selectedItems[4], 
+                EpostRapport = selectedItems[5] 
+            };
+
+            string info;
+
+            if (!test)
+            {
+                
                 using (var db = new Context())
                 {
 
-                    db.BrukerPreferanser.Add(nyBrukerpreferanser);
+                    BrukerPreferanse brukerPref = db.BrukerPreferanser.FirstOrDefault(o => o.Bruker_id == brukerId);
+                    brukerPref.EpostTeam = selectedItems[0];
+                    brukerPref.EpostProsjekt = selectedItems[1];
+                    brukerPref.EpostOppgave = selectedItems[2];
+                    brukerPref.EpostKommentar = selectedItems[3];
+                    brukerPref.EpostTidsfrist = selectedItems[4];
+                    brukerPref.EpostRapport = selectedItems[5];
+
                     db.SaveChanges();
                 }
                 info = Queries.GetBruker(brukerId).Fornavn;

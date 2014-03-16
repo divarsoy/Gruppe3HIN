@@ -19,6 +19,22 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        // Henter epostpreferanser til bruker med bruker_id
+        static public BrukerPreferanse GetEpostPreferanser(int _bruker_id)
+        {
+            using (var context = new Context())
+            {
+                List<BrukerPreferanse> brukPrefs = context.BrukerPreferanser.Where(p => p.Bruker_id == _bruker_id).ToList();
+                if (brukPrefs.Count > 0)
+                {
+                    return brukPrefs[0];
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
 
         // Henter brukere som har epost _Epost
         static public List<Bruker> GetBruker(string _Epost)
