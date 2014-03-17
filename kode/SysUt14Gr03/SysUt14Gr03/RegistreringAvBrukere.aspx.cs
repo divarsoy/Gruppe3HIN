@@ -18,7 +18,8 @@ namespace SysUt14Gr03
         private string epost;
         private bool emailUnq = true;
 
-        private MailMessage msg;
+        private string msg;
+        private string subject;
         private Classes.sendEmail sendMsg;
         private string ActivationUrl;
         private string email;
@@ -79,8 +80,10 @@ namespace SysUt14Gr03
                 
             } */
 
-            if (emailUnq && tb_reg_epost.Text.Length < 256)
+            if (emailUnq && tb_reg_epost.Text.Length < 256) {
                 epost = tb_reg_epost.Text;
+                EpostFullforReg();
+            }    
             else
                 FeilMeldingEpost.Visible = true;
         }
@@ -88,13 +91,13 @@ namespace SysUt14Gr03
         public void EpostFullforReg()
         {
             Guid token = Guid.NewGuid();
-            email = tb_reg_epost.Text.Trim();
-            msg.Subject = "Bekreftelses epost for konto aktivering";
+         //   msg = new MailMessage();
+            email = "lillesith@gmail.com";
+            subject = "Bekreftelses epost for konto aktivering";
             //har begynt å lage en aktiverkonto side 
             ActivationUrl = Server.HtmlEncode("http://localhost:60154/AktiverKonto.aspx?Epost=" + email + "&Token=" + token);
-            msg.Body = "Hei " + tb_reg_fornavn.Text.Trim() + "!\n" + "Takk for at du registrerte deg hos oss\n" + " <a href='" + ActivationUrl + "'>Klikk her for å aktivere</a>  din konto.";
-
-            sendMsg.sendEpost(email, msg.Body, msg.Subject, ActivationUrl, null, null);
+            msg = "Hei " + tb_reg_fornavn.Text.Trim() + "!\n" + "Takk for at du registrerte deg hos oss\n" + " <a href='" + ActivationUrl + "'>Klikk her for å aktivere</a>  din konto.";
+            sendEmail.sendEpost(email, msg, subject, ActivationUrl, null, null);
         }
 
     }

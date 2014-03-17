@@ -16,6 +16,7 @@
         <p><asp:Label ID="FeilmeldingEtternavn" runat="server" ForeColor="Red" Text="Etternavn kan ikke være lenger enn 256 tegn" Visible="False"></asp:Label> </p>
         <p><asp:Label ID="FeilMeldingFornavn" runat="server" ForeColor="Red" Text="Fornavn kan ikke være lenger enn 256 tegn" Visible="False"></asp:Label> </p>
         <p><asp:Label ID="FeilMeldingEpost" runat="server" ForeColor="Red" Text="Epost kan ikke være lenger enn 256 tegn og må ikke være registrert tidligere" Visible="False"></asp:Label> </p>
+        <p><p><asp:Label ID="BrukerRegistrert" runat="server" ForeColor="Red" Text="Ny bruker har blitt registrert" Visible="False"></asp:Label> </p></p>
     </div>
         
 </asp:Content>
