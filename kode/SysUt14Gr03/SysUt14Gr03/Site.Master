@@ -60,15 +60,9 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bruker <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li> <a runat="server" href="~/RegistreringAvBrukere">Opprett ny Bruker</a></li>
-                                <li> <a runat="server" href="~/AktiverKonto">Aktiver konto</a></li>
-                                <li> <a runat="server" href="~/Epost">Epost</a></li>
                                 <li> <a runat="server" href="~/lostPassword">Mistet Passord</a></li>
                                 <li> <a runat="server" href="~/EndreBrukerinformasjon">Endre brukerinformasjon</a></li>
                                 <li> <a runat="server" href="~/EpostPreferanser">Brukerpreferanser</a></li>
-                                <li> <a runat="server" href="~/HistorikkStattestikk">Historikk/statistikk</a></li>
-
-
-
                             </ul>
                         </li>
                         <li class="dropdown">
