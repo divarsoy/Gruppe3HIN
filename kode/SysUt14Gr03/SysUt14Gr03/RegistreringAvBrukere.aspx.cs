@@ -97,7 +97,7 @@ namespace SysUt14Gr03
             //har begynt å lage en aktiverkonto side 
             ActivationUrl = Server.HtmlEncode("http://localhost:60154/AktiverKonto.aspx?Epost=" + email + "&Token=" + token);
             msg = "Hei " + tb_reg_fornavn.Text.Trim() + "!\n" + "Takk for at du registrerte deg hos oss\n" + " <a href='" + ActivationUrl + "'>Klikk her for å aktivere</a>  din konto.";
-            sendEmail.sendEpost(email, msg, subject, ActivationUrl, null, null);
+            //sendEmail.sendEpost(email, msg, subject, ActivationUrl, null, null);
         }
 
     }
