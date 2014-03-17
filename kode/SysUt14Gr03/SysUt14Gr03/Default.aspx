@@ -6,7 +6,7 @@
     <div class="kolonner col-md-8">
         <p>Velkommen, bruker!</p>
 
-        <p><asp:Button ID="tempButton" runat="server" Text="Kom Igang!" /></p>
+        <p><asp:Button ID="tempButton" runat="server" Text="Kom Igang!(Ikke trykk)" /></p>
         
     </div>
     <div class="kolonner col-md-4">
