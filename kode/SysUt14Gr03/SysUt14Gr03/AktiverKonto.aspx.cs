@@ -17,6 +17,9 @@ namespace SysUt14Gr03
 {
     public partial class AktiverKonto : System.Web.UI.Page
     {
+        static string initialFornavn;
+        static string initialEtternavn;
+        static string initialEpost;
         private string brukernavn;
         private string etternavn;
         private string fornavn;
@@ -25,7 +28,7 @@ namespace SysUt14Gr03
         private string passord;
         private string token;
     
-        private List<Bruker> brukerList;
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -34,6 +37,21 @@ namespace SysUt14Gr03
                 ActivateMyAccount();
             }
         }
+
+        public static void SetBrukerFelter(string _fornavn, string _etternavn, string _epost) {
+            initialFornavn = _fornavn;
+            initialEtternavn = _etternavn;
+            initialEpost = _epost;
+        }
+
+/*        private void ActivateMyAccount()
+        {
+ *              
+            Response.Write("<h2 align=center> Fyll ut resterende felt for å aktivere kontoen din</h2>");
+            Aftername.Text = initialFornavn;
+            Firstname.Text = initialEtternavn;
+            epost = Email.Text = initialEpost;
+        } */
 
         private void ActivateMyAccount()
         {
@@ -46,17 +64,9 @@ namespace SysUt14Gr03
                 {
                     Response.Write("<h2 align=center> Fyll ut resterende felt for å aktivere kontoen din</h2>");
 
-                    brukerList = Queries.GetBruker(Request.QueryString["Epost"]);
-                    for (int i = 0; i < brukerList.Count; i++)
-                    {
-                        Bruker bruker = brukerList[i];
-                        Aftername.Text = bruker.Etternavn;
-                        Firstname.Text = bruker.Fornavn;
-                        epost = Email.Text = Request.QueryString["Epost"];
-                        
-                     
-                    }
-
+                    Firstname.Text = initialFornavn;
+                    Aftername.Text = initialEtternavn;
+                    epost = Email.Text = Request.QueryString["Epost"];
                     token = Request.QueryString["Token"];
                 }
                 else
@@ -90,7 +100,11 @@ namespace SysUt14Gr03
 
                 using (var db = new Context())
                 {
-                    var conUser = db.Brukere.Where(user => user.Epost == epost).First();
+
+                    var Bruker = new Bruker { Brukernavn = brukernavn, Etternavn = etternavn, Fornavn = fornavn, Epost = epost, IM = imAdresse, Aktiv = true, Passord = passord, opprettet = DateTime.Now, Token = token };
+                    db.Brukere.Add(Bruker);
+                    db.SaveChanges();
+                    /*Bruker conUser = db.Brukere.Where(user => user.Epost == epost).First();
                     conUser.Brukernavn = brukernavn;
                     conUser.Etternavn = etternavn;
                     conUser.Epost = epost;
@@ -98,8 +112,9 @@ namespace SysUt14Gr03
                     conUser.Passord = passord;
                     conUser.Token = token;
                     conUser.Aktiv = true;
-                    db.Brukere.Add(conUser);
-                    db.SaveChanges();
+//                    db.Brukere.Update(conUser);
+//                    db.Brukere.Add(conUser);
+                    db.SaveChanges(); */
                 }
                 // confirmUser(Username.Text, Aftername.Text, Firstname.Text, Email.Text, Im_adress.Text, password);
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('Kontoen din er aktivert');", true);

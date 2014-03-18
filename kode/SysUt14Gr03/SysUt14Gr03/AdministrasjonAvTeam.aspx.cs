@@ -33,7 +33,7 @@ namespace SysUt14Gr03
             
             AdministrasjonAvTeamBrukere.SetValgtTeam(valgtTeam.Team_id);
 
-            Response.Redirect("http://localhost:60154/AdministrasjonAvTeamBrukere.aspx");
+            Response.Redirect("~/AdministrasjonAvTeamBrukere.aspx");
 //           Server.Transfer("/AdministrasjonAvTeamBrukere.aspx");
         }
 
