@@ -165,7 +165,6 @@
     <Content Include="AdministrasjonAvTeam.aspx" />
     <Content Include="AdministrasjonAvTeamBrukere.aspx" />
     <Content Include="AdministratorForside.aspx" />
-    <Content Include="AdministrerTeam.aspx" />
     <Content Include="AktiverKonto.aspx" />
     <Content Include="ArkiverGruppe.aspx" />
     <Content Include="ArkiverOppg.aspx" />
@@ -320,13 +319,6 @@
     </Compile>
     <Compile Include="AdministratorForside.aspx.designer.cs">
       <DependentUpon>AdministratorForside.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="AdministrerTeam.aspx.cs">
-      <DependentUpon>AdministrerTeam.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AdministrerTeam.aspx.designer.cs">
-      <DependentUpon>AdministrerTeam.aspx</DependentUpon>
     </Compile>
     <Compile Include="AktiverKonto.aspx.cs">
       <DependentUpon>AktiverKonto.aspx</DependentUpon>

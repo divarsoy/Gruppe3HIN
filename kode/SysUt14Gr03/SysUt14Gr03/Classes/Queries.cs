@@ -311,25 +311,7 @@ namespace SysUt14Gr03.Classes
                                  select team).ToList();
                 return teamListe;
             }
-        }
-
-        /*
-        static public List<Rettighet> GetAlleRettigheter()
-        {
-            using (var context = new Context())
-            {
-                return context.Rettigheter.ToList<Rettighet>();
-            }
-        }
-        */
-        /*
-        public static IQueryable<Rettighet> GetAlleRettigheter()
-        {
-            var context = new Context();
-            IQueryable<Rettighet> query = context.Rettigheter;
-            return query;
-        }
-        */
+        }           
 
         public static Prosjekt getProsjekt (int prosjekt_id)
         {
