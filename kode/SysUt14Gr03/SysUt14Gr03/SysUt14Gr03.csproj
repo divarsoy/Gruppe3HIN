@@ -236,6 +236,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Site.Master" />
+    <Content Include="TidsestimerOppgave.aspx" />
     <Content Include="TidsestimerProsjekt.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
@@ -562,6 +563,13 @@
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="TidsestimerOppgave.aspx.cs">
+      <DependentUpon>TidsestimerOppgave.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TidsestimerOppgave.aspx.designer.cs">
+      <DependentUpon>TidsestimerOppgave.aspx</DependentUpon>
+    </Compile>
     <Compile Include="TidsestimerProsjekt.aspx.cs">
       <DependentUpon>TidsestimerProsjekt.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
