@@ -30,7 +30,7 @@ namespace SysUt14Gr03
    
         }
 
-        protected void opprettBruker(string _etternavn, string _fornavn, string _epost)
+/*        protected void opprettBruker(string _etternavn, string _fornavn, string _epost)
         {
             using (var db = new Context())
             {
@@ -38,7 +38,7 @@ namespace SysUt14Gr03
                 db.Brukere.Add(nyBruker);
                 db.SaveChanges();
             }
-        }
+        } */
 
         protected void bt_adm_reg_Click(object sender, EventArgs e)
         {
@@ -83,7 +83,8 @@ namespace SysUt14Gr03
 
             if (emailUnq && tb_reg_epost.Text.Length < 256) {
                 epost = tb_reg_epost.Text;
-                opprettBruker(etternavn, fornavn, epost);
+//                opprettBruker(etternavn, fornavn, epost);
+                AktiverKonto.SetBrukerFelter(fornavn, etternavn, epost);
                 EpostFullforReg();
           
             }    
