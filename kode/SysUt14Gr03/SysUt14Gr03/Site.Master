@@ -96,6 +96,7 @@
                                 <li> <a runat="server" href="~/KommentarPaOppgave">Kommentér oppgave</a></li>
                                 <li> <a runat="server" href="~/PameldingTilOppgave">Påmeld bruker på oppgave</a></li>
                                 <li> <a runat="server" href="~/FerdigstillelseAvOppgave">Merk oppgave som ferdig</a></li>
+                                <li> <a runat="server" href="~/TidsestimerOppgave">Tidsestimer oppgave</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
