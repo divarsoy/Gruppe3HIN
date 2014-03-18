@@ -18,16 +18,6 @@ namespace SysUt14Gr03
         {
 
             oppgaveListe = Queries.GetAlleAktiveOppgaver();
-            //oppgaveListe = new List<Oppgave>();
-           // oppgaveListe.Add(new Oppgave( { Title = "Oppgave 1" }));
-            //Oppgave test1 = new Oppgave();
-            //Oppgave test2 = new Oppgave();
-           // test1.Tittel = "Oppgave 1";
-           // test1.Krav = "Skriv 800 sider om scrum";
-            //test2.Tittel = "Oppgave 2";
-            //test2.Krav = "Skriv 500 sider om planning poker";
-            //oppgaveListe.Add(test1);
-            //oppgaveListe.Add(test2);
 
             if (lsbOppgaver.Items.Count == 0)
             {
