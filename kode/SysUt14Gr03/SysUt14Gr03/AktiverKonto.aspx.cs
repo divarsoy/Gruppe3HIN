@@ -44,15 +44,15 @@ namespace SysUt14Gr03
             initialEpost = _epost;
         }
 
-/*        private void ActivateMyAccount()
+        private void ActivateMyAccount()
         {
             Response.Write("<h2 align=center> Fyll ut resterende felt for å aktivere kontoen din</h2>");
             Aftername.Text = initialFornavn;
             Firstname.Text = initialEtternavn;
             epost = Email.Text = initialEpost;
-        } */
+        }
 
-        private void ActivateMyAccount()
+ /*       private void ActivateMyAccount()
         {
 
             try
@@ -90,7 +90,7 @@ namespace SysUt14Gr03
             }
 
 
-        }
+        } 
      
         protected void ConfirmButton_Click(object sender, EventArgs e)
         {
@@ -168,6 +168,6 @@ namespace SysUt14Gr03
             }
 
             return strBuilder.ToString();
-        }
-    }
+        } */
+    } 
 }
