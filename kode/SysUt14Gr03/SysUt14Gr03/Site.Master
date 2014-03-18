@@ -85,6 +85,7 @@
                             <ul class="dropdown-menu">
                                 <li> <a runat="server" href="~/OpprettProsjekt">Opprett Prosjekt</a></li>
                                 <li> <a runat="server" href="~/AdministrasjonAvProsjekt">Administrasjon Av Prosjekt</a></li>
+                                <li> <a runat="server" href="~/TidsestimerProsjekt">Tidsestimer Prosjekt</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -95,6 +96,7 @@
                                 <li> <a runat="server" href="~/KommentarPaOppgave">Kommentér oppgave</a></li>
                                 <li> <a runat="server" href="~/PameldingTilOppgave">Påmeld bruker på oppgave</a></li>
                                 <li> <a runat="server" href="~/FerdigstillelseAvOppgave">Merk oppgave som ferdig</a></li>
+                                <li> <a runat="server" href="~/TidsestimerOppgave">Tidsestimer oppgave</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
