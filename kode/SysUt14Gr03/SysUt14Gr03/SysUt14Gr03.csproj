@@ -182,11 +182,13 @@
     <Content Include="EpostPreferanser.aspx" />
     <Content Include="InvitasjonAvBruker.aspx" />
     <Content Include="KommentarPaOppgave.aspx" />
+    <Content Include="ListboxTest.aspx" />
     <Content Include="OpprettGruppe.aspx" />
     <Content Include="OpprettOppgave.aspx" />
     <Content Include="OpprettProsjekt.aspx" />
     <Content Include="OpprettTidsfristPaaOppgave.aspx" />
     <Content Include="OversiktOppgaver.aspx" />
+    <Content Include="OversiktProsjekter.aspx" />
     <Content Include="PameldingTilOppgave.aspx" />
     <Content Include="Pictures\blomst.jpg" />
     <Content Include="OpprettTeam.aspx" />
@@ -353,6 +355,20 @@
     </Compile>
     <Compile Include="ArkiverOppg.aspx.designer.cs">
       <DependentUpon>ArkiverOppg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ListboxTest.aspx.cs">
+      <DependentUpon>ListboxTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListboxTest.aspx.designer.cs">
+      <DependentUpon>ListboxTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OversiktProsjekter.aspx.cs">
+      <DependentUpon>OversiktProsjekter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OversiktProsjekter.aspx.designer.cs">
+      <DependentUpon>OversiktProsjekter.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Utvikler.Master.cs">
       <DependentUpon>Site.Utvikler.Master</DependentUpon>
