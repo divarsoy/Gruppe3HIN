@@ -8,7 +8,7 @@ using System.Web.UI.WebControls;
 
 namespace SysUt14Gr03
 {
-    public partial class Bruker : System.Web.UI.MasterPage
+    public partial class Utvikler : System.Web.UI.MasterPage
     {
         private const string AntiXsrfTokenKey = "__AntiXsrfToken";
         private const string AntiXsrfUserNameKey = "__AntiXsrfUserName";
