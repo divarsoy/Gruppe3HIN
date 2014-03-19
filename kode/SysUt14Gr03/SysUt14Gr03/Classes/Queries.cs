@@ -291,7 +291,8 @@ namespace SysUt14Gr03.Classes
             using (var context = new Context())
             {
                 var komListe = (from kommentar in context.Kommentarer
-                                where kommentar.Bruker_id == brukder_id
+                                where kommentar.Bruker_id == brukder_id 
+                                where kommentar.Aktiv == true
                                 select kommentar).ToList<Kommentar>();
                 return komListe;
             }
