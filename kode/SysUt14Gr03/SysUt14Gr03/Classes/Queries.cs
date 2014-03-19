@@ -101,30 +101,6 @@ namespace SysUt14Gr03.Classes
                 return priori;
             }
         }
-
-        static public List<Bruker> GetAlleBrukereIEtTeam(int _team_id) {
-            int team_id = _team_id;
-            using (var context = new Context())
-            {
-                var brukerListe = (from bruker in context.Brukere
-                                   where bruker.Teams.Any(team => team.Team_id == team_id)
-                                   select bruker).ToList();
-                
-                return brukerListe;
-            }
-        }
-
-        static public List<Team> GetAlleTeamsEnBrukerErMedI(int _bruker_id)
-        {
-            int bruker_id = _bruker_id;
-            using (var context = new Context())
-            {
-                var teamListe = (from team in context.Teams
-                                 where team.Brukere.Any(bruker => bruker.Bruker_id == bruker_id)
-                                 select team).ToList();
-                return teamListe;
-            }
-        }
         /*
          * Ikke klar
         static public List<Team> GetTeamFromGruppe(int _gruppe_id)
@@ -241,7 +217,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
-        static public List<Prosjekt> GetAlleProsjektFraBrukerErMedI(int bruker_id)
+        static public List<Prosjekt> GetAlleProsjektEnBrukerErMedI(int bruker_id)
         {
             using (var context = new Context())
             {
@@ -252,7 +228,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
-        static public List<Moete> GetAlleMoeterFraBrukerErMedI(int bruker_id)
+        static public List<Moete> GetAlleMoeterEnBrukerErMedI(int bruker_id)
         {
             using (var context = new Context())
             {
@@ -292,7 +268,7 @@ namespace SysUt14Gr03.Classes
             return query;
         }
         */
-<<<<<<< HEAD
+
         public static string getProsjektNavn(int prosjekt_id)
         {
             using (SqlCommand command = new SqlCommand())
@@ -344,7 +320,7 @@ namespace SysUt14Gr03.Classes
                 command.Connection.Close();
                 return statusNavn;
             }
-=======
+        }
 
         /* Legger til eller fjerner brukere på et team
         Brukes i AdministrasjonAvTeamBrukere */
@@ -360,8 +336,6 @@ namespace SysUt14Gr03.Classes
 
                 context.SaveChanges();
             }
-            
->>>>>>> d9777054baa36089430d0c5011c010dcb33ecb38
         }
     }
 }

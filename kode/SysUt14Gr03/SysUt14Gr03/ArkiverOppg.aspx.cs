@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -13,95 +14,121 @@ namespace SysUt14Gr03
 {
     public partial class CancelOppg : System.Web.UI.Page
     {
-        private int oppgave_id;
-        private Label prosjektid;
+        private List<Bruker> brukerListe;
+        private List<Prosjekt> prosjektListe;
+        private List<Prioritering> pri;
+        private List<Status> visStatus;
+        private List<int> valgtBrukerid = new List<int>();
+
+        private int oppgaveID;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                visOppgaver();
+                brukerListe = Queries.GetAlleAktiveBrukere();
+                prosjektListe = Queries.GetAlleAktiveProsjekter();
+                pri = Queries.GetAllePrioriteringer();
+                visStatus = Queries.GetAlleStatuser();
+                tbOppgave_id.Text = Request.QueryString["oppgave_id"];
+                oppgaveID = Classes.Validator.KonverterTilTall(tbOppgave_id.Text);
+                for (int i = 0; i < visStatus.Count; i++)
+                {
+                    Status status = visStatus[i];
+                    ddlStatus.Items.Add(new ListItem(status.Navn, status.Status_id.ToString()));
+                }
+                using (var context = new Context())
+                {
+                    System.Windows.Forms.BindingSource bindingSource1 = new System.Windows.Forms.BindingSource();
+                    bindingSource1.DataSource = context.Oppgaver.ToList<Oppgave>();
+                    GridViewOppg.DataSource = bindingSource1;
+                    GridViewOppg.DataBind();
+                }
+
+                for (int i = 0; i < brukerListe.Count; i++)
+                {
+                    Bruker bruker = brukerListe[i];
+                    ddlBrukere.Items.Add(new ListItem(bruker.ToString(), bruker.Bruker_id.ToString()));
+                }
+                for (int i = 0; i < prosjektListe.Count; i++)
+                {
+                    Prosjekt prosjekt = prosjektListe[i];
+
+                    ddlProsjekt.Items.Add(new ListItem(prosjekt.Navn, prosjekt.Prosjekt_id.ToString()));
+                }
+                for (int i = 0; i < pri.Count; i++)
+                {
+                    Prioritering priori = pri[i];
+                    ddlPrioritet.Items.Add(new ListItem(priori.Navn, priori.Prioritering_id.ToString()));
+                }
             }
         }
-        private void visOppgaver()
+        private void EndreOppg()
         {
-            lblKommentar.Visible = false;
-            tbKommentar.Visible = false;
-            btnSend.Visible = false;
-            using (var context = new Context())
+            List<Bruker> selectedBruker = new List<Bruker>();
+            if (tbKrav.Text != String.Empty && tbTittel.Text != String.Empty && tbBeskrivelse.Text != String.Empty && TbEstimering.Text != String.Empty)
             {
-                System.Windows.Forms.BindingSource bindingSource1 = new System.Windows.Forms.BindingSource();
-                bindingSource1.DataSource = context.Oppgaver.ToList<Oppgave>();
-                gridViewOppgave.DataSource = bindingSource1;
-                gridViewOppgave.DataBind();
+                using (var context = new Context())
+                {
+
+                    int priorietring_id = Convert.ToInt32(ddlPrioritet.SelectedValue);
+                    int prosjekt_id = Convert.ToInt32(ddlProsjekt.SelectedValue);
+                    float estimering = Convert.ToInt16(TbEstimering.Text);
+                    int status_id = Convert.ToInt32(ddlStatus.SelectedValue);
+
+                    foreach (ListItem s in lbBrukere.Items)
+                    {
+                        int navn = Convert.ToInt32(s.Value);
+                        Bruker bruk = context.Brukere.Where(b => b.Bruker_id == navn).First();
+                        selectedBruker.Add(bruk);
+                    }
+
+                    var oppgave = context.Oppgaver.First(id => id.Oppgave_id = oppgaveID);
+                    oppgave.Krav = tbKrav.Text;
+                    oppgave.Oppdatert = DateTime.Now;
+                    oppgave.Prioritering_id = priorietring_id;
+                    oppgave.Prosjekt_id = prosjekt_id;
+                    oppgave.Status_id = status_id;
+                    oppgave.Tittel = tbTittel.Text;
+                    oppgave.UserStory = tbBeskrivelse.Text;
+                    oppgave.Aktiv = cbAktiv.Checked;
+                    oppgave.Brukere = selectedBruker;
+                    oppgave.Estimat = estimering;
+                    oppgave.Tidsfrist;
+                    oppgave.RemainingTime;
+                    
+                    context.SaveChanges();
+                    Response.Redirect("OpprettOppgave.aspx");
+                }
             }
-        }
-        protected void gridViewGroup_RowEditing(object sender, GridViewEditEventArgs e)
-        {
-            gridViewOppgave.EditIndex = e.NewEditIndex;
-            visOppgaver();
-        }
-
-        protected void gridViewGroup_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
-        {
-            gridViewOppgave.EditIndex = -1;
-            visOppgaver();
-        }
-
-        protected void gridViewGroup_RowUpdating(object sender, GridViewUpdateEventArgs e)
-        {
-            oppgave_id = (int)gridViewOppgave.DataKeys[e.RowIndex].Value;
-            prosjektid = (Label)gridViewOppgave.Rows[e.RowIndex].FindControl("lbProsjekt");
-            System.Web.UI.WebControls.TextBox tbTittel = (TextBox)gridViewOppgave.Rows[e.RowIndex].FindControl("tbTittel");
-            System.Web.UI.WebControls.TextBox tbEstimat = (TextBox)gridViewOppgave.Rows[e.RowIndex].FindControl("tbEstimat");
-            System.Web.UI.WebControls.TextBox tbBruktTid = (TextBox)gridViewOppgave.Rows[e.RowIndex].FindControl("tbBruktTid");
-            System.Web.UI.WebControls.TextBox tbTidsfrist = (TextBox)gridViewOppgave.Rows[e.RowIndex].FindControl("tbTidsfrist");
-            System.Web.UI.WebControls.TextBox tbOpprettet = (TextBox)gridViewOppgave.Rows[e.RowIndex].FindControl("tbOpprettet");
-            System.Web.UI.WebControls.TextBox tbProsjekt = (TextBox)gridViewOppgave.Rows[e.RowIndex].FindControl("tbProsjekt");
-            System.Web.UI.WebControls.TextBox tbStatus = (TextBox)gridViewOppgave.Rows[e.RowIndex].FindControl("tbStatus");
-            System.Web.UI.WebControls.CheckBox cbAktiv = (CheckBox)gridViewOppgave.Rows[e.RowIndex].FindControl("cboxAktiv");
-
-            using (var context = new Context())
+            else
             {
-                Oppgave oppgaver = context.Oppgaver.Where(b => b.Oppgave_id == oppgave_id).First();
-                oppgaver.Tittel = tbTittel.Text;
-                oppgaver.Estimat = float.Parse(tbEstimat.Text);
-                oppgaver.BruktTid = float.Parse(tbBruktTid.Text);
-                oppgaver.Estimat = Convert.ToInt16(tbEstimat.Text);
-                oppgaver.BruktTid = Convert.ToInt32(tbBruktTid.Text);
-                oppgaver.Tidsfrist = Convert.ToDateTime(tbTidsfrist.Text);
-                oppgaver.Opprettet = Convert.ToDateTime(tbOpprettet.Text);
-                oppgaver.Prosjekt.Navn = tbProsjekt.Text;
-                oppgaver.Status.Navn = tbStatus.Text;
-                oppgaver.Aktiv = Convert.ToBoolean(cbAktiv.Checked);
-                context.SaveChanges();
-
-                if (oppgaver.Aktiv == false)
-                    this.btnSend_Click(sender, e);
+                lblCheck.Visible = true;
+                lblCheck.ForeColor = Color.Red;
+                lblCheck.Text = "Feltene kan ikke være tomme!";
             }
-            gridViewOppgave.EditIndex = -1;
-            visOppgaver();
         }
-        public void InsertBegrunnelseTilOppaveTabel(int id, string tekst)
+
+        protected void btnEndre_Click(object sender, EventArgs e)
         {
-            using (SqlCommand command = new SqlCommand())
+            EndreOppg();
+        }
+
+        protected void btnBrukere_Click(object sender, EventArgs e)
+        {
+            ListItem selectedUser = ddlBrukere.SelectedItem;
+            selectedUser.Selected = false;
+            if (lbBrukere.Items.Contains(selectedUser))
             {
-                command.Connection = new SqlConnection(ConfigurationManager.ConnectionStrings["sysUt14Gr03"].ConnectionString);
-                command.CommandText = @"insert into Oppgave(Kommentarer) values('" + tekst + "') where Oppgave_id='" + id + "'";
-                command.Connection.Open();
-                command.ExecuteNonQuery();
-                command.Connection.Close();
+                lblFeil.Visible = true;
+                lblFeil.ForeColor = Color.Red;
+                lblFeil.Text = selectedUser + " er allerede valgt!";
             }
-        }
-
-        protected void btnSend_Click(object sender, EventArgs e)
-        {
-            lblKommentar.Visible = true;
-            tbKommentar.Visible = true;
-            btnSend.Visible = true;
-            this.InsertBegrunnelseTilOppaveTabel(oppgave_id, tbKommentar.Text);
-            gridViewOppgave.EditIndex = -1;
-            visOppgaver();
+            else
+            {
+                lblFeil.Visible = false;
+                lbBrukere.Items.Add(selectedUser);
+            }
         }
     }
 }

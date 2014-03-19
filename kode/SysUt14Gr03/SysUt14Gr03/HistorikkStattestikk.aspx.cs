@@ -71,7 +71,7 @@ namespace SysUt14Gr03
 
         protected void Projects_SelectedIndexChanged(object sender, EventArgs e)
         {
-            List<Prosjekt> prosjektList = Queries.GetAlleProsjektFraBrukerErMedI(brukerID);
+            List<Prosjekt> prosjektList = Queries.GetAlleProsjektEnBrukerErMedI(brukerID);
 
             if (Project.Items.Count == 0)
             {
@@ -86,7 +86,7 @@ namespace SysUt14Gr03
 
         protected void Meetings_SelectedIndexChanged(object sender, EventArgs e)
         {
-            List<Moete> moeteList = Queries.GetAlleMoeterFraBrukerErMedI(brukerID);
+            List<Moete> moeteList = Queries.GetAlleMoeterEnBrukerErMedI(brukerID);
 
             if (Meeting.Items.Count == 0)
             {
