@@ -54,7 +54,7 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Gå til team">
                 <ItemTemplate>
-                    <asp:HyperLink ID="asp" NavigateUrl="~/AdministrasjonAvTeam.aspx" Text="AdministrasjonAvTeam" runat="server"></asp:HyperLink> 
+                    <asp:HyperLink ID="asp" NavigateUrl="~/AdministrasjonAvTeamBrukere.aspx" Text="AdministrasjonAvTeam" runat="server"></asp:HyperLink> 
                 </ItemTemplate>
                 <EditItemTemplate>
 

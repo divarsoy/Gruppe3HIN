@@ -286,7 +286,16 @@ namespace SysUt14Gr03.Classes
                 return teamListe;
             }
         }
-
+        static public List<Kommentar> GetAlleKommentarTilBruker(int brukder_id)
+        {
+            using (var context = new Context())
+            {
+                var komListe = (from kommentar in context.Kommentarer
+                                where kommentar.Bruker_id == brukder_id
+                                select kommentar).ToList<Kommentar>();
+                return komListe;
+            }
+        }
 
 
 
