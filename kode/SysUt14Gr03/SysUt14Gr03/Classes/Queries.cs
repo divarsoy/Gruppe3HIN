@@ -10,7 +10,7 @@ namespace SysUt14Gr03.Classes
 {
     public class Queries
     {
-        static public SysUt14Gr03.Models.Bruker GetBruker(int _bruker_id)
+        static public Bruker GetBruker(int _bruker_id)
         {
             using (var context = new Context())
             {
@@ -37,14 +37,14 @@ namespace SysUt14Gr03.Classes
         }
 
         // Henter brukere som har epost _Epost
-        static public List<SysUt14Gr03.Models.Bruker> GetBruker(string _Epost)
+        static public List<Bruker> GetBruker(string _Epost)
         {
             using (var context = new Context())
             {
                 var IQueryList = context.Brukere.Where(bruker => bruker.Epost == _Epost);
                 if (IQueryList.Any())
                 {
-                    return IQueryList.ToList<SysUt14Gr03.Models.Bruker>();
+                    return IQueryList.ToList<Bruker>();
                 }
                 else
                 {
@@ -64,19 +64,19 @@ namespace SysUt14Gr03.Classes
         }
 
 
-        static public List<SysUt14Gr03.Models.Bruker> GetAlleAktiveBrukere()
+        static public List<Bruker> GetAlleAktiveBrukere()
         {
             using (var context = new Context())
             {
                 var brukerListe = (from bruker in context.Brukere
                                    where bruker.Aktiv == true
-                                   select bruker).ToList<SysUt14Gr03.Models.Bruker>();
+                                   select bruker).ToList<Bruker>();
                 return brukerListe;
             
             }
         }
 
-        static public List<SysUt14Gr03.Models.Bruker> GetAlleBrukerePaaTeam(int valgtTeam_id)
+        static public List<Bruker> GetAlleBrukerePaaTeam(int valgtTeam_id)
         {
             using (var context = new Context())
             {
@@ -88,7 +88,7 @@ namespace SysUt14Gr03.Classes
                 }
                 else
                 {
-                    List<SysUt14Gr03.Models.Bruker> tomListe = new List<SysUt14Gr03.Models.Bruker>();
+                    List<Bruker> tomListe = new List<Bruker>();
                     return tomListe;
                 }
 
