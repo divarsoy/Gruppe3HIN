@@ -10,7 +10,7 @@ namespace SysUt14Gr03.Classes
 {
     public class Queries
     {
-        static public Bruker GetBruker(int _bruker_id)
+        static public SysUt14Gr03.Models.Bruker GetBruker(int _bruker_id)
         {
             using (var context = new Context())
             {
@@ -37,14 +37,14 @@ namespace SysUt14Gr03.Classes
         }
 
         // Henter brukere som har epost _Epost
-        static public List<Bruker> GetBruker(string _Epost)
+        static public List<SysUt14Gr03.Models.Bruker> GetBruker(string _Epost)
         {
             using (var context = new Context())
             {
                 var IQueryList = context.Brukere.Where(bruker => bruker.Epost == _Epost);
                 if (IQueryList.Any())
                 {
-                    return IQueryList.ToList<Bruker>();
+                    return IQueryList.ToList<SysUt14Gr03.Models.Bruker>();
                 }
                 else
                 {
@@ -62,21 +62,21 @@ namespace SysUt14Gr03.Classes
                 return result;
             }
         }
-        
 
-        static public List<Bruker> GetAlleAktiveBrukere()
+
+        static public List<SysUt14Gr03.Models.Bruker> GetAlleAktiveBrukere()
         {
             using (var context = new Context())
             {
                 var brukerListe = (from bruker in context.Brukere
                                    where bruker.Aktiv == true
-                                   select bruker).ToList<Bruker>();
+                                   select bruker).ToList<SysUt14Gr03.Models.Bruker>();
                 return brukerListe;
             
             }
         }
 
-        static public List<Bruker> GetAlleBrukerePaaTeam(int valgtTeam_id)
+        static public List<SysUt14Gr03.Models.Bruker> GetAlleBrukerePaaTeam(int valgtTeam_id)
         {
             using (var context = new Context())
             {
@@ -88,7 +88,7 @@ namespace SysUt14Gr03.Classes
                 }
                 else
                 {
-                    List<Bruker> tomListe = new List<Bruker>();
+                    List<SysUt14Gr03.Models.Bruker> tomListe = new List<SysUt14Gr03.Models.Bruker>();
                     return tomListe;
                 }
 
@@ -263,7 +263,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
-        static public List<Bruker> GetAlleBrukereIEtTeam(int _team_id)
+        static public List<SysUt14Gr03.Models.Bruker> GetAlleBrukereIEtTeam(int _team_id)
         {
             int team_id = _team_id;
             using (var context = new Context())
@@ -376,7 +376,7 @@ namespace SysUt14Gr03.Classes
 
         /* Legger til eller fjerner brukere på et team
         Brukes i AdministrasjonAvTeamBrukere */
-        public static void UpdateBrukerePaaTeam(Team teamAAOppdatere, Bruker brukerAAOppdatere, int LeggTil1Fjern2)
+        public static void UpdateBrukerePaaTeam(Team teamAAOppdatere, SysUt14Gr03.Models.Bruker brukerAAOppdatere, int LeggTil1Fjern2)
         {
             using (var context = new Context())
             {

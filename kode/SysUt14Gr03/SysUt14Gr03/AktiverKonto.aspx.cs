@@ -90,6 +90,7 @@ namespace SysUt14Gr03
             try
             {
              //   passord = ComputeHash(Password.Text, new SHA256CryptoServiceProvider());
+                string Tok = token;
                 passord = MD5Hash(Password.Text); 
                 epost = Email.Text;
                 brukernavn = Username.Text;
@@ -101,7 +102,7 @@ namespace SysUt14Gr03
                 using (var db = new Context())
                 {
 
-                    var Bruker = new Bruker { Brukernavn = brukernavn, Etternavn = etternavn, Fornavn = fornavn, Epost = epost, IM = imAdresse, Aktiv = true, Passord = passord, opprettet = DateTime.Now, Token = token };
+                    var Bruker = new Bruker {Brukernavn = brukernavn, Etternavn = etternavn, Fornavn = fornavn, Epost = epost, IM = imAdresse, Aktiv = true, Passord = passord, opprettet = DateTime.Now, Token = Tok};
                     db.Brukere.Add(Bruker);
                     db.SaveChanges();
                     /*Bruker conUser = db.Brukere.Where(user => user.Epost == epost).First();

@@ -4,38 +4,41 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using SysUt14Gr03.Classes;
-using SysUt14Gr03.Models;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using SysUt14Gr03.Classes;
+using SysUt14Gr03.Models;
 
 namespace SysUt14Gr03
 {
     public partial class Login : Page
     {
-        private List<Bruker> brukerList;
+        private List<SysUt14Gr03.Models.Bruker> brukerList;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            // SysUt14Gr03.Models.Bruker bruker = new SysUt14Gr03.Models.Bruker();
 
         }
 
         protected void LoginButton_Click(object sender, EventArgs e)
         {
             
-            var brukerListR = Queries.GetBruker(UserName.Text);
+            brukerList = Queries.GetBruker(UserName.Text);
             
-            if (brukerListR != null)
+            if (brukerList != null)
             {
-                brukerList = brukerListR.ToList<Bruker>();
-                Bruker bruker = brukerList[0];
+                //brukerList = brukerListR.ToList<Bruker>();
+                SysUt14Gr03.Models.Bruker bruker = brukerList[0];
                 string oppgittPassord = Password.Text;
-                string riktigPassord = brukerList[0].Passord;
+                string riktigPassord = bruker.Passord;
                 var manager = new UserManager();
                 ApplicationUser user = manager.Find(UserName.Text, Password.Text);
                 user.Id = "" + bruker.Bruker_id;
+
+                oppgittPassord = AktiverKonto.MD5Hash(oppgittPassord);
 
                 if (string.Compare(oppgittPassord, riktigPassord, false) == 0)
                 {

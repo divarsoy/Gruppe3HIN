@@ -5,12 +5,14 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using SysUt14Gr03.Classes;
 using SysUt14Gr03.Models;
 
 namespace SysUt14Gr03
 {
     public partial class AdministrasjonAvProsjekt : System.Web.UI.Page
     {
+      
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -62,6 +64,7 @@ namespace SysUt14Gr03
                     context.SaveChanges();
                 }
                 gridViewProsjekt.EditIndex = -1;
+                gridViewProsjekt.Columns[6].Visible = true;
                 visProsjekt();
             }
             catch 
@@ -73,12 +76,14 @@ namespace SysUt14Gr03
         protected void gridViewProsjekt_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             gridViewProsjekt.EditIndex = -1;
+            gridViewProsjekt.Columns[6].Visible = true;
             visProsjekt();
         }
 
         protected void gridViewProsjekt_RowEditing(object sender, GridViewEditEventArgs e)
         {
             gridViewProsjekt.EditIndex = e.NewEditIndex;
+            gridViewProsjekt.Columns[6].Visible = false;
             visProsjekt();
         }
     }
