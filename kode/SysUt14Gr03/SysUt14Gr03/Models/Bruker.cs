@@ -13,7 +13,6 @@ namespace SysUt14Gr03.Models
         public string Brukernavn { get; set; }
         public string Epost { get; set; }
         public string Passord { get; set; }
-        public string Salt { get; set; }
         public string IM { get; set; }
         public string Token { get; set; }
         public bool Aktivert { get; set; }

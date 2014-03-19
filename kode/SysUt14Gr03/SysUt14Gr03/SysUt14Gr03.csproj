@@ -167,6 +167,7 @@
     <Content Include="AdministratorForside.aspx" />
     <Content Include="AktiverKonto.aspx" />
     <Content Include="ArkiverGruppe.aspx" />
+    <Content Include="ArkiveringAvKommentarer.aspx" />
     <Content Include="ArkiverOppg.aspx" />
     <Content Include="Brukere.aspx" />
     <Content Include="Default.aspx" />
@@ -348,6 +349,13 @@
     </Compile>
     <Compile Include="ArkiverGruppe.aspx.designer.cs">
       <DependentUpon>ArkiverGruppe.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ArkiveringAvKommentarer.aspx.cs">
+      <DependentUpon>ArkiveringAvKommentarer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ArkiveringAvKommentarer.aspx.designer.cs">
+      <DependentUpon>ArkiveringAvKommentarer.aspx</DependentUpon>
     </Compile>
     <Compile Include="ArkiverOppg.aspx.cs">
       <DependentUpon>ArkiverOppg.aspx</DependentUpon>

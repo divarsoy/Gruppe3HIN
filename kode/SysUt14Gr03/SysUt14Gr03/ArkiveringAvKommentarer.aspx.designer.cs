@@ -10,42 +10,33 @@
 namespace SysUt14Gr03 {
     
     
-    public partial class InvitasjonAvBruker {
+    public partial class ArkiveringAvKommentarer {
         
         /// <summary>
-        /// lblbrukerInnlogget control.
+        /// lblBruker control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblbrukerInnlogget;
+        protected global::System.Web.UI.WebControls.Label lblBruker;
         
         /// <summary>
-        /// ddlOppgave control.
+        /// lbKommentarer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlOppgave;
+        protected global::System.Web.UI.WebControls.ListBox lbKommentarer;
         
         /// <summary>
-        /// ddlBrukere control.
+        /// btnSlett control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlBrukere;
-        
-        /// <summary>
-        /// btnSendInvitasjon control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSendInvitasjon;
+        protected global::System.Web.UI.WebControls.Button btnSlett;
     }
 }
