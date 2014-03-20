@@ -57,7 +57,7 @@ namespace SysUt14Gr03.Classes
             selectedItems[5] = brukerPrefs.EpostRapport;
 
             melding = melding == "" ? VARSELTEKST[varsel] : melding;
-            tittel = tittel == "" ? "Varsel angående " + VARSELTEKST[varsel] : tittel;
+            tittel = tittel == "" ? "Varsel angående " + VARSELTITTEL[varsel] : tittel;
 
             if (selectedItems[varsel])
             {
