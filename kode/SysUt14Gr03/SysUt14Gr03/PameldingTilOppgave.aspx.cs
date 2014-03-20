@@ -40,7 +40,6 @@ namespace SysUt14Gr03
         protected void btnLeggTil_Click(object sender, EventArgs e)
         {
             // Legger til bruker på oppgaven
-            // Husk å sjekke om bruker allerede er lagt til...
             using (var context = new Context())
             {
                 int oppgave_id = Convert.ToInt32(ddlOppgaver.SelectedValue);
@@ -51,14 +50,25 @@ namespace SysUt14Gr03
                 Status status = context.Status.FirstOrDefault(s => s.Status_id == 2);
 
                 List<Bruker> tmpBruker = oppgave.Brukere;
-                tmpBruker.Add(bruker);
-                oppgave.Brukere = tmpBruker;
-                oppgave.Status = status;
-                context.SaveChanges();
+                // Sjekker om bruker allerede er lagt til
+                if (!tmpBruker.Contains(bruker))
+                {
+                    tmpBruker.Add(bruker);
+                    oppgave.Brukere = tmpBruker;
+                    oppgave.Status = status;
+                    context.SaveChanges();
 
-                lblMelding.Text = "Bruker " + bruker.ToString() + " lagt til på " + oppgave.Tittel;
-                lblMelding.ForeColor = Color.Green;
+                    lblMelding.Text = "Bruker " + bruker.ToString() + " lagt til på " + oppgave.Tittel;
+                    lblMelding.ForeColor = Color.Green;
+                }
+                else
+                {
+                    lblMelding.Text = "Bruker " + bruker.ToString() + " er allerede lagt til på " + oppgave.Tittel;
+                    lblMelding.ForeColor = Color.Red;
+                }
+
                 lblMelding.Visible = true;
+                
 
             }
         }
