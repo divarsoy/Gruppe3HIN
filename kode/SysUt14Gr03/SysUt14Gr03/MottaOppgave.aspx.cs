@@ -21,8 +21,6 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
-
             List<Bruker> brukerListe = Queries.GetAlleAktiveBrukere();
             mottaker = Queries.GetBruker(mottaker_id);
             avsender = Queries.GetBruker(avsender_id);
@@ -62,16 +60,14 @@ namespace SysUt14Gr03
 
         protected void btnAvsla_Click(object sender, EventArgs e)
         {
-            // sender mottaker tilbake til forsiden
-            Response.Redirect("default.aspx", true);
             // varlser avsender
-            sendEmail sendEmail = new sendEmail();
             string message = "Bruker " + mottaker.Fornavn + " " + mottaker.Etternavn
                 + " ønsker ikke å delta på oppgave " + oppgave.Tittel;
 
-            sendEmail.sendEpost(avsender.Epost, message, "Avslag på oppgave", null, null, null);
+            Varsel.SendVarsel(avsender_id, Varsel.OPPGAVEVARSEL, "Avslag på oppgave", message);
 
-            Varsel.SendVarsel(avsender_id, 0);
+            // sender mottaker tilbake til forsiden
+            Response.Redirect("default.aspx", true);
         }
     }
 }
