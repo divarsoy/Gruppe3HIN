@@ -29,6 +29,8 @@ namespace SysUt14Gr03
                 ListBox1.SelectionMode = ListSelectionMode.Multiple;
                 ListBox1.DataSource = datatable;
                 ListBox1.DataBind();
+                ListBox1.CssClass = "form-control listbox";
+                btnRemove.CssClass = "btn btn-primary";
             }
         }
 
