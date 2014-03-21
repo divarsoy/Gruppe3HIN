@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using SysUt14Gr03;
 using SysUt14Gr03.Models;
+using SysUt14Gr03.Classes;
 
 
 namespace SysUt14Gr03
@@ -14,6 +15,7 @@ namespace SysUt14Gr03
     {
         public BrukerEksempel bruker;
         public List<Bruker> listeMedBrukere;
+        private int brukerId;
         
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -22,6 +24,17 @@ namespace SysUt14Gr03
         //                              where b.Teams.Any(t => t.Navn == "Alpha")
         //                              select b);
        //}
+            if (Session["loggedIn"] == null)
+            {
+                lblNavn.Visible = false;
+            }
+            else
+            {
+                brukerId = Convert.ToInt32(Session["bruker_id"]);
+                Bruker bruker = Queries.GetBruker(brukerId);
+                lblNavn.Text = bruker.ToString();
+            }
+
             int team_id = 2;
             using (var context = new Context())
             {
