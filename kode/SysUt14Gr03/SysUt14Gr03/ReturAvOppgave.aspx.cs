@@ -21,7 +21,7 @@ namespace SysUt14Gr03
         {
             if (Session["loggedIn"] == null)
             {
-                Response.Redirect("default.aspx", true);
+                Response.Redirect("Login.aspx", true);
             }
             else
             {
