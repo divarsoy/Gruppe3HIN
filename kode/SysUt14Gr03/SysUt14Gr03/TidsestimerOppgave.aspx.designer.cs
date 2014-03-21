@@ -10,7 +10,25 @@
 namespace SysUt14Gr03 {
     
     
-    public partial class OpprettTeam {
+    public partial class TidsestimerOppgave {
+        
+        /// <summary>
+        /// lsbOppgaver control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox lsbOppgaver;
+        
+        /// <summary>
+        /// btnVisEstimat control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnVisEstimat;
         
         /// <summary>
         /// Label1 control.
@@ -22,66 +40,39 @@ namespace SysUt14Gr03 {
         protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
-        /// txtTeamNavn control.
+        /// txtEstimat control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTeamNavn;
+        protected global::System.Web.UI.WebControls.TextBox txtEstimat;
         
         /// <summary>
-        /// pnlBrukere control.
+        /// Label2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlBrukere;
+        protected global::System.Web.UI.WebControls.Label Label2;
         
         /// <summary>
-        /// cblBrukere control.
+        /// Feilmelding control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList cblBrukere;
+        protected global::System.Web.UI.WebControls.Label Feilmelding;
         
         /// <summary>
-        /// NoUsersSelected control.
+        /// btnLagreEstimat control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label NoUsersSelected;
-        
-        /// <summary>
-        /// TeamOK control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label TeamOK;
-        
-        /// <summary>
-        /// btnOK control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnOK;
-        
-        /// <summary>
-        /// btnCancel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancel;
+        protected global::System.Web.UI.WebControls.Button btnLagreEstimat;
     }
 }

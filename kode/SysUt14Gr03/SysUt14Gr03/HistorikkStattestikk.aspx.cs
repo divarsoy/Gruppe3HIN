@@ -86,7 +86,7 @@ namespace SysUt14Gr03
 
         protected void Meetings_SelectedIndexChanged(object sender, EventArgs e)
         {
-            List<Moete> moeteList = Queries.GetAlleMoeterEnBrukerErMedI(brukerID);
+            List<Moete> moeteList = Queries.GetAlleMoeterFraBrukerErMedI(brukerID);
 
             if (Meeting.Items.Count == 0)
             {

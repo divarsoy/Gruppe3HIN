@@ -10,78 +10,96 @@
 namespace SysUt14Gr03 {
     
     
-    public partial class OpprettTeam {
+    public partial class TidsestimerProsjekt {
         
         /// <summary>
-        /// Label1 control.
+        /// pnlOppgaver control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Panel pnlOppgaver;
         
         /// <summary>
-        /// txtTeamNavn control.
+        /// lsbProsjekt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTeamNavn;
+        protected global::System.Web.UI.WebControls.ListBox lsbProsjekt;
         
         /// <summary>
-        /// pnlBrukere control.
+        /// btnDetaljer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlBrukere;
+        protected global::System.Web.UI.WebControls.Button btnDetaljer;
         
         /// <summary>
-        /// cblBrukere control.
+        /// txtInfo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList cblBrukere;
+        protected global::System.Web.UI.WebControls.TextBox txtInfo;
         
         /// <summary>
-        /// NoUsersSelected control.
+        /// pnlDato control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label NoUsersSelected;
+        protected global::System.Web.UI.WebControls.Panel pnlDato;
         
         /// <summary>
-        /// TeamOK control.
+        /// calCalendar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label TeamOK;
+        protected global::System.Web.UI.WebControls.Calendar calCalendar;
         
         /// <summary>
-        /// btnOK control.
+        /// txtArbeid control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnOK;
+        protected global::System.Web.UI.WebControls.TextBox txtArbeid;
         
         /// <summary>
-        /// btnCancel control.
+        /// FristOK control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancel;
+        protected global::System.Web.UI.WebControls.Label FristOK;
+        
+        /// <summary>
+        /// Feilmelding control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Feilmelding;
+        
+        /// <summary>
+        /// btnFrist control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnFrist;
     }
 }

@@ -10,15 +10,15 @@
 namespace SysUt14Gr03 {
     
     
-    public partial class AdministrerTeam {
+    public partial class SiteMaster {
         
         /// <summary>
-        /// lsbTeams control.
+        /// MainContentUtvikler control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox lsbTeams;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContentUtvikler;
     }
 }

@@ -17,7 +17,7 @@
                 </ItemTemplate>
                   <EditItemTemplate>
                       <asp:TextBox ID="tbProsjektleder" runat="server" Text='<%#Bind("Bruker.Fornavn") %>'></asp:TextBox>
-                  </EditItemTemplate>
+                 </EditItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Startdato">
                 <ItemTemplate>
@@ -35,18 +35,10 @@
                     <asp:TextBox ID="tbSlutt" runat="server"  Text='<%#Bind("Sluttdato") %>'></asp:TextBox>
                 </EditItemTemplate>
             </asp:TemplateField>
-             <asp:TemplateField HeaderText="Gruppe">
-                <ItemTemplate>
-                    <asp:Label ID="lbGruppe" runat="server" Text='<%#Bind("Gruppe.Navn") %>'></asp:Label>
-                </ItemTemplate>
-                <EditItemTemplate>
-                    <asp:TextBox ID="tbGruppe" runat="server"  Text='<%#Bind("Gruppe.Navn") %>'></asp:TextBox>
-                </EditItemTemplate>
-            </asp:TemplateField>
+            
               <asp:TemplateField HeaderText="Team">
                 <ItemTemplate>
-              
-                    <asp:Label ID="lbTeam" runat="server" Text='<%#Bind("Team.Navn") %>'></asp:Label>
+                <asp:Label ID="lbTeam" runat="server" Text='<%#Bind("Team.Navn") %>'></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
                     <asp:TextBox ID="tbTeam" runat="server" Text='<%#Bind("Team.Navn") %>'></asp:TextBox>
@@ -59,6 +51,14 @@
                 <EditItemTemplate>
                     <asp:CheckBox ID="cboxAktiv" Checked='<%#Bind("Aktiv") %>' runat="server" />
                      </EditItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Gå til team">
+                <ItemTemplate>
+                    <asp:HyperLink ID="asp" NavigateUrl="~/AdministrasjonAvTeam.aspx" Text="AdministrasjonAvTeam" runat="server"></asp:HyperLink> 
+                </ItemTemplate>
+                <EditItemTemplate>
+
+                </EditItemTemplate>
             </asp:TemplateField>
              <asp:CommandField ShowEditButton="true" />
         </Columns>

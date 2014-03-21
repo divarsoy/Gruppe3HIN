@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -16,13 +17,18 @@ namespace SysUt14Gr03
 {
     public partial class AktiverKonto : System.Web.UI.Page
     {
-        private Bruker bruker = new Bruker();
+        static string initialFornavn;
+        static string initialEtternavn;
+        static string initialEpost;
         private string brukernavn;
         private string etternavn;
         private string fornavn;
         private string epost;
         private string imAdresse;
         private string passord;
+        private string token;
+    
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -31,6 +37,21 @@ namespace SysUt14Gr03
                 ActivateMyAccount();
             }
         }
+
+        public static void SetBrukerFelter(string _fornavn, string _etternavn, string _epost) {
+            initialFornavn = _fornavn;
+            initialEtternavn = _etternavn;
+            initialEpost = _epost;
+        }
+
+/*        private void ActivateMyAccount()
+        {
+              
+            Response.Write("<h2 align=center> Fyll ut resterende felt for å aktivere kontoen din</h2>");
+            Aftername.Text = initialFornavn;
+            Firstname.Text = initialEtternavn;
+            epost = Email.Text = initialEpost;
+        } */
 
         private void ActivateMyAccount()
         {
@@ -43,9 +64,10 @@ namespace SysUt14Gr03
                 {
                     Response.Write("<h2 align=center> Fyll ut resterende felt for å aktivere kontoen din</h2>");
 
-                    Aftername.Text = Request.QueryString["Etternavn"];
-                    Firstname.Text = Request.QueryString["Brukernavn"];
+                    Firstname.Text = initialFornavn;
+                    Aftername.Text = initialEtternavn;
                     epost = Email.Text = Request.QueryString["Epost"];
+                    token = Request.QueryString["Token"];
                 }
                 else
                 {
@@ -61,28 +83,40 @@ namespace SysUt14Gr03
             }
 
 
-        }
-        protected void confirmUser(string _brukernavn, string _etternavn, string _fornavn, string _epost, string _imadresse, string _passord)
-        {
-            using (var db = new Context())
-            {
-
-                var confirmUser = new Bruker { Brukernavn = brukernavn, Etternavn = etternavn, Fornavn = fornavn, Epost = epost, IM = imAdresse, Passord = passord };
-                db.Brukere.Add(confirmUser);
-                db.SaveChanges();
-            }
-        }
+        } 
+     
         protected void ConfirmButton_Click(object sender, EventArgs e)
         {
             try
             {
-                passord = ComputeHash(Password.Text, new SHA256CryptoServiceProvider());
-               epost = Email.Text;
+             //   passord = ComputeHash(Password.Text, new SHA256CryptoServiceProvider());
+                string Tok = token;
+                passord = MD5Hash(Password.Text); 
+                epost = Email.Text;
                 brukernavn = Username.Text;
                 etternavn = Aftername.Text;
                 fornavn = Firstname.Text;
                 imAdresse = Im_adress.Text;
+            
 
+                using (var db = new Context())
+                {
+
+                    var Bruker = new Bruker {Brukernavn = brukernavn, Etternavn = etternavn, Fornavn = fornavn, Epost = epost, IM = imAdresse, Aktiv = true, Passord = passord, opprettet = DateTime.Now, Token = Tok};
+                    db.Brukere.Add(Bruker);
+                    db.SaveChanges();
+                    /*Bruker conUser = db.Brukere.Where(user => user.Epost == epost).First();
+                    conUser.Brukernavn = brukernavn;
+                    conUser.Etternavn = etternavn;
+                    conUser.Epost = epost;
+                    conUser.IM = imAdresse;
+                    conUser.Passord = passord;
+                    conUser.Token = token;
+                    conUser.Aktiv = true;
+//                    db.Brukere.Update(conUser);
+//                    db.Brukere.Add(conUser);
+                    db.SaveChanges(); */
+                }
                 // confirmUser(Username.Text, Aftername.Text, Firstname.Text, Email.Text, Im_adress.Text, password);
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('Kontoen din er aktivert');", true);
 
@@ -112,13 +146,26 @@ namespace SysUt14Gr03
             lblPassword.Visible = false;
             ConfirmButton.Visible = false;
         }
-        private string ComputeHash(string input, HashAlgorithm algorithm)
+    
+        public static string MD5Hash(string text)
         {
-            Byte[] inputBytes = Encoding.UTF8.GetBytes(input);
+            MD5 md5 = new MD5CryptoServiceProvider();
 
-            Byte[] hashedBytes = algorithm.ComputeHash(inputBytes);
+            //compute hash from the bytes of text
+            md5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(text));
 
-            return BitConverter.ToString(hashedBytes);
+            //get hash result after compute it
+            byte[] result = md5.Hash;
+
+            StringBuilder strBuilder = new StringBuilder();
+            for (int i = 0; i < result.Length; i++)
+            {
+                //change it into 2 hexadecimal digits
+                //for each byte
+                strBuilder.Append(result[i].ToString("x2"));
+            }
+
+            return strBuilder.ToString();
         }
-    }
+    } 
 }

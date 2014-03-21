@@ -2,6 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h1>Opprett team</h1>
     <p>
+        <asp:Label ID="Label1" runat="server" Text="Navn på team"></asp:Label>
         <asp:TextBox ID="txtTeamNavn" runat="server" MaxLength="128" ToolTip="Navn på team"></asp:TextBox>
     </p>
     <asp:Panel ID="pnlBrukere" runat="server" Height="40%" ScrollBars="Auto">

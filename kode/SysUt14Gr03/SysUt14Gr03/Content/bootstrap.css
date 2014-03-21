@@ -332,8 +332,7 @@ input,
 select[multiple],
 textarea {
   background-image: none;
-    height: 57px;
-}
+    }
 
 a {
   color: #428bca;
@@ -403,7 +402,8 @@ hr {
 
 p {
   margin: 0 0 10px;
-    width: 401px;
+    width: 399px;
+    height: 55px;
 }
 
 .lead {

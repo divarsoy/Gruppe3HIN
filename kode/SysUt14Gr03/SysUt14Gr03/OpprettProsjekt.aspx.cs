@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -14,9 +15,9 @@ namespace SysUt14Gr03
     {
         private DateTime dtStart;
         private DateTime dtSlutt;
-        private List<Gruppe> gruppeListe;
+        private List<Bruker> brukerListe;
         private List<Team> teamListe;
-        private int gruppe_id;
+    
         private int team_id;
         private int bruker_id;
 
@@ -25,17 +26,17 @@ namespace SysUt14Gr03
             if (!IsPostBack)
             {
                 teamListe = Queries.GetAlleAktiveTeam();
-                gruppeListe = Queries.GetAlleAktiveGrupper();
+                brukerListe = Queries.GetAlleAktiveBrukere();
 
                 for (int i = 0; i < teamListe.Count(); i++)
                 {
                     Team team = teamListe[i];
                     dropTeam.Items.Add(new ListItem(team.Navn, team.Team_id.ToString()));
                 }
-                for (int i = 0; i < gruppeListe.Count; i++)
+                for (int i = 0; i < brukerListe.Count(); i++)
                 {
-                    Gruppe gruppe = gruppeListe[i];
-                    dropGruppe.Items.Add(new ListItem(gruppe.Navn, gruppe.Gruppe_id.ToString()));
+                    Bruker bruker = brukerListe[i];
+                    ddlBrukere.Items.Add(new ListItem(bruker.ToString(), bruker.Bruker_id.ToString()));
                 }
             }
         }
@@ -47,30 +48,33 @@ namespace SysUt14Gr03
         private void opprettProsjekt()
         {
 
-            dtStart = Convert.ToDateTime(tbStart.Text);
-            dtSlutt = Convert.ToDateTime(tbSlutt.Text);
-            team_id = Convert.ToInt32(dropTeam.SelectedValue);
-            gruppe_id = Convert.ToInt32(dropGruppe.SelectedValue);
-            string fornavn = tbProsjektleder.Text;
+            if (tbProsjektnavn.Text != String.Empty && tbStart.Text != String.Empty && tbSlutt.Text != String.Empty)
+            {
+
+                dtStart = Convert.ToDateTime(tbStart.Text);
+                dtSlutt = Convert.ToDateTime(tbSlutt.Text);
+                team_id = Convert.ToInt32(dropTeam.SelectedValue);
+                bruker_id = Convert.ToInt32(ddlBrukere.SelectedValue);
+            
             using (var context = new Context())
             {
-                Bruker bruker = context.Brukere.Where(b => b.Fornavn == fornavn).First();
-                bruker_id = bruker.Bruker_id;
-            }
-            using (var context = new Context())
-            {
-                var nyttProsjekt = new Prosjekt { Navn = tbProsjektnavn.Text, Bruker_id = bruker_id, Aktiv = true, Opprettet = DateTime.Now, Gruppe_id = gruppe_id, Team_id = team_id, StartDato = dtStart, SluttDato = dtSlutt };
+                var nyttProsjekt = new Prosjekt { Navn = tbProsjektnavn.Text, Bruker_id = bruker_id, Aktiv = true, Opprettet = DateTime.Now, Team_id = team_id, StartDato = dtStart, SluttDato = dtSlutt };
                 context.Prosjekter.Add(nyttProsjekt);
                 context.SaveChanges();
                 this.sendEpost();
             }
 
-
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('Prosjektet ble lagret');", true);
-          
-            Response.Redirect("OpprettProsjekt.aspx");
-
-        }
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('Prosjektet ble lagret');", true);
+                Response.Redirect("OpprettProsjekt.aspx");
+            }
+            else
+            {
+                lblFeil.Visible = true;
+                lblFeil.ForeColor = Color.Red;
+                lblFeil.Text = "Feltene kan ikke være tomme";
+            }
+            }
+    
 
         protected void btnStart_Click(object sender, EventArgs e)
         {
@@ -88,7 +92,7 @@ namespace SysUt14Gr03
             BrukerPreferanse preferanse = new BrukerPreferanse();
             if(preferanse.EpostProsjekt == true)
             {
-                List<Bruker> brukerListe = Queries.GetAlleBrukereIEtTeam(team_id);
+                //List<Bruker> brukerListe = Queries.GetAlleBrukereIEtTeam(team_id);
                 sendEmail sendMsg = new sendEmail();
 
                 string message = "Du ble lagt til et nytt prosjekt: " + tbProsjektnavn.Text + "\nDato: " + DateTime.Now + "\nLagt til av: " + User.Identity.Name;
