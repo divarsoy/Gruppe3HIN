@@ -74,7 +74,7 @@ namespace SysUt14Gr03.Classes
                                   .Include("Prosjekt")
                                   .Where(oppgave => oppgave.Oppgave_id == oppgave_id)
                                   .Where(oppgave => oppgave.Aktiv == true)
-                                  .ToList();
+                                  .ToList<Oppgave>();
                 return oppgaveListe[0];
             }
         }
@@ -202,16 +202,6 @@ namespace SysUt14Gr03.Classes
             }
         }
 
-        static public Oppgave GetOppgave(int oppgaveId)
-        {
-            using (var context = new Context())
-            {
-                var oppgave = context.Oppgaver.Include("Brukere").Where(o => o.Oppgave_id == oppgaveId).FirstOrDefault();
-                return oppgave;
-
-            }
-        }
-
         static public List<Oppgave> GetAlleAktiveOppgaver()
         {
             using (var context = new Context())
@@ -306,8 +296,7 @@ namespace SysUt14Gr03.Classes
                 return teamListe;
             }
         }
-<<<<<<< HEAD
-=======
+
         static public List<Kommentar> GetAlleKommentarTilBruker(int brukder_id)
         {
             using (var context = new Context())
@@ -319,9 +308,6 @@ namespace SysUt14Gr03.Classes
                 return komListe;
             }
         }
-
-
->>>>>>> b2b9db59439a4522ca5c3ce449da1dd144ea2f66
 
         static public List<Moete> GetAlleMoeterFraBrukerErMedI(int bruker_id)
         {

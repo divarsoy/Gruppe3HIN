@@ -24,15 +24,16 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            //if (Session["loggedIn"] == null)
+            //    Response.Redirect("Login.aspx", true);
+            
+            if (!Page.IsPostBack)
             {
                 brukerListe = Queries.GetAlleAktiveBrukere();
                 prosjektListe = Queries.GetAlleAktiveProsjekter();
                 pri = Queries.GetAllePrioriteringer();
-                visStatus = Queries.GetAlleStatuser();
-                tbOppgave_id.Text = Request.QueryString["oppgave_id"];
-                oppgaveID = 6; //Classes.Validator.KonverterTilTall(tbOppgave_id.Text);
-                endres = Queries.GetOppgave(6);
+                oppgaveID = Classes.Validator.KonverterTilTall(Request.QueryString["oppgave_id"]);
+                endres = Queries.GetOppgave(oppgaveID);
 
                 for (int i = 0; i < visStatus.Count; i++)
                 {
@@ -65,7 +66,6 @@ namespace SysUt14Gr03
                 tbBeskrivelse.Text = endres.UserStory;
                 TbEstimering.Text = endres.Estimat.ToString();
                 tbKrav.Text = endres.Krav;
-                tbOppgave_id.Text = endres.Oppgave_id.ToString();
                 tbRemainingTime.Text = endres.RemainingTime.ToString();
                 tbTidsfristStart.Text = endres.Opprettet.ToString();
                 tbTidsfristSlutt.Text = endres.Tidsfrist.ToString();
@@ -82,11 +82,23 @@ namespace SysUt14Gr03
             {
                 using (var context = new Context())
                 {
+                    oppgaveID = Classes.Validator.KonverterTilTall(Request.QueryString["oppgave_id"]);
+                    endres = context.Oppgaver
+                                  .Include("Brukere")
+                                  .Include("Prioritering")
+                                  .Include("Status")
+                                  .Include("Prosjekt")
+                                  .Where(oppgave => oppgave.Oppgave_id == oppgaveID)
+                                  .Where(oppgave => oppgave.Aktiv == true)
+                                  .FirstOrDefault();
 
                     int priorietring_id = Convert.ToInt32(ddlPrioritet.SelectedValue);
                     int prosjekt_id = Convert.ToInt32(ddlProsjekt.SelectedValue);
                     float estimering = Convert.ToInt16(TbEstimering.Text);
                     int status_id = Convert.ToInt32(ddlStatus.SelectedValue);
+                    Prioritering pri = context.Prioriteringer.FirstOrDefault(id => id.Prioritering_id == priorietring_id);
+                    Prosjekt pro = context.Prosjekter.FirstOrDefault(id => id.Prosjekt_id == prosjekt_id);
+                    Status sta = context.Status.FirstOrDefault(id => id.Status_id == status_id);
 
                     foreach (ListItem s in lbBrukere.Items)
                     {
@@ -94,30 +106,31 @@ namespace SysUt14Gr03
                         Bruker bruk = context.Brukere.Where(b => b.Bruker_id == navn).First();
                         selectedBruker.Add(bruk);
                     }
-                    oppgaveID = 6;
-                    var oppgave = context.Oppgaver.First(id => id.Oppgave_id == oppgaveID);
-                    oppgave.Krav = tbKrav.Text;
-                    oppgave.Oppdatert = DateTime.Now;
-                    oppgave.Prioritering_id = priorietring_id;
-                    oppgave.Prosjekt_id = prosjekt_id;
-                    oppgave.Status_id = status_id;
-                    oppgave.Tittel = tbTittel.Text;
-                    oppgave.UserStory = tbBeskrivelse.Text;
-                    oppgave.Aktiv = cbAktiv.Checked;
-                    oppgave.Brukere = selectedBruker;
-                    oppgave.Estimat = estimering;
-                    oppgave.RemainingTime = float.Parse(tbRemainingTime.Text);
-                    oppgave.Tidsfrist = Convert.ToDateTime(tbTidsfristSlutt.Text);
 
-                    try
+                    if (endres != null)
                     {
-                        context.SaveChanges();
-                        Response.Redirect("AdministrasjonAvOppgave.aspx");
+                        endres.Krav = tbKrav.Text;
+                        endres.Oppdatert = DateTime.Now;
+                        endres.Prioritering = pri;
+                        endres.Prosjekt = pro;
+                        endres.Status = sta;
+                        endres.Tittel = tbTittel.Text;
+                        endres.UserStory = tbBeskrivelse.Text;
+                        endres.Aktiv = cbAktiv.Checked;
+                        //endres.Brukere = selectedBruker;
+                        endres.Estimat = estimering;
+                        endres.RemainingTime = float.Parse(tbRemainingTime.Text);
+                        endres.Tidsfrist = Convert.ToDateTime(tbTidsfristSlutt.Text);
                     }
-                    catch (System.Data.Entity.Infrastructure.DbUpdateException ex)
-                    {
-                        lblFeil.Visible = true;
-                        lblFeil.Text = ex.Message;
+
+                    try {
+                        context.SaveChanges();
+                        Response.Redirect("FerdigstillelsAvOppgave.aspx");
+                    }
+                    catch (System.Data.Entity.Infrastructure.DbUpdateException ex) {
+                        lblCheck.Visible = true;
+                        lblCheck.ForeColor = Color.Red;
+                        lblCheck.Text = ex.Message + "\n" + ex.InnerException.Message;
                     }
                 }
             }
@@ -152,9 +165,17 @@ namespace SysUt14Gr03
         }
         protected void btnSlettBrukere_Click(object sender, EventArgs e)
         {
-            lblFeil.Visible = false;
-            string t43 = lbBrukere.SelectedItem.Text;
-            lbBrukere.Items.Remove(t43);
+            if (lbBrukere.Items.Count > 0 && lbBrukere.SelectedIndex >= 0)
+            {
+                for (int i = 0; i < lbBrukere.Items.Count; i++)
+                {
+                    if (lbBrukere.Items[i].Selected)
+                    {
+                        lbBrukere.Items.Remove(lbBrukere.Items[i]);
+                        i--;
+                    }
+                }
+            }
         }
 
         protected void btnSlutt_Click(object sender, EventArgs e)

@@ -172,7 +172,6 @@
     <Content Include="ArkiverGruppe.aspx" />
     <Content Include="AdministrasjonAvOppgave.aspx" />
     <Content Include="ArkiveringAvKommentarer.aspx" />
-    <Content Include="ArkiverOppg.aspx" />
     <Content Include="Brukere.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="changeUser.aspx" />
@@ -360,16 +359,14 @@
     </Compile>
     <Compile Include="AdministrasjonAvOppgave.aspx.cs">
       <DependentUpon>AdministrasjonAvOppgave.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="ArkiveringAvKommentarer.aspx.cs">
       <DependentUpon>ArkiveringAvKommentarer.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ArkiveringAvKommentarer.aspx.designer.cs">
       <DependentUpon>ArkiveringAvKommentarer.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ArkiverOppg.aspx.cs">
-      <DependentUpon>ArkiverOppg.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="AdministrasjonAvOppgave.aspx.designer.cs">
       <DependentUpon>AdministrasjonAvOppgave.aspx</DependentUpon>
