@@ -13,7 +13,7 @@ namespace SysUt14Gr03
     public partial class MottaOppgave : System.Web.UI.Page
     {
         private int avsender_id = 2;
-        private int mottaker_id = 6;
+        private int mottaker_id;
         private int oppgave_id = 4;
         private Bruker avsender;
         private Bruker mottaker;
@@ -21,11 +21,19 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["loggedIn"] == null)
+            {
+                Response.Redirect("Login.aspx", true);
+            }
+            else
+            {
+                mottaker_id = Convert.ToInt32(Session["bruker_id"]);
+            }
+
             List<Bruker> brukerListe = Queries.GetAlleAktiveBrukere();
             mottaker = Queries.GetBruker(mottaker_id);
             avsender = Queries.GetBruker(avsender_id);
 
-            // Tilfeldig oppgave, proof of consept
             oppgave = Queries.GetOppgave(oppgave_id);
 
             lblMessage.Text = "Bruker " + avsender.IM + " ønsker hjelp på oppgave "

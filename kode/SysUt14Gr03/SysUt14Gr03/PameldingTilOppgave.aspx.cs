@@ -15,9 +15,19 @@ namespace SysUt14Gr03
 
         private List<Oppgave> oppgaveListe;
         private List<Bruker> brukerListe;
+        private int bruker_id;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["loggedIn"] == null)
+            {
+                Response.Redirect("Login.aspx", true);
+            }
+            else
+            {
+                bruker_id = Convert.ToInt32(Session["bruker_id"]);
+            }
+
             oppgaveListe = Queries.GetAlleAktiveOppgaver();
             brukerListe = Queries.GetAlleAktiveBrukere();
 
@@ -29,10 +39,6 @@ namespace SysUt14Gr03
                     ddlOppgaver.Items.Add(new ListItem(oppgave.Tittel, oppgave.Oppgave_id.ToString()));
                 }
 
-                foreach (Bruker bruker in brukerListe)
-                {
-                    ddlBrukere.Items.Add(new ListItem(bruker.ToString(), bruker.Bruker_id.ToString()));
-                }
             }
 
         }
@@ -43,7 +49,6 @@ namespace SysUt14Gr03
             using (var context = new Context())
             {
                 int oppgave_id = Convert.ToInt32(ddlOppgaver.SelectedValue);
-                int bruker_id = Convert.ToInt32(ddlBrukere.SelectedValue);
 
                 Bruker bruker = context.Brukere.FirstOrDefault(b => b.Bruker_id == bruker_id);
                 Oppgave oppgave = context.Oppgaver.FirstOrDefault(o => o.Oppgave_id == oppgave_id);

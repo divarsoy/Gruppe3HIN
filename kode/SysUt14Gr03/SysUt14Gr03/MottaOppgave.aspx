@@ -4,7 +4,6 @@
     <p>
         <asp:Label ID="lblMessage" runat="server" Visible="false"></asp:Label>
         <br />
-        <hr />
     <asp:Button ID="btnAvsla" runat="server" OnClick="btnAvsla_Click" Text="Avslå" />
     <asp:Button ID="btnGodta" runat="server" OnClick="btnGodta_Click" Text="Godta" />
     </p>

@@ -209,6 +209,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Account\Web.config" />
+    <Content Include="ReturAvOppgave.aspx" />
     <Content Include="Site.Utvikler.Master" />
     <Content Include="Content\MorildDataStylesheet.less" />
     <None Include="Properties\PublishProfiles\SysUt14Gr03.pubxml" />
@@ -390,6 +391,13 @@
     </Compile>
     <Compile Include="OversiktProsjekter.aspx.designer.cs">
       <DependentUpon>OversiktProsjekter.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReturAvOppgave.aspx.cs">
+      <DependentUpon>ReturAvOppgave.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReturAvOppgave.aspx.designer.cs">
+      <DependentUpon>ReturAvOppgave.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Utvikler.Master.cs">
       <DependentUpon>Site.Utvikler.Master</DependentUpon>
