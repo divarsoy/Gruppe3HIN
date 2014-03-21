@@ -8,5 +8,6 @@
     <h4>Send invitasjon til en annen bruker</h4>
     <asp:DropDownList ID="ddlBrukere" runat="server"></asp:DropDownList>
     <asp:Button ID="btnSendInvitasjon" runat="server" Text="Send Invitasjon" OnClick="btnSendInvitasjon_Click" Height="33px"/>
+    <asp:Label ID="lblInvitasjon" runat="server"></asp:Label>
     
 </asp:Content>
