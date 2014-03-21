@@ -108,6 +108,20 @@ namespace SysUt14Gr03.Classes
 
             }
         }
+
+        static public List<Prosjekt> GetAlleAktiveProsjekterForBruker(int bruker_id) 
+        {
+            using (var context = new Context()) 
+            {
+                var prosjektListe = context.Prosjekter
+                                    .Where(prosjekta => prosjekta.Aktiv == true)
+                                    .Where(team => team.Team.Brukere.Any(bruker => bruker.Bruker_id == bruker_id))
+                                    .ToList();
+                return prosjektListe;      
+            }
+        }
+
+
         static public List<Status> GetAlleStatuser()
         {
             using (var context = new Context())
@@ -150,14 +164,24 @@ namespace SysUt14Gr03.Classes
         }
          * */
 
-        static public Team GetTeam(int _team_id)
+        static public Team GetTeam(int team_id)
         {
             using (var context = new Context())
             {
-                var team = context.Teams.Find(_team_id);
+                var team = context.Teams.Find(team_id);
                 return team;
             }
+        }
 
+        static public Rettighet GetRettighet(int bruker_id)
+        {
+            using (var context = new Context())
+            {
+                var rettighet = context.Rettigheter
+                                .Where(brukere => brukere.Brukere.Any(bruker => bruker.Bruker_id == bruker_id))
+                                .FirstOrDefault();
+                return rettighet;
+            }
         }
 
         static public List<Team> GetAlleAktiveTeam()

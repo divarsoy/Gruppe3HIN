@@ -76,7 +76,7 @@ namespace SysUt14Gr03.Classes
             return tabell;
         }
 
-        public static Table HentProsjektTabell(List<Prosjekt> query)
+        public static Table HentProsjekterTabell(List<Prosjekt> query)
         {
             Table tabell = new Table();
             TableHeaderRow headerRow = new TableHeaderRow();
@@ -109,20 +109,25 @@ namespace SysUt14Gr03.Classes
                 TableCell teamCell = new TableCell();
                 TableCell prosjektlederCell = new TableCell();
 
+                Team team = Queries.GetTeam((int)prosjekt.Team_id);
+                Bruker bruker = Queries.GetBruker(prosjekt.Bruker_id);
+
                 navnCell.Text = String.Format("<a href='AdministrasjonAvProsjekt?Prosjekt_id={0}'>{1}</a>", prosjekt.Prosjekt_id.ToString(), prosjekt.Navn);
-                startDatoCell.Text = String.Format("{0}", prosjekt.StartDato);
-                sluttDatoCell.Text = String.Format("{0}", prosjekt.SluttDato);
-                //teamCell.Text = Queries.GetTeam(prosjekt.Team_id).Navn;
-                prosjektlederCell.Text = Queries.GetBruker(prosjekt.Bruker_id).ToString();
+                startDatoCell.Text = String.Format("{0:dd/MM/yyyy}", prosjekt.StartDato);
+                sluttDatoCell.Text = String.Format("{0:dd/MM/yyyy}", prosjekt.SluttDato);
+                teamCell.Text = String.Format("<a href='AdministrasjonAvTeam?Team_id={0}'>{1}</a>", team.Team_id.ToString(), team.Navn);
+                prosjektlederCell.Text = String.Format("<a href='HistorikkStattestikk?bruker_id={0}'>{1} </a>", bruker.Bruker_id, bruker.ToString());
 
                 tRow.Cells.Add(navnCell);
                 tRow.Cells.Add(startDatoCell);
                 tRow.Cells.Add(sluttDatoCell);
-                //tRow.Cells.Add(teamCell);
+                tRow.Cells.Add(teamCell);
                 tRow.Cells.Add(prosjektlederCell);
 
                 tabell.Rows.Add(tRow);
             }
+            tabell.CssClass = "table";
+
             return tabell;
 
         }

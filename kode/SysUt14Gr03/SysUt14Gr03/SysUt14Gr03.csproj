@@ -370,6 +370,7 @@
     <Compile Include="ArkiverOppg.aspx.designer.cs">
       <DependentUpon>ArkiverOppg.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Classes\Konstanter.cs" />
     <Compile Include="Classes\Varsel.cs" />
     <Compile Include="ListboxTest.aspx.cs">
       <DependentUpon>ListboxTest.aspx</DependentUpon>
