@@ -2,6 +2,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h1>Arkiver Kommentarer</h1>
     <asp:Label ID="lblBruker" runat="server"></asp:Label>
-    <p><asp:ListBox ID="lbKommentarer" runat="server" Height="56px" Width="149px"></asp:ListBox></p>
+    <p><asp:ListBox ID="lbKommentarer" AutoPostBack="true" runat="server" Height="56px" OnSelectedIndexChanged="lbKommentarer_SelectedIndexChanged" Width="149px"></asp:ListBox></p>
+      <h3>Oppgave som er kommentert</h3><p> 
+         <asp:ListBox ID="lbOppgave" runat="server" Width="191px"></asp:ListBox>
+    </p>
     <asp:Button ID="btnSlett" runat="server" OnClick="btnSlett_Click" Text="Slett Kommentar"/>
 </asp:Content>
