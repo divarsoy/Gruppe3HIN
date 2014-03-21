@@ -10,33 +10,33 @@
 namespace SysUt14Gr03 {
     
     
-    public partial class PameldingTilOppgave {
+    public partial class MottaOppgave {
         
         /// <summary>
-        /// ddlOppgaver control.
+        /// lblMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlOppgaver;
+        protected global::System.Web.UI.WebControls.Label lblMessage;
         
         /// <summary>
-        /// lblMelding control.
+        /// btnAvsla control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMelding;
+        protected global::System.Web.UI.WebControls.Button btnAvsla;
         
         /// <summary>
-        /// btnLeggTil control.
+        /// btnGodta control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnLeggTil;
+        protected global::System.Web.UI.WebControls.Button btnGodta;
     }
 }

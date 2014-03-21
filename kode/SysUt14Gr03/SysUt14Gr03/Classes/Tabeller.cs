@@ -75,5 +75,56 @@ namespace SysUt14Gr03.Classes
             }
             return tabell;
         }
+
+        public static Table HentProsjektTabell(List<Prosjekt> query)
+        {
+            Table tabell = new Table();
+            TableHeaderRow headerRow = new TableHeaderRow();
+            TableHeaderCell navnHeaderCell = new TableHeaderCell();
+            TableHeaderCell startDatoHeaderCell = new TableHeaderCell();
+            TableHeaderCell sluttDatoHeaderCell = new TableHeaderCell();
+            TableHeaderCell teamHeaderCell = new TableHeaderCell();
+            TableHeaderCell prosjektlederHeaderCell = new TableHeaderCell();
+
+            navnHeaderCell.Text = "Navn";
+            startDatoHeaderCell.Text = "Start Dato";
+            sluttDatoHeaderCell.Text = "Slutt Dato";
+            teamHeaderCell.Text = "Team";
+            prosjektlederHeaderCell.Text = "Prosjektleder";
+
+            headerRow.Cells.Add(navnHeaderCell);
+            headerRow.Cells.Add(startDatoHeaderCell);
+            headerRow.Cells.Add(sluttDatoHeaderCell);
+            headerRow.Cells.Add(teamHeaderCell);
+            headerRow.Cells.Add(prosjektlederHeaderCell);
+            tabell.Rows.Add(headerRow);
+
+            foreach (Prosjekt prosjekt in query)
+            {
+
+                TableRow tRow = new TableRow();
+                TableCell navnCell = new TableCell();
+                TableCell startDatoCell = new TableCell();
+                TableCell sluttDatoCell = new TableCell();
+                TableCell teamCell = new TableCell();
+                TableCell prosjektlederCell = new TableCell();
+
+                navnCell.Text = String.Format("<a href='AdministrasjonAvProsjekt?Prosjekt_id={0}'>{1}</a>", prosjekt.Prosjekt_id.ToString(), prosjekt.Navn);
+                startDatoCell.Text = String.Format("{0}", prosjekt.StartDato);
+                sluttDatoCell.Text = String.Format("{0}", prosjekt.SluttDato);
+                //teamCell.Text = Queries.GetTeam(prosjekt.Team_id).Navn;
+                prosjektlederCell.Text = Queries.GetBruker(prosjekt.Bruker_id).ToString();
+
+                tRow.Cells.Add(navnCell);
+                tRow.Cells.Add(startDatoCell);
+                tRow.Cells.Add(sluttDatoCell);
+                //tRow.Cells.Add(teamCell);
+                tRow.Cells.Add(prosjektlederCell);
+
+                tabell.Rows.Add(tRow);
+            }
+            return tabell;
+
+        }
     }
 }

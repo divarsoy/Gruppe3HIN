@@ -15,7 +15,7 @@ namespace SysUt14Gr03
 {
     public partial class Login : Page
     {
-        private List<SysUt14Gr03.Models.Bruker> brukerList;
+        private List<Bruker> brukerList;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -31,19 +31,28 @@ namespace SysUt14Gr03
             if (brukerList != null)
             {
                 //brukerList = brukerListR.ToList<Bruker>();
-                SysUt14Gr03.Models.Bruker bruker = brukerList[0];
+                Bruker bruker = brukerList[0];
                 string oppgittPassord = Password.Text;
                 string riktigPassord = bruker.Passord;
                 var manager = new UserManager();
-                ApplicationUser user = manager.Find(UserName.Text, Password.Text);
-                user.Id = "" + bruker.Bruker_id;
+                // ApplicationUser user = manager.Find(UserName.Text, Password.Text);
+                // user.Id = "" + bruker.Bruker_id;
 
                 oppgittPassord = AktiverKonto.MD5Hash(oppgittPassord);
 
                 if (string.Compare(oppgittPassord, riktigPassord, false) == 0)
                 {
                     // Logg inn bruker
-                    IdentityHelper.SignIn(manager, user, RememberMe.Checked);
+                    // IdentityHelper.SignIn(manager, user, RememberMe.Checked);
+
+                    // http://stackoverflow.com/questions/3140341/how-to-create-persistent-cookies-in-asp-net
+                    HttpCookie persist = new HttpCookie("persist");
+                    persist.Values.Add("bruker_id", bruker.Bruker_id.ToString());
+                    persist.Expires = DateTime.Now.AddDays(7); // Husker bruker i én uke
+                    Response.Cookies.Add(persist);
+
+                    Session["bruker_id"] = bruker.Bruker_id;
+                    Session["loggedIn"] = true;
                     Response.Redirect("brukere.aspx", true);
                 }
             }
@@ -51,6 +60,7 @@ namespace SysUt14Gr03
             
             // Feil brukernavn eller passord
             InvalidCredentialsMessage.Visible = true;
+             
         }
         public int getBrukerID()
         {

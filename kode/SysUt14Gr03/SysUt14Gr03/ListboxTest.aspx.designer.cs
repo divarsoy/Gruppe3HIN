@@ -10,33 +10,24 @@
 namespace SysUt14Gr03 {
     
     
-    public partial class PameldingTilOppgave {
+    public partial class ListboxTest {
         
         /// <summary>
-        /// ddlOppgaver control.
+        /// ListBox1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlOppgaver;
+        protected global::System.Web.UI.WebControls.ListBox ListBox1;
         
         /// <summary>
-        /// lblMelding control.
+        /// btnRemove control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMelding;
-        
-        /// <summary>
-        /// btnLeggTil control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnLeggTil;
+        protected global::System.Web.UI.WebControls.Button btnRemove;
     }
 }

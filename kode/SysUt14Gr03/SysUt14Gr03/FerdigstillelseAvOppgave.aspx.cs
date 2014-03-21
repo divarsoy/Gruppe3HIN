@@ -12,16 +12,22 @@ namespace SysUt14Gr03
     public partial class FerdigstillelseAvOppgave : System.Web.UI.Page
     {
         private List<Oppgave> mineOppgaver;
-        private int brukerId;
+        private int bruker_id;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Får brukerId
-            brukerId = 1;
+            if (Session["loggedIn"] == null)
+            {
+                Response.Redirect("default.aspx", true);
+            }
+            else
+            {
+                bruker_id = Convert.ToInt32(Session["bruker_id"]);
+            }
 
             if (!IsPostBack)
             {
-                mineOppgaver = Queries.GetAlleAktiveOppgaverForBruker(brukerId);
+                mineOppgaver = Queries.GetAlleAktiveOppgaverForBruker(bruker_id);
                 foreach (Oppgave oppgave in mineOppgaver)
                 {
                     lsbOppgaver.Items.Add(new ListItem(oppgave.Tittel, oppgave.Oppgave_id.ToString()));

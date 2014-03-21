@@ -202,6 +202,16 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        static public Oppgave GetOppgave(int oppgaveId)
+        {
+            using (var context = new Context())
+            {
+                var oppgave = context.Oppgaver.Include("Brukere").Where(o => o.Oppgave_id == oppgaveId).FirstOrDefault();
+                return oppgave;
+
+            }
+        }
+
         static public List<Oppgave> GetAlleAktiveOppgaver()
         {
             using (var context = new Context())
@@ -273,7 +283,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
-        static public List<SysUt14Gr03.Models.Bruker> GetAlleBrukereIEtTeam(int _team_id)
+        static public List<Bruker> GetAlleBrukereIEtTeam(int _team_id)
         {
             int team_id = _team_id;
             using (var context = new Context())
@@ -296,6 +306,22 @@ namespace SysUt14Gr03.Classes
                 return teamListe;
             }
         }
+<<<<<<< HEAD
+=======
+        static public List<Kommentar> GetAlleKommentarTilBruker(int brukder_id)
+        {
+            using (var context = new Context())
+            {
+                var komListe = (from kommentar in context.Kommentarer
+                                where kommentar.Bruker_id == brukder_id 
+                                where kommentar.Aktiv == true
+                                select kommentar).ToList<Kommentar>();
+                return komListe;
+            }
+        }
+
+
+>>>>>>> b2b9db59439a4522ca5c3ce449da1dd144ea2f66
 
         static public List<Moete> GetAlleMoeterFraBrukerErMedI(int bruker_id)
         {

@@ -10,33 +10,42 @@
 namespace SysUt14Gr03 {
     
     
-    public partial class PameldingTilOppgave {
+    public partial class ReturAvOppgave {
         
         /// <summary>
-        /// ddlOppgaver control.
+        /// Panel1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlOppgaver;
+        protected global::System.Web.UI.WebControls.Panel Panel1;
         
         /// <summary>
-        /// lblMelding control.
+        /// txtSvar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMelding;
+        protected global::System.Web.UI.WebControls.TextBox txtSvar;
         
         /// <summary>
-        /// btnLeggTil control.
+        /// lblFeil control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnLeggTil;
+        protected global::System.Web.UI.WebControls.Label lblFeil;
+        
+        /// <summary>
+        /// btnSend control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSend;
     }
 }

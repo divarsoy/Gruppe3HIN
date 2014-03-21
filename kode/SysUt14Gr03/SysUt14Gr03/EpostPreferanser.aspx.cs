@@ -24,9 +24,17 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Får innlogget brukerId
-            brukerId = 2;
-
+            
+            if (Session["loggedIn"] == null)
+            {
+                Response.Redirect("default.aspx", true);
+            }
+            else
+            {
+                brukerId = Convert.ToInt32(Session["bruker_id"]);
+            }
+            
+            // brukerId = 1;
             
             
             if (cblElementer.Items.Count == 0)
@@ -110,13 +118,20 @@ namespace SysUt14Gr03
                 {
 
                     BrukerPreferanse brukerPref = db.BrukerPreferanser.FirstOrDefault(o => o.Bruker_id == brukerId);
-                    brukerPref.EpostTeam = selectedItems[0];
-                    brukerPref.EpostProsjekt = selectedItems[1];
-                    brukerPref.EpostOppgave = selectedItems[2];
-                    brukerPref.EpostKommentar = selectedItems[3];
-                    brukerPref.EpostTidsfrist = selectedItems[4];
-                    brukerPref.EpostRapport = selectedItems[5];
-
+                    if (brukerPref != null)
+                    {
+                        brukerPref.EpostTeam = selectedItems[0];
+                        brukerPref.EpostProsjekt = selectedItems[1];
+                        brukerPref.EpostOppgave = selectedItems[2];
+                        brukerPref.EpostKommentar = selectedItems[3];
+                        brukerPref.EpostTidsfrist = selectedItems[4];
+                        brukerPref.EpostRapport = selectedItems[5];
+                    }
+                    else
+                    {
+                        db.BrukerPreferanser.Add(nyBrukerpreferanser);
+                    }
+                  
                     db.SaveChanges();
                 }
                 info = Queries.GetBruker(brukerId).Fornavn;
