@@ -13,14 +13,33 @@ namespace SysUt14Gr03
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            bool queryStatus = false;
             List<Prosjekt> query = null;
-            int bruker_id = 2;
+            LblTilbakemelding.Text = "";
 
-            query = Queries.GetAlleAktiveProsjekter();
+            int bruker_id;
 
+            //Sjekker om brukeren er logget inn
+            if (Session["bruker_id"] != null)
+                bruker_id = Validator.KonverterTilTall((string)Session["bruker_id"]);
+            else
+                bruker_id = 3;
 
+            Rettighet rettighet = Queries.GetRettighet(bruker_id);
 
+            if (rettighet.RettighetNavn.ToString() == Konstanter.rettighet.Prosjektleder.ToString())
+            {
+                query = Queries.GetAlleAktiveProsjekter();
+            }
+            else
+            {
+                query = Queries.GetAlleAktiveProsjekterForBruker(bruker_id);
+            }
+
+            if (!IsPostBack)
+            {
+                Table prosjektTabell = Tabeller.HentProsjekterTabell(query);
+                PlaceHolderTable.Controls.Add(prosjektTabell);
+            }
         }
     }
 }

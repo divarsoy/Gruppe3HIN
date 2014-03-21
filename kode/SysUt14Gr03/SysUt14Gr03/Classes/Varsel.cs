@@ -45,6 +45,11 @@ namespace SysUt14Gr03.Classes
 
         static public void SendVarsel(int bruker_id, int varsel, string tittel, string melding)
         {
+            SendVarsel(bruker_id, varsel, tittel, melding, -1);
+        }
+
+        static public void SendVarsel(int bruker_id, int varsel, string tittel, string melding, int oppgave_id)
+        {
             // Sjekker brukerpreferanser
             Bruker bruker = Queries.GetBruker(bruker_id);
             BrukerPreferanse brukerPrefs = Queries.GetEpostPreferanser(bruker_id);
@@ -58,6 +63,12 @@ namespace SysUt14Gr03.Classes
 
             melding = melding == "" ? VARSELTEKST[varsel] : melding;
             tittel = tittel == "" ? "Varsel angående " + VARSELTITTEL[varsel] : tittel;
+            bool oppgave = oppgave_id > 0;
+
+            if (oppgave)
+            {
+                melding += "Link til oppgave: http://malmen.hin.no/stud/SysUt14Gr03/MottaOppgave.aspx?oppgaveID=" + oppgave_id;
+            }
 
             if (selectedItems[varsel])
             {
