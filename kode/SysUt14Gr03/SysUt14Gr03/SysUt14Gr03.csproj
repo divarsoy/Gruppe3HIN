@@ -187,6 +187,7 @@
     <Content Include="InvitasjonAvBruker.aspx" />
     <Content Include="KommentarPaOppgave.aspx" />
     <Content Include="ListboxTest.aspx" />
+    <Content Include="MottaOppgave.aspx" />
     <Content Include="OpprettGruppe.aspx" />
     <Content Include="OpprettOppgave.aspx" />
     <Content Include="OpprettProsjekt.aspx" />
@@ -368,12 +369,20 @@
     <Compile Include="ArkiverOppg.aspx.designer.cs">
       <DependentUpon>ArkiverOppg.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Classes\Varsel.cs" />
     <Compile Include="ListboxTest.aspx.cs">
       <DependentUpon>ListboxTest.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ListboxTest.aspx.designer.cs">
       <DependentUpon>ListboxTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MottaOppgave.aspx.cs">
+      <DependentUpon>MottaOppgave.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MottaOppgave.aspx.designer.cs">
+      <DependentUpon>MottaOppgave.aspx</DependentUpon>
     </Compile>
     <Compile Include="OversiktProsjekter.aspx.cs">
       <DependentUpon>OversiktProsjekter.aspx</DependentUpon>

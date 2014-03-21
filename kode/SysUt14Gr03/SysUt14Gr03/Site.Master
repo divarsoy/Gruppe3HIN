@@ -98,6 +98,7 @@
                                 <li> <a runat="server" href="~/PameldingTilOppgave">Påmeld bruker på oppgave</a></li>
                                 <li> <a runat="server" href="~/FerdigstillelseAvOppgave">Merk oppgave som ferdig</a></li>
                                 <li> <a runat="server" href="~/TidsestimerOppgave">Tidsestimer oppgave</a></li>
+                                <li> <a runat="server" href="~/MottaOppgave">Godta/avslå invitasjon</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
