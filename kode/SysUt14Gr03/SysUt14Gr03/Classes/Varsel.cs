@@ -61,13 +61,14 @@ namespace SysUt14Gr03.Classes
             selectedItems[4] = brukerPrefs.EpostTidsfrist;
             selectedItems[5] = brukerPrefs.EpostRapport;
 
+            // Genererer melding + tittel
             melding = melding == "" ? VARSELTEKST[varsel] : melding;
             tittel = tittel == "" ? "Varsel angående " + VARSELTITTEL[varsel] : tittel;
             bool oppgave = oppgave_id > 0;
 
             if (oppgave)
             {
-                melding += "Link til oppgave: http://malmen.hin.no/stud/SysUt14Gr03/MottaOppgave.aspx?oppgaveID=" + oppgave_id;
+                melding += Environment.NewLine + "Link til oppgave: http://malmen.hin.no/stud/SysUt14Gr03/MottaOppgave.aspx?oppgaveID=" + oppgave_id;
             }
 
             if (selectedItems[varsel])
