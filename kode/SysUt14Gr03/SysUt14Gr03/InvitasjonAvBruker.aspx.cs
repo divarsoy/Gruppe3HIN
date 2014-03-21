@@ -16,8 +16,8 @@ namespace SysUt14Gr03
     {
         private List<Bruker> brukerListe;
         private List<Oppgave> oppgListe;
-        //hardkodet brukerid
         private int brukerid;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             

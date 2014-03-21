@@ -199,7 +199,6 @@
     <Content Include="OpprettTeam.aspx" />
     <Content Include="RegistreringAvBrukere.aspx" />
     <Content Include="Rettigheter.aspx" />
-    <Content Include="Epost.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="HowToQueryTheDatabase.aspx" />
     <Content Include="Login.aspx" />
@@ -553,13 +552,6 @@
     </Compile>
     <Compile Include="Rettigheter.aspx.designer.cs">
       <DependentUpon>Rettigheter.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Epost.aspx.cs">
-      <DependentUpon>Epost.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Epost.aspx.designer.cs">
-      <DependentUpon>Epost.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
