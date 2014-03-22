@@ -24,11 +24,12 @@ namespace SysUt14Gr03
                 brukerid = Validator.KonverterTilTall(Session["bruker_id"].ToString());
         
             }
-
-            prosjektListe = Queries.GetAlleProsjekterForLeder(brukerid);
-            Table prosjektTabell = Tabeller.HentProsjekterTabellProsjektLeder(prosjektListe);
-            ProsjektTable.Controls.Add(prosjektTabell);
-
+            if (!IsPostBack)
+            {
+                prosjektListe = Queries.GetAlleProsjekterForLeder(brukerid);
+                Table prosjektTabell = Tabeller.HentProsjekterTabellProsjektLeder(prosjektListe);
+                ProsjektTable.Controls.Add(prosjektTabell);
+            }
         }
     }
 }
