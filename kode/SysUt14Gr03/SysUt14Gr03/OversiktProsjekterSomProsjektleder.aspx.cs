@@ -21,10 +21,11 @@ namespace SysUt14Gr03
             }
             else
             {
-                brukerid = Convert.ToInt32(Session["bruker_id"]);
+                brukerid = Validator.KonverterTilTall(Session["bruker_id"].ToString());
+        
             }
 
-            prosjektListe = Queries.GetAlleAktiveProsjekterForBruker(brukerid);
+            prosjektListe = Queries.GetAlleProsjekterForLeder(brukerid);
             Table prosjektTabell = Tabeller.HentProsjekterTabellProsjektLeder(prosjektListe);
             ProsjektTable.Controls.Add(prosjektTabell);
 
