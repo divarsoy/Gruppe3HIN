@@ -131,5 +131,73 @@ namespace SysUt14Gr03.Classes
             return tabell;
 
         }
+        public static Table HentBrukerTabell(List<Bruker> query)
+        {
+            Table tabell = new Table();
+            TableHeaderRow headerRow = new TableHeaderRow();
+            TableHeaderCell forNavnHeaderCell = new TableHeaderCell();
+            TableHeaderCell etterNavnHeaderCell = new TableHeaderCell();
+            TableHeaderCell brukerNavnHeaderCell = new TableHeaderCell();
+            TableHeaderCell epostHeaderCell = new TableHeaderCell();
+            TableHeaderCell IMHeaderCell = new TableHeaderCell();
+            TableHeaderCell teamHeaderCell = new TableHeaderCell();
+            TableHeaderCell prosjektHeaderCell = new TableHeaderCell();
+
+            forNavnHeaderCell.Text = "Fornavn";
+            etterNavnHeaderCell.Text = "Etternavn";
+            brukerNavnHeaderCell.Text = "Brukernavn";
+            epostHeaderCell.Text = "Epost";
+            IMHeaderCell.Text = "IM";
+            teamHeaderCell.Text = "Teams";
+            prosjektHeaderCell.Text = "Prosjekter";
+
+            headerRow.Cells.Add(forNavnHeaderCell);
+            headerRow.Cells.Add(etterNavnHeaderCell);
+            headerRow.Cells.Add(brukerNavnHeaderCell);
+            headerRow.Cells.Add(epostHeaderCell);
+            headerRow.Cells.Add(IMHeaderCell);
+            headerRow.Cells.Add(teamHeaderCell);
+            headerRow.Cells.Add(prosjektHeaderCell);
+            tabell.Rows.Add(headerRow);
+
+            foreach (Bruker bruker in query)
+            {
+                /*StringBuilder brukereIOppgave = new StringBuilder();
+                foreach (Bruker bruker in bruker.Brukere)
+                {
+                    brukereIOppgave.Append(String.Format("<a href='HistorikkStattestikk?bruker_id={0}'>{1} </a>", bruker.Bruker_id, bruker.Brukernavn));
+                }*/
+                TableRow tRow = new TableRow();
+                TableCell forNavnCell = new TableCell();
+                TableCell etterNavnCell = new TableCell();
+                TableCell brukerNavnCell = new TableCell();
+                TableCell epostCell = new TableCell();
+                TableCell IMCell = new TableCell();
+                TableCell teamsCell = new TableCell();
+                TableCell prosjekterCell = new TableCell();
+
+                Team team = Queries.GetAlleTeamsEnBrukerErMedI((int)bruker.Bruker_id);
+                Prosjekt prosjekt = Queries.GetProsjekt(prosjekt.Bruker_id);
+
+                forNavnCell.Text = String.Format("<a href='ArkiverOppg?oppgave_id={0}'>{1}</a>", bruker.Oppgave_id.ToString(), bruker.Tittel);
+                etterNavnCell.Text = Queries.GetStatus(bruker.Status_id).Navn;
+                brukerNavnCell.Text = bruker.Estimat.ToString();
+                epostCell.Text = bruker.BruktTid.ToString();
+                IMCell.Text = bruker.RemainingTime.ToString();
+                teamsCell.Text = brukereIOppgave.ToString();
+                prosjekterCell.Text = bruker.Kommentarer.Count.ToString();
+
+                tRow.Cells.Add(forNavnCell);
+                tRow.Cells.Add(etterNavnCell);
+                tRow.Cells.Add(brukerNavnCell);
+                tRow.Cells.Add(epostCell);
+                tRow.Cells.Add(IMCell);
+                tRow.Cells.Add(teamsCell);
+                tRow.Cells.Add(prosjekterCell);
+
+                tabell.Rows.Add(tRow);
+            }
+            return tabell;
+        }
     }
 }

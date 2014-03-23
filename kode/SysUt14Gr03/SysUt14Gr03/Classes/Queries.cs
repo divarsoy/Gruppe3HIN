@@ -54,6 +54,15 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        static public Prosjekt GetProsjekt(int prosjekt_id)
+        {
+            using (var context = new Context())
+            {
+                Prosjekt prosjekt = context.Prosjekter.Find(prosjekt_id);
+                return prosjekt;
+            }
+        }
+
         static public Status GetStatus(int _status_id)
         {
             using (var context = new Context())
@@ -309,6 +318,16 @@ namespace SysUt14Gr03.Classes
                 return brukerListe;
             }
         }
+        static public List<Bruker> GetAlleBrukereIEtProjekt(int prosjekt_id)
+        {
+            using (var context = new Context())
+            {
+                var brukerListe = (from bruker in context.Brukere
+                                   where bruker.Prosjekter.Any(prosjekt => prosjekt.Prosjekt_id == prosjekt_id)
+                                   select bruker).ToList();
+                return brukerListe;
+            }
+        }
 
         static public List<Prosjekt> GetAlleProsjektEnBrukerErMedI(int bruker_id)
         {
@@ -356,15 +375,7 @@ namespace SysUt14Gr03.Classes
             }
         }           
 
-        public static Prosjekt getProsjekt (int prosjekt_id)
-        {
-            using (var context = new Context()) {
-                Prosjekt prosjekt = context.Prosjekter.Find(prosjekt_id);
-                return prosjekt;
-            }
-        }
-
-        public static string getProsjektNavn(int prosjekt_id)
+        public static string GetProsjektNavn(int prosjekt_id)
         {
             using (SqlCommand command = new SqlCommand())
             {

@@ -27,7 +27,7 @@ namespace SysUt14Gr03
                     }
                     else
                     {
-                        string prosjektNavn = Queries.getProsjekt(prosjekt_id).Navn;
+                        string prosjektNavn = Queries.GetProsjekt(prosjekt_id).Navn;
                         string brukerNavn = Queries.GetBruker(bruker_id).ToString();
                         lblTilbakemelding.Text = string.Format("<h3>Prosjekt: {0}</h3><h3>Bruker: {1}</h3>", prosjektNavn, brukerNavn);
                         queryStatus = true;
