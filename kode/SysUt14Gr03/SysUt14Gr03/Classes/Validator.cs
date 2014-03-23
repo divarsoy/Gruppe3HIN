@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
+using SysUt14Gr03;
+using SysUt14Gr03.Models;
+using SysUt14Gr03.Classes;
 
 namespace SysUt14Gr03.Classes
 {
@@ -15,6 +18,14 @@ namespace SysUt14Gr03.Classes
             if (vellykketKonvertering)
                 return resultat;
             else return -1;
+        }
+
+        public static bool SjekkRettighet(int bruker_id, Konstanter.rettighet rettighet) {
+            Bruker bruker = Queries.GetBrukerMedRettighet(bruker_id, rettighet);
+            if (bruker == null)
+                return false;
+            else
+                return true;
         }
     }
 }
