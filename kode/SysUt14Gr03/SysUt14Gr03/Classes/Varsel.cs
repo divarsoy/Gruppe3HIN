@@ -81,5 +81,38 @@ namespace SysUt14Gr03.Classes
 
             // Sender intern varsel (kommer senere)
         }
+
+        // Samme  metoder, tar i mot en liste med brukere
+        static public void SendVarsel(List<Bruker> brukerListe, int varsel)
+        {
+            foreach (Bruker bruker in brukerListe)
+            {
+                SendVarsel(bruker.Bruker_id, varsel, "");
+            }           
+        }
+
+        static public void SendVarsel(List<Bruker> brukerListe, int varsel, string melding)
+        {
+            foreach (Bruker bruker in brukerListe)
+            {
+                SendVarsel(bruker.Bruker_id, varsel, "", melding);
+            }          
+        }
+
+        static public void SendVarsel(List<Bruker> brukerListe, int varsel, string tittel, string melding)
+        {
+            foreach (Bruker bruker in brukerListe)
+            {
+                SendVarsel(bruker.Bruker_id, varsel, tittel, melding, -1);
+            }
+        }
+
+        static public void SendVarsel(List<Bruker> brukerListe, int varsel, string tittel, string melding, int oppgave_id)
+        {
+            foreach (Bruker bruker in brukerListe)
+            {
+                SendVarsel(bruker.Bruker_id, varsel, tittel, melding, oppgave_id);
+            }
+        }
     }
 }

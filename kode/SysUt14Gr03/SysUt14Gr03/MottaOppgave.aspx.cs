@@ -74,11 +74,14 @@ namespace SysUt14Gr03
                     tmpBruker.Add(mottaker);
                     oppgave.Brukere = tmpBruker;
                     context.SaveChanges();
-
                     
                     lblMessage.Text = "Du har nå blitt lagt til på " + oppgave.Tittel;
                     lblMessage.ForeColor = Color.Green;
                     lblMessage.Visible = true;
+
+                    // Sender varsel til avsender
+                    string melding = "Bruker " + mottaker.ToString() + " har godtatt invitasjonen til oppgave " + oppgave.Tittel;
+                    Varsel.SendVarsel(avsender_id, Varsel.OPPGAVEVARSEL, "Aksept av oppgave", melding);
                     
                 }
             }

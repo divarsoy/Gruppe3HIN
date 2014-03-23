@@ -22,6 +22,15 @@ namespace SysUt14Gr03 {
         protected global::System.Web.UI.WebControls.DropDownList ddlOppgaver;
         
         /// <summary>
+        /// ddlBrukere control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlBrukere;
+        
+        /// <summary>
         /// lblMelding control.
         /// </summary>
         /// <remarks>
