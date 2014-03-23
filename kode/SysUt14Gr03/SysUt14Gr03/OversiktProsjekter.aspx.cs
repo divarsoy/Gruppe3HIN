@@ -24,16 +24,10 @@ namespace SysUt14Gr03
             else
                 bruker_id = 3;
 
-            Rettighet rettighet = Queries.GetRettighet(bruker_id);
-
-            if (rettighet.RettighetNavn.ToString() == Konstanter.rettighet.Prosjektleder.ToString())
-            {
+            if (Validator.SjekkRettighet(bruker_id, Konstanter.rettighet.Prosjektleder))
                 query = Queries.GetAlleAktiveProsjekter();
-            }
             else
-            {
                 query = Queries.GetAlleAktiveProsjekterForBruker(bruker_id);
-            }
 
             if (!IsPostBack)
             {

@@ -48,7 +48,7 @@ namespace SysUt14Gr03
             // Dersom prosjekt ikke er oppgitt lages en spørring basert på bruker_id til innlogget bruker
             else
             {
-                queryProsjekt = Queries.GetAlleAktiveOppgaverForBruker(bruker_id);
+                //queryProsjekt = Queries.GetAlleAktiveOppgaverForBruker(bruker_id);
                 string brukerNavn = Queries.GetBruker(bruker_id).ToString();
                 lblTilbakemelding.Text = string.Format("<h3>Bruker: {0}</h3>", brukerNavn);
                 queryStatus = true;
@@ -56,9 +56,9 @@ namespace SysUt14Gr03
             // Lager Tabell for å vise oppgaver
             if (!IsPostBack && queryStatus)
             {
-                Table oppgaveTable = Tabeller.HentOppgaveTabell(queryProsjekt);
+                /*Table oppgaveTable = Tabeller.HentOppgaveTabell(queryProsjekt);
                 oppgaveTable.CssClass = "table";
-                PlaceHolderTable.Controls.Add(oppgaveTable);
+                PlaceHolderTable.Controls.Add(oppgaveTable);*/
             }
         }
     }

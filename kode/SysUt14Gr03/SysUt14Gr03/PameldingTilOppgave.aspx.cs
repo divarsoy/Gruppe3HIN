@@ -39,6 +39,13 @@ namespace SysUt14Gr03
                     ddlOppgaver.Items.Add(new ListItem(oppgave.Tittel, oppgave.Oppgave_id.ToString()));
                 }
 
+                // Sjekk om prosjektleder
+                ddlBrukere.Visible = true;
+                foreach (Bruker bruker in brukerListe)
+                {
+                    ddlBrukere.Items.Add(new ListItem(bruker.ToString(), bruker.Bruker_id.ToString()));
+                }         
+
             }
 
         }
@@ -65,6 +72,9 @@ namespace SysUt14Gr03
 
                     lblMelding.Text = "Bruker " + bruker.ToString() + " lagt til på " + oppgave.Tittel;
                     lblMelding.ForeColor = Color.Green;
+
+                    // Sjekk om det er prosjektleder eller bruker selv som har lagt seg til
+                    Varsel.SendVarsel(bruker.Bruker_id, Varsel.OPPGAVEVARSEL, lblMelding.Text);
                 }
                 else
                 {

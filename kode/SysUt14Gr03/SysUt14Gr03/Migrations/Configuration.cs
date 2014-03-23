@@ -49,6 +49,24 @@ namespace SysUt14Gr03.Migrations
             rettigheter.ForEach(element => context.Rettigheter.AddOrUpdate(element));
             context.SaveChanges();
 
+            var notifikasjonsTyper = new List<NotifikasjonsType> {
+                new NotifikasjonsType {
+                    Type = "alert-success"
+                },
+                new NotifikasjonsType {
+                    Type = "alert-info"
+                },
+                new NotifikasjonsType {
+                    Type = "alert-warning"
+                },
+                new NotifikasjonsType {
+                    Type = "alert-danger"
+                }
+            };
+
+            notifikasjonsTyper.ForEach(element => context.NotifikasjonsType.AddOrUpdate(element));
+            context.SaveChanges();
+
             var brukere = new List<Bruker> {
                new Bruker {
                     Etternavn = "Åsgård",

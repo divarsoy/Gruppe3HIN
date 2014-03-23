@@ -131,6 +131,7 @@ namespace SysUt14Gr03.Classes
             return tabell;
 
         }
+
         public static Table HentBrukerTabell(List<Bruker> query)
         {
             Table tabell = new Table();
@@ -176,7 +177,7 @@ namespace SysUt14Gr03.Classes
                 TableCell teamsCell = new TableCell();
                 TableCell prosjekterCell = new TableCell();
 
-                Team team = Queries.GetAlleTeamsEnBrukerErMedI((int)bruker.Bruker_id);
+                /*Team team = Queries.GetAlleTeamsEnBrukerErMedI((int)bruker.Bruker_id);
                 Prosjekt prosjekt = Queries.GetProsjekt(prosjekt.Bruker_id);
 
                 forNavnCell.Text = String.Format("<a href='ArkiverOppg?oppgave_id={0}'>{1}</a>", bruker.Oppgave_id.ToString(), bruker.Tittel);
@@ -185,7 +186,7 @@ namespace SysUt14Gr03.Classes
                 epostCell.Text = bruker.BruktTid.ToString();
                 IMCell.Text = bruker.RemainingTime.ToString();
                 teamsCell.Text = brukereIOppgave.ToString();
-                prosjekterCell.Text = bruker.Kommentarer.Count.ToString();
+                prosjekterCell.Text = bruker.Kommentarer.Count.ToString();*/
 
                 tRow.Cells.Add(forNavnCell);
                 tRow.Cells.Add(etterNavnCell);
@@ -197,6 +198,88 @@ namespace SysUt14Gr03.Classes
 
                 tabell.Rows.Add(tRow);
             }
+            return tabell;
+        }
+
+        public static Table HentProsjekterTabellProsjektLeder(List<Prosjekt> query)
+        {
+            Table tabell = new Table();
+            TableHeaderRow headerRow = new TableHeaderRow();
+            TableHeaderCell navnHeaderCell = new TableHeaderCell();
+            TableHeaderCell startDatoHeaderCell = new TableHeaderCell();
+            TableHeaderCell sluttDatoHeaderCell = new TableHeaderCell();
+            TableHeaderCell teamHeaderCell = new TableHeaderCell();
+            TableHeaderCell brukereHeaderCell = new TableHeaderCell();
+            TableHeaderCell opprettetHeaderCell = new TableHeaderCell();
+            TableHeaderCell aktivHeaderCell = new TableHeaderCell();
+
+            navnHeaderCell.Text = "Navn";
+            startDatoHeaderCell.Text = "Start Dato";
+            sluttDatoHeaderCell.Text = "Slutt Dato";
+            teamHeaderCell.Text = "Team";
+            brukereHeaderCell.Text = "Tilknyttet Oppgave";
+            opprettetHeaderCell.Text = "Opprettet";
+            aktivHeaderCell.Text = "Aktiv";
+
+            headerRow.Cells.Add(navnHeaderCell);
+            headerRow.Cells.Add(startDatoHeaderCell);
+            headerRow.Cells.Add(sluttDatoHeaderCell);
+            headerRow.Cells.Add(teamHeaderCell);
+            headerRow.Cells.Add(brukereHeaderCell);
+            headerRow.Cells.Add(opprettetHeaderCell);
+            headerRow.Cells.Add(aktivHeaderCell);
+            tabell.Rows.Add(headerRow);
+
+            foreach (Prosjekt prosjekt in query)
+            {
+
+                TableRow tRow = new TableRow();
+                TableCell navnCell = new TableCell();
+                TableCell startDatoCell = new TableCell();
+                TableCell sluttDatoCell = new TableCell();
+                TableCell teamCell = new TableCell();
+                TableCell oppgCell = new TableCell();
+                TableCell opprettetCell = new TableCell();
+                TableCell aktivCell = new TableCell();
+
+                Team team = Queries.GetTeam((int)prosjekt.Team_id);
+                Bruker bruker = Queries.GetBruker(prosjekt.Bruker_id);
+                List<Oppgave> liste = Queries.GetAlleAktiveOppgaverForProsjekt(prosjekt.Prosjekt_id);
+
+
+                navnCell.Text = String.Format("<a href='AdministrasjonAvProsjekt?Prosjekt_id={0}'>{1}</a>", prosjekt.Prosjekt_id.ToString(), prosjekt.Navn);
+                startDatoCell.Text = String.Format("{0:dd/MM/yyyy}", prosjekt.StartDato);
+                sluttDatoCell.Text = String.Format("{0:dd/MM/yyyy}", prosjekt.SluttDato);
+                teamCell.Text = String.Format("<a href='AdministrasjonAvTeam?Team_id={0}'>{1}</a>", team.Team_id.ToString(), team.Navn);
+                opprettetCell.Text = String.Format("{0:dd/MM/yyyy}", prosjekt.Opprettet);
+
+                if (prosjekt.Aktiv == true)
+                {
+                    aktivCell.Text = String.Format("Ja");
+                }
+                else
+                {
+                    aktivCell.Text = String.Format("Nei");
+                }
+
+
+                for (int i = 0; i < liste.Count; i++)
+                {
+                    Oppgave oppg = liste[i];
+                    oppgCell.Text = String.Format(oppg.Tittel);
+                }
+
+                tRow.Cells.Add(navnCell);
+                tRow.Cells.Add(startDatoCell);
+                tRow.Cells.Add(sluttDatoCell);
+                tRow.Cells.Add(teamCell);
+                tRow.Cells.Add(oppgCell);
+                tRow.Cells.Add(opprettetCell);
+                tRow.Cells.Add(aktivCell);
+                tabell.Rows.Add(tRow);
+            }
+            tabell.CssClass = "table";
+
             return tabell;
         }
     }

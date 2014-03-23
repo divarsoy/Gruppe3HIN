@@ -22,6 +22,8 @@ namespace SysUt14Gr03.Models
         public DbSet<Rettighet> Rettigheter { get; set; }
         public DbSet<Status> Status { get; set; }
         public DbSet<Team> Teams { get; set; }
+        public DbSet<Notifikasjon> Notifikasjoner { get; set; }
+        public DbSet<NotifikasjonsType> NotifikasjonsType { get; set; }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

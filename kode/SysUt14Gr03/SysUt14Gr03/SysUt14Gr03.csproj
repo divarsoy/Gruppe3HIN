@@ -53,6 +53,9 @@
       <HintPath>..\packages\FakeO.1.0.4447.26941\lib\net40\FakeO.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.2.1402.2112\lib\net40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -195,6 +198,7 @@
     <Content Include="OversiktBrukerSomUtvikler.aspx" />
     <Content Include="OversiktOppgaver.aspx" />
     <Content Include="OversiktProsjekter.aspx" />
+    <Content Include="OversiktProsjekterSomProsjektleder.aspx" />
     <Content Include="PameldingTilOppgave.aspx" />
     <Content Include="Pictures\blomst.jpg" />
     <Content Include="OpprettTeam.aspx" />
@@ -370,6 +374,8 @@
     <Compile Include="AdministrasjonAvOppgave.aspx.designer.cs">
       <DependentUpon>AdministrasjonAvOppgave.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Notifikasjon.cs" />
+    <Compile Include="Models\NotifikasjonsType.cs" />
     <Compile Include="OversiktBrukerSomUtvikler.aspx.cs">
       <DependentUpon>OversiktBrukerSomUtvikler.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -399,6 +405,13 @@
     </Compile>
     <Compile Include="OversiktProsjekter.aspx.designer.cs">
       <DependentUpon>OversiktProsjekter.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OversiktProsjekterSomProsjektleder.aspx.cs">
+      <DependentUpon>OversiktProsjekterSomProsjektleder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OversiktProsjekterSomProsjektleder.aspx.designer.cs">
+      <DependentUpon>OversiktProsjekterSomProsjektleder.aspx</DependentUpon>
     </Compile>
     <Compile Include="ReturAvOppgave.aspx.cs">
       <DependentUpon>ReturAvOppgave.aspx</DependentUpon>

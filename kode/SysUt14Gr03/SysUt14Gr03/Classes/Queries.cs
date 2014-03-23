@@ -19,6 +19,20 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        static public Bruker GetBrukerMedRettighet(int _bruker_id, Konstanter.rettighet _rettighet)
+        {
+            using (var context = new Context())
+            {
+                string rettighetString = _rettighet.ToString();
+                var brukerObjekt = context.Brukere
+                            .Include("Rettigheter")
+                            .Where(bruker => bruker.Rettigheter.Any(rettighet => rettighet.RettighetNavn == rettighetString))
+                            .Where(b => b.Bruker_id == _bruker_id)
+                            .FirstOrDefault();
+                return brukerObjekt;
+            }
+        }
+
         // Henter epostpreferanser til bruker med bruker_id
         static public BrukerPreferanse GetEpostPreferanser(int _bruker_id)
         {
@@ -142,7 +156,16 @@ namespace SysUt14Gr03.Classes
                 return prosjektListe;      
             }
         }
-
+        static public List<Prosjekt> GetAlleProsjekterForLeder(int bruker_id)
+        {
+            using (var context = new Context())
+            {
+                var prosjektListe = context.Prosjekter
+                                    .Where(prosjekta => prosjekta.Bruker_id == bruker_id)
+                                    .ToList();
+                return prosjektListe;
+            }
+        }
 
         static public List<Status> GetAlleStatuser()
         {
