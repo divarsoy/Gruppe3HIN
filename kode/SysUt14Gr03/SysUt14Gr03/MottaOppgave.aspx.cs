@@ -14,7 +14,7 @@ namespace SysUt14Gr03
     {
         private int avsender_id = 2;
         private int mottaker_id;
-        private int oppgave_id = 4;
+        private int oppgave_id;
         private Bruker avsender;
         private Bruker mottaker;
         private Oppgave oppgave;
@@ -34,12 +34,30 @@ namespace SysUt14Gr03
             mottaker = Queries.GetBruker(mottaker_id);
             avsender = Queries.GetBruker(avsender_id);
 
-            oppgave = Queries.GetOppgave(oppgave_id);
+            btnGodta.Enabled = false;
+            btnAvsla.Enabled = false;
 
-            lblMessage.Text = "Bruker " + avsender.IM + " ønsker hjelp på oppgave "
-                + oppgave.Tittel + ". Ved å godta invitasjonen blir du lagt til "
-                + "på denne oppgaven.";
-            lblMessage.Visible = true;
+            if (Request.QueryString["oppgaveID"] != null)
+            {
+                oppgave_id = Convert.ToInt32(Request.QueryString["oppgaveID"]);
+                oppgave = Queries.GetOppgave(oppgave_id);
+                if (oppgave != null)
+                {
+                    lblMessage.Text = "Bruker " + avsender.IM + " ønsker hjelp på oppgave "
+                    + oppgave.Tittel + "." + Environment.NewLine + "Ved å godta invitasjonen blir du lagt til "
+                    + "på denne oppgaven.";
+                    lblMessage.Visible = true;
+                    btnGodta.Enabled = true;
+                    btnAvsla.Enabled = true;
+                }
+                else
+                {
+                    lblMessage.Text = "Oppgaven finnes ikke";
+                    lblMessage.ForeColor = Color.Red;
+                    lblMessage.Visible = true;
+                }
+                
+            }
 
         }
 
@@ -56,11 +74,14 @@ namespace SysUt14Gr03
                     tmpBruker.Add(mottaker);
                     oppgave.Brukere = tmpBruker;
                     context.SaveChanges();
-
                     
                     lblMessage.Text = "Du har nå blitt lagt til på " + oppgave.Tittel;
                     lblMessage.ForeColor = Color.Green;
                     lblMessage.Visible = true;
+
+                    // Sender varsel til avsender
+                    string melding = "Bruker " + mottaker.ToString() + " har godtatt invitasjonen til oppgave " + oppgave.Tittel;
+                    Varsel.SendVarsel(avsender_id, Varsel.OPPGAVEVARSEL, "Aksept av oppgave", melding);
                     
                 }
             }

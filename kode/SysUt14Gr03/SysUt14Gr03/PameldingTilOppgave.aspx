@@ -4,6 +4,8 @@
     <p>
         <asp:DropDownList ID="ddlOppgaver" runat="server">
         </asp:DropDownList>
+        <asp:DropDownList ID="ddlBrukere" runat="server" Visible="false">
+        </asp:DropDownList>
     </p>
     <p>
         <asp:Label ID="lblMelding" runat="server" Visible="false"></asp:Label>
