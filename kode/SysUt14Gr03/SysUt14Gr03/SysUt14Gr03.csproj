@@ -170,8 +170,8 @@
     <Content Include="AdministratorForside.aspx" />
     <Content Include="AktiverKonto.aspx" />
     <Content Include="ArkiverGruppe.aspx" />
+    <Content Include="AdministrasjonAvOppgave.aspx" />
     <Content Include="ArkiveringAvKommentarer.aspx" />
-    <Content Include="ArkiverOppg.aspx" />
     <Content Include="Brukere.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="changeUser.aspx" />
@@ -192,14 +192,15 @@
     <Content Include="OpprettOppgave.aspx" />
     <Content Include="OpprettProsjekt.aspx" />
     <Content Include="OpprettTidsfristPaaOppgave.aspx" />
+    <Content Include="OversiktBrukerSomUtvikler.aspx" />
     <Content Include="OversiktOppgaver.aspx" />
     <Content Include="OversiktProsjekter.aspx" />
+    <Content Include="OversiktProsjekterSomProsjektleder.aspx" />
     <Content Include="PameldingTilOppgave.aspx" />
     <Content Include="Pictures\blomst.jpg" />
     <Content Include="OpprettTeam.aspx" />
     <Content Include="RegistreringAvBrukere.aspx" />
     <Content Include="Rettigheter.aspx" />
-    <Content Include="Epost.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="HowToQueryTheDatabase.aspx" />
     <Content Include="Login.aspx" />
@@ -356,6 +357,10 @@
     <Compile Include="ArkiverGruppe.aspx.designer.cs">
       <DependentUpon>ArkiverGruppe.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AdministrasjonAvOppgave.aspx.cs">
+      <DependentUpon>AdministrasjonAvOppgave.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="ArkiveringAvKommentarer.aspx.cs">
       <DependentUpon>ArkiveringAvKommentarer.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -363,13 +368,17 @@
     <Compile Include="ArkiveringAvKommentarer.aspx.designer.cs">
       <DependentUpon>ArkiveringAvKommentarer.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ArkiverOppg.aspx.cs">
-      <DependentUpon>ArkiverOppg.aspx</DependentUpon>
+    <Compile Include="AdministrasjonAvOppgave.aspx.designer.cs">
+      <DependentUpon>AdministrasjonAvOppgave.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OversiktBrukerSomUtvikler.aspx.cs">
+      <DependentUpon>OversiktBrukerSomUtvikler.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ArkiverOppg.aspx.designer.cs">
-      <DependentUpon>ArkiverOppg.aspx</DependentUpon>
+    <Compile Include="OversiktBrukerSomUtvikler.aspx.designer.cs">
+      <DependentUpon>OversiktBrukerSomUtvikler.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Classes\Konstanter.cs" />
     <Compile Include="Classes\Varsel.cs" />
     <Compile Include="ListboxTest.aspx.cs">
       <DependentUpon>ListboxTest.aspx</DependentUpon>
@@ -391,6 +400,13 @@
     </Compile>
     <Compile Include="OversiktProsjekter.aspx.designer.cs">
       <DependentUpon>OversiktProsjekter.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OversiktProsjekterSomProsjektleder.aspx.cs">
+      <DependentUpon>OversiktProsjekterSomProsjektleder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OversiktProsjekterSomProsjektleder.aspx.designer.cs">
+      <DependentUpon>OversiktProsjekterSomProsjektleder.aspx</DependentUpon>
     </Compile>
     <Compile Include="ReturAvOppgave.aspx.cs">
       <DependentUpon>ReturAvOppgave.aspx</DependentUpon>
@@ -553,13 +569,6 @@
     </Compile>
     <Compile Include="Rettigheter.aspx.designer.cs">
       <DependentUpon>Rettigheter.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Epost.aspx.cs">
-      <DependentUpon>Epost.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Epost.aspx.designer.cs">
-      <DependentUpon>Epost.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

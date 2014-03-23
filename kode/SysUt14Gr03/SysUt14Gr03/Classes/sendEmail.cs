@@ -31,7 +31,7 @@ namespace SysUt14Gr03.Classes
                  **/
                 if(users != null)
                     for (int i = 0; i < users.Count; i++)
-                        msg.To.Add(users[i].ToString());
+                        msg.To.Add(users[i].Epost);
                 else if(brukere != null)
                     for (int i = 0; i < users.Count; i++)
                         msg.To.Add(brukere[i].ToString());

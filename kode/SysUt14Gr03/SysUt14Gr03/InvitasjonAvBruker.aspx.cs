@@ -16,8 +16,8 @@ namespace SysUt14Gr03
     {
         private List<Bruker> brukerListe;
         private List<Oppgave> oppgListe;
-        //hardkodet brukerid
         private int brukerid;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             
@@ -31,6 +31,7 @@ namespace SysUt14Gr03
                 {
                    brukerid = Convert.ToInt32(Session["bruker_id"]);
                 }
+
                 brukerListe = Queries.GetAlleAktiveBrukere();
                 oppgListe = Queries.GetAlleAktiveOppgaverForBruker(brukerid);
 
@@ -50,7 +51,7 @@ namespace SysUt14Gr03
                     }
                 using (var context = new Context())
                 {
-                    //tar bare en random bruker
+                   
                     Bruker bruker = context.Brukere.Where(b => b.Bruker_id == brukerid).First();
                     lblbrukerInnlogget.Text = "Logget inn som: " + bruker.ToString();
                     lblbrukerInnlogget.ForeColor = Color.Green; 

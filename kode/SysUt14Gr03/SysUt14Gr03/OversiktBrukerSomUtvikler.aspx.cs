@@ -1,18 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 using SysUt14Gr03.Classes;
 using SysUt14Gr03.Models;
 
 namespace SysUt14Gr03
 {
-    public partial class OversiktOppgaver : System.Web.UI.Page
+    public partial class OversiktBrukerSomUtvikler : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             bool queryStatus = false;
             List<Oppgave> query = null;
-            int bruker_id = 3;
+            int bruker_id = 2;
 
             // Sjekker om det er lagt ved et Get parameter "prosjekt_id" og lager en spørring basert på prosjekt_id og bruker_id på innlogget bruker
             if (Request.QueryString["prosjekt_id"] != null)
@@ -39,7 +42,7 @@ namespace SysUt14Gr03
                     lblTilbakemelding.Text = "Du har valgt et ikke gyldig prosjekt";
                 }
             }
-                // Dersom prosjekt ikke er oppgitt lages en spørring basert på bruker_id til innlogget bruker
+            // Dersom prosjekt ikke er oppgitt lages en spørring basert på bruker_id til innlogget bruker
             else
             {
                 query = Queries.GetAlleAktiveOppgaverForBruker(bruker_id);
