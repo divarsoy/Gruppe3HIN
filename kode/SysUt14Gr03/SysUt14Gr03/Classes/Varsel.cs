@@ -31,23 +31,54 @@ namespace SysUt14Gr03.Classes
                                                 "Du har blitt nevnt i en rapport"
                                               };
 
+        /// <summary>
+        /// Sender varsel til bruker med bruker_id, send med varseltype
+        /// som sjekkes mot epostpreferanser.
+        /// </summary>
+        /// <param name="bruker_id">ID til mottaker</param>
+        /// <param name="varsel">Hvilken type varsel, bruk Varsel.VARSELTYPE</param>
         static public void SendVarsel(int bruker_id, int varsel)
         {
             SendVarsel(bruker_id, varsel, "");
             
         }
 
+        /// <summary>
+        /// Sender varsel til bruker med bruker_id, send med varseltype
+        /// som sjekkes mot epostpreferanser og melding.
+        /// </summary>
+        /// <param name="bruker_id">ID til mottaker</param>
+        /// <param name="varsel">Hvilken type varsel, bruk Varsel.VARSELTYPE</param>
+        /// <param name="melding">Meldingstekst</param>
         static public void SendVarsel(int bruker_id, int varsel, string melding)
         {
             SendVarsel(bruker_id, varsel, "", melding);
 
         }
 
+        /// <summary>
+        /// Sender varsel til bruker med bruker_id, send med varseltype
+        /// som sjekkes mot epostpreferanser, melding og meldingstittel.
+        /// </summary>
+        /// <param name="bruker_id">ID til mottaker</param>
+        /// <param name="varsel">Hvilken type varsel, bruk Varsel.VARSELTYPE</param>
+        /// <param name="melding">Meldingstekst</param>
+        /// <param name="melding">Tittel, vises som epostemne.</param>
         static public void SendVarsel(int bruker_id, int varsel, string tittel, string melding)
         {
             SendVarsel(bruker_id, varsel, tittel, melding, -1);
         }
 
+        /// <summary>
+        /// Sender varsel til bruker med bruker_id, send med varseltype
+        /// som sjekkes mot epostpreferanser, melding, meldingstittel
+        /// og en oppgave_id. Brukes kun ved invitasjon.
+        /// </summary>
+        /// <param name="bruker_id">ID til mottaker</param>
+        /// <param name="varsel">Hvilken type varsel, bruk Varsel.VARSELTYPE</param>
+        /// <param name="melding">Meldingstekst</param>
+        /// <param name="melding">Tittel, vises som epostemne.</param>
+        /// <param name="oppgave_id">oppgave_id til oppgaven mottaker inviteres til</param>
         static public void SendVarsel(int bruker_id, int varsel, string tittel, string melding, int oppgave_id)
         {
             // Sjekker brukerpreferanser
@@ -82,7 +113,12 @@ namespace SysUt14Gr03.Classes
             // Sender intern varsel (kommer senere)
         }
 
-        // Samme  metoder, tar i mot en liste med brukere
+        /// <summary>
+        /// Sender varsel til alle brukere i en liste, send med varseltype
+        /// som sjekkes mot epostpreferanser.
+        /// </summary>
+        /// <param name="brukerListe">Liste med mottakere</param>
+        /// <param name="varsel">Hvilken type varsel, bruk Varsel.VARSELTYPE</param>
         static public void SendVarsel(List<Bruker> brukerListe, int varsel)
         {
             foreach (Bruker bruker in brukerListe)
@@ -91,6 +127,13 @@ namespace SysUt14Gr03.Classes
             }           
         }
 
+        /// <summary>
+        /// Sender varsel til alle brukere i en liste, send med varseltype
+        /// som sjekkes mot epostpreferanser og meldingstekst.
+        /// </summary>
+        /// <param name="brukerListe">Liste med mottakere</param>
+        /// <param name="varsel">Hvilken type varsel, bruk Varsel.VARSELTYPE</param>
+        /// <param name="melding">Meldingstekst</param>
         static public void SendVarsel(List<Bruker> brukerListe, int varsel, string melding)
         {
             foreach (Bruker bruker in brukerListe)
@@ -99,6 +142,14 @@ namespace SysUt14Gr03.Classes
             }          
         }
 
+        /// <summary>
+        /// Sender varsel til alle brukere i en liste, send med varseltype
+        /// som sjekkes mot epostpreferanser, melding og meldingstittel.
+        /// </summary>
+        /// <param name="brukerListe">Liste med mottakere</param>
+        /// <param name="varsel">Hvilken type varsel, bruk Varsel.VARSELTYPE</param>
+        /// <param name="melding">Meldingstekst</param>
+        /// <param name="melding">Tittel, vises som epostemne.</param>
         static public void SendVarsel(List<Bruker> brukerListe, int varsel, string tittel, string melding)
         {
             foreach (Bruker bruker in brukerListe)
@@ -107,6 +158,16 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        /// <summary>
+        /// Sender varsel til alle brukere i en liste, send med varseltype
+        /// som sjekkes mot epostpreferanser, melding, meldingstittel
+        /// og en oppgave_id. Brukes kun ved invitasjon.
+        /// </summary>
+        /// <param name="brukerListe">Liste med mottakere</param>
+        /// <param name="varsel">Hvilken type varsel, bruk Varsel.VARSELTYPE</param>
+        /// <param name="melding">Meldingstekst</param>
+        /// <param name="melding">Tittel, vises som epostemne.</param>
+        /// <param name="oppgave_id">oppgave_id til oppgaven mottaker inviteres til</param>
         static public void SendVarsel(List<Bruker> brukerListe, int varsel, string tittel, string melding, int oppgave_id)
         {
             foreach (Bruker bruker in brukerListe)
