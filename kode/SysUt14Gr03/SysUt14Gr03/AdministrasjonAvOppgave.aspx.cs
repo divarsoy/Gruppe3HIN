@@ -24,8 +24,8 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (Session["loggedIn"] == null)
-            //    Response.Redirect("Login.aspx", true);
+            if (Session["loggedIn"] == null)
+                Response.Redirect("Login.aspx", true);
             
             if (!Page.IsPostBack)
             {
@@ -33,7 +33,7 @@ namespace SysUt14Gr03
                 brukerListe = Queries.GetAlleAktiveBrukere();
                 prosjektListe = Queries.GetAlleAktiveProsjekter();
                 pri = Queries.GetAllePrioriteringer();
-                oppgaveID = 6; // Classes.Validator.KonverterTilTall(Request.QueryString["oppgave_id"]);
+                oppgaveID = Classes.Validator.KonverterTilTall(Request.QueryString["oppgave_id"]);
                 endres = Queries.GetOppgave(oppgaveID);
 
                 for (int i = 0; i < visStatus.Count; i++)
@@ -83,7 +83,7 @@ namespace SysUt14Gr03
             {
                 using (var context = new Context())
                 {
-                    oppgaveID = 6; // Classes.Validator.KonverterTilTall(Request.QueryString["oppgave_id"]);
+                    oppgaveID = Classes.Validator.KonverterTilTall(Request.QueryString["oppgave_id"]);
                     endres = context.Oppgaver
                                   .Include("Brukere")
                                   .Include("Prioritering")

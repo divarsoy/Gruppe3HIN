@@ -163,11 +163,6 @@ namespace SysUt14Gr03.Classes
 
             foreach (Bruker bruker in query)
             {
-                /*StringBuilder brukereIOppgave = new StringBuilder();
-                foreach (Bruker bruker in bruker.Brukere)
-                {
-                    brukereIOppgave.Append(String.Format("<a href='HistorikkStattestikk?bruker_id={0}'>{1} </a>", bruker.Bruker_id, bruker.Brukernavn));
-                }*/
                 TableRow tRow = new TableRow();
                 TableCell forNavnCell = new TableCell();
                 TableCell etterNavnCell = new TableCell();
@@ -177,9 +172,10 @@ namespace SysUt14Gr03.Classes
                 TableCell teamsCell = new TableCell();
                 TableCell prosjekterCell = new TableCell();
 
-                /*Team team = Queries.GetAlleTeamsEnBrukerErMedI((int)bruker.Bruker_id);
-                Prosjekt prosjekt = Queries.GetProsjekt(prosjekt.Bruker_id);
-
+                
+                //Team team = Queries.GetTeam();
+                //Prosjekt prosjekt = Queries.GetProsjekt(prosjekt.Bruker_id);
+                /*
                 forNavnCell.Text = String.Format("<a href='ArkiverOppg?oppgave_id={0}'>{1}</a>", bruker.Oppgave_id.ToString(), bruker.Tittel);
                 etterNavnCell.Text = Queries.GetStatus(bruker.Status_id).Navn;
                 brukerNavnCell.Text = bruker.Estimat.ToString();
