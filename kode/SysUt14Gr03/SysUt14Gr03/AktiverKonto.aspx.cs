@@ -44,22 +44,11 @@ namespace SysUt14Gr03
             initialEpost = _epost;
         }
 
-/*        private void ActivateMyAccount()
-        {
-              
-            Response.Write("<h2 align=center> Fyll ut resterende felt for å aktivere kontoen din</h2>");
-            Aftername.Text = initialFornavn;
-            Firstname.Text = initialEtternavn;
-            epost = Email.Text = initialEpost;
-        } */
-
         private void ActivateMyAccount()
         {
 
             try
             {
-
-
                 if ((!string.IsNullOrEmpty(Request.QueryString["Epost"])) & (!string.IsNullOrEmpty(Request.QueryString["Token"])))
                 {
                     Response.Write("<h2 align=center> Fyll ut resterende felt for å aktivere kontoen din</h2>");
@@ -81,15 +70,13 @@ namespace SysUt14Gr03
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('Error occured : " + ex.Message.ToString() + "');", true);
                 return;
             }
-
-
         } 
      
         protected void ConfirmButton_Click(object sender, EventArgs e)
         {
             try
             {
-             //   passord = ComputeHash(Password.Text, new SHA256CryptoServiceProvider());
+             
                 string Tok = token;
                 passord = MD5Hash(Password.Text); 
                 epost = Email.Text;
@@ -102,22 +89,20 @@ namespace SysUt14Gr03
                 using (var db = new Context())
                 {
 
-                    var Bruker = new Bruker {Brukernavn = brukernavn, Etternavn = etternavn, Fornavn = fornavn, Epost = epost, IM = imAdresse, Aktiv = true, Passord = passord, opprettet = DateTime.Now, Token = Tok};
+                    var Bruker = new Bruker {
+                        Brukernavn = brukernavn, 
+                        Etternavn = etternavn, 
+                        Fornavn = fornavn, 
+                        Epost = epost, 
+                        IM = imAdresse, 
+                        Aktiv = true, 
+                        Passord = passord, 
+                        opprettet = DateTime.Now, 
+                        Token = Tok};
                     db.Brukere.Add(Bruker);
                     db.SaveChanges();
-                    /*Bruker conUser = db.Brukere.Where(user => user.Epost == epost).First();
-                    conUser.Brukernavn = brukernavn;
-                    conUser.Etternavn = etternavn;
-                    conUser.Epost = epost;
-                    conUser.IM = imAdresse;
-                    conUser.Passord = passord;
-                    conUser.Token = token;
-                    conUser.Aktiv = true;
-//                    db.Brukere.Update(conUser);
-//                    db.Brukere.Add(conUser);
-                    db.SaveChanges(); */
+                
                 }
-                // confirmUser(Username.Text, Aftername.Text, Firstname.Text, Email.Text, Im_adress.Text, password);
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('Kontoen din er aktivert');", true);
 
                 Response.Write("<h2>Du kan logge deg inn nå  <a href=Login.aspx>Klikk her for å logge inn</a> </h2>");
