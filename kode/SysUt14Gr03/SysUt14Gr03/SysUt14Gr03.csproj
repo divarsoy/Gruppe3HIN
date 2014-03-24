@@ -195,6 +195,7 @@
     <Content Include="OpprettOppgave.aspx" />
     <Content Include="OpprettProsjekt.aspx" />
     <Content Include="OpprettTidsfristPaaOppgave.aspx" />
+    <Content Include="OversiktBrukereSomProsjektleder.aspx" />
     <Content Include="OversiktBrukerSomUtvikler.aspx" />
     <Content Include="OversiktOppgaver.aspx" />
     <Content Include="OversiktProsjekter.aspx" />
@@ -376,6 +377,13 @@
     </Compile>
     <Compile Include="Models\Notifikasjon.cs" />
     <Compile Include="Models\NotifikasjonsType.cs" />
+    <Compile Include="OversiktBrukereSomProsjektleder.aspx.cs">
+      <DependentUpon>OversiktBrukereSomProsjektleder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OversiktBrukereSomProsjektleder.aspx.designer.cs">
+      <DependentUpon>OversiktBrukereSomProsjektleder.aspx</DependentUpon>
+    </Compile>
     <Compile Include="OversiktBrukerSomUtvikler.aspx.cs">
       <DependentUpon>OversiktBrukerSomUtvikler.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
