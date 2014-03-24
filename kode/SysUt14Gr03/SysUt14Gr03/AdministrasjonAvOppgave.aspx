@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AdministrasjonAvOppgave.aspx.cs" Inherits="SysUt14Gr03.AdministrasjonAvOppgave" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" CodeBehind="AdministrasjonAvOppgave.aspx.cs" Inherits="SysUt14Gr03.AdministrasjonAvOppgave" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Administrering av Oppgave</h2>
@@ -8,7 +8,7 @@
     <p>Estimering: <asp:TextBox ID="TbEstimering" runat="server" Height="25px" Width="160px"></asp:TextBox></p>
     <p>Aktiv: <asp:CheckBox ID="cbAktiv" runat="server" /></p>
     <p>Tilgjengelige Brukere: <asp:DropDownList ID="ddlBrukere" runat="server"></asp:DropDownList></p>
-    <asp:ListBox ID="lbBrukere" runat="server" Width="252px" Enabled="False"></asp:ListBox>
+    <asp:ListBox ID="lbBrukere" runat="server" Width="252px" Enabled="False" EnableViewState="true"></asp:ListBox>
     <br />
     <asp:Label ID="lblFeil" runat="server" Visible="false" Text=""></asp:Label>
     <br />

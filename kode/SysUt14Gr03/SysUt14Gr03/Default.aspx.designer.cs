@@ -13,13 +13,22 @@ namespace SysUt14Gr03 {
     public partial class BrukerForside {
         
         /// <summary>
-        /// tempButton control.
+        /// ListBoxProsjekt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button tempButton;
+        protected global::System.Web.UI.WebControls.ListBox ListBoxProsjekt;
+        
+        /// <summary>
+        /// btnVelgProsjekt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnVelgProsjekt;
         
         /// <summary>
         /// Calendar1 control.

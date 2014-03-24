@@ -1,14 +1,16 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="SysUt14Gr03.BrukerForside" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-
-    <h1>Forside for Brukere</h1>
-
-    <div class="kolonner col-md-8">
-        <p>Velkommen, bruker!</p>
-
-        <p><asp:Button ID="tempButton" runat="server" Text="Kom Igang!(Ikke trykk)" /></p>
-        
+    <div class="container">
+        <div class="col-md-12">
+            <h1>Forside for Brukere</h1>
+        </div>
+    <div class="col-md-4">
+        <h3>Velkommen <% Response.Write(Fornavn); %>!</h3>
+        <h4>Velg Prosjekt:</h4>
+        <asp:ListBox ID="ListBoxProsjekt" runat="server" Rows="1"></asp:ListBox>
+        <asp:Button ID="btnVelgProsjekt" runat="server" Text="Velg Prosjekt" OnClick="btnVelgProsjekt_Click" />        
     </div>
+    <div class="col-md-4"></div>
     <div class="kolonner col-md-4">
         <p><asp:Calendar ID="Calendar1" runat="server" BackColor="White" BorderColor="White" BorderWidth="1px" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="190px" NextPrevFormat="FullMonth" Width="350px">
             <DayHeaderStyle Font-Bold="True" Font-Size="8pt" />
@@ -43,4 +45,5 @@
        
     </div>
     <p>...</p>
+        </div>
 </asp:Content>
