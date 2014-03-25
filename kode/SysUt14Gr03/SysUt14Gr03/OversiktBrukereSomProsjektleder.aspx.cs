@@ -12,8 +12,9 @@ namespace SysUt14Gr03
     public partial class OversiktBrukereSomProsjektleder : System.Web.UI.Page
     {
         private List<Prosjekt> listProsjekt;
-        private List<object> bruker;
+        private List<Bruker> brukerListe;
         private int brukerid;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["loggedIn"] == null)
@@ -26,7 +27,8 @@ namespace SysUt14Gr03
 
             }
 
-            listProsjekt = Queries.GetAlleAktiveProsjekterForBruker(brukerid);
+            listProsjekt = Queries.GetAlleProsjekterForLeder(brukerid);
+            brukerListe = Queries.GetAlleAktiveBrukere();
 
             for (int i = 0; i < listProsjekt.Count; i++)
             {
@@ -34,14 +36,12 @@ namespace SysUt14Gr03
                 {
                 Prosjekt prosjekt = listProsjekt[i];
                 Team team = context.Teams.Where(t => t.Team_id == prosjekt.Team_id).First();
-                bruker = new List<object>();
-                bruker.Add(team.Brukere);
-
-                ListBox1.DataSource = bruker;
-                ListBox1.DataBind();
-                
-
+                for (int j = 0; j < team.Brukere.Count; j++)
+                {
+                    Bruker bruk = brukerListe[j];
+                    ListBox1.Items.Add(bruk.ToString());
                 }
+              }
             }
         }
     }
