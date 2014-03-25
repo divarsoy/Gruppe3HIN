@@ -10,25 +10,27 @@ namespace SysUt14Gr03.Classes
     public class Passord
     {
        
-        public static String HashPassord(string passord, string salt) {
+        public static String HashPassord(string passord) {
             
-            var combinedPassword = String.Concat(passord, salt);
+            var combinedPassword = String.Concat(passord, GetRandomSalt());
             var sha256 = new SHA256Managed();
             var bytes = UTF8Encoding.UTF8.GetBytes(combinedPassword);
             var hash = sha256.ComputeHash(bytes);
             return Convert.ToBase64String(hash);
 
         }
-        public String GetRandomSalt(Int32 size = 12)
+        public static String GetRandomSalt(Int32 size = 12)
         {
             var random = new RNGCryptoServiceProvider();
             var salt = new Byte[size];
             random.GetBytes(salt);
             return Convert.ToBase64String(salt);
         }
-        public static String HashPassordSjekk(string passord)
+        public static Boolean HashPassordSjekk(string salt)
         {
-            return null;
+            //ikke ferdig
+            var hash = HashPassord(salt);
+            return String.Equals(hash, salt);
         }
     }
 }

@@ -24,25 +24,36 @@ namespace SysUt14Gr03
             else
             {
                 brukerid = Validator.KonverterTilTall(Session["bruker_id"].ToString());
-
             }
+          // if (Validator.SjekkRettighet(brukerid, Konstanter.rettighet.Prosjektleder))
+              //  {
+                listProsjekt = Queries.GetAlleProsjekterForLeder(brukerid);
+                brukerListe = Queries.GetAlleAktiveBrukere();
 
-            listProsjekt = Queries.GetAlleProsjekterForLeder(brukerid);
-            brukerListe = Queries.GetAlleAktiveBrukere();
+               // lbBrukere.Items.Add("Prosjekt " + " " + " Brukere");
+                for (int i = 0; i < listProsjekt.Count; i++)
+                {
+                    using (var context = new Context())
+                    {
 
-            for (int i = 0; i < listProsjekt.Count; i++)
-            {
-                using (var context = new Context())
-                {
-                Prosjekt prosjekt = listProsjekt[i];
-                Team team = context.Teams.Where(t => t.Team_id == prosjekt.Team_id).First();
-                for (int j = 0; j < team.Brukere.Count; j++)
-                {
-                    Bruker bruk = brukerListe[j];
-                    ListBox1.Items.Add(bruk.ToString());
+                        Prosjekt prosjekt = listProsjekt[i];
+
+                        Team team = context.Teams.Where(t => t.Team_id == prosjekt.Team_id).First();
+                      //  Table table = Tabeller.HentBrukerTabell(team.Brukere);
+                      //  PlaceHolderBrukere.Controls.Add(table);
+                        for (int j = 0; j < team.Brukere.Count; j++)
+                        {
+                            Bruker bruk = brukerListe[j];
+                           
+                           lbBrukere.Items.Add(prosjekt.Navn + " " + bruk.ToString());
+                        }
+                    }
                 }
-              }
-            }
+        /*    }
+            else
+            {
+                Response.Redirect("Brukere.aspx");
+            } */
         }
     }
 }
