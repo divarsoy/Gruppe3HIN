@@ -19,6 +19,20 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        static public Bruker GetBrukerMedRettighet(int _bruker_id, Konstanter.rettighet _rettighet)
+        {
+            using (var context = new Context())
+            {
+                string rettighetString = _rettighet.ToString();
+                var brukerObjekt = context.Brukere
+                            .Include("Rettigheter")
+                            .Where(bruker => bruker.Rettigheter.Any(rettighet => rettighet.RettighetNavn == rettighetString))
+                            .Where(b => b.Bruker_id == _bruker_id)
+                            .FirstOrDefault();
+                return brukerObjekt;
+            }
+        }
+
         // Henter epostpreferanser til bruker med bruker_id
         static public BrukerPreferanse GetEpostPreferanser(int _bruker_id)
         {
@@ -54,6 +68,15 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        static public Prosjekt GetProsjekt(int prosjekt_id)
+        {
+            using (var context = new Context())
+            {
+                Prosjekt prosjekt = context.Prosjekter.Find(prosjekt_id);
+                return prosjekt;
+            }
+        }
+
         static public Status GetStatus(int _status_id)
         {
             using (var context = new Context())
@@ -63,6 +86,21 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        static public Oppgave GetOppgave(int oppgave_id)
+        {
+            using (var context = new Context())
+            {
+                var oppgaveListe = context.Oppgaver
+                                  .Include("Brukere")
+                                  .Include("Prioritering")
+                                  .Include("Status")
+                                  .Include("Prosjekt")
+                                  .Where(oppgave => oppgave.Oppgave_id == oppgave_id)
+                                  .Where(oppgave => oppgave.Aktiv == true)
+                                  .ToList<Oppgave>();
+                return oppgaveListe[0];
+            }
+        }
 
         static public List<Bruker> GetAlleAktiveBrukere()
         {
@@ -90,9 +128,7 @@ namespace SysUt14Gr03.Classes
                 {
                     List<Bruker> tomListe = new List<Bruker>();
                     return tomListe;
-                }
-
-                
+                }  
             }
         }
 
@@ -108,6 +144,29 @@ namespace SysUt14Gr03.Classes
 
             }
         }
+
+        static public List<Prosjekt> GetAlleAktiveProsjekterForBruker(int bruker_id) 
+        {
+            using (var context = new Context()) 
+            {
+                var prosjektListe = context.Prosjekter
+                                    .Where(prosjekta => prosjekta.Aktiv == true)
+                                    .Where(team => team.Team.Brukere.Any(bruker => bruker.Bruker_id == bruker_id))
+                                    .ToList();
+                return prosjektListe;      
+            }
+        }
+        static public List<Prosjekt> GetAlleProsjekterForLeder(int bruker_id)
+        {
+            using (var context = new Context())
+            {
+                var prosjektListe = context.Prosjekter
+                                    .Where(prosjekta => prosjekta.Bruker_id == bruker_id)
+                                    .ToList();
+                return prosjektListe;
+            }
+        }
+
         static public List<Status> GetAlleStatuser()
         {
             using (var context = new Context())
@@ -126,9 +185,6 @@ namespace SysUt14Gr03.Classes
                 return priori;
             }
         }
-
-
-
 
         /*
          * Ikke klar
@@ -150,14 +206,24 @@ namespace SysUt14Gr03.Classes
         }
          * */
 
-        static public Team GetTeam(int _team_id)
+        static public Team GetTeam(int team_id)
         {
             using (var context = new Context())
             {
-                var team = context.Teams.Find(_team_id);
+                var team = context.Teams.Find(team_id);
                 return team;
             }
+        }
 
+        static public Rettighet GetRettighet(int bruker_id)
+        {
+            using (var context = new Context())
+            {
+                var rettighet = context.Rettigheter
+                                .Where(brukere => brukere.Brukere.Any(bruker => bruker.Bruker_id == bruker_id))
+                                .FirstOrDefault();
+                return rettighet;
+            }
         }
 
         static public List<Team> GetAlleAktiveTeam()
@@ -263,7 +329,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
-        static public List<SysUt14Gr03.Models.Bruker> GetAlleBrukereIEtTeam(int _team_id)
+        static public List<Bruker> GetAlleBrukereIEtTeam(int _team_id)
         {
             int team_id = _team_id;
             using (var context = new Context())
@@ -275,8 +341,18 @@ namespace SysUt14Gr03.Classes
                 return brukerListe;
             }
         }
+        static public List<Bruker> GetAlleBrukereIEtProjekt(int prosjekt_id)
+        {
+            using (var context = new Context())
+            {
+                var brukerListe = (from bruker in context.Brukere
+                                   where bruker.Prosjekter.Any(prosjekt => prosjekt.Prosjekt_id == prosjekt_id)
+                                   select bruker).ToList();
+                return brukerListe;
+            }
+        }
 
-        static public List<Prosjekt> GetAlleProsjektFraBrukerErMedI(int bruker_id)
+        static public List<Prosjekt> GetAlleProsjektEnBrukerErMedI(int bruker_id)
         {
             using (var context = new Context())
             {
@@ -286,6 +362,7 @@ namespace SysUt14Gr03.Classes
                 return teamListe;
             }
         }
+
         static public List<Kommentar> GetAlleKommentarTilBruker(int brukder_id)
         {
             using (var context = new Context())
@@ -297,8 +374,6 @@ namespace SysUt14Gr03.Classes
                 return komListe;
             }
         }
-
-
 
         static public List<Moete> GetAlleMoeterFraBrukerErMedI(int bruker_id)
         {
@@ -323,15 +398,7 @@ namespace SysUt14Gr03.Classes
             }
         }           
 
-        public static Prosjekt getProsjekt (int prosjekt_id)
-        {
-            using (var context = new Context()) {
-                Prosjekt prosjekt = context.Prosjekter.Find(prosjekt_id);
-                return prosjekt;
-            }
-        }
-
-        public static string getProsjektNavn(int prosjekt_id)
+        public static string GetProsjektNavn(int prosjekt_id)
         {
             using (SqlCommand command = new SqlCommand())
             {
@@ -398,8 +465,6 @@ namespace SysUt14Gr03.Classes
 
                 context.SaveChanges();
             }
-            
-
         }
     }
 }

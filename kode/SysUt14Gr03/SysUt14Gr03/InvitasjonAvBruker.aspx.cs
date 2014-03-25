@@ -16,13 +16,21 @@ namespace SysUt14Gr03
     {
         private List<Bruker> brukerListe;
         private List<Oppgave> oppgListe;
-        //hardkodet brukerid
-        private int brukerid = 21;
+        private int brukerid;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             
             if (!IsPostBack)
             {
+                if (Session["loggedIn"] == null)
+                {
+                    Response.Redirect("Login.aspx", true);
+                }
+                else
+                {
+                   brukerid = Convert.ToInt32(Session["bruker_id"]);
+                }
 
                 brukerListe = Queries.GetAlleAktiveBrukere();
                 oppgListe = Queries.GetAlleAktiveOppgaverForBruker(brukerid);
@@ -43,7 +51,7 @@ namespace SysUt14Gr03
                     }
                 using (var context = new Context())
                 {
-                    //tar bare en random bruker
+                   
                     Bruker bruker = context.Brukere.Where(b => b.Bruker_id == brukerid).First();
                     lblbrukerInnlogget.Text = "Logget inn som: " + bruker.ToString();
                     lblbrukerInnlogget.ForeColor = Color.Green; 
@@ -53,7 +61,12 @@ namespace SysUt14Gr03
    
         protected void btnSendInvitasjon_Click(object sender, EventArgs e)
         {
-            //Invitasjon.Aksept(oppgave_id, bruker_id);
+            
+            brukerid = Convert.ToInt32(ddlBrukere.SelectedValue);
+            int oppgave_id = Convert.ToInt32(ddlOppgave.SelectedValue);
+            Varsel.SendVarsel(brukerid, Varsel.OPPGAVEVARSEL, "Hjelp", "Trenger hjelp til oppgaven: ", oppgave_id);
+            lblInvitasjon.ForeColor = Color.Green;
+            lblInvitasjon.Text = "Invitasjon sendt til: " + ddlBrukere.SelectedItem.ToString();
         }
     }
 }

@@ -39,7 +39,7 @@
             </Scripts>
         </asp:ScriptManager>
 
-        <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar navbar-inverse navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -98,6 +98,8 @@
                                 <li> <a runat="server" href="~/PameldingTilOppgave">Påmeld bruker på oppgave</a></li>
                                 <li> <a runat="server" href="~/FerdigstillelseAvOppgave">Merk oppgave som ferdig</a></li>
                                 <li> <a runat="server" href="~/TidsestimerOppgave">Tidsestimer oppgave</a></li>
+                                <li> <a runat="server" href="~/MottaOppgave">Godta/avslå invitasjon</a></li>
+                                <li> <a runat="server" href="~/ReturAvOppgave">Returner oppgave</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">

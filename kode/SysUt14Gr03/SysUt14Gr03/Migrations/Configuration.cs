@@ -49,6 +49,24 @@ namespace SysUt14Gr03.Migrations
             rettigheter.ForEach(element => context.Rettigheter.AddOrUpdate(element));
             context.SaveChanges();
 
+            var notifikasjonsTyper = new List<NotifikasjonsType> {
+                new NotifikasjonsType {
+                    Type = "alert-success"
+                },
+                new NotifikasjonsType {
+                    Type = "alert-info"
+                },
+                new NotifikasjonsType {
+                    Type = "alert-warning"
+                },
+                new NotifikasjonsType {
+                    Type = "alert-danger"
+                }
+            };
+
+            notifikasjonsTyper.ForEach(element => context.NotifikasjonsType.AddOrUpdate(element));
+            context.SaveChanges();
+
             var brukere = new List<Bruker> {
                new Bruker {
                     Etternavn = "Åsgård",
@@ -1093,6 +1111,113 @@ namespace SysUt14Gr03.Migrations
                 }
             };
             logger.ForEach(element => context.Logger.AddOrUpdate(logg => logg.Hendelse, element));
+            context.SaveChanges();
+
+            var notifikasjon = new List<Notifikasjon> {
+                new Notifikasjon {
+                    Melding = "Bruker b akspterte invitasjonen til å hjelpe deg med oppgave F",
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "pholm").Bruker_id,
+                    NotifikasjonsType_id = 1,
+                    Vist = false
+                },
+                new Notifikasjon {
+                    Melding = "Du ble herved invitert til oppgave F hvor bruker A trenger hjelp",
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "jpolden").Bruker_id,
+                    NotifikasjonsType_id = 2,
+                    Vist = false
+                },
+                new Notifikasjon {
+                    Melding = "Du har blitt nevnt i kommentart d",
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "aaskoy").Bruker_id,
+                    NotifikasjonsType_id = 2,
+                    Vist = false
+                },
+                new Notifikasjon {
+                    Melding = "Tiden for din oppgave F er i ferd med å løpe ut",
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "pholm").Bruker_id,
+                    NotifikasjonsType_id = 3,
+                    Vist = false
+                },
+                new Notifikasjon {
+                    Melding = "Bruker c ville ikke hjelpe deg med oppgave F",
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "hhansen").Bruker_id,
+                    NotifikasjonsType_id = 2,
+                    Vist = false
+                },
+                new Notifikasjon {
+                    Melding = "Du ble herved tildelt et team Rødhette",
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "mlarsen").Bruker_id,
+                    NotifikasjonsType_id = 2,
+                    Vist = false
+                },
+                new Notifikasjon {
+                    Melding = "Du ble herved lagt til i prosjektet GråUlv",
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "lmartinsen").Bruker_id,
+                    NotifikasjonsType_id = 2,
+                    Vist = false
+                },
+                new Notifikasjon {
+                    Melding = "Fristen for oppgave F har dessverre gått ut, gjør noe kjapt",
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "jpolden").Bruker_id,
+                    NotifikasjonsType_id = 4,
+                    Vist = false
+                },
+                new Notifikasjon {
+                    Melding = "Du har brukt for lang tid på Oppgave F, venligst søk hjelp viss du må",
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "pholm").Bruker_id,
+                    NotifikasjonsType_id = 3,
+                    Vist = false
+                },
+                new Notifikasjon {
+                    Melding = "Du har brukt 4 timer mindre enn planlagt forrige uke. SKJÆRP DÆ!",
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "aaskoy").Bruker_id,
+                    NotifikasjonsType_id = 3,
+                    Vist = false
+                },
+                new Notifikasjon {
+                    Melding = "Du ble herved invitert til oppgave F hvor bruker A trenger hjelp",
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "jpolden").Bruker_id,
+                    NotifikasjonsType_id = 2,
+                    Vist = false
+                },
+                new Notifikasjon {
+                    Melding = "Du ble herved invitert til oppgave F hvor bruker A trenger hjelp",
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "jpolden").Bruker_id,
+                    NotifikasjonsType_id = 2,
+                    Vist = false
+                },
+                new Notifikasjon {
+                    Melding = "Du har vært meget flink",
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "jaasgaard").Bruker_id,
+                    NotifikasjonsType_id = 1,
+                    Vist = false
+                },
+                new Notifikasjon {
+                    Melding = "Du har fulført oppgave F, good job.",
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "mlarsen").Bruker_id,
+                    NotifikasjonsType_id = 1,
+                    Vist = false
+                },
+                new Notifikasjon {
+                    Melding = "Din fullførelse av oppgave ble ikke godkjent",
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "lmartinsen").Bruker_id,
+                    NotifikasjonsType_id = 4,
+                    Vist = false
+                },
+                new Notifikasjon {
+                    Melding = "Du har to møter på samme tid Mr/mrs. vennligst avlys eller utsett",
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "hhansen").Bruker_id,
+                    NotifikasjonsType_id = 4,
+                    Vist = false
+                },
+                new Notifikasjon {
+                    Melding = "Svarfristen på invitasjonen til oppgave F er gått ut på dato",
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "aaskoy").Bruker_id,
+                    NotifikasjonsType_id = 4,
+                    Vist = false
+                },
+            };
+            notifikasjon.ForEach(element => context.Notifikasjoner.AddOrUpdate(notifikasjoner => notifikasjoner.Melding, element));
             context.SaveChanges();
         }
     }

@@ -4,7 +4,7 @@
     <p>
         <asp:DropDownList ID="ddlOppgaver" runat="server">
         </asp:DropDownList>
-        <asp:DropDownList ID="ddlBrukere" runat="server">
+        <asp:DropDownList ID="ddlBrukere" runat="server" Visible="false">
         </asp:DropDownList>
     </p>
     <p>

@@ -13,12 +13,22 @@ namespace SysUt14Gr03
     public partial class KommentarPaOppgave : System.Web.UI.Page
     {
         private List<Oppgave> oppgaveListe;
+        private int bruker_id;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["loggedIn"] == null)
+            {
+                Response.Redirect("Login.aspx", true);
+            }
+            else
+            {
+                bruker_id = Convert.ToInt32(Session["bruker_id"]);
+            }
+
             if (!IsPostBack)
             {
-                oppgaveListe = Queries.GetAlleAktiveOppgaver();
+                oppgaveListe = Queries.GetAlleAktiveOppgaverForBruker(bruker_id);
 
                 foreach (Oppgave oppgave in oppgaveListe)
                 {
@@ -30,8 +40,6 @@ namespace SysUt14Gr03
         protected void btnKommentar_Click(object sender, EventArgs e)
         {
             // Her lagres kommentaren
-            // Skal hente brukerID fra innlogget bruker
-            int innloggetBrukerId = 1;
             if (txtKommentar.Text != string.Empty)
             {
                 using (var context = new Context())
@@ -44,7 +52,7 @@ namespace SysUt14Gr03
                         Tekst = txtKommentar.Text,
                         Aktiv = true,
                         Opprettet = DateTime.Now,
-                        Bruker_id = innloggetBrukerId,
+                        Bruker_id = bruker_id,
                         Oppgave_id = oppgave_id
                     };
 

@@ -10,7 +10,7 @@ using SysUt14Gr03.Models;
 
 namespace SysUt14Gr03.Classes
 {
-    public class sendEmail : System.Web.UI.Page
+    public class sendEmail : System.Web.UI.Page // (bør bruke stor forbokstav i klassenavn)
     {
         private string password = "blahimmel";
         private MailMessage msg;
@@ -24,9 +24,14 @@ namespace SysUt14Gr03.Classes
 
                 //bruker gruppe eposten som avsender
                 msg.From = new MailAddress("sysut14gr03@gmail.com");
+                /* Tips: bruk overload-metoder i stedet for if-tester              
+                 * sendEpost(string epost, string message, string subject) {
+                 * sendEpost(epost, message, subject, null, null, null);
+                 * }
+                 **/
                 if(users != null)
                     for (int i = 0; i < users.Count; i++)
-                        msg.To.Add(users[i].ToString());
+                        msg.To.Add(users[i].Epost);
                 else if(brukere != null)
                     for (int i = 0; i < users.Count; i++)
                         msg.To.Add(brukere[i].ToString());

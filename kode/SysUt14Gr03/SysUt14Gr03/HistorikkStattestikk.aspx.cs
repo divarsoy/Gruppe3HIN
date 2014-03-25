@@ -71,7 +71,7 @@ namespace SysUt14Gr03
 
         protected void Projects_SelectedIndexChanged(object sender, EventArgs e)
         {
-            List<Prosjekt> prosjektList = Queries.GetAlleProsjektFraBrukerErMedI(brukerID);
+            List<Prosjekt> prosjektList = Queries.GetAlleProsjektEnBrukerErMedI(brukerID);
 
             if (Project.Items.Count == 0)
             {

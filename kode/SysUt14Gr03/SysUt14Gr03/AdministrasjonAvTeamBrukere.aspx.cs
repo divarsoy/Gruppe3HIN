@@ -15,7 +15,6 @@ namespace SysUt14Gr03
         private List<Bruker> team_brukerListe;
         private List<Bruker> brukerListe;
 
-
         public static void SetValgtTeam(int value)
         { 
            teamId = value;

@@ -79,7 +79,7 @@ namespace SysUt14Gr03
 
                         context.Teams.Add(nyttTeam);
                         context.SaveChanges();
-                        this.sendEpost();
+                        Varsel.SendVarsel(selectedBrukers, Varsel.TEAMVARSEL, Varsel.VARSELTITTEL[Varsel.TEAMVARSEL], Varsel.VARSELTEKST[Varsel.TEAMVARSEL] + ": " + teamNavn, 2);
                     
                 }
                 else
@@ -95,18 +95,5 @@ namespace SysUt14Gr03
             // Går tilbake til forrige side
         }
 
-        public void sendEpost()
-        {
-            BrukerPreferanse preferanse = new BrukerPreferanse();
-            if (preferanse.EpostTeam == true)
-            {
-                sendEmail sendMsg = new sendEmail();
-
-                string message = "Du ble lagt til et nytt team: " + teamNavn + "\nDato: " + DateTime.Now + "\nLagt til av: " + User.Identity.Name;
-                string subject = "Medlem av nytt team";
-
-                sendMsg.sendEpost(null, message, subject, null, selectedBrukers, null);
-            }
-        }
     }
 }
