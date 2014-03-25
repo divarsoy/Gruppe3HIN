@@ -45,6 +45,15 @@ namespace SysUt14Gr03.Classes
                 return notifikasjonsListe;
             }
         }
+        static public NotifikasjonsType GetNotifikasjonsType(int notifikasjonsType_id)
+        {
+            using (var context = new Context())
+            {
+                var notifikasjonsType = context.NotifikasjonsType
+                    .Find(notifikasjonsType_id);
+                    return notifikasjonsType;
+            }
+        }
 
         // Henter epostpreferanser til bruker med bruker_id
         static public BrukerPreferanse GetEpostPreferanser(int _bruker_id)

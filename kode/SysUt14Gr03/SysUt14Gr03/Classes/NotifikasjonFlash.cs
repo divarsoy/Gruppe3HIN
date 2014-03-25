@@ -15,8 +15,8 @@ namespace SysUt14Gr03.Classes
             StringBuilder returnString = new StringBuilder();
             foreach (Notifikasjon notifikasjon in notifikasjonsListe)
             {
-                returnString.Append("<div id='flash' class='flash alert alert-dismissable '");
-                returnString.Append(notifikasjon);
+                returnString.Append("<div id='flash' class='flash alert alert-dismissable ");
+                returnString.Append(Queries.GetNotifikasjonsType(notifikasjon.NotifikasjonsType_id).Type);
                 returnString.Append("'>");
                 returnString.Append(Environment.NewLine);
                 returnString.Append("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>");
