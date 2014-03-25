@@ -374,6 +374,7 @@
     <Compile Include="AdministrasjonAvOppgave.aspx.designer.cs">
       <DependentUpon>AdministrasjonAvOppgave.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Classes\NotifikasjonFlash.cs" />
     <Compile Include="Models\Notifikasjon.cs" />
     <Compile Include="Models\NotifikasjonsType.cs" />
     <Compile Include="OversiktBrukerSomUtvikler.aspx.cs">

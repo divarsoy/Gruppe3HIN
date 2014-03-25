@@ -6,6 +6,8 @@ using System.Web;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using SysUt14Gr03;
+using SysUt14Gr03.Classes;
 
 namespace SysUt14Gr03
 {
@@ -68,6 +70,15 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                if (Session["bruker_id"] != null){
+                    int bruker_id = 2;
+                    //int bruker_id = Validator.KonverterTilTall((string)Session["bruker_id"]);
+                    String notifikasjoner = NotifikasjonFlash.HentNotifikasjoner(bruker_id);
+                    NotifikasjonsContent.Text = notifikasjoner;
+                }
+            }
 
         }
 
