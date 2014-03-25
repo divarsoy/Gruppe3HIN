@@ -16,6 +16,7 @@ namespace SysUt14Gr03
         private const string AntiXsrfTokenKey = "__AntiXsrfToken";
         private const string AntiXsrfUserNameKey = "__AntiXsrfUserName";
         private string _antiXsrfTokenValue;
+        public string antallNotifikasjoner = "";
 
         protected void Page_Init(object sender, EventArgs e)
         {
@@ -74,9 +75,14 @@ namespace SysUt14Gr03
             {
                 if (Session["bruker_id"] != null){
                     int bruker_id = 2;
+
                     //int bruker_id = Validator.KonverterTilTall((string)Session["bruker_id"]);
-                    String notifikasjoner = NotifikasjonFlash.HentNotifikasjoner(bruker_id);
-                    NotifikasjonsContent.Text = notifikasjoner;
+                    int antallNotifikasjonerInt = Queries.GetNotifikasjon(bruker_id).Count;
+                    if (antallNotifikasjonerInt > 0)
+                        antallNotifikasjoner = String.Format("({0})", antallNotifikasjonerInt.ToString());
+                    //String notifikasjoner = NotifikasjonFlash.HentNotifikasjoner(bruker_id);
+                    //NotifikasjonsContent.Text = notifikasjoner;
+                    PlaceHolderNotifikasjon.Controls.Add(NotifikasjonFlash.HentNotifikasjonsPanel(bruker_id));
                 }
             }
 
@@ -85,6 +91,10 @@ namespace SysUt14Gr03
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
         {
             Context.GetOwinContext().Authentication.SignOut();
+        }
+
+        void btnNotifikasjon_Click(object sender, EventArgs e)
+        {
         }
     }
 

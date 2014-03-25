@@ -13,13 +13,13 @@ namespace SysUt14Gr03 {
     public partial class SiteMaster {
         
         /// <summary>
-        /// NotifikasjonsContent control.
+        /// PlaceHolderNotifikasjon control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label NotifikasjonsContent;
+        protected global::System.Web.UI.WebControls.PlaceHolder PlaceHolderNotifikasjon;
         
         /// <summary>
         /// MainContent control.
