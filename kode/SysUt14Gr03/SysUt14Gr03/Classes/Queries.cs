@@ -336,6 +336,7 @@ namespace SysUt14Gr03.Classes
             {
                 var brukerListe = (from bruker in context.Brukere
                                    where bruker.Teams.Any(team => team.Team_id == team_id)
+                                   orderby bruker.Etternavn
                                    select bruker).ToList();
 
                 return brukerListe;
@@ -345,9 +346,12 @@ namespace SysUt14Gr03.Classes
         {
             using (var context = new Context())
             {
-                var brukerListe = (from bruker in context.Brukere
-                                   where bruker.Prosjekter.Any(prosjekt => prosjekt.Prosjekt_id == prosjekt_id)
-                                   select bruker).ToList();
+                var brukerListe = context.Brukere
+                                    .Include("Teams")
+                                    .Include("Prosjekter")
+                                    .Where(bruker => bruker.Prosjekter.Any(prosjekt => prosjekt.Prosjekt_id == prosjekt_id))
+                                    .OrderBy(bruker => bruker.Etternavn)
+                                    .ToList();
                 return brukerListe;
             }
         }

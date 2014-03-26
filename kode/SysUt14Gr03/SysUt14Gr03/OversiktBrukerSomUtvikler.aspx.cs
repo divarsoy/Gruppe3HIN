@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -11,22 +12,21 @@ namespace SysUt14Gr03
 {
     public partial class OversiktBrukerSomUtvikler : System.Web.UI.Page
     {
+        private List<Bruker> queryProsjekt = null;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             bool queryStatus = false;
-            List<Bruker> queryProsjekt = null;
-            List<Bruker> queryTeam = null;
             int bruker_id = 2;
 
-            // Sjekker om det er lagt ved et Get parameter "prosjekt_id" og lager en spørring basert på prosjekt_id og bruker_id på innlogget bruker
+            
+            // Sjekker om det er lagt ved et Get parameter "prosjekt_id" og lager en spørring basert på prosjekt_id og team_id på innlogget bruker
             if (Request.QueryString["prosjekt_id"] != null)
             {
-                int prosjekt_id = Validator.KonverterTilTall(Request.QueryString["prosjekt_id"]);
-                int team_id = Validator.KonverterTilTall(Request.QueryString["team_id"]);
+                int prosjekt_id = 4; // Validator.KonverterTilTall(Request.QueryString["prosjekt_id"]);
                 if (prosjekt_id >= 1)
                 {
                     queryProsjekt = Queries.GetAlleBrukereIEtProjekt(prosjekt_id);
-                    queryTeam = Queries.GetAlleBrukereIEtTeam(team_id);
                     if (queryProsjekt.Count == 0)
                     {
                         lblTilbakemelding.Text = "Brukeren er ikke i ditt prosjekt";
@@ -39,16 +39,16 @@ namespace SysUt14Gr03
                         queryStatus = true;
                     }
                 }
-
                 else
                 {
                     lblTilbakemelding.Text = "Brukeren er ikke i ditt prosjekt";
                 }
             }
-            // Dersom prosjekt ikke er oppgitt lages en spørring basert på bruker_id til innlogget bruker
+            // Dersom prosjekt eller team ikke er oppgitt lages en spørring basert på bruker_id til innlogget bruker
             else
             {
-                //queryProsjekt = Queries.GetAlleAktiveOppgaverForBruker(bruker_id);
+                int prosjekt_id = 4; // Validator.KonverterTilTall(Request.QueryString["prosjekt_id"]);
+                queryProsjekt = Queries.GetAlleBrukereIEtProjekt(prosjekt_id);
                 string brukerNavn = Queries.GetBruker(bruker_id).ToString();
                 lblTilbakemelding.Text = string.Format("<h3>Bruker: {0}</h3>", brukerNavn);
                 queryStatus = true;
@@ -56,9 +56,24 @@ namespace SysUt14Gr03
             // Lager Tabell for å vise oppgaver
             if (!IsPostBack && queryStatus)
             {
-                /*Table oppgaveTable = Tabeller.HentOppgaveTabell(queryProsjekt);
-                oppgaveTable.CssClass = "table";
-                PlaceHolderTable.Controls.Add(oppgaveTable);*/
+                Table prosjektTable = Tabeller.HentBrukerTabellIProsjektTeamUtviklere(queryProsjekt); 
+                prosjektTable.CssClass = "table";
+                PlaceHolderTableProject.Controls.Add(prosjektTable);
+            }
+        }
+
+        public void Button1_Click(object sender, EventArgs e)
+        {
+            foreach(Bruker bruker in queryProsjekt)
+            {
+                DropDownList ddlProsjekt = new DropDownList();
+                for (int i = 0; i < bruker.Prosjekter.Count; i++)
+                {
+                    Prosjekt prosjekt = bruker.Prosjekter[i];
+                    ddlProsjekt.Items.Add(new ListItem(prosjekt.Navn, prosjekt.Prosjekt_id.ToString()));
+                }
+                string id = ddlProsjekt.SelectedValue;
+                Response.Redirect("HistorikkStattestikk?Prosjekt_id=" + id);
             }
         }
     }

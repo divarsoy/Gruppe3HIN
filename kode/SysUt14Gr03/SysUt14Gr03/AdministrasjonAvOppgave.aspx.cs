@@ -50,7 +50,6 @@ namespace SysUt14Gr03
                 for (int i = 0; i < prosjektListe.Count; i++)
                 {
                     Prosjekt prosjekt = prosjektListe[i];
-
                     ddlProsjekt.Items.Add(new ListItem(prosjekt.Navn, prosjekt.Prosjekt_id.ToString()));
                 }
                 for (int i = 0; i < pri.Count; i++)
@@ -58,12 +57,13 @@ namespace SysUt14Gr03
                     Prioritering priori = pri[i];
                     ddlPrioritet.Items.Add(new ListItem(priori.Navn, priori.Prioritering_id.ToString()));
                 }
-                cbAktiv.Checked = endres.Aktiv;
                 for (int i = 0; i < endres.Brukere.Count; i++)
                 {
                     Bruker bruker = endres.Brukere[i];
                     lbBrukere.Items.Add(new ListItem(endres.Brukere[i].ToString(), bruker.Bruker_id.ToString()));
                 }
+
+                cbAktiv.Checked = endres.Aktiv;
                 tbBeskrivelse.Text = endres.UserStory;
                 TbEstimering.Text = endres.Estimat.ToString();
                 tbKrav.Text = endres.Krav;
@@ -118,7 +118,7 @@ namespace SysUt14Gr03
                         endres.Tittel = tbTittel.Text;
                         endres.UserStory = tbBeskrivelse.Text;
                         endres.Aktiv = cbAktiv.Checked;
-                        //endres.Brukere = selectedBruker;
+                        endres.Brukere = selectedBruker;
                         endres.Estimat = estimering;
                         endres.RemainingTime = float.Parse(tbRemainingTime.Text);
                         endres.Tidsfrist = Convert.ToDateTime(tbTidsfristSlutt.Text);
