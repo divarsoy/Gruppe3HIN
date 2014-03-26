@@ -13,6 +13,8 @@ namespace SysUt14Gr03
     {
         private List<Prosjekt> listProsjekt;
         private List<Bruker> brukerListe;
+        private List<Bruker> brukerProsjekt;
+        private List<Bruker> queryTeam = null;
         private int brukerid;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -37,14 +39,17 @@ namespace SysUt14Gr03
                     {
 
                         Prosjekt prosjekt = listProsjekt[i];
-
+                        queryTeam = Queries.GetAlleBrukereIEtTeam((int)prosjekt.Team_id);
                         Team team = context.Teams.Where(t => t.Team_id == prosjekt.Team_id).First();
                       //  Table table = Tabeller.HentBrukerTabell(team.Brukere);
                       //  PlaceHolderBrukere.Controls.Add(table);
-                        for (int j = 0; j < team.Brukere.Count; j++)
+                        for (int j = 0; j < queryTeam.Count; j++)
                         {
                             Bruker bruk = brukerListe[j];
-                           
+                            brukerProsjekt = Queries.GetAlleAktiveBrukereID(bruk.Bruker_id);
+
+                            Table table = Tabeller.HentBrukerTabellIProsjektTeamProsjektLeder(brukerProsjekt);
+                            PlaceHolderBrukere.Controls.Add(table);
                            lbBrukere.Items.Add(prosjekt.Navn + " " + bruk.ToString());
                         }
                     }
