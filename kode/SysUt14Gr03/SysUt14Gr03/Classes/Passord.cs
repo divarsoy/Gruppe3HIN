@@ -19,7 +19,7 @@ namespace SysUt14Gr03.Classes
             return Convert.ToBase64String(hash);
 
         }
-        public static String GetRandomSalt(Int32 size = 12)
+        private static String GetRandomSalt(Int32 size = 12)
         {
             var random = new RNGCryptoServiceProvider();
             var salt = new Byte[size];
