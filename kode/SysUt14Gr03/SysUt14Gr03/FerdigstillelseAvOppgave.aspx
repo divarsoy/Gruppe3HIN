@@ -1,5 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="FerdigstillelseAvOppgave.aspx.cs" Inherits="SysUt14Gr03.FerdigstillelseAvOppgave" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Utvikler.Master" AutoEventWireup="true" CodeBehind="FerdigstillelseAvOppgave.aspx.cs" Inherits="SysUt14Gr03.FerdigstillelseAvOppgave" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContentUtvikler" runat="server">
     <h1>Ferdigstillelse av oppgave</h1>
     <p>Mine oppgaver</p>
     <p>

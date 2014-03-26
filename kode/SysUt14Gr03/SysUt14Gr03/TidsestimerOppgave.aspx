@@ -1,5 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="TidsestimerOppgave.aspx.cs" Inherits="SysUt14Gr03.TidsestimerOppgave" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Utvikler.Master" AutoEventWireup="true" CodeBehind="TidsestimerOppgave.aspx.cs" Inherits="SysUt14Gr03.TidsestimerOppgave" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContentUtvikler" runat="server">
     <h1>Tidsestimer oppgave</h1>
     <p>
         <asp:ListBox ID="lsbOppgaver" runat="server"></asp:ListBox>

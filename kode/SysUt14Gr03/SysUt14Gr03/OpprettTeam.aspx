@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="OpprettTeam.aspx.cs" Inherits="SysUt14Gr03.OpprettTeam" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Site.Prosjektleder.Master" AutoEventWireup="true" CodeBehind="OpprettTeam.aspx.cs" Inherits="SysUt14Gr03.OpprettTeam" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h1>Opprett team</h1>
     <p>

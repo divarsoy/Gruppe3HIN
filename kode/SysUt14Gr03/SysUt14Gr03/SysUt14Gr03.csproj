@@ -259,6 +259,7 @@
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Site.Mobile.Master" />
+    <Content Include="Site.Prosjektleder.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -428,6 +429,13 @@
     </Compile>
     <Compile Include="ReturAvOppgave.aspx.designer.cs">
       <DependentUpon>ReturAvOppgave.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Site.Prosjektleder.Master.cs">
+      <DependentUpon>Site.Prosjektleder.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Prosjektleder.Master.designer.cs">
+      <DependentUpon>Site.Prosjektleder.Master</DependentUpon>
     </Compile>
     <Compile Include="Site.Utvikler.Master.cs">
       <DependentUpon>Site.Utvikler.Master</DependentUpon>
