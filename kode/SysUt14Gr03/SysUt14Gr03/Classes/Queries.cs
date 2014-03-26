@@ -113,7 +113,17 @@ namespace SysUt14Gr03.Classes
             
             }
         }
+        static public List<Bruker> GetAlleAktiveBrukereID(int bruker_id)
+        {
+            using (var context = new Context())
+            {
+                var brukerListe = (from bruker in context.Brukere
+                                   where bruker.Bruker_id == bruker_id
+                                   select bruker).ToList<Bruker>();
+                return brukerListe;
 
+            }
+        }
         static public List<Bruker> GetAlleBrukerePaaTeam(int valgtTeam_id)
         {
             using (var context = new Context())
