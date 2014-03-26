@@ -66,7 +66,22 @@ namespace SysUt14Gr03.Classes
         /// <param name="melding">Tittel, vises som epostemne.</param>
         static public void SendVarsel(int bruker_id, int varsel, string tittel, string melding)
         {
-            SendVarsel(bruker_id, varsel, tittel, melding, -1);
+            SendVarsel(bruker_id, varsel, tittel, melding, 1);
+        }
+
+        /// <summary>
+        /// Sender varsel til bruker med bruker_id, send med varseltype
+        /// som sjekkes mot epostpreferanser, melding, meldingstittel
+        /// og en oppgave_id. Brukes kun ved invitasjon.
+        /// </summary>
+        /// <param name="bruker_id">ID til mottaker</param>
+        /// <param name="varsel">Hvilken type varsel, bruk Varsel.VARSELTYPE</param>
+        /// <param name="melding">Meldingstekst</param>
+        /// <param name="melding">Tittel, vises som epostemne.</param>
+        /// <param name="notifikasjonstype">hvilken type notifikasjon(se database)</param>
+        static public void SendVarsel(int bruker_id, int varsel, string tittel, string melding, int notifikasjonstype)
+        {
+            SendVarsel(bruker_id, varsel, tittel, melding, -1, notifikasjonstype);
         }
 
         /// <summary>
@@ -79,18 +94,22 @@ namespace SysUt14Gr03.Classes
         /// <param name="melding">Meldingstekst</param>
         /// <param name="melding">Tittel, vises som epostemne.</param>
         /// <param name="oppgave_id">oppgave_id til oppgaven mottaker inviteres til</param>
-        static public void SendVarsel(int bruker_id, int varsel, string tittel, string melding, int oppgave_id)
+        /// /// <param name="notifikasjonstype">hvilken type notifikasjon(se database)</param>
+        static public void SendVarsel(int bruker_id, int varsel, string tittel, string melding, int oppgave_id, int notifikasjonstype)
         {
             // Sjekker brukerpreferanser
             Bruker bruker = Queries.GetBruker(bruker_id);
             BrukerPreferanse brukerPrefs = Queries.GetEpostPreferanser(bruker_id);
             bool[] selectedItems = new bool[6];
-            selectedItems[0] = brukerPrefs.EpostTeam;
-            selectedItems[1] = brukerPrefs.EpostProsjekt;
-            selectedItems[2] = brukerPrefs.EpostOppgave;
-            selectedItems[3] = brukerPrefs.EpostKommentar;
-            selectedItems[4] = brukerPrefs.EpostTidsfrist;
-            selectedItems[5] = brukerPrefs.EpostRapport;
+            if (brukerPrefs != null)
+            {
+                selectedItems[0] = brukerPrefs.EpostTeam;
+                selectedItems[1] = brukerPrefs.EpostProsjekt;
+                selectedItems[2] = brukerPrefs.EpostOppgave;
+                selectedItems[3] = brukerPrefs.EpostKommentar;
+                selectedItems[4] = brukerPrefs.EpostTidsfrist;
+                selectedItems[5] = brukerPrefs.EpostRapport;
+            }   
 
             // Genererer melding + tittel
             melding = melding == "" ? VARSELTEKST[varsel] : melding;
@@ -110,8 +129,24 @@ namespace SysUt14Gr03.Classes
                 sendEmail.sendEpost(epost, melding, tittel, null, null, null);
             }
 
-            // Sender intern varsel (kommer senere)
+            // Sender intern varsel
+            using (var context = new Context())
+            {
+                bruker = context.Brukere.FirstOrDefault(b => b.Bruker_id == bruker_id);
+                NotifikasjonsType type = context.NotifikasjonsType.FirstOrDefault(nt => nt.NotifikasjonsType_id == notifikasjonstype);
+                    // Legger varsel inn i databasen:
+                    var nyVarsel = new Notifikasjon
+                    {
+                        Melding = melding,
+                        notifikasjonsType = type,
+                        bruker = bruker
+                    };
+
+                    context.Notifikasjoner.Add(nyVarsel);
+                    context.SaveChanges();
+            }
         }
+                
 
         /// <summary>
         /// Sender varsel til alle brukere i en liste, send med varseltype
@@ -154,7 +189,7 @@ namespace SysUt14Gr03.Classes
         {
             foreach (Bruker bruker in brukerListe)
             {
-                SendVarsel(bruker.Bruker_id, varsel, tittel, melding, -1);
+                SendVarsel(bruker.Bruker_id, varsel, tittel, melding, 1);
             }
         }
 
@@ -168,11 +203,31 @@ namespace SysUt14Gr03.Classes
         /// <param name="melding">Meldingstekst</param>
         /// <param name="melding">Tittel, vises som epostemne.</param>
         /// <param name="oppgave_id">oppgave_id til oppgaven mottaker inviteres til</param>
-        static public void SendVarsel(List<Bruker> brukerListe, int varsel, string tittel, string melding, int oppgave_id)
+        /// /// <param name="notifikasjonstype">hvilken type notifikasjon(se database)</param>
+        static public void SendVarsel(List<Bruker> brukerListe, int varsel, string tittel, string melding, int notifikasjonstype)
         {
             foreach (Bruker bruker in brukerListe)
             {
-                SendVarsel(bruker.Bruker_id, varsel, tittel, melding, oppgave_id);
+                SendVarsel(bruker.Bruker_id, varsel, tittel, melding, -1, notifikasjonstype);
+            }
+        }
+
+        /// <summary>
+        /// Sender varsel til alle brukere i en liste, send med varseltype
+        /// som sjekkes mot epostpreferanser, melding, meldingstittel
+        /// og en oppgave_id. Brukes kun ved invitasjon.
+        /// </summary>
+        /// <param name="brukerListe">Liste med mottakere</param>
+        /// <param name="varsel">Hvilken type varsel, bruk Varsel.VARSELTYPE</param>
+        /// <param name="melding">Meldingstekst</param>
+        /// <param name="melding">Tittel, vises som epostemne.</param>
+        /// <param name="oppgave_id">oppgave_id til oppgaven mottaker inviteres til</param>
+        /// /// <param name="notifikasjonstype">hvilken type notifikasjon(se database)</param>
+        static public void SendVarsel(List<Bruker> brukerListe, int varsel, string tittel, string melding, int oppgave_id, int notifikasjonstype)
+        {
+            foreach (Bruker bruker in brukerListe)
+            {
+                SendVarsel(bruker.Bruker_id, varsel, tittel, melding, oppgave_id, notifikasjonstype);
             }
         }
     }
