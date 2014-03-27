@@ -12,36 +12,27 @@ namespace SysUt14Gr03.Classes
 {
     public class NotifikasjonFlash
     {
-        static public string HentNotifikasjoner(int bruker_id){
-            var notifikasjonsListe = Queries.GetNotifikasjon(bruker_id);
-            StringBuilder returnString = new StringBuilder();
-            foreach (Notifikasjon notifikasjon in notifikasjonsListe)
-            {
-                returnString.Append("<div id='flash' class='flash alert alert-dismissable ");
-                returnString.Append(Queries.GetNotifikasjonsType(notifikasjon.NotifikasjonsType_id).Type);
-                returnString.Append("'>");
-                returnString.Append(Environment.NewLine);
-                returnString.Append("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>");
-                returnString.Append(Environment.NewLine);
-                returnString.Append(notifikasjon.Melding);
-                returnString.Append("</div>");
-                returnString.Append(Environment.NewLine);
-            }
-            return returnString.ToString();
-        }
-        static public Panel HentNotifikasjonsPanel(int bruker_id)
+        private Panel panel = new Panel();
+
+        public Panel HentNotifikasjonsPanel(int bruker_id)
         {
             var notifikasjonsListe = Queries.GetNotifikasjon(bruker_id);
-            Panel panel = new Panel();
+            int i = 1;
             foreach (Notifikasjon notifikasjon in notifikasjonsListe)
             {
                 Label label = new Label();
                 label.Text = String.Format ("<div id='flash' class='flash alert alert-dismissable {0}'>", Queries.GetNotifikasjonsType(notifikasjon.NotifikasjonsType_id).Type);
                 LinkButton button = new LinkButton();
                 button.CssClass = "close";
-                button.Attributes.Add("data-dismiss", "alert");
+                //button.Attributes.Add("data-dismiss", "alert");  Fjernet da den kjører et javascript som overstyrer reload
                 button.Attributes.Add("aria-hidden", "true");
                 button.Text = "&times;";
+                button.Command += new CommandEventHandler(btnNotifikasjon_Click);
+                button.CommandArgument = notifikasjon.Notifikasjon_id.ToString();
+                button.CommandName = "button" + i;
+
+                //button.Click += new System.EventHandler(btnNotifikasjon_Click);
+                //.OnClientClick += new System.EventHandler(btnNotifikasjon_Click);
                 Label labelMelding = new Label();
                 labelMelding.Text = notifikasjon.Melding + "</div>";
                 panel.Controls.Add(label);
@@ -49,6 +40,19 @@ namespace SysUt14Gr03.Classes
                 panel.Controls.Add(labelMelding);
             }
             return panel;
+        }
+
+        protected void btnNotifikasjon_Click(object sender, CommandEventArgs e)
+        {
+            int notifikasjon_id = Validator.KonverterTilTall(e.CommandArgument.ToString());
+
+            using (Context context = new Context())
+            {
+                var notifikasjon = context.Notifikasjoner.Find(notifikasjon_id);
+                notifikasjon.Vist = true;
+                context.SaveChanges();
+            }
+
         }
     }
 }

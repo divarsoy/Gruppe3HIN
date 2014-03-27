@@ -129,7 +129,7 @@
             </div>
         </div>
         <div class="notifikasjon">
-            <asp:PlaceHolder ID="PlaceHolderNotifikasjon" runat="server"></asp:PlaceHolder>
+            <asp:Panel ID="NotifikasjonsPanel" runat="server"></asp:Panel>
         </div>
 
         <div class="container body-content">

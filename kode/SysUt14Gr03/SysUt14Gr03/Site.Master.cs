@@ -8,6 +8,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using SysUt14Gr03;
 using SysUt14Gr03.Classes;
+using SysUt14Gr03.Models;
 
 namespace SysUt14Gr03
 {
@@ -17,6 +18,8 @@ namespace SysUt14Gr03
         private const string AntiXsrfUserNameKey = "__AntiXsrfUserName";
         private string _antiXsrfTokenValue;
         public string antallNotifikasjoner = "";
+        private int bruker_id = 2;
+        private int i = 0;
 
         protected void Page_Init(object sender, EventArgs e)
         {
@@ -48,6 +51,9 @@ namespace SysUt14Gr03
             }
 
             Page.PreLoad += master_Page_PreLoad;
+
+
+
         }
 
         protected void master_Page_PreLoad(object sender, EventArgs e)
@@ -71,20 +77,18 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                if (Session["bruker_id"] != null){
-                    int bruker_id = 2;
+            //if (!IsPostBack)
+            //{
+            int bruker_id = 2;
 
-                    //int bruker_id = Validator.KonverterTilTall((string)Session["bruker_id"]);
-                    int antallNotifikasjonerInt = Queries.GetNotifikasjon(bruker_id).Count;
-                    if (antallNotifikasjonerInt > 0)
-                        antallNotifikasjoner = String.Format("({0})", antallNotifikasjonerInt.ToString());
-                    //String notifikasjoner = NotifikasjonFlash.HentNotifikasjoner(bruker_id);
-                    //NotifikasjonsContent.Text = notifikasjoner;
-                    PlaceHolderNotifikasjon.Controls.Add(NotifikasjonFlash.HentNotifikasjonsPanel(bruker_id));
-                }
-            }
+
+
+            int antallNotifikasjonerInt = Queries.GetNotifikasjon(bruker_id).Count;
+            if (antallNotifikasjonerInt > 0)
+                antallNotifikasjoner = String.Format("({0})", antallNotifikasjonerInt.ToString());
+
+            HentNotifikasjonsPanel(bruker_id);
+            //}
 
         }
 
@@ -93,9 +97,50 @@ namespace SysUt14Gr03
             Context.GetOwinContext().Authentication.SignOut();
         }
 
-        void btnNotifikasjon_Click(object sender, EventArgs e)
+
+        public void HentNotifikasjonsPanel(int bruker_id)
         {
+            var notifikasjonsListe = Queries.GetNotifikasjon(bruker_id);
+
+            foreach (Notifikasjon notifikasjon in notifikasjonsListe)
+            {
+                Label label = new Label();
+                label.Text = String.Format("<div id='flash' class='flash alert alert-dismissable {0}'>", Queries.GetNotifikasjonsType(notifikasjon.NotifikasjonsType_id).Type);
+                LinkButton button = new LinkButton();
+                button.CssClass = "close";
+                //button.Attributes.Add("data-dismiss", "alert");  Fjernet da den kjører et javascript som overstyrer reload
+                button.Attributes.Add("aria-hidden", "true");
+                button.Text = "&times;";
+                button.Command += new CommandEventHandler(btnNotifikasjon_Click);
+                button.CommandArgument = notifikasjon.Notifikasjon_id.ToString();
+                button.CommandName = i.ToString();
+                Label labelMelding = new Label();
+                labelMelding.Text = notifikasjon.Melding + "</div>";
+                NotifikasjonsPanel.Controls.Add(label);
+                NotifikasjonsPanel.Controls.Add(button);
+                NotifikasjonsPanel.Controls.Add(labelMelding);
+                i++;
+            }
         }
+
+        protected void btnNotifikasjon_Click(object sender, CommandEventArgs e)
+        {
+            int notifikasjon_id = Validator.KonverterTilTall(e.CommandArgument.ToString());
+
+            using (Context context = new Context())
+            {
+                var notifikasjon = context.Notifikasjoner.Find(notifikasjon_id);
+                notifikasjon.Vist = true;
+                context.SaveChanges();
+            }
+            int index = Validator.KonverterTilTall(e.CommandName);
+    //      NotifikasjonsPanel.Controls.RemoveAt(antallNotifikasjoner+2);
+    //      NotifikasjonsPanel.Controls.RemoveAt(index+1);
+    //      NotifikasjonsPanel.Controls.RemoveAt(index);
+            NotifikasjonsPanel.Controls.Clear();
+            HentNotifikasjonsPanel(bruker_id);
+        }
+
     }
 
 }
