@@ -79,7 +79,7 @@ namespace SysUt14Gr03
              
                 string Tok = token;
                 passord = MD5Hash(Password.Text);
-                //passord = Passord.HashPassord(Password.Text, Passord.GetRandomSalt());
+                //passord = Passord.HashPassord(Password.Text);
                 epost = Email.Text;
                 brukernavn = Username.Text;
                 etternavn = Aftername.Text;

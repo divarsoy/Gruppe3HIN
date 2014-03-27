@@ -6,7 +6,7 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - Morild Data BA</title>
+    <title><%:antallNotifikasjoner %> - Morild Data BA - <%: Page.Title %></title>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
@@ -78,6 +78,10 @@
                 </div>
             </div>
         </div>
+        <div class="notifikasjon">
+            <asp:Panel ID="NotifikasjonsPanel" runat="server"></asp:Panel>
+        </div>
+
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>

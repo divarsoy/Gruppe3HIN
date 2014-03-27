@@ -171,6 +171,7 @@
     <Content Include="AdministrasjonAvTeam.aspx" />
     <Content Include="AdministrasjonAvTeamBrukere.aspx" />
     <Content Include="AdministratorForside.aspx" />
+    <Content Include="AdministrerOppgavegruppe.aspx" />
     <Content Include="AktiverKonto.aspx" />
     <Content Include="ArkiverGruppe.aspx" />
     <Content Include="AdministrasjonAvOppgave.aspx" />
@@ -193,6 +194,7 @@
     <Content Include="MottaOppgave.aspx" />
     <Content Include="OpprettGruppe.aspx" />
     <Content Include="OpprettOppgave.aspx" />
+    <Content Include="OpprettOppgavegruppe.aspx" />
     <Content Include="OpprettProsjekt.aspx" />
     <Content Include="OpprettTidsfristPaaOppgave.aspx" />
     <Content Include="OversiktBrukereSomProsjektleder.aspx" />
@@ -259,7 +261,6 @@
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Site.Mobile.Master" />
-    <Content Include="Site.Prosjektleder.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -338,6 +339,13 @@
     <Compile Include="AdministratorForside.aspx.designer.cs">
       <DependentUpon>AdministratorForside.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AdministrerOppgavegruppe.aspx.cs">
+      <DependentUpon>AdministrerOppgavegruppe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdministrerOppgavegruppe.aspx.designer.cs">
+      <DependentUpon>AdministrerOppgavegruppe.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AktiverKonto.aspx.cs">
       <DependentUpon>AktiverKonto.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -376,9 +384,17 @@
     <Compile Include="AdministrasjonAvOppgave.aspx.designer.cs">
       <DependentUpon>AdministrasjonAvOppgave.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Classes\NotifikasjonFlash.cs" />
     <Compile Include="Classes\Passord.cs" />
     <Compile Include="Models\Notifikasjon.cs" />
     <Compile Include="Models\NotifikasjonsType.cs" />
+    <Compile Include="OpprettOppgavegruppe.aspx.cs">
+      <DependentUpon>OpprettOppgavegruppe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OpprettOppgavegruppe.aspx.designer.cs">
+      <DependentUpon>OpprettOppgavegruppe.aspx</DependentUpon>
+    </Compile>
     <Compile Include="OversiktBrukereSomProsjektleder.aspx.cs">
       <DependentUpon>OversiktBrukereSomProsjektleder.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -429,13 +445,6 @@
     </Compile>
     <Compile Include="ReturAvOppgave.aspx.designer.cs">
       <DependentUpon>ReturAvOppgave.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Site.Prosjektleder.Master.cs">
-      <DependentUpon>Site.Prosjektleder.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Site.Prosjektleder.Master.designer.cs">
-      <DependentUpon>Site.Prosjektleder.Master</DependentUpon>
     </Compile>
     <Compile Include="Site.Utvikler.Master.cs">
       <DependentUpon>Site.Utvikler.Master</DependentUpon>
