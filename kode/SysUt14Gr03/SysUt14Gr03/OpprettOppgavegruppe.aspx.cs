@@ -21,20 +21,14 @@ namespace SysUt14Gr03
         protected void Page_Load(object sender, EventArgs e)
         {
             oppgaveListe = Queries.GetAlleAktiveOppgaverForProsjekt(prosjekt_id);
-
-            BindingSource bindingsource = new BindingSource();
             valgteOppgaver = new List<Oppgave>();
-            bindingsource.DataSource = oppgaveListe;
-            gvwOppgaver.DataSource = bindingsource;
-            gvwOppgaver.DataBind();
 
             if (!IsPostBack)
             {
-                foreach (Oppgave oppgave in oppgaveListe)
-                {
-                    
-                }
-                
+                BindingSource bindingsource = new BindingSource();
+                bindingsource.DataSource = oppgaveListe;
+                gvwOppgaver.DataSource = bindingsource;
+                gvwOppgaver.DataBind();
             }
         }
 
@@ -56,12 +50,10 @@ namespace SysUt14Gr03
         {
             //DropDownList ddlPrioritet;
 
-            int i = 0;
-
-            foreach (GridViewRow row in gvwOppgaver.Rows)
+            for (int i = 0; i < gvwOppgaver.Rows.Count; i++)
             {
-                System.Web.UI.WebControls.CheckBox chkBox = row.FindControl("chbGruppe") as System.Web.UI.WebControls.CheckBox;
-                ddlPrioritet = row.FindControl("ddlPrioritet") as DropDownList;
+                System.Web.UI.WebControls.CheckBox chkBox = (System.Web.UI.WebControls.CheckBox)gvwOppgaver.Rows[i].FindControl("chbGruppe");
+                ddlPrioritet = gvwOppgaver.Rows[i].FindControl("ddlPrioritet") as DropDownList;
                 if (chkBox != null)
                 {
                     if (chkBox.Checked)
@@ -70,7 +62,6 @@ namespace SysUt14Gr03
                         valgteOppgaver.Add(oppgaveListe[i]);
                     }
                 }
-                i++;
             }
 
             using (var context = new Context())
