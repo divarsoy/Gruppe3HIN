@@ -13,12 +13,30 @@ namespace SysUt14Gr03 {
     public partial class OversiktBrukereSomProsjektleder {
         
         /// <summary>
-        /// ListBox1 control.
+        /// lblProsjekt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox ListBox1;
+        protected global::System.Web.UI.WebControls.Label lblProsjekt;
+        
+        /// <summary>
+        /// PlaceHolderBrukere control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder PlaceHolderBrukere;
+        
+        /// <summary>
+        /// lbBrukere control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox lbBrukere;
     }
 }

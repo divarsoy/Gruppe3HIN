@@ -171,6 +171,7 @@
     <Content Include="AdministrasjonAvTeam.aspx" />
     <Content Include="AdministrasjonAvTeamBrukere.aspx" />
     <Content Include="AdministratorForside.aspx" />
+    <Content Include="AdministrerOppgavegruppe.aspx" />
     <Content Include="AktiverKonto.aspx" />
     <Content Include="ArkiverGruppe.aspx" />
     <Content Include="AdministrasjonAvOppgave.aspx" />
@@ -193,6 +194,7 @@
     <Content Include="MottaOppgave.aspx" />
     <Content Include="OpprettGruppe.aspx" />
     <Content Include="OpprettOppgave.aspx" />
+    <Content Include="OpprettOppgavegruppe.aspx" />
     <Content Include="OpprettProsjekt.aspx" />
     <Content Include="OpprettTidsfristPaaOppgave.aspx" />
     <Content Include="OversiktBrukereSomProsjektleder.aspx" />
@@ -337,6 +339,13 @@
     <Compile Include="AdministratorForside.aspx.designer.cs">
       <DependentUpon>AdministratorForside.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AdministrerOppgavegruppe.aspx.cs">
+      <DependentUpon>AdministrerOppgavegruppe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdministrerOppgavegruppe.aspx.designer.cs">
+      <DependentUpon>AdministrerOppgavegruppe.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AktiverKonto.aspx.cs">
       <DependentUpon>AktiverKonto.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -379,6 +388,13 @@
     <Compile Include="Classes\Passord.cs" />
     <Compile Include="Models\Notifikasjon.cs" />
     <Compile Include="Models\NotifikasjonsType.cs" />
+    <Compile Include="OpprettOppgavegruppe.aspx.cs">
+      <DependentUpon>OpprettOppgavegruppe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OpprettOppgavegruppe.aspx.designer.cs">
+      <DependentUpon>OpprettOppgavegruppe.aspx</DependentUpon>
+    </Compile>
     <Compile Include="OversiktBrukereSomProsjektleder.aspx.cs">
       <DependentUpon>OversiktBrukereSomProsjektleder.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

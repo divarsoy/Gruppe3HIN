@@ -10,33 +10,42 @@
 namespace SysUt14Gr03 {
     
     
-    public partial class OversiktBrukerSomUtvikler {
+    public partial class OpprettOppgavegruppe {
         
         /// <summary>
-        /// lblTilbakemelding control.
+        /// txtNavn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTilbakemelding;
+        protected global::System.Web.UI.WebControls.TextBox txtNavn;
         
         /// <summary>
-        /// PlaceHolderTableProject control.
+        /// gvwOppgaver control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder PlaceHolderTableProject;
+        protected global::System.Web.UI.WebControls.GridView gvwOppgaver;
         
         /// <summary>
-        /// Button1 control.
+        /// btnOpprett control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.Button btnOpprett;
+        
+        /// <summary>
+        /// Button2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button2;
     }
 }

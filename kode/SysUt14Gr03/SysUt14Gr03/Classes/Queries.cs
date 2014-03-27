@@ -108,6 +108,15 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        static public Prioritering GetPrioritering(int _prioritering_id)
+        {
+            using (var context = new Context())
+            {
+                var result = context.Prioriteringer.Where(p => p.Prioritering_id == _prioritering_id).FirstOrDefault();
+                return result;
+            }
+        }
+
         static public Oppgave GetOppgave(int oppgave_id)
         {
             using (var context = new Context())
@@ -135,7 +144,17 @@ namespace SysUt14Gr03.Classes
             
             }
         }
+        static public List<Bruker> GetAlleAktiveBrukereID(int bruker_id)
+        {
+            using (var context = new Context())
+            {
+                var brukerListe = (from bruker in context.Brukere
+                                   where bruker.Bruker_id == bruker_id
+                                   select bruker).ToList<Bruker>();
+                return brukerListe;
 
+            }
+        }
         static public List<Bruker> GetAlleBrukerePaaTeam(int valgtTeam_id)
         {
             using (var context = new Context())
@@ -358,6 +377,7 @@ namespace SysUt14Gr03.Classes
             {
                 var brukerListe = (from bruker in context.Brukere
                                    where bruker.Teams.Any(team => team.Team_id == team_id)
+                                   orderby bruker.Etternavn
                                    select bruker).ToList();
 
                 return brukerListe;
@@ -367,9 +387,12 @@ namespace SysUt14Gr03.Classes
         {
             using (var context = new Context())
             {
-                var brukerListe = (from bruker in context.Brukere
-                                   where bruker.Prosjekter.Any(prosjekt => prosjekt.Prosjekt_id == prosjekt_id)
-                                   select bruker).ToList();
+                var brukerListe = context.Brukere
+                                    .Include("Teams")
+                                    .Include("Prosjekter")
+                                    .Where(bruker => bruker.Prosjekter.Any(prosjekt => prosjekt.Prosjekt_id == prosjekt_id))
+                                    .OrderBy(bruker => bruker.Etternavn)
+                                    .ToList();
                 return brukerListe;
             }
         }

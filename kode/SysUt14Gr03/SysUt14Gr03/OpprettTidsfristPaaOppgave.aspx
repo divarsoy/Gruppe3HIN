@@ -1,5 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="OpprettTidsfristPaaOppgave.aspx.cs" Inherits="SysUt14Gr03.OpprettTidsfristPaaOppgave" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Utvikler.Master" AutoEventWireup="true" CodeBehind="OpprettTidsfristPaaOppgave.aspx.cs" Inherits="SysUt14Gr03.OpprettTidsfristPaaOppgave" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContentUtvikler" runat="server">
     <h1>Sett tidsfrist på oppgaver</h1>
     <p></p>
     <asp:Panel ID="pnlOppgaver" runat="server">
