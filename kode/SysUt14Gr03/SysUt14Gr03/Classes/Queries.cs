@@ -33,6 +33,28 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        static public List<Notifikasjon> GetNotifikasjon(int bruker_id)
+        {
+            using (var context = new Context())
+            {
+                List<Notifikasjon> notifikasjonsListe = context.Notifikasjoner
+                    .Include("NotifikasjonsType")
+                    .Where(notifikasjon => notifikasjon.Bruker_id == bruker_id)
+                    .Where(p => p.Vist == false)
+                    .ToList();
+                return notifikasjonsListe;
+            }
+        }
+        static public NotifikasjonsType GetNotifikasjonsType(int notifikasjonsType_id)
+        {
+            using (var context = new Context())
+            {
+                var notifikasjonsType = context.NotifikasjonsType
+                    .Find(notifikasjonsType_id);
+                    return notifikasjonsType;
+            }
+        }
+
         // Henter epostpreferanser til bruker med bruker_id
         static public BrukerPreferanse GetEpostPreferanser(int _bruker_id)
         {
