@@ -187,7 +187,8 @@ namespace SysUt14Gr03.Classes
                 {
                     Prosjekt prosjekt = bruker.Prosjekter[i];
                     ddlProsjekt.Items.Add(new ListItem(prosjekt.Navn, prosjekt.Prosjekt_id.ToString()));
-                    btnProsjekt.Click += get.Button1_Click;
+                    btnProsjekt.ID = "btnProsjekt";
+                    btnProsjekt.Text = "Gå til prosjekt";
                 }
                     
                 forNavnCell.Text = String.Format("<a href='HistorikkStattestikk?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Fornavn);
