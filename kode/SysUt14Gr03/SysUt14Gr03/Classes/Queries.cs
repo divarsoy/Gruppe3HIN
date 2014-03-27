@@ -86,6 +86,15 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        static public Prioritering GetPrioritering(int _prioritering_id)
+        {
+            using (var context = new Context())
+            {
+                var result = context.Prioriteringer.Where(p => p.Prioritering_id == _prioritering_id).FirstOrDefault();
+                return result;
+            }
+        }
+
         static public Oppgave GetOppgave(int oppgave_id)
         {
             using (var context = new Context())
