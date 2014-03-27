@@ -22,6 +22,15 @@ namespace SysUt14Gr03 {
         protected global::System.Web.UI.WebControls.Label lblProsjekt;
         
         /// <summary>
+        /// PlaceHolderBrukere control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder PlaceHolderBrukere;
+        
+        /// <summary>
         /// lbBrukere control.
         /// </summary>
         /// <remarks>

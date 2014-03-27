@@ -1,5 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EstimerResttidPaOppgave.aspx.cs" Inherits="SysUt14Gr03.EstimerResttidPaOppgave" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Utvikler.Master" AutoEventWireup="true" CodeBehind="EstimerResttidPaOppgave.aspx.cs" Inherits="SysUt14Gr03.EstimerResttidPaOppgave" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContentUtvikler" runat="server">
     <h2> Estimer resterende tid på oppgave</h2>
     <p> 
         <asp:DropDownList ID="ddlOppgaver" runat="server">
