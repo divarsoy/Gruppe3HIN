@@ -35,7 +35,6 @@ namespace SysUt14Gr03
             listProsjekt = Queries.GetAlleProsjekterForLeder(brukerid);
             brukerListe = Queries.GetAlleAktiveBrukere();
 
-            // lbBrukere.Items.Add("Prosjekt " + " " + " Brukere");
               for (int i = 0; i < listProsjekt.Count; i++)
               {
                   using (var context = new Context())
@@ -43,19 +42,16 @@ namespace SysUt14Gr03
 
                       Prosjekt prosjekt = listProsjekt[i];
                       queryTeam = Queries.GetAlleBrukereIEtTeam((int)prosjekt.Team_id);
-                    //  Team team = context.Teams.Where(t => t.Team_id == prosjekt.Team_id).First();
-                    //  Table table = Tabeller.HentBrukerTabell(team.Brukere);
-                    //  PlaceHolderBrukere.Controls.Add(table);
+          
                       for (int j = 0; j < queryTeam.Count; j++)
                       {
                           Bruker bruk = brukerListe[j];
                           brukerProsjekt = Queries.GetAlleAktiveBrukereID(bruk.Bruker_id);
                           teams = Queries.GetAlleTeamsEnBrukerErMedI(bruk.Bruker_id);
-                          queryProsjekt = Queries.GetAlleProsjektEnBrukerErMedI(bruk.Bruker_id);
-
-                          Table table = Tabeller.HentBrukerTabellIProsjektTeamProsjektLeder(brukerProsjekt, teams, listProsjekt);
+                          queryProsjekt = Queries.GetAlleBrukereProsjektTeam((int)prosjekt.Team_id);
+                          Table table = Tabeller.HentBrukerTabellIProsjektTeamProsjektLeder(brukerProsjekt, teams, queryProsjekt);
                           PlaceHolderBrukere.Controls.Add(table);
-                         lbBrukere.Items.Add(prosjekt.Navn + " " + bruk.ToString());
+                          
                       }
                   }
               }

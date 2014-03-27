@@ -185,7 +185,16 @@ namespace SysUt14Gr03.Classes
                 return prosjektListe;
             }
         }
-
+        static public List<Prosjekt> GetAlleBrukereProsjektTeam(int team_id)
+        {
+            using (var context = new Context())
+            {
+                var prosjektListe = context.Prosjekter
+                                    .Where(prosjekta => prosjekta.Team_id == team_id)
+                                    .ToList();
+                return prosjektListe;
+            }
+        }
         static public List<Status> GetAlleStatuser()
         {
             using (var context = new Context())

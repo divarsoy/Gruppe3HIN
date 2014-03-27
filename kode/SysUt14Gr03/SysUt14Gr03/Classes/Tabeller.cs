@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -217,6 +218,7 @@ namespace SysUt14Gr03.Classes
         public static Table HentBrukerTabellIProsjektTeamProsjektLeder(List<Bruker> query, List<Team> queryTeam, List<Prosjekt> queryProsjekt)
         {
             Table tabell = new Table();
+      
             TableHeaderRow headerRow = new TableHeaderRow();
             TableHeaderCell forNavnHeaderCell = new TableHeaderCell();
             TableHeaderCell etterNavnHeaderCell = new TableHeaderCell();
@@ -227,12 +229,12 @@ namespace SysUt14Gr03.Classes
             TableHeaderCell prosjektHeaderCell = new TableHeaderCell();
 
             forNavnHeaderCell.Text = "Fornavn";
-            etterNavnHeaderCell.Text = "Etternavn";
-            brukerNavnHeaderCell.Text = "Brukernavn";
-            epostHeaderCell.Text = "Epost";
-            IMHeaderCell.Text = "IM";
-            teamHeaderCell.Text = "Team";
-            prosjektHeaderCell.Text = "Prosjekter";
+            etterNavnHeaderCell.Text = " Etternavn";
+            brukerNavnHeaderCell.Text = " Brukernavn";
+            epostHeaderCell.Text = " Epost";
+            IMHeaderCell.Text = " IM";
+            teamHeaderCell.Text = " Team";
+            prosjektHeaderCell.Text = " Prosjekter";
 
             headerRow.Cells.Add(forNavnHeaderCell);
             headerRow.Cells.Add(etterNavnHeaderCell);
@@ -255,27 +257,20 @@ namespace SysUt14Gr03.Classes
                 TableCell prosjekterCell = new TableCell();
 
              
-                
-
-               // StringBuilder brukereITeam = new StringBuilder();
                 foreach (Team team in queryTeam)
                 {
-                    teamsCell.Text = String.Format("<a href='HistorikkStattestikk?team_id={0}'>{1} </a>", team.Team_id, team.Navn);
-
-                    //henter ut team navnene og legge dem et sted. prosjkt og team er hentet ut av querien allerede.
-                    //brukereITeam.Append(String.Format("<a href='HistorikkStattestikk?team_id={0}'>{1} </a>", team.Team_id, team.Navn));
-                } 
+                    teamsCell.Text = String.Format("<a href='AdministrasjonAvTeam?team_id={0}'>{1} </a>", team.Team_id, team.Navn);
+                }                    
                 foreach (Prosjekt prosjekt in queryProsjekt)
-                 {
-                       prosjekterCell.Text = prosjekt.Navn;
-                 }
+                 {    
+                    prosjekterCell.Text = String.Format("<a href='AdministrasjonAvProsjekt?prosjekt_id={0}'>{1} </a>", prosjekt.Prosjekt_id, prosjekt.Navn);
+                 } 
 
-                forNavnCell.Text = String.Format("<a href='HistorikkStattestikk?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Fornavn);
-                etterNavnCell.Text = String.Format("<a href='HistorikkStattestikk?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Etternavn);
-                brukerNavnCell.Text = String.Format("<a href='HistorikkStattestikk?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Brukernavn);
-                epostCell.Text = bruker.Epost;
-                IMCell.Text = bruker.IM;
-               
+                forNavnCell.Text = String.Format("<a href='changeUser?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Fornavn);
+                etterNavnCell.Text = String.Format("<a href='changeUser?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Etternavn);
+                brukerNavnCell.Text = String.Format("<a href='changeUser?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Brukernavn);
+                epostCell.Text = String.Format(bruker.Epost);
+                IMCell.Text = String.Format(bruker.IM);
 
                 tRow.Cells.Add(forNavnCell);
                 tRow.Cells.Add(etterNavnCell);
@@ -284,8 +279,9 @@ namespace SysUt14Gr03.Classes
                 tRow.Cells.Add(IMCell);
                 tRow.Cells.Add(teamsCell);
                 tRow.Cells.Add(prosjekterCell);
-
+                
                 tabell.Rows.Add(tRow);
+                
             }
 
             return tabell;
@@ -318,7 +314,7 @@ namespace SysUt14Gr03.Classes
             headerRow.Cells.Add(opprettetHeaderCell);
             headerRow.Cells.Add(aktivHeaderCell);
             tabell.Rows.Add(headerRow);
-
+          
             foreach (Prosjekt prosjekt in query)
             {
 
