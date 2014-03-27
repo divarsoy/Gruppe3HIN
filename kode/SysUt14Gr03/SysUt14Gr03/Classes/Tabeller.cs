@@ -213,7 +213,7 @@ namespace SysUt14Gr03.Classes
             
             return tabell;
         }
-        public static Table HentBrukerTabellIProsjektTeamProsjektLeder(List<Bruker> query)
+        public static Table HentBrukerTabellIProsjektTeamProsjektLeder(List<Bruker> query, List<Team> queryTeam, List<Prosjekt> queryProsjekt)
         {
             Table tabell = new Table();
             TableHeaderRow headerRow = new TableHeaderRow();
@@ -230,7 +230,7 @@ namespace SysUt14Gr03.Classes
             brukerNavnHeaderCell.Text = "Brukernavn";
             epostHeaderCell.Text = "Epost";
             IMHeaderCell.Text = "IM";
-            teamHeaderCell.Text = "Teams";
+            teamHeaderCell.Text = "Team";
             prosjektHeaderCell.Text = "Prosjekter";
 
             headerRow.Cells.Add(forNavnHeaderCell);
@@ -256,25 +256,24 @@ namespace SysUt14Gr03.Classes
              
                 
 
-                StringBuilder brukereITeam = new StringBuilder();
-                foreach (Team team in bruker.Teams)
+               // StringBuilder brukereITeam = new StringBuilder();
+                foreach (Team team in queryTeam)
                 {
+                    teamsCell.Text = String.Format("<a href='HistorikkStattestikk?team_id={0}'>{1} </a>", team.Team_id, team.Navn);
+
                     //henter ut team navnene og legge dem et sted. prosjkt og team er hentet ut av querien allerede.
-                    brukereITeam.Append(String.Format("<a href='HistorikkStattestikk?team_id={0}'>{1} </a>", team.Team_id, team.Navn));
-                }
-                for (int i = 0; i < bruker.Prosjekter.Count; i++)
-                {
-                    Prosjekt prosjekt = bruker.Prosjekter[i];
-                    prosjekterCell.Text = prosjekt.Navn;
-                }
+                    //brukereITeam.Append(String.Format("<a href='HistorikkStattestikk?team_id={0}'>{1} </a>", team.Team_id, team.Navn));
+                } 
+                foreach (Prosjekt prosjekt in queryProsjekt)
+                 {
+                       prosjekterCell.Text = prosjekt.Navn;
+                 }
 
                 forNavnCell.Text = String.Format("<a href='HistorikkStattestikk?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Fornavn);
-
                 etterNavnCell.Text = String.Format("<a href='HistorikkStattestikk?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Etternavn);
                 brukerNavnCell.Text = String.Format("<a href='HistorikkStattestikk?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Brukernavn);
                 epostCell.Text = bruker.Epost;
                 IMCell.Text = bruker.IM;
-                teamsCell.Text = brukereITeam.ToString();
                
 
                 tRow.Cells.Add(forNavnCell);
