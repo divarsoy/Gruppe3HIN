@@ -305,7 +305,6 @@ namespace SysUt14Gr03.Classes
         public static Table HentBrukerTabellIProsjektTeamProsjektLeder(List<Bruker> query, List<Team> queryTeam, List<Prosjekt> queryProsjekt)
         {
             Table tabell = new Table();
-      
             TableHeaderRow headerRow = new TableHeaderRow();
             TableHeaderCell forNavnHeaderCell = new TableHeaderCell();
             TableHeaderCell etterNavnHeaderCell = new TableHeaderCell();
@@ -370,6 +369,7 @@ namespace SysUt14Gr03.Classes
                 tabell.Rows.Add(tRow);
                 
             }
+            tabell.CssClass = "table";
 
             return tabell;
         }
