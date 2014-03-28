@@ -33,6 +33,28 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        static public List<Notifikasjon> GetNotifikasjon(int bruker_id)
+        {
+            using (var context = new Context())
+            {
+                List<Notifikasjon> notifikasjonsListe = context.Notifikasjoner
+                    .Include("NotifikasjonsType")
+                    .Where(notifikasjon => notifikasjon.Bruker_id == bruker_id)
+                    .Where(p => p.Vist == false)
+                    .ToList();
+                return notifikasjonsListe;
+            }
+        }
+        static public NotifikasjonsType GetNotifikasjonsType(int notifikasjonsType_id)
+        {
+            using (var context = new Context())
+            {
+                var notifikasjonsType = context.NotifikasjonsType
+                    .Find(notifikasjonsType_id);
+                    return notifikasjonsType;
+            }
+        }
+
         // Henter epostpreferanser til bruker med bruker_id
         static public BrukerPreferanse GetEpostPreferanser(int _bruker_id)
         {
@@ -86,6 +108,15 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        static public Prioritering GetPrioritering(int _prioritering_id)
+        {
+            using (var context = new Context())
+            {
+                var result = context.Prioriteringer.Where(p => p.Prioritering_id == _prioritering_id).FirstOrDefault();
+                return result;
+            }
+        }
+
         static public Oppgave GetOppgave(int oppgave_id)
         {
             using (var context = new Context())
@@ -113,7 +144,17 @@ namespace SysUt14Gr03.Classes
             
             }
         }
+        static public List<Bruker> GetAlleAktiveBrukereID(int bruker_id)
+        {
+            using (var context = new Context())
+            {
+                var brukerListe = (from bruker in context.Brukere
+                                   where bruker.Bruker_id == bruker_id
+                                   select bruker).ToList<Bruker>();
+                return brukerListe;
 
+            }
+        }
         static public List<Bruker> GetAlleBrukerePaaTeam(int valgtTeam_id)
         {
             using (var context = new Context())
@@ -166,7 +207,16 @@ namespace SysUt14Gr03.Classes
                 return prosjektListe;
             }
         }
-
+        static public List<Prosjekt> GetAlleBrukereProsjektTeam(int team_id)
+        {
+            using (var context = new Context())
+            {
+                var prosjektListe = context.Prosjekter
+                                    .Where(prosjekta => prosjekta.Team_id == team_id)
+                                    .ToList();
+                return prosjektListe;
+            }
+        }
         static public List<Status> GetAlleStatuser()
         {
             using (var context = new Context())

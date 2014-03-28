@@ -13,6 +13,7 @@ namespace SysUt14Gr03
     public partial class OversiktBrukerSomUtvikler : System.Web.UI.Page
     {
         private List<Bruker> queryProsjekt = null;
+        Button btnProsjekt;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -56,12 +57,17 @@ namespace SysUt14Gr03
                 queryStatus = true;
             }
             // Lager Tabell for å vise oppgaver
+            Table prosjektTable = Tabeller.HentBrukerTabellIProsjektTeamUtviklere(queryProsjekt);
+            prosjektTable.CssClass = "table";
             if (!IsPostBack && queryStatus)
             {
-                Table prosjektTable = Tabeller.HentBrukerTabellIProsjektTeamUtviklere(queryProsjekt); 
-                prosjektTable.CssClass = "table";
+                
                 PlaceHolderTableProject.Controls.Add(prosjektTable);
-            }
+                btnProsjekt = (prosjektTable.FindControl("btnProsjekt") as Button);
+            }    
+            //PlaceHolderTableProject.FindControl()
+            //Button btnProsjekt = new Button();
+            btnProsjekt.Click += Button1_Click;
         }
 
         public void Button1_Click(object sender, EventArgs e)
@@ -75,7 +81,7 @@ namespace SysUt14Gr03
                     ddlProsjekt.Items.Add(new ListItem(prosjekt.Navn, prosjekt.Prosjekt_id.ToString()));
                 }
                 string id = ddlProsjekt.SelectedValue;
-                Response.Redirect("HistorikkStattestikk?Prosjekt_id=" + id);
+                Response.Redirect("HistorikkStattestikk.aspx?Prosjekt_id=" + id);
             }
         }
         public void Button2_Click(object sender, EventArgs e)

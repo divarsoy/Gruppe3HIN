@@ -1,5 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="HistorikkStattestikk.aspx.cs" Inherits="SysUt14Gr03.HistorikkStattestikk" %>
-<asp:Content ID="Content1" runat="server" contentplaceholderid="MainContent">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Utvikler.Master" AutoEventWireup="true" CodeBehind="HistorikkStattestikk.aspx.cs" Inherits="SysUt14Gr03.HistorikkStattestikk" %>
+<asp:Content ID="Content1" runat="server" contentplaceholderid="MainContentUtvikler">
     <h1>Historikk/Statestikk</h1>
 
     <div class="kolonner col-md-8">

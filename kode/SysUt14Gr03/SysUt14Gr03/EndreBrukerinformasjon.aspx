@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EndreBrukerinformasjon.aspx.cs" Inherits="SysUt14Gr03.EndreBrukerinformasjon" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Prosjektleder.Master" AutoEventWireup="true" CodeBehind="EndreBrukerinformasjon.aspx.cs" Inherits="SysUt14Gr03.EndreBrukerinformasjon" %>
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
