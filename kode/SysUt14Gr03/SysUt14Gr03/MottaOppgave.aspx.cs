@@ -27,7 +27,9 @@ namespace SysUt14Gr03
             }
             else
             {
-                mottaker_id = Convert.ToInt32(Session["bruker_id"]);
+                mottaker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
+                if (mottaker_id == -1)
+                    Response.Redirect("Login.aspx", true);
             }
 
             List<Bruker> brukerListe = Queries.GetAlleAktiveBrukere();
@@ -37,9 +39,9 @@ namespace SysUt14Gr03
             btnGodta.Enabled = false;
             btnAvsla.Enabled = false;
 
-            if (Request.QueryString["oppgaveID"] != null)
+            if (Request.QueryString["oppgave_id"] != null)
             {
-                oppgave_id = Convert.ToInt32(Request.QueryString["oppgaveID"]);
+                oppgave_id = Convert.ToInt32(Request.QueryString["oppgave_id"]);
                 oppgave = Queries.GetOppgave(oppgave_id);
                 if (oppgave != null)
                 {

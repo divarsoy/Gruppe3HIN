@@ -63,29 +63,35 @@ namespace SysUt14Gr03
                     }
                 }
             }
-
-            using (var context = new Context())
+            if (valgteOppgaver.Count < 2)
             {
-                List<Oppgave> oppgaverTilDatabase = new List<Oppgave>();
-
-                var nyOppgaveGruppe = new OppgaveGruppe
+                using (var context = new Context())
                 {
-                    Navn = txtNavn.Text
-                };
+                    List<Oppgave> oppgaverTilDatabase = new List<Oppgave>();
 
-                context.OppgaveGrupper.Add(nyOppgaveGruppe);
+                    var nyOppgaveGruppe = new OppgaveGruppe
+                    {
+                        Navn = txtNavn.Text
+                    };
 
-                foreach (Oppgave oppgave in valgteOppgaver)
-                {
+                    context.OppgaveGrupper.Add(nyOppgaveGruppe);
 
-                    Oppgave op = context.Oppgaver.FirstOrDefault(o => o.Oppgave_id == oppgave.Oppgave_id);
-                    op.OppgaveGruppe = nyOppgaveGruppe;
-                    op.Prioritering = context.Prioriteringer.FirstOrDefault(p => p.Prioritering_id == 10);
-                    context.SaveChanges();
+                    foreach (Oppgave oppgave in valgteOppgaver)
+                    {
+
+                        Oppgave op = context.Oppgaver.FirstOrDefault(o => o.Oppgave_id == oppgave.Oppgave_id);
+                        op.OppgaveGruppe = nyOppgaveGruppe;
+                        op.Prioritering = context.Prioriteringer.FirstOrDefault(p => p.Prioritering_id == 10);
+                        context.SaveChanges();
+                    }
+
                 }
-                
+            }
+            else
+            {
 
             }
+            
         }
     }
 }
