@@ -25,12 +25,8 @@ namespace SysUt14Gr03
         protected void Page_Load()
         {
             if (Session["loggedIn"] == null)
-<<<<<<< HEAD
-                Response.Redirect("Login.aspx", true);
-                
-=======
-                //Response.Redirect("Login.aspx", true);                
->>>>>>> 5771842ba693fcfa8bd77008c7be0313ae678ba0
+                     //Response.Redirect("Login.aspx", true);                
+
             
             if (!Page.IsPostBack)
             {

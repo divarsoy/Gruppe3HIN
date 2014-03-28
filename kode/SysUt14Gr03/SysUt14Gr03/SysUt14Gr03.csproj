@@ -181,6 +181,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="DefaultAdministrator.aspx" />
+    <Content Include="DefaultProsjektleder.aspx" />
     <Content Include="HistorikkStattestikk.aspx" />
     <Content Include="EndreBrukerinformasjon.aspx" />
     <Content Include="EpostPreferanser.aspx" />
@@ -261,6 +263,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Site.Mobile.Master" />
     <Content Include="Site.Prosjektleder.Master" />
+    <Content Include="Site.Administrator.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -372,6 +375,20 @@
     </Compile>
     <Compile Include="Classes\NotifikasjonFlash.cs" />
     <Compile Include="Classes\Passord.cs" />
+    <Compile Include="DefaultAdministrator.aspx.cs">
+      <DependentUpon>DefaultAdministrator.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DefaultAdministrator.aspx.designer.cs">
+      <DependentUpon>DefaultAdministrator.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DefaultProsjektleder.aspx.cs">
+      <DependentUpon>DefaultProsjektleder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DefaultProsjektleder.aspx.designer.cs">
+      <DependentUpon>DefaultProsjektleder.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Models\Notifikasjon.cs" />
     <Compile Include="Models\NotifikasjonsType.cs" />
     <Compile Include="OpprettOppgavegruppe.aspx.cs">
@@ -438,6 +455,13 @@
     </Compile>
     <Compile Include="ReturAvOppgave.aspx.designer.cs">
       <DependentUpon>ReturAvOppgave.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Site.Administrator.Master.cs">
+      <DependentUpon>Site.Administrator.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Administrator.Master.designer.cs">
+      <DependentUpon>Site.Administrator.Master</DependentUpon>
     </Compile>
     <Compile Include="Site.Prosjektleder.Master.cs">
       <DependentUpon>Site.Prosjektleder.Master</DependentUpon>
