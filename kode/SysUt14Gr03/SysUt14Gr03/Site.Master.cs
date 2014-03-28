@@ -148,6 +148,9 @@ namespace SysUt14Gr03
     //      NotifikasjonsPanel.Controls.RemoveAt(index);
             NotifikasjonsPanel.Controls.Clear();
             HentNotifikasjonsPanel(bruker_id);
+            int antallNotifikasjonerInt = Queries.GetNotifikasjon(bruker_id).Count;
+            if (antallNotifikasjonerInt > 0)
+                antallNotifikasjoner = String.Format("({0})", antallNotifikasjonerInt.ToString());
         }
 
     }
