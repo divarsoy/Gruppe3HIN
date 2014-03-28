@@ -321,7 +321,7 @@ namespace SysUt14Gr03.Classes
             IMHeaderCell.Text = " IM";
             teamHeaderCell.Text = " Team";
             prosjektHeaderCell.Text = " Prosjekter";
-
+           
             headerRow.Cells.Add(forNavnHeaderCell);
             headerRow.Cells.Add(etterNavnHeaderCell);
             headerRow.Cells.Add(brukerNavnHeaderCell);
@@ -369,7 +369,7 @@ namespace SysUt14Gr03.Classes
                 tabell.Rows.Add(tRow);
                 
             }
-            tabell.CssClass = "table";
+           
 
             return tabell;
         }

@@ -17,6 +17,7 @@ namespace SysUt14Gr03
         private List<Status> visStatus;
         private List<int> valgtBrukerid = new List<int>();
         private int prosjekt_id;
+        private DateTime tidsfrist;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -60,7 +61,7 @@ namespace SysUt14Gr03
         private void OpprettOppg()
         {
             List<Bruker> selectedBruker = new List<Bruker>();
-            if (tbKrav.Text != String.Empty && tbTittel.Text != String.Empty && tbBeskrivelse.Text != String.Empty && TbEstimering.Text != String.Empty)
+            if (tbKrav.Text != String.Empty && tbTittel.Text != String.Empty && tbBeskrivelse.Text != String.Empty && TbEstimering.Text != String.Empty && tbFrist.Text != String.Empty)
             {
 
             
@@ -70,7 +71,7 @@ namespace SysUt14Gr03
                 int priorietring_id = Convert.ToInt32(ddlPrioritet.SelectedValue);
                 float estimering = Convert.ToInt16(TbEstimering.Text);
                 int status_id = Convert.ToInt32(ddlStatus.SelectedValue);
-
+                tidsfrist = Convert.ToDateTime(tbFrist.Text);
                 foreach (ListItem s in lbBrukere.Items)
                 {
                     int navn = Convert.ToInt32(s.Value);
@@ -90,7 +91,9 @@ namespace SysUt14Gr03
                     Status_id = status_id,
                     Brukere = selectedBruker,
                     Prosjekt_id = prosjekt_id,
-                    Prioritering_id = priorietring_id
+                    Prioritering_id = priorietring_id,
+                    RemainingTime = estimering,
+                    Tidsfrist = tidsfrist
                     
                 };
 
@@ -130,6 +133,11 @@ namespace SysUt14Gr03
                     lbBrukere.Items.Add(selectedUser);
                 }
            
+        }
+
+        protected void btnSett_Click(object sender, EventArgs e)
+        {
+            tbFrist.Text = cal.SelectedDate.ToShortDateString();
         }
 
 

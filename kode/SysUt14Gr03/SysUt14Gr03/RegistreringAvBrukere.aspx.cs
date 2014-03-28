@@ -102,7 +102,7 @@ namespace SysUt14Gr03
                 subject = "Bekreftelses epost for konto aktivering";
 
                 //har begynt å lage en aktiverkonto side 
-                ActivationUrl = Server.HtmlEncode("http://localhost:60154/AktiverKonto.aspx?Epost=" + email + "&Token=" + token);
+                ActivationUrl = Server.HtmlEncode("AktiverKonto.aspx?Epost=" + email + "&Token=" + token);
             
                 //sendEmail.sendEpost(email, msg, subject, ActivationUrl, null, null);
                 msg = new MailMessage();
