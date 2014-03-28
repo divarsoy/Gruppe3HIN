@@ -26,13 +26,13 @@ namespace SysUt14Gr03
         protected void LoginButton_Click(object sender, EventArgs e)
         {
             
-            brukerList = Queries.GetBruker(UserName.Text);
+            brukerList = Queries.GetBruker("UserName");
             
             if (brukerList != null)
             {
                 //brukerList = brukerListR.ToList<Bruker>();
                 Bruker bruker = brukerList[0];
-                string oppgittPassord = Password.Text;
+                string oppgittPassord = ("Password");
                 string riktigPassord = bruker.Passord;
                 var manager = new UserManager();
                 // ApplicationUser user = manager.Find(UserName.Text, Password.Text);
