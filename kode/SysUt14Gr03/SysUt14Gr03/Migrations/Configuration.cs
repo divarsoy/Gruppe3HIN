@@ -6,6 +6,7 @@ namespace SysUt14Gr03.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
     using SysUt14Gr03.Models;
+    using SysUt14Gr03.Classes;
 
     internal sealed class Configuration : DbMigrationsConfiguration<SysUt14Gr03.Models.Context>
     {
@@ -32,21 +33,24 @@ namespace SysUt14Gr03.Migrations
 
             var rettigheter = new List<Rettighet> {
                 new Rettighet {
-                    RettighetNavn = "Brukeradmin",
+                    RettighetNavn = Konstanter.rettighet.Administrator.ToString(),
                     Brukere = new List<Bruker>()
                 },
                 new Rettighet {
-                    RettighetNavn = "Prosjektleder",
+                    RettighetNavn = Konstanter.rettighet.Prosjektleder.ToString(),
                     Brukere = new List<Bruker>()
                 },
                 new Rettighet {
-                    RettighetNavn = "Utvikler",
+                    RettighetNavn = Konstanter.rettighet.Teamleder.ToString(),
                     Brukere = new List<Bruker>()
-
+                },
+                new Rettighet {
+                    RettighetNavn = Konstanter.rettighet.Utvikler.ToString(),
+                    Brukere = new List<Bruker>()
                 }
             };
 
-            rettigheter.ForEach(element => context.Rettigheter.AddOrUpdate(element));
+            rettigheter.ForEach(element => context.Rettigheter.AddOrUpdate(rettighet => rettighet.RettighetNavn, element));
             context.SaveChanges();
 
             var notifikasjonsTyper = new List<NotifikasjonsType> {
@@ -64,7 +68,7 @@ namespace SysUt14Gr03.Migrations
                 }
             };
 
-            notifikasjonsTyper.ForEach(element => context.NotifikasjonsType.AddOrUpdate(element));
+            notifikasjonsTyper.ForEach(element => context.NotifikasjonsType.AddOrUpdate(notifikasjonstype => notifikasjonstype.Type, element));
             context.SaveChanges();
 
             var brukere = new List<Bruker> {
@@ -1112,7 +1116,7 @@ namespace SysUt14Gr03.Migrations
             };
             logger.ForEach(element => context.Logger.AddOrUpdate(logg => logg.Hendelse, element));
             context.SaveChanges();
-
+            
             var notifikasjon = new List<Notifikasjon> {
                 new Notifikasjon {
                     Melding = "Bruker b akspterte invitasjonen til å hjelpe deg med oppgave F",
@@ -1145,18 +1149,6 @@ namespace SysUt14Gr03.Migrations
                     Vist = false
                 },
                 new Notifikasjon {
-                    Melding = "Du ble herved tildelt et team Rødhette",
-                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "mlarsen").Bruker_id,
-                    NotifikasjonsType_id = 2,
-                    Vist = false
-                },
-                new Notifikasjon {
-                    Melding = "Du ble herved lagt til i prosjektet GråUlv",
-                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "lmartinsen").Bruker_id,
-                    NotifikasjonsType_id = 2,
-                    Vist = false
-                },
-                new Notifikasjon {
                     Melding = "Fristen for oppgave F har dessverre gått ut, gjør noe kjapt",
                     Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "jpolden").Bruker_id,
                     NotifikasjonsType_id = 4,
@@ -1169,21 +1161,9 @@ namespace SysUt14Gr03.Migrations
                     Vist = false
                 },
                 new Notifikasjon {
-                    Melding = "Du har brukt 4 timer mindre enn planlagt forrige uke. SKJÆRP DÆ!",
+                    Melding = "Du har brukt 4 timer mindre enn planlagt forrige uke.",
                     Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "aaskoy").Bruker_id,
                     NotifikasjonsType_id = 3,
-                    Vist = false
-                },
-                new Notifikasjon {
-                    Melding = "Du ble herved invitert til oppgave F hvor bruker A trenger hjelp",
-                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "jpolden").Bruker_id,
-                    NotifikasjonsType_id = 2,
-                    Vist = false
-                },
-                new Notifikasjon {
-                    Melding = "Du ble herved invitert til oppgave F hvor bruker A trenger hjelp",
-                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "jpolden").Bruker_id,
-                    NotifikasjonsType_id = 2,
                     Vist = false
                 },
                 new Notifikasjon {
@@ -1219,6 +1199,7 @@ namespace SysUt14Gr03.Migrations
             };
             notifikasjon.ForEach(element => context.Notifikasjoner.AddOrUpdate(notifikasjoner => notifikasjoner.Melding, element));
             context.SaveChanges();
+            
         }
     }
 }
