@@ -50,6 +50,11 @@ namespace SysUt14Gr03
                 Response.Cookies.Set(responseCookie);
             }
 
+            if (Session["flashMelding"] != null && Session["flashStatus"] != null)
+            {
+                HentFlashMelding();
+            }
+
             Page.PreLoad += master_Page_PreLoad;
 
 
@@ -79,10 +84,7 @@ namespace SysUt14Gr03
         {
             //if (!IsPostBack)
             //{
-            if (Session["flashMelding"] != null && Session["flashStatus"] != null)
-            {
-                HentFlashMelding();
-            }
+
 
             if (Session["bruker_id"] != null)
             {
@@ -122,6 +124,7 @@ namespace SysUt14Gr03
             Label labelMelding = new Label();
             labelMelding.Text = Session["flashMelding"] + "</div>";
             NotifikasjonsPanel.Controls.Add(label);
+            NotifikasjonsPanel.Controls.Add(button);
             NotifikasjonsPanel.Controls.Add(labelMelding);
             Session["flashMelding"] = null;
             Session["flashStatus"] = null;
