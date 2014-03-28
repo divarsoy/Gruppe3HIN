@@ -21,7 +21,7 @@ namespace SysUt14Gr03
             int bruker_id = 2;
 
             if (Session["loggedIn"] == null)
-                Response.Redirect("Login.aspx", true);
+                //Response.Redirect("Login.aspx", true);
 
             // Sjekker om det er lagt ved et Get parameter "prosjekt_id" og lager en spørring basert på prosjekt_id og team_id på innlogget bruker
             if (Request.QueryString["prosjekt_id"] != null)

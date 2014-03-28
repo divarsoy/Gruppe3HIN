@@ -1,9 +1,14 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Prosjektleder.Master" AutoEventWireup="true" CodeBehind="AdministrasjonAvTeam.aspx.cs" Inherits="SysUt14Gr03.AdministrasjonAvTeam" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AdministrasjonAvTeam.aspx.cs" Inherits="SysUt14Gr03.AdministrasjonAvTeam" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+
+    <div class="container">
     <h1>Administrering av Team</h1>
-    <asp:CheckBoxList ID="cbl_team" runat="server" /> 
-        <asp:Button ID="bt_endreTeam" runat="server" Text="Endre Team" OnClick="bt_endreTeam_Click" />
-        <asp:Button ID="bt_arkivereTeam" runat="server" Text="Arkivere Team" />
+        <div class="checkbox">
+    <asp:CheckBoxList ID="cbl_team"  runat="server" /> 
+        </div>
+        <asp:Button ID="bt_endreTeam" class=" btn btn-primary" runat="server" Text="Endre Team" OnClick="bt_endreTeam_Click" />
+        <asp:Button ID="bt_arkivereTeam" class="btn btn-danger" runat="server" Text="Arkivere Team" />
+        </div>
         <%-- <asp:GridView ID="gridViewProsjekt" runat="server" AutoGenerateColumns="false" DataKeyNames="Team_id" OnRowUpdating="gridViewProsjekt_RowUpdating" OnRowCancelingEdit="gridViewProsjekt_RowCancelingEdit" OnRowEditing="gridViewProsjekt_RowEditing">
         <Columns>
                 <asp:Label ID="lbTeam" runat="server" Text='<%#Bind("Team.Navn") %>'></asp:Label>

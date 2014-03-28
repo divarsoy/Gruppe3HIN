@@ -127,6 +127,7 @@ namespace SysUt14Gr03
                 NotifikasjonsPanel.Controls.Add(label);
                 NotifikasjonsPanel.Controls.Add(button);
                 NotifikasjonsPanel.Controls.Add(labelMelding);
+                
                 i++;
             }
         }

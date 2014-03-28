@@ -27,11 +27,14 @@ namespace SysUt14Gr03
             
             if (Session["loggedIn"] == null)
             {
-                Response.Redirect("Login.aspx", true);
+                //Response.Redirect("Login.aspx", true);
+                brukerId = 2;
             }
             else
             {
-                brukerId = Convert.ToInt32(Session["bruker_id"]);
+                brukerId = Validator.KonverterTilTall(Session["bruker_id"].ToString());
+                if (brukerId == -1)
+                    Response.Redirect("Login.aspx", true);
             }
             
             // brukerId = 1;

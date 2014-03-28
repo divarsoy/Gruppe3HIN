@@ -3,8 +3,9 @@
     <h1>Opprett oppgavegruppe</h1>
     <br />
     Navn på gruppe:<asp:TextBox ID="txtNavn" runat="server"></asp:TextBox>
-<br />
-    <asp:GridView ID="gvwOppgaver" runat="server" AutoGenerateColumns="False" OnRowDataBound="gvwOppgaver_RowDataBound">
+    <br />
+    <hr />
+    <asp:GridView CssClass="table" ID="gvwOppgaver" runat="server" AutoGenerateColumns="False" OnRowDataBound="gvwOppgaver_RowDataBound">
         <Columns>
             <asp:TemplateField HeaderText="Oppgavegruppe">
                 <ItemTemplate>
@@ -28,6 +29,9 @@
         </Columns>
     </asp:GridView>
     <br />
+    <asp:Label ID="lblMelding" runat="server" Visible="false"></asp:Label>
+    <br />
+
     <asp:Button ID="btnOpprett" runat="server" Text="Lagre" OnClick="btnOpprett_Click" />
     <asp:Button ID="Button2" runat="server" Text="Button" />
     <br />
