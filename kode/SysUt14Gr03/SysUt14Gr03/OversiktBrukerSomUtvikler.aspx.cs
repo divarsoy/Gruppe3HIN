@@ -19,7 +19,9 @@ namespace SysUt14Gr03
             bool queryStatus = false;
             int bruker_id = 2;
 
-            
+            if (Session["loggedIn"] == null)
+                Response.Redirect("Login.aspx", true);
+
             // Sjekker om det er lagt ved et Get parameter "prosjekt_id" og lager en spørring basert på prosjekt_id og team_id på innlogget bruker
             if (Request.QueryString["prosjekt_id"] != null)
             {
@@ -74,6 +76,20 @@ namespace SysUt14Gr03
                 }
                 string id = ddlProsjekt.SelectedValue;
                 Response.Redirect("HistorikkStattestikk?Prosjekt_id=" + id);
+            }
+        }
+        public void Button2_Click(object sender, EventArgs e)
+        {
+            foreach (Bruker bruker in queryProsjekt)
+            {
+                DropDownList ddlTeam = new DropDownList();
+                for (int i = 0; i < bruker.Prosjekter.Count; i++)
+                {
+                    Team team = bruker.Teams[i];
+                    ddlTeam.Items.Add(new ListItem(team.Navn, team.Team_id.ToString()));
+                }
+                string id = ddlTeam.SelectedValue;
+                Response.Redirect("HistorikkStattestikk?Team_id=" + id);
             }
         }
     }

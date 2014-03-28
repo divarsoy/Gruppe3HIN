@@ -49,6 +49,24 @@ namespace SysUt14Gr03 {
         protected global::System.Web.UI.WebControls.TextBox TbEstimering;
         
         /// <summary>
+        /// tbBruktTid control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbBruktTid;
+        
+        /// <summary>
+        /// tbRemainingTime control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbRemainingTime;
+        
+        /// <summary>
         /// cbAktiv control.
         /// </summary>
         /// <remarks>
@@ -164,15 +182,6 @@ namespace SysUt14Gr03 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlProsjekt;
-        
-        /// <summary>
-        /// tbRemainingTime control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbRemainingTime;
         
         /// <summary>
         /// lblCheck control.

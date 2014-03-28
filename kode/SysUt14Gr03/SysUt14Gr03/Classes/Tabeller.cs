@@ -174,20 +174,30 @@ namespace SysUt14Gr03.Classes
                 TableCell prosjekterCell = new TableCell();
 
                 DropDownList ddlProsjekt = new DropDownList();
+                DropDownList ddlTeam = new DropDownList();
                 OversiktBrukerSomUtvikler get = new OversiktBrukerSomUtvikler();
                 Button btnProsjekt = new Button();
+                Button btnTeam = new Button();
 
                 StringBuilder brukereITeam = new StringBuilder();
-                foreach(Team team in bruker.Teams)
+                /*foreach(Team team in bruker.Teams)
                 {
                     //henter ut team navnene og legge dem et sted. prosjkt og team er hentet ut av querien allerede.
                     brukereITeam.Append(String.Format("<a href='HistorikkStattestikk?team_id={0}'>{1} </a>", team.Team_id, team.Navn));
+                }*/
+                for (int i = 0; i < bruker.Teams.Count; i++)
+                {
+                    Team team = bruker.Teams[i];
+                    ddlTeam.Items.Add(new ListItem(team.Navn, team.Team_id.ToString()));
+                    btnTeam.Text = "Gå til team";
+                    btnTeam.Click += new EventHandler(get.Button2_Click);
                 }
                 for (int i = 0; i < bruker.Prosjekter.Count; i++)
                 {
                     Prosjekt prosjekt = bruker.Prosjekter[i];
                     ddlProsjekt.Items.Add(new ListItem(prosjekt.Navn, prosjekt.Prosjekt_id.ToString()));
-                    btnProsjekt.Click += get.Button1_Click;
+                    btnProsjekt.Text = "Gå til prosjekt";
+                    btnProsjekt.Click += new EventHandler(get.Button1_Click);
                 }
                     
                 forNavnCell.Text = String.Format("<a href='HistorikkStattestikk?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Fornavn);
@@ -196,7 +206,9 @@ namespace SysUt14Gr03.Classes
                 brukerNavnCell.Text = String.Format("<a href='HistorikkStattestikk?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Brukernavn);
                 epostCell.Text = bruker.Epost;
                 IMCell.Text = bruker.IM;
-                teamsCell.Text = brukereITeam.ToString();
+                //teamsCell.Text = brukereITeam.ToString();
+                teamsCell.Controls.Add(ddlTeam);
+                teamsCell.Controls.Add(btnTeam);
                 prosjekterCell.Controls.Add(ddlProsjekt);
                 prosjekterCell.Controls.Add(btnProsjekt);
 
@@ -210,7 +222,6 @@ namespace SysUt14Gr03.Classes
 
                 tabell.Rows.Add(tRow);
             }
-            
             return tabell;
         }
 

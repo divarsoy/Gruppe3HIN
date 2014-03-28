@@ -22,7 +22,7 @@ namespace SysUt14Gr03
         private Oppgave endres;
         private int oppgaveID;
 
-        protected void Page_Load(object sender, EventArgs e)
+        protected void Page_Load()
         {
             if (Session["loggedIn"] == null)
                 Response.Redirect("Login.aspx", true);
@@ -67,6 +67,7 @@ namespace SysUt14Gr03
                 tbBeskrivelse.Text = endres.UserStory;
                 TbEstimering.Text = endres.Estimat.ToString();
                 tbKrav.Text = endres.Krav;
+                tbBruktTid.Text = endres.BruktTid.ToString();
                 tbRemainingTime.Text = endres.RemainingTime.ToString();
                 tbTidsfristStart.Text = endres.Opprettet.ToString();
                 tbTidsfristSlutt.Text = endres.Tidsfrist.ToString();
@@ -120,6 +121,7 @@ namespace SysUt14Gr03
                         endres.Aktiv = cbAktiv.Checked;
                         endres.Brukere = selectedBruker;
                         endres.Estimat = estimering;
+                        endres.BruktTid = float.Parse(tbBruktTid.Text);
                         endres.RemainingTime = float.Parse(tbRemainingTime.Text);
                         endres.Tidsfrist = Convert.ToDateTime(tbTidsfristSlutt.Text);
                     }
@@ -182,6 +184,19 @@ namespace SysUt14Gr03
         protected void btnSlutt_Click(object sender, EventArgs e)
         {
             tbTidsfristSlutt.Text = cal.SelectedDate.ToShortDateString();
+        }
+
+        protected void tbBruktTid_TextChanged(object sender, EventArgs e)
+        {
+            oppgaveID = Classes.Validator.KonverterTilTall(Request.QueryString["oppgave_id"]);
+            endres = Queries.GetOppgave(oppgaveID);
+            if (endres.BruktTid != null)
+            {
+                float est = float.Parse(TbEstimering.Text);
+                float bru = float.Parse(tbBruktTid.Text);
+                float sum = est - bru;
+                tbRemainingTime.Text = sum.ToString();
+            }
         }
     }
 }
