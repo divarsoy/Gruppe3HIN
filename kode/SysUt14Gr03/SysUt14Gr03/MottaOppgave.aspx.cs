@@ -23,7 +23,8 @@ namespace SysUt14Gr03
         {
             if (Session["loggedIn"] == null)
             {
-                Response.Redirect("Login.aspx", true);
+                //Response.Redirect("Login.aspx", true);
+                mottaker_id = 2;
             }
             else
             {

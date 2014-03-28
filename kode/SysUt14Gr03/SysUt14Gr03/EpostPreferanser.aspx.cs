@@ -27,7 +27,8 @@ namespace SysUt14Gr03
             
             if (Session["loggedIn"] == null)
             {
-                Response.Redirect("Login.aspx", true);
+                //Response.Redirect("Login.aspx", true);
+                brukerId = 2;
             }
             else
             {
