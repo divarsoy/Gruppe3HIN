@@ -214,7 +214,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Account\Web.config" />
     <Content Include="ReturAvOppgave.aspx" />
-    <Content Include="Site.Utvikler.Master" />
     <Content Include="Content\MorildDataStylesheet.less" />
     <None Include="Properties\PublishProfiles\SysUt14Gr03.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -262,7 +261,6 @@
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Site.Mobile.Master" />
-    <Content Include="Site.Prosjektleder.Master" />
     <Content Include="Site.Administrator.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -462,20 +460,6 @@
     </Compile>
     <Compile Include="Site.Administrator.Master.designer.cs">
       <DependentUpon>Site.Administrator.Master</DependentUpon>
-    </Compile>
-    <Compile Include="Site.Prosjektleder.Master.cs">
-      <DependentUpon>Site.Prosjektleder.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Site.Prosjektleder.Master.designer.cs">
-      <DependentUpon>Site.Prosjektleder.Master</DependentUpon>
-    </Compile>
-    <Compile Include="Site.Utvikler.Master.cs">
-      <DependentUpon>Site.Utvikler.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Site.Utvikler.Master.designer.cs">
-      <DependentUpon>Site.Utvikler.Master</DependentUpon>
     </Compile>
     <Compile Include="Brukere.aspx.cs">
       <DependentUpon>Brukere.aspx</DependentUpon>
