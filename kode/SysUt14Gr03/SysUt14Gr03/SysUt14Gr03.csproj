@@ -200,6 +200,7 @@
     <Content Include="OversiktBrukereSomProsjektleder.aspx" />
     <Content Include="OversiktBrukerSomUtvikler.aspx" />
     <Content Include="OversiktOppgaver.aspx" />
+    <Content Include="OversiktOverTeam.aspx" />
     <Content Include="OversiktProsjekter.aspx" />
     <Content Include="OversiktProsjekterSomProsjektleder.aspx" />
     <Content Include="PameldingTilOppgave.aspx" />
@@ -424,6 +425,13 @@
     </Compile>
     <Compile Include="MottaOppgave.aspx.designer.cs">
       <DependentUpon>MottaOppgave.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OversiktOverTeam.aspx.cs">
+      <DependentUpon>OversiktOverTeam.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OversiktOverTeam.aspx.designer.cs">
+      <DependentUpon>OversiktOverTeam.aspx</DependentUpon>
     </Compile>
     <Compile Include="OversiktProsjekter.aspx.cs">
       <DependentUpon>OversiktProsjekter.aspx</DependentUpon>

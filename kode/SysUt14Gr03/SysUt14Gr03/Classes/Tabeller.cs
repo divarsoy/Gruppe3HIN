@@ -134,6 +134,81 @@ namespace SysUt14Gr03.Classes
 
         }
 
+        public static Table HentBrukerTabellForTeam(List<Bruker> query, Team nesteTeam)
+        {
+            Table tabell = new Table();
+            TableHeaderRow headerRow = new TableHeaderRow();
+            TableHeaderRow teamNavnHeader = new TableHeaderRow();
+            TableHeaderCell teamNavnCell = new TableHeaderCell();
+            TableHeaderCell forNavnHeaderCell = new TableHeaderCell();
+            TableHeaderCell etterNavnHeaderCell = new TableHeaderCell();
+            TableHeaderCell brukerNavnHeaderCell = new TableHeaderCell();
+            TableHeaderCell epostHeaderCell = new TableHeaderCell();
+            TableHeaderCell IMHeaderCell = new TableHeaderCell();
+
+            forNavnHeaderCell.Text = "Fornavn";
+            etterNavnHeaderCell.Text = "Etternavn";
+            brukerNavnHeaderCell.Text = "Brukernavn";
+            epostHeaderCell.Text = "Epost";
+            IMHeaderCell.Text = "IM";
+            teamNavnCell.Text = "" + nesteTeam.Navn;
+               
+            teamNavnHeader.Cells.Add(teamNavnCell);
+            tabell.Rows.Add(teamNavnHeader);
+
+            headerRow.Cells.Add(forNavnHeaderCell);
+            headerRow.Cells.Add(etterNavnHeaderCell);
+            headerRow.Cells.Add(brukerNavnHeaderCell);
+            headerRow.Cells.Add(epostHeaderCell);
+            headerRow.Cells.Add(IMHeaderCell);
+            tabell.Rows.Add(headerRow);
+
+            foreach (Bruker bruker in query)
+            {
+                TableRow tRow = new TableRow();
+                TableCell forNavnCell = new TableCell();
+                TableCell etterNavnCell = new TableCell();
+                TableCell brukerNavnCell = new TableCell();
+                TableCell epostCell = new TableCell();
+                TableCell IMCell = new TableCell();
+
+              //  DropDownList ddlProsjekt = new DropDownList();
+               // OversiktBrukerSomUtvikler get = new OversiktBrukerSomUtvikler();
+               // Button btnProsjekt = new Button();
+
+                StringBuilder brukereITeam = new StringBuilder();
+              /*  foreach (Team team in bruker.Teams)
+                {
+                    //henter ut team navnene og legge dem et sted. prosjkt og team er hentet ut av querien allerede.
+                    brukereITeam.Append(String.Format("<a href='HistorikkStattestikk?team_id={0}'>{1} </a>", team.Team_id, team.Navn));
+                } */
+            /*    for (int i = 0; i < bruker.Prosjekter.Count; i++)
+                {
+                    Prosjekt prosjekt = bruker.Prosjekter[i];
+                    ddlProsjekt.Items.Add(new ListItem(prosjekt.Navn, prosjekt.Prosjekt_id.ToString()));
+                    btnProsjekt.ID = "btnProsjekt";
+                    btnProsjekt.Text = "Gå til prosjekt";
+                } */
+
+                forNavnCell.Text = String.Format("<a href='HistorikkStattestikk?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Fornavn);
+
+                etterNavnCell.Text = String.Format("<a href='HistorikkStattestikk?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Etternavn);
+                brukerNavnCell.Text = String.Format("<a href='HistorikkStattestikk?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Brukernavn);
+                epostCell.Text = bruker.Epost;
+                IMCell.Text = bruker.IM;
+
+                tRow.Cells.Add(forNavnCell);
+                tRow.Cells.Add(etterNavnCell);
+                tRow.Cells.Add(brukerNavnCell);
+                tRow.Cells.Add(epostCell);
+                tRow.Cells.Add(IMCell);
+
+                tabell.Rows.Add(tRow);
+            }
+
+            return tabell;
+        }
+
         public static Table HentBrukerTabellIProsjektTeamUtviklere(List<Bruker> query)
         {
             Table tabell = new Table();
