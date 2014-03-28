@@ -5,7 +5,7 @@
             <h1>Forside for Brukere</h1>
         </div>
     <div class="col-md-4">
-        <h3>Velkommen <% Response.Write(Fornavn); %>!</h3>
+        <h3>Velkommen <%: Fornavn %>!</h3>
         <h4>Velg Prosjekt:</h4>
         <asp:ListBox ID="ListBoxProsjekt" runat="server" Rows="1"></asp:ListBox>
         <asp:Button ID="btnVelgProsjekt" runat="server" Text="Velg Prosjekt" OnClick="btnVelgProsjekt_Click" />        

@@ -2,6 +2,5 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Oversikt over brukere</h2>
     <asp:Label ID="lblProsjekt" runat="server"></asp:Label>
-    <asp:PlaceHolder ID="PlaceHolderBrukere" runat="server"></asp:PlaceHolder>
-     <asp:ListBox ID="lbBrukere" runat="server" Height="147px" Width="255px"></asp:ListBox>
+    <asp:PlaceHolder ID="PlaceHolderBrukere"   runat="server"></asp:PlaceHolder>
 </asp:Content>
