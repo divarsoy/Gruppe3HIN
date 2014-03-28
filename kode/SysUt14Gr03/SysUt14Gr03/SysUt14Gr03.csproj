@@ -200,6 +200,7 @@
     <Content Include="OversiktBrukereSomProsjektleder.aspx" />
     <Content Include="OversiktBrukerSomUtvikler.aspx" />
     <Content Include="OversiktOppgaver.aspx" />
+    <Content Include="OversiktOverTeam.aspx" />
     <Content Include="OversiktProsjekter.aspx" />
     <Content Include="OversiktProsjekterSomProsjektleder.aspx" />
     <Content Include="PameldingTilOppgave.aspx" />
@@ -255,7 +256,12 @@
     <Content Include="Site.Master" />
     <Content Include="TidsestimerOppgave.aspx" />
     <Content Include="TidsestimerProsjekt.aspx" />
+    <Content Include="Timeregistrering.aspx" />
     <Content Include="ViewSwitcher.ascx" />
+    <Content Include="VisBruker.aspx" />
+    <Content Include="VisOppgave.aspx" />
+    <Content Include="VisProsjekt.aspx" />
+    <Content Include="VisTeam.aspx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
     <None Include="Project_Readme.html" />
@@ -425,6 +431,13 @@
     </Compile>
     <Compile Include="MottaOppgave.aspx.designer.cs">
       <DependentUpon>MottaOppgave.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OversiktOverTeam.aspx.cs">
+      <DependentUpon>OversiktOverTeam.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OversiktOverTeam.aspx.designer.cs">
+      <DependentUpon>OversiktOverTeam.aspx</DependentUpon>
     </Compile>
     <Compile Include="OversiktProsjekter.aspx.cs">
       <DependentUpon>OversiktProsjekter.aspx</DependentUpon>
@@ -678,12 +691,47 @@
     <Compile Include="TidsestimerProsjekt.aspx.designer.cs">
       <DependentUpon>TidsestimerProsjekt.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Timeregistrering.aspx.cs">
+      <DependentUpon>Timeregistrering.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Timeregistrering.aspx.designer.cs">
+      <DependentUpon>Timeregistrering.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="VisBruker.aspx.cs">
+      <DependentUpon>VisBruker.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="VisBruker.aspx.designer.cs">
+      <DependentUpon>VisBruker.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="VisOppgave.aspx.cs">
+      <DependentUpon>VisOppgave.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="VisOppgave.aspx.designer.cs">
+      <DependentUpon>VisOppgave.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="VisProsjekt.aspx.cs">
+      <DependentUpon>VisProsjekt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="VisProsjekt.aspx.designer.cs">
+      <DependentUpon>VisProsjekt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="VisTeam.aspx.cs">
+      <DependentUpon>VisTeam.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="VisTeam.aspx.designer.cs">
+      <DependentUpon>VisTeam.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

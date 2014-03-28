@@ -118,7 +118,7 @@ namespace SysUt14Gr03.Classes
 
             if (oppgave)
             {
-                melding += Environment.NewLine + "Link til oppgave: http://malmen.hin.no/stud/SysUt14Gr03/MottaOppgave.aspx?oppgaveID=" + oppgave_id;
+                melding += Environment.NewLine + "Link til oppgave: http://malmen.hin.no/stud/SysUt14Gr03/MottaOppgave.aspx?oppgave_id=" + oppgave_id;
             }
 
             if (selectedItems[varsel])

@@ -10,51 +10,60 @@
 namespace SysUt14Gr03 {
     
     
-    public partial class OpprettOppgavegruppe {
+    public partial class Timeregistrering {
         
         /// <summary>
-        /// txtNavn control.
+        /// tbTidsregistrert control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNavn;
+        protected global::System.Web.UI.WebControls.TextBox tbTidsregistrert;
         
         /// <summary>
-        /// gvwOppgaver control.
+        /// btnSnart control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvwOppgaver;
+        protected global::System.Web.UI.WebControls.Button btnSnart;
         
         /// <summary>
-        /// lblMelding control.
+        /// btnPause control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMelding;
+        protected global::System.Web.UI.WebControls.Button btnPause;
         
         /// <summary>
-        /// btnOpprett control.
+        /// btnStop control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnOpprett;
+        protected global::System.Web.UI.WebControls.Button btnStop;
         
         /// <summary>
-        /// Button2 control.
+        /// ddlOppgaver control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button2;
+        protected global::System.Web.UI.WebControls.DropDownList ddlOppgaver;
+        
+        /// <summary>
+        /// tbKommentar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbKommentar;
     }
 }

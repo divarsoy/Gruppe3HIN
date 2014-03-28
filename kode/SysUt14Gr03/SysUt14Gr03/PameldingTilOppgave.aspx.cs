@@ -21,11 +21,14 @@ namespace SysUt14Gr03
         {
             if (Session["loggedIn"] == null)
             {
-                Response.Redirect("Login.aspx", true);
+            //    Response.Redirect("Login.aspx", true);
+                bruker_id = 2;
             }
             else
             {
-                bruker_id = Convert.ToInt32(Session["bruker_id"]);
+                bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
+                if (bruker_id == -1)
+                    Response.Redirect("Login.aspx", true);
             }
 
             oppgaveListe = Queries.GetAlleAktiveOppgaver();

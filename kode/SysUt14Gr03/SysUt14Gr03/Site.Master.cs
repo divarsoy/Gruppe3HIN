@@ -18,8 +18,8 @@ namespace SysUt14Gr03
         private const string AntiXsrfUserNameKey = "__AntiXsrfUserName";
         private string _antiXsrfTokenValue;
         public string antallNotifikasjoner = "";
-        private int bruker_id = 2;
         private int i = 0;
+        private int bruker_id;
 
         protected void Page_Init(object sender, EventArgs e)
         {
@@ -79,7 +79,15 @@ namespace SysUt14Gr03
         {
             //if (!IsPostBack)
             //{
-            int bruker_id = 2;
+            if (Session["bruker_id"] != null)
+            {
+                bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
+                //Response.Redirect("~/Login");
+            }
+            else
+            {
+                bruker_id = 2;
+            }
 
 
 
