@@ -200,6 +200,7 @@
     <Content Include="OversiktBrukereSomProsjektleder.aspx" />
     <Content Include="OversiktBrukerSomUtvikler.aspx" />
     <Content Include="OversiktOppgaver.aspx" />
+    <Content Include="OversiktOverTeam.aspx" />
     <Content Include="OversiktProsjekter.aspx" />
     <Content Include="OversiktProsjekterSomProsjektleder.aspx" />
     <Content Include="PameldingTilOppgave.aspx" />
@@ -255,6 +256,7 @@
     <Content Include="Site.Master" />
     <Content Include="TidsestimerOppgave.aspx" />
     <Content Include="TidsestimerProsjekt.aspx" />
+    <Content Include="Timeregistrering.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -426,6 +428,13 @@
     <Compile Include="MottaOppgave.aspx.designer.cs">
       <DependentUpon>MottaOppgave.aspx</DependentUpon>
     </Compile>
+    <Compile Include="OversiktOverTeam.aspx.cs">
+      <DependentUpon>OversiktOverTeam.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OversiktOverTeam.aspx.designer.cs">
+      <DependentUpon>OversiktOverTeam.aspx</DependentUpon>
+    </Compile>
     <Compile Include="OversiktProsjekter.aspx.cs">
       <DependentUpon>OversiktProsjekter.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -449,6 +458,7 @@
     </Compile>
     <Compile Include="Site.Prosjektleder.Master.cs">
       <DependentUpon>Site.Prosjektleder.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Site.Prosjektleder.Master.designer.cs">
       <DependentUpon>Site.Prosjektleder.Master</DependentUpon>
@@ -676,6 +686,13 @@
     </Compile>
     <Compile Include="TidsestimerProsjekt.aspx.designer.cs">
       <DependentUpon>TidsestimerProsjekt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Timeregistrering.aspx.cs">
+      <DependentUpon>Timeregistrering.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Timeregistrering.aspx.designer.cs">
+      <DependentUpon>Timeregistrering.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
