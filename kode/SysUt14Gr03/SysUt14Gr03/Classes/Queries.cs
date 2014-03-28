@@ -32,7 +32,18 @@ namespace SysUt14Gr03.Classes
                 return brukerObjekt;
             }
         }
-
+        static public List<Bruker> GetProsjektledere(Konstanter.rettighet _rettighet)
+        {
+            using (var context = new Context())
+            {
+                string rettighetString = _rettighet.ToString();
+                var prosjektLedere = context.Brukere
+                            .Include("Rettigheter")
+                            .Where(bruker => bruker.Rettigheter.Any(rettighet => rettighet.RettighetNavn == rettighetString))                         
+                            .ToList<Bruker>();
+                return prosjektLedere;
+            }
+        }
         static public List<Notifikasjon> GetNotifikasjon(int bruker_id)
         {
             using (var context = new Context())

@@ -30,7 +30,7 @@ namespace SysUt14Gr03
                 }
                 else
                 {
-                   brukerid = Convert.ToInt32(Session["bruker_id"]);
+                   brukerid = Validator.KonverterTilTall(Session["bruker_id"].ToString());
                 }
 
                 brukerListe = Queries.GetAlleAktiveBrukere();
