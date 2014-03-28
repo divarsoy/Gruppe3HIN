@@ -166,14 +166,12 @@
     <Content Include="Account\OpenAuthProviders.ascx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\RegisterExternalLogin.aspx" />
-    <Content Include="AdministrasjonAvGruppe.aspx" />
     <Content Include="AdministrasjonAvProsjekt.aspx" />
     <Content Include="AdministrasjonAvTeam.aspx" />
     <Content Include="AdministrasjonAvTeamBrukere.aspx" />
     <Content Include="AdministratorForside.aspx" />
     <Content Include="AdministrerOppgavegruppe.aspx" />
     <Content Include="AktiverKonto.aspx" />
-    <Content Include="ArkiverGruppe.aspx" />
     <Content Include="AdministrasjonAvOppgave.aspx" />
     <Content Include="ArkiveringAvKommentarer.aspx" />
     <Content Include="Brukere.aspx" />
@@ -183,8 +181,6 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
-    <Content Include="EstimerResttidPaOppgave.aspx" />
-    <Content Include="FerdigstillelseAvOppgave.aspx" />
     <Content Include="HistorikkStattestikk.aspx" />
     <Content Include="EndreBrukerinformasjon.aspx" />
     <Content Include="EpostPreferanser.aspx" />
@@ -192,11 +188,9 @@
     <Content Include="KommentarPaOppgave.aspx" />
     <Content Include="ListboxTest.aspx" />
     <Content Include="MottaOppgave.aspx" />
-    <Content Include="OpprettGruppe.aspx" />
     <Content Include="OpprettOppgave.aspx" />
     <Content Include="OpprettOppgavegruppe.aspx" />
     <Content Include="OpprettProsjekt.aspx" />
-    <Content Include="OpprettTidsfristPaaOppgave.aspx" />
     <Content Include="OversiktBrukereSomProsjektleder.aspx" />
     <Content Include="OversiktBrukerSomUtvikler.aspx" />
     <Content Include="OversiktOppgaver.aspx" />
@@ -254,7 +248,6 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Site.Master" />
-    <Content Include="TidsestimerOppgave.aspx" />
     <Content Include="TidsestimerProsjekt.aspx" />
     <Content Include="Timeregistrering.aspx" />
     <Content Include="ViewSwitcher.ascx" />
@@ -311,13 +304,6 @@
     <Compile Include="Account\RegisterExternalLogin.aspx.designer.cs">
       <DependentUpon>RegisterExternalLogin.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AdministrasjonAvGruppe.aspx.cs">
-      <DependentUpon>AdministrasjonAvGruppe.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AdministrasjonAvGruppe.aspx.designer.cs">
-      <DependentUpon>AdministrasjonAvGruppe.aspx</DependentUpon>
-    </Compile>
     <Compile Include="AdministrasjonAvProsjekt.aspx.cs">
       <DependentUpon>AdministrasjonAvProsjekt.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -370,13 +356,6 @@
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="ArkiverGruppe.aspx.cs">
-      <DependentUpon>ArkiverGruppe.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ArkiverGruppe.aspx.designer.cs">
-      <DependentUpon>ArkiverGruppe.aspx</DependentUpon>
-    </Compile>
     <Compile Include="AdministrasjonAvOppgave.aspx.cs">
       <DependentUpon>AdministrasjonAvOppgave.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -516,20 +495,6 @@
     <Compile Include="EndreBrukerinformasjon.aspx.designer.cs">
       <DependentUpon>EndreBrukerinformasjon.aspx</DependentUpon>
     </Compile>
-    <Compile Include="EstimerResttidPaOppgave.aspx.cs">
-      <DependentUpon>EstimerResttidPaOppgave.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="EstimerResttidPaOppgave.aspx.designer.cs">
-      <DependentUpon>EstimerResttidPaOppgave.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="FerdigstillelseAvOppgave.aspx.cs">
-      <DependentUpon>FerdigstillelseAvOppgave.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FerdigstillelseAvOppgave.aspx.designer.cs">
-      <DependentUpon>FerdigstillelseAvOppgave.aspx</DependentUpon>
-    </Compile>
     <Compile Include="InvitasjonAvBruker.aspx.cs">
       <DependentUpon>InvitasjonAvBruker.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -551,13 +516,6 @@
     </Compile>
     <Compile Include="EpostPreferanser.aspx.designer.cs">
       <DependentUpon>EpostPreferanser.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="OpprettGruppe.aspx.cs">
-      <DependentUpon>OpprettGruppe.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="OpprettGruppe.aspx.designer.cs">
-      <DependentUpon>OpprettGruppe.aspx</DependentUpon>
     </Compile>
     <Compile Include="HistorikkStattestikk.aspx.cs">
       <DependentUpon>HistorikkStattestikk.aspx</DependentUpon>
@@ -586,13 +544,6 @@
     </Compile>
     <Compile Include="OpprettTeam.aspx.designer.cs">
       <DependentUpon>OpprettTeam.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="OpprettTidsfristPaaOppgave.aspx.cs">
-      <DependentUpon>OpprettTidsfristPaaOppgave.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="OpprettTidsfristPaaOppgave.aspx.designer.cs">
-      <DependentUpon>OpprettTidsfristPaaOppgave.aspx</DependentUpon>
     </Compile>
     <Compile Include="OversiktOppgaver.aspx.cs">
       <DependentUpon>OversiktOppgaver.aspx</DependentUpon>
@@ -677,13 +628,6 @@
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
-    <Compile Include="TidsestimerOppgave.aspx.cs">
-      <DependentUpon>TidsestimerOppgave.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="TidsestimerOppgave.aspx.designer.cs">
-      <DependentUpon>TidsestimerOppgave.aspx</DependentUpon>
-    </Compile>
     <Compile Include="TidsestimerProsjekt.aspx.cs">
       <DependentUpon>TidsestimerProsjekt.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
