@@ -58,6 +58,33 @@ namespace SysUt14Gr03 {
         protected global::System.Web.UI.WebControls.TextBox TbEstimering;
         
         /// <summary>
+        /// cal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Calendar cal;
+        
+        /// <summary>
+        /// tbFrist control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbFrist;
+        
+        /// <summary>
+        /// btnSett control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSett;
+        
+        /// <summary>
         /// ddlBrukere control.
         /// </summary>
         /// <remarks>
