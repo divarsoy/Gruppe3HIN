@@ -3,8 +3,7 @@
 
     <ul class="nav navbar-nav">
         <li><a id="A1" runat="server" href="~/RegistreringAvBrukere">Registrer Ny Bruker</a></li>
-        <li><a id="A2" runat="server" href="~/OversiktBrukereSomProsjektleder">Oversikt Over Brukere</a></li>
-        <li><a id="A4" runat="server" href="~/Contact">Administrere Brukere</a></li>
+        <li><a id="A2" runat="server" href="~/OversiktBrukereSomAdministrator">Oversikt Over Brukere</a></li>
         <li><a id="A3" runat="server" href="~/Rettigheter">Administrere Rettigheter</a></li>
         
     </ul>

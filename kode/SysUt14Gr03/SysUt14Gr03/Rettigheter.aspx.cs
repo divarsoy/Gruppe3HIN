@@ -11,12 +11,34 @@ namespace SysUt14Gr03
 {
     public partial class Rettigheter : System.Web.UI.Page
     {
-        // TO DO... Sjekk om innlogget bruker har brukeradmin rettigheter
-        public List<Rettighet> rettighetsListe;
+        private int bruker_id;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-                BindRettigheter();
+            if (Session["loggedIn"] == null)
+            {
+                //    Response.Redirect("Login.aspx", true);
+                bruker_id = 1;
+            }
+            else
+            {
+                bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
+            }
+            if (!Validator.SjekkRettighet(bruker_id, Konstanter.rettighet.Administrator))
+            {
+                Session["bruker_id"] = null;
+                Session["bruker"] = null;
+                Session["fornavn"] = null;
+                Session["brukernavn"] = null;
+                Session["loggedIn"] = null;
+                Session["flashMelding"] = "Du må være logget inn som administrator for aksessere siden du prøvde å nå";
+                Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
+                Response.Redirect(("Login.aspx"), true);
+            }
+            else
+            {
+                if (!IsPostBack)
+                    BindRettigheter();
+            }
         }
 
         private void BindRettigheter()

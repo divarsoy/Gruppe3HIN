@@ -454,5 +454,64 @@ namespace SysUt14Gr03.Classes
 
             return tabell;
         }
+
+        static public Table HentBrukereTabellForAdministrator(List<Bruker> query)
+        {
+            Table tabell = new Table();
+            TableHeaderRow headerRow = new TableHeaderRow();
+            TableHeaderCell forNavnHeaderCell = new TableHeaderCell();
+            TableHeaderCell etterNavnHeaderCell = new TableHeaderCell();
+            TableHeaderCell brukerNavnHeaderCell = new TableHeaderCell();
+            TableHeaderCell epostHeaderCell = new TableHeaderCell();
+            TableHeaderCell IMHeaderCell = new TableHeaderCell();
+            TableHeaderCell aktivHeaderCell = new TableHeaderCell();
+
+            forNavnHeaderCell.Text = "Fornavn";
+            etterNavnHeaderCell.Text = "Etternavn";
+            brukerNavnHeaderCell.Text = "Brukernavn";
+            epostHeaderCell.Text = "Epost";
+            IMHeaderCell.Text = "IM";
+            aktivHeaderCell.Text = "Aktiv";
+
+            headerRow.Cells.Add(forNavnHeaderCell);
+            headerRow.Cells.Add(etterNavnHeaderCell);
+            headerRow.Cells.Add(brukerNavnHeaderCell);
+            headerRow.Cells.Add(epostHeaderCell);
+            headerRow.Cells.Add(IMHeaderCell);
+            headerRow.Cells.Add(aktivHeaderCell);
+            tabell.Rows.Add(headerRow);
+
+            foreach (Bruker bruker in query)
+            {
+                TableRow tRow = new TableRow();
+                TableCell forNavnCell = new TableCell();
+                TableCell etterNavnCell = new TableCell();
+                TableCell brukerNavnCell = new TableCell();
+                TableCell epostCell = new TableCell();
+                TableCell IMCell = new TableCell();
+                TableCell aktivCell = new TableCell();
+                                
+                forNavnCell.Text = String.Format("<a href='EndreBrukerinformasjonSomAdministrator?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Fornavn);
+                etterNavnCell.Text = String.Format("<a href='EndreBrukerinformasjonSomAdministrator?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Etternavn);
+                brukerNavnCell.Text = String.Format("<a href='EndreBrukerinformasjonSomAdministrator?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Brukernavn);
+                epostCell.Text = String.Format(bruker.Epost);
+                IMCell.Text = String.Format(bruker.IM);
+                if (bruker.Aktiv)
+                    aktivCell.Text = "Ja";
+                else
+                    aktivCell.Text = "Nei";
+
+                tRow.Cells.Add(forNavnCell);
+                tRow.Cells.Add(etterNavnCell);
+                tRow.Cells.Add(brukerNavnCell);
+                tRow.Cells.Add(epostCell);
+                tRow.Cells.Add(IMCell);
+                tRow.Cells.Add(aktivCell);
+                tabell.Rows.Add(tRow);
+            }
+            tabell.CssClass = "table";
+            return tabell;
+
+        }
     }
 }

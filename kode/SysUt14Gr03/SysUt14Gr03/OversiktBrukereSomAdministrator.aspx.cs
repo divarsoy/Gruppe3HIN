@@ -5,24 +5,33 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using SysUt14Gr03.Classes;
+using SysUt14Gr03.Models;
 
 namespace SysUt14Gr03
 {
-    public partial class DefaultAdministrator : System.Web.UI.Page
+    public partial class OversiktBrukereSomAdministrator : System.Web.UI.Page
     {
-        private int bruker_id;
+        private List<Prosjekt> listProsjekt;
+        private List<Bruker> brukerListe;
+        private List<Bruker> brukerProsjekt;
+        private List<Bruker> queryTeam = null;
+        private List<Prosjekt> queryProsjekt = null;
+        private List<Team> teams = null;
+        private Table table;
+        private int brukerid;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["loggedIn"] == null)
             {
                 //    Response.Redirect("Login.aspx", true);
-                bruker_id = 1;
+                brukerid = 1;
             }
             else
             {
-                bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
+                brukerid = Validator.KonverterTilTall(Session["bruker_id"].ToString());
             }
-            if (!Validator.SjekkRettighet(bruker_id, Konstanter.rettighet.Administrator))
+            if (!Validator.SjekkRettighet(brukerid, Konstanter.rettighet.Administrator))
             {
                 Session["bruker_id"] = null;
                 Session["bruker"] = null;
@@ -33,7 +42,15 @@ namespace SysUt14Gr03
                 Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
                 Response.Redirect(("Login.aspx"), true);
             }
+            else {
 
+                if (!IsPostBack)
+                {
+                    brukerListe = Queries.GetAlleBrukere();
+                    PlaceHolderBrukere.Controls.Add(Tabeller.HentBrukereTabellForAdministrator(brukerListe));                    
+                }
+
+            }
         }
     }
 }

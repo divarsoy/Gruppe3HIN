@@ -286,12 +286,14 @@ namespace SysUt14Gr03.Migrations
             brukerPreferanser.ForEach(element => context.BrukerPreferanser.AddOrUpdate(brukerpreferanse => brukerpreferanse.Bruker_id, element));
             context.SaveChanges();
 
-            Rettighet BrukerRettighetUtvikler = context.Rettigheter.FirstOrDefault(rettighet => rettighet.RettighetNavn == "Utvikler");
-            Rettighet BrukerRettighetProsjektleder = context.Rettigheter.FirstOrDefault(rettighet => rettighet.RettighetNavn == "Prosjektleder");
-            Rettighet BrukerRettighetBrukeradmin = context.Rettigheter.FirstOrDefault(rettighet => rettighet.RettighetNavn == "BrukerAdmin");
+            Rettighet BrukerRettighetAdministrator = context.Rettigheter.FirstOrDefault(rettighet => rettighet.RettighetNavn == Konstanter.rettighet.Administrator.ToString());
+            Rettighet BrukerRettighetProsjektleder = context.Rettigheter.FirstOrDefault(rettighet => rettighet.RettighetNavn == Konstanter.rettighet.Prosjektleder.ToString());
+            Rettighet BrukerRettighetTeamleder = context.Rettigheter.FirstOrDefault(rettighet => rettighet.RettighetNavn == Konstanter.rettighet.Teamleder.ToString());
+            Rettighet BrukerRettighetUtvikler = context.Rettigheter.FirstOrDefault(rettighet => rettighet.RettighetNavn == Konstanter.rettighet.Utvikler.ToString());
+
 
             Bruker jaasgaard = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "jaasgaard");
-            jaasgaard.Rettigheter.Add(BrukerRettighetBrukeradmin);
+            jaasgaard.Rettigheter.Add(BrukerRettighetAdministrator);
 
             Bruker lmartinsen = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "lmartinsen");
             lmartinsen.Rettigheter.Add(BrukerRettighetUtvikler);

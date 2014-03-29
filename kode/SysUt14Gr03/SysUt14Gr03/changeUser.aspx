@@ -1,18 +1,18 @@
-﻿<%@ Page Title="changeUser" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="changeUser.aspx.cs" Inherits="SysUt14Gr03.changeUser" %>
+﻿<%@ Page Title="changeUser" Language="C#" MasterPageFile="~/Site.Utvikler.master" AutoEventWireup="true" CodeBehind="changeUser.aspx.cs" Inherits="SysUt14Gr03.changeUser" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" Runat="Server">
     <h1>
         Endre Brukerinformasjon</h1>
     <p>
-        For navn:
+        Fornavn:
         <asp:TextBox ID="FirstName" runat="server"></asp:TextBox></p>
     <p>
-        EtterNavn:
+        Etternavn:
         <asp:TextBox ID="SurName" runat="server"></asp:TextBox></p>
     <p>
-        Bruker navn:
+        Brukernavn:
         <asp:TextBox ID="UserName" runat="server"></asp:TextBox></p>
     <p>
-        Email:
+        Epost:
         <asp:TextBox ID="Email" runat="server"></asp:TextBox></p>
     <p>
         Passord:
