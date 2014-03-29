@@ -51,7 +51,7 @@ namespace SysUt14Gr03
                     if (Validator.SjekkRettighet(bruker.Bruker_id, Konstanter.rettighet.Administrator))
                     {
                         Session["rettighet"] = Konstanter.rettighet.Administrator.ToString();
-                        Response.Redirect("DefaultAdministrator");
+                        Response.Redirect("Administrator/DefaultAdministrator");
                     }
                     else if (Validator.SjekkRettighet(bruker.Bruker_id, Konstanter.rettighet.Prosjektleder))
                     {
@@ -61,12 +61,12 @@ namespace SysUt14Gr03
                     else if (Validator.SjekkRettighet(bruker.Bruker_id, Konstanter.rettighet.Teamleder))
                     {
                         Session["rettighet"] = Konstanter.rettighet.Teamleder.ToString();
-                        Response.Redirect("Default");
+                        Response.Redirect("DefaultUtvikler");
                     }
                     else if (Validator.SjekkRettighet(bruker.Bruker_id, Konstanter.rettighet.Utvikler))
                     {
                         Session["rettighet"] = Konstanter.rettighet.Utvikler.ToString();
-                        Response.Redirect("Default");
+                        Response.Redirect("DefaultUtvikler");
                     }
                     else
                     {

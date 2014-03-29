@@ -176,6 +176,7 @@
     <Content Include="ArkiveringAvKommentarer.aspx" />
     <Content Include="Brukere.aspx" />
     <Content Include="Default.aspx" />
+    <Content Include="DefaultUtvikler.aspx" />
     <Content Include="changeUser.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap.css" />
@@ -386,6 +387,13 @@
     <Compile Include="Administrator\DefaultAdministrator.aspx.designer.cs">
       <DependentUpon>DefaultAdministrator.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DefaultProsjektleder.aspx.cs">
       <DependentUpon>DefaultProsjektleder.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -493,12 +501,12 @@
     </Compile>
     <Compile Include="Classes\Tabeller.cs" />
     <Compile Include="Classes\Validator.cs" />
-    <Compile Include="Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
+    <Compile Include="DefaultUtvikler.aspx.cs">
+      <DependentUpon>DefaultUtvikler.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
+    <Compile Include="DefaultUtvikler.aspx.designer.cs">
+      <DependentUpon>DefaultUtvikler.aspx</DependentUpon>
     </Compile>
     <Compile Include="changeUser.aspx.cs">
       <DependentUpon>changeUser.aspx</DependentUpon>
