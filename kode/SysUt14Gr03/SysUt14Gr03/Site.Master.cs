@@ -50,6 +50,11 @@ namespace SysUt14Gr03
                 Response.Cookies.Set(responseCookie);
             }
 
+            if (Session["flashMelding"] != null && Session["flashStatus"] != null)
+            {
+                HentFlashMelding();
+            }
+
             Page.PreLoad += master_Page_PreLoad;
 
 
@@ -79,6 +84,8 @@ namespace SysUt14Gr03
         {
             //if (!IsPostBack)
             //{
+
+
             if (Session["bruker_id"] != null)
             {
                 bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
@@ -105,8 +112,26 @@ namespace SysUt14Gr03
             Context.GetOwinContext().Authentication.SignOut();
         }
 
+        protected void HentFlashMelding()
+        {
+            Label label = new Label();
+            label.Text = String.Format("<div id='flash' class='flash alert alert-dismissable alert-{0}'>", Session["flashStatus"]);
+            LinkButton button = new LinkButton();
+            button.CssClass = "close";
+            button.Attributes.Add("data-dismiss", "alert");
+            button.Attributes.Add("aria-hidden", "true");
+            button.Text = "&times;";
+            Label labelMelding = new Label();
+            labelMelding.Text = Session["flashMelding"] + "</div>";
+            NotifikasjonsPanel.Controls.Add(label);
+            NotifikasjonsPanel.Controls.Add(button);
+            NotifikasjonsPanel.Controls.Add(labelMelding);
+            Session["flashMelding"] = null;
+            Session["flashStatus"] = null;
+        }
 
-        public void HentNotifikasjonsPanel(int bruker_id)
+
+        protected void HentNotifikasjonsPanel(int bruker_id)
         {
             var notifikasjonsListe = Queries.GetNotifikasjon(bruker_id);
 
