@@ -4,10 +4,15 @@
    <p>Prosjektnavn:  <asp:TextBox ID="tbProsjektnavn" runat="server" Height="25px" ></asp:TextBox>
     
    </p>
-   <p>Prosjektleder: <asp:DropDownList ID="ddlBrukere" runat="server"></asp:DropDownList>
+   <p>Prosjektleder: <asp:DropDownList ID="ddlBrukere" runat="server" AppendDataBoundItems="true">
+         <asp:ListItem Selected = "True" Text = "Velg Prosjektleder" Value = "0"></asp:ListItem>
+                     </asp:DropDownList>
    </p>
-    <p>Team:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;         <asp:DropDownList ID="dropTeam" runat="server" Height="22px"></asp:DropDownList>
-    <asp:Calendar ID="cal" runat="server" Width="293px"></asp:Calendar>
+    <p>Team:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   
+        <asp:DropDownList ID="dropTeam" runat="server" Height="22px" AppendDataBoundItems="true">
+        <asp:ListItem Selected = "True" Text = "Velg Team" Value = "0"></asp:ListItem>
+        </asp:DropDownList></p>
+  <p><asp:Calendar ID="cal" runat="server" Width="293px"></asp:Calendar></p>
    <p>Startdato:     <asp:TextBox ID="tbStart" runat="server" Height="23px" ></asp:TextBox><asp:Button ID="btnStart" Text="Sett Startdato" OnClick="btnStart_Click" runat="server" Width="112px" Height="30px" />
     </p>
    <p>Sluttdato:     <asp:TextBox ID="tbSlutt" runat="server" Height="23px" Width="122px" ></asp:TextBox><asp:Button ID="btnSlutt" Text="Sett Sluttdato" OnClick="btnSlutt_Click" runat="server" Width="112px" Height="30px" />

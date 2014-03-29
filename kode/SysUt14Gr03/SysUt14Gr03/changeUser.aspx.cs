@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using SysUt14Gr03.Classes;
 
 namespace SysUt14Gr03
 {
@@ -22,9 +23,12 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            getInfo = new Login();
-            updatePassord = new lostPassword();
-            userID = getInfo.getBrukerID();
+            if (Session["bruker_id"] != null)
+            {
+                getInfo = new Login();
+                updatePassord = new lostPassword();
+                userID = Validator.KonverterTilTall(Session["bruker_id"].ToString());
+            }
         }
         protected void btnPasswordChange_Click(object sender, EventArgs e)
         {

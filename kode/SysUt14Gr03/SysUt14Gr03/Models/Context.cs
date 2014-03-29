@@ -73,9 +73,9 @@ namespace SysUt14Gr03.Models
                     m.ToTable("BrukerOppgaver");
                 });
 
-            modelBuilder.Entity<Bruker>()
-                .HasMany(t => t.Rettigheter)
-                .WithMany(t => t.Brukere)
+            modelBuilder.Entity<Rettighet>()
+                .HasMany(t => t.Brukere)
+                .WithMany(t => t.Rettigheter)
                 .Map(m =>
                 {
                     m.MapLeftKey("Rettighet_id");

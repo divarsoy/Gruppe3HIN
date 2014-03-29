@@ -13,6 +13,15 @@ namespace SysUt14Gr03 {
     public partial class OpprettOppgave {
         
         /// <summary>
+        /// lblProsjekt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblProsjekt;
+        
+        /// <summary>
         /// tbTittel control.
         /// </summary>
         /// <remarks>
@@ -47,6 +56,33 @@ namespace SysUt14Gr03 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbEstimering;
+        
+        /// <summary>
+        /// cal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Calendar cal;
+        
+        /// <summary>
+        /// tbFrist control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbFrist;
+        
+        /// <summary>
+        /// btnSett control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSett;
         
         /// <summary>
         /// ddlBrukere control.
@@ -110,15 +146,6 @@ namespace SysUt14Gr03 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlPrioritet;
-        
-        /// <summary>
-        /// ddlProsjekt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlProsjekt;
         
         /// <summary>
         /// lblCheck control.

@@ -47,6 +47,8 @@ namespace SysUt14Gr03
                     }
                 }
             }
+            Session["flashMelding"] = "Brukeren / Brukerne ble slettet";
+            Session["flashStatus"] = Konstanter.notifikasjonsTyper.success.ToString();
         }
     }
 }

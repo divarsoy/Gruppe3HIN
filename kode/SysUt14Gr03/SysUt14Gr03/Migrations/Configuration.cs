@@ -6,6 +6,8 @@ namespace SysUt14Gr03.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
     using SysUt14Gr03.Models;
+    using SysUt14Gr03.Classes;
+    using System.Collections;
 
     internal sealed class Configuration : DbMigrationsConfiguration<SysUt14Gr03.Models.Context>
     {
@@ -32,21 +34,24 @@ namespace SysUt14Gr03.Migrations
 
             var rettigheter = new List<Rettighet> {
                 new Rettighet {
-                    RettighetNavn = "Brukeradmin",
+                    RettighetNavn = Konstanter.rettighet.Administrator.ToString(),
                     Brukere = new List<Bruker>()
                 },
                 new Rettighet {
-                    RettighetNavn = "Prosjektleder",
+                    RettighetNavn = Konstanter.rettighet.Prosjektleder.ToString(),
                     Brukere = new List<Bruker>()
                 },
                 new Rettighet {
-                    RettighetNavn = "Utvikler",
+                    RettighetNavn = Konstanter.rettighet.Teamleder.ToString(),
                     Brukere = new List<Bruker>()
-
+                },
+                new Rettighet {
+                    RettighetNavn = Konstanter.rettighet.Utvikler.ToString(),
+                    Brukere = new List<Bruker>()
                 }
             };
 
-            rettigheter.ForEach(element => context.Rettigheter.AddOrUpdate(element));
+            rettigheter.ForEach(element => context.Rettigheter.AddOrUpdate(rettighet => rettighet.RettighetNavn, element));
             context.SaveChanges();
 
             var notifikasjonsTyper = new List<NotifikasjonsType> {
@@ -64,16 +69,35 @@ namespace SysUt14Gr03.Migrations
                 }
             };
 
-            notifikasjonsTyper.ForEach(element => context.NotifikasjonsType.AddOrUpdate(element));
+            notifikasjonsTyper.ForEach(element => context.NotifikasjonsType.AddOrUpdate(notifikasjonstype => notifikasjonstype.Type, element));
             context.SaveChanges();
+
+            
+
+            Hashtable HashAndSaltBruker1 = Hash.GetHashAndSalt(Konstanter.FELLES_TEST_PASSORD);
+            string HashBruker1 = (string)HashAndSaltBruker1["hash"];
+            string SaltBruker1 = (string)HashAndSaltBruker1["salt"];
+            string HashBruker2 = (string)HashAndSaltBruker1["hash"];
+            string SaltBruker2 = (string)HashAndSaltBruker1["salt"];
+            string HashBruker3 = (string)HashAndSaltBruker1["hash"];
+            string SaltBruker3 = (string)HashAndSaltBruker1["salt"];
+            string HashBruker4 = (string)HashAndSaltBruker1["hash"];
+            string SaltBruker4 = (string)HashAndSaltBruker1["salt"];
+            string HashBruker5 = (string)HashAndSaltBruker1["hash"];
+            string SaltBruker5 = (string)HashAndSaltBruker1["salt"];
+            string HashBruker6 = (string)HashAndSaltBruker1["hash"];
+            string SaltBruker6 = (string)HashAndSaltBruker1["salt"];
+            string HashBruker7 = (string)HashAndSaltBruker1["hash"];
+            string SaltBruker7 = (string)HashAndSaltBruker1["salt"];
 
             var brukere = new List<Bruker> {
                new Bruker {
                     Etternavn = "Åsgård",
                     Fornavn = "Jane",
                     Brukernavn = "jaasgaard",
-                    Epost = "janeaasgaard@gmail.com",
-                    Passord = "Passord må krypteres!",
+                    Epost = "admin@gmail.com",
+                    Passord = HashBruker1,
+                    Salt = SaltBruker1,
                     IM = "jaasgaard",
                     Token = "Må generere Token!",
                     Aktivert = true,
@@ -92,8 +116,9 @@ namespace SysUt14Gr03.Migrations
                     Etternavn = "Martinsen",
                     Fornavn = "Lars",
                     Brukernavn = "lmartinsen",
-                    Epost = "lmartinsen@gmail.com",
-                    Passord = "Passord må krypteres!",
+                    Epost = "utvikler@gmail.com",
+                    Passord = HashBruker2,
+                    Salt = SaltBruker2,
                     IM = "lmartinsen",
                     Token = "Må generere Token!",
                     Aktivert = true,
@@ -112,8 +137,9 @@ namespace SysUt14Gr03.Migrations
                     Etternavn = "Larsen",
                     Fornavn = "Martin",
                     Brukernavn = "mlarsen",
-                    Epost = "mlarsen@gmail.com",
-                    Passord = "Passord må krypteres!",
+                    Epost = "prosjektleder@gmail.com",
+                    Passord = HashBruker3,
+                    Salt = SaltBruker3,
                     IM = "mlarsen",
                     Token = "Må generere Token!",
                     Aktivert = true,
@@ -133,7 +159,8 @@ namespace SysUt14Gr03.Migrations
                     Fornavn = "Heidi",
                     Brukernavn = "hhansen",
                     Epost = "hhansen@gmail.com",
-                    Passord = "Passord må krypteres!",
+                    Passord = HashBruker4,
+                    Salt = SaltBruker4,
                     IM = "hhansen",
                     Token = "Må generere Token!",
                     Aktivert = true,
@@ -153,7 +180,8 @@ namespace SysUt14Gr03.Migrations
                     Fornavn = "Anette",
                     Brukernavn = "aaskoy",
                     Epost = "aaskoy@gmail.com",
-                    Passord = "Passord må krypteres!",
+                    Passord = HashBruker5,
+                    Salt = SaltBruker5,
                     IM = "aaskoy",
                     Token = "Må generere Token!",
                     Aktivert = true,
@@ -173,7 +201,8 @@ namespace SysUt14Gr03.Migrations
                     Fornavn = "Polden",
                     Brukernavn = "jpolden",
                     Epost = "jpolden@gmail.com",
-                    Passord = "Passord må krypteres!",
+                    Passord = HashBruker6,
+                    Salt = SaltBruker6,
                     IM = "jpolden",
                     Token = "Må generere Token!",
                     Aktivert = true,
@@ -193,7 +222,8 @@ namespace SysUt14Gr03.Migrations
                     Fornavn = "Pernille",
                     Brukernavn = "pholm",
                     Epost = "pholm@gmail.com",
-                    Passord = "Passord må krypteres!",
+                    Passord = HashBruker7,
+                    Salt = SaltBruker7,
                     IM = "pholm",
                     Token = "Må generere Token!",
                     Aktivert = true,
@@ -282,12 +312,19 @@ namespace SysUt14Gr03.Migrations
             brukerPreferanser.ForEach(element => context.BrukerPreferanser.AddOrUpdate(brukerpreferanse => brukerpreferanse.Bruker_id, element));
             context.SaveChanges();
 
-            Rettighet BrukerRettighetUtvikler = context.Rettigheter.FirstOrDefault(rettighet => rettighet.RettighetNavn == "Utvikler");
-            Rettighet BrukerRettighetProsjektleder = context.Rettigheter.FirstOrDefault(rettighet => rettighet.RettighetNavn == "Prosjektleder");
-            Rettighet BrukerRettighetBrukeradmin = context.Rettigheter.FirstOrDefault(rettighet => rettighet.RettighetNavn == "BrukerAdmin");
+            string BrukerRettighetAdministratorString = Konstanter.rettighet.Administrator.ToString();
+            string BrukerRettighetProsjektlederString = Konstanter.rettighet.Prosjektleder.ToString();
+            string BrukerRettighetTeamlederString = Konstanter.rettighet.Teamleder.ToString();
+            string BrukerRettighetUtviklerString = Konstanter.rettighet.Utvikler.ToString();
+
+            Rettighet BrukerRettighetAdministrator = context.Rettigheter.FirstOrDefault(rettighet => rettighet.RettighetNavn == BrukerRettighetAdministratorString);
+            Rettighet BrukerRettighetProsjektleder = context.Rettigheter.FirstOrDefault(rettighet => rettighet.RettighetNavn == BrukerRettighetProsjektlederString);
+            Rettighet BrukerRettighetTeamleder = context.Rettigheter.FirstOrDefault(rettighet => rettighet.RettighetNavn == BrukerRettighetTeamlederString);
+            Rettighet BrukerRettighetUtvikler = context.Rettigheter.FirstOrDefault(rettighet => rettighet.RettighetNavn == BrukerRettighetUtviklerString);
+
 
             Bruker jaasgaard = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "jaasgaard");
-            jaasgaard.Rettigheter.Add(BrukerRettighetBrukeradmin);
+            jaasgaard.Rettigheter.Add(BrukerRettighetAdministrator);
 
             Bruker lmartinsen = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "lmartinsen");
             lmartinsen.Rettigheter.Add(BrukerRettighetUtvikler);
@@ -1112,7 +1149,7 @@ namespace SysUt14Gr03.Migrations
             };
             logger.ForEach(element => context.Logger.AddOrUpdate(logg => logg.Hendelse, element));
             context.SaveChanges();
-
+            
             var notifikasjon = new List<Notifikasjon> {
                 new Notifikasjon {
                     Melding = "Bruker b akspterte invitasjonen til å hjelpe deg med oppgave F",
@@ -1145,18 +1182,6 @@ namespace SysUt14Gr03.Migrations
                     Vist = false
                 },
                 new Notifikasjon {
-                    Melding = "Du ble herved tildelt et team Rødhette",
-                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "mlarsen").Bruker_id,
-                    NotifikasjonsType_id = 2,
-                    Vist = false
-                },
-                new Notifikasjon {
-                    Melding = "Du ble herved lagt til i prosjektet GråUlv",
-                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "lmartinsen").Bruker_id,
-                    NotifikasjonsType_id = 2,
-                    Vist = false
-                },
-                new Notifikasjon {
                     Melding = "Fristen for oppgave F har dessverre gått ut, gjør noe kjapt",
                     Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "jpolden").Bruker_id,
                     NotifikasjonsType_id = 4,
@@ -1169,21 +1194,9 @@ namespace SysUt14Gr03.Migrations
                     Vist = false
                 },
                 new Notifikasjon {
-                    Melding = "Du har brukt 4 timer mindre enn planlagt forrige uke. SKJÆRP DÆ!",
+                    Melding = "Du har brukt 4 timer mindre enn planlagt forrige uke.",
                     Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "aaskoy").Bruker_id,
                     NotifikasjonsType_id = 3,
-                    Vist = false
-                },
-                new Notifikasjon {
-                    Melding = "Du ble herved invitert til oppgave F hvor bruker A trenger hjelp",
-                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "jpolden").Bruker_id,
-                    NotifikasjonsType_id = 2,
-                    Vist = false
-                },
-                new Notifikasjon {
-                    Melding = "Du ble herved invitert til oppgave F hvor bruker A trenger hjelp",
-                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "jpolden").Bruker_id,
-                    NotifikasjonsType_id = 2,
                     Vist = false
                 },
                 new Notifikasjon {
@@ -1219,6 +1232,7 @@ namespace SysUt14Gr03.Migrations
             };
             notifikasjon.ForEach(element => context.Notifikasjoner.AddOrUpdate(notifikasjoner => notifikasjoner.Melding, element));
             context.SaveChanges();
+            
         }
     }
 }

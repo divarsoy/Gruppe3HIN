@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContentUtvikler" runat="server">
     <div class="container">
     <h1> Innstillinger for varsling</h1>
-    <h4> Varsle meg når jeg blir...</h4>
+    <h4> Varsle meg på e-post når jeg blir...</h4>
 
         <asp:CheckBoxList ID="cblElementer" runat="server" CssClass="epost_pref_tabell">
         </asp:CheckBoxList>

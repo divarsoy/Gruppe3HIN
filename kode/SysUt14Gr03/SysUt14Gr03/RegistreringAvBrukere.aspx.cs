@@ -30,15 +30,15 @@ namespace SysUt14Gr03
    
         }
 
-/*        protected void opprettBruker(string _etternavn, string _fornavn, string _epost)
+        protected void opprettBruker(string _etternavn, string _fornavn, string _epost)
         {
             using (var db = new Context())
             {
-                var nyBruker = new Bruker { Etternavn = etternavn, Fornavn = fornavn, Epost = epost, opprettet = DateTime.Now };
+                var nyBruker = new Bruker { Etternavn = etternavn, Fornavn = fornavn, Epost = epost, Brukernavn = "", IM = "", Token = "", Aktivert = false, Aktiv = false, opprettet = DateTime.Now };
                 db.Brukere.Add(nyBruker);
                 db.SaveChanges();
             }
-        } */
+        } 
 
         protected void bt_adm_reg_Click(object sender, EventArgs e)
         {
@@ -83,8 +83,8 @@ namespace SysUt14Gr03
 
             if (emailUnq && tb_reg_epost.Text.Length < 256) {
                 epost = tb_reg_epost.Text;
-//                opprettBruker(etternavn, fornavn, epost);
-                AktiverKonto.SetBrukerFelter(fornavn, etternavn, epost);
+             opprettBruker(etternavn, fornavn, epost);
+                //AktiverKonto.SetBrukerFelter(fornavn, etternavn, epost);
                 EpostFullforReg();
           
             }    
@@ -101,8 +101,8 @@ namespace SysUt14Gr03
                 email = tb_reg_epost.Text;
                 subject = "Bekreftelses epost for konto aktivering";
 
-                //har begynt å lage en aktiverkonto side 
-                ActivationUrl = Server.HtmlEncode("http://localhost:60154/AktiverKonto.aspx?Epost=" + email + "&Token=" + token);
+                //Rett link tips?
+                ActivationUrl = Server.HtmlEncode("AktiverKonto?Epost=" + email + "&Token=" + token);
             
                 //sendEmail.sendEpost(email, msg, subject, ActivationUrl, null, null);
                 msg = new MailMessage();
@@ -124,7 +124,10 @@ namespace SysUt14Gr03
 
                 if(ActivationUrl != null)
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('En link for å aktivere brukerkontoen er sendt til brukereposten');", true);
-
+                tb_reg_epost.Text = string.Empty;
+                tb_reg_etternavn.Text = string.Empty;
+                tb_reg_fornavn.Text = string.Empty;
+                tb_reg_fornavn.Focus();
             }
             catch (Exception ex)
             {

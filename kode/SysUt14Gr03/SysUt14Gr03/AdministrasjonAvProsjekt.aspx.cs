@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -12,7 +13,7 @@ namespace SysUt14Gr03
 {
     public partial class AdministrasjonAvProsjekt : System.Web.UI.Page
     {
-      
+        private int team_id;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -35,8 +36,9 @@ namespace SysUt14Gr03
         {
             try
             {
+                lblFeil.Visible = false;
                 int prosjekt_id = (int)gridViewProsjekt.DataKeys[e.RowIndex].Value;
-                int team_id;
+               
                 int bruker_id;
 
                 System.Web.UI.WebControls.TextBox tbProsjektnavn = (TextBox)gridViewProsjekt.Rows[e.RowIndex].FindControl("tbProsjektnavn");
@@ -69,13 +71,17 @@ namespace SysUt14Gr03
             }
             catch 
             {
-                Response.Write("<h2 align=center>Feltet stemmer ikke overrens med det i databasen!</h2>");
+                lblFeil.Visible = true;
+                lblFeil.ForeColor = Color.Red;
+                lblFeil.Text = "Stemmer ikke overrens med databasen!";
+                
             }
         }
 
         protected void gridViewProsjekt_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             gridViewProsjekt.EditIndex = -1;
+   
             gridViewProsjekt.Columns[6].Visible = true;
             visProsjekt();
         }
@@ -85,6 +91,23 @@ namespace SysUt14Gr03
             gridViewProsjekt.EditIndex = e.NewEditIndex;
             gridViewProsjekt.Columns[6].Visible = false;
             visProsjekt();
+        }
+
+        protected void gridViewProsjekt_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+           
+                if (e.Row.RowType == DataControlRowType.DataRow)
+                {
+                    using (var context = new Context())
+                    {
+                        Label tTeam = e.Row.FindControl("lbTeam") as Label;
+                        Team team = context.Teams.Where(t => t.Navn == tTeam.Text).First();
+                        team_id = team.Team_id;
+                        HyperLink link = e.Row.FindControl("asp") as HyperLink;
+                        link.NavigateUrl = "AdministrasjonAvTeamBrukere?Team_id=" + team_id;
+                    }
+                }
+            
         }
     }
 }

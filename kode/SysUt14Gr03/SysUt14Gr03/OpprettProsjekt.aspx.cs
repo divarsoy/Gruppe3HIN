@@ -26,16 +26,17 @@ namespace SysUt14Gr03
             if (!IsPostBack)
             {
                 teamListe = Queries.GetAlleAktiveTeam();
-                brukerListe = Queries.GetAlleAktiveBrukere();
+                brukerListe = Queries.GetProsjektledere(Konstanter.rettighet.Prosjektleder);
 
                 for (int i = 0; i < teamListe.Count(); i++)
                 {
                     Team team = teamListe[i];
+                   
                     dropTeam.Items.Add(new ListItem(team.Navn, team.Team_id.ToString()));
                 }
                 for (int i = 0; i < brukerListe.Count(); i++)
                 {
-                    Bruker bruker = brukerListe[i];
+                    Bruker bruker = brukerListe[i]; 
                     ddlBrukere.Items.Add(new ListItem(bruker.ToString(), bruker.Bruker_id.ToString()));
                 }
             }
@@ -48,11 +49,13 @@ namespace SysUt14Gr03
         private void opprettProsjekt()
         {
 
-            if (tbProsjektnavn.Text != String.Empty && tbStart.Text != String.Empty && tbSlutt.Text != String.Empty)
+            if (tbProsjektnavn.Text != String.Empty && tbStart.Text != String.Empty && tbSlutt.Text != String.Empty && dropTeam.SelectedValue == null && ddlBrukere.SelectedValue == null)
             {
 
                 dtStart = Convert.ToDateTime(tbStart.Text);
                 dtSlutt = Convert.ToDateTime(tbSlutt.Text);
+                
+
                 team_id = Convert.ToInt32(dropTeam.SelectedValue);
                 bruker_id = Convert.ToInt32(ddlBrukere.SelectedValue);
             
@@ -92,7 +95,7 @@ namespace SysUt14Gr03
             BrukerPreferanse preferanse = new BrukerPreferanse();
             if(preferanse.EpostProsjekt == true)
             {
-                //List<Bruker> brukerListe = Queries.GetAlleBrukereIEtTeam(team_id);
+                List<Bruker> brukerListe = Queries.GetAlleBrukereIEtTeam(team_id);
                 sendEmail sendMsg = new sendEmail();
 
                 string message = "Du ble lagt til et nytt prosjekt: " + tbProsjektnavn.Text + "\nDato: " + DateTime.Now + "\nLagt til av: " + User.Identity.Name;

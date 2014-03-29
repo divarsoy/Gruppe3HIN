@@ -13,6 +13,15 @@ namespace SysUt14Gr03 {
     public partial class SiteMaster {
         
         /// <summary>
+        /// MenyTemplate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder MenyTemplate;
+        
+        /// <summary>
         /// NotifikasjonsPanel control.
         /// </summary>
         /// <remarks>
@@ -22,12 +31,12 @@ namespace SysUt14Gr03 {
         protected global::System.Web.UI.WebControls.Panel NotifikasjonsPanel;
         
         /// <summary>
-        /// MainContent control.
+        /// MainContentTemplate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContentTemplate;
     }
 }

@@ -13,13 +13,13 @@ namespace SysUt14Gr03 {
     public partial class Login {
         
         /// <summary>
-        /// UserName control.
+        /// Epost control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl UserName;
+        protected global::System.Web.UI.WebControls.TextBox Epost;
         
         /// <summary>
         /// Password control.
@@ -28,7 +28,7 @@ namespace SysUt14Gr03 {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputPassword Password;
+        protected global::System.Web.UI.WebControls.TextBox Password;
         
         /// <summary>
         /// RememberMe control.

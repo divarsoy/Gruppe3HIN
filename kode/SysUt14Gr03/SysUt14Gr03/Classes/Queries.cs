@@ -33,6 +33,25 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        static public Bruker GetBrukerVedEpost(string epost)
+        {
+            using (var context = new Context())
+            {
+                return context.Brukere.Where(bruker => bruker.Epost == epost).FirstOrDefault();
+            }
+        }
+        static public List<Bruker> GetProsjektledere(Konstanter.rettighet _rettighet)
+        {
+            using (var context = new Context())
+            {
+                string rettighetString = _rettighet.ToString();
+                var prosjektLedere = context.Brukere
+                            .Include("Rettigheter")
+                            .Where(bruker => bruker.Rettigheter.Any(rettighet => rettighet.RettighetNavn == rettighetString))                         
+                            .ToList<Bruker>();
+                return prosjektLedere;
+            }
+        }
         static public List<Notifikasjon> GetNotifikasjon(int bruker_id)
         {
             using (var context = new Context())
@@ -142,6 +161,15 @@ namespace SysUt14Gr03.Classes
                                    select bruker).ToList<Bruker>();
                 return brukerListe;
             
+            }
+        }
+
+        static public List<Bruker> GetAlleBrukere()
+        {
+            using (var context = new Context())
+            { 
+                var brukerListe = context.Brukere.ToList();
+                return brukerListe;
             }
         }
         static public List<Bruker> GetAlleAktiveBrukereID(int bruker_id)

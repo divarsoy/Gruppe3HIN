@@ -15,7 +15,7 @@ namespace SysUt14Gr03
     {
         private int bruker_id;
         private MailMessage msg;
-        private Classes.sendEmail sendMsg;
+        private sendEmail sendMsg;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -76,7 +76,7 @@ namespace SysUt14Gr03
         {
             Guid token = Guid.NewGuid();
             msg.Subject = "Bekreftelses epost for konto aktivering";
-            string ActivationUrl = Server.HtmlEncode("http://localhost:60154/AktiverKonto.aspx?Epost=" + epost + "&Token=" + token);
+            string ActivationUrl = Server.HtmlEncode("~/AktiverKonto.aspx?Epost=" + epost + "&Token=" + token);
             msg.Body = "Hei " + fornavn + "!\n" + "Takk for at du registrerte deg hos oss\n" + " <a href='" + ActivationUrl + "'>Klikk her for å aktivere</a>  din konto.";
 
             sendMsg.sendEpost(epost, msg.Body, msg.Subject, ActivationUrl, null, null);
