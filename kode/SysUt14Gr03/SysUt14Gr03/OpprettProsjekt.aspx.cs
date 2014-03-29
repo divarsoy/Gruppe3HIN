@@ -95,7 +95,7 @@ namespace SysUt14Gr03
             BrukerPreferanse preferanse = new BrukerPreferanse();
             if(preferanse.EpostProsjekt == true)
             {
-                //List<Bruker> brukerListe = Queries.GetAlleBrukereIEtTeam(team_id);
+                List<Bruker> brukerListe = Queries.GetAlleBrukereIEtTeam(team_id);
                 sendEmail sendMsg = new sendEmail();
 
                 string message = "Du ble lagt til et nytt prosjekt: " + tbProsjektnavn.Text + "\nDato: " + DateTime.Now + "\nLagt til av: " + User.Identity.Name;

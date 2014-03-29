@@ -76,6 +76,7 @@ namespace SysUt14Gr03
         protected void gridViewProsjekt_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             gridViewProsjekt.EditIndex = -1;
+   
             gridViewProsjekt.Columns[6].Visible = true;
             visProsjekt();
         }

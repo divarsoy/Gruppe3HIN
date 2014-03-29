@@ -27,7 +27,7 @@ namespace SysUt14Gr03
         private string imAdresse;
         private string passord;
         private string token;
-    
+        private int bruker_id;
 
 
         protected void Page_Load(object sender, EventArgs e)
@@ -38,11 +38,11 @@ namespace SysUt14Gr03
             }
         }
 
-        public static void SetBrukerFelter(string _fornavn, string _etternavn, string _epost) {
+   /*     public static void SetBrukerFelter(string _fornavn, string _etternavn, string _epost) {
             initialFornavn = _fornavn;
             initialEtternavn = _etternavn;
             initialEpost = _epost;
-        }
+        } */
 
         private void ActivateMyAccount()
         {
@@ -52,11 +52,15 @@ namespace SysUt14Gr03
                 if ((!string.IsNullOrEmpty(Request.QueryString["Epost"])) & (!string.IsNullOrEmpty(Request.QueryString["Token"])))
                 {
                     Response.Write("<h2 align=center> Fyll ut resterende felt for å aktivere kontoen din</h2>");
-
-                    Firstname.Text = initialFornavn;
-                    Aftername.Text = initialEtternavn;
-                    epost = Email.Text = Request.QueryString["Epost"];
-                    token = Request.QueryString["Token"];
+                    using (var context = new Context())
+                    {
+                        epost = Email.Text = Request.QueryString["Epost"];
+                        Bruker bruk = context.Brukere.Where(b => b.Epost == epost).First();
+                        bruker_id = bruk.Bruker_id;
+                        Firstname.Text = bruk.Fornavn;
+                        Aftername.Text = bruk.Etternavn;
+                        token = Request.QueryString["Token"];
+                    }
                 }
                 else
                 {
@@ -78,19 +82,31 @@ namespace SysUt14Gr03
             {
              
                 string Tok = token;
-                passord = MD5Hash(Password.Text);
-                //passord = Passord.HashPassord(Password.Text);
+                //passord = MD5Hash(Password.Text);
+                passord = Passord.HashPassord(Password.Text);
                 epost = Email.Text;
                 brukernavn = Username.Text;
                 etternavn = Aftername.Text;
                 fornavn = Firstname.Text;
                 imAdresse = Im_adress.Text;
-            
+               // int id = bruker_id;
 
                 using (var db = new Context())
                 {
+                    var Bruker = (from bruker in db.Brukere
+                                  where bruker.Epost == epost
+                                  select bruker).FirstOrDefault();
 
-                    var Bruker = new Bruker {
+                    Bruker.Aktiv = true;
+                    Bruker.Brukernavn = brukernavn;
+                    Bruker.Epost = epost;
+                    Bruker.Etternavn = etternavn;
+                    Bruker.IM = imAdresse;
+                    Bruker.Passord = passord;
+                    Bruker.Token = Tok;
+                  
+                   /* var Bruker = new Bruker {
+                    * 
                         Brukernavn = brukernavn, 
                         Etternavn = etternavn, 
                         Fornavn = fornavn, 
@@ -100,7 +116,7 @@ namespace SysUt14Gr03
                         Passord = passord, 
                         opprettet = DateTime.Now, 
                         Token = Tok};
-                    db.Brukere.Add(Bruker);
+                    db.Brukere.Add(Bruker);  */ 
                     db.SaveChanges();
                 
                 }

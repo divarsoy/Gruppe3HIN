@@ -30,7 +30,7 @@ namespace SysUt14Gr03
    
         }
 
-/*        protected void opprettBruker(string _etternavn, string _fornavn, string _epost)
+        protected void opprettBruker(string _etternavn, string _fornavn, string _epost)
         {
             using (var db = new Context())
             {
@@ -38,7 +38,7 @@ namespace SysUt14Gr03
                 db.Brukere.Add(nyBruker);
                 db.SaveChanges();
             }
-        } */
+        } 
 
         protected void bt_adm_reg_Click(object sender, EventArgs e)
         {
@@ -83,8 +83,8 @@ namespace SysUt14Gr03
 
             if (emailUnq && tb_reg_epost.Text.Length < 256) {
                 epost = tb_reg_epost.Text;
-//                opprettBruker(etternavn, fornavn, epost);
-                AktiverKonto.SetBrukerFelter(fornavn, etternavn, epost);
+             opprettBruker(etternavn, fornavn, epost);
+                //AktiverKonto.SetBrukerFelter(fornavn, etternavn, epost);
                 EpostFullforReg();
           
             }    
@@ -102,7 +102,7 @@ namespace SysUt14Gr03
                 subject = "Bekreftelses epost for konto aktivering";
 
                 //har begynt å lage en aktiverkonto side 
-                ActivationUrl = Server.HtmlEncode("AktiverKonto.aspx?Epost=" + email + "&Token=" + token);
+                ActivationUrl = Server.HtmlEncode("http://AktiverKonto.aspx?Epost=" + email + "&Token=" + token);
             
                 //sendEmail.sendEpost(email, msg, subject, ActivationUrl, null, null);
                 msg = new MailMessage();
