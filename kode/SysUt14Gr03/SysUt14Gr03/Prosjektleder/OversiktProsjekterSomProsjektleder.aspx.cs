@@ -32,5 +32,10 @@ namespace SysUt14Gr03
                 ProsjektTable.Controls.Add(prosjektTabell);
             }
         }
+
+        protected void BtnOpprettProsjekt_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Prosjektleder/OpprettProsjekt");
+        }
     }
 }

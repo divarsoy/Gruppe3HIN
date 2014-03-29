@@ -6,9 +6,8 @@
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Prosjekter <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li> <a runat="server" href="~/AdministrasjonAvProsjekt">Administrasjon Av Prosjekt</a></li>
-                    <li> <a runat="server" href="~/RegistreringAvBrukere">Opprett bruker</a></li>
                     <li> <a runat="server" href="~/ProsjektLeder/OversiktProsjekterSomProsjektleder">Oversikt over prosjekter</a></li>
+                    <li> <a runat="server" href="~/ProsjektLeder/OpprettProsjekt">Opprett Prosjekt</a></li>
                 </ul>                  
     </ul>
 
@@ -16,9 +15,16 @@
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Team <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li> <a runat="server" href="~/AdministrasjonAvTeam">Administrasjon Av Team</a></li>
+                    <li> <a runat="server" href="~/OversiktTeam">Oversikt over Team i valgt prosjekt</a></li>
+                    <li> <a runat="server" href="~/OpprettTeam">Opprett Team</a></li>
+                </ul>                  
+    </ul>
+        <ul class="nav navbar-nav">
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Brukere <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li> <a runat="server" href="~/OversiktBrukere">Oversikt over Brukere i valgt prosjekt</a></li>
                     <li> <a runat="server" href="~/RegistreringAvBrukere">Opprett bruker</a></li>
-                    <li> <a runat="server" href="~/OversiktProsjekter">Oversikt over prosjekter</a></li>
                 </ul>                  
     </ul>
 
@@ -26,9 +32,8 @@
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Oppgaver <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li> <a runat="server" href="~/AdministrasjonAvOppgave">Administrasjon Av Oppgaver</a></li>
-                    <li> <a runat="server" href="~/RegistreringAvBrukere">Opprett bruker</a></li>
-                    <li> <a runat="server" href="~/OversiktProsjekter">Oversikt over prosjekter</a></li>
+                    <li> <a runat="server" href="~/OversiktOppgaver">Oversikt over Oppgaver i valgt prosjekt</a></li>
+                    <li> <a runat="server" href="~/OpprettOppgave">Opprett Oppgaver</a></li>
                 </ul>                  
     </ul>
 

@@ -359,7 +359,6 @@ namespace SysUt14Gr03.Classes
             startDatoHeaderCell.Text = "Start Dato";
             sluttDatoHeaderCell.Text = "Slutt Dato";
             teamHeaderCell.Text = "Team";
-            brukereHeaderCell.Text = "Tilknyttet Oppgave";
             opprettetHeaderCell.Text = "Opprettet";
             aktivHeaderCell.Text = "Aktiv";
 
@@ -367,7 +366,6 @@ namespace SysUt14Gr03.Classes
             headerRow.Cells.Add(startDatoHeaderCell);
             headerRow.Cells.Add(sluttDatoHeaderCell);
             headerRow.Cells.Add(teamHeaderCell);
-            headerRow.Cells.Add(brukereHeaderCell);
             headerRow.Cells.Add(opprettetHeaderCell);
             headerRow.Cells.Add(aktivHeaderCell);
             tabell.Rows.Add(headerRow);
@@ -380,13 +378,11 @@ namespace SysUt14Gr03.Classes
                 TableCell startDatoCell = new TableCell();
                 TableCell sluttDatoCell = new TableCell();
                 TableCell teamCell = new TableCell();
-                TableCell oppgCell = new TableCell();
                 TableCell opprettetCell = new TableCell();
                 TableCell aktivCell = new TableCell();
 
                 Team team = Queries.GetTeam((int)prosjekt.Team_id);
                 Bruker bruker = Queries.GetBruker(prosjekt.Bruker_id);
-                List<Oppgave> liste = Queries.GetAlleAktiveOppgaverForProsjekt(prosjekt.Prosjekt_id);
 
 
                 navnCell.Text = String.Format("<a href='AdministrasjonAvProsjekt?Prosjekt_id={0}'>{1}</a>", prosjekt.Prosjekt_id.ToString(), prosjekt.Navn);
@@ -404,18 +400,10 @@ namespace SysUt14Gr03.Classes
                     aktivCell.Text = String.Format("Nei");
                 }
 
-
-                for (int i = 0; i < liste.Count; i++)
-                {
-                    Oppgave oppg = liste[i];
-                    oppgCell.Text = String.Format(oppg.Tittel);
-                }
-
                 tRow.Cells.Add(navnCell);
                 tRow.Cells.Add(startDatoCell);
                 tRow.Cells.Add(sluttDatoCell);
                 tRow.Cells.Add(teamCell);
-                tRow.Cells.Add(oppgCell);
                 tRow.Cells.Add(opprettetCell);
                 tRow.Cells.Add(aktivCell);
                 tabell.Rows.Add(tRow);

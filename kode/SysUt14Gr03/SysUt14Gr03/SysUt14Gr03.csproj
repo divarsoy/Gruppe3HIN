@@ -194,7 +194,7 @@
     <Content Include="MottaOppgave.aspx" />
     <Content Include="OpprettOppgave.aspx" />
     <Content Include="OpprettOppgavegruppe.aspx" />
-    <Content Include="OpprettProsjekt.aspx" />
+    <Content Include="Prosjektleder\OpprettProsjekt.aspx" />
     <Content Include="Administrator\OversiktBrukereSomAdministrator.aspx" />
     <Content Include="OversiktBrukereSomProsjektleder.aspx" />
     <Content Include="OversiktBrukerSomUtvikler.aspx" />
@@ -567,11 +567,11 @@
     <Compile Include="OpprettOppgave.aspx.designer.cs">
       <DependentUpon>OpprettOppgave.aspx</DependentUpon>
     </Compile>
-    <Compile Include="OpprettProsjekt.aspx.cs">
+    <Compile Include="Prosjektleder\OpprettProsjekt.aspx.cs">
       <DependentUpon>OpprettProsjekt.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="OpprettProsjekt.aspx.designer.cs">
+    <Compile Include="Prosjektleder\OpprettProsjekt.aspx.designer.cs">
       <DependentUpon>OpprettProsjekt.aspx</DependentUpon>
     </Compile>
     <Compile Include="OpprettTeam.aspx.cs">
