@@ -103,7 +103,8 @@ namespace SysUt14Gr03
                                   select bruker).FirstOrDefault();
 
                     // Default rettighet er utvikler
-                    var rettighetUtvikler = db.Rettigheter.Where(rettighet => rettighet.RettighetNavn == Konstanter.rettighet.Utvikler.ToString()).FirstOrDefault();
+                    string rettighetUtviklerString = Konstanter.rettighet.Utvikler.ToString();
+                    var rettighetUtvikler = db.Rettigheter.Where(rettighet => rettighet.RettighetNavn == rettighetUtviklerString).FirstOrDefault();
                    
                     Bruker.Aktiv = true;
                     Bruker.Brukernavn = brukernavn;
