@@ -12,7 +12,6 @@ namespace SysUt14Gr03
     public partial class AdministrerOppgavegruppe : System.Web.UI.Page
     {
         private int prosjekt_id = 1;
-        private int bruker_id;
         private List<Oppgave> oppgaveListe;
 
         protected void Page_Load(object sender, EventArgs e)

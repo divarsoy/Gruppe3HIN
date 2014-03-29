@@ -4,5 +4,4 @@
     <h1>Liste over brukere i prosjektet</h1>
     <asp:Label ID="lblTilbakemelding" runat="server" Text=""></asp:Label>
     <asp:PlaceHolder ID="PlaceHolderTableProject" runat="server"></asp:PlaceHolder>
-    <asp:Button ID="Button1" runat="server" Text="Gå til prosjektsiden" OnClick="Button1_Click" />
 </asp:Content>

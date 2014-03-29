@@ -13,17 +13,16 @@ namespace SysUt14Gr03
     public partial class OversiktBrukerSomUtvikler : System.Web.UI.Page
     {
         private List<Bruker> queryProsjekt = null;
-        Button btnProsjekt;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             bool queryStatus = false;
             int bruker_id = 2;
 
-            if (Session["loggedIn"] == null)
-                Response.Redirect("Login.aspx", true);
+            //if (Session["loggedIn"] == null)
+            //    Response.Redirect("Login.aspx", true);
 
-            // Sjekker om det er lagt ved et Get parameter "prosjekt_id" og lager en spørring basert på prosjekt_id og team_id på innlogget bruker
+            // Sjekker om det er lagt ved et Get parameter "prosjekt_id" og lager en spørring basert på prosjekt_id på innlogget bruker
             if (Request.QueryString["prosjekt_id"] != null)
             {
                 int prosjekt_id = 4; // Validator.KonverterTilTall(Request.QueryString["prosjekt_id"]);
@@ -47,7 +46,7 @@ namespace SysUt14Gr03
                     lblTilbakemelding.Text = "Brukeren er ikke i ditt prosjekt";
                 }
             }
-            // Dersom prosjekt eller team ikke er oppgitt lages en spørring basert på bruker_id til innlogget bruker
+            // Dersom prosjekt ikke er oppgitt lages en spørring basert på bruker_id til innlogget bruker
             else
             {
                 int prosjekt_id = 4; // Validator.KonverterTilTall(Request.QueryString["prosjekt_id"]);
@@ -56,46 +55,12 @@ namespace SysUt14Gr03
                 lblTilbakemelding.Text = string.Format("<h3>Bruker: {0}</h3>", brukerNavn);
                 queryStatus = true;
             }
-            // Lager Tabell for å vise oppgaver
-            Table prosjektTable = Tabeller.HentBrukerTabellIProsjektTeamUtviklere(queryProsjekt);
-            prosjektTable.CssClass = "table";
             if (!IsPostBack && queryStatus)
             {
-                
+                // Lager Tabell for å vise oppgaver
+                Table prosjektTable = Tabeller.HentBrukerTabellIProsjektTeamUtviklere(queryProsjekt);
+                prosjektTable.CssClass = "table";
                 PlaceHolderTableProject.Controls.Add(prosjektTable);
-                btnProsjekt = (prosjektTable.FindControl("btnProsjekt") as Button);
-            }    
-            //PlaceHolderTableProject.FindControl()
-            //Button btnProsjekt = new Button();
-            btnProsjekt.Click += Button1_Click;
-        }
-
-        public void Button1_Click(object sender, EventArgs e)
-        {
-            foreach(Bruker bruker in queryProsjekt)
-            {
-                DropDownList ddlProsjekt = new DropDownList();
-                for (int i = 0; i < bruker.Prosjekter.Count; i++)
-                {
-                    Prosjekt prosjekt = bruker.Prosjekter[i];
-                    ddlProsjekt.Items.Add(new ListItem(prosjekt.Navn, prosjekt.Prosjekt_id.ToString()));
-                }
-                string id = ddlProsjekt.SelectedValue;
-                Response.Redirect("HistorikkStattestikk.aspx?Prosjekt_id=" + id);
-            }
-        }
-        public void Button2_Click(object sender, EventArgs e)
-        {
-            foreach (Bruker bruker in queryProsjekt)
-            {
-                DropDownList ddlTeam = new DropDownList();
-                for (int i = 0; i < bruker.Prosjekter.Count; i++)
-                {
-                    Team team = bruker.Teams[i];
-                    ddlTeam.Items.Add(new ListItem(team.Navn, team.Team_id.ToString()));
-                }
-                string id = ddlTeam.SelectedValue;
-                Response.Redirect("HistorikkStattestikk?Team_id=" + id);
             }
         }
     }
