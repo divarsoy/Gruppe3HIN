@@ -31,7 +31,6 @@ namespace SysUt14Gr03 {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor Adm2;
         
         /// <summary>
-<<<<<<< HEAD
         /// Adm3 control.
         /// </summary>
         /// <remarks>
@@ -42,9 +41,6 @@ namespace SysUt14Gr03 {
         
         /// <summary>
         /// Adm4 control.
-=======
-        /// A3 control.
->>>>>>> ca1ceed9af0cc32da5d143acb7d34b8b31053de4
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
