@@ -19,13 +19,9 @@ namespace SysUt14Gr03
             bool queryStatus = false;
             int bruker_id = 2;
 
-<<<<<<< HEAD
-            //if (Session["loggedIn"] == null)
-            //    Response.Redirect("Login.aspx", true);
-=======
+
             if (Session["loggedIn"] == null)
                 //Response.Redirect("Login.aspx", true);
->>>>>>> ab11d14b798e5ad11942f71479d0b6b8518fb5a4
 
             // Sjekker om det er lagt ved et Get parameter "prosjekt_id" og lager en spørring basert på prosjekt_id på innlogget bruker
             if (Request.QueryString["prosjekt_id"] != null)

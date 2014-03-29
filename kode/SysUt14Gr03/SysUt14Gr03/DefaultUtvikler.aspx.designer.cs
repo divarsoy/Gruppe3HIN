@@ -13,19 +13,16 @@ namespace SysUt14Gr03 {
     public partial class BrukerForside {
         
         /// <summary>
-<<<<<<< HEAD:kode/SysUt14Gr03/SysUt14Gr03/Site.Utvikler.master.designer.cs
+
         /// MainContent control.
-=======
+
         /// ListBoxProsjekt control.
->>>>>>> c31b5189680fa4aee246329fec389c2de21425b4:kode/SysUt14Gr03/SysUt14Gr03/DefaultUtvikler.aspx.designer.cs
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-<<<<<<< HEAD:kode/SysUt14Gr03/SysUt14Gr03/Site.Utvikler.master.designer.cs
         protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
-=======
         protected global::System.Web.UI.WebControls.ListBox ListBoxProsjekt;
         
         /// <summary>
@@ -54,6 +51,5 @@ namespace SysUt14Gr03 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image Image1;
->>>>>>> c31b5189680fa4aee246329fec389c2de21425b4:kode/SysUt14Gr03/SysUt14Gr03/DefaultUtvikler.aspx.designer.cs
     }
 }
