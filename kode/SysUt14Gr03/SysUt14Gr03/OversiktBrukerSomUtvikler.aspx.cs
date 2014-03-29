@@ -19,13 +19,13 @@ namespace SysUt14Gr03
             bool queryStatus = false;
             int bruker_id = 2;
 
-            //if (Session["loggedIn"] == null)
-            //    Response.Redirect("Login.aspx", true);
+            if (Session["loggedIn"] == null)
+                Response.Redirect("Login.aspx", true);
 
             // Sjekker om det er lagt ved et Get parameter "prosjekt_id" og lager en spørring basert på prosjekt_id på innlogget bruker
             if (Request.QueryString["prosjekt_id"] != null)
             {
-                int prosjekt_id = 4; // Validator.KonverterTilTall(Request.QueryString["prosjekt_id"]);
+                int prosjekt_id = Validator.KonverterTilTall(Request.QueryString["prosjekt_id"]);
                 if (prosjekt_id >= 1)
                 {
                     queryProsjekt = Queries.GetAlleBrukereIEtProjekt(prosjekt_id);
@@ -49,7 +49,7 @@ namespace SysUt14Gr03
             // Dersom prosjekt ikke er oppgitt lages en spørring basert på bruker_id til innlogget bruker
             else
             {
-                int prosjekt_id = 4; // Validator.KonverterTilTall(Request.QueryString["prosjekt_id"]);
+                int prosjekt_id = Validator.KonverterTilTall(Request.QueryString["prosjekt_id"]);
                 queryProsjekt = Queries.GetAlleBrukereIEtProjekt(prosjekt_id);
                 string brukerNavn = Queries.GetBruker(bruker_id).ToString();
                 lblTilbakemelding.Text = string.Format("<h3>Bruker: {0}</h3>", brukerNavn);

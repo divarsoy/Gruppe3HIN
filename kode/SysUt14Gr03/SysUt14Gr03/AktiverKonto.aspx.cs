@@ -26,7 +26,6 @@ namespace SysUt14Gr03
         private string fornavn;
         private string epost;
         private string imAdresse;
-        private string passord;
         private string token;
         private int bruker_id;
 

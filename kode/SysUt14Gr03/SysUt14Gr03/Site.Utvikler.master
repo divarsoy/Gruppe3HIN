@@ -1,0 +1,19 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Site.Utvikler.master.cs" Inherits="SysUt14Gr03.Site_Utvikler" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="MenyTemplate" runat="server">
+
+    <ul class="nav navbar-nav">
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Prosjekter <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li> <a runat="server" href="~/AdministrasjonAvProsjekt">Administrasjon Av Prosjekt</a></li>
+                    <li> <a runat="server" href="~/RegistreringAvBrukere">Opprett bruker</a></li>
+                    <li> <a runat="server" href="~/OversiktProsjekter">Oversikt over prosjekter</a></li>
+                </ul> 
+
+
+</asp:Content>
+
+<asp:Content ID= "Content2" ContentPlaceHolderID="MainContentTemplate" runat="server">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+</asp:Content>
