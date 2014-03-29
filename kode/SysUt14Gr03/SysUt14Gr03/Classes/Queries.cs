@@ -155,6 +155,15 @@ namespace SysUt14Gr03.Classes
             
             }
         }
+
+        static public List<Bruker> GetAlleBrukere()
+        {
+            using (var context = new Context())
+            { 
+                var brukerListe = context.Brukere.ToList();
+                return brukerListe;
+            }
+        }
         static public List<Bruker> GetAlleAktiveBrukereID(int bruker_id)
         {
             using (var context = new Context())

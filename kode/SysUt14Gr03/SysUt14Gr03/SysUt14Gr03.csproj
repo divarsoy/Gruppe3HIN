@@ -181,8 +181,9 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
-    <Content Include="DefaultAdministrator.aspx" />
+    <Content Include="Administrator\DefaultAdministrator.aspx" />
     <Content Include="DefaultProsjektleder.aspx" />
+    <Content Include="Administrator\EndreBrukerinformasjonSomAdministrator.aspx" />
     <Content Include="HistorikkStattestikk.aspx" />
     <Content Include="EndreBrukerinformasjon.aspx" />
     <Content Include="EpostPreferanser.aspx" />
@@ -193,6 +194,7 @@
     <Content Include="OpprettOppgave.aspx" />
     <Content Include="OpprettOppgavegruppe.aspx" />
     <Content Include="OpprettProsjekt.aspx" />
+    <Content Include="Administrator\OversiktBrukereSomAdministrator.aspx" />
     <Content Include="OversiktBrukereSomProsjektleder.aspx" />
     <Content Include="OversiktBrukerSomUtvikler.aspx" />
     <Content Include="OversiktOppgaver.aspx" />
@@ -202,8 +204,9 @@
     <Content Include="PameldingTilOppgave.aspx" />
     <Content Include="Pictures\blomst.jpg" />
     <Content Include="OpprettTeam.aspx" />
+    <Content Include="Administrator\RegistreringAvBrukereSomAdministrator.aspx" />
     <Content Include="RegistreringAvBrukere.aspx" />
-    <Content Include="Rettigheter.aspx" />
+    <Content Include="Administrator\Rettigheter.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="HowToQueryTheDatabase.aspx" />
     <Content Include="Login.aspx" />
@@ -261,7 +264,9 @@
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Site.Mobile.Master" />
-    <Content Include="Site.Administrator.Master" />
+    <Content Include="Site.SysAdm.master" />
+    <Content Include="Site.Prosjektleder.master" />
+    <Content Include="Site.Utvikler.master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -373,11 +378,11 @@
     </Compile>
     <Compile Include="Classes\NotifikasjonFlash.cs" />
     <Compile Include="Classes\Passord.cs" />
-    <Compile Include="DefaultAdministrator.aspx.cs">
+    <Compile Include="Administrator\DefaultAdministrator.aspx.cs">
       <DependentUpon>DefaultAdministrator.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="DefaultAdministrator.aspx.designer.cs">
+    <Compile Include="Administrator\DefaultAdministrator.aspx.designer.cs">
       <DependentUpon>DefaultAdministrator.aspx</DependentUpon>
     </Compile>
     <Compile Include="DefaultProsjektleder.aspx.cs">
@@ -387,6 +392,13 @@
     <Compile Include="DefaultProsjektleder.aspx.designer.cs">
       <DependentUpon>DefaultProsjektleder.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Administrator\EndreBrukerinformasjonSomAdministrator.aspx.cs">
+      <DependentUpon>EndreBrukerinformasjonSomAdministrator.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrator\EndreBrukerinformasjonSomAdministrator.aspx.designer.cs">
+      <DependentUpon>EndreBrukerinformasjonSomAdministrator.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Models\Notifikasjon.cs" />
     <Compile Include="Models\NotifikasjonsType.cs" />
     <Compile Include="OpprettOppgavegruppe.aspx.cs">
@@ -395,6 +407,13 @@
     </Compile>
     <Compile Include="OpprettOppgavegruppe.aspx.designer.cs">
       <DependentUpon>OpprettOppgavegruppe.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrator\OversiktBrukereSomAdministrator.aspx.cs">
+      <DependentUpon>OversiktBrukereSomAdministrator.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrator\OversiktBrukereSomAdministrator.aspx.designer.cs">
+      <DependentUpon>OversiktBrukereSomAdministrator.aspx</DependentUpon>
     </Compile>
     <Compile Include="OversiktBrukereSomProsjektleder.aspx.cs">
       <DependentUpon>OversiktBrukereSomProsjektleder.aspx</DependentUpon>
@@ -447,19 +466,19 @@
     <Compile Include="OversiktProsjekterSomProsjektleder.aspx.designer.cs">
       <DependentUpon>OversiktProsjekterSomProsjektleder.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Administrator\RegistreringAvBrukereSomAdministrator.aspx.cs">
+      <DependentUpon>RegistreringAvBrukereSomAdministrator.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrator\RegistreringAvBrukereSomAdministrator.aspx.designer.cs">
+      <DependentUpon>RegistreringAvBrukereSomAdministrator.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ReturAvOppgave.aspx.cs">
       <DependentUpon>ReturAvOppgave.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ReturAvOppgave.aspx.designer.cs">
       <DependentUpon>ReturAvOppgave.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Site.Administrator.Master.cs">
-      <DependentUpon>Site.Administrator.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Site.Administrator.Master.designer.cs">
-      <DependentUpon>Site.Administrator.Master</DependentUpon>
     </Compile>
     <Compile Include="Brukere.aspx.cs">
       <DependentUpon>Brukere.aspx</DependentUpon>
@@ -574,11 +593,11 @@
     <Compile Include="RegistreringAvBrukere.aspx.designer.cs">
       <DependentUpon>RegistreringAvBrukere.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Rettigheter.aspx.cs">
+    <Compile Include="Administrator\Rettigheter.aspx.cs">
       <DependentUpon>Rettigheter.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Rettigheter.aspx.designer.cs">
+    <Compile Include="Administrator\Rettigheter.aspx.designer.cs">
       <DependentUpon>Rettigheter.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
@@ -634,6 +653,27 @@
     </Compile>
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Site.Prosjektleder.master.cs">
+      <DependentUpon>Site.Prosjektleder.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Prosjektleder.master.designer.cs">
+      <DependentUpon>Site.Prosjektleder.master</DependentUpon>
+    </Compile>
+    <Compile Include="Site.SysAdm.master.cs">
+      <DependentUpon>Site.SysAdm.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.SysAdm.master.designer.cs">
+      <DependentUpon>Site.SysAdm.master</DependentUpon>
+    </Compile>
+    <Compile Include="Site.Utvikler.master.cs">
+      <DependentUpon>Site.Utvikler.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Utvikler.master.designer.cs">
+      <DependentUpon>Site.Utvikler.master</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="TidsestimerProsjekt.aspx.cs">
@@ -703,7 +743,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>60154</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

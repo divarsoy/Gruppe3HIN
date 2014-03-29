@@ -52,6 +52,9 @@ namespace SysUt14Gr03
                     Response.Cookies.Add(persist);
 
                     Session["bruker_id"] = bruker.Bruker_id;
+                    Session["bruker"] = bruker.ToString();
+                    Session["fornavn"] = bruker.Fornavn;
+                    Session["brukernavn"] = bruker.Brukernavn;
                     Session["loggedIn"] = true;
                     if (Validator.SjekkRettighet(bruker.Bruker_id, Konstanter.rettighet.Administrator))
                     {

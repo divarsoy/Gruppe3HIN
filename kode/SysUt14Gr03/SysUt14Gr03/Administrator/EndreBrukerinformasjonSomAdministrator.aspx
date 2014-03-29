@@ -1,14 +1,9 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EndreBrukerinformasjon.aspx.cs" Inherits="SysUt14Gr03.EndreBrukerinformasjon" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.SysAdm.Master" AutoEventWireup="true" CodeBehind="EndreBrukerinformasjonSomAdministrator.aspx.cs" Inherits="SysUt14Gr03.EndreBrukerinformasjonSomAdministrator" %>
 
 
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContentTemplate" runat="server">
-    
-    <p></p>
-    <h2>Endre Brukerinformasjon</h2>
-    <p></p>
-    
-    <asp:GridView RowStyle-HorizontalAlign="Center" ID="gridViewEndre" runat="server" AutoGenerateColumns="false" DataKeyNames="Bruker_id" OnRowEditing="gridViewEndre_RowEditing" OnRowCancelingEdit="gridViewEndre_RowCancelingEdit" OnRowUpdating="gridViewEndre_RowUpdating" OnRowCommand="gridViewEndre_RowCommand" ShowFooter="False" ShowHeader="True">
-
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+      <h2>Endre Brukerinformasjon</h2>  
+    <asp:GridView RowStyle-HorizontalAlign="Center" ID="gridViewEndre" runat="server" CssClass="table" AutoGenerateColumns="false" DataKeyNames="Bruker_id" OnRowEditing="gridViewEndre_RowEditing" OnRowCancelingEdit="gridViewEndre_RowCancelingEdit" OnRowUpdating="gridViewEndre_RowUpdating" OnRowCommand="gridViewEndre_RowCommand" ShowFooter="False" ShowHeader="True">
         <Columns>
             <asp:TemplateField HeaderText="Etternavn">
                 <ItemTemplate>
@@ -50,9 +45,6 @@
         </EditItemTemplate>
         </asp:TemplateField> 
              <asp:CommandField ShowEditButton="true" />
-        </Columns>
-      
-    </asp:GridView>
-  
-       
+        </Columns>      
+    </asp:GridView>       
 </asp:Content>

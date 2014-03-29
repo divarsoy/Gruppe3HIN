@@ -10,33 +10,51 @@
 namespace SysUt14Gr03 {
     
     
-    public partial class SiteMaster {
+    public partial class Site_SysAdm {
         
         /// <summary>
-        /// MenyTemplate control.
+        /// Adm1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MenyTemplate;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor Adm1;
         
         /// <summary>
-        /// NotifikasjonsPanel control.
+        /// Adm2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel NotifikasjonsPanel;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor Adm2;
         
         /// <summary>
-        /// MainContentTemplate control.
+        /// Adm3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContentTemplate;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor Adm3;
+        
+        /// <summary>
+        /// Adm4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor Adm4;
+        
+        /// <summary>
+        /// MainContent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
     }
 }
