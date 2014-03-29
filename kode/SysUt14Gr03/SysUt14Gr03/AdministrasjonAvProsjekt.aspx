@@ -5,7 +5,8 @@
          <Columns>
             <asp:TemplateField HeaderText="ProsjektNavn">
                 <ItemTemplate>
-                      <asp:Label ID="lbProsjektnavn" runat="server" Text='<%#Bind("Navn") %>'></asp:Label>                
+                      <asp:Label ID="lbProsjektnavn" runat="server" Visible="false" Text='<%#Bind("Navn") %>'></asp:Label>
+                      <asp:HyperLink ID="pLink" runat="server"></asp:HyperLink> 
                 </ItemTemplate>          
                 <EditItemTemplate>
                     <asp:TextBox ID="tbProsjektnavn" runat="server" Text='<%#Bind("Navn") %>'></asp:TextBox>
@@ -39,10 +40,11 @@
               <asp:TemplateField HeaderText="Team">
                 <ItemTemplate>
                 <asp:Label ID="lbTeam" runat="server" Text='<%#Bind("Team.Navn") %>'></asp:Label>
+                    
                 </ItemTemplate>
                 <EditItemTemplate>
-                    <asp:TextBox ID="tbTeam" runat="server" Text='<%#Bind("Team.Navn") %>'></asp:TextBox>
-                    <asp:DropDownList ID="ddlTeam" runat="server" AppendDataBoundItems="true">
+                    <asp:Label ID="lbTeam" runat="server" Text='<%#Bind("Team.Navn") %>'></asp:Label>
+                    <asp:DropDownList ID="ddlTeam" runat="server" >
                     </asp:DropDownList>
                 </EditItemTemplate>
             </asp:TemplateField>

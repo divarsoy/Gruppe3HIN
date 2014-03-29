@@ -14,6 +14,7 @@ namespace SysUt14Gr03
     public partial class AdministrasjonAvProsjekt : System.Web.UI.Page
     {
         private int team_id;
+        private List<Team> teamListe = null;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -29,7 +30,7 @@ namespace SysUt14Gr03
                 bindingSource1.DataSource = context.Prosjekter.ToList<Prosjekt>();
                 gridViewProsjekt.DataSource = bindingSource1;
                 gridViewProsjekt.DataBind();
-             
+              
             }          
         }
         protected void gridViewProsjekt_RowUpdating(object sender, GridViewUpdateEventArgs e)
@@ -45,12 +46,13 @@ namespace SysUt14Gr03
                 System.Web.UI.WebControls.TextBox tbProsjektleder = (TextBox)gridViewProsjekt.Rows[e.RowIndex].FindControl("tbProsjektleder");
                 System.Web.UI.WebControls.TextBox tbStart = (TextBox)gridViewProsjekt.Rows[e.RowIndex].FindControl("tbStart");
                 System.Web.UI.WebControls.TextBox tbSlutt = (TextBox)gridViewProsjekt.Rows[e.RowIndex].FindControl("tbSlutt");
-                System.Web.UI.WebControls.TextBox tbTeam = (TextBox)gridViewProsjekt.Rows[e.RowIndex].FindControl("tbTeam");
+                System.Web.UI.WebControls.DropDownList tbTeam = (DropDownList)gridViewProsjekt.Rows[e.RowIndex].FindControl("ddlTeam");
                 System.Web.UI.WebControls.CheckBox cbAktiv = (CheckBox)gridViewProsjekt.Rows[e.RowIndex].FindControl("cboxAktiv");
 
                 using (var context = new Context())
                 {
-                    Team team = context.Teams.Where(t => t.Navn == tbTeam.Text).First();
+                   
+                    Team team = context.Teams.Where(t => t.Navn == tbTeam.SelectedValue).First();
                     team_id = team.Team_id;
 
                     Bruker bruker = context.Brukere.Where(b => b.Fornavn == tbProsjektleder.Text).First();
@@ -77,11 +79,10 @@ namespace SysUt14Gr03
                 
             }
         }
-
+        
         protected void gridViewProsjekt_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             gridViewProsjekt.EditIndex = -1;
-   
             gridViewProsjekt.Columns[6].Visible = true;
             visProsjekt();
         }
@@ -89,10 +90,27 @@ namespace SysUt14Gr03
         protected void gridViewProsjekt_RowEditing(object sender, GridViewEditEventArgs e)
         {
             gridViewProsjekt.EditIndex = e.NewEditIndex;
+            gridViewProsjekt.RowDataBound -= new GridViewRowEventHandler(gridViewProsjekt_RowDataBound);
+            gridViewProsjekt.RowDataBound += new GridViewRowEventHandler(gridViewProsjekt_RowDataBoun);        
             gridViewProsjekt.Columns[6].Visible = false;
             visProsjekt();
         }
-
+         protected void gridViewProsjekt_RowDataBoun(object sender, GridViewRowEventArgs e)
+          {
+              if (e.Row.RowType == DataControlRowType.DataRow  && gridViewProsjekt.EditIndex == e.Row.RowIndex)
+              {
+               
+                  Label tTeam = e.Row.FindControl("lbTeam") as Label;
+                  teamListe = Queries.GetAlleAktiveTeam();
+                  for (int i = 0; i < teamListe.Count; i++)
+                  {
+                      Team team = teamListe[i];
+                      DropDownList ddlt = e.Row.FindControl("ddlTeam") as DropDownList;
+                      ddlt.Items.Add(team.Navn);
+                  }
+              
+              }
+          } 
         protected void gridViewProsjekt_RowDataBound(object sender, GridViewRowEventArgs e)
         {
            
@@ -100,14 +118,20 @@ namespace SysUt14Gr03
                 {
                     using (var context = new Context())
                     {
+                     
                         Label tTeam = e.Row.FindControl("lbTeam") as Label;
+                        Label lblProsjekt = e.Row.FindControl("lbProsjektnavn") as Label;
+                        Prosjekt prosjekt = context.Prosjekter.Where(p => p.Navn == lblProsjekt.Text).First();
                         Team team = context.Teams.Where(t => t.Navn == tTeam.Text).First();
                         team_id = team.Team_id;
+                        HyperLink prosjektLink = e.Row.FindControl("pLink") as HyperLink;
+                        prosjektLink.Text = prosjekt.Navn;
+                        prosjektLink.NavigateUrl = "visProsjekt?Prosjekt_id=" + prosjekt.Prosjekt_id;
                         HyperLink link = e.Row.FindControl("asp") as HyperLink;
                         link.NavigateUrl = "AdministrasjonAvTeamBrukere?Team_id=" + team_id;
+                        
                     }
-                }
-            
+                }         
         }
     }
 }
