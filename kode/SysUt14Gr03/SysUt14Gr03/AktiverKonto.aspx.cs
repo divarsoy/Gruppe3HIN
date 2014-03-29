@@ -13,6 +13,7 @@ using System.Web.UI.WebControls;
 using SysUt14Gr03.Classes;
 using SysUt14Gr03.Models;
 
+
 namespace SysUt14Gr03
 {
     public partial class AktiverKonto : System.Web.UI.Page
@@ -101,6 +102,9 @@ namespace SysUt14Gr03
                                   where bruker.Epost == epost
                                   select bruker).FirstOrDefault();
 
+                    // Default rettighet er utvikler
+                    var rettighetUtvikler = db.Rettigheter.Where(rettighet => rettighet.RettighetNavn == Konstanter.rettighet.Utvikler.ToString()).FirstOrDefault();
+                   
                     Bruker.Aktiv = true;
                     Bruker.Brukernavn = brukernavn;
                     Bruker.Epost = epost;
@@ -108,7 +112,8 @@ namespace SysUt14Gr03
                     Bruker.IM = imAdresse;
                     Bruker.Passord = hash;
                     Bruker.Token = token;
-                    Bruker.Salt = salt;                                   
+                    Bruker.Salt = salt;
+                    Bruker.Rettigheter.Add(rettighetUtvikler);             
                     db.SaveChanges();
                 
                 }
