@@ -17,8 +17,7 @@ namespace SysUt14Gr03
         {
             if (Session["loggedIn"] == null)
             {
-                //    Response.Redirect("Login.aspx", true);
-                brukerid = 1;
+                Response.Redirect("~/Login.aspx", true);
             }
             else
             {
@@ -33,7 +32,7 @@ namespace SysUt14Gr03
                 Session["loggedIn"] = null;
                 Session["flashMelding"] = "Du må være logget inn som administrator for aksessere siden du prøvde å nå";
                 Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
-                Response.Redirect(("Login.aspx"), true);
+                Response.Redirect(("~/Login.aspx"), true);
             }
             else {
 
