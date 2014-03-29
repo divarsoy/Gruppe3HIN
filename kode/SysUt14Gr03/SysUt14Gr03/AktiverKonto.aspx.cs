@@ -17,9 +17,9 @@ namespace SysUt14Gr03
 {
     public partial class AktiverKonto : System.Web.UI.Page
     {
-        static string initialFornavn;
-        static string initialEtternavn;
-        static string initialEpost;
+       // static string initialFornavn;
+       // static string initialEtternavn;
+      //  static string initialEpost;
         private string brukernavn;
         private string etternavn;
         private string fornavn;
