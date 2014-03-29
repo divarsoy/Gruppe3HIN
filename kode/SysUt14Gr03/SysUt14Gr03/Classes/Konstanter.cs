@@ -9,5 +9,6 @@ namespace SysUt14Gr03.Classes
     {
         public enum rettighet { Administrator, Prosjektleder, Teamleder, Utvikler };
         public enum notifikasjonsTyper { success, info, warning, danger };
+        public const int SALTSIZE = 40;
     }
 }

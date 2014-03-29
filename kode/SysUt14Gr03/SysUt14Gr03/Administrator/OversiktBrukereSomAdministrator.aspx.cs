@@ -11,13 +11,6 @@ namespace SysUt14Gr03
 {
     public partial class OversiktBrukereSomAdministrator : System.Web.UI.Page
     {
-        private List<Prosjekt> listProsjekt;
-        private List<Bruker> brukerListe;
-        private List<Bruker> brukerProsjekt;
-        private List<Bruker> queryTeam = null;
-        private List<Prosjekt> queryProsjekt = null;
-        private List<Team> teams = null;
-        private Table table;
         private int brukerid;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -46,7 +39,7 @@ namespace SysUt14Gr03
 
                 if (!IsPostBack)
                 {
-                    brukerListe = Queries.GetAlleBrukere();
+                    List<Bruker> brukerListe = Queries.GetAlleBrukere();
                     PlaceHolderBrukere.Controls.Add(Tabeller.HentBrukereTabellForAdministrator(brukerListe));                    
                 }
 
