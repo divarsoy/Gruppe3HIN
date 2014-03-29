@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="SysUt14Gr03.Login" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" Runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContentTemplate" Runat="Server">
     <div class="container">
         <h1>Logg inn</h1>
         <div class="ettellerannet">
@@ -34,7 +34,7 @@
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <asp:Button class="btn btn-primary" ID="LoginButton" runat="server" Text="Logg inn" OnClick="LoginButton_Click" />
+                <asp:Button CssClass="btn btn-primary" ID="LoginButton" runat="server" Text="Logg inn" OnClick="LoginButton_Click" />
             </div>
         </div>
  

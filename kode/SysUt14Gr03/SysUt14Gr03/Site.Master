@@ -50,7 +50,7 @@
                     <a class="navbar-brand" runat="server" href="~/">Morild Data BA</a>
                 </div>
                 <div class="navbar-collapse collapse">
-
+                    
                     <asp:ContentPlaceHolder ID="MenyTemplate" runat="server">
                     </asp:ContentPlaceHolder>
                     <asp:LoginView runat="server" ViewStateMode="Disabled">

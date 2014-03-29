@@ -13,15 +13,6 @@ namespace SysUt14Gr03 {
     public partial class AdministrasjonAvTeamBrukere {
         
         /// <summary>
-        /// lb_navn_paa_team control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lb_navn_paa_team;
-        
-        /// <summary>
         /// tb_TeamNavn control.
         /// </summary>
         /// <remarks>

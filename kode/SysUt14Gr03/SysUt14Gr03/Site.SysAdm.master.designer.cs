@@ -13,40 +13,40 @@ namespace SysUt14Gr03 {
     public partial class Site_SysAdm {
         
         /// <summary>
-        /// A1 control.
+        /// Adm1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor A1;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor Adm1;
         
         /// <summary>
-        /// A2 control.
+        /// Adm2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor A2;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor Adm2;
         
         /// <summary>
-        /// A4 control.
+        /// Adm3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor A4;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor Adm3;
         
         /// <summary>
-        /// A3 control.
+        /// Adm4 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor A3;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor Adm4;
         
         /// <summary>
         /// MainContent control.

@@ -1,6 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AdministrasjonAvProsjekt.aspx.cs" Inherits="SysUt14Gr03.AdministrasjonAvProsjekt" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Prosjektleder.Master" AutoEventWireup="true" CodeBehind="AdministrasjonAvProsjekt.aspx.cs" Inherits="SysUt14Gr03.AdministrasjonAvProsjekt" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Endre Prosjekt</h2>
+    <br />
     <asp:GridView ID="gridViewProsjekt" cssClass="table table-hover  table-bordered" runat="server" AutoGenerateColumns="false" DataKeyNames="Prosjekt_id" OnRowUpdating="gridViewProsjekt_RowUpdating" OnRowCancelingEdit="gridViewProsjekt_RowCancelingEdit" OnRowEditing="gridViewProsjekt_RowEditing">
          <Columns>
             <asp:TemplateField HeaderText="ProsjektNavn">

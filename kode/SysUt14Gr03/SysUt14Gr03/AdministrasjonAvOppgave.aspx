@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" CodeBehind="AdministrasjonAvOppgave.aspx.cs" Inherits="SysUt14Gr03.AdministrasjonAvOppgave" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Prosjektleder.Master" CodeBehind="AdministrasjonAvOppgave.aspx.cs" Inherits="SysUt14Gr03.AdministrasjonAvOppgave" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Administrering av Oppgave</h2>
