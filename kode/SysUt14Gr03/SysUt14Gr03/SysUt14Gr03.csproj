@@ -176,7 +176,7 @@
     <Content Include="ArkiveringAvKommentarer.aspx" />
     <Content Include="Brukere.aspx" />
     <Content Include="Default.aspx" />
-    <Content Include="DefaultUtvikler.aspx" />
+    <Content Include="Utvikler\DefaultUtvikler.aspx" />
     <Content Include="changeUser.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap.css" />
@@ -187,7 +187,7 @@
     <Content Include="Administrator\EndreBrukerinformasjonSomAdministrator.aspx" />
     <Content Include="HistorikkStattestikk.aspx" />
     <Content Include="EndreBrukerinformasjon.aspx" />
-    <Content Include="EpostPreferanser.aspx" />
+    <Content Include="Utvikler\EpostPreferanser.aspx" />
     <Content Include="InvitasjonAvBruker.aspx" />
     <Content Include="KommentarPaOppgave.aspx" />
     <Content Include="ListboxTest.aspx" />
@@ -501,11 +501,11 @@
     </Compile>
     <Compile Include="Classes\Tabeller.cs" />
     <Compile Include="Classes\Validator.cs" />
-    <Compile Include="DefaultUtvikler.aspx.cs">
+    <Compile Include="Utvikler\DefaultUtvikler.aspx.cs">
       <DependentUpon>DefaultUtvikler.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="DefaultUtvikler.aspx.designer.cs">
+    <Compile Include="Utvikler\DefaultUtvikler.aspx.designer.cs">
       <DependentUpon>DefaultUtvikler.aspx</DependentUpon>
     </Compile>
     <Compile Include="changeUser.aspx.cs">
@@ -546,11 +546,11 @@
       <DependentUpon>KommentarPaOppgave.aspx</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="EpostPreferanser.aspx.cs">
+    <Compile Include="Utvikler\EpostPreferanser.aspx.cs">
       <DependentUpon>EpostPreferanser.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="EpostPreferanser.aspx.designer.cs">
+    <Compile Include="Utvikler\EpostPreferanser.aspx.designer.cs">
       <DependentUpon>EpostPreferanser.aspx</DependentUpon>
     </Compile>
     <Compile Include="HistorikkStattestikk.aspx.cs">
@@ -737,7 +737,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Utvikler\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

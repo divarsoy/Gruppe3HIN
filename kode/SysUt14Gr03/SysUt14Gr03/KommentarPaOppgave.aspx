@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Utvikler.Master" AutoEventWireup="true" CodeBehind="KommentarPaOppgave.aspx.cs" Inherits="SysUt14Gr03.KommentarPaOppgave" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContentUtvikler" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h1> Kommenter på oppgave</h1>
     <p> 
         <asp:DropDownList ID="ddlOppgave" runat="server">
