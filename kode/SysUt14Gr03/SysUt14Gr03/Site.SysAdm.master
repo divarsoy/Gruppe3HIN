@@ -2,9 +2,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MenyTemplate" runat="server">
 
     <ul class="nav navbar-nav">
-        <li><a id="A1" runat="server" href="~/RegistreringAvBrukere">Registrer Ny Bruker</a></li>
-        <li><a id="A2" runat="server" href="~/OversiktBrukereSomAdministrator">Oversikt Over Brukere</a></li>
-        <li><a id="A3" runat="server" href="~/Rettigheter">Administrere Rettigheter</a></li>
+        <li><a id="A1" runat="server" href="~/Administrator/RegistreringAvBrukereSomAdministrator">Registrer Ny Bruker</a></li>
+        <li><a id="A2" runat="server" href="~/Administrator/OversiktBrukereSomAdministrator">Oversikt Over Brukere</a></li>
+        <li><a id="A3" runat="server" href="~/Administrator/Rettigheter">Administrere Rettigheter</a></li>
         
     </ul>
 

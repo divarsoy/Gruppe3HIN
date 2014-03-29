@@ -55,7 +55,7 @@ namespace SysUt14Gr03
         {
             using (var db = new Context())
             {
-                var nyBruker = new Bruker { Etternavn = etternavn, Fornavn = fornavn, Epost = epost, opprettet = DateTime.Now };
+                var nyBruker = new Bruker { Etternavn = etternavn, Fornavn = fornavn, Epost = epost, Brukernavn = "", IM = "", Token = "", Aktivert = false, Aktiv = false, opprettet = DateTime.Now };
                 db.Brukere.Add(nyBruker);
                 db.SaveChanges();
             }
