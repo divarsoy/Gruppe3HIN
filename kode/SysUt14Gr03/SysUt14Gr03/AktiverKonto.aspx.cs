@@ -83,10 +83,11 @@ namespace SysUt14Gr03
         {
             try
             {
-
                 token = Request.QueryString["Token"];
                 //passord = MD5Hash(Password.Text);
-                passord = Passord.HashPassord(Password.Text);
+                //passord = Passord.HashPassord(Password.Text);
+                string salt = Hash.GetSalt();
+                string hash = Hash.GetHash(Password.Text, salt);
                 epost = Email.Text;
                 brukernavn = Username.Text;
                 etternavn = Aftername.Text;
@@ -105,22 +106,9 @@ namespace SysUt14Gr03
                     Bruker.Epost = epost;
                     Bruker.Etternavn = etternavn;
                     Bruker.IM = imAdresse;
-                    Bruker.Passord = passord;
+                    Bruker.Passord = hash;
                     Bruker.Token = token;
-                    Bruker.Salt = Passord.GetRandomSalt();
-                  
-                   /* var Bruker = new Bruker {
-                    * 
-                        Brukernavn = brukernavn, 
-                        Etternavn = etternavn, 
-                        Fornavn = fornavn, 
-                        Epost = epost, 
-                        IM = imAdresse, 
-                        Aktiv = true, 
-                        Passord = passord, 
-                        opprettet = DateTime.Now, 
-                        Token = Tok};
-                    db.Brukere.Add(Bruker);  */ 
+                    Bruker.Salt = salt;                                   
                     db.SaveChanges();
                 
                 }

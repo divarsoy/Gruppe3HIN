@@ -32,6 +32,14 @@ namespace SysUt14Gr03.Classes
                 return brukerObjekt;
             }
         }
+
+        static public Bruker GetBrukerVedEpost(string epost)
+        {
+            using (var context = new Context())
+            {
+                return context.Brukere.Where(bruker => bruker.Epost == epost).FirstOrDefault();
+            }
+        }
         static public List<Bruker> GetProsjektledere(Konstanter.rettighet _rettighet)
         {
             using (var context = new Context())

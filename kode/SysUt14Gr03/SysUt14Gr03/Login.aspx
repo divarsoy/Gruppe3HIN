@@ -6,8 +6,7 @@
             <div class ="form-group">
                 <label for="epostInput" class="col-sm-2 control-label">E-postadresse</label>
                 <div class="col-sm-4">
-                    <input type="email" runat="server" class="form-control" id="UserName" placeholder="Tast inn E-Postadressen din">
-                    <%-- <asp:TextBox ID="UserName" runat="server"></asp:TextBox> --%>
+                    <asp:TextBox ID="Epost" runat="server" placeholder="Tast inn E-postadressen din" CssClass="form-control" TextMode="email"></asp:TextBox>
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -15,8 +14,7 @@
             <div class="form-group">
                 <label for="passordInput" class="col-sm-2 control-label">Passord</label>
                 <div class="col-sm-4">
-                    <input type="password" runat="server" class="form-control" id="Password" placeholder="Tast inn ditt passord">
-                    <%-- <asp:TextBox ID="Password" runat="server" TextMode="Password"></asp:TextBox> --%>
+                    <asp:TextBox ID="Password" runat="server" CssClass="form-control" placeholder="Tast inn ditt passord" TextMode="Password"></asp:TextBox>
                 </div>
             </div>
             <div class="clearfix"></div>
