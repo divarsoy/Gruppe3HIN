@@ -13,42 +13,6 @@ namespace SysUt14Gr03 {
     public partial class Site_Utvikler {
         
         /// <summary>
-        /// Utv1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor Utv1;
-        
-        /// <summary>
-        /// Utv2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor Utv2;
-        
-        /// <summary>
-        /// Utv3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor Utv3;
-        
-        /// <summary>
-        /// Utv4 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor Utv4;
-        
-        /// <summary>
         /// MainContent control.
         /// </summary>
         /// <remarks>

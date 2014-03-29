@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.SysAdm.Master" AutoEventWireup="true" CodeBehind="RegistreringAvBrukereSomAdministrator.aspx.cs" Inherits="SysUt14Gr03.RegistreringAvBrukereSomAdministrator" %>
 
-<asp:Content ID="Content1" class="form-horizontal" role="form" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="Content1" CssClass="form-horizontal" role="form" ContentPlaceHolderID="MainContent" runat="server">
 
     <div class="container">
 
