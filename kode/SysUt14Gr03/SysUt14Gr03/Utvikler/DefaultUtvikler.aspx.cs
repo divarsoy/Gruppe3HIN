@@ -22,7 +22,7 @@ namespace SysUt14Gr03
             {
                 if (Session["bruker_id"] == null)
                 {
-                    Response.Redirect("Login.aspx", true);
+                    Response.Redirect("~/Login.aspx", true);
                 }
                 else {
                     bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());

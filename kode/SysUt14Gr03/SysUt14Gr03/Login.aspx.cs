@@ -61,12 +61,12 @@ namespace SysUt14Gr03
                     else if (Validator.SjekkRettighet(bruker.Bruker_id, Konstanter.rettighet.Teamleder))
                     {
                         Session["rettighet"] = Konstanter.rettighet.Teamleder.ToString();
-                        Response.Redirect("~/DefaultUtvikler");
+                        Response.Redirect("~/Utvikler/DefaultUtvikler");
                     }
                     else if (Validator.SjekkRettighet(bruker.Bruker_id, Konstanter.rettighet.Utvikler))
                     {
                         Session["rettighet"] = Konstanter.rettighet.Utvikler.ToString();
-                        Response.Redirect("~/DefaultUtvikler");
+                        Response.Redirect("~/Utvikler/DefaultUtvikler");
                     }
                     else
                     {

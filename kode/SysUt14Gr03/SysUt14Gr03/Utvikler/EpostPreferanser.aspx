@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Utvikler.Master" AutoEventWireup="true" CodeBehind="EpostPreferanser.aspx.cs" Inherits="SysUt14Gr03.EpostPreferanser" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContentUtvikler" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container">
     <h1> Innstillinger for varsling</h1>
     <h4> Varsle meg på e-post når jeg blir...</h4>
