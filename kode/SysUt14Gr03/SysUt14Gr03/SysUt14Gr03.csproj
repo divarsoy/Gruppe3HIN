@@ -183,7 +183,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Administrator\DefaultAdministrator.aspx" />
-    <Content Include="DefaultProsjektleder.aspx" />
+    <Content Include="Prosjektleder\DefaultProsjektleder.aspx" />
     <Content Include="Administrator\EndreBrukerinformasjonSomAdministrator.aspx" />
     <Content Include="HistorikkStattestikk.aspx" />
     <Content Include="EndreBrukerinformasjon.aspx" />
@@ -201,7 +201,7 @@
     <Content Include="OversiktOppgaver.aspx" />
     <Content Include="OversiktOverTeam.aspx" />
     <Content Include="OversiktProsjekter.aspx" />
-    <Content Include="OversiktProsjekterSomProsjektleder.aspx" />
+    <Content Include="Prosjektleder\OversiktProsjekterSomProsjektleder.aspx" />
     <Content Include="PameldingTilOppgave.aspx" />
     <Content Include="Pictures\blomst.jpg" />
     <Content Include="OpprettTeam.aspx" />
@@ -394,11 +394,11 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="DefaultProsjektleder.aspx.cs">
+    <Compile Include="Prosjektleder\DefaultProsjektleder.aspx.cs">
       <DependentUpon>DefaultProsjektleder.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="DefaultProsjektleder.aspx.designer.cs">
+    <Compile Include="Prosjektleder\DefaultProsjektleder.aspx.designer.cs">
       <DependentUpon>DefaultProsjektleder.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administrator\EndreBrukerinformasjonSomAdministrator.aspx.cs">
@@ -468,11 +468,11 @@
     <Compile Include="OversiktProsjekter.aspx.designer.cs">
       <DependentUpon>OversiktProsjekter.aspx</DependentUpon>
     </Compile>
-    <Compile Include="OversiktProsjekterSomProsjektleder.aspx.cs">
+    <Compile Include="Prosjektleder\OversiktProsjekterSomProsjektleder.aspx.cs">
       <DependentUpon>OversiktProsjekterSomProsjektleder.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="OversiktProsjekterSomProsjektleder.aspx.designer.cs">
+    <Compile Include="Prosjektleder\OversiktProsjekterSomProsjektleder.aspx.designer.cs">
       <DependentUpon>OversiktProsjekterSomProsjektleder.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administrator\RegistreringAvBrukereSomAdministrator.aspx.cs">
@@ -737,6 +737,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Utvikler\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
