@@ -59,8 +59,9 @@ namespace SysUt14Gr03
                         bruker_id = bruk.Bruker_id;
                         Firstname.Text = bruk.Fornavn;
                         Aftername.Text = bruk.Etternavn;
-                        token = Request.QueryString["Token"];
+                       
                     }
+                    
                 }
                 else
                 {
@@ -72,7 +73,9 @@ namespace SysUt14Gr03
             catch (Exception ex)
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('Error occured : " + ex.Message.ToString() + "');", true);
+                Response.Redirect("RegistreringAvBrukere.aspx");
                 return;
+                
             }
         } 
      
@@ -80,8 +83,8 @@ namespace SysUt14Gr03
         {
             try
             {
-             
-                string Tok = token;
+
+                token = Request.QueryString["Token"];
                 //passord = MD5Hash(Password.Text);
                 passord = Passord.HashPassord(Password.Text);
                 epost = Email.Text;
@@ -103,7 +106,8 @@ namespace SysUt14Gr03
                     Bruker.Etternavn = etternavn;
                     Bruker.IM = imAdresse;
                     Bruker.Passord = passord;
-                    Bruker.Token = Tok;
+                    Bruker.Token = token;
+                    Bruker.Salt = Passord.GetRandomSalt();
                   
                    /* var Bruker = new Bruker {
                     * 
