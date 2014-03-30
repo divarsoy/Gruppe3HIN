@@ -1,4 +1,9 @@
 ﻿<%@ Master Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Site.SysAdm.master.cs" Inherits="SysUt14Gr03.Site_SysAdm" %>
+
+<asp:Content ID="Content3" ContentPlaceHolderID="LogoTemplate" runat="server">
+    <a class="navbar-brand" runat="server" href="~/Administrator/DefaultAdministrator">Morild Data BA</a>
+</asp:Content>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MenyTemplate" runat="server">
 
     <ul class="nav navbar-nav">

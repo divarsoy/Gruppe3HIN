@@ -268,6 +268,7 @@
     <Content Include="Site.SysAdm.master" />
     <Content Include="Site.Prosjektleder.master" />
     <Content Include="Site.Utvikler.master" />
+    <Content Include="Site.Morild.master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -501,6 +502,13 @@
     </Compile>
     <Compile Include="Classes\Tabeller.cs" />
     <Compile Include="Classes\Validator.cs" />
+    <Compile Include="Site.Morild.master.cs">
+      <DependentUpon>Site.Morild.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Morild.master.designer.cs">
+      <DependentUpon>Site.Morild.master</DependentUpon>
+    </Compile>
     <Compile Include="Utvikler\DefaultUtvikler.aspx.cs">
       <DependentUpon>DefaultUtvikler.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
