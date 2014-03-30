@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Utvikler.Master" AutoEventWireup="true" CodeBehind="ReturAvOppgave.aspx.cs" Inherits="SysUt14Gr03.ReturAvOppgave" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContentUtvikler" runat="server">
-    <h1>Retur av oppgave</h1>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <h1>
+        <asp:Label ID="lblNavn" runat="server" Text="Retur av oppgave"></asp:Label></h1>
     <asp:Panel ID="Panel1" runat="server">
         <br />
         Begrunnelse:

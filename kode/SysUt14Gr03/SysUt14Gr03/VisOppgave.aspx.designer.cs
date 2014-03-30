@@ -31,6 +31,33 @@ namespace SysUt14Gr03 {
         protected global::System.Web.UI.WebControls.Label lblInfo;
         
         /// <summary>
+        /// btnPameld control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnPameld;
+        
+        /// <summary>
+        /// btnInviter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnInviter;
+        
+        /// <summary>
+        /// btnReturn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnReturn;
+        
+        /// <summary>
         /// lblKommentarteller control.
         /// </summary>
         /// <remarks>
