@@ -40,10 +40,10 @@
               <asp:TemplateField HeaderText="Team">
                 <ItemTemplate>
                 <asp:Label ID="lbTeam" runat="server" Text='<%#Bind("Team.Navn") %>'></asp:Label>
-                    
+                    <asp:Label ID="lblTeam_id" runat="server" Visible="false" Text='<%#Bind("Team_id") %>'></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
-                    <asp:Label ID="lbTeam" runat="server" Text='<%#Bind("Team.Navn") %>'></asp:Label>
+                    <asp:Label ID="lbTeam" runat="server" Text='<%#Bind("Team") %>'></asp:Label>
                     <asp:DropDownList ID="ddlTeam" runat="server" >
                     </asp:DropDownList>
                 </EditItemTemplate>

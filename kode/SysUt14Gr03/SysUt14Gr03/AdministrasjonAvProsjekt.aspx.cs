@@ -119,11 +119,12 @@ namespace SysUt14Gr03
                     using (var context = new Context())
                     {
                      
-                        Label tTeam = e.Row.FindControl("lbTeam") as Label;
+                        Label tTeam = e.Row.FindControl("lblTeam_id") as Label;
                         Label lblProsjekt = e.Row.FindControl("lbProsjektnavn") as Label;
                         Prosjekt prosjekt = context.Prosjekter.Where(p => p.Navn == lblProsjekt.Text).First();
-                        Team team = context.Teams.Where(t => t.Navn == tTeam.Text).First();
-                        team_id = team.Team_id;
+                        int team_id = Convert.ToInt32(tTeam.Text);
+                        //Team team = context.Teams.Where(t => t.Team_id == team_id).First();
+                       // team_id = team.Team_id;
                         HyperLink prosjektLink = e.Row.FindControl("pLink") as HyperLink;
                         prosjektLink.Text = prosjekt.Navn;
                         prosjektLink.NavigateUrl = "visProsjekt?Prosjekt_id=" + prosjekt.Prosjekt_id;
