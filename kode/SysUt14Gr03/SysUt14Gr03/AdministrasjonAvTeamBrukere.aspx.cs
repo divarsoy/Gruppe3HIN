@@ -94,7 +94,7 @@ namespace SysUt14Gr03
             {
                 if (cbl_TeamBrukere.Items[i].Selected)
                 {
-                    Queries.UpdateBrukerePaaTeam(Queries.GetTeamById(teamId), team_brukerListe[i], 1);
+                    Queries.UpdateBrukerePaaTeam(Queries.GetTeamById(teamId), team_brukerListe[i - 1], 1);
                 }
             }
             Response.Redirect(Request.RawUrl);
