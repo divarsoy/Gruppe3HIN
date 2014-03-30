@@ -16,46 +16,80 @@ namespace SysUt14Gr03
         private List<Prioritering> pri;
         private List<Status> visStatus;
         private List<int> valgtBrukerid = new List<int>();
-        private int prosjekt_id;
+        private int prosjekt_id = -1;
         private DateTime tidsfrist;
+        private int bruker_id = -1;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.QueryString["prosjekt_id"] != null)
+            if (!IsPostBack)
             {
-                prosjekt_id = Validator.KonverterTilTall(Request.QueryString["prosjekt_id"]);
-              
-                if (!IsPostBack)
+                if (Session["bruker_id"] != null)
                 {
+                    bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
+                }
+                else
+                {
+                    Response.Redirect("~/Login.aspx", true);
+                }
 
-                    brukerListe = Queries.GetAlleAktiveBrukere();
-                    string prosjektNavn = Queries.GetProsjekt(prosjekt_id).Navn;
-                    lblProsjekt.Text = prosjektNavn;
-                    pri = Queries.GetAllePrioriteringer();
-                    visStatus = Queries.GetAlleStatuser();
-                    for (int i = 0; i < visStatus.Count; i++)
+                if (Request.QueryString["prosjekt_id"] != null)
+                {
+                prosjekt_id = Validator.KonverterTilTall(Request.QueryString["prosjekt_id"]);
+                }
+                else if (Session["prosjekt_id"] != null)
+                {
+                prosjekt_id = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
+                }
+
+                if (prosjekt_id != -1 && bruker_id != -1) {
+                    Prosjekt prosjekt = Queries.GetProsjekt(prosjekt_id);
+
+                    // Sjekk om prosjektleder er prosjektleder for valgt prosjekt
+                    if (prosjekt.Bruker_id == bruker_id)
                     {
-                        Status status = visStatus[i];
-                        ddlStatus.Items.Add(new ListItem(status.Navn, status.Status_id.ToString()));
+
+                        brukerListe = Queries.GetAlleAktiveBrukere();
+                        string prosjektNavn = Queries.GetProsjekt(prosjekt_id).Navn;
+                        lblProsjekt.Text = prosjektNavn;
+                        pri = Queries.GetAllePrioriteringer();
+                        visStatus = Queries.GetAlleStatuser();
+                        for (int i = 0; i < visStatus.Count; i++)
+                        {
+                            Status status = visStatus[i];
+                            ddlStatus.Items.Add(new ListItem(status.Navn, status.Status_id.ToString()));
+                        }
+                        using (var context = new Context())
+                        {
+                            System.Windows.Forms.BindingSource bindingSource1 = new System.Windows.Forms.BindingSource();
+                            bindingSource1.DataSource = context.Oppgaver.Where(o => o.Prosjekt_id == prosjekt_id).ToList<Oppgave>();
+                            GridViewOppg.DataSource = bindingSource1;
+                            GridViewOppg.DataBind();
+                        }
+                        for (int i = 0; i < brukerListe.Count; i++)
+                        {
+                            Bruker bruker = brukerListe[i];
+                            ddlBrukere.Items.Add(new ListItem(bruker.ToString(), bruker.Bruker_id.ToString()));
+                        }
+                        for (int i = 0; i < pri.Count; i++)
+                        {
+                            Prioritering priori = pri[i];
+                            ddlPrioritet.Items.Add(new ListItem(priori.Navn, priori.Prioritering_id.ToString()));
+                        }
                     }
-                    using (var context = new Context())
+                    else
                     {
-                        System.Windows.Forms.BindingSource bindingSource1 = new System.Windows.Forms.BindingSource();
-                        bindingSource1.DataSource = context.Oppgaver.Where(o => o.Prosjekt_id == prosjekt_id).ToList<Oppgave>();
-                        GridViewOppg.DataSource = bindingSource1;
-                        GridViewOppg.DataBind();
-                    } 
-                    for (int i = 0; i < brukerListe.Count; i++)
-                    {
-                        Bruker bruker = brukerListe[i];
-                        ddlBrukere.Items.Add(new ListItem(bruker.ToString(), bruker.Bruker_id.ToString()));
-                    }
-                    for (int i = 0; i < pri.Count; i++)
-                    {
-                        Prioritering priori = pri[i];
-                        ddlPrioritet.Items.Add(new ListItem(priori.Navn, priori.Prioritering_id.ToString()));
+                        Session["flashMelding"] = "Du har valgt et ikke gyldig prosjekt, prøv igjen med et annet prosjekt";
+                        Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
+                        Response.Redirect("~/Prosjektleder/DefaultProsjektleder", true);
                     }
                 }
+                else
+                {
+                    Session["flashMelding"] = "Du må velge et prosjekt!";
+                    Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
+                    Response.Redirect("~/Prosjektleder/DefaultProsjektleder", true);
+                }  
             }
         }
         private void OpprettOppg()

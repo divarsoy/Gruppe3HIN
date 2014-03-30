@@ -5,11 +5,12 @@
          <Columns>
             <asp:TemplateField HeaderText="ProsjektNavn">
                 <ItemTemplate>
-                      <asp:Label ID="lbProsjektnavn" runat="server" Visible="false" Text='<%#Bind("Navn") %>'></asp:Label>
+                      <asp:Label ID="lbProsjektnavn" runat="server" Visible="false" Text='<%#Bind("Prosjekt_id") %>'></asp:Label>
                       <asp:HyperLink ID="pLink" runat="server"></asp:HyperLink> 
                 </ItemTemplate>          
                 <EditItemTemplate>
                     <asp:TextBox ID="tbProsjektnavn" runat="server" Text='<%#Bind("Navn") %>'></asp:TextBox>
+                    <asp:Label ID="lbProsjektnavn" runat="server" Visible="false" Text='<%#Bind("Prosjekt_id") %>'></asp:Label>
                 </EditItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Prosjektleder">
@@ -17,33 +18,34 @@
                     <asp:Label ID="lbProsjektleder" runat="server" Text='<%#Bind("Bruker.Fornavn") %>'></asp:Label>
                 </ItemTemplate>
                   <EditItemTemplate>
-                      <asp:TextBox ID="tbProsjektleder" runat="server" Text='<%#Bind("Bruker.Fornavn") %>'></asp:TextBox>
+                      <asp:Label ID="lblProsjektleder" Visible="false" runat="server" Text='<%#Bind("Bruker_id") %>'></asp:Label>
+                      <asp:DropDownList ID="ddlLeder" runat="server"></asp:DropDownList>
                  </EditItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Startdato">
                 <ItemTemplate>
-                    <asp:Label ID="lbStart" runat="server" Text='<%#Bind("Startdato") %>'></asp:Label>
+                    <asp:Label ID="lbStart" runat="server" Text='<%#Bind("Startdato", "{0:dd/MM/yyyy}") %>'></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
-                    <asp:TextBox ID="tbStart" runat="server"  Text='<%#Bind("Startdato") %>'></asp:TextBox>
+                    <asp:TextBox ID="tbStart" runat="server"  Text='<%#Bind("Startdato", "{0:dd/MM/yyyy}") %>'></asp:TextBox>
                 </EditItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Sluttdato">
                 <ItemTemplate>
-                    <asp:Label ID="lbSlutt" runat="server" Text='<%#Bind("Sluttdato") %>'></asp:Label>
+                    <asp:Label ID="lbSlutt" runat="server" Text='<%#Bind("Sluttdato" , "{0:dd/MM/yyyy}") %>'></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
-                    <asp:TextBox ID="tbSlutt" runat="server"  Text='<%#Bind("Sluttdato") %>'></asp:TextBox>
+                    <asp:TextBox ID="tbSlutt" runat="server"  Text='<%#Bind("Sluttdato", "{0:dd/MM/yyyy}") %>'></asp:TextBox>
                 </EditItemTemplate>
             </asp:TemplateField>
             
               <asp:TemplateField HeaderText="Team">
                 <ItemTemplate>
                 <asp:Label ID="lbTeam" runat="server" Text='<%#Bind("Team.Navn") %>'></asp:Label>
-                    
+                    <asp:Label ID="lblTeam_id" runat="server" Visible="false" Text='<%#Bind("Team_id") %>'></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
-                    <asp:Label ID="lbTeam" runat="server" Text='<%#Bind("Team.Navn") %>'></asp:Label>
+                    <asp:Label ID="lbTeam" runat="server" Visible="false" Text='<%#Bind("Team_id") %>'></asp:Label>
                     <asp:DropDownList ID="ddlTeam" runat="server" >
                     </asp:DropDownList>
                 </EditItemTemplate>
@@ -56,12 +58,11 @@
                     <asp:CheckBox ID="cboxAktiv" Checked='<%#Bind("Aktiv") %>' runat="server" />
                      </EditItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Gå til team">
+            <asp:TemplateField HeaderText="Endre Team">
                 <ItemTemplate>
                     <asp:HyperLink ID="asp" Text="AdministrasjonAvTeam" runat="server"></asp:HyperLink> 
                 </ItemTemplate>
                 <EditItemTemplate>
-
                 </EditItemTemplate>
             </asp:TemplateField>
              <asp:CommandField ShowEditButton="true" />

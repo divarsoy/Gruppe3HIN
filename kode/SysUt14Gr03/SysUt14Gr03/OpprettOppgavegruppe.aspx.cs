@@ -59,37 +59,60 @@ namespace SysUt14Gr03
                     if (chkBox.Checked)
                     {
                         Oppgave oppgave = oppgaveListe[i];
+                        oppgave.Prioritering_id = ddlPrioritet.SelectedIndex + 1; ;
                         valgteOppgaver.Add(oppgaveListe[i]);
                     }
                 }
             }
-            if (valgteOppgaver.Count < 2)
+            if (txtNavn.Text != string.Empty)
             {
-                using (var context = new Context())
+                if (valgteOppgaver.Count < 10)
                 {
-                    List<Oppgave> oppgaverTilDatabase = new List<Oppgave>();
-
-                    var nyOppgaveGruppe = new OppgaveGruppe
+                    if (valgteOppgaver.Count >= 2)
                     {
-                        Navn = txtNavn.Text
-                    };
+                        using (var context = new Context())
+                        {
+                            List<Oppgave> oppgaverTilDatabase = new List<Oppgave>();
 
-                    context.OppgaveGrupper.Add(nyOppgaveGruppe);
+                            var nyOppgaveGruppe = new OppgaveGruppe
+                            {
+                                Navn = txtNavn.Text
+                            };
 
-                    foreach (Oppgave oppgave in valgteOppgaver)
+                            context.OppgaveGrupper.Add(nyOppgaveGruppe);
+                            context.SaveChanges();
+
+                            foreach (Oppgave oppgave in valgteOppgaver)
+                            {
+
+                                Oppgave op = context.Oppgaver.FirstOrDefault(o => o.Oppgave_id == oppgave.Oppgave_id);
+                                op.OppgaveGruppe = nyOppgaveGruppe;
+                                op.Prioritering = context.Prioriteringer.FirstOrDefault(p => p.Prioritering_id == oppgave.Prioritering_id);
+                                context.SaveChanges();
+                            }
+
+                        }
+                        Response.Redirect(Request.RawUrl);
+                    }
+                    else
                     {
-
-                        Oppgave op = context.Oppgaver.FirstOrDefault(o => o.Oppgave_id == oppgave.Oppgave_id);
-                        op.OppgaveGruppe = nyOppgaveGruppe;
-                        op.Prioritering = context.Prioriteringer.FirstOrDefault(p => p.Prioritering_id == 10);
-                        context.SaveChanges();
+                        lblMelding.Text = "Velg minst to oppgaver";
+                        lblMelding.Visible = true;
                     }
 
                 }
+
+                else
+                {
+                    lblMelding.Text = "Maks antall oppgaver i en gruppe er 10";
+                    lblMelding.Visible = true;
+                }
+
             }
             else
             {
-
+                lblMelding.Text = "Skriv inn et navn";
+                lblMelding.Visible = true;
             }
             
         }

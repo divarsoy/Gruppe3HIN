@@ -1,10 +1,10 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.SysAdm.Master" AutoEventWireup="true" CodeBehind="RegistreringAvBrukere.aspx.cs" Inherits="SysUt14Gr03.RegistreringAvBrukere" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Prosjektleder.master" AutoEventWireup="true" CodeBehind="RegistreringAvBrukere.aspx.cs" Inherits="SysUt14Gr03.RegistreringAvBrukere" %>
 
 <asp:Content ID="Content1" class="form-horizontal" role="form" ContentPlaceHolderID="MainContent" runat="server">
 
     <div class="container">
 
-    <h1>Registrer ny bruker</h1>
+    <h1>Opprett ny bruker</h1>
         <br />
 
         
