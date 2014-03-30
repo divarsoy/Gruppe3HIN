@@ -4,7 +4,7 @@
 
     <div class="container">
 
-    <h1>Registrer ny bruker</h1>
+    <h1>Opprett ny bruker</h1>
         <br />
 
         

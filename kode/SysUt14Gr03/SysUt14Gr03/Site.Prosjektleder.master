@@ -15,16 +15,17 @@
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Team <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li> <a runat="server" href="~/OversiktTeam">Oversikt over Team i valgt prosjekt</a></li>
-                    <li> <a runat="server" href="~/OpprettTeam">Opprett Team</a></li>
+                    <li> <a runat="server" href="~/Prosjektleder/OversiktOverAlleTeam">Oversikt over alle Team</a></li>
+                    <li> <a runat="server" href="~/Prosjektleder/OversiktTeam">Oversikt over Team i valgt prosjekt</a></li>
+                    <li> <a runat="server" href="~/Prosjektleder/OpprettTeam">Opprett Team</a></li>
                 </ul>                  
     </ul>
         <ul class="nav navbar-nav">
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Brukere <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li> <a runat="server" href="~/OversiktBrukere">Oversikt over Brukere i valgt prosjekt</a></li>
-                    <li> <a runat="server" href="~/RegistreringAvBrukere">Opprett bruker</a></li>
+                    <li> <a runat="server" href="~/Prosjektleder/OversiktBrukere">Oversikt over Brukere i valgt prosjekt</a></li>
+                    <li> <a runat="server" href="~/Prosjektleder/RegistreringAvBrukere">Opprett bruker</a></li>
                 </ul>                  
     </ul>
 

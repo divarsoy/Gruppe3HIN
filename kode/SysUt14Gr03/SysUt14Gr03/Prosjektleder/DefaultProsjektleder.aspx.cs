@@ -17,8 +17,14 @@ namespace SysUt14Gr03
         protected string Fornavn;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["Fornavn"] != null)
+            {
+                Fornavn = Session["Fornavn"].ToString();
+            }
+
             if (!Page.IsPostBack)
             {
+
                 if (Session["bruker_id"] == null)
                 {
 
@@ -57,8 +63,11 @@ namespace SysUt14Gr03
         {
             if (ListBoxProsjekt.SelectedItem.Value != null)
             {
-                Session["prosjekt_id"] = ListBoxProsjekt.SelectedItem.Value;
-                //Session["prosjektNavn"] = 
+                int prosjekt_id = Validator.KonverterTilTall(ListBoxProsjekt.SelectedItem.Value);
+                Session["prosjekt_id"] = prosjekt_id;
+                Prosjekt prosjekt = Queries.GetProsjekt(prosjekt_id);
+                Session["prosjekt_navn"] = prosjekt.Navn;
+                lblValgtProsjekt.Text = String.Format("<h3>Valgt prosjekt er <b>{0}</b></h3>", prosjekt.Navn);
                 //Response.Redirect(String.Format("OversiktOppgaver?bruker_id={0}&prosjekt_id={1}", Session["bruker_id"], ListBoxProsjekt.SelectedItem.Value));
             }
         }

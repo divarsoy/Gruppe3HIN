@@ -199,14 +199,14 @@
     <Content Include="OversiktBrukereSomProsjektleder.aspx" />
     <Content Include="OversiktBrukerSomUtvikler.aspx" />
     <Content Include="OversiktOppgaver.aspx" />
-    <Content Include="OversiktOverTeam.aspx" />
+    <Content Include="Prosjektleder\OversiktOverAlleTeam.aspx" />
     <Content Include="OversiktProsjekter.aspx" />
     <Content Include="Prosjektleder\OversiktProsjekterSomProsjektleder.aspx" />
     <Content Include="PameldingTilOppgave.aspx" />
     <Content Include="Pictures\blomst.jpg" />
-    <Content Include="OpprettTeam.aspx" />
+    <Content Include="Prosjektleder\OpprettTeam.aspx" />
     <Content Include="Administrator\RegistreringAvBrukereSomAdministrator.aspx" />
-    <Content Include="RegistreringAvBrukere.aspx" />
+    <Content Include="Prosjektleder\RegistreringAvBrukere.aspx" />
     <Content Include="Administrator\Rettigheter.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="HowToQueryTheDatabase.aspx" />
@@ -454,12 +454,12 @@
     <Compile Include="MottaOppgave.aspx.designer.cs">
       <DependentUpon>MottaOppgave.aspx</DependentUpon>
     </Compile>
-    <Compile Include="OversiktOverTeam.aspx.cs">
-      <DependentUpon>OversiktOverTeam.aspx</DependentUpon>
+    <Compile Include="Prosjektleder\OversiktOverAlleTeam.aspx.cs">
+      <DependentUpon>OversiktOverAlleTeam.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="OversiktOverTeam.aspx.designer.cs">
-      <DependentUpon>OversiktOverTeam.aspx</DependentUpon>
+    <Compile Include="Prosjektleder\OversiktOverAlleTeam.aspx.designer.cs">
+      <DependentUpon>OversiktOverAlleTeam.aspx</DependentUpon>
     </Compile>
     <Compile Include="OversiktProsjekter.aspx.cs">
       <DependentUpon>OversiktProsjekter.aspx</DependentUpon>
@@ -574,11 +574,11 @@
     <Compile Include="Prosjektleder\OpprettProsjekt.aspx.designer.cs">
       <DependentUpon>OpprettProsjekt.aspx</DependentUpon>
     </Compile>
-    <Compile Include="OpprettTeam.aspx.cs">
+    <Compile Include="Prosjektleder\OpprettTeam.aspx.cs">
       <DependentUpon>OpprettTeam.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="OpprettTeam.aspx.designer.cs">
+    <Compile Include="Prosjektleder\OpprettTeam.aspx.designer.cs">
       <DependentUpon>OpprettTeam.aspx</DependentUpon>
     </Compile>
     <Compile Include="OversiktOppgaver.aspx.cs">
@@ -595,11 +595,11 @@
     <Compile Include="PameldingTilOppgave.aspx.designer.cs">
       <DependentUpon>PameldingTilOppgave.aspx</DependentUpon>
     </Compile>
-    <Compile Include="RegistreringAvBrukere.aspx.cs">
+    <Compile Include="Prosjektleder\RegistreringAvBrukere.aspx.cs">
       <DependentUpon>RegistreringAvBrukere.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="RegistreringAvBrukere.aspx.designer.cs">
+    <Compile Include="Prosjektleder\RegistreringAvBrukere.aspx.designer.cs">
       <DependentUpon>RegistreringAvBrukere.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administrator\Rettigheter.aspx.cs">
