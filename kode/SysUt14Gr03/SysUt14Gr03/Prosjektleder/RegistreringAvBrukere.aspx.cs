@@ -102,11 +102,7 @@ namespace SysUt14Gr03
                 subject = "Bekreftelses epost for konto aktivering";
 
                 //Rett link tips?
-<<<<<<< HEAD:kode/SysUt14Gr03/SysUt14Gr03/RegistreringAvBrukere.aspx.cs
-                ActivationUrl = Server.HtmlEncode("http://malmen.hin.no/SysUt14Gr03/AktiverKonto?Epost=" + email + "&Token=" + token);
-=======
                 ActivationUrl = Server.HtmlEncode("http://Malmen.hin.no/SysUt14Gr03/AktiverKonto?Epost=" + email + "&Token=" + token);
->>>>>>> 0a73fc480dceb589743a5201f761963b7fe04288:kode/SysUt14Gr03/SysUt14Gr03/Prosjektleder/RegistreringAvBrukere.aspx.cs
             
                 //sendEmail.sendEpost(email, msg, subject, ActivationUrl, null, null);
                 msg = new MailMessage();
