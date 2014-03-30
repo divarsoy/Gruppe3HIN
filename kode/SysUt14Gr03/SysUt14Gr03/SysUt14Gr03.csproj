@@ -198,7 +198,7 @@
     <Content Include="Administrator\OversiktBrukereSomAdministrator.aspx" />
     <Content Include="OversiktBrukereSomProsjektleder.aspx" />
     <Content Include="OversiktBrukerSomUtvikler.aspx" />
-    <Content Include="OversiktOppgaver.aspx" />
+    <Content Include="Prosjektleder\OversiktOppgaver.aspx" />
     <Content Include="Prosjektleder\OversiktOverAlleTeam.aspx" />
     <Content Include="OversiktProsjekter.aspx" />
     <Content Include="Prosjektleder\OversiktProsjekterSomProsjektleder.aspx" />
@@ -589,11 +589,11 @@
     <Compile Include="Prosjektleder\OpprettTeam.aspx.designer.cs">
       <DependentUpon>OpprettTeam.aspx</DependentUpon>
     </Compile>
-    <Compile Include="OversiktOppgaver.aspx.cs">
+    <Compile Include="Prosjektleder\OversiktOppgaver.aspx.cs">
       <DependentUpon>OversiktOppgaver.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="OversiktOppgaver.aspx.designer.cs">
+    <Compile Include="Prosjektleder\OversiktOppgaver.aspx.designer.cs">
       <DependentUpon>OversiktOppgaver.aspx</DependentUpon>
     </Compile>
     <Compile Include="PameldingTilOppgave.aspx.cs">

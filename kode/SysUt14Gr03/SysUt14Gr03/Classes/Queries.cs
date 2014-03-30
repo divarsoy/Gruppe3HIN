@@ -407,6 +407,19 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        static public List<Oppgave> GetAlleOppgaverForProsjekt(int _prosjekt_id)
+        {
+            using (var context = new Context())
+            {
+                var oppgaveListe = context.Oppgaver
+                                  .Include("Brukere")
+                                  .Include("Kommentarer")
+                                  .Where(oppgave => oppgave.Prosjekt_id == _prosjekt_id)
+                                  .OrderBy(oppgave => oppgave.Tittel)
+                                  .ToList();
+                return oppgaveListe;
+            }
+        }
         static public List<Oppgave> GetAlleAktiveOppgaverForBruker(int _bruker_id)
         {
             using (var context = new Context())
