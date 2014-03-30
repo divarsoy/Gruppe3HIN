@@ -8,10 +8,10 @@ namespace SysUt14Gr03
 {
     public partial class OversiktOppgaver : System.Web.UI.Page
     {
-        List<Oppgave> query = null;
-        int bruker_id;
-        int prosjekt_id;
-        string prosjektNavn;
+        private List<Oppgave> query = null;
+        private int bruker_id;
+        private int prosjekt_id = -1;
+        private string prosjektNavn;
             
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -20,12 +20,11 @@ namespace SysUt14Gr03
 
                 if (Session["bruker_id"] != null)
                 {
-                    bruker_id = Validator.KonverterTilTall((string)Session["bruker_id"]);
+                    bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
                 }
                 else
                 {
-                 //       Response.Redirect("Login.aspx", true);
-                    bruker_id = 3;
+                      Response.Redirect("Login.aspx", true);
                 }
 
                 // Sjekker om det er lagt ved et Get parameter "prosjekt_id" og lager en spørring basert på prosjekt_id og bruker_id på innlogget bruker
@@ -40,7 +39,7 @@ namespace SysUt14Gr03
                 }
 
 
-                if (prosjekt_id >= 1 && prosjekt_id != null)
+                if (prosjekt_id >= 1 && prosjekt_id != -1)
                 {
                     Prosjekt prosjekt = Queries.GetProsjekt(prosjekt_id);
 
@@ -51,9 +50,8 @@ namespace SysUt14Gr03
 
                         if (query.Count > 0)
                         {
-                            string prosjektNavn = Queries.GetProsjekt(prosjekt_id).Navn;
-                            string brukerNavn = Queries.GetBruker(bruker_id).ToString();
-                            lblTilbakemelding.Text = string.Format("<h3>Prosjekt: {0}</h3><h3>Bruker: {1}</h3>", prosjektNavn, brukerNavn);
+                            prosjektNavn = Queries.GetProsjekt(prosjekt_id).Navn;
+                            lblTilbakemelding.Text = string.Format("<h3>Prosjekt: {0}</h3>", prosjektNavn);
 
                             Table oppgaveTable = Tabeller.HentOppgaveTabell(query);
                             oppgaveTable.CssClass = "table";

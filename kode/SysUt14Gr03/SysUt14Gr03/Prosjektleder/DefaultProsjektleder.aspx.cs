@@ -24,12 +24,12 @@ namespace SysUt14Gr03
 
             if (!Page.IsPostBack)
             {
+                Session["bruker_id"] = 3;
 
                 if (Session["bruker_id"] == null)
                 {
 
                     //Response.Redirect("~/Login.aspx", true);
-                    bruker_id = 3;
 
                 }
                 else
