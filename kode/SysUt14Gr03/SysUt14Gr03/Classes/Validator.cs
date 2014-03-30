@@ -27,5 +27,22 @@ namespace SysUt14Gr03.Classes
             else
                 return true;
         }
+
+        // Sjekk om oppgave er avhengig av andre, returnerer id'en til denne
+        public static int SjekkAvhengighet(int oppgave_id)
+        {
+            Oppgave oppgave = Queries.GetOppgave(oppgave_id);
+            int oppgaveGruppeId = 0;
+            int result = -1;
+            if (oppgave.OppgaveGruppe_id.HasValue)
+                oppgaveGruppeId = (int)oppgave.OppgaveGruppe_id;
+            List<Oppgave> oppgaverIGruppe = Queries.GetOppgaverIOppgaveGruppe(oppgaveGruppeId);
+            foreach (Oppgave o in oppgaverIGruppe)
+            {
+                if (o.Prioritering_id < oppgave.Prioritering_id)
+                    result = o.Oppgave_id;
+            }
+            return result;
+        }
     }
 }

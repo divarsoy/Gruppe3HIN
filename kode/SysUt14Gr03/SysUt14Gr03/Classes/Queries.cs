@@ -169,6 +169,17 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        static public List<Oppgave> GetOppgaverIOppgaveGruppe(int oppgaveGruppe_id)
+        {
+            using (var context = new Context())
+            {
+                var oppgaveListe = context.Oppgaver
+                                    .Where(o => o.OppgaveGruppe_id == oppgaveGruppe_id)
+                                    .ToList();
+                return oppgaveListe;
+            }
+        }
+
         static public List<Bruker> GetAlleAktiveBrukere()
         {
             using (var context = new Context())
