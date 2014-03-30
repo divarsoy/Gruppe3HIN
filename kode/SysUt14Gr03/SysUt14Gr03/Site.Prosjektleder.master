@@ -42,6 +42,8 @@
                 <ul class="dropdown-menu">
                     <li> <a runat="server" href="~/Prosjektleder/OversiktOppgaver">Oversikt over Oppgaver i valgt prosjekt</a></li>
                     <li> <a runat="server" href="~/Prosjektleder/OpprettOppgave">Opprett Oppgave i valgt prosjekt</a></li>
+                    <li> <a runat="server" href="~/Prosjektleder/OpprettOppgavegruppe">Opprett Oppgavegruppe i valgt prosjekt</a></li>
+
                 </ul>                  
     </ul>
 

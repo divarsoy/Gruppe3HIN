@@ -193,7 +193,7 @@
     <Content Include="ListboxTest.aspx" />
     <Content Include="MottaOppgave.aspx" />
     <Content Include="Prosjektleder\OpprettOppgave.aspx" />
-    <Content Include="OpprettOppgavegruppe.aspx" />
+    <Content Include="Prosjektleder\OpprettOppgavegruppe.aspx" />
     <Content Include="Prosjektleder\OpprettProsjekt.aspx" />
     <Content Include="Administrator\OversiktBrukereSomAdministrator.aspx" />
     <Content Include="OversiktBrukereSomProsjektleder.aspx" />
@@ -411,11 +411,11 @@
     </Compile>
     <Compile Include="Models\Notifikasjon.cs" />
     <Compile Include="Models\NotifikasjonsType.cs" />
-    <Compile Include="OpprettOppgavegruppe.aspx.cs">
+    <Compile Include="Prosjektleder\OpprettOppgavegruppe.aspx.cs">
       <DependentUpon>OpprettOppgavegruppe.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="OpprettOppgavegruppe.aspx.designer.cs">
+    <Compile Include="Prosjektleder\OpprettOppgavegruppe.aspx.designer.cs">
       <DependentUpon>OpprettOppgavegruppe.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administrator\OversiktBrukereSomAdministrator.aspx.cs">
