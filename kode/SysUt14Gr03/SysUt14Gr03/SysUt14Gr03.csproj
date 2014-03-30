@@ -257,7 +257,7 @@
     <Content Include="Timeregistrering.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="VisBruker.aspx" />
-    <Content Include="VisOppgave.aspx" />
+    <Content Include="Prosjektleder\VisOppgave.aspx" />
     <Content Include="VisProsjekt.aspx" />
     <Content Include="VisTeam.aspx" />
     <Content Include="Web.config" />
@@ -721,11 +721,11 @@
     <Compile Include="VisBruker.aspx.designer.cs">
       <DependentUpon>VisBruker.aspx</DependentUpon>
     </Compile>
-    <Compile Include="VisOppgave.aspx.cs">
+    <Compile Include="Prosjektleder\VisOppgave.aspx.cs">
       <DependentUpon>VisOppgave.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="VisOppgave.aspx.designer.cs">
+    <Compile Include="Prosjektleder\VisOppgave.aspx.designer.cs">
       <DependentUpon>VisOppgave.aspx</DependentUpon>
     </Compile>
     <Compile Include="VisProsjekt.aspx.cs">

@@ -25,6 +25,7 @@ namespace SysUt14Gr03
             if (!Page.IsPostBack)
             {
                 Session["bruker_id"] = 3;
+                Session["Fornavn"] = "Martin";
 
                 if (Session["bruker_id"] == null)
                 {

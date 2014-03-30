@@ -46,7 +46,7 @@ namespace SysUt14Gr03.Classes
                 StringBuilder brukereIOppgave = new StringBuilder();
                 foreach (Bruker bruker in oppgave.Brukere)
                 {
-                    brukereIOppgave.Append(String.Format("<a href='HistorikkStattestikk?bruker_id={0}'>{1} </a>", bruker.Bruker_id, bruker.Brukernavn));
+                    brukereIOppgave.Append(String.Format("<a href='VisBruker?bruker_id={0}'>{1} </a>", bruker.Bruker_id, bruker.Brukernavn));
                 }
                 TableRow tRow = new TableRow();
                 TableCell tittelCell = new TableCell();
@@ -57,7 +57,7 @@ namespace SysUt14Gr03.Classes
                 TableCell brukerCell = new TableCell();
                 TableCell kommentarCell = new TableCell();
 
-                tittelCell.Text = String.Format("<a href='ArkiverOppg?oppgave_id={0}'>{1}</a>", oppgave.Oppgave_id.ToString(), oppgave.Tittel);
+                tittelCell.Text = String.Format("<a href='VisOppgave?oppgave_id={0}'>{1}</a>", oppgave.Oppgave_id.ToString(), oppgave.Tittel);
                 statusCell.Text = Queries.GetStatus(oppgave.Status_id).Navn;
                 estimatCell.Text = oppgave.Estimat.ToString();
                 bruktTidCell.Text = oppgave.BruktTid.ToString();
