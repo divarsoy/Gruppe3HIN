@@ -192,7 +192,7 @@
     <Content Include="KommentarPaOppgave.aspx" />
     <Content Include="ListboxTest.aspx" />
     <Content Include="MottaOppgave.aspx" />
-    <Content Include="OpprettOppgave.aspx" />
+    <Content Include="Prosjektleder\OpprettOppgave.aspx" />
     <Content Include="OpprettOppgavegruppe.aspx" />
     <Content Include="Prosjektleder\OpprettProsjekt.aspx" />
     <Content Include="Administrator\OversiktBrukereSomAdministrator.aspx" />
@@ -560,11 +560,11 @@
     <Compile Include="HistorikkStattestikk.aspx.designer.cs">
       <DependentUpon>HistorikkStattestikk.aspx</DependentUpon>
     </Compile>
-    <Compile Include="OpprettOppgave.aspx.cs">
+    <Compile Include="Prosjektleder\OpprettOppgave.aspx.cs">
       <DependentUpon>OpprettOppgave.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="OpprettOppgave.aspx.designer.cs">
+    <Compile Include="Prosjektleder\OpprettOppgave.aspx.designer.cs">
       <DependentUpon>OpprettOppgave.aspx</DependentUpon>
     </Compile>
     <Compile Include="Prosjektleder\OpprettProsjekt.aspx.cs">

@@ -34,7 +34,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Oppgaver <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li> <a runat="server" href="~/Prosjektleder/OversiktOppgaver">Oversikt over Oppgaver i valgt prosjekt</a></li>
-                    <li> <a runat="server" href="~/OpprettOppgave">Opprett Oppgaver</a></li>
+                    <li> <a runat="server" href="~/Prosjektleder/OpprettOppgave">Opprett Oppgave i valgt prosjekt</a></li>
                 </ul>                  
     </ul>
 
