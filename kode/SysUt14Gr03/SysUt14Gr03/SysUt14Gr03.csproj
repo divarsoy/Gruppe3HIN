@@ -167,8 +167,8 @@
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\RegisterExternalLogin.aspx" />
     <Content Include="Prosjektleder\AdministrasjonAvProsjekt.aspx" />
-    <Content Include="AdministrasjonAvTeam.aspx" />
-    <Content Include="AdministrasjonAvTeamBrukere.aspx" />
+    <Content Include="Prosjektleder\AdministrasjonAvTeam.aspx" />
+    <Content Include="Prosjektleder\AdministrasjonAvTeamBrukere.aspx" />
     <Content Include="AdministratorForside.aspx" />
     <Content Include="AdministrerOppgavegruppe.aspx" />
     <Content Include="AktiverKonto.aspx" />
@@ -319,18 +319,18 @@
     <Compile Include="Prosjektleder\AdministrasjonAvProsjekt.aspx.designer.cs">
       <DependentUpon>AdministrasjonAvProsjekt.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AdministrasjonAvTeam.aspx.cs">
+    <Compile Include="Prosjektleder\AdministrasjonAvTeam.aspx.cs">
       <DependentUpon>AdministrasjonAvTeam.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AdministrasjonAvTeam.aspx.designer.cs">
+    <Compile Include="Prosjektleder\AdministrasjonAvTeam.aspx.designer.cs">
       <DependentUpon>AdministrasjonAvTeam.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AdministrasjonAvTeamBrukere.aspx.cs">
+    <Compile Include="Prosjektleder\AdministrasjonAvTeamBrukere.aspx.cs">
       <DependentUpon>AdministrasjonAvTeamBrukere.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AdministrasjonAvTeamBrukere.aspx.designer.cs">
+    <Compile Include="Prosjektleder\AdministrasjonAvTeamBrukere.aspx.designer.cs">
       <DependentUpon>AdministrasjonAvTeamBrukere.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdministratorForside.aspx.cs">
