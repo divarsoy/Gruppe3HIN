@@ -125,6 +125,16 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        static public List<Kommentar> GetAlleKommentarerTilOppgave(int oppgave_id)
+        {
+            using (var context = new Context())
+            {
+                var kommentarListe = context.Kommentarer.Include("Bruker")
+                    .Where(k => k.Oppgave_id == oppgave_id).ToList();
+                return kommentarListe;
+            }
+        }
+
         static public Status GetStatus(int _status_id)
         {
             using (var context = new Context())
@@ -147,15 +157,15 @@ namespace SysUt14Gr03.Classes
         {
             using (var context = new Context())
             {
-                var oppgaveListe = context.Oppgaver
+                var oppgave = context.Oppgaver
                                   .Include("Brukere")
                                   .Include("Prioritering")
                                   .Include("Status")
                                   .Include("Prosjekt")
-                                  .Where(oppgave => oppgave.Oppgave_id == oppgave_id)
-                                  .Where(oppgave => oppgave.Aktiv == true)
-                                  .ToList<Oppgave>();
-                return oppgaveListe[0];
+                                  .Where(o => o.Oppgave_id == oppgave_id)
+                                  .Where(o => o.Aktiv == true)
+                                  .FirstOrDefault<Oppgave>();
+                return oppgave;
             }
         }
 
