@@ -59,11 +59,12 @@ namespace SysUt14Gr03
                     if (chkBox.Checked)
                     {
                         Oppgave oppgave = oppgaveListe[i];
+                        oppgave.Prioritering_id = ddlPrioritet.SelectedIndex + 1; ;
                         valgteOppgaver.Add(oppgaveListe[i]);
                     }
                 }
             }
-            if (valgteOppgaver.Count < 2)
+            if (valgteOppgaver.Count > 2)
             {
                 using (var context = new Context())
                 {
@@ -75,13 +76,15 @@ namespace SysUt14Gr03
                     };
 
                     context.OppgaveGrupper.Add(nyOppgaveGruppe);
+                    context.SaveChanges();
 
                     foreach (Oppgave oppgave in valgteOppgaver)
                     {
 
                         Oppgave op = context.Oppgaver.FirstOrDefault(o => o.Oppgave_id == oppgave.Oppgave_id);
                         op.OppgaveGruppe = nyOppgaveGruppe;
-                        op.Prioritering = context.Prioriteringer.FirstOrDefault(p => p.Prioritering_id == 10);
+                        //int prioritering = ddlPrioritet.SelectedIndex + 1;
+                        op.Prioritering = context.Prioriteringer.FirstOrDefault(p => p.Prioritering_id == oppgave.Prioritering_id);
                         context.SaveChanges();
                     }
 

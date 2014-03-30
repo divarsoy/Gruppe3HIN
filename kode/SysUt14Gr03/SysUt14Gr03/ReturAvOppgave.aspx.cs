@@ -31,8 +31,17 @@ namespace SysUt14Gr03
                     Response.Redirect("Login.aspx", true);
             }
 
-            oppgaveListe = Queries.GetAlleAktiveOppgaverForBruker(bruker_id);
-            oppgave = oppgaveListe[0];
+            if (Request.QueryString["oppgave_id"] != null)
+            {
+                int oppgave_id = Validator.KonverterTilTall(Request.QueryString["oppgave_id"]);
+                oppgave = Queries.GetOppgave(oppgave_id);
+                lblNavn.Text += ": " + oppgave.Tittel;
+            }
+            else
+            {
+                lblFeil.Text = "Ingen oppgave valgt!";
+                btnSend.Enabled = false;
+            }
         }
 
         protected void btnSend_Click(object sender, EventArgs e)
