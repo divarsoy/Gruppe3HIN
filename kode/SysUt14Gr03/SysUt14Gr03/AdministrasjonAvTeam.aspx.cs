@@ -30,11 +30,9 @@ namespace SysUt14Gr03
         protected void bt_endreTeam_Click(object sender, EventArgs e)
         {
             Team valgtTeam = Queries.GetTeamByName(cbl_team.SelectedValue);
+            Response.Redirect("AdministrasjonAvTeamBrukere?Team_id=" + valgtTeam.Team_id);
             
-            AdministrasjonAvTeamBrukere.SetValgtTeam(valgtTeam.Team_id);
-
-            Response.Redirect("~/AdministrasjonAvTeamBrukere.aspx");
-//           Server.Transfer("/AdministrasjonAvTeamBrukere.aspx");
+            
         }
 
     }

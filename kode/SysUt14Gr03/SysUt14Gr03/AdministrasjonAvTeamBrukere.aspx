@@ -10,6 +10,8 @@
                 <label for="lblEndreTeamNavn">Team-Navn </label>
                 <asp:TextBox ID="tb_TeamNavn" runat="server" Height="22px" Width="146px"></asp:TextBox>
 
+                 <asp:Button ID="bt_edreTeamNavn" CssClass="btn btn-warning" runat="server" Text="Endre Navn" OnClick="bt_fjerneBruker_Click" />     
+
             </div>
             
     

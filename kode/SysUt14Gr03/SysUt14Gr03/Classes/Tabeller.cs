@@ -151,7 +151,7 @@ namespace SysUt14Gr03.Classes
             brukerNavnHeaderCell.Text = "Brukernavn";
             epostHeaderCell.Text = "Epost";
             IMHeaderCell.Text = "IM";
-            teamNavnCell.Text = "" + nesteTeam.Navn;
+            teamNavnCell.Text = String.Format("<a href='VisTeam'>{0}</a>", nesteTeam.Navn);
                
             teamNavnHeader.Cells.Add(teamNavnCell);
             tabell.Rows.Add(teamNavnHeader);
@@ -172,28 +172,12 @@ namespace SysUt14Gr03.Classes
                 TableCell epostCell = new TableCell();
                 TableCell IMCell = new TableCell();
 
-              //  DropDownList ddlProsjekt = new DropDownList();
-               // OversiktBrukerSomUtvikler get = new OversiktBrukerSomUtvikler();
-               // Button btnProsjekt = new Button();
-
                 StringBuilder brukereITeam = new StringBuilder();
-              /*  foreach (Team team in bruker.Teams)
-                {
-                    //henter ut team navnene og legge dem et sted. prosjkt og team er hentet ut av querien allerede.
-                    brukereITeam.Append(String.Format("<a href='HistorikkStattestikk?team_id={0}'>{1} </a>", team.Team_id, team.Navn));
-                } */
-            /*    for (int i = 0; i < bruker.Prosjekter.Count; i++)
-                {
-                    Prosjekt prosjekt = bruker.Prosjekter[i];
-                    ddlProsjekt.Items.Add(new ListItem(prosjekt.Navn, prosjekt.Prosjekt_id.ToString()));
-                    btnProsjekt.ID = "btnProsjekt";
-                    btnProsjekt.Text = "Gå til prosjekt";
-                } */
 
-                forNavnCell.Text = String.Format("<a href='HistorikkStattestikk?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Fornavn);
+                forNavnCell.Text = bruker.Fornavn;
 
-                etterNavnCell.Text = String.Format("<a href='HistorikkStattestikk?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Etternavn);
-                brukerNavnCell.Text = String.Format("<a href='HistorikkStattestikk?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Brukernavn);
+                etterNavnCell.Text = bruker.Etternavn;
+                brukerNavnCell.Text = String.Format("<a href='VisBruker'>{0}</a>", bruker.Brukernavn);
                 epostCell.Text = bruker.Epost;
                 IMCell.Text = bruker.IM;
 

@@ -15,15 +15,17 @@ namespace SysUt14Gr03
         private List<Bruker> team_brukerListe;
         private List<Bruker> brukerListe;
 
-        public static void SetValgtTeam(int value)
-        { 
-           teamId = value;
-        }
+        
 
         protected void Page_Load(object sender, EventArgs e)
         {
             team_brukerListe = Queries.GetAlleBrukerePaaTeam(teamId);
             brukerListe = Queries.GetAlleAktiveBrukere();
+
+            if (Request.QueryString["Team_id"] != null)
+            {
+                teamId = Validator.KonverterTilTall(Request.QueryString["Team_id"]);
+            }
 
             if (teamId != -1)
             {
@@ -55,6 +57,16 @@ namespace SysUt14Gr03
 
             }
             
+        }
+
+        protected void bt_endreTeamNavn_Click(object sender, EventArgs e)
+        {
+            using (var context = new Context())
+            {
+                Team t = context.Teams.Where(Team => Team.Team_id == teamId).First();
+                t.Navn = tb_TeamNavn.Text;
+                context.SaveChanges();
+            }
         }
 
         protected void bt_fjerneBruker_Click(object sender, EventArgs e)

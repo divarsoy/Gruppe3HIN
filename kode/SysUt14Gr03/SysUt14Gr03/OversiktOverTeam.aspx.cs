@@ -22,6 +22,7 @@ namespace SysUt14Gr03
                 if (!IsPostBack)
                 {
                     Table brukerTabell = Tabeller.HentBrukerTabellForTeam(query, t);
+                    brukerTabell.CssClass = "table";
                     PlaceHolderTable.Controls.Add(brukerTabell);
                 }
             }
