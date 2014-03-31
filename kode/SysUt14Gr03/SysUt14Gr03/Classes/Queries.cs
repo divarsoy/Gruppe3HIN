@@ -179,7 +179,17 @@ namespace SysUt14Gr03.Classes
                 return oppgaveListe;
             }
         }
-
+        static public List<Prosjekt> GetProsjektLeder(int prosjekt_id)
+        {
+            using (var context = new Context())
+            {
+                var prosjektListe = (from prosjekt in context.Prosjekter
+                                   where prosjekt.Prosjekt_id == prosjekt_id
+                                   select prosjekt).ToList<Prosjekt>();
+                return prosjektListe;
+            
+            }
+        }
         static public List<Bruker> GetAlleAktiveBrukere()
         {
             using (var context = new Context())

@@ -256,7 +256,7 @@ namespace SysUt14Gr03.Classes
             }
             return tabell;
         }
-        public static Table HentBrukerTabellIProsjektTeamProsjektLeder(List<Bruker> query, List<Team> queryTeam, List<Prosjekt> queryProsjekt)
+        public static Table HentBrukerTabellIProsjektTeamProsjektLeder(List<Bruker> query)
         {
             Table tabell = new Table();
             TableHeaderRow headerRow = new TableHeaderRow();
@@ -296,19 +296,19 @@ namespace SysUt14Gr03.Classes
                 TableCell teamsCell = new TableCell();
                 TableCell prosjekterCell = new TableCell();
 
-             
+            /* 
                 foreach (Team team in queryTeam)
                 {
-                    teamsCell.Text = String.Format("<a href='AdministrasjonAvTeam?team_id={0}'>{1} </a>", team.Team_id, team.Navn);
+                    teamsCell.Text = String.Format("<a href='visProsjekt?team_id={0}'>{1} </a>", team.Team_id, team.Navn);
                 }                    
                 foreach (Prosjekt prosjekt in queryProsjekt)
                  {    
-                    prosjekterCell.Text = String.Format("<a href='AdministrasjonAvProsjekt?prosjekt_id={0}'>{1} </a>", prosjekt.Prosjekt_id, prosjekt.Navn);
+                    prosjekterCell.Text = String.Format("<a href='visProsjekt?prosjekt_id={0}'>{1} </a>", prosjekt.Prosjekt_id, prosjekt.Navn);
                  } 
-
-                forNavnCell.Text = String.Format("<a href='changeUser?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Fornavn);
-                etterNavnCell.Text = String.Format("<a href='changeUser?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Etternavn);
-                brukerNavnCell.Text = String.Format("<a href='changeUser?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Brukernavn);
+                */
+                forNavnCell.Text = String.Format("<a href='visBruker?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Fornavn);
+                etterNavnCell.Text = String.Format("<a href='visBruker?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Etternavn);
+                brukerNavnCell.Text = String.Format("<a href='visBruker?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Brukernavn);
                 epostCell.Text = String.Format(bruker.Epost);
                 IMCell.Text = String.Format(bruker.IM);
 
