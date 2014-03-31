@@ -520,8 +520,17 @@ namespace SysUt14Gr03.Classes
                                  select team).ToList();
                 return teamListe;
             }
-        }           
-
+        }
+        static public List<Team> GetTeamMedList(int team_id)
+        {
+            using (var context = new Context())
+            {
+                var teamListe = (from team in context.Teams
+                                 where team.Team_id == team_id
+                                 select team).ToList<Team>();
+                return teamListe;
+            }
+        }
         public static string GetProsjektNavn(int prosjekt_id)
         {
             using (SqlCommand command = new SqlCommand())
