@@ -18,7 +18,7 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            /* if (Session["loggedIn"] == null)
+             if (Session["loggedIn"] == null)
              {
                  Response.Redirect("Login.aspx", true);
              }
@@ -26,8 +26,7 @@ namespace SysUt14Gr03
              {
                  brukerid = Validator.KonverterTilTall(Session["bruker_id"].ToString());
              }
-             */
-            brukerid = 3;
+         
             if (Validator.SjekkRettighet(brukerid, Konstanter.rettighet.Prosjektleder) && Request.QueryString["prosjekt_id"] != null)
             {
 
