@@ -166,9 +166,9 @@
     <Content Include="Account\OpenAuthProviders.ascx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\RegisterExternalLogin.aspx" />
-    <Content Include="AdministrasjonAvProsjekt.aspx" />
-    <Content Include="AdministrasjonAvTeam.aspx" />
-    <Content Include="AdministrasjonAvTeamBrukere.aspx" />
+    <Content Include="Prosjektleder\AdministrasjonAvProsjekt.aspx" />
+    <Content Include="Prosjektleder\AdministrasjonAvTeam.aspx" />
+    <Content Include="Prosjektleder\AdministrasjonAvTeamBrukere.aspx" />
     <Content Include="AdministratorForside.aspx" />
     <Content Include="AdministrerOppgavegruppe.aspx" />
     <Content Include="AktiverKonto.aspx" />
@@ -193,7 +193,7 @@
     <Content Include="ListboxTest.aspx" />
     <Content Include="MottaOppgave.aspx" />
     <Content Include="Prosjektleder\OpprettOppgave.aspx" />
-    <Content Include="OpprettOppgavegruppe.aspx" />
+    <Content Include="Prosjektleder\OpprettOppgavegruppe.aspx" />
     <Content Include="Prosjektleder\OpprettProsjekt.aspx" />
     <Content Include="Administrator\OversiktBrukereSomAdministrator.aspx" />
     <Content Include="OversiktBrukereSomProsjektleder.aspx" />
@@ -257,7 +257,7 @@
     <Content Include="Timeregistrering.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="VisBruker.aspx" />
-    <Content Include="VisOppgave.aspx" />
+    <Content Include="Prosjektleder\VisOppgave.aspx" />
     <Content Include="VisProsjekt.aspx" />
     <Content Include="VisTeam.aspx" />
     <Content Include="Web.config" />
@@ -312,25 +312,25 @@
     <Compile Include="Account\RegisterExternalLogin.aspx.designer.cs">
       <DependentUpon>RegisterExternalLogin.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AdministrasjonAvProsjekt.aspx.cs">
+    <Compile Include="Prosjektleder\AdministrasjonAvProsjekt.aspx.cs">
       <DependentUpon>AdministrasjonAvProsjekt.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AdministrasjonAvProsjekt.aspx.designer.cs">
+    <Compile Include="Prosjektleder\AdministrasjonAvProsjekt.aspx.designer.cs">
       <DependentUpon>AdministrasjonAvProsjekt.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AdministrasjonAvTeam.aspx.cs">
+    <Compile Include="Prosjektleder\AdministrasjonAvTeam.aspx.cs">
       <DependentUpon>AdministrasjonAvTeam.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AdministrasjonAvTeam.aspx.designer.cs">
+    <Compile Include="Prosjektleder\AdministrasjonAvTeam.aspx.designer.cs">
       <DependentUpon>AdministrasjonAvTeam.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AdministrasjonAvTeamBrukere.aspx.cs">
+    <Compile Include="Prosjektleder\AdministrasjonAvTeamBrukere.aspx.cs">
       <DependentUpon>AdministrasjonAvTeamBrukere.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AdministrasjonAvTeamBrukere.aspx.designer.cs">
+    <Compile Include="Prosjektleder\AdministrasjonAvTeamBrukere.aspx.designer.cs">
       <DependentUpon>AdministrasjonAvTeamBrukere.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdministratorForside.aspx.cs">
@@ -411,11 +411,11 @@
     </Compile>
     <Compile Include="Models\Notifikasjon.cs" />
     <Compile Include="Models\NotifikasjonsType.cs" />
-    <Compile Include="OpprettOppgavegruppe.aspx.cs">
+    <Compile Include="Prosjektleder\OpprettOppgavegruppe.aspx.cs">
       <DependentUpon>OpprettOppgavegruppe.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="OpprettOppgavegruppe.aspx.designer.cs">
+    <Compile Include="Prosjektleder\OpprettOppgavegruppe.aspx.designer.cs">
       <DependentUpon>OpprettOppgavegruppe.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administrator\OversiktBrukereSomAdministrator.aspx.cs">
@@ -721,11 +721,11 @@
     <Compile Include="VisBruker.aspx.designer.cs">
       <DependentUpon>VisBruker.aspx</DependentUpon>
     </Compile>
-    <Compile Include="VisOppgave.aspx.cs">
+    <Compile Include="Prosjektleder\VisOppgave.aspx.cs">
       <DependentUpon>VisOppgave.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="VisOppgave.aspx.designer.cs">
+    <Compile Include="Prosjektleder\VisOppgave.aspx.designer.cs">
       <DependentUpon>VisOppgave.aspx</DependentUpon>
     </Compile>
     <Compile Include="VisProsjekt.aspx.cs">

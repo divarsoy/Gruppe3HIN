@@ -225,17 +225,9 @@ namespace SysUt14Gr03.Classes
         {
             using (var context = new Context())
             {
-                List<Team> teamene = context.Teams.Where(x => x.Team_id == valgtTeam_id).ToList();
-                if (teamene.Count > 0)
-                {
-                    Team team = teamene[0];
-                    return team.Brukere;
-                }
-                else
-                {
-                    List<Bruker> tomListe = new List<Bruker>();
-                    return tomListe;
-                }  
+                List<Bruker> brk = context.Brukere.Where(bruker => bruker.Teams.Any(team => team.Team_id == valgtTeam_id)).ToList();
+                return brk;
+                 
             }
         }
 
@@ -368,8 +360,7 @@ namespace SysUt14Gr03.Classes
         {
             using (var context = new Context())
             {
-                List<Team> allSelectedTeams = context.Teams.Where(x => x.Team_id == teamId).ToList();
-                Team valgtTeam = allSelectedTeams[0];
+                Team valgtTeam = context.Teams.Where(x => x.Team_id == teamId).FirstOrDefault();
                 return valgtTeam;
             }
         }
@@ -586,15 +577,15 @@ namespace SysUt14Gr03.Classes
 
         /* Legger til eller fjerner brukere på et team
         Brukes i AdministrasjonAvTeamBrukere */
-        public static void UpdateBrukerePaaTeam(Team teamAAOppdatere, SysUt14Gr03.Models.Bruker brukerAAOppdatere, int LeggTil1Fjern2)
+        public static void UpdateBrukerePaaTeam(Team teamOppd, SysUt14Gr03.Models.Bruker brukerOppd, int LeggTil1Fjern2)
         {
             using (var context = new Context())
             {
-                Team _teamAAOppdatere = context.Teams.FirstOrDefault(Team => Team.Navn == teamAAOppdatere.Navn);
+                Team _teamOppd = context.Teams.FirstOrDefault(Team => Team.Navn == teamOppd.Navn);
                 if (LeggTil1Fjern2 == 1)
-                    _teamAAOppdatere.Brukere.Add(brukerAAOppdatere);
+                    _teamOppd.Brukere.Add(brukerOppd);
                 else if (LeggTil1Fjern2 == 2)
-                    _teamAAOppdatere.Brukere.Remove(brukerAAOppdatere);
+                    _teamOppd.Brukere.Remove(brukerOppd);
 
                 context.SaveChanges();
             }

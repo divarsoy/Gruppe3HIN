@@ -11,7 +11,7 @@ namespace SysUt14Gr03
 {
     public partial class AdministrasjonAvTeamBrukere : System.Web.UI.Page
     {
-        static int teamId = -1;
+        static int teamId = 2;
         private List<Bruker> team_brukerListe;
         private List<Bruker> brukerListe;
 
@@ -19,51 +19,57 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            team_brukerListe = Queries.GetAlleBrukerePaaTeam(teamId);
-            brukerListe = Queries.GetAlleAktiveBrukere();
-
-            if (Request.QueryString["Team_id"] != null)
+            if (!Page.IsPostBack)
             {
-                teamId = Validator.KonverterTilTall(Request.QueryString["Team_id"]);
-            }
+                team_brukerListe = Queries.GetAlleBrukerePaaTeam(teamId);
+                brukerListe = Queries.GetAlleAktiveBrukere();
 
-            if (teamId != -1)
-            {
-                tb_TeamNavn.Text = "" + (string)Queries.GetTeamById(teamId).Navn;
-            }
-
-            if (cbl_brukere.Items.Count == 0 && teamId != -1)
-            {
-                for (int i = 0; i < brukerListe.Count(); i++)
+                if (Request.QueryString["Team_id"] != null)
                 {
-                    Bruker bruker = brukerListe[i];
-                    cbl_brukere.Items.Add(bruker.Etternavn + ", " + bruker.Fornavn);
+                    teamId = Validator.KonverterTilTall(Request.QueryString["Team_id"]);
+
+                }
+
+                // slå sammen med if over
+                if (teamId != -1)
+                {
+                    tb_TeamNavn.Text = Queries.GetTeamById(teamId).Navn;
+                }
+
+                if (cbl_brukere.Items.Count == 0 && teamId != -1)
+                {
+                    for (int i = 0; i < brukerListe.Count(); i++)
+                    {
+                        Bruker bruker = brukerListe[i];
+                        cbl_brukere.Items.Add(bruker.Etternavn + ", " + bruker.Fornavn);
+                    }
+                }
+
+                if (cbl_TeamBrukere.Items.Count == 0 && teamId != -1)
+                {
+                    for (int i = 0; i < team_brukerListe.Count(); i++)
+                    {
+                        Bruker bruker = team_brukerListe[i];
+                        cbl_TeamBrukere.Items.Add(bruker.Etternavn + ", " + bruker.Fornavn);
+                    }
+                }
+
+                if (teamId == -1)
+                {
+                    bt_leggeTilBruker.Visible = false;
+                    bt_fjerneBruker.Visible = false;
+
                 }
             }
-
-            if (cbl_TeamBrukere.Items.Count == 0 && teamId != -1)
-            {
-                for (int i = 0; i < team_brukerListe.Count(); i++)
-                {
-                    Bruker bruker = team_brukerListe[i];
-                    cbl_TeamBrukere.Items.Add(bruker.Etternavn + ", " + bruker.Fornavn);
-                }
-            }
-
-            if (teamId == -1)
-            {
-                bt_leggeTilBruker.Visible = false;
-                bt_fjerneBruker.Visible = false;
-
-            }
-            
         }
 
         protected void bt_endreTeamNavn_Click(object sender, EventArgs e)
         {
+
+
             using (var context = new Context())
             {
-                Team t = context.Teams.Where(Team => Team.Team_id == teamId).First();
+                Team t = context.Teams.Where(Team => Team.Team_id == teamId).FirstOrDefault();
                 t.Navn = tb_TeamNavn.Text;
                 context.SaveChanges();
             }

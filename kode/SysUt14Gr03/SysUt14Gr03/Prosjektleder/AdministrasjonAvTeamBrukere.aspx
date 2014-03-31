@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Prosjektleder.Master" AutoEventWireup="true" CodeBehind="AdministrasjonAvTeamBrukere.aspx.cs" Inherits="SysUt14Gr03.AdministrasjonAvTeamBrukere" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Prosjektleder.master" AutoEventWireup="true" CodeBehind="AdministrasjonAvTeamBrukere.aspx.cs" Inherits="SysUt14Gr03.AdministrasjonAvTeamBrukere" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
     <div class="container">
@@ -10,7 +10,7 @@
                 <label for="lblEndreTeamNavn">Team-Navn </label>
                 <asp:TextBox ID="tb_TeamNavn" runat="server" Height="22px" Width="146px"></asp:TextBox>
 
-                 <asp:Button ID="bt_edreTeamNavn" CssClass="btn btn-warning" runat="server" Text="Endre Navn" OnClick="bt_fjerneBruker_Click" />     
+                 <asp:Button ID="bt_edreTeamNavn" CssClass="btn btn-warning" runat="server" Text="Endre Navn" OnClick="bt_endreTeamNavn_Click" />     
 
             </div>
             

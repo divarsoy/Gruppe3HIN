@@ -12,7 +12,8 @@ namespace SysUt14Gr03
 {
     public partial class OpprettOppgavegruppe : System.Web.UI.Page
     {
-        private int prosjekt_id = 1;
+        private int prosjekt_id = -1;
+        private int bruker_id = -1;
         private List<Oppgave> oppgaveListe;
         private List<Oppgave> valgteOppgaver;
         private DropDownList ddlPrioritet;
@@ -20,16 +21,55 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            oppgaveListe = Queries.GetAlleAktiveOppgaverForProsjekt(prosjekt_id);
-            valgteOppgaver = new List<Oppgave>();
+            if (Session["bruker_id"] != null)
+                {
+                    bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
+                }
+                else
+                {
+                    Response.Redirect("~/Login.aspx", true);
+                }
 
-            if (!IsPostBack)
-            {
-                BindingSource bindingsource = new BindingSource();
-                bindingsource.DataSource = oppgaveListe;
-                gvwOppgaver.DataSource = bindingsource;
-                gvwOppgaver.DataBind();
-            }
+                if (Request.QueryString["prosjekt_id"] != null)
+                {
+                prosjekt_id = Validator.KonverterTilTall(Request.QueryString["prosjekt_id"]);
+                }
+                else if (Session["prosjekt_id"] != null)
+                {
+                prosjekt_id = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
+                }
+
+                if (prosjekt_id != -1 && bruker_id != -1)
+                {
+                    Prosjekt prosjekt = Queries.GetProsjekt(prosjekt_id);
+
+                    // Sjekk om prosjektleder er prosjektleder for valgt prosjekt
+                    if (prosjekt.Bruker_id == bruker_id)
+                    {
+                        oppgaveListe = Queries.GetAlleAktiveOppgaverForProsjekt(prosjekt_id);
+                        valgteOppgaver = new List<Oppgave>();
+
+                        if (!IsPostBack)
+                        {
+                            BindingSource bindingsource = new BindingSource();
+                            bindingsource.DataSource = oppgaveListe;
+                            gvwOppgaver.DataSource = bindingsource;
+                            gvwOppgaver.DataBind();
+                        }
+                    }
+                    else
+                    {
+                        Session["flashMelding"] = "Du har valgt et ikke gyldig prosjekt, prøv igjen med et annet prosjekt";
+                        Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
+                        Response.Redirect("~/Prosjektleder/DefaultProsjektleder", true);
+                    }
+                }
+                else
+                {
+                    Session["flashMelding"] = "Du må velge et prosjekt!";
+                    Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
+                    Response.Redirect("~/Prosjektleder/DefaultProsjektleder", true);                 
+                }
         }
 
         protected void gvwOppgaver_RowDataBound(object sender, GridViewRowEventArgs e)
