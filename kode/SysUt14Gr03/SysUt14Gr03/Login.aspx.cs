@@ -51,22 +51,22 @@ namespace SysUt14Gr03
                     if (Validator.SjekkRettighet(bruker.Bruker_id, Konstanter.rettighet.Administrator))
                     {
                         Session["rettighet"] = Konstanter.rettighet.Administrator.ToString();
-                        Response.Redirect("~/Administrator/DefaultAdministrator");
+                        Response.Redirect("~/Administrator/DefaultAdministrator", true);
                     }
                     else if (Validator.SjekkRettighet(bruker.Bruker_id, Konstanter.rettighet.Prosjektleder))
                     {
                         Session["rettighet"] = Konstanter.rettighet.Prosjektleder.ToString();
-                        Response.Redirect("~/Prosjektleder/DefaultProsjektleder");
+                        Response.Redirect("~/Prosjektleder/DefaultProsjektleder", true);
                     }
                     else if (Validator.SjekkRettighet(bruker.Bruker_id, Konstanter.rettighet.Teamleder))
                     {
                         Session["rettighet"] = Konstanter.rettighet.Teamleder.ToString();
-                        Response.Redirect("~/Utvikler/DefaultUtvikler");
+                        Response.Redirect("~/Utvikler/DefaultUtvikler", true);
                     }
                     else if (Validator.SjekkRettighet(bruker.Bruker_id, Konstanter.rettighet.Utvikler))
                     {
                         Session["rettighet"] = Konstanter.rettighet.Utvikler.ToString();
-                        Response.Redirect("~/Utvikler/DefaultUtvikler");
+                        Response.Redirect("~/Utvikler/DefaultUtvikler", true);
                     }
                     else
                     {
