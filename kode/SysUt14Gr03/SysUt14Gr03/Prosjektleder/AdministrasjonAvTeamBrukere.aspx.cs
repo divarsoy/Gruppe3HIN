@@ -12,9 +12,9 @@ namespace SysUt14Gr03
     public partial class AdministrasjonAvTeamBrukere : System.Web.UI.Page
     {
         static int teamId = 2;
-        private List<Bruker> team_brukerListe;
+        static List<Bruker> team_brukerListe;
         private List<Bruker> brukerListe;
-
+        static Team tempTeam;
         
 
         protected void Page_Load(object sender, EventArgs e)
@@ -77,14 +77,10 @@ namespace SysUt14Gr03
 
         protected void bt_fjerneBruker_Click(object sender, EventArgs e)
         {
-
-            for (int i = 0; i < cbl_TeamBrukere.Items.Count; i++)
-            {
-                if (cbl_TeamBrukere.Items[i].Selected)
-                {
-                    Queries.UpdateBrukerePaaTeam(Queries.GetTeamById(teamId), team_brukerListe[i], 2);
-                }
-            }
+            tempTeam = Queries.GetTeamById(teamId);
+            Bruker team_brukerL = team_brukerListe[cbl_TeamBrukere.SelectedIndex];
+            Queries.UpdateBrukerePaaTeam(tempTeam, team_brukerL, 2);
+                
             Response.Redirect(Request.RawUrl);  
         } 
 
@@ -94,7 +90,7 @@ namespace SysUt14Gr03
             {
                 if (cbl_TeamBrukere.Items[i].Selected)
                 {
-                    Queries.UpdateBrukerePaaTeam(Queries.GetTeamById(teamId), team_brukerListe[i - 1], 1);
+                    Queries.UpdateBrukerePaaTeam(Queries.GetTeamById(teamId), team_brukerListe[i], 1);
                 }
             }
             Response.Redirect(Request.RawUrl);

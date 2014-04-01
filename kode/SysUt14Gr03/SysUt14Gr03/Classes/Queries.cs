@@ -360,7 +360,7 @@ namespace SysUt14Gr03.Classes
         {
             using (var context = new Context())
             {
-                Team valgtTeam = context.Teams.Where(x => x.Team_id == teamId).FirstOrDefault();
+                Team valgtTeam = context.Teams.Where(Team => Team.Team_id == teamId).FirstOrDefault();
                 return valgtTeam;
             }
         }
@@ -586,7 +586,7 @@ namespace SysUt14Gr03.Classes
 
         /* Legger til eller fjerner brukere på et team
         Brukes i AdministrasjonAvTeamBrukere */
-        public static void UpdateBrukerePaaTeam(Team teamOppd, SysUt14Gr03.Models.Bruker brukerOppd, int LeggTil1Fjern2)
+        public static void UpdateBrukerePaaTeam(Team teamOppd, Bruker brukerOppd, int LeggTil1Fjern2)
         {
             using (var context = new Context())
             {
