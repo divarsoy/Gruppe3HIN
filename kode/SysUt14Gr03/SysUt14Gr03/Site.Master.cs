@@ -85,24 +85,21 @@ namespace SysUt14Gr03
             //if (!IsPostBack)
             //{
 
-
             if (Session["bruker_id"] != null)
             {
                 bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
                 //Response.Redirect("~/Login");
+
+
+                int antallNotifikasjonerInt = Queries.GetNotifikasjon(bruker_id).Count;
+                if (antallNotifikasjonerInt > 0)
+                    antallNotifikasjoner = String.Format("({0})", antallNotifikasjonerInt.ToString());
+
+                HentNotifikasjonsPanel(bruker_id);
+
+                btnLoggin.PostBackUrl = "~/Loggut";
+                btnLoggin.Text = "Logg ut";               
             }
-            else
-            {
-                bruker_id = 2;
-            }
-
-
-
-            int antallNotifikasjonerInt = Queries.GetNotifikasjon(bruker_id).Count;
-            if (antallNotifikasjonerInt > 0)
-                antallNotifikasjoner = String.Format("({0})", antallNotifikasjonerInt.ToString());
-
-            HentNotifikasjonsPanel(bruker_id);
             //}
 
         }
