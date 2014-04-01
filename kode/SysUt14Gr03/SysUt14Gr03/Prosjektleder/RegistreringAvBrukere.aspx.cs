@@ -103,7 +103,6 @@ namespace SysUt14Gr03
 
                 //Rett link tips?
                 ActivationUrl = Server.HtmlEncode("http://malmen.hin.no/SysUt14Gr03/AktiverKonto?Epost=" + email + "&Token=" + token);
-
                 //sendEmail.sendEpost(email, msg, subject, ActivationUrl, null, null);
                 msg = new MailMessage();
                 SmtpClient smtp = new SmtpClient();

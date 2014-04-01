@@ -179,7 +179,17 @@ namespace SysUt14Gr03.Classes
                 return oppgaveListe;
             }
         }
-
+        static public List<Prosjekt> GetProsjektLeder(int prosjekt_id)
+        {
+            using (var context = new Context())
+            {
+                var prosjektListe = (from prosjekt in context.Prosjekter
+                                   where prosjekt.Prosjekt_id == prosjekt_id
+                                   select prosjekt).ToList<Prosjekt>();
+                return prosjektListe;
+            
+            }
+        }
         static public List<Bruker> GetAlleAktiveBrukere()
         {
             using (var context = new Context())
@@ -510,8 +520,17 @@ namespace SysUt14Gr03.Classes
                                  select team).ToList();
                 return teamListe;
             }
-        }           
-
+        }
+        static public List<Team> GetTeamMedList(int team_id)
+        {
+            using (var context = new Context())
+            {
+                var teamListe = (from team in context.Teams
+                                 where team.Team_id == team_id
+                                 select team).ToList<Team>();
+                return teamListe;
+            }
+        }
         public static string GetProsjektNavn(int prosjekt_id)
         {
             using (SqlCommand command = new SqlCommand())

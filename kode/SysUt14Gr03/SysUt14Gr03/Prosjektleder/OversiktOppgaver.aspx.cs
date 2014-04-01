@@ -24,7 +24,7 @@ namespace SysUt14Gr03
                 }
                 else
                 {
-                      Response.Redirect("Login.aspx", true);
+                      Response.Redirect("~/Login.aspx", true);
                 }
 
                 // Sjekker om det er lagt ved et Get parameter "prosjekt_id" og lager en spørring basert på prosjekt_id og bruker_id på innlogget bruker

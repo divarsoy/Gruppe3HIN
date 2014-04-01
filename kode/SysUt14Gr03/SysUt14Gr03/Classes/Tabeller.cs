@@ -46,7 +46,7 @@ namespace SysUt14Gr03.Classes
                 StringBuilder brukereIOppgave = new StringBuilder();
                 foreach (Bruker bruker in oppgave.Brukere)
                 {
-                    brukereIOppgave.Append(String.Format("<a href='HistorikkStattestikk?bruker_id={0}'>{1} </a>", bruker.Bruker_id, bruker.Brukernavn));
+                    brukereIOppgave.Append(String.Format("<a href='VisBruker?bruker_id={0}'>{1} </a>", bruker.Bruker_id, bruker.Brukernavn));
                 }
                 TableRow tRow = new TableRow();
                 TableCell tittelCell = new TableCell();
@@ -57,7 +57,7 @@ namespace SysUt14Gr03.Classes
                 TableCell brukerCell = new TableCell();
                 TableCell kommentarCell = new TableCell();
 
-                tittelCell.Text = String.Format("<a href='ArkiverOppg?oppgave_id={0}'>{1}</a>", oppgave.Oppgave_id.ToString(), oppgave.Tittel);
+                tittelCell.Text = String.Format("<a href='VisOppgave?oppgave_id={0}'>{1}</a>", oppgave.Oppgave_id.ToString(), oppgave.Tittel);
                 statusCell.Text = Queries.GetStatus(oppgave.Status_id).Navn;
                 estimatCell.Text = oppgave.Estimat.ToString();
                 bruktTidCell.Text = oppgave.BruktTid.ToString();
@@ -256,7 +256,7 @@ namespace SysUt14Gr03.Classes
             }
             return tabell;
         }
-        public static Table HentBrukerTabellIProsjektTeamProsjektLeder(List<Bruker> query, List<Team> queryTeam, List<Prosjekt> queryProsjekt)
+        public static Table HentBrukerTabellIProsjektTeamProsjektLeder(List<Bruker> query, List<Prosjekt> queryProsjekt, List<Team> queryTeam)
         {
             Table tabell = new Table();
             TableHeaderRow headerRow = new TableHeaderRow();
@@ -267,6 +267,7 @@ namespace SysUt14Gr03.Classes
             TableHeaderCell IMHeaderCell = new TableHeaderCell();
             TableHeaderCell teamHeaderCell = new TableHeaderCell();
             TableHeaderCell prosjektHeaderCell = new TableHeaderCell();
+            TableHeaderCell endreBrukerCell = new TableHeaderCell();
 
             forNavnHeaderCell.Text = "Fornavn";
             etterNavnHeaderCell.Text = " Etternavn";
@@ -275,6 +276,7 @@ namespace SysUt14Gr03.Classes
             IMHeaderCell.Text = " IM";
             teamHeaderCell.Text = " Team";
             prosjektHeaderCell.Text = " Prosjekter";
+            endreBrukerCell.Text = "Rediger Bruker";
            
             headerRow.Cells.Add(forNavnHeaderCell);
             headerRow.Cells.Add(etterNavnHeaderCell);
@@ -283,6 +285,7 @@ namespace SysUt14Gr03.Classes
             headerRow.Cells.Add(IMHeaderCell);
             headerRow.Cells.Add(teamHeaderCell);
             headerRow.Cells.Add(prosjektHeaderCell);
+            headerRow.Cells.Add(endreBrukerCell);
             tabell.Rows.Add(headerRow);
 
             foreach (Bruker bruker in query)
@@ -295,23 +298,24 @@ namespace SysUt14Gr03.Classes
                 TableCell IMCell = new TableCell();
                 TableCell teamsCell = new TableCell();
                 TableCell prosjekterCell = new TableCell();
+                TableCell endreCell = new TableCell();
 
-             
                 foreach (Team team in queryTeam)
                 {
-                    teamsCell.Text = String.Format("<a href='AdministrasjonAvTeam?team_id={0}'>{1} </a>", team.Team_id, team.Navn);
-                }                    
+                    teamsCell.Text = String.Format("<a href='AdministrajonAvTeamBrukere?team_id={0}'>{1} </a>", team.Team_id, team.Navn);
+                }
                 foreach (Prosjekt prosjekt in queryProsjekt)
-                 {    
+                {
                     prosjekterCell.Text = String.Format("<a href='AdministrasjonAvProsjekt?prosjekt_id={0}'>{1} </a>", prosjekt.Prosjekt_id, prosjekt.Navn);
-                 } 
+                }
 
-                forNavnCell.Text = String.Format("<a href='changeUser?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Fornavn);
-                etterNavnCell.Text = String.Format("<a href='changeUser?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Etternavn);
-                brukerNavnCell.Text = String.Format("<a href='changeUser?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Brukernavn);
+                forNavnCell.Text = String.Format(bruker.Fornavn);
+                etterNavnCell.Text = String.Format(bruker.Etternavn);
+                brukerNavnCell.Text = String.Format(bruker.Brukernavn);
                 epostCell.Text = String.Format(bruker.Epost);
                 IMCell.Text = String.Format(bruker.IM);
-
+                endreCell.Text = String.Format("<a href='EndreBruker?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), "Rediger Bruker");
+                    
                 tRow.Cells.Add(forNavnCell);
                 tRow.Cells.Add(etterNavnCell);
                 tRow.Cells.Add(brukerNavnCell);
@@ -319,7 +323,7 @@ namespace SysUt14Gr03.Classes
                 tRow.Cells.Add(IMCell);
                 tRow.Cells.Add(teamsCell);
                 tRow.Cells.Add(prosjekterCell);
-                
+                tRow.Cells.Add(endreCell);
                 tabell.Rows.Add(tRow);
                 
             }

@@ -11,12 +11,8 @@ namespace SysUt14Gr03
 {
     public partial class OversiktBrukereSomProsjektleder : System.Web.UI.Page
     {
-        private List<Prosjekt> listProsjekt;
-        private List<Bruker> brukerListe;
+   
         private List<Bruker> brukerProsjekt;
-        private List<Bruker> queryTeam = null;
-        private List<Prosjekt> queryProsjekt = null;
-        private List<Team> teams = null;
         private Table table;
         private int brukerid;
 
@@ -32,43 +28,29 @@ namespace SysUt14Gr03
              }
              */
             brukerid = 3;
-            if (Validator.SjekkRettighet(brukerid, Konstanter.rettighet.Prosjektleder))
+            if (Validator.SjekkRettighet(brukerid, Konstanter.rettighet.Prosjektleder) && Request.QueryString["prosjekt_id"] != null)
             {
-                brukerid = 3;
-                listProsjekt = Queries.GetAlleProsjekterForLeder(brukerid);
-                brukerListe = Queries.GetAlleAktiveBrukere();
+
+                int prosjekt_id = Validator.KonverterTilTall(Request.QueryString["prosjekt_id"]);
+           
+
                 if (!IsPostBack)
                 {
-                    for (int i = 0; i < listProsjekt.Count; i++)
-                    {
-                        using (var context = new Context())
-                        {
 
-                            Prosjekt prosjekt = listProsjekt[i];
-                            queryTeam = Queries.GetAlleBrukereIEtTeam((int)prosjekt.Team_id);
+                    Prosjekt pro = Queries.GetProsjekt(prosjekt_id);
+                    brukerProsjekt = Queries.GetAlleBrukereIEtTeam((int)pro.Team_id);
+                    List<Prosjekt> getProsjekt = Queries.GetProsjektLeder(pro.Prosjekt_id);
+                    List<Team> getTeam = Queries.GetTeamMedList((int)pro.Team_id);
+                    table = Tabeller.HentBrukerTabellIProsjektTeamProsjektLeder(brukerProsjekt, getProsjekt, getTeam);
+                    PlaceHolderBrukere.Controls.Add(table);
+                    table.CssClass = "table table-hover";
 
-                            for (int j = 0; j < queryTeam.Count; j++)
-                            {
-                                Bruker bruk = brukerListe[j];
-                                brukerProsjekt = Queries.GetAlleAktiveBrukereID(bruk.Bruker_id);
-                                teams = Queries.GetAlleTeamsEnBrukerErMedI(bruk.Bruker_id);
-                                queryProsjekt = Queries.GetAlleBrukereProsjektTeam((int)prosjekt.Team_id);
-                                table = Tabeller.HentBrukerTabellIProsjektTeamProsjektLeder(brukerProsjekt, teams, queryProsjekt);
-
-                                PlaceHolderBrukere.Controls.Add(table);
-
-                                table.CssClass = "table table-hover";
-                            }
-                        }
-
-                    }
 
                 }
+
             }
-            /*   else
-               {
-                   Response.Redirect("Brukere.aspx");
-               } */
+
         }
     }
 }
+    
