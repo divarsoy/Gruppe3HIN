@@ -31,7 +31,7 @@
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Brukere <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li> <a runat="server" href="~/Prosjektleder/DefaultProsjektleder"><i>Oversikt over Brukere i valgt prosjekt</i></a></li>
+                    <li> <a runat="server" href="~/Prosjektleder/OversiktBrukereSomProsjektleder">Oversikt over Brukere i valgt prosjekt</a></li>
                     <li> <a runat="server" href="~/Prosjektleder/RegistreringAvBrukere">Opprett bruker</a></li>
                 </ul>                  
     </ul>

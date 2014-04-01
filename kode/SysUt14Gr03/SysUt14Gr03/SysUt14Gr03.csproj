@@ -197,7 +197,7 @@
     <Content Include="Prosjektleder\OpprettOppgavegruppe.aspx" />
     <Content Include="Prosjektleder\OpprettProsjekt.aspx" />
     <Content Include="Administrator\OversiktBrukereSomAdministrator.aspx" />
-    <Content Include="OversiktBrukereSomProsjektleder.aspx" />
+    <Content Include="Prosjektleder\OversiktBrukereSomProsjektleder.aspx" />
     <Content Include="OversiktBrukerSomUtvikler.aspx" />
     <Content Include="Prosjektleder\OversiktOppgaver.aspx" />
     <Content Include="Prosjektleder\OversiktOverAlleTeam.aspx" />
@@ -433,11 +433,11 @@
     <Compile Include="Administrator\OversiktBrukereSomAdministrator.aspx.designer.cs">
       <DependentUpon>OversiktBrukereSomAdministrator.aspx</DependentUpon>
     </Compile>
-    <Compile Include="OversiktBrukereSomProsjektleder.aspx.cs">
+    <Compile Include="Prosjektleder\OversiktBrukereSomProsjektleder.aspx.cs">
       <DependentUpon>OversiktBrukereSomProsjektleder.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="OversiktBrukereSomProsjektleder.aspx.designer.cs">
+    <Compile Include="Prosjektleder\OversiktBrukereSomProsjektleder.aspx.designer.cs">
       <DependentUpon>OversiktBrukereSomProsjektleder.aspx</DependentUpon>
     </Compile>
     <Compile Include="OversiktBrukerSomUtvikler.aspx.cs">

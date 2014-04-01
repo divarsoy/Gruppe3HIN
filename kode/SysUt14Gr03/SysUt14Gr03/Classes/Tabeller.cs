@@ -302,7 +302,7 @@ namespace SysUt14Gr03.Classes
 
                 foreach (Team team in queryTeam)
                 {
-                    teamsCell.Text = String.Format("<a href='AdministrajonAvTeamBrukere?team_id={0}'>{1} </a>", team.Team_id, team.Navn);
+                    teamsCell.Text = String.Format("<a href='AdministrasjonAvTeamBrukere?team_id={0}'>{1} </a>", team.Team_id, team.Navn);
                 }
                 foreach (Prosjekt prosjekt in queryProsjekt)
                 {
