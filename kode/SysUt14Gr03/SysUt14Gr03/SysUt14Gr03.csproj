@@ -166,6 +166,7 @@
     <Content Include="Account\OpenAuthProviders.ascx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\RegisterExternalLogin.aspx" />
+    <Content Include="Loggut.aspx" />
     <Content Include="Prosjektleder\AdministrasjonAvProsjekt.aspx" />
     <Content Include="Prosjektleder\AdministrasjonAvTeam.aspx" />
     <Content Include="Prosjektleder\AdministrasjonAvTeamBrukere.aspx" />
@@ -196,7 +197,7 @@
     <Content Include="Prosjektleder\OpprettOppgavegruppe.aspx" />
     <Content Include="Prosjektleder\OpprettProsjekt.aspx" />
     <Content Include="Administrator\OversiktBrukereSomAdministrator.aspx" />
-    <Content Include="OversiktBrukereSomProsjektleder.aspx" />
+    <Content Include="Prosjektleder\OversiktBrukereSomProsjektleder.aspx" />
     <Content Include="OversiktBrukerSomUtvikler.aspx" />
     <Content Include="Prosjektleder\OversiktOppgaver.aspx" />
     <Content Include="Prosjektleder\OversiktOverAlleTeam.aspx" />
@@ -312,6 +313,13 @@
     <Compile Include="Account\RegisterExternalLogin.aspx.designer.cs">
       <DependentUpon>RegisterExternalLogin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Loggut.aspx.cs">
+      <DependentUpon>Loggut.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Loggut.aspx.designer.cs">
+      <DependentUpon>Loggut.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Prosjektleder\AdministrasjonAvProsjekt.aspx.cs">
       <DependentUpon>AdministrasjonAvProsjekt.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -425,11 +433,11 @@
     <Compile Include="Administrator\OversiktBrukereSomAdministrator.aspx.designer.cs">
       <DependentUpon>OversiktBrukereSomAdministrator.aspx</DependentUpon>
     </Compile>
-    <Compile Include="OversiktBrukereSomProsjektleder.aspx.cs">
+    <Compile Include="Prosjektleder\OversiktBrukereSomProsjektleder.aspx.cs">
       <DependentUpon>OversiktBrukereSomProsjektleder.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="OversiktBrukereSomProsjektleder.aspx.designer.cs">
+    <Compile Include="Prosjektleder\OversiktBrukereSomProsjektleder.aspx.designer.cs">
       <DependentUpon>OversiktBrukereSomProsjektleder.aspx</DependentUpon>
     </Compile>
     <Compile Include="OversiktBrukerSomUtvikler.aspx.cs">

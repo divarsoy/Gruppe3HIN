@@ -31,6 +31,15 @@ namespace SysUt14Gr03 {
         protected global::System.Web.UI.WebControls.ContentPlaceHolder MenyTemplate;
         
         /// <summary>
+        /// btnLoggin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnLoggin;
+        
+        /// <summary>
         /// NotifikasjonsPanel control.
         /// </summary>
         /// <remarks>

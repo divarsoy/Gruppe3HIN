@@ -18,20 +18,19 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            /* if (Session["loggedIn"] == null)
+             if (Session["bruker_id"] == null)
              {
-                 Response.Redirect("Login.aspx", true);
+                 Response.Redirect("~/Login.aspx", true);
              }
              else
              {
                  brukerid = Validator.KonverterTilTall(Session["bruker_id"].ToString());
              }
-             */
-            brukerid = 3;
-            if (Validator.SjekkRettighet(brukerid, Konstanter.rettighet.Prosjektleder) && Request.QueryString["prosjekt_id"] != null)
+         
+            if (Validator.SjekkRettighet(brukerid, Konstanter.rettighet.Prosjektleder) && Session["prosjekt_id"] != null)
             {
 
-                int prosjekt_id = Validator.KonverterTilTall(Request.QueryString["prosjekt_id"]);
+                int prosjekt_id = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
            
 
                 if (!IsPostBack)

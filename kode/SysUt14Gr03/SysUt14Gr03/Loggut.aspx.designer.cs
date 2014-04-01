@@ -10,24 +10,15 @@
 namespace SysUt14Gr03 {
     
     
-    public partial class VisProsjekt {
+    public partial class Loggut {
         
         /// <summary>
-        /// prosjektNavn control.
+        /// form1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label prosjektNavn;
-        
-        /// <summary>
-        /// lblInfo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblInfo;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
     }
 }

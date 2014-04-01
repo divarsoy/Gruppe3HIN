@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="SysUt14Gr03.SiteMaster" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Master.cs" Inherits="SysUt14Gr03.SiteMaster" %>
 
 <!DOCTYPE html>
 
@@ -56,22 +56,9 @@
                     
                     <asp:ContentPlaceHolder ID="MenyTemplate" runat="server">
                     </asp:ContentPlaceHolder>
-                    <asp:LoginView runat="server" ViewStateMode="Disabled">
-                        <AnonymousTemplate>
                             <ul class="nav navbar-nav navbar-right">
-                                <!-- <li><a runat="server" href="~/RegistreringAvBrukere">Registrer</a></li> -->
-                                <li><a runat="server" href="~/Login">Logg in</a></li>
+                                <li><asp:LinkButton ID="btnLoggin" runat="server" PostBackUrl="~/Login">Logg inn</asp:LinkButton></li>
                             </ul>
-                        </AnonymousTemplate>
-                        <LoggedInTemplate>
-                            <ul class="nav navbar-nav navbar-right">
-                                <li><a runat="server" href="~/Account/Manage" title="Manage your account">Hello, <%: Context.User.Identity.GetUserName()  %> !</a></li>
-                                <li>
-                                    <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
-                                </li>
-                            </ul>
-                        </LoggedInTemplate>
-                    </asp:LoginView>
                 </div>
             </div>
         </div>
