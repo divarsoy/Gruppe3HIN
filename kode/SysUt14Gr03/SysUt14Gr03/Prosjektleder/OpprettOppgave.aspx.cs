@@ -31,7 +31,8 @@ namespace SysUt14Gr03
                 prosjekt_id = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
 
 
-                if (prosjekt_id != -1 && bruker_id != -1) {
+                if (prosjekt_id != -1 && bruker_id != -1)
+                {
                     Prosjekt prosjekt = Queries.GetProsjekt(prosjekt_id);
 
                     // Sjekk om prosjektleder er prosjektleder for valgt prosjekt
@@ -66,19 +67,7 @@ namespace SysUt14Gr03
                             ddlPrioritet.Items.Add(new ListItem(priori.Navn, priori.Prioritering_id.ToString()));
                         }
                     }
-                    else
-                    {
-                        Session["flashMelding"] = "Du har valgt et ikke gyldig prosjekt, prøv igjen med et annet prosjekt";
-                        Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
-                        Response.Redirect("~/Prosjektleder/DefaultProsjektleder", true);
-                    }
                 }
-                else
-                {
-                    Session["flashMelding"] = "Du må velge et prosjekt!";
-                    Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
-                    Response.Redirect("~/Prosjektleder/DefaultProsjektleder", true);
-                }  
             }
         }
         private void OpprettOppg()
