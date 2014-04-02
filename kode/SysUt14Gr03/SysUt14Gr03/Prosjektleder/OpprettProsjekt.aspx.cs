@@ -48,8 +48,9 @@ namespace SysUt14Gr03
         }
         private void opprettProsjekt()
         {
-
-            if (tbProsjektnavn.Text != String.Empty && tbStart.Text != String.Empty && tbSlutt.Text != String.Empty && dropTeam.SelectedValue == null && ddlBrukere.SelectedValue == null)
+            lblFeil.Visible = false;
+                 
+            if (tbProsjektnavn.Text != String.Empty && tbStart.Text != String.Empty && tbSlutt.Text != String.Empty && dropTeam.SelectedValue != "0" && ddlBrukere.SelectedValue != "0")
             {
 
                 dtStart = Convert.ToDateTime(tbStart.Text);
@@ -67,8 +68,11 @@ namespace SysUt14Gr03
                 this.sendEpost();
             }
 
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('Prosjektet ble lagret');", true);
-                Response.Redirect("OpprettProsjekt.aspx");
+            lblFeil.Visible = true;
+            lblFeil.ForeColor = Color.Green;
+            lblFeil.Text = "Prosjektet ble lagret!";
+            Response.AddHeader("REFRESH", "3;URL=OpprettProsjekt");
+         
             }
             else
             {

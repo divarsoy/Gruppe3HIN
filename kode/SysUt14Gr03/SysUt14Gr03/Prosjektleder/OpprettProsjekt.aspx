@@ -45,7 +45,7 @@
 
 
     <asp:Button ID="btnLagre" CssClass="btn btn-primary" runat="server" Text="Lagre Prosjekt" OnClick="btnLagre_Click" Width="300px" />
-    <asp:Label ID="lblFeil" runat="server" Visible="False"></asp:Label>
+   <p> <asp:Label ID="lblFeil" runat="server" Visible="False"></asp:Label></p>
 
     </div>
 </asp:Content>
