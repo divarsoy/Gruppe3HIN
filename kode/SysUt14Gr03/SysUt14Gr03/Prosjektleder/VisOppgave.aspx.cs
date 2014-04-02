@@ -53,6 +53,7 @@ namespace SysUt14Gr03
 
                     lblNavn.Text = oppgave.Tittel;
                     lblInfo.Text = "User story: " + oppgave.UserStory;
+                    lblInfo.Text += "<br />" + "Oppgave-ID: " + oppgave.Oppgave_id;
                     lblInfo.Text += "<br />" + "Krav: " + oppgave.Krav;
                     lblInfo.Text += "<br />" + "Estimat: " + oppgave.Estimat + " timer";
                     lblInfo.Text += "<br />" + "Resterende tid: " + oppgave.RemainingTime.ToString() + " timer";
