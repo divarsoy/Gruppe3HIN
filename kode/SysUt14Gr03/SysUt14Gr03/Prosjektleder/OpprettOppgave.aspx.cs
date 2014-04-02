@@ -24,23 +24,12 @@ namespace SysUt14Gr03
         {
             if (!IsPostBack)
             {
-                if (Session["bruker_id"] != null)
-                {
-                    bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
-                }
-                else
-                {
-                    Response.Redirect("~/Login.aspx", true);
-                }
+                SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
+                SessionSjekk.sjekkForProsjekt_id();
 
-                if (Request.QueryString["prosjekt_id"] != null)
-                {
-                prosjekt_id = Validator.KonverterTilTall(Request.QueryString["prosjekt_id"]);
-                }
-                else if (Session["prosjekt_id"] != null)
-                {
+                bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
                 prosjekt_id = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
-                }
+
 
                 if (prosjekt_id != -1 && bruker_id != -1) {
                     Prosjekt prosjekt = Queries.GetProsjekt(prosjekt_id);

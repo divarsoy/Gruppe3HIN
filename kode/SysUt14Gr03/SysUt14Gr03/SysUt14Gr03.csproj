@@ -313,6 +313,7 @@
     <Compile Include="Account\RegisterExternalLogin.aspx.designer.cs">
       <DependentUpon>RegisterExternalLogin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Classes\SessionSjekk.cs" />
     <Compile Include="Loggut.aspx.cs">
       <DependentUpon>Loggut.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
