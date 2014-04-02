@@ -17,21 +17,24 @@ namespace SysUt14Gr03
             if (Request.QueryString["Team_id"] != null)
             {
                 teamId = Validator.KonverterTilTall(Request.QueryString["Team_id"]);
+                List<Bruker> query = Queries.GetAlleBrukerePaaTeam(teamId);
+                Team t = Queries.GetTeamById(teamId);
+
+                if (!IsPostBack)
+                {
+                    Table brukerTabell = Tabeller.HentBrukerTabellForTeam(query, t);
+
+                    PlaceHolderTable.Controls.Add(brukerTabell);
+                }
             }
             else
             {
-
+                Label teamIkkeValgt = new Label();
+                teamIkkeValgt.Text = "Team er ikke valgt. Gå tilbake til oversikt over team";
+                PlaceHolderTable.Controls.Add(teamIkkeValgt);
             }
 
-            List<Bruker> query = Queries.GetAlleBrukerePaaTeam(teamId);
-            Team t = Queries.GetTeamById(teamId);
-
-            if (!IsPostBack)
-            {
-                Table brukerTabell = Tabeller.HentBrukerTabellForTeam(query, t);
-
-                PlaceHolderTable.Controls.Add(brukerTabell);
-            }
+            
         }
     }
 }
