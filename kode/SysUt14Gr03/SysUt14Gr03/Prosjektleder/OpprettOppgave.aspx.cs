@@ -112,7 +112,7 @@ namespace SysUt14Gr03
                     Bruker bruk = context.Brukere.Where(b => b.Bruker_id == navn).First();
                     selectedBruker.Add(bruk);
                 }
-
+                
                 var oppgave = new Oppgave
                 {
 
