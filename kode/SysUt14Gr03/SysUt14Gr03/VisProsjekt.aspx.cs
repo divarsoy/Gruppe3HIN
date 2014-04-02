@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -44,6 +45,11 @@ namespace SysUt14Gr03
                     Oppgave oppg = oppgaveProsjekt[i];
                     lblInfo.Text += "<br /><a href=\"visOppgave?oppgave_id=" + oppg.Oppgave_id + "\">" + oppg.Tittel + "</a>";
                 }
+            }
+            else
+            {
+                lblInfo.Text = "Prosjekt finnes ikke";
+                lblInfo.ForeColor = Color.Red;
             }
         }
     }

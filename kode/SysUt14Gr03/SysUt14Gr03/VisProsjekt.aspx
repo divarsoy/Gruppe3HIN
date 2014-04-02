@@ -7,7 +7,7 @@
     <hr />
     <br />
     <h3>
-    <asp:Label CssClass="label" ID="lblInfo" runat="server"></asp:Label>       
+    <asp:Label ID="lblInfo" runat="server"></asp:Label>       
     </h3>
         </div>
 </asp:Content>
