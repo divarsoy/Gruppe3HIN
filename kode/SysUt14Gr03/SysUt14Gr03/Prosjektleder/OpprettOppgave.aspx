@@ -31,6 +31,6 @@
 
   Status<asp:DropDownList ID="ddlStatus" runat="server"></asp:DropDownList>
    <p> Prioritet<asp:DropDownList ID="ddlPrioritet" runat="server"></asp:DropDownList></p>
-    <asp:label id="lblCheck" visible="false" runat="server" ></asp:label>
     <asp:Button ID="btnOpprett" runat="server" OnClick="btnOpprett_Click" Text="Opprett Oppgave" />
+     <p><asp:label id="lblCheck" visible="false" runat="server" ></asp:label></p>
 </asp:Content>

@@ -95,10 +95,9 @@ namespace SysUt14Gr03
         private void OpprettOppg()
         {
             List<Bruker> selectedBruker = new List<Bruker>();
+            lblCheck.Visible = false;
             if (tbKrav.Text != String.Empty && tbTittel.Text != String.Empty && tbBeskrivelse.Text != String.Empty && TbEstimering.Text != String.Empty && tbFrist.Text != String.Empty)
-            {
-
-            
+            {   
             using (var context = new Context())
             {
 
@@ -112,6 +111,7 @@ namespace SysUt14Gr03
                     Bruker bruk = context.Brukere.Where(b => b.Bruker_id == navn).First();
                     selectedBruker.Add(bruk);
                 }
+                prosjekt_id = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
                 
                 var oppgave = new Oppgave
                 {
@@ -133,7 +133,10 @@ namespace SysUt14Gr03
 
                 context.Oppgaver.Add(oppgave);
                 context.SaveChanges();
-                Response.Redirect("OpprettOppgave.aspx");
+                lblCheck.Visible = true;
+                lblCheck.ForeColor = Color.Green;
+                lblCheck.Text = "Oppgave opprettet";
+                Response.AddHeader("REFRESH", "3;URL=OpprettOppgave.aspx");
             }
             }
             else
