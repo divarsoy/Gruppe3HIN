@@ -603,5 +603,15 @@ namespace SysUt14Gr03.Classes
                 context.SaveChanges();
             }
         }
+
+        public static void ArkiverTeam(Team t)
+        {
+            using (var context = new Context())
+            {
+                Team _t = context.Teams.Where(Team => Team.Team_id == t.Team_id).FirstOrDefault();
+                _t.Aktiv = false;
+                context.SaveChanges();
+            }
+        }
     }
 }

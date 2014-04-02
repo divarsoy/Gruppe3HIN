@@ -37,13 +37,15 @@ namespace SysUt14Gr03
 
         protected void bt_arkivereTeam_Click(object sender, EventArgs e)
         {
-            Team valgtTeam = Queries.GetTeamByName(cbl_team.SelectedValue);
-            using (var context = new Context())
+            for (int i = 0; i < cbl_team.Items.Count; i++)
             {
-                Team t = context.Teams.Where(Team => Team.Team_id == valgtTeam.Team_id).FirstOrDefault();
-                t.Aktiv = false;
-                context.SaveChanges();
+                if (cbl_team.Items[i].Selected)
+                {
+                    Team valgtTeam = teamListe[i];
+                    Queries.ArkiverTeam(valgtTeam);
+                }
             }
+           
             Response.Redirect(Request.RawUrl);
         }
 
