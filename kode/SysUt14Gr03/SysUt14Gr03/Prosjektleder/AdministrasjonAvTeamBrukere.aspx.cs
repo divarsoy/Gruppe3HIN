@@ -13,7 +13,7 @@ namespace SysUt14Gr03
     {
         static int teamId = 2;
         static List<Bruker> team_brukerListe;
-        private List<Bruker> brukerListe;
+        static List<Bruker> brukerListe;
         static Team tempTeam;
         
 
@@ -77,20 +77,29 @@ namespace SysUt14Gr03
 
         protected void bt_fjerneBruker_Click(object sender, EventArgs e)
         {
-            tempTeam = Queries.GetTeamById(teamId);
-            Bruker team_brukerL = team_brukerListe[cbl_TeamBrukere.SelectedIndex];
-            Queries.UpdateBrukerePaaTeam(tempTeam, team_brukerL, 2);
+            for (int i = 0; i < cbl_TeamBrukere.Items.Count; i++)
+            {
+                if (cbl_TeamBrukere.Items[i].Selected)
+                {
+                    tempTeam = Queries.GetTeamById(teamId);
+                    Bruker tempBruker = team_brukerListe[i];
+                    Queries.UpdateBrukerePaaTeam(tempTeam, tempBruker, 2);
+                }
+            }
+                
                 
             Response.Redirect(Request.RawUrl);  
         } 
 
         protected void bt_leggeTilBruker_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < cbl_TeamBrukere.Items.Count; i++)
+            for (int i = 0; i < cbl_brukere.Items.Count; i++)
             {
-                if (cbl_TeamBrukere.Items[i].Selected)
+                if (cbl_brukere.Items[i].Selected)
                 {
-                    Queries.UpdateBrukerePaaTeam(Queries.GetTeamById(teamId), team_brukerListe[i], 1);
+                    tempTeam = Queries.GetTeamById(teamId);
+                    Bruker tempBruker = brukerListe[i];
+                    Queries.UpdateBrukerePaaTeam(tempTeam, tempBruker, 1);
                 }
             }
             Response.Redirect(Request.RawUrl);

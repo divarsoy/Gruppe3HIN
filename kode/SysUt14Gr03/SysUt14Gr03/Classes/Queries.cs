@@ -591,10 +591,14 @@ namespace SysUt14Gr03.Classes
             using (var context = new Context())
             {
                 Team _teamOppd = context.Teams.FirstOrDefault(Team => Team.Navn == teamOppd.Navn);
-                if (LeggTil1Fjern2 == 1)
-                    _teamOppd.Brukere.Add(brukerOppd);
+                Bruker _brukerOppd = context.Brukere.Where(Bruker => Bruker.Bruker_id == brukerOppd.Bruker_id).FirstOrDefault();
+                if (LeggTil1Fjern2 == 1) {
+                    _teamOppd.Brukere.Add(_brukerOppd);
+                }
                 else if (LeggTil1Fjern2 == 2)
-                    _teamOppd.Brukere.Remove(brukerOppd);
+                {
+                    _teamOppd.Brukere.Remove(_brukerOppd);
+                }
 
                 context.SaveChanges();
             }

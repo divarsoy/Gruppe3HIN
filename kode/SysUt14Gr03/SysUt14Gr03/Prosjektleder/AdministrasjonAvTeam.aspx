@@ -8,7 +8,7 @@
     <asp:CheckBoxList ID="cbl_team"  runat="server" /> 
         </div>
         <asp:Button ID="bt_endreTeam" CssClass="btn btn-primary" runat="server" Text="Endre Team" OnClick="bt_endreTeam_Click" />
-        <asp:Button ID="bt_arkivereTeam" CssClass="btn btn-danger" runat="server" Text="Arkivere Team" />
+        <asp:Button ID="bt_arkivereTeam" CssClass="btn btn-danger" runat="server" Text="Arkivere Team" OnClick="bt_arkivereTeam_Click" />
         </div>
         <%-- <asp:GridView ID="gridViewProsjekt" runat="server" AutoGenerateColumns="false" DataKeyNames="Team_id" OnRowUpdating="gridViewProsjekt_RowUpdating" OnRowCancelingEdit="gridViewProsjekt_RowCancelingEdit" OnRowEditing="gridViewProsjekt_RowEditing">
         <Columns>

@@ -35,5 +35,17 @@ namespace SysUt14Gr03
             
         }
 
+        protected void bt_arkivereTeam_Click(object sender, EventArgs e)
+        {
+            Team valgtTeam = Queries.GetTeamByName(cbl_team.SelectedValue);
+            using (var context = new Context())
+            {
+                Team t = context.Teams.Where(Team => Team.Team_id == valgtTeam.Team_id).FirstOrDefault();
+                t.Aktiv = false;
+                context.SaveChanges();
+            }
+            Response.Redirect(Request.RawUrl);
+        }
+
     }
 }
