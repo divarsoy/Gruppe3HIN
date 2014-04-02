@@ -89,5 +89,10 @@ namespace SysUt14Gr03
                 InvalidCredentialsMessage.Visible = true;
             }
         }
+
+        protected void btnGlemtPassord_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("lostPassword", true);
+        }
     }
 }
