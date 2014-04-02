@@ -30,7 +30,7 @@ namespace SysUt14Gr03.Classes
                 http.Session["fornavn"] = null;
                 http.Session["brukernavn"] = null;
                 http.Session["loggedIn"] = null;
-                http.Session["flashMelding"] = "Du må være logget inn som administrator for aksessere siden du prøvde å nå";
+                http.Session["flashMelding"] = "Du har ikke korrekte rettighet for aksessere siden du prøvde å nå";
                 http.Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
                 http.Response.Redirect(("~/Login.aspx"), true);
             }
