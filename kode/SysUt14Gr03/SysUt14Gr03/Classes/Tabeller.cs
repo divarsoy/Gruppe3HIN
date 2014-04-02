@@ -151,7 +151,7 @@ namespace SysUt14Gr03.Classes
             brukerNavnHeaderCell.Text = "Brukernavn";
             epostHeaderCell.Text = "Epost";
             IMHeaderCell.Text = "IM";
-            teamNavnCell.Text = String.Format("<a href='VisTeam'>{0}</a>", nesteTeam.Navn);
+            teamNavnCell.Text = String.Format("<a href='VisTeam?Team_id={0}'>{1}</a>", nesteTeam.Team_id.ToString(), nesteTeam.Navn);
                
             teamNavnHeader.Cells.Add(teamNavnCell);
             tabell.Rows.Add(teamNavnHeader);
