@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Prosjektleder.Master" AutoEventWireup="true" CodeBehind="AdministrasjonAvTeam.aspx.cs" Inherits="SysUt14Gr03.AdministrasjonAvTeam" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Prosjektleder.master" AutoEventWireup="true" CodeBehind="AdministrasjonAvTeam.aspx.cs" Inherits="SysUt14Gr03.AdministrasjonAvTeam" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
     <div class="container">
@@ -8,7 +8,7 @@
     <asp:CheckBoxList ID="cbl_team"  runat="server" /> 
         </div>
         <asp:Button ID="bt_endreTeam" CssClass="btn btn-primary" runat="server" Text="Endre Team" OnClick="bt_endreTeam_Click" />
-        <asp:Button ID="bt_arkivereTeam" CssClass="btn btn-danger" runat="server" Text="Arkivere Team" />
+        <asp:Button ID="bt_arkivereTeam" CssClass="btn btn-danger" runat="server" Text="Arkivere Team" OnClick="bt_arkivereTeam_Click" />
         </div>
         <%-- <asp:GridView ID="gridViewProsjekt" runat="server" AutoGenerateColumns="false" DataKeyNames="Team_id" OnRowUpdating="gridViewProsjekt_RowUpdating" OnRowCancelingEdit="gridViewProsjekt_RowCancelingEdit" OnRowEditing="gridViewProsjekt_RowEditing">
         <Columns>

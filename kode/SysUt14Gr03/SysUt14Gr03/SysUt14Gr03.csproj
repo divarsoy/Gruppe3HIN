@@ -166,9 +166,10 @@
     <Content Include="Account\OpenAuthProviders.ascx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\RegisterExternalLogin.aspx" />
-    <Content Include="AdministrasjonAvProsjekt.aspx" />
-    <Content Include="AdministrasjonAvTeam.aspx" />
-    <Content Include="AdministrasjonAvTeamBrukere.aspx" />
+    <Content Include="Loggut.aspx" />
+    <Content Include="Prosjektleder\AdministrasjonAvProsjekt.aspx" />
+    <Content Include="Prosjektleder\AdministrasjonAvTeam.aspx" />
+    <Content Include="Prosjektleder\AdministrasjonAvTeamBrukere.aspx" />
     <Content Include="AdministratorForside.aspx" />
     <Content Include="AdministrerOppgavegruppe.aspx" />
     <Content Include="AktiverKonto.aspx" />
@@ -192,13 +193,13 @@
     <Content Include="KommentarPaOppgave.aspx" />
     <Content Include="ListboxTest.aspx" />
     <Content Include="MottaOppgave.aspx" />
-    <Content Include="OpprettOppgave.aspx" />
-    <Content Include="OpprettOppgavegruppe.aspx" />
+    <Content Include="Prosjektleder\OpprettOppgave.aspx" />
+    <Content Include="Prosjektleder\OpprettOppgavegruppe.aspx" />
     <Content Include="Prosjektleder\OpprettProsjekt.aspx" />
     <Content Include="Administrator\OversiktBrukereSomAdministrator.aspx" />
-    <Content Include="OversiktBrukereSomProsjektleder.aspx" />
+    <Content Include="Prosjektleder\OversiktBrukereSomProsjektleder.aspx" />
     <Content Include="OversiktBrukerSomUtvikler.aspx" />
-    <Content Include="OversiktOppgaver.aspx" />
+    <Content Include="Prosjektleder\OversiktOppgaver.aspx" />
     <Content Include="Prosjektleder\OversiktOverAlleTeam.aspx" />
     <Content Include="OversiktProsjekter.aspx" />
     <Content Include="Prosjektleder\OversiktProsjekterSomProsjektleder.aspx" />
@@ -257,7 +258,7 @@
     <Content Include="Timeregistrering.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="VisBruker.aspx" />
-    <Content Include="VisOppgave.aspx" />
+    <Content Include="Prosjektleder\VisOppgave.aspx" />
     <Content Include="VisProsjekt.aspx" />
     <Content Include="VisTeam.aspx" />
     <Content Include="Web.config" />
@@ -268,6 +269,7 @@
     <Content Include="Site.SysAdm.master" />
     <Content Include="Site.Prosjektleder.master" />
     <Content Include="Site.Utvikler.master" />
+    <Content Include="Site.Morild.master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -311,25 +313,33 @@
     <Compile Include="Account\RegisterExternalLogin.aspx.designer.cs">
       <DependentUpon>RegisterExternalLogin.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AdministrasjonAvProsjekt.aspx.cs">
+    <Compile Include="Classes\SessionSjekk.cs" />
+    <Compile Include="Loggut.aspx.cs">
+      <DependentUpon>Loggut.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Loggut.aspx.designer.cs">
+      <DependentUpon>Loggut.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Prosjektleder\AdministrasjonAvProsjekt.aspx.cs">
       <DependentUpon>AdministrasjonAvProsjekt.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AdministrasjonAvProsjekt.aspx.designer.cs">
+    <Compile Include="Prosjektleder\AdministrasjonAvProsjekt.aspx.designer.cs">
       <DependentUpon>AdministrasjonAvProsjekt.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AdministrasjonAvTeam.aspx.cs">
+    <Compile Include="Prosjektleder\AdministrasjonAvTeam.aspx.cs">
       <DependentUpon>AdministrasjonAvTeam.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AdministrasjonAvTeam.aspx.designer.cs">
+    <Compile Include="Prosjektleder\AdministrasjonAvTeam.aspx.designer.cs">
       <DependentUpon>AdministrasjonAvTeam.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AdministrasjonAvTeamBrukere.aspx.cs">
+    <Compile Include="Prosjektleder\AdministrasjonAvTeamBrukere.aspx.cs">
       <DependentUpon>AdministrasjonAvTeamBrukere.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AdministrasjonAvTeamBrukere.aspx.designer.cs">
+    <Compile Include="Prosjektleder\AdministrasjonAvTeamBrukere.aspx.designer.cs">
       <DependentUpon>AdministrasjonAvTeamBrukere.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdministratorForside.aspx.cs">
@@ -410,11 +420,11 @@
     </Compile>
     <Compile Include="Models\Notifikasjon.cs" />
     <Compile Include="Models\NotifikasjonsType.cs" />
-    <Compile Include="OpprettOppgavegruppe.aspx.cs">
+    <Compile Include="Prosjektleder\OpprettOppgavegruppe.aspx.cs">
       <DependentUpon>OpprettOppgavegruppe.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="OpprettOppgavegruppe.aspx.designer.cs">
+    <Compile Include="Prosjektleder\OpprettOppgavegruppe.aspx.designer.cs">
       <DependentUpon>OpprettOppgavegruppe.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administrator\OversiktBrukereSomAdministrator.aspx.cs">
@@ -424,11 +434,11 @@
     <Compile Include="Administrator\OversiktBrukereSomAdministrator.aspx.designer.cs">
       <DependentUpon>OversiktBrukereSomAdministrator.aspx</DependentUpon>
     </Compile>
-    <Compile Include="OversiktBrukereSomProsjektleder.aspx.cs">
+    <Compile Include="Prosjektleder\OversiktBrukereSomProsjektleder.aspx.cs">
       <DependentUpon>OversiktBrukereSomProsjektleder.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="OversiktBrukereSomProsjektleder.aspx.designer.cs">
+    <Compile Include="Prosjektleder\OversiktBrukereSomProsjektleder.aspx.designer.cs">
       <DependentUpon>OversiktBrukereSomProsjektleder.aspx</DependentUpon>
     </Compile>
     <Compile Include="OversiktBrukerSomUtvikler.aspx.cs">
@@ -501,6 +511,13 @@
     </Compile>
     <Compile Include="Classes\Tabeller.cs" />
     <Compile Include="Classes\Validator.cs" />
+    <Compile Include="Site.Morild.master.cs">
+      <DependentUpon>Site.Morild.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Morild.master.designer.cs">
+      <DependentUpon>Site.Morild.master</DependentUpon>
+    </Compile>
     <Compile Include="Utvikler\DefaultUtvikler.aspx.cs">
       <DependentUpon>DefaultUtvikler.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -560,11 +577,11 @@
     <Compile Include="HistorikkStattestikk.aspx.designer.cs">
       <DependentUpon>HistorikkStattestikk.aspx</DependentUpon>
     </Compile>
-    <Compile Include="OpprettOppgave.aspx.cs">
+    <Compile Include="Prosjektleder\OpprettOppgave.aspx.cs">
       <DependentUpon>OpprettOppgave.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="OpprettOppgave.aspx.designer.cs">
+    <Compile Include="Prosjektleder\OpprettOppgave.aspx.designer.cs">
       <DependentUpon>OpprettOppgave.aspx</DependentUpon>
     </Compile>
     <Compile Include="Prosjektleder\OpprettProsjekt.aspx.cs">
@@ -581,11 +598,11 @@
     <Compile Include="Prosjektleder\OpprettTeam.aspx.designer.cs">
       <DependentUpon>OpprettTeam.aspx</DependentUpon>
     </Compile>
-    <Compile Include="OversiktOppgaver.aspx.cs">
+    <Compile Include="Prosjektleder\OversiktOppgaver.aspx.cs">
       <DependentUpon>OversiktOppgaver.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="OversiktOppgaver.aspx.designer.cs">
+    <Compile Include="Prosjektleder\OversiktOppgaver.aspx.designer.cs">
       <DependentUpon>OversiktOppgaver.aspx</DependentUpon>
     </Compile>
     <Compile Include="PameldingTilOppgave.aspx.cs">
@@ -713,11 +730,11 @@
     <Compile Include="VisBruker.aspx.designer.cs">
       <DependentUpon>VisBruker.aspx</DependentUpon>
     </Compile>
-    <Compile Include="VisOppgave.aspx.cs">
+    <Compile Include="Prosjektleder\VisOppgave.aspx.cs">
       <DependentUpon>VisOppgave.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="VisOppgave.aspx.designer.cs">
+    <Compile Include="Prosjektleder\VisOppgave.aspx.designer.cs">
       <DependentUpon>VisOppgave.aspx</DependentUpon>
     </Compile>
     <Compile Include="VisProsjekt.aspx.cs">

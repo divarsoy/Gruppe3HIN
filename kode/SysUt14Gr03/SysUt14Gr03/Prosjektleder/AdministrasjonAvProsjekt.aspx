@@ -10,6 +10,7 @@
                 </ItemTemplate>          
                 <EditItemTemplate>
                     <asp:TextBox ID="tbProsjektnavn" runat="server" Text='<%#Bind("Navn") %>'></asp:TextBox>
+                    <asp:Label ID="lbProsjektnavn" runat="server" Visible="false" Text='<%#Bind("Prosjekt_id") %>'></asp:Label>
                 </EditItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Prosjektleder">
@@ -23,18 +24,18 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Startdato">
                 <ItemTemplate>
-                    <asp:Label ID="lbStart" runat="server" Text='<%#Bind("Startdato") %>'></asp:Label>
+                    <asp:Label ID="lbStart" runat="server" Text='<%#Bind("Startdato", "{0:dd/MM/yyyy}") %>'></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
-                    <asp:TextBox ID="tbStart" runat="server"  Text='<%#Bind("Startdato") %>'></asp:TextBox>
+                    <asp:TextBox ID="tbStart" runat="server"  Text='<%#Bind("Startdato", "{0:dd/MM/yyyy}") %>'></asp:TextBox>
                 </EditItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Sluttdato">
                 <ItemTemplate>
-                    <asp:Label ID="lbSlutt" runat="server" Text='<%#Bind("Sluttdato") %>'></asp:Label>
+                    <asp:Label ID="lbSlutt" runat="server" Text='<%#Bind("Sluttdato" , "{0:dd/MM/yyyy}") %>'></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
-                    <asp:TextBox ID="tbSlutt" runat="server"  Text='<%#Bind("Sluttdato") %>'></asp:TextBox>
+                    <asp:TextBox ID="tbSlutt" runat="server"  Text='<%#Bind("Sluttdato", "{0:dd/MM/yyyy}") %>'></asp:TextBox>
                 </EditItemTemplate>
             </asp:TemplateField>
             
@@ -57,7 +58,7 @@
                     <asp:CheckBox ID="cboxAktiv" Checked='<%#Bind("Aktiv") %>' runat="server" />
                      </EditItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Gå til team">
+            <asp:TemplateField HeaderText="Endre Team">
                 <ItemTemplate>
                     <asp:HyperLink ID="asp" Text="AdministrasjonAvTeam" runat="server"></asp:HyperLink> 
                 </ItemTemplate>

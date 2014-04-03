@@ -10,15 +10,15 @@
 namespace SysUt14Gr03 {
     
     
-    public partial class VisTeam {
+    public partial class Site_Morild {
         
         /// <summary>
-        /// PlaceHolderTable control.
+        /// MainContent control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder PlaceHolderTable;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
     }
 }

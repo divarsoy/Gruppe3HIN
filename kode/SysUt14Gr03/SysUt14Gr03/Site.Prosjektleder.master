@@ -1,4 +1,9 @@
 ﻿<%@ Master Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Site.Prosjektleder.master.cs" Inherits="SysUt14Gr03.Site_Prosjektleder" %>
+
+<asp:Content ID="Content3" ContentPlaceHolderID="LogoTemplate" runat="server">
+    <a class="navbar-brand" runat="server" href="~/Prosjektleder/DefaultProsjektleder">Morild Data BA</a>
+</asp:Content>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MenyTemplate" runat="server">
 
     
@@ -7,6 +12,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Prosjekter <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li> <a runat="server" href="~/ProsjektLeder/OversiktProsjekterSomProsjektleder">Oversikt over prosjekter</a></li>
+                    <li> <a runat="server" href="~/Prosjektleder/AdministrasjonAvProsjekt">Admininstrasjon av prosjekter</a></li>
                     <li> <a runat="server" href="~/ProsjektLeder/OpprettProsjekt">Opprett Prosjekt</a></li>
                 </ul>                  
     </ul>
@@ -16,7 +22,8 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Team <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li> <a runat="server" href="~/Prosjektleder/OversiktOverAlleTeam">Oversikt over alle Team</a></li>
-                    <li> <a runat="server" href="~/Prosjektleder/OversiktTeam">Oversikt over Team i valgt prosjekt</a></li>
+                    <li> <a runat="server" href="~/Prosjektleder/DefaultProsjektleder"><i>Oversikt over Team i valgt prosjekt</i></a></li>
+                    <li> <a runat="server" href="~/Prosjektleder/AdministrasjonAvTeam">Admininstrasjon av Team</a></li>
                     <li> <a runat="server" href="~/Prosjektleder/OpprettTeam">Opprett Team</a></li>
                 </ul>                  
     </ul>
@@ -24,7 +31,7 @@
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Brukere <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li> <a runat="server" href="~/Prosjektleder/OversiktBrukere">Oversikt over Brukere i valgt prosjekt</a></li>
+                    <li> <a runat="server" href="~/Prosjektleder/OversiktBrukereSomProsjektleder">Oversikt over Brukere i valgt prosjekt</a></li>
                     <li> <a runat="server" href="~/Prosjektleder/RegistreringAvBrukere">Opprett bruker</a></li>
                 </ul>                  
     </ul>
@@ -33,8 +40,10 @@
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Oppgaver <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li> <a runat="server" href="~/OversiktOppgaver">Oversikt over Oppgaver i valgt prosjekt</a></li>
-                    <li> <a runat="server" href="~/OpprettOppgave">Opprett Oppgaver</a></li>
+                    <li> <a runat="server" href="~/Prosjektleder/OversiktOppgaver">Oversikt over Oppgaver i valgt prosjekt</a></li>
+                    <li> <a runat="server" href="~/Prosjektleder/OpprettOppgave">Opprett Oppgave i valgt prosjekt</a></li>
+                    <li> <a runat="server" href="~/Prosjektleder/OpprettOppgavegruppe">Opprett Oppgavegruppe i valgt prosjekt</a></li>
+
                 </ul>                  
     </ul>
 

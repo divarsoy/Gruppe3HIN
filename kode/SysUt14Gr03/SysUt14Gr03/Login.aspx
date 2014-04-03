@@ -31,11 +31,15 @@
             </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
+            <div class="col-sm-offset-2 col-sm-1">
                 <asp:Button CssClass="btn btn-primary" ID="LoginButton" runat="server" Text="Logg inn" OnClick="LoginButton_Click" />
             </div>
+            <div class="col-sm-1">
+                <asp:Button CssClass="btn btn-default" ID="btnGlemtPassord" runat="server" Text="Glemt Passord?" OnClick="btnGlemtPassord_Click"/>
+            </div>
         </div>
- 
+        <div class="clearfix"></div>
+         
         <div class="form-group">
             <asp:Label ID="InvalidCredentialsMessage" runat="server" ForeColor="Red" Text="Feil brukernavn eller passord"
                 Visible="False"></asp:Label> 

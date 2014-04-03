@@ -179,7 +179,17 @@ namespace SysUt14Gr03.Classes
                 return oppgaveListe;
             }
         }
-
+        static public List<Prosjekt> GetProsjektLeder(int prosjekt_id)
+        {
+            using (var context = new Context())
+            {
+                var prosjektListe = (from prosjekt in context.Prosjekter
+                                   where prosjekt.Prosjekt_id == prosjekt_id
+                                   select prosjekt).ToList<Prosjekt>();
+                return prosjektListe;
+            
+            }
+        }
         static public List<Bruker> GetAlleAktiveBrukere()
         {
             using (var context = new Context())
@@ -215,17 +225,9 @@ namespace SysUt14Gr03.Classes
         {
             using (var context = new Context())
             {
-                List<Team> teamene = context.Teams.Where(x => x.Team_id == valgtTeam_id).ToList();
-                if (teamene.Count > 0)
-                {
-                    Team team = teamene[0];
-                    return team.Brukere;
-                }
-                else
-                {
-                    List<Bruker> tomListe = new List<Bruker>();
-                    return tomListe;
-                }  
+                List<Bruker> brk = context.Brukere.Where(bruker => bruker.Teams.Any(team => team.Team_id == valgtTeam_id)).ToList();
+                return brk;
+                 
             }
         }
 
@@ -358,8 +360,7 @@ namespace SysUt14Gr03.Classes
         {
             using (var context = new Context())
             {
-                List<Team> allSelectedTeams = context.Teams.Where(x => x.Team_id == teamId).ToList();
-                Team valgtTeam = allSelectedTeams[0];
+                Team valgtTeam = context.Teams.Where(Team => Team.Team_id == teamId).FirstOrDefault();
                 return valgtTeam;
             }
         }
@@ -407,6 +408,19 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        static public List<Oppgave> GetAlleOppgaverForProsjekt(int _prosjekt_id)
+        {
+            using (var context = new Context())
+            {
+                var oppgaveListe = context.Oppgaver
+                                  .Include("Brukere")
+                                  .Include("Kommentarer")
+                                  .Where(oppgave => oppgave.Prosjekt_id == _prosjekt_id)
+                                  .OrderBy(oppgave => oppgave.Tittel)
+                                  .ToList();
+                return oppgaveListe;
+            }
+        }
         static public List<Oppgave> GetAlleAktiveOppgaverForBruker(int _bruker_id)
         {
             using (var context = new Context())
@@ -506,8 +520,17 @@ namespace SysUt14Gr03.Classes
                                  select team).ToList();
                 return teamListe;
             }
-        }           
-
+        }
+        static public List<Team> GetTeamMedList(int team_id)
+        {
+            using (var context = new Context())
+            {
+                var teamListe = (from team in context.Teams
+                                 where team.Team_id == team_id
+                                 select team).ToList<Team>();
+                return teamListe;
+            }
+        }
         public static string GetProsjektNavn(int prosjekt_id)
         {
             using (SqlCommand command = new SqlCommand())
@@ -563,16 +586,30 @@ namespace SysUt14Gr03.Classes
 
         /* Legger til eller fjerner brukere på et team
         Brukes i AdministrasjonAvTeamBrukere */
-        public static void UpdateBrukerePaaTeam(Team teamAAOppdatere, SysUt14Gr03.Models.Bruker brukerAAOppdatere, int LeggTil1Fjern2)
+        public static void UpdateBrukerePaaTeam(Team teamOppd, Bruker brukerOppd, int LeggTil1Fjern2)
         {
             using (var context = new Context())
             {
-                Team _teamAAOppdatere = context.Teams.FirstOrDefault(Team => Team.Navn == teamAAOppdatere.Navn);
-                if (LeggTil1Fjern2 == 1)
-                    _teamAAOppdatere.Brukere.Add(brukerAAOppdatere);
+                Team _teamOppd = context.Teams.FirstOrDefault(Team => Team.Navn == teamOppd.Navn);
+                Bruker _brukerOppd = context.Brukere.Where(Bruker => Bruker.Bruker_id == brukerOppd.Bruker_id).FirstOrDefault();
+                if (LeggTil1Fjern2 == 1) {
+                    _teamOppd.Brukere.Add(_brukerOppd);
+                }
                 else if (LeggTil1Fjern2 == 2)
-                    _teamAAOppdatere.Brukere.Remove(brukerAAOppdatere);
+                {
+                    _teamOppd.Brukere.Remove(_brukerOppd);
+                }
 
+                context.SaveChanges();
+            }
+        }
+
+        public static void ArkiverTeam(Team t)
+        {
+            using (var context = new Context())
+            {
+                Team _t = context.Teams.Where(Team => Team.Team_id == t.Team_id).FirstOrDefault();
+                _t.Aktiv = false;
                 context.SaveChanges();
             }
         }

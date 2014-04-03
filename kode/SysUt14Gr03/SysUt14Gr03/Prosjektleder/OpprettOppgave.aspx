@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="OpprettOppgave.aspx.cs" Inherits="SysUt14Gr03.OpprettOppgave" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Prosjektleder.master" AutoEventWireup="true" CodeBehind="OpprettOppgave.aspx.cs" Inherits="SysUt14Gr03.OpprettOppgave" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Opprett Oppgave</h2>
     <h3>Prosjekt: </h3><asp:Label ID="lblProsjekt" runat="server"></asp:Label>
@@ -31,6 +31,6 @@
 
   Status<asp:DropDownList ID="ddlStatus" runat="server"></asp:DropDownList>
    <p> Prioritet<asp:DropDownList ID="ddlPrioritet" runat="server"></asp:DropDownList></p>
-    <asp:label id="lblCheck" visible="false" runat="server" ></asp:label>
     <asp:Button ID="btnOpprett" runat="server" OnClick="btnOpprett_Click" Text="Opprett Oppgave" />
+     <p><asp:label id="lblCheck" visible="false" runat="server" ></asp:label></p>
 </asp:Content>

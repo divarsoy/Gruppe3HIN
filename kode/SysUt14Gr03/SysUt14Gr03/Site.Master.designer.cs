@@ -13,6 +13,15 @@ namespace SysUt14Gr03 {
     public partial class SiteMaster {
         
         /// <summary>
+        /// LogoTemplate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder LogoTemplate;
+        
+        /// <summary>
         /// MenyTemplate control.
         /// </summary>
         /// <remarks>
@@ -20,6 +29,15 @@ namespace SysUt14Gr03 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder MenyTemplate;
+        
+        /// <summary>
+        /// btnLoggin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnLoggin;
         
         /// <summary>
         /// NotifikasjonsPanel control.

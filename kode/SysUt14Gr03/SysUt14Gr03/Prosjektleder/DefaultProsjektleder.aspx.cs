@@ -17,6 +17,9 @@ namespace SysUt14Gr03
         protected string Fornavn;
         protected void Page_Load(object sender, EventArgs e)
         {
+            Session["bruker_id"] = 3;
+            Session["Fornavn"] = "Martin";
+
             if (Session["Fornavn"] != null)
             {
                 Fornavn = Session["Fornavn"].ToString();
@@ -25,11 +28,11 @@ namespace SysUt14Gr03
             if (!Page.IsPostBack)
             {
 
+
                 if (Session["bruker_id"] == null)
                 {
 
                     //Response.Redirect("~/Login.aspx", true);
-                    bruker_id = 3;
 
                 }
                 else
