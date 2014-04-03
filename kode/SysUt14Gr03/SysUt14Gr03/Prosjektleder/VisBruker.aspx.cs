@@ -17,17 +17,7 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["loggedIn"] == null)
-            {
-                //   Response.Redirect("Login.aspx", true);
-                innloggetBruker_id = 2;
-            }
-            else
-            {
-                innloggetBruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
-                if (innloggetBruker_id == -1)
-                    Response.Redirect("Login.aspx", true);
-            }
+            SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
 
             if (Request.QueryString["bruker_id"] != null)
             {

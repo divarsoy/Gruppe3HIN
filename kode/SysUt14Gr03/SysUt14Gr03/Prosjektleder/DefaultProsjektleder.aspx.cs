@@ -70,7 +70,7 @@ namespace SysUt14Gr03
                 Session["prosjekt_id"] = prosjekt_id;
                 Prosjekt prosjekt = Queries.GetProsjekt(prosjekt_id);
                 Session["prosjekt_navn"] = prosjekt.Navn;
-                lblValgtProsjekt.Text = String.Format("<h3>Valgt prosjekt er <b>{0}</b></h3>", prosjekt.Navn);
+                lblValgtProsjekt.Text = String.Format("<h4>Valgt prosjekt er <b>{0}</b></h4>", prosjekt.Navn);
                 //Response.Redirect(String.Format("OversiktOppgaver?bruker_id={0}&prosjekt_id={1}", Session["bruker_id"], ListBoxProsjekt.SelectedItem.Value));
             }
         }

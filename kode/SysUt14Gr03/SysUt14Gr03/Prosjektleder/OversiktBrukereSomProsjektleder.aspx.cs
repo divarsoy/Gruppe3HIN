@@ -18,37 +18,23 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
-             if (Session["bruker_id"] == null)
-             {
-                 Response.Redirect("~/Login.aspx", true);
-             }
-             else
-             {
-                 brukerid = Validator.KonverterTilTall(Session["bruker_id"].ToString());
-             }
-         
-            if (Validator.SjekkRettighet(brukerid, Konstanter.rettighet.Prosjektleder) && Session["prosjekt_id"] != null)
+            SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
+            SessionSjekk.sjekkForProsjekt_id();
+
+            brukerid = Validator.KonverterTilTall(Session["bruker_id"].ToString());
+            int prosjekt_id = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
+
+            if (!IsPostBack)
             {
 
-                int prosjekt_id = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
-           
-
-                if (!IsPostBack)
-                {
-
-                    Prosjekt pro = Queries.GetProsjekt(prosjekt_id);
-                    brukerProsjekt = Queries.GetAlleBrukereIEtTeam((int)pro.Team_id);
-                    List<Prosjekt> getProsjekt = Queries.GetProsjektLeder(pro.Prosjekt_id);
-                    List<Team> getTeam = Queries.GetTeamMedList((int)pro.Team_id);
-                    table = Tabeller.HentBrukerTabellIProsjektTeamProsjektLeder(brukerProsjekt, getProsjekt, getTeam);
-                    PlaceHolderBrukere.Controls.Add(table);
-                    table.CssClass = "table table-hover";
-
-
-                }
-
+                Prosjekt pro = Queries.GetProsjekt(prosjekt_id);
+                brukerProsjekt = Queries.GetAlleBrukereIEtTeam((int)pro.Team_id);
+                List<Prosjekt> getProsjekt = Queries.GetProsjektLeder(pro.Prosjekt_id);
+                List<Team> getTeam = Queries.GetTeamMedList((int)pro.Team_id);
+                table = Tabeller.HentBrukerTabellIProsjektTeamProsjektLeder(brukerProsjekt, getProsjekt, getTeam);
+                PlaceHolderBrukere.Controls.Add(table);
+                table.CssClass = "table table-hover";
             }
-
         }
     }
 }

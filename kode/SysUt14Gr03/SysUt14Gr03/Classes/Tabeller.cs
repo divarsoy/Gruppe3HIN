@@ -118,7 +118,7 @@ namespace SysUt14Gr03.Classes
                 startDatoCell.Text = String.Format("{0:dd/MM/yyyy}", prosjekt.StartDato);
                 sluttDatoCell.Text = String.Format("{0:dd/MM/yyyy}", prosjekt.SluttDato);
                 teamCell.Text = String.Format("<a href='AdministrasjonAvTeam?Team_id={0}'>{1}</a>", team.Team_id.ToString(), team.Navn);
-                prosjektlederCell.Text = String.Format("<a href='HistorikkStattestikk?bruker_id={0}'>{1} </a>", bruker.Bruker_id, bruker.ToString());
+                prosjektlederCell.Text = String.Format("<a href='visBruker?bruker_id={0}'>{1} </a>", bruker.Bruker_id, bruker.ToString());
 
                 tRow.Cells.Add(navnCell);
                 tRow.Cells.Add(startDatoCell);
@@ -177,7 +177,7 @@ namespace SysUt14Gr03.Classes
                 forNavnCell.Text = bruker.Fornavn;
 
                 etterNavnCell.Text = bruker.Etternavn;
-                brukerNavnCell.Text = String.Format("<a href='VisBruker'>{0}</a>", bruker.Brukernavn);
+                brukerNavnCell.Text = String.Format("<a href='VisBruker?bruker_id={0}'>{1}</a>", bruker.Bruker_id, bruker.Brukernavn);
                 epostCell.Text = bruker.Epost;
                 IMCell.Text = bruker.IM;
 
@@ -238,9 +238,9 @@ namespace SysUt14Gr03.Classes
                 foreach (Team team in bruker.Teams)
                     teamsCell.Text = team.Navn;
 
-                forNavnCell.Text = String.Format("<a href='HistorikkStattestikk?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Fornavn);               
-                etterNavnCell.Text = String.Format("<a href='HistorikkStattestikk?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Etternavn);
-                brukerNavnCell.Text = String.Format("<a href='HistorikkStattestikk?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Brukernavn);
+                forNavnCell.Text = String.Format("<a href='visBruker?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Fornavn);               
+                etterNavnCell.Text = String.Format("<a href='visBruker?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Etternavn);
+                brukerNavnCell.Text = String.Format("<a href='visBruker?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Brukernavn);
                 epostCell.Text = bruker.Epost;
                 IMCell.Text = bruker.IM;
 
@@ -309,9 +309,9 @@ namespace SysUt14Gr03.Classes
                     prosjekterCell.Text = String.Format("<a href='AdministrasjonAvProsjekt?prosjekt_id={0}'>{1} </a>", prosjekt.Prosjekt_id, prosjekt.Navn);
                 }
 
-                forNavnCell.Text = String.Format(bruker.Fornavn);
-                etterNavnCell.Text = String.Format(bruker.Etternavn);
-                brukerNavnCell.Text = String.Format(bruker.Brukernavn);
+                forNavnCell.Text = String.Format("<a href='visBruker?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Fornavn);
+                etterNavnCell.Text = String.Format("<a href='visBruker?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Etternavn);
+                brukerNavnCell.Text = String.Format("<a href='visBruker?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Brukernavn);
                 epostCell.Text = String.Format(bruker.Epost);
                 IMCell.Text = String.Format(bruker.IM);
                 endreCell.Text = String.Format("<a href='EndreBruker?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), "Rediger Bruker");

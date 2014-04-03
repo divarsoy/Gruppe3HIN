@@ -22,11 +22,11 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
+            SessionSjekk.sjekkForProsjekt_id();
+
             if (!IsPostBack)
             {
-                SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
-                SessionSjekk.sjekkForProsjekt_id();
-
                 bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
                 prosjekt_id = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
 

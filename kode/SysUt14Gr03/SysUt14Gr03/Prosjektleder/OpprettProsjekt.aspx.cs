@@ -23,6 +23,8 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
+
             if (!IsPostBack)
             {
                 teamListe = Queries.GetAlleAktiveTeam();

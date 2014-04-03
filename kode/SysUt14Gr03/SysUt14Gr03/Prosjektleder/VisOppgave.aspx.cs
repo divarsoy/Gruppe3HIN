@@ -17,17 +17,10 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["loggedIn"] == null)
-            {
-                //   Response.Redirect("Login.aspx", true);
-                bruker_id = 2;
-            }
-            else
-            {
-                bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
-                if (bruker_id == -1)
-                    Response.Redirect("Login.aspx", true);
-            }
+            SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
+
+            bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
+
 
             if (Request.QueryString["oppgave_id"] != null)
             {
@@ -47,7 +40,8 @@ namespace SysUt14Gr03
                         btnInviter.Visible = true;
                         btnReturn.Visible = true;
                     }
-                    else {
+                    else
+                    {
                         btnPameld.Visible = true;
                     }
 
@@ -91,7 +85,7 @@ namespace SysUt14Gr03
                             lblKommentarer.Text += "<br />" + kommentarListe[i].Tekst;
                         }
                         lblKommentarer.Visible = true;
-                    }    
+                    }
                 }
                 else
                 {
