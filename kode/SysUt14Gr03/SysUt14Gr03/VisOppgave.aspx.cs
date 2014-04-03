@@ -129,6 +129,7 @@ namespace SysUt14Gr03
 
                     // Gi tilbakemelding
                 }
+                Response.Redirect(Request.RawUrl);
 
             }
         }
