@@ -14,6 +14,7 @@ namespace SysUt14Gr03
         private int bruker_id;
         private int oppgave_id;
         private Oppgave oppgave;
+        private List<Kommentar> kommentarListe;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -76,22 +77,8 @@ namespace SysUt14Gr03
                     //txtInfo.Text = info;
                     lblInfo.Visible = true;
 
-                    List<Kommentar> kommentarListe = Queries.GetAlleKommentarerTilOppgave(oppgave_id);
-                    lblKommentarteller.Text = "Kommentarer (" + kommentarListe.Count + ")";
-                    txtKommentar.Visible = true;
-                    btnKommentar.Visible = true;
-                    lblKommentarteller.Visible = true;
-                    if (kommentarListe.Count > 0)
-                    {
-                        lblKommentarer.Text = "";
-                        for (int i = kommentarListe.Count - 1; i >= 0; i--)
-                        {
-                            lblKommentarer.Text += "<hr /> <a href=\"VisBruker.aspx?bruker_id=" + kommentarListe[i].Bruker.Bruker_id + "\">" + kommentarListe[i].Bruker.IM + "</a>";
-                            lblKommentarer.Text += "<br />" + kommentarListe[i].Opprettet.ToString();
-                            lblKommentarer.Text += "<br />" + kommentarListe[i].Tekst;
-                        }
-                        lblKommentarer.Visible = true;
-                    }    
+                    kommentarListe = Queries.GetAlleKommentarerTilOppgave(oppgave_id);
+                    OppdaterKommentarer();
                 }
                 else
                 {
@@ -128,11 +115,34 @@ namespace SysUt14Gr03
                     context.Kommentarer.Add(kommentar);
                     context.SaveChanges();
 
+                    kommentarListe.Add(kommentar);
+                    OppdaterKommentarer();
+
                     // Gi tilbakemelding
                 }
-                Response.Redirect(Request.RawUrl);
+                // Response.Redirect(Request.RawUrl);
 
             }
+        }
+
+        private void OppdaterKommentarer()
+        {
+            kommentarListe = Queries.GetAlleKommentarerTilOppgave(oppgave_id);
+            lblKommentarteller.Text = "Kommentarer (" + kommentarListe.Count + ")";
+            txtKommentar.Visible = true;
+            btnKommentar.Visible = true;
+            lblKommentarteller.Visible = true;
+            if (kommentarListe.Count > 0)
+            {
+                lblKommentarer.Text = "";
+                for (int i = kommentarListe.Count - 1; i >= 0; i--)
+                {
+                    lblKommentarer.Text += "<hr /> <a href=\"VisBruker.aspx?bruker_id=" + kommentarListe[i].Bruker.Bruker_id + "\">" + kommentarListe[i].Bruker.IM + "</a>";
+                    lblKommentarer.Text += "<br />" + kommentarListe[i].Opprettet.ToString();
+                    lblKommentarer.Text += "<br />" + kommentarListe[i].Tekst;
+                }
+                lblKommentarer.Visible = true;
+            } 
         }
 
         protected void btnPaMeld_Click(object sender, EventArgs e)
