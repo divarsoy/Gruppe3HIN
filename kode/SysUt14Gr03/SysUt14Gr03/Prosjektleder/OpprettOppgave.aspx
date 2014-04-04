@@ -1,20 +1,42 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Prosjektleder.master" AutoEventWireup="true" CodeBehind="OpprettOppgave.aspx.cs" Inherits="SysUt14Gr03.OpprettOppgave" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <h2>Opprett Oppgave</h2>
-    <h3>Prosjekt: </h3><asp:Label ID="lblProsjekt" runat="server"></asp:Label>
-    <p>Tittel: <asp:TextBox ID="tbTittel" runat="server" Height="25px"></asp:TextBox></p>
-    <p> Beskrivelse av oppgave: <asp:TextBox ID="tbBeskrivelse" runat="server" Height="39px" Width="132px"></asp:TextBox></p>
-   <p>Krav: <asp:TextBox ID="tbKrav" runat="server" Height="25px"></asp:TextBox></p>
-    <p> Estimering<asp:TextBox ID="TbEstimering" runat="server" Height="25px" Width="160px"></asp:TextBox></p>
-    <p> <asp:Calendar ID="cal" runat="server" Width="293px"></asp:Calendar>
-    <asp:TextBox ID="tbFrist" runat="server"></asp:TextBox><asp:Button ID="btnSett" runat="server" Text="Sett Tidsfrist" OnClick="btnSett_Click" /></p>
-    <p> Tilgjengelige Brukere<asp:DropDownList ID="ddlBrukere" runat="server"></asp:DropDownList></p>
-    <asp:ListBox ID="lbBrukere" runat="server" Width="157px" Enabled="False"></asp:ListBox>
-    <asp:Label ID="lblFeil" runat="server" Visible="false" Text=""></asp:Label>
-    <asp:Button ID="btnBrukere" Text="Legg Til Brukere" runat="server" OnClick="btnBrukere_Click" />
+
+    <div class ="container">
+        
+        <h1>Opprett Oppgave</h1>
+            
+
+        <div class="form-group">
+            <h3 style="display: inline-block">Prosjekt: <asp:Label ID="lblProsjekt" runat="server"></asp:Label> </h3>     
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-4">
+                    <p style="display: inline-block">
+                        <asp:TextBox ID="tbTittel" CssClass="form-control" runat="server" Height="25px" Width="300px" placeholder="Tittel på oppgave!"></asp:TextBox>
+                        <asp:Textbox ID="tbBeskrivelse" CssClass="form-control" TextMode="MultiLine" runat="server" Height="100px" Width="300px" placeholder="Beskrivelse av oppgaven!"></asp:Textbox>
+                        <asp:TextBox ID="tbKrav" CssClass="form-control" runat="server" Height="25px" Width="300px" placeholder="Krav til oppgaven!"></asp:TextBox>
+                        <asp:TextBox ID="TbEstimering" CssClass="form-control" runat="server" Height="25px" Width="300px" placeholder="Estimering av tid på oppgave!"></asp:TextBox>
+                        &nbsp&nbsp&nbsp<label>Tilgjengelige Brukere</label><asp:DropDownList ID="ddlBrukere" CssClass="form-control" Width="300px" runat="server"></asp:DropDownList>
+                        <asp:ListBox ID="lbBrukere" CssClass="form-control" runat="server" Height="100px" Width="300px" Enabled="False"></asp:ListBox>
+                        <asp:Button ID="btnBrukere" CssClass="btn btn-primary" Text="Legg Til Brukere" runat="server" OnClick="btnBrukere_Click" />
+                        <asp:Label ID="lblFeil" runat="server" Visible="false" Text=""></asp:Label>
+                    </p>
+                </div>
+        
+                <div class="col-md-4">
+                    <asp:Calendar ID="cal" CssClass="form-control" BorderColor="Blue" ShowGridLines="true" NextMonthText="Neste" PrevMonthText="Forrige" TodayDayStyle-BackColor="Blue" TodayDayStyle-ForeColor="White" WeekendDayStyle-ForeColor="Red" runat="server" Width="300px"></asp:Calendar>
+                    <p></p><p></p><p></p>
+                    <asp:TextBox ID="tbFrist" CssClass="form-control" width="280px" runat="server" placeholder="Tidsfrist på oppgave!"></asp:TextBox>
+                    <asp:Button ID="btnSett" CssClass="btn btn-primary" runat="server" Text="Sett Tidsfrist" OnClick="btnSett_Click" />
+                </div>
+            </div>
+        </div>
+
     <h3>Oversikt over oppgaver i prosjektet</h3>
-  
-       <asp:GridView ID="GridViewOppg" AutoGenerateColumns="false" runat="server" CssClass="table">
+        
+       <asp:GridView ID="GridViewOppg" AutoGenerateColumns="false" runat="server" CssClass="table table-striped">
            <Columns>
                <asp:TemplateField HeaderText="Prosjekt">
                    <ItemTemplate>
@@ -29,8 +51,25 @@
            </Columns>
        </asp:GridView>
 
-  Status<asp:DropDownList ID="ddlStatus" runat="server"></asp:DropDownList>
-   <p> Prioritet<asp:DropDownList ID="ddlPrioritet" runat="server"></asp:DropDownList></p>
-    <asp:Button ID="btnOpprett" runat="server" OnClick="btnOpprett_Click" Text="Opprett Oppgave" />
-     <p><asp:label id="lblCheck" visible="false" runat="server" ></asp:label></p>
+        
+
+                
+            
+        <div class="col-sm-2">
+            <label >Status på oppgave</label>
+        </div>
+        <asp:DropDownList ID="ddlStatus" style="display: inline-block" CssClass="form-control" Width="150px" runat="server"></asp:DropDownList>
+            <br />
+        <div class="col-sm-2">
+            <label >Prioritet</label>
+        </div>
+            <asp:DropDownList ID="ddlPrioritet" style="display: inline-block" CssClass="form-control" Width="80px" runat="server"></asp:DropDownList>
+            <br />
+            <asp:Button ID="btnOpprett" CssClass="btn btn-primary" runat="server" OnClick="btnOpprett_Click" Text="Opprett Oppgave" />
+            <asp:label id="lblCheck" visible="false" runat="server" ></asp:label>
+            
+       
+ </div>
+   
+        
 </asp:Content>
