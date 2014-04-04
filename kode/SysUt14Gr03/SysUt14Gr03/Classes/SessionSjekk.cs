@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using SysUt14Gr03.Classes;
+using SysUt14Gr03.Models;
 
 namespace SysUt14Gr03.Classes
 {
@@ -45,6 +46,27 @@ namespace SysUt14Gr03.Classes
                 http.Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
                 http.Response.Redirect(http.Request.UrlReferrer.ToString(), true);
             }
+        }
+
+        static public string findMaster()
+        {
+            HttpContext http = HttpContext.Current;
+            sjekkForBruker_id();
+            int bruker_id = Validator.KonverterTilTall(http.Session["bruker_id"].ToString());
+            Rettighet rettighet = Queries.GetRettighet(bruker_id);
+
+            string master = "";
+
+            if (rettighet.RettighetNavn == Konstanter.rettighet.Administrator.ToString())
+                master = "~/Site.SysAdm.Master";
+            else if (rettighet.RettighetNavn == Konstanter.rettighet.Prosjektleder.ToString())
+                master = "~/Site.Prosjektleder.master";
+            else if (rettighet.RettighetNavn == Konstanter.rettighet.Teamleder.ToString())
+                master = "~/Site.Utvikler.Master";
+            else if (rettighet.RettighetNavn == Konstanter.rettighet.Utvikler.ToString())
+                master = "~/Site.Utvikler.Master";
+
+            return master;
         }
 
         /*

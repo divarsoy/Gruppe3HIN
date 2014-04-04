@@ -1,10 +1,13 @@
 ﻿<%@ Master Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Site.SysAdm.master.cs" Inherits="SysUt14Gr03.Site_SysAdm" %>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="LogoTemplate" runat="server">
+    <asp:ContentPlaceHolder ID="LogoTemplate" runat="server"></asp:ContentPlaceHolder>
+
     <a class="navbar-brand" runat="server" href="~/Administrator/DefaultAdministrator">Morild Data BA</a>
 </asp:Content>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MenyTemplate" runat="server">
+    <asp:ContentPlaceHolder ID="MenyTemplate" runat="server"></asp:ContentPlaceHolder>
 
     <ul class="nav navbar-nav">
 
@@ -12,12 +15,11 @@
         <li><a id="Adm2" runat="server" href="~/Administrator/OversiktBrukereSomAdministrator">Oversikt Over Brukere</a></li>
         <li><a id="Adm3" runat="server" href="~/Administrator/EndreBrukerinformasjonSomAdministrator">Administrere Brukere</a></li>
         <li><a id="Adm4" runat="server" href="~/Administrator/Rettigheter">Administrere Rettigheter</a></li>
-
+        <li><a id="Adm5" runat="server" href="~/EpostPreferanser">E-Post Varsler</a></li>
     </ul>
 
 </asp:Content>
 
-<asp:Content ID= "Content2" ContentPlaceHolderID="MainContentTemplate" runat="server">
-                <asp:ContentPlaceHolder ID="MainContent" runat="server">
-            </asp:ContentPlaceHolder>
+<asp:Content ID= "Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
 </asp:Content>

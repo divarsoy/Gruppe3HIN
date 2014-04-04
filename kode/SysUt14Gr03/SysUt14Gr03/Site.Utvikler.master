@@ -1,11 +1,12 @@
 ﻿<%@ Master Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Site.Utvikler.master.cs" Inherits="SysUt14Gr03.Site_Utvikler" %>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="LogoTemplate" runat="server">
+    <asp:ContentPlaceHolder ID="LogoTemplate" runat="server"></asp:ContentPlaceHolder>
     <a class="navbar-brand" runat="server" href="~/Utvikler/DefaultUtvikler">Morild Data BA</a>
 </asp:Content>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MenyTemplate" runat="server">
-
+<asp:ContentPlaceHolder ID="MenyTemplate" runat="server"></asp:ContentPlaceHolder>
     <ul class="nav navbar-nav">
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Prosjekter <b class="caret"></b></a>
@@ -26,14 +27,13 @@
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Innstillinger <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li> <a runat="server" href="~/Utvikler/EpostPreferanser">E-Post Varsler</a></li>
+                    <li> <a runat="server" href="~/EpostPreferanser">E-Post Varsler</a></li>
                 </ul> 
     </ul>
 
 
 </asp:Content>
 
-<asp:Content ID= "Content2" ContentPlaceHolderID="MainContentTemplate" runat="server">
-                <asp:ContentPlaceHolder ID="MainContent" runat="server">
-            </asp:ContentPlaceHolder>
+<asp:Content ID= "Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
 </asp:Content>
