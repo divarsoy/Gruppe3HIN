@@ -14,7 +14,7 @@ namespace SysUt14Gr03
     {
         private List<Kommentar> kommentarList;
         //hardkodet brukerid siden det er bare den brukeren som har kommentert
-        private int bruker_id = 1;
+        private int bruker_id = 2;
         private int komm_id;
         private int oppg_id;
         protected void Page_Load(object sender, EventArgs e)

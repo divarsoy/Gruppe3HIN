@@ -179,6 +179,18 @@ namespace SysUt14Gr03.Classes
                 return oppgaveListe;
             }
         }
+
+        static public List<Logg> GetLoggForBruker(int bruker_id)
+        {
+            using (var context = new Context())
+            {
+                var loggListe = context.Logger
+                                    .Where(l => l.bruker_id == bruker_id)
+                                    .ToList();
+                return loggListe;
+            }
+        }
+        
         static public List<Prosjekt> GetProsjektLeder(int prosjekt_id)
         {
             using (var context = new Context())
@@ -240,6 +252,36 @@ namespace SysUt14Gr03.Classes
                                      where prosjekter.Aktiv == true
                                      select prosjekter).ToList<Prosjekt>();
                 return prosjektListe;
+
+            }
+        }
+
+        static public List<Oppgave> GetAllePabegynteOppgaverForBruker(int bruker_id)
+        {
+            using (var context = new Context())
+            {
+                var oppgaveListe = context.Oppgaver
+                                 .Include("Brukere")
+                                 .Where(oppgave => oppgave.Brukere.Any(bruker => bruker.Bruker_id == bruker_id))
+                                 .Where(oppgave => oppgave.Status_id == 2)
+                                 .OrderBy(oppgave => oppgave.Tittel)
+                                 .ToList();
+                return oppgaveListe;
+
+            }
+        }
+
+        static public List<Oppgave> GetAlleFerdigeOppgaverForBruker(int bruker_id)
+        {
+            using (var context = new Context())
+            {
+                var oppgaveListe = context.Oppgaver
+                                 .Include("Brukere")
+                                 .Where(oppgave => oppgave.Brukere.Any(bruker => bruker.Bruker_id == bruker_id))
+                                 .Where(oppgave => oppgave.Status_id == 3)
+                                 .OrderBy(oppgave => oppgave.Tittel)
+                                 .ToList();
+                return oppgaveListe;
 
             }
         }
