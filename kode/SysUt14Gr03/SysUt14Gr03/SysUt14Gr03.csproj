@@ -167,6 +167,7 @@
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\RegisterExternalLogin.aspx" />
     <Content Include="Loggut.aspx" />
+    <Content Include="ManuellTimeregistrering.aspx" />
     <Content Include="Prosjektleder\AdministrasjonAvProsjekt.aspx" />
     <Content Include="Prosjektleder\AdministrasjonAvTeam.aspx" />
     <Content Include="Prosjektleder\AdministrasjonAvTeamBrukere.aspx" />
@@ -320,6 +321,13 @@
     </Compile>
     <Compile Include="Loggut.aspx.designer.cs">
       <DependentUpon>Loggut.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManuellTimeregistrering.aspx.cs">
+      <DependentUpon>ManuellTimeregistrering.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManuellTimeregistrering.aspx.designer.cs">
+      <DependentUpon>ManuellTimeregistrering.aspx</DependentUpon>
     </Compile>
     <Compile Include="Prosjektleder\AdministrasjonAvProsjekt.aspx.cs">
       <DependentUpon>AdministrasjonAvProsjekt.aspx</DependentUpon>
