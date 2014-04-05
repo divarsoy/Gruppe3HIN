@@ -22,7 +22,7 @@
 
 
     <br />
-    <asp:Button ID="btnLagre" runat="server" OnClick="btnLagre_Click" Text="Lagre timer" />
+    <asp:Button ID="btnLagre" runat="server" OnClick="btnLagre_Click" Text="Lagre timer"/>
 
 
     <asp:Label ID="lblTest" runat="server" Text="Label"></asp:Label>
