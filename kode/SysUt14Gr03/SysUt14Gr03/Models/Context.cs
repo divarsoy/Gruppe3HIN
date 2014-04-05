@@ -11,7 +11,6 @@ namespace SysUt14Gr03.Models
 
         public DbSet<Bruker> Brukere { get; set; }
         public DbSet<BrukerPreferanse> BrukerPreferanser { get; set; }
-        public DbSet<Gruppe> Grupper { get; set; }
         public DbSet<Kommentar> Kommentarer { get; set; }
         public DbSet<Logg> Logger { get; set; }
         public DbSet<Moete> Moeter { get; set; }
@@ -24,6 +23,7 @@ namespace SysUt14Gr03.Models
         public DbSet<Team> Teams { get; set; }
         public DbSet<Notifikasjon> Notifikasjoner { get; set; }
         public DbSet<NotifikasjonsType> NotifikasjonsType { get; set; }
+        public DbSet<Time> Timer { get; set; }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -40,16 +40,6 @@ namespace SysUt14Gr03.Models
                     m.ToTable("BrukerTeams");
                 });
 
-            // Mange til mange forhold Teams <=> Grupper
-            modelBuilder.Entity<Team>()
-                .HasMany(t => t.Grupper)
-                .WithMany(t => t.Teams)
-                .Map(m =>
-                {
-                    m.MapLeftKey("Gruppe_id");
-                    m.MapRightKey("Team_id");
-                    m.ToTable("GruppeTeams");
-                });
 
             // Mange til mange forhold Moeter <=> Brukere
             modelBuilder.Entity<Bruker>()
@@ -72,7 +62,7 @@ namespace SysUt14Gr03.Models
                     m.MapRightKey("Bruker_id");
                     m.ToTable("BrukerOppgaver");
                 });
-
+            // Mange til mange forhold Brukere <=> Rettigheter
             modelBuilder.Entity<Rettighet>()
                 .HasMany(t => t.Brukere)
                 .WithMany(t => t.Rettigheter)
