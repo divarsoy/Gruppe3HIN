@@ -39,8 +39,8 @@ namespace SysUt14Gr03
                     
                     if (isBruker)
                     {
-                        lblInfo.Text += "<h3>Statestikk</h3>";
-                        lblOppgaver.Text += "<hr /><h4>Påbegynte oppgaver:</h4>";
+                        lblOppgaver.Text += "<h2>Statestikk</h2>";
+                        lblOppgaver.Text += "<h4>Påbegynte oppgaver:</h4>";
                         // Venter på timeregistrering for mer data..
                         foreach (Oppgave oppgave in oppgaveListe)
                         {
@@ -51,10 +51,9 @@ namespace SysUt14Gr03
                         lblKommentarer.Text += "<br /><h4>Team:</h4>";
                         foreach (Team team in teamListe)
                         {
-                            lblKommentarer.Text += "<br /><a href=\"VisTeam.aspx?team_id=" + team.Team_id + "\">" + team.Navn + "</a>";
+                            lblKommentarer.Text += "<a href=\"VisTeam.aspx?team_id=" + team.Team_id + "\">" + team.Navn + "</a><br />";
                         }
 
-                        lblKommentarer.Text += "<hr />";
                         lblKommentarer.Text += "<h3>Min aktivitet</h3>";                     
                         List<Kommentar> kommentarListe = Queries.GetAlleKommentarTilBruker(bruker_id);
                         lblKommentarer.Text += "<h4>Mine kommentarer</h4>";
@@ -65,7 +64,6 @@ namespace SysUt14Gr03
 
                         }
 
-                        lblLogg.Text += "<hr />";
                         lblLogg.Text += "<h3>Historikk</h3>";
                         // Venter på datofelt for mer data..
                         List<Logg> loggListe = Queries.GetLoggForBruker(bruker_id);
@@ -83,7 +81,6 @@ namespace SysUt14Gr03
 
                         }
 
-                        lblPrefs.Text += "<hr />";
                         lblPrefs.Text += "<h3>Mine instillinger</h3>";
 
                         BrukerPreferanse brukerPrefs = Queries.GetEpostPreferanser(bruker_id);
