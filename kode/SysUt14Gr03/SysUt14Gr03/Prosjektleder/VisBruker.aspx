@@ -16,12 +16,13 @@
       
             <asp:Label ID="lblKommentarer" runat="server" Visible="False"></asp:Label>
  <hr />
+            <asp:Label ID="lblLogg" runat="server" Visible="False"></asp:Label>
         <div class="listboxTest">
             <asp:ListBox ID="lsbKommentarer" CssClass="form-control" Height="100px" Width="500px" AutoPostBack="True" runat="server" Visible="False" OnSelectedIndexChanged="lsbKommentarer_SelectedIndexChanged"></asp:ListBox>
         </div>
 
-            <asp:Label ID="lblLogg" runat="server" Visible="False"></asp:Label>
-
+            
+            <asp:Label ID="lblHistorikk" runat="server"></asp:Label>
         <div class="listboxTest">
             <asp:ListBox ID="lsbLogg" CssClass="form-control" Height="100px" Width="500px" runat="server" Visible="False"></asp:ListBox>
         </div>
@@ -31,7 +32,7 @@
         <div class="listboxTest">
             <asp:ListBox ID="lsbFFullfort" CssClass="form-control" Height="100px" Width="500px" runat="server" Visible="False"></asp:ListBox>
         </div>
-
+            <hr />
             <asp:Label ID="lblPrefs" runat="server" Visible="False"></asp:Label>
             <br />
             <asp:Button ID="btnPrefs" CssClass="btn btn-primary" runat="server" OnClick="btnPrefs_Click" Text="Endre instillinger" Visible="False"/>

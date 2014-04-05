@@ -70,10 +70,18 @@
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
-            <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - Gruppe 3 "Blå Himmel"</p>
-            </footer>
-        </div>
+            
+            
+           
+      </div>
+
+        
     </form>
+    <div class="navbar navbar-inverse navbar-fixed-bottom">
+            <div class="container">
+                <p class="navbar-text">&copy; <%: DateTime.Now.Year %> - Gruppe 3 "Blå Himmel"</p>
+            </div>
+        </div>
+    <div class="footerPadding"></div>
 </body>
 </html>

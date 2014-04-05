@@ -54,7 +54,7 @@ namespace SysUt14Gr03
                             lblKommentarer.Text += "<a href=\"VisTeam.aspx?team_id=" + team.Team_id + "\">" + team.Navn + "</a><br />";
                         }
 
-                        lblLogg.Text += "<h3>Min aktivitet</h3>";                     
+                        lblLogg.Text += "<h2>Min aktivitet</h2>";                     
                         List<Kommentar> kommentarListe = Queries.GetAlleKommentarTilBruker(bruker_id);
                         lblLogg.Text += "<h4>Mine kommentarer</h4>";
                         foreach (Kommentar kommentar in kommentarListe)
@@ -64,7 +64,7 @@ namespace SysUt14Gr03
 
                         }
 
-                        lblLogg.Text += "<h3>Historikk</h3>";
+                        lblHistorikk.Text += "<h4>Historikk</h4>";
                         // Venter på datofelt for mer data..
                         List<Logg> loggListe = Queries.GetLoggForBruker(bruker_id);
                         foreach (Logg logg in loggListe)
@@ -81,20 +81,20 @@ namespace SysUt14Gr03
 
                         }
 
-                        lblPrefs.Text += "<h3>Mine instillinger</h3>";
+                        lblPrefs.Text += "<h2>Mine instillinger</h2>";
 
                         BrukerPreferanse brukerPrefs = Queries.GetEpostPreferanser(bruker_id);
 
                         if (brukerPrefs != null)
                         {
                             // Setter valgte verdier
-                            lblPrefs.Text += "<br /> Varsle meg på e-post når jeg blir...";
+                            lblPrefs.Text += " Varsle meg på e-post når jeg blir...<br />";
                             lblPrefs.Text += "<br />" + " lagt til på team: " + (brukerPrefs.EpostTeam ? "Ja" : "Nei");
                             lblPrefs.Text += "<br />" + " tildelt oppgave: " + (brukerPrefs.EpostOppgave ? "Ja" : "Nei");
                             lblPrefs.Text += "<br />" + " nevnt i kommentar: " + (brukerPrefs.EpostKommentar ? "Ja" : "Nei");
                             lblPrefs.Text += "<br />" + " tildelt en tidsfrist: " + (brukerPrefs.EpostTidsfrist ? "Ja" : "Nei");
                             lblPrefs.Text += "<br />" + " noe med rapporter..: " + (brukerPrefs.EpostRapport ? "Ja" : "Nei");
-
+                            lblPrefs.Text += "<br />";
                         }
                     }
                     
