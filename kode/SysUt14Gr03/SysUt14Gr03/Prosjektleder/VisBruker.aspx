@@ -13,9 +13,9 @@
         <div class="listboxTest">
             <asp:ListBox ID="lsbOppgaver" CssClass="form-control" Height="100px" Width="500px" AutoPostBack="True" runat="server" Visible="False" OnSelectedIndexChanged="lsbOppgaver_SelectedIndexChanged" ></asp:ListBox>
         </div>
-       
+      
             <asp:Label ID="lblKommentarer" runat="server" Visible="False"></asp:Label>
-
+ <hr />
         <div class="listboxTest">
             <asp:ListBox ID="lsbKommentarer" CssClass="form-control" Height="100px" Width="500px" AutoPostBack="True" runat="server" Visible="False" OnSelectedIndexChanged="lsbKommentarer_SelectedIndexChanged"></asp:ListBox>
         </div>

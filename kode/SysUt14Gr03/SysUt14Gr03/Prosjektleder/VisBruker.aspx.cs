@@ -54,9 +54,9 @@ namespace SysUt14Gr03
                             lblKommentarer.Text += "<a href=\"VisTeam.aspx?team_id=" + team.Team_id + "\">" + team.Navn + "</a><br />";
                         }
 
-                        lblKommentarer.Text += "<h3>Min aktivitet</h3>";                     
+                        lblLogg.Text += "<h3>Min aktivitet</h3>";                     
                         List<Kommentar> kommentarListe = Queries.GetAlleKommentarTilBruker(bruker_id);
-                        lblKommentarer.Text += "<h4>Mine kommentarer</h4>";
+                        lblLogg.Text += "<h4>Mine kommentarer</h4>";
                         foreach (Kommentar kommentar in kommentarListe)
                         {
                             lsbKommentarer.Items.Add(new ListItem(kommentar.Opprettet + ": " + kommentar.Tekst, "VisOppgave.aspx?oppgave_id="
