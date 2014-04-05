@@ -478,18 +478,6 @@ namespace SysUt14Gr03.Classes
             }
         }
 
-        static public List<Gruppe> GetAlleAktiveGrupper()
-        {
-            using (var context = new Context())
-            {
-                // teams = context.Teams.Include(x => x.).ToList();
-                var gruppeListe = (from grupper in context.Grupper
-                                 where grupper.Aktiv == true
-                                 select grupper).ToList<Gruppe>();
-                return gruppeListe;
-
-            }
-        }
 
         static public List<Bruker> GetAlleBrukereIEtTeam(int _team_id)
         {

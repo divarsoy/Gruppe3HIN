@@ -35,7 +35,7 @@ namespace SysUt14Gr03
                     lblNavn.Text = bruker.ToString();
                     lblInfo.Text = "Brukernavn: " + bruker.Brukernavn;
                     lblInfo.Text += "<br />" + "Epost: <a href=\"mailto:" + bruker.Epost + "\">" + bruker.Epost + "</a>";
-                    lblInfo.Text += "<br />Ble med: " + bruker.opprettet.ToShortDateString();
+                    lblInfo.Text += "<br />Ble med: " + bruker.Opprettet.ToShortDateString();
                     
                     if (isBruker)
                     {

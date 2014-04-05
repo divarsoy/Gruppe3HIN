@@ -321,6 +321,7 @@
     <Compile Include="Loggut.aspx.designer.cs">
       <DependentUpon>Loggut.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Time.cs" />
     <Compile Include="Prosjektleder\AdministrasjonAvProsjekt.aspx.cs">
       <DependentUpon>AdministrasjonAvProsjekt.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -651,7 +652,6 @@
       <DependentUpon>lostPassword.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\BrukerPreferanse.cs" />
-    <Compile Include="Models\Gruppe.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Kommentar.cs" />
     <Compile Include="Models\Logg.cs" />

@@ -102,7 +102,8 @@ namespace SysUt14Gr03.Migrations
                     Token = "Må generere Token!",
                     Aktivert = true,
                     Aktiv = true,
-                    opprettet = DateTime.Now,
+                    Opprettet = DateTime.Now.AddDays(-60),
+                    SistInnlogget = DateTime.Now.AddDays(-2),
                     BrukerPreferanser = new List<BrukerPreferanse>(),
                     Rettigheter = new List<Rettighet>(),
                     Moeter = new List<Moete>(),
@@ -123,7 +124,8 @@ namespace SysUt14Gr03.Migrations
                     Token = "Må generere Token!",
                     Aktivert = true,
                     Aktiv = true,
-                    opprettet = DateTime.Now,
+                    Opprettet = DateTime.Now.AddDays(-50),
+                    SistInnlogget = DateTime.Now.AddDays(-1),
                     BrukerPreferanser = new List<BrukerPreferanse>(),
                     Rettigheter = new List<Rettighet>(),
                     Moeter = new List<Moete>(),
@@ -144,7 +146,8 @@ namespace SysUt14Gr03.Migrations
                     Token = "Må generere Token!",
                     Aktivert = true,
                     Aktiv = true,
-                    opprettet = DateTime.Now,
+                    Opprettet = DateTime.Now.AddDays(-40),
+                    SistInnlogget = DateTime.Now.AddHours(-3),
                     BrukerPreferanser = new List<BrukerPreferanse>(),
                     Rettigheter = new List<Rettighet>(),
                     Moeter = new List<Moete>(),
@@ -165,7 +168,8 @@ namespace SysUt14Gr03.Migrations
                     Token = "Må generere Token!",
                     Aktivert = true,
                     Aktiv = true,
-                    opprettet = DateTime.Now,
+                    Opprettet = DateTime.Now.AddDays(-30),
+                    SistInnlogget = DateTime.Now.AddHours(-8),
                     BrukerPreferanser = new List<BrukerPreferanse>(),
                     Rettigheter = new List<Rettighet>(),
                     Moeter = new List<Moete>(),
@@ -186,7 +190,8 @@ namespace SysUt14Gr03.Migrations
                     Token = "Må generere Token!",
                     Aktivert = true,
                     Aktiv = true,
-                    opprettet = DateTime.Now,
+                    Opprettet = DateTime.Now.AddDays(-20),
+                    SistInnlogget = DateTime.Now.AddHours(-6),
                     BrukerPreferanser = new List<BrukerPreferanse>(),
                     Rettigheter = new List<Rettighet>(),
                     Moeter = new List<Moete>(),
@@ -207,7 +212,8 @@ namespace SysUt14Gr03.Migrations
                     Token = "Må generere Token!",
                     Aktivert = true,
                     Aktiv = true,
-                    opprettet = DateTime.Now,
+                    Opprettet = DateTime.Now.AddDays(-15),
+                    SistInnlogget = DateTime.Now.AddHours(-1),
                     BrukerPreferanser = new List<BrukerPreferanse>(),
                     Rettigheter = new List<Rettighet>(),
                     Moeter = new List<Moete>(),
@@ -228,7 +234,8 @@ namespace SysUt14Gr03.Migrations
                     Token = "Må generere Token!",
                     Aktivert = true,
                     Aktiv = true,
-                    opprettet = DateTime.Now,
+                    Opprettet = DateTime.Now.AddDays(-10),
+                    SistInnlogget = DateTime.Now.AddHours(-3),
                     BrukerPreferanser = new List<BrukerPreferanse>(),
                     Rettigheter = new List<Rettighet>(),
                     Moeter = new List<Moete>(),
@@ -353,7 +360,6 @@ namespace SysUt14Gr03.Migrations
                     Opprettet = DateTime.Now,
                     Brukere = new List<Bruker>(),
                     Prosjekter = new List<Prosjekt>(),
-                    Grupper = new List<Gruppe>()
                 },
                  new Team {
                     Navn = "Bravo",
@@ -361,7 +367,6 @@ namespace SysUt14Gr03.Migrations
                     Opprettet = DateTime.Now,
                     Brukere = new List<Bruker>(),
                     Prosjekter = new List<Prosjekt>(),
-                    Grupper = new List<Gruppe>()
                 },
                  new Team {
                     Navn = "Charlie",
@@ -369,7 +374,6 @@ namespace SysUt14Gr03.Migrations
                     Opprettet = DateTime.Now,
                     Brukere = new List<Bruker>(),
                     Prosjekter = new List<Prosjekt>(),
-                    Grupper = new List<Gruppe>()
                 }
             };
 
@@ -488,34 +492,7 @@ namespace SysUt14Gr03.Migrations
             prioriteringer.ForEach(element => context.Prioriteringer.AddOrUpdate(prioritering => prioritering.Navn, element));
             context.SaveChanges();
 
-            var grupper = new List<Gruppe> {
-                new Gruppe {
-                    Navn = "Gruppe 1",
-                    Aktiv = true,
-                    Opprettet = DateTime.Now,
-                    Prosjekter = new List<Prosjekt>(),
-                    Teams = new List<Team>()
-                },
-                new Gruppe {
-                    Navn = "Gruppe 2",
-                    Aktiv = true,
-                    Opprettet = DateTime.Now,
-                    Prosjekter = new List<Prosjekt>(),
-                    Teams = new List<Team>()
-                }
-            };
-            grupper.ForEach(element => context.Grupper.AddOrUpdate(gruppe => gruppe.Navn, element));
-            context.SaveChanges();
-
-            Gruppe gruppe1 = context.Grupper.FirstOrDefault(Gruppe => Gruppe.Navn == "Gruppe 1");
-            Gruppe gruppe2 = context.Grupper.FirstOrDefault(Gruppe => Gruppe.Navn == "Gruppe 2");
-
-            gruppe1.Teams.Add(alpha);
-            gruppe1.Teams.Add(bravo);
-            gruppe2.Teams.Add(charlie);
-            context.SaveChanges();
-
-            var oppgavegrupper = new List <OppgaveGruppe> {
+           var oppgavegrupper = new List <OppgaveGruppe> {
                 new OppgaveGruppe {
                     Navn = "Administrative Oppgaver",
                     Oppgaver = new List<Oppgave>()
@@ -526,8 +503,8 @@ namespace SysUt14Gr03.Migrations
                 }
             };
             oppgavegrupper.ForEach(element => context.OppgaveGrupper.AddOrUpdate(oppgavegruppe => oppgavegruppe.Navn, element));
-            context.SaveChanges();
-          
+            context.SaveChanges();     
+
             var oppgaver = new List <Oppgave> {
                 new Oppgave {
                     Tittel = "Opprette notat",
@@ -537,8 +514,10 @@ namespace SysUt14Gr03.Migrations
                     BruktTid = 3,
                     RemainingTime = 0,
                     Aktiv = true,
-                    Opprettet = DateTime.Now,
-                    Oppdatert = DateTime.Now.AddDays(2),
+                    Opprettet = DateTime.Now.AddDays(-3),
+                    Startet = DateTime.Now.AddDays(-2),
+                    Oppdatert = DateTime.Now.AddDays(-1),
+                    Avsluttet = DateTime.Now.AddDays(-1),
                     Prosjekt_id = context.Prosjekter.FirstOrDefault(prosjekt => prosjekt.Navn == "Rød Elv").Prosjekt_id,
                     OppgaveGruppe_id = context.OppgaveGrupper.FirstOrDefault(oppgaveGruppe => oppgaveGruppe.Navn == "Administrative Oppgaver").OppgaveGruppe_id,
                     Prioritering_id = context.Prioriteringer.FirstOrDefault(prioritering => prioritering.Navn == "1").Prioritering_id,
@@ -554,8 +533,9 @@ namespace SysUt14Gr03.Migrations
                     BruktTid = 3,
                     RemainingTime = 3,
                     Aktiv = true,
-                    Opprettet = DateTime.Now,
-                    Oppdatert = DateTime.Now.AddDays(2),
+                    Opprettet = DateTime.Now.AddDays(-3),
+                    Startet = DateTime.Now.AddDays(-2),
+                    Oppdatert = DateTime.Now.AddDays(-1),
                     Prosjekt_id = context.Prosjekter.FirstOrDefault(prosjekt => prosjekt.Navn == "Rød Elv").Prosjekt_id,
                     OppgaveGruppe_id = context.OppgaveGrupper.FirstOrDefault(oppgaveGruppe => oppgaveGruppe.Navn == "Administrative Oppgaver").OppgaveGruppe_id,
                     Prioritering_id = context.Prioriteringer.FirstOrDefault(prioritering => prioritering.Navn == "2").Prioritering_id,
@@ -568,10 +548,12 @@ namespace SysUt14Gr03.Migrations
                     UserStory = "Som bruker ønsker jeg å kunne slette et notat",
                     Krav = "Notatet skal ikke overgå en side",
                     Estimat = 2,
-                    BruktTid = 0,
-                    RemainingTime = 2,
+                    BruktTid = 1,
+                    RemainingTime =1,
                     Aktiv = true,
-                    Opprettet = DateTime.Now,
+                    Opprettet = DateTime.Now.AddDays(-3),
+                    Startet = DateTime.Now.AddDays(-2),
+                    Oppdatert = DateTime.Now.AddDays(-1),
                     Prosjekt_id = context.Prosjekter.FirstOrDefault(prosjekt => prosjekt.Navn == "Rød Elv").Prosjekt_id,
                     OppgaveGruppe_id = context.OppgaveGrupper.FirstOrDefault(oppgaveGruppe => oppgaveGruppe.Navn == "Administrative Oppgaver").OppgaveGruppe_id,
                     Prioritering_id = context.Prioriteringer.FirstOrDefault(prioritering => prioritering.Navn == "3").Prioritering_id,
@@ -598,10 +580,12 @@ namespace SysUt14Gr03.Migrations
                     UserStory = "Som bruker ønsker jeg å kunne opprette et prosjekt",
                     Krav = "Prosjektet må være unikt",
                     Estimat = 4,
-                    BruktTid = 0,
-                    RemainingTime = 4,
+                    BruktTid = 2,
+                    RemainingTime = 2,
                     Aktiv = true,
-                    Opprettet = DateTime.Now,
+                    Opprettet = DateTime.Now.AddDays(-3),
+                    Startet = DateTime.Now.AddDays(-2),
+                    Oppdatert = DateTime.Now.AddDays(-1),
                     Prosjekt_id = context.Prosjekter.FirstOrDefault(prosjekt => prosjekt.Navn == "Blå spurv").Prosjekt_id,
                     Status_id = context.Status.FirstOrDefault(status => status.Navn == "Klar").Status_id,
                     Kommentarer = new List<Kommentar>(),
@@ -612,11 +596,13 @@ namespace SysUt14Gr03.Migrations
                     UserStory = "Som bruker ønsker jeg å kunne administrere et prosjekt",
                     Krav = "Prosjektet må være aktivt",
                     Estimat = 6,
-                    BruktTid = 0,
-                    RemainingTime = 6,
+                    BruktTid = 3,
+                    RemainingTime = 3,
                     Tidsfrist = DateTime.Now.AddDays(7),
                     Aktiv = true,
-                    Opprettet = DateTime.Now,
+                    Opprettet = DateTime.Now.AddDays(-3),
+                    Startet = DateTime.Now.AddDays(-2),
+                    Oppdatert = DateTime.Now.AddDays(-1),
                     Prosjekt_id = context.Prosjekter.FirstOrDefault(prosjekt => prosjekt.Navn == "Blå spurv").Prosjekt_id,
                     Status_id = context.Status.FirstOrDefault(status => status.Navn == "Klar").Status_id,
                     Kommentarer = new List<Kommentar>(),
@@ -644,8 +630,10 @@ namespace SysUt14Gr03.Migrations
                     BruktTid = 4,
                     RemainingTime = 0,
                     Aktiv = true,
-                    Opprettet = DateTime.Now,
-                    Oppdatert = DateTime.Now.AddDays(2),
+                    Opprettet = DateTime.Now.AddDays(-3),
+                    Startet = DateTime.Now.AddDays(-2),
+                    Oppdatert = DateTime.Now.AddDays(-1),
+                    Avsluttet = DateTime.Now.AddDays(-1),
                     Prosjekt_id = context.Prosjekter.FirstOrDefault(prosjekt => prosjekt.Navn == "Grå ulv").Prosjekt_id,
                     OppgaveGruppe_id = context.OppgaveGrupper.FirstOrDefault(oppgaveGruppe => oppgaveGruppe.Navn == "Funksjonelle oppgaver").OppgaveGruppe_id,
                     Prioritering_id = context.Prioriteringer.FirstOrDefault(prioritering => prioritering.Navn == "1").Prioritering_id,
@@ -661,8 +649,9 @@ namespace SysUt14Gr03.Migrations
                     BruktTid = 1,
                     RemainingTime = 2,
                     Aktiv = true,
-                    Opprettet = DateTime.Now,
-                    Oppdatert = DateTime.Now.AddDays(2),
+                    Opprettet = DateTime.Now.AddDays(-3),
+                    Startet = DateTime.Now.AddDays(-2),
+                    Oppdatert = DateTime.Now.AddDays(-1),
                     Prosjekt_id = context.Prosjekter.FirstOrDefault(prosjekt => prosjekt.Navn == "Grå ulv").Prosjekt_id,
                     OppgaveGruppe_id = context.OppgaveGrupper.FirstOrDefault(oppgaveGruppe => oppgaveGruppe.Navn == "Funksjonelle oppgaver").OppgaveGruppe_id,
                     Prioritering_id = context.Prioriteringer.FirstOrDefault(prioritering => prioritering.Navn == "2").Prioritering_id,
@@ -745,6 +734,63 @@ namespace SysUt14Gr03.Migrations
             jpolden.Oppgaver.Add(oppgave11);
 
             context.SaveChanges();
+
+            var timer = new List<Time> {
+                new Time {
+                    Tid = new TimeSpan(3,0,0),
+                    Opprettet = DateTime.Now,
+                    Aktiv = true,
+                    Oppgave_id = context.Oppgaver.FirstOrDefault(oppgave => oppgave.Tittel == "Opprette notat").Oppgave_id,
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "lmartinsen").Bruker_id,
+                },
+                new Time {
+                    Tid = new TimeSpan(3,0,0),
+                    Opprettet = DateTime.Now,
+                    Aktiv = true,
+                    Oppgave_id = context.Oppgaver.FirstOrDefault(oppgave => oppgave.Tittel == "Redigere notat").Oppgave_id,
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "lmartinsen").Bruker_id,
+                },
+                new Time {
+                    Tid = new TimeSpan(3,0,0),
+                    Opprettet = DateTime.Now,
+                    Aktiv = true,
+                    Oppgave_id = context.Oppgaver.FirstOrDefault(oppgave => oppgave.Tittel == "Slette notat").Oppgave_id,
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "mlarsen").Bruker_id,
+                },
+                new Time {
+                    Tid = new TimeSpan(4,0,0),
+                    Opprettet = DateTime.Now,
+                    Aktiv = true,
+                    Oppgave_id = context.Oppgaver.FirstOrDefault(oppgave => oppgave.Tittel == "Opprette Prosjekt").Oppgave_id,
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "aaskoy").Bruker_id,
+                },
+
+
+                new Time {
+                    Tid = new TimeSpan(4,0,0),
+                    Opprettet = DateTime.Now,
+                    Aktiv = true,
+                    Oppgave_id = context.Oppgaver.FirstOrDefault(oppgave => oppgave.Tittel == "Administrere prosjekt").Oppgave_id,
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "hhansen").Bruker_id,
+                },             
+                new Time {
+                    Tid = new TimeSpan(4,0,0),
+                    Opprettet = DateTime.Now,
+                    Aktiv = true,
+                    Oppgave_id = context.Oppgaver.FirstOrDefault(oppgave => oppgave.Tittel == "Opprette møte").Oppgave_id,
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "jpolden").Bruker_id,
+                },
+                new Time {
+                    Tid = new TimeSpan(1,0,0),
+                    Opprettet = DateTime.Now,
+                    Aktiv = true,
+                    Oppgave_id = context.Oppgaver.FirstOrDefault(oppgave => oppgave.Tittel == "Redigere møte").Oppgave_id,
+                    Bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "jpolden").Bruker_id,
+                },                
+            };
+            timer.ForEach(element => context.Timer.AddOrUpdate(time => time.Oppgave_id));
+            context.SaveChanges();
+
 
             var kommentarer = new List<Kommentar> {
                 new Kommentar {
@@ -1156,7 +1202,17 @@ namespace SysUt14Gr03.Migrations
                     Hendelse = "jpolden påtok seg oppgaven 'Påmelding til møte'",
                     Opprettet = DateTime.Now.AddMinutes(15),
                     bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "jpolden").Bruker_id
-                }
+                },
+                new Logg {
+                    Hendelse = "lmartinsen avsluttet oppgaven 'Opprette notat'",
+                    Opprettet = DateTime.Now.AddDays(-2),
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "lmartinsen").Bruker_id
+                },
+                new Logg {
+                    Hendelse = "jpolden avsluttet oppgaven 'Opprette møte'",
+                    Opprettet = DateTime.Now.AddDays(-1),
+                    bruker_id = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "jpolden").Bruker_id
+                },
             };
             logger.ForEach(element => context.Logger.AddOrUpdate(logg => logg.Hendelse, element));
             context.SaveChanges();

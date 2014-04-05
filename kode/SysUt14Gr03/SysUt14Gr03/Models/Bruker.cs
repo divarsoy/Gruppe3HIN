@@ -18,7 +18,8 @@ namespace SysUt14Gr03.Models
         public string Token { get; set; }
         public bool Aktivert { get; set; }
         public bool Aktiv { get; set; }
-        public DateTime opprettet { get; set; }
+        public DateTime Opprettet { get; set; }
+        public DateTime SistInnlogget { get; set; }
 
         public virtual List<BrukerPreferanse> BrukerPreferanser { get; set; }
         public virtual List<Rettighet> Rettigheter { get; set; }
@@ -28,6 +29,7 @@ namespace SysUt14Gr03.Models
         public virtual List<Oppgave> Oppgaver { get; set; }
         public virtual List<Prosjekt> Prosjekter { get; set; }
         public virtual List<Team> Teams { get; set; }
+        public virtual List<Time> Time { get; set; }
 
         public override string ToString()
         {

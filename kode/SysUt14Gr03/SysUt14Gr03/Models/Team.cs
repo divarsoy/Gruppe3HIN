@@ -16,6 +16,5 @@ namespace SysUt14Gr03.Models
 
         public virtual List<Bruker> Brukere { get; set; }
         public virtual List<Prosjekt> Prosjekter { get; set; }
-        public virtual List<Gruppe> Grupper { get; set; }
     }
 }

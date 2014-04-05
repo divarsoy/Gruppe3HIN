@@ -15,13 +15,11 @@ namespace SysUt14Gr03.Models
         public DateTime Opprettet { get; set; }
 
         public int? Team_id { get; set; }
-        public int? Gruppe_id { get; set; }
 
         [Display(Name = "Prosjektleder")]
         public int Bruker_id { get; set; }
 
         public virtual Team Team { get; set; }
-        public virtual Gruppe Gruppe { get; set; }
         public virtual Bruker Bruker { get; set; }
         public virtual List<Oppgave> Oppgaver { get; set; }
     }

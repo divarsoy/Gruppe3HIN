@@ -17,7 +17,9 @@ namespace SysUt14Gr03.Models
         public DateTime? Tidsfrist { get; set; }
         public bool Aktiv { get; set; }
         public DateTime Opprettet { get; set; }
+        public DateTime? Startet { get; set; }
         public DateTime? Oppdatert { get; set; }
+        public DateTime? Avsluttet { get; set; }
 
         public int Prosjekt_id { get; set; }
         public int? OppgaveGruppe_id { get; set; }
@@ -30,6 +32,8 @@ namespace SysUt14Gr03.Models
         public virtual Status Status { get; set; }
         public virtual List<Kommentar> Kommentarer { get; set; }
         public virtual List<Bruker> Brukere { get; set; }
+        public virtual List<Time> Time { get; set; }
+
 
 
     }
