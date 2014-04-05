@@ -1,13 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AktiverKonto.aspx.cs" Inherits="SysUt14Gr03.AktiverKonto" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContentTemplate" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <p>
-
+        <asp:Label ID="lblAktivert" Visible="false" runat="server"></asp:Label>
     </p>
     <p>
      
         <asp:Label ID="lblUsername" AssociatedControlID="Username" runat="server">Brukernavn:</asp:Label>
         <asp:TextBox ID="Username" runat="server"></asp:TextBox>
         <asp:RequiredFieldValidator runat="server" ControlToValidate="Username" ErrorMessage="Feltet kan ikke være tomt"></asp:RequiredFieldValidator>
+        <asp:Label ID="lblBrukernavnFeil" runat="server" Visible="false"></asp:Label>
     </p>
     <p>
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
@@ -28,7 +29,7 @@ namespace SysUt14Gr03
         private string imAdresse;
         private string token;
         private int bruker_id;
-
+        private bool check = true;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -51,7 +52,8 @@ namespace SysUt14Gr03
             {
                 if ((!string.IsNullOrEmpty(Request.QueryString["Epost"])) & (!string.IsNullOrEmpty(Request.QueryString["Token"])))
                 {
-                    Response.Write("<h2 align=center> Fyll ut resterende felt for å aktivere kontoen din</h2>");
+                    lblAktivert.Visible = true;
+                    lblAktivert.Text = "<h2 align=center> Fyll ut resterende felt for å aktivere kontoen din</h2>";
                     using (var context = new Context())
                     {
                         epost = Email.Text = Request.QueryString["Epost"];
@@ -66,7 +68,10 @@ namespace SysUt14Gr03
                 else
                 {
                     disable();
-                    Response.Write("<h2 align=center>Det skjedde noe galt, Kontoen din ble ikke aktivert!</h2>");
+                    lblAktivert.Visible = true;
+                    lblAktivert.Text = "<h2 align=center>Det skjedde noe galt, Kontoen din ble ikke aktivert!</h2>";
+                  
+                    //Response.Write("<h2 align=center>Det skjedde noe galt, Kontoen din ble ikke aktivert!</h2>");
 
                 }
             }
@@ -81,8 +86,8 @@ namespace SysUt14Gr03
      
         protected void ConfirmButton_Click(object sender, EventArgs e)
         {
-            try
-            {
+            
+                lblBrukernavnFeil.Visible = false;
                 token = Request.QueryString["Token"];
                 //passord = MD5Hash(Password.Text);
                 //passord = Passord.HashPassord(Password.Text);
@@ -104,30 +109,34 @@ namespace SysUt14Gr03
                     // Default rettighet er utvikler
                     string rettighetUtviklerString = Konstanter.rettighet.Utvikler.ToString();
                     var rettighetUtvikler = db.Rettigheter.Where(rettighet => rettighet.RettighetNavn == rettighetUtviklerString).FirstOrDefault();
-                   
-                    Bruker.Aktiv = true;
-                    Bruker.Brukernavn = brukernavn;
-                    Bruker.Epost = epost;
-                    Bruker.Etternavn = etternavn;
-                    Bruker.IM = imAdresse;
-                    Bruker.Passord = hash;
-                    Bruker.Token = token;
-                    Bruker.Salt = salt;
-                    Bruker.Rettigheter.Add(rettighetUtvikler);             
-                    db.SaveChanges();
-                
+                    var queryBrukernavn = db.Brukere.FirstOrDefault(b => b.Brukernavn == brukernavn);
+                    if (queryBrukernavn != null)
+                    {
+                        lblBrukernavnFeil.Visible = true;
+                        lblBrukernavnFeil.ForeColor = Color.Red;
+                        lblBrukernavnFeil.Text = "Brukernavnet er allerede tatt";
+                        check = false;
+                    }
+                    if(check)
+                    {
+                        Bruker.Aktiv = true;
+                        Bruker.Brukernavn = brukernavn;
+                        Bruker.Epost = epost;
+                        Bruker.Etternavn = etternavn;
+                        Bruker.IM = imAdresse;
+                        Bruker.Passord = hash;
+                        Bruker.Token = token;
+                        Bruker.Salt = salt;
+                        Bruker.Rettigheter.Add(rettighetUtvikler);
+                        db.SaveChanges();
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('Kontoen din er aktivert, du vil bli videresendt til logg inn siden');", true);
+
+                        Response.AddHeader("REFRESH", "4;URL=Login.aspx");
+                        //Response.Write("<h2>Du kan logge deg inn nå  <a href=Login.aspx>Klikk her for å logge inn</a> </h2>");
+                        disable();
+                    }
                 }
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('Kontoen din er aktivert');", true);
 
-                Response.Write("<h2>Du kan logge deg inn nå  <a href=Login.aspx>Klikk her for å logge inn</a> </h2>");
-                disable();
-
-            }
-            catch (Exception ex)
-            {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('Error occured : " + ex.Message.ToString() + "');", true);
-                return;
-            }
         }
         protected void disable()
         {
@@ -144,27 +153,6 @@ namespace SysUt14Gr03
             Password.Visible = false;
             lblPassword.Visible = false;
             ConfirmButton.Visible = false;
-        }
-    
-        public static string MD5Hash(string text)
-        {
-            MD5 md5 = new MD5CryptoServiceProvider();
-
-            //compute hash from the bytes of text
-            md5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(text));
-
-            //get hash result after compute it
-            byte[] result = md5.Hash;
-
-            StringBuilder strBuilder = new StringBuilder();
-            for (int i = 0; i < result.Length; i++)
-            {
-                //change it into 2 hexadecimal digits
-                //for each byte
-                strBuilder.Append(result[i].ToString("x2"));
-            }
-
-            return strBuilder.ToString();
         }
     } 
 }
