@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -134,6 +135,27 @@ namespace SysUt14Gr03
                     lblKommentarer.Text += "<hr /> <a href=\"VisBruker.aspx?bruker_id=" + kommentarListe[i].Bruker.Bruker_id + "\">" + kommentarListe[i].Bruker.IM + "</a>";
                     lblKommentarer.Text += "<br />" + kommentarListe[i].Opprettet.ToString();
                     lblKommentarer.Text += "<br />" + kommentarListe[i].Tekst;
+                    if (kommentarListe[i].Tekst.Contains("@"))
+                    {
+                        MatchCollection match = Regex.Matches(kommentarListe[i].Tekst, @"(?<!\w)@\w+");
+                        foreach (Match ord in match)
+                        {
+                            string[] navn = Regex.Split(ord.Value, @"^@");
+                            using (var context = new Context())
+                            {
+                                foreach (string userName in navn)
+                                {
+                                    if (userName != String.Empty)
+                                    {
+                                        Bruker bruker = context.Brukere.Where(b => b.Brukernavn == userName).First();
+                                        string fornavn = Queries.GetBruker(bruker_id).ToString();
+                                        Varsel.SendVarsel(bruker.Bruker_id, Varsel.KOMMENTARVARSEL, "Kommentar", fornavn + " har nevnt deg i en kommentar", oppgave.Oppgave_id);
+                                    }
+                                }
+                            }
+                        }
+
+                    }
                 }
                 lblKommentarer.Visible = true;
             } 
