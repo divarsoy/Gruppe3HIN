@@ -19,9 +19,10 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
+            //SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
 
-            bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
+            //bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
+            bruker_id = 2;
 
 
             if (Request.QueryString["oppgave_id"] != null)

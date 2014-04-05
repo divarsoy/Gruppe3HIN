@@ -39,10 +39,12 @@
             </div>
         </div>
         <div class="clearfix"></div>
-         
+         <br />
         <div class="form-group">
-            <asp:Label ID="InvalidCredentialsMessage" runat="server" ForeColor="Red" Text="Feil brukernavn eller passord"
+            <div class="col-sm-offset-2">
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<asp:Label ID="InvalidCredentialsMessage" runat="server" ForeColor="Red" Text="Feil brukernavn eller passord"
                 Visible="False"></asp:Label> 
+            </div>
         </div>
     </div> 
 </asp:Content>

@@ -19,8 +19,9 @@
                         <asp:TextBox ID="tbKrav" CssClass="form-control" runat="server" Height="25px" Width="300px" placeholder="Krav til oppgaven!"></asp:TextBox>
                         <asp:TextBox ID="TbEstimering" CssClass="form-control" runat="server" Height="25px" Width="300px" placeholder="Estimering av tid på oppgave!"></asp:TextBox>
                         &nbsp&nbsp&nbsp<label>Tilgjengelige Brukere</label><asp:DropDownList ID="ddlBrukere" CssClass="form-control" Width="300px" runat="server"></asp:DropDownList>
-                        <asp:ListBox ID="lbBrukere" CssClass="form-control" runat="server" Height="100px" Width="300px" Enabled="False"></asp:ListBox>
+                        <asp:ListBox ID="lbBrukere" CssClass="form-control" runat="server" Height="100px" Width="300px" Enabled="True"></asp:ListBox>
                         <asp:Button ID="btnBrukere" CssClass="btn btn-primary" Text="Legg Til Brukere" runat="server" OnClick="btnBrukere_Click" />
+                        <asp:Button ID="btnFjernBruker" CssClass="btn btn-warning" runat="server" Text="Fjern bruker" OnClick="btnFjernBruker_Click" />
                         <asp:Label ID="lblFeil" runat="server" Visible="false" Text=""></asp:Label>
                     </p>
                 </div>

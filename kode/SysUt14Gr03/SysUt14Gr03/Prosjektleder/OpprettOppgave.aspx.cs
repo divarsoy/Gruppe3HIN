@@ -155,6 +155,12 @@ namespace SysUt14Gr03
             tbFrist.Text = cal.SelectedDate.ToShortDateString();
         }
 
+        protected void btnFjernBruker_Click(object sender, EventArgs e)
+        {
+            
+            lbBrukere.Items.Remove(lbBrukere.SelectedItem);
+        }
+
 
     }
 }

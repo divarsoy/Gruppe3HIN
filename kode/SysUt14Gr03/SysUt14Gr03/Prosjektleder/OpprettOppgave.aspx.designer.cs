@@ -85,6 +85,15 @@ namespace SysUt14Gr03 {
         protected global::System.Web.UI.WebControls.Button btnBrukere;
         
         /// <summary>
+        /// btnFjernBruker control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnFjernBruker;
+        
+        /// <summary>
         /// lblFeil control.
         /// </summary>
         /// <remarks>
