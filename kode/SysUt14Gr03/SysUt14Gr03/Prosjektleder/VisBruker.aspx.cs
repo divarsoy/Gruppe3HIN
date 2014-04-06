@@ -35,12 +35,12 @@ namespace SysUt14Gr03
                     lblNavn.Text = bruker.ToString();
                     lblInfo.Text = "Brukernavn: " + bruker.Brukernavn;
                     lblInfo.Text += "<br />" + "Epost: <a href=\"mailto:" + bruker.Epost + "\">" + bruker.Epost + "</a>";
-                    lblInfo.Text += "<br />Ble med: " + bruker.opprettet.ToShortDateString();
+                    lblInfo.Text += "<br />Ble med: " + bruker.Opprettet.ToShortDateString();
                     
                     if (isBruker)
                     {
-                        lblInfo.Text += "<h3>Statestikk</h3>";
-                        lblOppgaver.Text += "<hr /><h4>Påbegynte oppgaver:</h4>";
+                        lblOppgaver.Text += "<h2>Statestikk</h2>";
+                        lblOppgaver.Text += "<h4>Påbegynte oppgaver:</h4>";
                         // Venter på timeregistrering for mer data..
                         foreach (Oppgave oppgave in oppgaveListe)
                         {
@@ -51,13 +51,12 @@ namespace SysUt14Gr03
                         lblKommentarer.Text += "<br /><h4>Team:</h4>";
                         foreach (Team team in teamListe)
                         {
-                            lblKommentarer.Text += "<br /><a href=\"VisTeam.aspx?team_id=" + team.Team_id + "\">" + team.Navn + "</a>";
+                            lblKommentarer.Text += "<a href=\"VisTeam.aspx?team_id=" + team.Team_id + "\">" + team.Navn + "</a><br />";
                         }
 
-                        lblKommentarer.Text += "<hr />";
-                        lblKommentarer.Text += "<h3>Min aktivitet</h3>";                     
+                        lblLogg.Text += "<h2>Min aktivitet</h2>";                     
                         List<Kommentar> kommentarListe = Queries.GetAlleKommentarTilBruker(bruker_id);
-                        lblKommentarer.Text += "<h4>Mine kommentarer</h4>";
+                        lblLogg.Text += "<h4>Mine kommentarer</h4>";
                         foreach (Kommentar kommentar in kommentarListe)
                         {
                             lsbKommentarer.Items.Add(new ListItem(kommentar.Opprettet + ": " + kommentar.Tekst, "VisOppgave.aspx?oppgave_id="
@@ -65,8 +64,7 @@ namespace SysUt14Gr03
 
                         }
 
-                        lblLogg.Text += "<hr />";
-                        lblLogg.Text += "<h3>Historikk</h3>";
+                        lblHistorikk.Text += "<h4>Historikk</h4>";
                         // Venter på datofelt for mer data..
                         List<Logg> loggListe = Queries.GetLoggForBruker(bruker_id);
                         foreach (Logg logg in loggListe)
@@ -83,21 +81,20 @@ namespace SysUt14Gr03
 
                         }
 
-                        lblPrefs.Text += "<hr />";
-                        lblPrefs.Text += "<h3>Mine instillinger</h3>";
+                        lblPrefs.Text += "<h2>Mine instillinger</h2>";
 
                         BrukerPreferanse brukerPrefs = Queries.GetEpostPreferanser(bruker_id);
 
                         if (brukerPrefs != null)
                         {
                             // Setter valgte verdier
-                            lblPrefs.Text += "<br /> Varsle meg på e-post når jeg blir...";
+                            lblPrefs.Text += " Varsle meg på e-post når jeg blir...<br />";
                             lblPrefs.Text += "<br />" + " lagt til på team: " + (brukerPrefs.EpostTeam ? "Ja" : "Nei");
                             lblPrefs.Text += "<br />" + " tildelt oppgave: " + (brukerPrefs.EpostOppgave ? "Ja" : "Nei");
                             lblPrefs.Text += "<br />" + " nevnt i kommentar: " + (brukerPrefs.EpostKommentar ? "Ja" : "Nei");
                             lblPrefs.Text += "<br />" + " tildelt en tidsfrist: " + (brukerPrefs.EpostTidsfrist ? "Ja" : "Nei");
                             lblPrefs.Text += "<br />" + " noe med rapporter..: " + (brukerPrefs.EpostRapport ? "Ja" : "Nei");
-
+                            lblPrefs.Text += "<br />";
                         }
                     }
                     

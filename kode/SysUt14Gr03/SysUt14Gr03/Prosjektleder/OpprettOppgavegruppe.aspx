@@ -1,5 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Prosjektleder.master" AutoEventWireup="true" CodeBehind="OpprettOppgavegruppe.aspx.cs" Inherits="SysUt14Gr03.OpprettOppgavegruppe" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+
+
+
     <h1>Opprett oppgavegruppe</h1>
     <br />
     Navn på gruppe:<asp:TextBox ID="txtNavn" runat="server"></asp:TextBox>

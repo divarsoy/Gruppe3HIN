@@ -58,6 +58,15 @@ namespace SysUt14Gr03 {
         protected global::System.Web.UI.WebControls.Label lblKommentarer;
         
         /// <summary>
+        /// lblLogg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblLogg;
+        
+        /// <summary>
         /// lsbKommentarer control.
         /// </summary>
         /// <remarks>
@@ -67,13 +76,13 @@ namespace SysUt14Gr03 {
         protected global::System.Web.UI.WebControls.ListBox lsbKommentarer;
         
         /// <summary>
-        /// lblLogg control.
+        /// lblHistorikk control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblLogg;
+        protected global::System.Web.UI.WebControls.Label lblHistorikk;
         
         /// <summary>
         /// lsbLogg control.

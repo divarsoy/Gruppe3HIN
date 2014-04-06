@@ -17,6 +17,7 @@
 
 </head>
 <body>
+    <div class="headerPadding"></div>
     <form runat="server">
         <asp:ScriptManager runat="server">
             <Scripts>
@@ -39,7 +40,7 @@
             </Scripts>
         </asp:ScriptManager>
 
-        <div class="navbar navbar-inverse navbar-static-top">
+        <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -70,10 +71,18 @@
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
-            <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - Gruppe 3 "Blå Himmel"</p>
-            </footer>
-        </div>
+            
+            
+           
+      </div>
+
+        
     </form>
+    <div class="navbar navbar-inverse navbar-fixed-bottom">
+            <div class="container">
+                <p class="navbar-text">&copy; <%: DateTime.Now.Year %> - Gruppe 3 "Blå Himmel"</p>
+            </div>
+        </div>
+    <div class="footerPadding"></div>
 </body>
 </html>
