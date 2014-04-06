@@ -36,6 +36,8 @@ namespace SysUt14Gr03
 
         protected void btnRemove_Click(object sender, EventArgs e)
         {
+            ListBox1.Items.Remove(ListBox1.SelectedItem); //Gjør samme som nedenfor.
+            /*
             if (ListBox1.Items.Count > 0 && ListBox1.SelectedIndex >= 0)
             {
                 for (int i = 0; i < ListBox1.Items.Count; i++)
@@ -46,7 +48,7 @@ namespace SysUt14Gr03
                         i--;
                     }
                 }
-            }
+            }*/
             Session["flashMelding"] = "Brukeren / Brukerne ble slettet";
             Session["flashStatus"] = Konstanter.notifikasjonsTyper.success.ToString();
         }
