@@ -24,18 +24,27 @@ namespace SysUt14Gr03
         //private Classes.sendEmail sendMsg
         private string ActivationUrl;
         private string email;
-
+        private List<Rettighet> rettighetListe = null;
         protected void Page_Load(object sender, EventArgs e)
         {
-            SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Administrator);  
+            SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Administrator);
+            rettighetListe = Queries.GetAlleRettigheter();
+            for (int i = 0; i < rettighetListe.Count; i++)
+            {
+                Rettighet rett = rettighetListe[i];
+                ddlRettighet.Items.Add(new ListItem(rett.RettighetNavn, rett.Rettighet_id.ToString()));
+            }
         }
 
         protected void opprettBruker(string _etternavn, string _fornavn, string _epost)
         {
             using (var db = new Context())
             {
+                int rettighet_id = Convert.ToInt32(ddlRettighet.SelectedValue);
+                var rettighet = db.Rettigheter.Where(r => r.Rettighet_id == rettighet_id).FirstOrDefault();
                 var nyBruker = new Bruker { Etternavn = etternavn, Fornavn = fornavn, Epost = epost, Brukernavn = "", IM = "", Token = "", Aktivert = false, Aktiv = false, opprettet = DateTime.Now };
                 db.Brukere.Add(nyBruker);
+                db.Rettigheter.Add(rettighet);
                 db.SaveChanges();
             }
         } 

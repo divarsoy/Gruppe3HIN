@@ -375,7 +375,15 @@ namespace SysUt14Gr03.Classes
                 return rettighet;
             }
         }
-
+        static public List<Rettighet> GetAlleRettigheter()
+        {
+            using (var context = new Context())
+            {
+                var rettigheter = (from rett in context.Rettigheter
+                                   select rett).ToList<Rettighet>();
+                return rettigheter;
+            }
+        }
         static public List<Team> GetAlleAktiveTeam()
         {
             using (var context = new Context())
