@@ -15,35 +15,56 @@ namespace SysUt14Gr03
         private int bruker_id;
         private int oppgave_id;
         private Oppgave oppgave;
+        private TimeSpan bruktTid;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             //SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
             //bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
+            bruker_id = 2;
 
             if (Request.QueryString["oppgave_id"] != null)
             {
                 
-                //oppgave_id = Validator.KonverterTilTall(Request.QueryString["oppgave_id"]);
-                //oppgave = Queries.GetOppgave(oppgave_id);
-
-                if (!IsPostBack)
+                oppgave_id = Validator.KonverterTilTall(Request.QueryString["oppgave_id"]);
+                oppgave = Queries.GetOppgave(oppgave_id);
+                if (oppgave != null)
                 {
                     pauseTeller = 0;
-                    DateTime dato = DateTime.Now;
-                    ddlDag.Items.Add(new ListItem("I dag (" + dato.ToShortDateString() + ")", dato.ToShortDateString()));
-                    ddlDag.Items.Add(new ListItem("I går (" + dato.AddDays(-1).ToShortDateString() + ")", dato.AddDays(-1).ToShortDateString()));
-                }
 
-                if (ViewState["pauseteller"] != null)
+                    if (!IsPostBack)
+                    {
+
+                        DateTime dato = DateTime.Now;
+                        ddlDag.Items.Add(new ListItem("I dag (" + dato.ToShortDateString() + ")", dato.ToShortDateString()));
+                        ddlDag.Items.Add(new ListItem("I går (" + dato.AddDays(-1).ToShortDateString() + ")", dato.AddDays(-1).ToShortDateString()));
+                    }
+
+                    lblTittel.Text = "Manuell timeregistrering på oppgave " + oppgave.Tittel;
+
+                    if (ViewState["pauseteller"] != null)
+                    {
+                        pauseTeller = Validator.KonverterTilTall(ViewState["pauseteller"].ToString());
+                    }
+
+                    // Legger til nytt felt for pauser
+                    // http://www.codeproject.com/Articles/35360/ViewState-in-Dynamic-Control
+                    LeggTilPausefelt(pauseTeller);
+
+                    Label1.Visible = true;
+                    Label2.Visible = true;
+                    Label3.Visible = true;
+                    btnAddPause.Visible = true;
+                    btnLagre.Visible = true;
+                    ddlDag.Visible = true;
+                    txtStart.Visible = true;
+                    txtSlutt.Visible = true;
+                }
+                else
                 {
-                    pauseTeller = Validator.KonverterTilTall(ViewState["pauseteller"].ToString());
+                    lblTittel.Text = "Oppgaven finnes ikke";
                 }
-
-                // Legger til nytt felt for pauser
-                // http://www.codeproject.com/Articles/35360/ViewState-in-Dynamic-Control
-                LeggTilPausefelt(pauseTeller);
-                
+   
             }
             else
             {
@@ -54,16 +75,33 @@ namespace SysUt14Gr03
 
         protected void btnAddPause_Click(object sender, EventArgs e)
         {
+            lblTest.Visible = false;
+            btnFullfor.Visible = false;
 
-            pauseTeller++;
-            ViewState["pauseteller"] = pauseTeller;
             LeggTilPausefelt();
+            pauseTeller++;
+            ViewState["pauseteller"] = pauseTeller;          
 
         }
 
+        // Note to self: Husk å rydde opp i dette...
         private void LeggTilPausefelt()
         {
-            LeggTilPausefelt(1);
+            Label lblPST = new Label();
+            lblPST.Text = "Pause start:";
+            Label lblPSL = new Label();
+            lblPSL.Text = "Pause slutt:";
+            TextBox txtPST = new TextBox();
+            TextBox txtPSL = new TextBox();
+            txtPST.TextMode = TextBoxMode.Time;
+            txtPSL.TextMode = TextBoxMode.Time;
+            txtPST.ID = "txtPauseStart" + pauseTeller;
+            txtPSL.ID = "txtPauseSlutt" + pauseTeller;
+            pnlPauser.Controls.Add(lblPST);
+            pnlPauser.Controls.Add(txtPST);
+            pnlPauser.Controls.Add(lblPSL);
+            pnlPauser.Controls.Add(txtPSL);
+            pnlPauser.Controls.Add(new LiteralControl("<br />"));
         }
 
         private void LeggTilPausefelt(int p)
@@ -71,9 +109,9 @@ namespace SysUt14Gr03
             for (int i = 0; i < p; i++)
             {
                 Label lblPST = new Label();
-                lblPST.Text = "Pause start";
+                lblPST.Text = "Pause start:";
                 Label lblPSL = new Label();
-                lblPSL.Text = "Pause slutt";
+                lblPSL.Text = "Pause slutt:";
                 TextBox txtPST = new TextBox();
                 TextBox txtPSL = new TextBox();
                 txtPST.TextMode = TextBoxMode.Time;
@@ -96,63 +134,98 @@ namespace SysUt14Gr03
             DateTime.TryParse(txtStart.Text, out startTid);
             DateTime.TryParse(txtSlutt.Text, out sluttTid);
 
-            if (DateTime.Compare(startTid, sluttTid) < 0)
+            if (startTid != DateTime.MinValue && sluttTid != DateTime.MinValue)
             {
-                TimeSpan pauser = new TimeSpan();
-                TimeSpan bruktTid = sluttTid - startTid;
-                bool innenforOkt = true;
-
-                for (int i = 0; i < pauseTeller; i++)
+                if (DateTime.Compare(startTid, sluttTid) < 0)
                 {
-                    TextBox txtPST = pnlPauser.FindControl("txtPauseStart" + i) as TextBox;
-                    TextBox txtPSL = pnlPauser.FindControl("txtPauseSlutt" + i) as TextBox;
+                    TimeSpan pauser = new TimeSpan();
+                    bruktTid = sluttTid - startTid;
+                    bool innenforOkt = true;
 
-                    if (txtPSL != null && txtPST != null)
+                    for (int i = 0; i < pauseTeller; i++)
                     {
-                        // Samler opp alle pausetimer og -minutter
-                        txtPST.TextMode = TextBoxMode.Time;
-                        txtPSL.TextMode = TextBoxMode.Time;
-                        DateTime pauseStartTid;
-                        DateTime pauseSluttTid;
-                        DateTime.TryParse(txtPST.Text, out pauseStartTid);
-                        DateTime.TryParse(txtPSL.Text, out pauseSluttTid);
+                        TextBox txtPST = pnlPauser.FindControl("txtPauseStart" + i) as TextBox;
+                        TextBox txtPSL = pnlPauser.FindControl("txtPauseSlutt" + i) as TextBox;
 
-                        if (pauseStartTid != DateTime.MinValue && pauseSluttTid != DateTime.MinValue)
+                        if (txtPSL != null && txtPST != null)
                         {
-                            bool startOK = DateTime.Compare(startTid, pauseStartTid) < 0 && DateTime.Compare(sluttTid, pauseStartTid) > 0;
-                            bool sluttOK = DateTime.Compare(startTid, pauseSluttTid) < 0 && DateTime.Compare(sluttTid, pauseSluttTid) > 0;
+                            // Samler opp alle pausetimer og -minutter
+                            txtPST.TextMode = TextBoxMode.Time;
+                            txtPSL.TextMode = TextBoxMode.Time;
+                            DateTime pauseStartTid;
+                            DateTime pauseSluttTid;
+                            DateTime.TryParse(txtPST.Text, out pauseStartTid);
+                            DateTime.TryParse(txtPSL.Text, out pauseSluttTid);
 
-                            innenforOkt = startOK && sluttOK;
-
-                            if (innenforOkt)
+                            if (pauseStartTid != DateTime.MinValue && pauseSluttTid != DateTime.MinValue)
                             {
-                                pauser += pauseSluttTid - pauseStartTid;
+                                bool startOK = DateTime.Compare(startTid, pauseStartTid) < 0 && DateTime.Compare(sluttTid, pauseStartTid) > 0;
+                                bool sluttOK = DateTime.Compare(startTid, pauseSluttTid) < 0 && DateTime.Compare(sluttTid, pauseSluttTid) > 0;
+
+                                innenforOkt = startOK && sluttOK;
+
+                                if (innenforOkt)
+                                {
+                                    pauser += pauseSluttTid - pauseStartTid;
+                                }
                             }
+
                         }
+                    }
+
+                    if (innenforOkt)
+                    {
+                        bruktTid -= pauser;
+                        ViewState["bruktTid"] = bruktTid;
+
+                        DateTime dato = DateTime.Parse(ddlDag.SelectedValue);
+
+                        //debug
+                        lblTest.Text = "Følgende timetall vil bli registrert: " + bruktTid.Hours + " timer og " + bruktTid.Minutes + " minutter.<br />Dato: "
+                            + dato.ToShortDateString() + " på oppgave " + oppgave.Tittel + ". Godta registrering?";
+                        lblTest.Visible = true;
+                        btnFullfor.Visible = true;
 
                     }
-                }
-
-                if (innenforOkt)
-                {
-                    bruktTid -= pauser;
-
-                    DateTime dato = DateTime.Parse(ddlDag.SelectedValue);
-
-                    //debug
-                    lblTest.Text = "brukt tid: " + bruktTid.Hours + " timer og " + bruktTid.Minutes + " minutter. dato: "
-                        + dato.ToShortDateString();
+                    else
+                    {
+                        lblTest.Text = "Pauser kan ikke være utenfor arbeidsøkten";
+                    }
                 }
                 else
                 {
-                    lblTest.Text = "Pauser kan ikke være utenfor arbeidsøkten";
+                    lblTest.Text = "Sluttid kan ikke være før starttid";
                 }
             }
             else
             {
-                lblTest.Text = "Sluttid kan ikke være før starttid";
+                lblTest.Text = "Vennligst oppgi start- og sluttid";
             }
 
+
+        }
+
+        protected void btnFullfor_Click(object sender, EventArgs e)
+        {
+            DateTime dato = DateTime.Parse(ddlDag.SelectedValue);
+            bruktTid = (TimeSpan)ViewState["bruktTid"];
+
+            using (var context = new Context())
+            {
+                oppgave = context.Oppgaver.Where(o => o.Oppgave_id == oppgave_id).FirstOrDefault();
+                Bruker bruker = context.Brukere.Where(b => b.Bruker_id == bruker_id).FirstOrDefault();
+                var time = new Time
+                {
+                    Tid = bruktTid,
+                    Opprettet = dato,
+                    Aktiv = true,
+                    Bruker = bruker,
+                    Oppgave = oppgave
+                };
+
+                context.Timer.Add(time);
+                context.SaveChanges();
+            }
         }
 
     }

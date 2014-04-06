@@ -7,25 +7,29 @@
     <h1>
       <asp:Label ID="lblTittel" runat="server"></asp:Label>
     </h1>
-    Registrer timer for..
+    <asp:Label ID="Label1" runat="server" Text="Registrer timer for..." Visible="false"></asp:Label>
     <br />
-    <asp:DropDownList ID="ddlDag" runat="server"></asp:DropDownList>
+    <asp:DropDownList ID="ddlDag" runat="server" Visible="false"></asp:DropDownList>
 
     <br />
-    Starttidspunkt:<asp:TextBox ID="txtStart" runat="server" TextMode="Time"></asp:TextBox>
-    Sluttidspunklt:<asp:TextBox ID="txtSlutt" runat="server" TextMode="Time"></asp:TextBox>
+    <asp:Label ID="Label2" runat="server" Text="Starttidspunkt:" Visible="false"></asp:Label>
+    <asp:TextBox ID="txtStart" runat="server" TextMode="Time" Visible="false"></asp:TextBox>
+    <asp:Label ID="Label3" runat="server" Text="Sluttidspunkt:" Visible="false"></asp:Label>
+    <asp:TextBox ID="txtSlutt" runat="server" TextMode="Time" Visible="false"></asp:TextBox>
     <br />
-    <asp:Button ID="btnAddPause" runat="server" Text="Legg til pause" OnClick="btnAddPause_Click" />
+    <asp:Button ID="btnAddPause" runat="server" Text="Legg til pause" OnClick="btnAddPause_Click" Visible="false"/>
     <br />
     <asp:Panel ID="pnlPauser" runat="server">
     </asp:Panel>
 
-
     <br />
-    <asp:Button ID="btnLagre" runat="server" OnClick="btnLagre_Click" Text="Lagre timer"/>
+    <asp:Button ID="btnLagre" runat="server" OnClick="btnLagre_Click" Text="Lagre timer" Visible="false"/>
 
 
-    <asp:Label ID="lblTest" runat="server" Text="Label"></asp:Label>
+    <asp:Label ID="lblTest" runat="server" Visible="false"></asp:Label>
+
+
+    <asp:Button ID="btnFullfor" runat="server" OnClick="btnFullfor_Click" Text="Godta og lagre" Visible="false"/>
 
 
 </asp:Content>
