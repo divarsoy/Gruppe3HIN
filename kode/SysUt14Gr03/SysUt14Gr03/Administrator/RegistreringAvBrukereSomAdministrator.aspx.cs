@@ -36,7 +36,7 @@ namespace SysUt14Gr03
             }
         }
 
-        protected void opprettBruker(string _etternavn, string _fornavn, string _epost)
+        protected void opprettBruker(string etternavn, string fornavn, string epost)
         {
             using (var db = new Context())
             {
@@ -49,10 +49,11 @@ namespace SysUt14Gr03
                     Fornavn = fornavn, 
                     Epost = epost, 
                     Brukernavn = "", 
-                    IM = "", Token = "", 
+                    IM = "",
+                    Token = "", 
                     Aktivert = false, 
                     Aktiv = false, 
-                    Opprettet = DateTime.Now.Date
+                    Opprettet = DateTime.Now
                 };
                 db.Brukere.Add(nyBruker);
                 db.Rettigheter.Add(rettighet);

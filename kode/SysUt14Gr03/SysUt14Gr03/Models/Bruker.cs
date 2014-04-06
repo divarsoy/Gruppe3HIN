@@ -19,7 +19,7 @@ namespace SysUt14Gr03.Models
         public bool Aktivert { get; set; }
         public bool Aktiv { get; set; }
         public DateTime Opprettet { get; set; }
-        public DateTime SistInnlogget { get; set; }
+        public DateTime? SistInnlogget { get; set; }
 
         public virtual List<BrukerPreferanse> BrukerPreferanser { get; set; }
         public virtual List<Rettighet> Rettigheter { get; set; }
