@@ -8,6 +8,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using SysUt14Gr03.Classes;
 using SysUt14Gr03.Models;
+using System.Drawing;
 
 namespace SysUt14Gr03
 {
@@ -28,11 +29,14 @@ namespace SysUt14Gr03
         protected void Page_Load(object sender, EventArgs e)
         {
             SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Administrator);
-            rettighetListe = Queries.GetAlleRettigheter();
-            for (int i = 0; i < rettighetListe.Count; i++)
+            if (!IsPostBack)
             {
-                Rettighet rett = rettighetListe[i];
-                ddlRettighet.Items.Add(new ListItem(rett.RettighetNavn, rett.Rettighet_id.ToString()));
+                rettighetListe = Queries.GetAlleRettigheter();
+                for (int i = 0; i < rettighetListe.Count; i++)
+                {
+                    Rettighet rett = rettighetListe[i];
+                    ddlRettighet.Items.Add(new ListItem(rett.RettighetNavn, rett.Rettighet_id.ToString()));
+                }
             }
         }
 
@@ -40,9 +44,10 @@ namespace SysUt14Gr03
         {
             using (var db = new Context())
             {
-
+                List<Rettighet> listRett = new List<Rettighet>();
                 int rettighet_id = Convert.ToInt32(ddlRettighet.SelectedValue);
                 var rettighet = db.Rettigheter.Where(r => r.Rettighet_id == rettighet_id).FirstOrDefault();
+                listRett.Add(rettighet);
                 var nyBruker = new Bruker 
                 { 
                     Etternavn = etternavn, 
@@ -53,16 +58,18 @@ namespace SysUt14Gr03
                     Token = "", 
                     Aktivert = false, 
                     Aktiv = false, 
-                    Opprettet = DateTime.Now
+                    Opprettet = DateTime.Now,
+                    Rettigheter = listRett
                 };
+                
                 db.Brukere.Add(nyBruker);
-                db.Rettigheter.Add(rettighet);
                 db.SaveChanges();
             }
         } 
 
         protected void bt_adm_reg_Click(object sender, EventArgs e)
         {
+            lblRettighetfeil.Visible = false;
             if (tb_reg_etternavn.Text.Length < 256)
                 etternavn = tb_reg_etternavn.Text;
             else
@@ -88,7 +95,12 @@ namespace SysUt14Gr03
                     emailUnq = false;
                 } */
             }
-                
+            if (ddlRettighet.SelectedValue == "0")
+            {
+                lblRettighetfeil.Visible = true;
+                lblRettighetfeil.ForeColor = Color.Red;
+                lblRettighetfeil.Text = "Du må velge en rettighet";
+            }    
           /*  for (int i = 0; i < Queries.GetAlleAktiveBrukere().Count; i++)
             {
                 using (var context = new Context())

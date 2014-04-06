@@ -12,6 +12,7 @@
                     <asp:DropDownList ID="ddlRettighet" runat="server">
                         <asp:ListItem Text="Velg Rettighet" Value="0"></asp:ListItem>
                     </asp:DropDownList>
+                    <asp:Label ID="lblRettighetfeil" runat="server" Visible="false"></asp:Label>
                 </div>
             </div>
             <div class="form-group">

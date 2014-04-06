@@ -6,7 +6,12 @@
 
     <h1>Opprett ny bruker</h1>
         <br />
-
+            <div class="form-group">
+                <asp:DropDownList ID="ddlRettighet" runat="server">
+                    <asp:ListItem Text="Velg Rettighet" Value="0"></asp:ListItem>
+                </asp:DropDownList>
+                <asp:Label ID="lblRettighetfeil" runat="server" Visible ="false"></asp:Label>
+            </div>
         
             <div class="form-group">
                 <label for="inputEtternavn" class="col-sm-1 control-label">Etternavn</label>
