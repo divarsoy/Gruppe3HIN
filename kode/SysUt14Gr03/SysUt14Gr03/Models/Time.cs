@@ -9,8 +9,11 @@ namespace SysUt14Gr03.Models
         [Key]
         public int Time_id { get; set; }
         public TimeSpan Tid { get; set; }
+        public DateTime? Start { get; set; }
+        public DateTime? Stopp { get; set; }
         public DateTime Opprettet { get; set; }
         public Boolean Aktiv { get; set; }
+        public Boolean Manuell { get; set; }
 
         public int Oppgave_id { get; set; }
         public int Bruker_id { get; set; }
