@@ -19,13 +19,12 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
-            //bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
-            bruker_id = 2;
+            SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
+            bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
 
             if (Request.QueryString["oppgave_id"] != null)
             {
-                
+
                 oppgave_id = Validator.KonverterTilTall(Request.QueryString["oppgave_id"]);
                 oppgave = Queries.GetOppgave(oppgave_id);
                 if (oppgave != null)

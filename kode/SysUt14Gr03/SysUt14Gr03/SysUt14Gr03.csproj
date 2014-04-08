@@ -187,7 +187,6 @@
     <Content Include="Administrator\DefaultAdministrator.aspx" />
     <Content Include="Prosjektleder\DefaultProsjektleder.aspx" />
     <Content Include="Administrator\EndreBrukerinformasjonSomAdministrator.aspx" />
-    <Content Include="HistorikkStattestikk.aspx" />
     <Content Include="EndreBrukerinformasjon.aspx" />
     <Content Include="EpostPreferanser.aspx" />
     <Content Include="InvitasjonAvBruker.aspx" />
@@ -578,13 +577,6 @@
     </Compile>
     <Compile Include="EpostPreferanser.aspx.designer.cs">
       <DependentUpon>EpostPreferanser.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="HistorikkStattestikk.aspx.cs">
-      <DependentUpon>HistorikkStattestikk.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="HistorikkStattestikk.aspx.designer.cs">
-      <DependentUpon>HistorikkStattestikk.aspx</DependentUpon>
     </Compile>
     <Compile Include="Prosjektleder\OpprettOppgave.aspx.cs">
       <DependentUpon>OpprettOppgave.aspx</DependentUpon>
