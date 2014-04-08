@@ -22,6 +22,15 @@ namespace SysUt14Gr03 {
         protected global::System.Web.UI.WebControls.TextBox tbTidsregistrert;
         
         /// <summary>
+        /// lblTest control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTest;
+        
+        /// <summary>
         /// btnSnart control.
         /// </summary>
         /// <remarks>
@@ -65,5 +74,14 @@ namespace SysUt14Gr03 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tbKommentar;
+        
+        /// <summary>
+        /// btnRegistrer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRegistrer;
     }
 }

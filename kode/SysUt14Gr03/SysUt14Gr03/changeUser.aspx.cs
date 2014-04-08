@@ -8,14 +8,14 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using SysUt14Gr03.Classes;
+using SysUt14Gr03.Models;
 
 namespace SysUt14Gr03
 {
     public partial class changeUser : System.Web.UI.Page
     {
-        private Login getInfo;
         private int userID;
-        private string oldDBPassword = "johnsen";
+        private string oldDBPassword;
         private lostPassword updatePassord;
         private string newPassword;
         private string oldPassword;
@@ -25,10 +25,19 @@ namespace SysUt14Gr03
         {
             if (Session["bruker_id"] != null)
             {
-                getInfo = new Login();
                 updatePassord = new lostPassword();
                 userID = Validator.KonverterTilTall(Session["bruker_id"].ToString());
+                Bruker bruker = Queries.GetBruker(userID);
+                oldDBPassword = bruker.Passord;
+                FirstName.Text = bruker.Fornavn;
+                SurName.Text = bruker.Etternavn;
+                UserName.Text = bruker.Brukernavn;
+                Email.Text = bruker.Epost;
+                IM.Text = bruker.IM;
+                OldPassord.Text = bruker.Passord;
             }
+            else
+                Response.Redirect("Login.aspx");
         }
         protected void btnPasswordChange_Click(object sender, EventArgs e)
         {
@@ -63,45 +72,6 @@ namespace SysUt14Gr03
                 command.Connection.Open();
                 command.ExecuteNonQuery();
                 command.Connection.Close();
-            }
-        }
-        public ArrayList getUserInfo()
-        {
-            using (SqlCommand command = new SqlCommand())
-            {
-                string query = "SELECT * FROM Bruker WHERE Bruker_id = " + userID + "'";
-                command.Connection = new SqlConnection(ConfigurationManager.ConnectionStrings["sysUt14Gr03"].ConnectionString);
-
-                var list = new ArrayList();
-                var reader = command.ExecuteReader();
-
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        string etterNavn = reader.GetString(1);
-                        string forNavn = reader.GetString(2);
-                        string brukerNavn = reader.GetString(3);
-                        string epost = reader.GetString(4);
-                        oldDBPassword = reader.GetString(5);
-                        string im = reader.GetString(6);
-                        list.Add(forNavn);
-                        list.Add(etterNavn);
-                        list.Add(brukerNavn);
-                        list.Add(epost);
-                        list.Add(oldDBPassword);
-                        list.Add(im);
-                    }
-                }
-                else
-                {
-                    string respons = "Fikk ikke hentet ut informasjon fra tabellen Bruker";
-                    list.Add(respons);
-                }
-
-                reader.Close();
-                command.Connection.Close();
-                return list;
             }
         }
     }

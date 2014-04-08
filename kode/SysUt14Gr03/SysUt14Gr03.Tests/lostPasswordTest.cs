@@ -22,7 +22,7 @@ namespace SysUt14Gr03.Tests
 
             msg = new MailMessage();
             SmtpClient smtp = new SmtpClient();
-            email = "fredrik_johnsen92@hotmail.com";
+            email = "eivindjs@olebrumm.nnth.org";
             //bruker gruppe eposten som avsender
             msg.From = new MailAddress("sysut14gr03@gmail.com");
             msg.To.Add(email);
