@@ -107,8 +107,8 @@ namespace SysUt14Gr03
                                   select bruker).FirstOrDefault();
 
                     // Default rettighet er utvikler
-                    string rettighetUtviklerString = Konstanter.rettighet.Utvikler.ToString();
-                    var rettighetUtvikler = db.Rettigheter.Where(rettighet => rettighet.RettighetNavn == rettighetUtviklerString).FirstOrDefault();
+                   // string rettighetUtviklerString = Konstanter.rettighet.Utvikler.ToString();
+                   // var rettighetUtvikler = db.Rettigheter.Where(rettighet => rettighet.RettighetNavn == rettighetUtviklerString).FirstOrDefault();
                     var queryBrukernavn = db.Brukere.FirstOrDefault(b => b.Brukernavn == brukernavn);
                     if (queryBrukernavn != null)
                     {
@@ -127,7 +127,6 @@ namespace SysUt14Gr03
                         Bruker.Passord = hash;
                         Bruker.Token = token;
                         Bruker.Salt = salt;
-                        Bruker.Rettigheter.Add(rettighetUtvikler);
                         db.SaveChanges();
                         ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('Kontoen din er aktivert, du vil bli videresendt til logg inn siden');", true);
 
