@@ -60,6 +60,7 @@ namespace SysUt14Gr03
                 
 
                 team_id = Convert.ToInt32(dropTeam.SelectedValue);
+                Team team = Queries.GetTeamById(team_id);
                 bruker_id = Convert.ToInt32(ddlBrukere.SelectedValue);
             
             using (var context = new Context())
@@ -67,13 +68,15 @@ namespace SysUt14Gr03
                 var nyttProsjekt = new Prosjekt { Navn = tbProsjektnavn.Text, Bruker_id = bruker_id, Aktiv = true, Opprettet = DateTime.Now, Team_id = team_id, StartDato = dtStart, SluttDato = dtSlutt };
                 context.Prosjekter.Add(nyttProsjekt);
                 context.SaveChanges();
-                this.sendEpost();
             }
 
             lblFeil.Visible = true;
             lblFeil.ForeColor = Color.Green;
             lblFeil.Text = "Prosjektet ble lagret!";
             Response.AddHeader("REFRESH", "3;URL=OpprettProsjekt");
+
+            Varsel.SendVarsel(team.Brukere, Varsel.PROSJEKTVARSEL, "Du har blitt lagt til i prosjekt " 
+                + tbProsjektnavn.Text + " av prosjektleder " + ddlBrukere.SelectedItem.ToString());
          
             }
             else
@@ -96,19 +99,5 @@ namespace SysUt14Gr03
             tbSlutt.Text = cal.SelectedDate.ToShortDateString();
         }
 
-        public void sendEpost()
-        {
-            BrukerPreferanse preferanse = new BrukerPreferanse();
-            if(preferanse.EpostProsjekt == true)
-            {
-                List<Bruker> brukerListe = Queries.GetAlleBrukereIEtTeam(team_id);
-                sendEmail sendMsg = new sendEmail();
-
-                string message = "Du ble lagt til et nytt prosjekt: " + tbProsjektnavn.Text + "\nDato: " + DateTime.Now + "\nLagt til av: " + User.Identity.Name;
-                string subject = "Medlem av nytt team";
-
-                sendMsg.sendEpost(null, message, subject, null, brukerListe, null);
-            }
-        }
     }
 }

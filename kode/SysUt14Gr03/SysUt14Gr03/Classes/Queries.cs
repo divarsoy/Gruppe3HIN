@@ -40,6 +40,15 @@ namespace SysUt14Gr03.Classes
                 return context.Brukere.Where(bruker => bruker.Epost == epost).FirstOrDefault();
             }
         }
+
+        static public Bruker GetBrukerVedBrukernavn(string brukernavn)
+        {
+            using (var context = new Context())
+            {
+                return context.Brukere.Where(bruker => bruker.Brukernavn == brukernavn).FirstOrDefault();
+            }
+        }
+
         static public List<Bruker> GetProsjektledere(Konstanter.rettighet _rettighet)
         {
             using (var context = new Context())
@@ -52,6 +61,18 @@ namespace SysUt14Gr03.Classes
                 return prosjektLedere;
             }
         }
+
+        static public List<Time> GetTimerForBruker(int bruker_id)
+        {
+            using (var context = new Context())
+            {
+                var timeListe = context.Timer
+                            .Where(t => t.Bruker_id == bruker_id)
+                            .ToList<Time>();
+                return timeListe;
+            }
+        }
+
         static public List<Notifikasjon> GetNotifikasjon(int bruker_id)
         {
             using (var context = new Context())
@@ -421,7 +442,7 @@ namespace SysUt14Gr03.Classes
         {
             using (var context = new Context())
             {
-                Team valgtTeam = context.Teams.Where(Team => Team.Team_id == teamId).FirstOrDefault();
+                Team valgtTeam = context.Teams.Include("Brukere").Where(Team => Team.Team_id == teamId).FirstOrDefault();
                 return valgtTeam;
             }
         }
