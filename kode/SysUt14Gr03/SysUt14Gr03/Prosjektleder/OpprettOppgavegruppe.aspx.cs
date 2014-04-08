@@ -12,8 +12,8 @@ namespace SysUt14Gr03
 {
     public partial class OpprettOppgavegruppe : System.Web.UI.Page
     {
-        private int prosjekt_id = -1;
-        private int bruker_id = -1;
+        private int prosjekt_id;
+        private int bruker_id;
         private List<Oppgave> oppgaveListe;
         private List<Oppgave> valgteOppgaver;
         private DropDownList ddlPrioritet;
@@ -21,8 +21,10 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
             SessionSjekk.sjekkForProsjekt_id();
+            bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
 
             prosjekt_id = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
             Prosjekt prosjekt = Queries.GetProsjekt(prosjekt_id);

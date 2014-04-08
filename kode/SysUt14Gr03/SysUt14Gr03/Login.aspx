@@ -6,7 +6,7 @@
             <div class ="form-group">
                 <label for="epostInput" class="col-sm-2 control-label">E-postadresse</label>
                 <div class="col-sm-4">
-                    <asp:TextBox ID="Epost" runat="server" placeholder="Tast inn E-postadressen din" CssClass="form-control" TextMode="email"></asp:TextBox>
+                    <asp:TextBox ID="Epost" runat="server" placeholder="Tast inn E-postadressen din" CssClass="form-control"></asp:TextBox>
                 </div>
             </div>
             <div class="clearfix"></div>

@@ -36,15 +36,28 @@ namespace SysUt14Gr03
                     lblInfo.Text = "Brukernavn: " + bruker.Brukernavn;
                     lblInfo.Text += "<br />" + "Epost: <a href=\"mailto:" + bruker.Epost + "\">" + bruker.Epost + "</a>";
                     lblInfo.Text += "<br />Ble med: " + bruker.Opprettet.ToShortDateString();
+                    lblInfo.Text += "<br />Sist innlogget: " + bruker.SistInnlogget.GetValueOrDefault().ToString();
                     
                     if (isBruker)
                     {
                         lblOppgaver.Text += "<h2>Statestikk</h2>";
                         lblOppgaver.Text += "<h4>Påbegynte oppgaver:</h4>";
-                        // Venter på timeregistrering for mer data..
+
+                        List<Time> timeListe = Queries.GetTimerForBruker(bruker_id);
+                        
+                        
+
                         foreach (Oppgave oppgave in oppgaveListe)
                         {
-                            lsbOppgaver.Items.Add(new ListItem(oppgave.Tittel + "Brukt tid: " + oppgave.BruktTid, "VisOppgave.aspx?oppgave_id=" 
+                            TimeSpan sum = new TimeSpan();
+                            foreach (Time time in timeListe)
+                            {
+                                if (time.Oppgave_id == oppgave.Oppgave_id)
+                                {
+                                    sum += time.Tid;
+                                }
+                            }
+                            lsbOppgaver.Items.Add(new ListItem(oppgave.Tittel + " Brukt tid: " + sum.ToString(), "VisOppgave.aspx?oppgave_id=" 
                                 + oppgave.Oppgave_id));
 
                         }
@@ -65,7 +78,6 @@ namespace SysUt14Gr03
                         }
 
                         lblHistorikk.Text += "<h4>Historikk</h4>";
-                        // Venter på datofelt for mer data..
                         List<Logg> loggListe = Queries.GetLoggForBruker(bruker_id);
                         foreach (Logg logg in loggListe)
                         {

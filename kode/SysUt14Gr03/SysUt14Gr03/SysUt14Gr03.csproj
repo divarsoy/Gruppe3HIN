@@ -166,6 +166,7 @@
     <Content Include="Account\OpenAuthProviders.ascx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\RegisterExternalLogin.aspx" />
+    <Content Include="DeaktiveringAvRegistrerteTimer.aspx" />
     <Content Include="Loggut.aspx" />
     <Content Include="ManuellTimeregistrering.aspx" />
     <Content Include="Prosjektleder\AdministrasjonAvProsjekt.aspx" />
@@ -314,6 +315,13 @@
       <DependentUpon>RegisterExternalLogin.aspx</DependentUpon>
     </Compile>
     <Compile Include="Classes\SessionSjekk.cs" />
+    <Compile Include="DeaktiveringAvRegistrerteTimer.aspx.cs">
+      <DependentUpon>DeaktiveringAvRegistrerteTimer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DeaktiveringAvRegistrerteTimer.aspx.designer.cs">
+      <DependentUpon>DeaktiveringAvRegistrerteTimer.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Loggut.aspx.cs">
       <DependentUpon>Loggut.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

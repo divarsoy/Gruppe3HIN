@@ -176,6 +176,8 @@ namespace SysUt14Gr03
                     {
                         bruktTid -= pauser;
                         ViewState["bruktTid"] = bruktTid;
+                        ViewState["startTid"] = startTid;
+                        ViewState["sluttTid"] = sluttTid;
 
                         DateTime dato = DateTime.Parse(ddlDag.SelectedValue);
 
@@ -208,6 +210,8 @@ namespace SysUt14Gr03
         {
             DateTime dato = DateTime.Parse(ddlDag.SelectedValue);
             bruktTid = (TimeSpan)ViewState["bruktTid"];
+            DateTime startTid = (DateTime)ViewState["startTid"];
+            DateTime sluttTid = (DateTime)ViewState["sluttTid"];
 
             using (var context = new Context())
             {
@@ -217,9 +221,12 @@ namespace SysUt14Gr03
                 {
                     Tid = bruktTid,
                     Opprettet = dato,
+                    Manuell = true,
                     Aktiv = true,
                     Bruker = bruker,
-                    Oppgave = oppgave
+                    Oppgave = oppgave,
+                    Start = startTid,
+                    Stopp = sluttTid
                 };
 
                 context.Timer.Add(time);
