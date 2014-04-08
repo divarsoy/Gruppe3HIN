@@ -23,10 +23,10 @@ namespace SysUt14Gr03
 
         protected void LoginButton_Click(object sender, EventArgs e)
         {
-            string epost = Epost.Text;
+            string brukernavn = Brukernavn.Text;
             string oppgittPassord = Password.Text;
 
-            Bruker bruker = Queries.GetBrukerVedBrukernavn(epost);
+            Bruker bruker = Queries.GetBrukerVedBrukernavn(brukernavn);
 
             if (bruker != null)
             {

@@ -4,15 +4,15 @@
         <h1>Logg inn</h1>
         <div class="ettellerannet">
             <div class ="form-group">
-                <label for="epostInput" class="col-sm-2 control-label">E-postadresse</label>
+                <label for="Brukernavn" class="col-sm-1 control-label">Brukernavn</label>
                 <div class="col-sm-4">
-                    <asp:TextBox ID="Epost" runat="server" placeholder="Tast inn E-postadressen din" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox ID="Brukernavn" runat="server" placeholder="Tast inn brukernavnet ditt" CssClass="form-control"></asp:TextBox>
                 </div>
             </div>
             <div class="clearfix"></div>
 
             <div class="form-group">
-                <label for="passordInput" class="col-sm-2 control-label">Passord</label>
+                <label for="Password" class="col-sm-1 control-label">Passord</label>
                 <div class="col-sm-4">
                     <asp:TextBox ID="Password" runat="server" CssClass="form-control" placeholder="Tast inn ditt passord" TextMode="Password"></asp:TextBox>
                 </div>
@@ -31,10 +31,10 @@
             </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-1">
+            <div class="col-sm-offset-2 col-sm-2">
                 <asp:Button CssClass="btn btn-primary" ID="LoginButton" runat="server" Text="Logg inn" OnClick="LoginButton_Click" />
             </div>
-            <div class="col-sm-1">
+            <div class="col-sm-2">
                 <asp:Button CssClass="btn btn-default" ID="btnGlemtPassord" runat="server" Text="Glemt Passord?" OnClick="btnGlemtPassord_Click"/>
             </div>
         </div>
