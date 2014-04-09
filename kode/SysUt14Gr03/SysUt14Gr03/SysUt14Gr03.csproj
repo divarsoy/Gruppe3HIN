@@ -166,6 +166,8 @@
     <Content Include="Account\OpenAuthProviders.ascx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\RegisterExternalLogin.aspx" />
+    <Content Include="Content\shepherd-theme-arrows-plain-buttons.css" />
+    <Content Include="Content\shepherd-theme-arrows.css" />
     <Content Include="DeaktiveringAvRegistrerteTimer.aspx" />
     <Content Include="Loggut.aspx" />
     <Content Include="ManuellTimeregistrering.aspx" />
@@ -180,6 +182,9 @@
     <Content Include="Brukere.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="RapportTestForm.aspx" />
+    <Content Include="Scripts\MorildSheperdAdministrator.js" />
+    <Content Include="Scripts\shepherd.js" />
+    <Content Include="Scripts\shepherd.min.js" />
     <Content Include="Utvikler\DefaultUtvikler.aspx" />
     <Content Include="changeUser.aspx" />
     <Content Include="Contact.aspx" />
