@@ -19,11 +19,12 @@ namespace SysUt14Gr03.Models
         public DbSet<Prioritering> Prioriteringer { get; set; }
         public DbSet<Prosjekt> Prosjekter { get; set; }
         public DbSet<Rettighet> Rettigheter { get; set; }
-        public DbSet<Status> Status { get; set; }
+        public DbSet<Status> Statuser { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<Notifikasjon> Notifikasjoner { get; set; }
         public DbSet<NotifikasjonsType> NotifikasjonsType { get; set; }
         public DbSet<Time> Timer { get; set; }
+        public DbSet<Pause> Pauser { get; set; }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

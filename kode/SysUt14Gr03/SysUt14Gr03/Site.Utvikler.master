@@ -11,7 +11,14 @@
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Prosjekter <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li> <a runat="server" href="~/AdministrasjonAvProsjekt">Administrasjon Av Prosjekt</a></li>
+                    <li> <a runat="server" href="~/visProsjekt">Vis Prosjekter</a></li>
+                </ul> 
+    </ul>
+    <ul class="nav navbar-nav">
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Team <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li> <a runat="server" href="~/visProsjekt">Vis Team</a></li>
                 </ul> 
     </ul>
 
@@ -19,7 +26,7 @@
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Oppgaver <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li> <a runat="server" href="~/AdministrasjonAvProsjekt">Administrasjon Av Prosjekt</a></li>
+                    <li> <a runat="server" href="~/visOppgaver">Vis Oppgaver</a></li>
                 </ul> 
     </ul>
 

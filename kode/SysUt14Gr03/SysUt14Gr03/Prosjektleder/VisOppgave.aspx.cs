@@ -178,7 +178,7 @@ namespace SysUt14Gr03
             {
                 Bruker bruker = context.Brukere.FirstOrDefault(b => b.Bruker_id == bruker_id);
                 Oppgave oppgave = context.Oppgaver.FirstOrDefault(o => o.Oppgave_id == oppgave_id);
-                Status status = context.Status.FirstOrDefault(s => s.Status_id == 2);
+                Status status = context.Statuser.FirstOrDefault(s => s.Status_id == 2);
 
                 List<Bruker> tmpBruker = oppgave.Brukere;
                 // Sjekker om bruker allerede er lagt til

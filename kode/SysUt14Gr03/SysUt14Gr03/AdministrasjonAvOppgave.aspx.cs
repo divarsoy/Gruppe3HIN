@@ -101,7 +101,7 @@ namespace SysUt14Gr03
                     int status_id = Convert.ToInt32(ddlStatus.SelectedValue);
                     Prioritering pri = context.Prioriteringer.FirstOrDefault(id => id.Prioritering_id == priorietring_id);
                     Prosjekt pro = context.Prosjekter.FirstOrDefault(id => id.Prosjekt_id == prosjekt_id);
-                    Status sta = context.Status.FirstOrDefault(id => id.Status_id == status_id);
+                    Status sta = context.Statuser.FirstOrDefault(id => id.Status_id == status_id);
 
                     foreach (ListItem s in lbBrukere.Items)
                     {

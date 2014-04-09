@@ -160,7 +160,7 @@ namespace SysUt14Gr03.Classes
         {
             using (var context = new Context())
             {
-                var result = context.Status.Where(status => status.Status_id == _status_id).FirstOrDefault();
+                var result = context.Statuser.Where(status => status.Status_id == _status_id).FirstOrDefault();
                 return result;
             }
         }
@@ -342,7 +342,7 @@ namespace SysUt14Gr03.Classes
         {
             using (var context = new Context())
             {
-                var status = (from statuser in context.Status
+                var status = (from statuser in context.Statuser
                               select statuser).ToList<Status>();
                 return status;
             }

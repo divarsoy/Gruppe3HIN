@@ -29,7 +29,7 @@ namespace SysUt14Gr03
             {
                 teamListe = Queries.GetAlleAktiveTeam();
                 brukerListe = Queries.GetProsjektledere(Konstanter.rettighet.Prosjektleder);
-
+                
                 for (int i = 0; i < teamListe.Count(); i++)
                 {
                     Team team = teamListe[i];
@@ -90,13 +90,33 @@ namespace SysUt14Gr03
 
         protected void btnStart_Click(object sender, EventArgs e)
         {
-            tbStart.Text = cal.SelectedDate.ToShortDateString();
-
+            lblFeil.Visible = false;
+            if (cal.SelectedDate == DateTime.Parse("01.01.0001"))
+            {
+                lblFeil.Visible = true;
+                lblFeil.Text = "Du må velge en dato";
+                lblFeil.ForeColor = Color.Red;
+            }
+            else
+            {
+                tbStart.Text = cal.SelectedDate.ToShortDateString();
+            }
+                 
         }
 
         protected void btnSlutt_Click(object sender, EventArgs e)
         {
-            tbSlutt.Text = cal.SelectedDate.ToShortDateString();
+            lblFeil.Visible = false;
+            if (cal.SelectedDate == DateTime.Parse("01.01.0001"))
+            {
+                lblFeil.Visible = true;
+                lblFeil.Text = "Du må velge en dato";
+                lblFeil.ForeColor = Color.Red;
+            }
+            else
+            {
+                tbSlutt.Text = cal.SelectedDate.ToShortDateString();
+            }
         }
 
     }
