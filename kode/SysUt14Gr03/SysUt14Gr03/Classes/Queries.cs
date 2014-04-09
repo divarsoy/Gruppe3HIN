@@ -14,7 +14,12 @@ namespace SysUt14Gr03.Classes
         {
             using (var context = new Context())
             {
-                var bruker = context.Brukere.Find(_bruker_id);
+                var bruker = context.Brukere
+                    .Include("Prosjekter")
+                    .Include("Teams")
+                    .Include("Oppgaver")
+                    .Where(b => b.Bruker_id == _bruker_id)
+                            .FirstOrDefault();
                 return bruker;
             }
         }
@@ -68,6 +73,17 @@ namespace SysUt14Gr03.Classes
             {
                 var timeListe = context.Timer
                             .Where(t => t.Bruker_id == bruker_id)
+                            .ToList<Time>();
+                return timeListe;
+            }
+        }
+
+        static public List<Time> GetTimerForOppgave(int oppgave_id)
+        {
+            using (var context = new Context())
+            {
+                var timeListe = context.Timer
+                            .Where(t => t.Oppgave_id == oppgave_id)
                             .ToList<Time>();
                 return timeListe;
             }
@@ -134,7 +150,10 @@ namespace SysUt14Gr03.Classes
         {
             using (var context = new Context())
             {
-                Prosjekt prosjekt = context.Prosjekter.Find(prosjekt_id);
+                Prosjekt prosjekt = context.Prosjekter
+                    .Include("Team")
+                    .Include("Oppgaver")
+                    .Where(p => p.Prosjekt_id == prosjekt_id).FirstOrDefault();
                 return prosjekt;
             }
         }
@@ -442,7 +461,7 @@ namespace SysUt14Gr03.Classes
         {
             using (var context = new Context())
             {
-                Team valgtTeam = context.Teams.Include("Brukere").Where(Team => Team.Team_id == teamId).FirstOrDefault();
+                Team valgtTeam = context.Teams.Include("Brukere").Include("Prosjekter").Where(Team => Team.Team_id == teamId).FirstOrDefault();
                 return valgtTeam;
             }
         }
@@ -627,6 +646,7 @@ namespace SysUt14Gr03.Classes
                 return prosjektNavn;
             }
         }
+        // Fungerer ikke pls fix
         public static string getStatusNavn(int status_id)
         {
             using (SqlCommand command = new SqlCommand())

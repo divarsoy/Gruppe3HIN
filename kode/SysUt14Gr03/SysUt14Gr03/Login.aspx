@@ -34,8 +34,8 @@
             <div class="col-sm-offset-2 col-sm-2">
                 <asp:Button CssClass="btn btn-primary" ID="LoginButton" runat="server" Text="Logg inn" OnClick="LoginButton_Click" />
             </div>
-            <div class="col-sm-2">
-                <asp:Button CssClass="btn btn-default" ID="btnGlemtPassord" runat="server" Text="Glemt Passord?" OnClick="btnGlemtPassord_Click"/>
+            <div class="col-sm-1">
+                <asp:Button CssClass="btn btn-danger" ID="btnGlemtPassord" runat="server" Text="Glemt Passord?" OnClick="btnGlemtPassord_Click"/>
             </div>
         </div>
         <div class="clearfix"></div>
