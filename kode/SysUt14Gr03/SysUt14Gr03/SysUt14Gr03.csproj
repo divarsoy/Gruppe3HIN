@@ -179,6 +179,7 @@
     <Content Include="ArkiveringAvKommentarer.aspx" />
     <Content Include="Brukere.aspx" />
     <Content Include="Default.aspx" />
+    <Content Include="RapportTestForm.aspx" />
     <Content Include="Utvikler\DefaultUtvikler.aspx" />
     <Content Include="changeUser.aspx" />
     <Content Include="Contact.aspx" />
@@ -200,7 +201,7 @@
     <Content Include="Administrator\OversiktBrukereSomAdministrator.aspx" />
     <Content Include="Prosjektleder\OversiktBrukereSomProsjektleder.aspx" />
     <Content Include="OversiktBrukerSomUtvikler.aspx" />
-    <Content Include="Prosjektleder\OversiktOppgaver.aspx" />
+    <Content Include="OversiktOppgaver.aspx" />
     <Content Include="Prosjektleder\OversiktOverAlleTeam.aspx" />
     <Content Include="OversiktProsjekter.aspx" />
     <Content Include="Prosjektleder\OversiktProsjekterSomProsjektleder.aspx" />
@@ -259,7 +260,7 @@
     <Content Include="Timeregistrering.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Prosjektleder\VisBruker.aspx" />
-    <Content Include="Prosjektleder\VisOppgave.aspx" />
+    <Content Include="VisOppgave.aspx" />
     <Content Include="VisProsjekt.aspx" />
     <Content Include="VisTeam.aspx" />
     <Content Include="Web.config" />
@@ -314,6 +315,7 @@
     <Compile Include="Account\RegisterExternalLogin.aspx.designer.cs">
       <DependentUpon>RegisterExternalLogin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Classes\Rapport.cs" />
     <Compile Include="Classes\SessionSjekk.cs" />
     <Compile Include="DeaktiveringAvRegistrerteTimer.aspx.cs">
       <DependentUpon>DeaktiveringAvRegistrerteTimer.aspx</DependentUpon>
@@ -509,6 +511,13 @@
     <Compile Include="Administrator\RegistreringAvBrukereSomAdministrator.aspx.designer.cs">
       <DependentUpon>RegistreringAvBrukereSomAdministrator.aspx</DependentUpon>
     </Compile>
+    <Compile Include="RapportTestForm.aspx.cs">
+      <DependentUpon>RapportTestForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RapportTestForm.aspx.designer.cs">
+      <DependentUpon>RapportTestForm.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ReturAvOppgave.aspx.cs">
       <DependentUpon>ReturAvOppgave.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -608,11 +617,11 @@
     <Compile Include="Prosjektleder\OpprettTeam.aspx.designer.cs">
       <DependentUpon>OpprettTeam.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Prosjektleder\OversiktOppgaver.aspx.cs">
+    <Compile Include="OversiktOppgaver.aspx.cs">
       <DependentUpon>OversiktOppgaver.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Prosjektleder\OversiktOppgaver.aspx.designer.cs">
+    <Compile Include="OversiktOppgaver.aspx.designer.cs">
       <DependentUpon>OversiktOppgaver.aspx</DependentUpon>
     </Compile>
     <Compile Include="PameldingTilOppgave.aspx.cs">
@@ -739,11 +748,11 @@
     <Compile Include="Prosjektleder\VisBruker.aspx.designer.cs">
       <DependentUpon>VisBruker.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Prosjektleder\VisOppgave.aspx.cs">
+    <Compile Include="VisOppgave.aspx.cs">
       <DependentUpon>VisOppgave.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Prosjektleder\VisOppgave.aspx.designer.cs">
+    <Compile Include="VisOppgave.aspx.designer.cs">
       <DependentUpon>VisOppgave.aspx</DependentUpon>
     </Compile>
     <Compile Include="VisProsjekt.aspx.cs">
