@@ -408,7 +408,6 @@
     </Compile>
     <Compile Include="Classes\Hash.cs" />
     <Compile Include="Classes\NotifikasjonFlash.cs" />
-    <Compile Include="Classes\Passord.cs" />
     <Compile Include="Administrator\DefaultAdministrator.aspx.cs">
       <DependentUpon>DefaultAdministrator.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

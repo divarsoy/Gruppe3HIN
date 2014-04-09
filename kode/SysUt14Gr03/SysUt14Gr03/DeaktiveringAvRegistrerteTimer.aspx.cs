@@ -23,9 +23,9 @@ namespace SysUt14Gr03
                 foreach (Time time in timeListe)
                 {
                     Oppgave oppgListe = Queries.GetOppgave(time.Oppgave_id);
-                    lblRegTimer.Visible = true;
-
-                    lblRegTimer.Text += "<br />" + time.Tid + " " + oppgListe.Tittel + "\n";
+                    lbTimer.Visible = true;
+                    lbTimer.Items.Add(new ListItem(time.Tid + " (t/m/s) : " + oppgListe.Tittel, oppgListe.Oppgave_id.ToString()));
+                    // lblRegTimer.Text += "<br />" + time.Tid + " (t/m/s) " + oppgListe.Tittel + "\n";
                 }
             }
         }
@@ -36,6 +36,16 @@ namespace SysUt14Gr03
         }
 
         protected void btnEndre_Click(object sender, EventArgs e)
+        {
+            lbEndre.Items.Clear();
+            int oppg_id = Convert.ToInt32(lbTimer.SelectedValue);
+            lbEndre.Visible = true;
+            Oppgave oppg = Queries.GetOppgave(oppg_id);
+
+            lbEndre.Items.Add(new ListItem(oppg.Tittel + " " + oppg.UserStory, oppg.Oppgave_id.ToString()));
+        }
+
+        protected void lbTimer_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
