@@ -78,6 +78,17 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        static public List<Time> GetTimerForOppgave(int oppgave_id)
+        {
+            using (var context = new Context())
+            {
+                var timeListe = context.Timer
+                            .Where(t => t.Oppgave_id == oppgave_id)
+                            .ToList<Time>();
+                return timeListe;
+            }
+        }
+
         static public List<Notifikasjon> GetNotifikasjon(int bruker_id)
         {
             using (var context = new Context())
