@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SysUt14Gr03.Models
 {
+    [Table("Timer")]
     public class Time
     {
         [Key]
@@ -14,9 +16,12 @@ namespace SysUt14Gr03.Models
         public DateTime Opprettet { get; set; }
         public Boolean Aktiv { get; set; }
         public Boolean Manuell { get; set; }
+        public Boolean IsFerdig { get; set; }
 
         public int Oppgave_id { get; set; }
         public int Bruker_id { get; set; }
+
+        public virtual List<Pause> Pause { get; set; }
 
         public virtual Bruker Bruker { get; set; }
         public virtual Oppgave Oppgave { get; set; }

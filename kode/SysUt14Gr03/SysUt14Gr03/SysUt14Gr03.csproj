@@ -332,6 +332,7 @@
     <Compile Include="ManuellTimeregistrering.aspx.designer.cs">
       <DependentUpon>ManuellTimeregistrering.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Pause.cs" />
     <Compile Include="Models\Time.cs" />
     <Compile Include="ManuellTimeregistrering.aspx.cs">
       <DependentUpon>ManuellTimeregistrering.aspx</DependentUpon>

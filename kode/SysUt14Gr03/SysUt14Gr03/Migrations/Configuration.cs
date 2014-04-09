@@ -443,7 +443,7 @@ namespace SysUt14Gr03.Migrations
                     Oppgaver = new List<Oppgave>()
                 }
             };
-            statuser.ForEach(element => context.Status.AddOrUpdate(status => status.Navn, element));
+            statuser.ForEach(element => context.Statuser.AddOrUpdate(status => status.Navn, element));
             context.SaveChanges();
 
             var prioriteringer = new List <Prioritering> {
@@ -521,7 +521,7 @@ namespace SysUt14Gr03.Migrations
                     Prosjekt_id = context.Prosjekter.FirstOrDefault(prosjekt => prosjekt.Navn == "Rød Elv").Prosjekt_id,
                     OppgaveGruppe_id = context.OppgaveGrupper.FirstOrDefault(oppgaveGruppe => oppgaveGruppe.Navn == "Administrative Oppgaver").OppgaveGruppe_id,
                     Prioritering_id = context.Prioriteringer.FirstOrDefault(prioritering => prioritering.Navn == "1").Prioritering_id,
-                    Status_id = context.Status.FirstOrDefault(status => status.Navn == "Ferdig").Status_id,
+                    Status_id = context.Statuser.FirstOrDefault(status => status.Navn == "Ferdig").Status_id,
                     Kommentarer = new List<Kommentar>(),
                     Brukere = new List<Bruker>()
                 },
@@ -539,7 +539,7 @@ namespace SysUt14Gr03.Migrations
                     Prosjekt_id = context.Prosjekter.FirstOrDefault(prosjekt => prosjekt.Navn == "Rød Elv").Prosjekt_id,
                     OppgaveGruppe_id = context.OppgaveGrupper.FirstOrDefault(oppgaveGruppe => oppgaveGruppe.Navn == "Administrative Oppgaver").OppgaveGruppe_id,
                     Prioritering_id = context.Prioriteringer.FirstOrDefault(prioritering => prioritering.Navn == "2").Prioritering_id,
-                    Status_id = context.Status.FirstOrDefault(status => status.Navn == "Under Arbeid").Status_id,
+                    Status_id = context.Statuser.FirstOrDefault(status => status.Navn == "Under Arbeid").Status_id,
                     Kommentarer = new List<Kommentar>(),
                     Brukere = new List<Bruker>()
                 },
@@ -557,7 +557,7 @@ namespace SysUt14Gr03.Migrations
                     Prosjekt_id = context.Prosjekter.FirstOrDefault(prosjekt => prosjekt.Navn == "Rød Elv").Prosjekt_id,
                     OppgaveGruppe_id = context.OppgaveGrupper.FirstOrDefault(oppgaveGruppe => oppgaveGruppe.Navn == "Administrative Oppgaver").OppgaveGruppe_id,
                     Prioritering_id = context.Prioriteringer.FirstOrDefault(prioritering => prioritering.Navn == "3").Prioritering_id,
-                    Status_id = context.Status.FirstOrDefault(status => status.Navn == "Klar").Status_id,
+                    Status_id = context.Statuser.FirstOrDefault(status => status.Navn == "Klar").Status_id,
                     Kommentarer = new List<Kommentar>(),
                     Brukere = new List<Bruker>()
                 },
@@ -571,7 +571,7 @@ namespace SysUt14Gr03.Migrations
                     Aktiv = true,
                     Opprettet = DateTime.Now,
                     Prosjekt_id = context.Prosjekter.FirstOrDefault(prosjekt => prosjekt.Navn == "Rød Elv").Prosjekt_id,
-                    Status_id = context.Status.FirstOrDefault(status => status.Navn == "Klar").Status_id,
+                    Status_id = context.Statuser.FirstOrDefault(status => status.Navn == "Klar").Status_id,
                     Kommentarer = new List<Kommentar>(),
                     Brukere = new List<Bruker>()
                 },
@@ -587,7 +587,7 @@ namespace SysUt14Gr03.Migrations
                     Startet = DateTime.Now.AddDays(-2),
                     Oppdatert = DateTime.Now.AddDays(-1),
                     Prosjekt_id = context.Prosjekter.FirstOrDefault(prosjekt => prosjekt.Navn == "Blå spurv").Prosjekt_id,
-                    Status_id = context.Status.FirstOrDefault(status => status.Navn == "Klar").Status_id,
+                    Status_id = context.Statuser.FirstOrDefault(status => status.Navn == "Klar").Status_id,
                     Kommentarer = new List<Kommentar>(),
                     Brukere = new List<Bruker>()
                 },
@@ -604,7 +604,7 @@ namespace SysUt14Gr03.Migrations
                     Startet = DateTime.Now.AddDays(-2),
                     Oppdatert = DateTime.Now.AddDays(-1),
                     Prosjekt_id = context.Prosjekter.FirstOrDefault(prosjekt => prosjekt.Navn == "Blå spurv").Prosjekt_id,
-                    Status_id = context.Status.FirstOrDefault(status => status.Navn == "Klar").Status_id,
+                    Status_id = context.Statuser.FirstOrDefault(status => status.Navn == "Klar").Status_id,
                     Kommentarer = new List<Kommentar>(),
                     Brukere = new List<Bruker>()
                 },
@@ -618,7 +618,7 @@ namespace SysUt14Gr03.Migrations
                     Aktiv = true,
                     Opprettet = DateTime.Now,
                     Prosjekt_id = context.Prosjekter.FirstOrDefault(prosjekt => prosjekt.Navn == "Blå spurv").Prosjekt_id,
-                    Status_id = context.Status.FirstOrDefault(status => status.Navn == "Klar").Status_id,
+                    Status_id = context.Statuser.FirstOrDefault(status => status.Navn == "Klar").Status_id,
                     Kommentarer = new List<Kommentar>(),
                     Brukere = new List<Bruker>()
                 },
@@ -637,7 +637,7 @@ namespace SysUt14Gr03.Migrations
                     Prosjekt_id = context.Prosjekter.FirstOrDefault(prosjekt => prosjekt.Navn == "Grå ulv").Prosjekt_id,
                     OppgaveGruppe_id = context.OppgaveGrupper.FirstOrDefault(oppgaveGruppe => oppgaveGruppe.Navn == "Funksjonelle oppgaver").OppgaveGruppe_id,
                     Prioritering_id = context.Prioriteringer.FirstOrDefault(prioritering => prioritering.Navn == "1").Prioritering_id,
-                    Status_id = context.Status.FirstOrDefault(status => status.Navn == "Ferdig").Status_id,
+                    Status_id = context.Statuser.FirstOrDefault(status => status.Navn == "Ferdig").Status_id,
                     Kommentarer = new List<Kommentar>(),
                     Brukere = new List<Bruker>()
                 },
@@ -655,7 +655,7 @@ namespace SysUt14Gr03.Migrations
                     Prosjekt_id = context.Prosjekter.FirstOrDefault(prosjekt => prosjekt.Navn == "Grå ulv").Prosjekt_id,
                     OppgaveGruppe_id = context.OppgaveGrupper.FirstOrDefault(oppgaveGruppe => oppgaveGruppe.Navn == "Funksjonelle oppgaver").OppgaveGruppe_id,
                     Prioritering_id = context.Prioriteringer.FirstOrDefault(prioritering => prioritering.Navn == "2").Prioritering_id,
-                    Status_id = context.Status.FirstOrDefault(status => status.Navn == "Under Arbeid").Status_id,
+                    Status_id = context.Statuser.FirstOrDefault(status => status.Navn == "Under Arbeid").Status_id,
                     Kommentarer = new List<Kommentar>(),
                     Brukere = new List<Bruker>()
                 },
@@ -671,7 +671,7 @@ namespace SysUt14Gr03.Migrations
                     Prosjekt_id = context.Prosjekter.FirstOrDefault(prosjekt => prosjekt.Navn == "Grå ulv").Prosjekt_id,
                     OppgaveGruppe_id = context.OppgaveGrupper.FirstOrDefault(oppgaveGruppe => oppgaveGruppe.Navn == "Funksjonelle oppgaver").OppgaveGruppe_id,
                     Prioritering_id = context.Prioriteringer.FirstOrDefault(prioritering => prioritering.Navn == "3").Prioritering_id,
-                    Status_id = context.Status.FirstOrDefault(status => status.Navn == "Klar").Status_id,
+                    Status_id = context.Statuser.FirstOrDefault(status => status.Navn == "Klar").Status_id,
                     Kommentarer = new List<Kommentar>(),
                     Brukere = new List<Bruker>()
                 },
@@ -688,7 +688,7 @@ namespace SysUt14Gr03.Migrations
                     Prosjekt_id = context.Prosjekter.FirstOrDefault(prosjekt => prosjekt.Navn == "Rød Elv").Prosjekt_id,
                     OppgaveGruppe_id = context.OppgaveGrupper.FirstOrDefault(oppgaveGruppe => oppgaveGruppe.Navn == "Administrative Oppgaver").OppgaveGruppe_id,
                     Prioritering_id = context.Prioriteringer.FirstOrDefault(prioritering => prioritering.Navn == "1").Prioritering_id,
-                    Status_id = context.Status.FirstOrDefault(status => status.Navn == "Klar").Status_id,
+                    Status_id = context.Statuser.FirstOrDefault(status => status.Navn == "Klar").Status_id,
                     Kommentarer = new List<Kommentar>(),
                     Brukere = new List<Bruker>()
                 },             
