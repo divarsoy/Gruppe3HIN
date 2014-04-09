@@ -20,13 +20,10 @@ namespace SysUt14Gr03
         {
             if (!Page.IsPostBack)
             {
-                if (Session["bruker_id"] == null)
-                {
-                    Response.Redirect("~/Login.aspx", true);
-                }
-                else {
-                    bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
-                }
+              
+                SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Utvikler);
+                bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
+
                 Bruker bruker = Queries.GetBruker(bruker_id);
                 Fornavn = bruker.Fornavn;
                 List<Prosjekt> listeMedProsjekter = Queries.GetAlleAktiveProsjekterForBruker(bruker_id);
@@ -53,8 +50,12 @@ namespace SysUt14Gr03
         {
             if (ListBoxProsjekt.SelectedItem.Value != null)
             {
+                int prosjekt_id = Validator.KonverterTilTall(ListBoxProsjekt.SelectedItem.Value);
                 Session["prosjekt_id"] = ListBoxProsjekt.SelectedItem.Value;
-                Response.Redirect(String.Format("OversiktOppgaver?bruker_id={0}&prosjekt_id={1}", Session["bruker_id"], ListBoxProsjekt.SelectedItem.Value));
+                Prosjekt prosjekt = Queries.GetProsjekt(prosjekt_id);
+                Session["prosjekt_navn"] = prosjekt.Navn;
+                lblValgtProsjekt.Text = String.Format("<h4>Valgt prosjekt er <b>{0}</b></h4>", prosjekt.Navn);
+                //Response.Redirect(String.Format("OversiktOppgaver?bruker_id={0}&prosjekt_id={1}", Session["bruker_id"], ListBoxProsjekt.SelectedItem.Value));
             }
         }
     }

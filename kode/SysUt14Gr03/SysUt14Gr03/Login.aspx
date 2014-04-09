@@ -4,7 +4,7 @@
         <h1>Logg inn</h1>
         <div class="ettellerannet">
             <div class ="form-group">
-                <label for="Brukernavn" class="col-sm-1 control-label">Brukernavn</label>
+                <label for="Brukernavn" class="col-sm-2 control-label">Brukernavn</label>
                 <div class="col-sm-4">
                     <asp:TextBox ID="Brukernavn" runat="server" placeholder="Tast inn brukernavnet ditt" CssClass="form-control"></asp:TextBox>
                 </div>
@@ -12,7 +12,7 @@
             <div class="clearfix"></div>
 
             <div class="form-group">
-                <label for="Password" class="col-sm-1 control-label">Passord</label>
+                <label for="Password" class="col-sm-2 control-label">Passord</label>
                 <div class="col-sm-4">
                     <asp:TextBox ID="Password" runat="server" CssClass="form-control" placeholder="Tast inn ditt passord" TextMode="Password"></asp:TextBox>
                 </div>

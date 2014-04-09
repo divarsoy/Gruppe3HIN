@@ -31,21 +31,21 @@ namespace SysUt14Gr03 {
         protected global::System.Web.UI.WebControls.Button btnVelgProsjekt;
         
         /// <summary>
-        /// Calendar1 control.
+        /// lblValgtProsjekt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar Calendar1;
+        protected global::System.Web.UI.WebControls.Label lblValgtProsjekt;
         
         /// <summary>
-        /// Image1 control.
+        /// Calendar2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image1;
+        protected global::System.Web.UI.WebControls.Calendar Calendar2;
     }
 }
