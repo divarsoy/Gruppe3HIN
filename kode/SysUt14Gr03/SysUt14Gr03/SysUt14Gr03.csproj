@@ -179,6 +179,7 @@
     <Content Include="ArkiveringAvKommentarer.aspx" />
     <Content Include="Brukere.aspx" />
     <Content Include="Default.aspx" />
+    <Content Include="RapportTestForm.aspx" />
     <Content Include="Utvikler\DefaultUtvikler.aspx" />
     <Content Include="changeUser.aspx" />
     <Content Include="Contact.aspx" />
@@ -314,6 +315,7 @@
     <Compile Include="Account\RegisterExternalLogin.aspx.designer.cs">
       <DependentUpon>RegisterExternalLogin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Classes\Rapport.cs" />
     <Compile Include="Classes\SessionSjekk.cs" />
     <Compile Include="DeaktiveringAvRegistrerteTimer.aspx.cs">
       <DependentUpon>DeaktiveringAvRegistrerteTimer.aspx</DependentUpon>
@@ -508,6 +510,13 @@
     </Compile>
     <Compile Include="Administrator\RegistreringAvBrukereSomAdministrator.aspx.designer.cs">
       <DependentUpon>RegistreringAvBrukereSomAdministrator.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RapportTestForm.aspx.cs">
+      <DependentUpon>RapportTestForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RapportTestForm.aspx.designer.cs">
+      <DependentUpon>RapportTestForm.aspx</DependentUpon>
     </Compile>
     <Compile Include="ReturAvOppgave.aspx.cs">
       <DependentUpon>ReturAvOppgave.aspx</DependentUpon>

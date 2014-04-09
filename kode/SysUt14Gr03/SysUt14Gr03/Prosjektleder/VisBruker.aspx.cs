@@ -18,6 +18,7 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            //
             //SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
             innloggetBruker_id = 2;
 
@@ -61,6 +62,10 @@ namespace SysUt14Gr03
                                 + oppgave.Oppgave_id));
 
                         }
+
+                        if (oppgaveListe.Count > 0)
+                            lsbOppgaver.Visible = true;
+
                         lblKommentarer.Text += "<br /><h4>Team:</h4>";
                         foreach (Team team in teamListe)
                         {
@@ -77,13 +82,24 @@ namespace SysUt14Gr03
 
                         }
 
+                        if (kommentarListe.Count > 0)
+                            lsbKommentarer.Visible = true;
+
                         lblHistorikk.Text += "<h4>Historikk</h4>";
                         List<Logg> loggListe = Queries.GetLoggForBruker(bruker_id);
-                        foreach (Logg logg in loggListe)
+                        if (loggListe.Count > 0)
                         {
-                            lsbLogg.Items.Add(new ListItem(logg.Opprettet.ToShortDateString() + ": " + logg.Hendelse));
+                            foreach (Logg logg in loggListe)
+                            {
+                                lsbLogg.Items.Add(new ListItem(logg.Opprettet.ToShortDateString() + ": " + logg.Hendelse));
 
+                            }
                         }
+                        else
+                        {
+                            lsbLogg.Items.Add("Ingen hendelser...");
+                        }
+                        lsbLogg.Visible = true;
 
                         lblFullfort.Text += "<h4>Fullførte oppgaver</h4>";
                         List<Oppgave> ferdigeOppgaver = Queries.GetAlleFerdigeOppgaverForBruker(bruker_id);
@@ -92,6 +108,9 @@ namespace SysUt14Gr03
                             lsbFFullfort.Items.Add(new ListItem(oppgave.Tittel + ", brukt tid: " + oppgave.BruktTid + (oppgave.BruktTid == 1 ? " time" : " timer")));
 
                         }
+
+                        if (ferdigeOppgaver.Count > 0)
+                            lsbFFullfort.Visible = true;
 
                         lblPrefs.Text += "<h2>Mine instillinger</h2>";
 
@@ -111,14 +130,10 @@ namespace SysUt14Gr03
                     }
                     
                     lblInfo.Visible = true;
-                    lsbFFullfort.Visible = true;
-                    lsbKommentarer.Visible = true;
-                    lsbLogg.Visible = true;
                     lblFullfort.Visible = true;
                     lblLogg.Visible = true;
                     lblPrefs.Visible = true;
                     lblOppgaver.Visible = true;
-                    lsbOppgaver.Visible = true;
                     lblKommentarer.Visible = true;
                     btnPrefs.Visible = true;
                 }
