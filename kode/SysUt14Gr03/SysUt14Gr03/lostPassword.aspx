@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="lostPassword.aspx.cs" Inherits="SysUt14Gr03.lostPassword" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContentTemplate" Runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" Runat="Server">
     <h1>
         Få tilsendt et nytt passord</h1>
     <p>
