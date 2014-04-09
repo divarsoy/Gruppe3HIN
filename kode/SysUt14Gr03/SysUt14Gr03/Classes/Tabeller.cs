@@ -16,6 +16,7 @@ namespace SysUt14Gr03.Classes
         {
             Table tabell = new Table();
             TableHeaderRow headerRow = new TableHeaderRow();
+            TableHeaderCell idHeaderCell = new TableHeaderCell();
             TableHeaderCell tittelHeaderCell = new TableHeaderCell();
             TableHeaderCell statusHeaderCell = new TableHeaderCell();
             TableHeaderCell estimatHeaderCell = new TableHeaderCell();
@@ -24,6 +25,7 @@ namespace SysUt14Gr03.Classes
             TableHeaderCell brukerHeaderCell = new TableHeaderCell();
             TableHeaderCell kommentarerHeaderCell = new TableHeaderCell();
 
+            idHeaderCell.Text = "Id";
             tittelHeaderCell.Text = "Tittel";
             statusHeaderCell.Text = "Status";
             estimatHeaderCell.Text = "Estimat";
@@ -32,6 +34,7 @@ namespace SysUt14Gr03.Classes
             brukerHeaderCell.Text = "Brukere";
             kommentarerHeaderCell.Text = "Kommentarer";
 
+            headerRow.Cells.Add(idHeaderCell);
             headerRow.Cells.Add(tittelHeaderCell);
             headerRow.Cells.Add(statusHeaderCell);
             headerRow.Cells.Add(estimatHeaderCell);
@@ -49,6 +52,7 @@ namespace SysUt14Gr03.Classes
                     brukereIOppgave.Append(String.Format("<a href='VisBruker?bruker_id={0}'>{1} </a>", bruker.Bruker_id, bruker.Brukernavn));
                 }
                 TableRow tRow = new TableRow();
+                TableCell idCell = new TableCell();
                 TableCell tittelCell = new TableCell();
                 TableCell statusCell = new TableCell();
                 TableCell estimatCell = new TableCell();
@@ -57,7 +61,8 @@ namespace SysUt14Gr03.Classes
                 TableCell brukerCell = new TableCell();
                 TableCell kommentarCell = new TableCell();
 
-                tittelCell.Text = String.Format("<a href='VisOppgave?oppgave_id={0}'>{1}</a>", oppgave.Oppgave_id.ToString(), oppgave.Tittel);
+                idCell.Text = String.Format("<a href='~/VisOppgave?oppgave_id={0}'>{1}</a>", oppgave.Oppgave_id.ToString(), oppgave.Oppgave_id.ToString());
+                tittelCell.Text = String.Format("<a href='~/VisOppgave?oppgave_id={0}'>{1}</a>", oppgave.Oppgave_id.ToString(), oppgave.Tittel);
                 statusCell.Text = Queries.GetStatus(oppgave.Status_id).Navn;
                 estimatCell.Text = oppgave.Estimat.ToString();
                 bruktTidCell.Text = oppgave.BruktTid.ToString();
@@ -65,6 +70,7 @@ namespace SysUt14Gr03.Classes
                 brukerCell.Text = brukereIOppgave.ToString();
                 kommentarCell.Text = oppgave.Kommentarer.Count.ToString();
 
+                tRow.Cells.Add(idCell);
                 tRow.Cells.Add(tittelCell);
                 tRow.Cells.Add(statusCell);
                 tRow.Cells.Add(estimatCell);

@@ -201,7 +201,7 @@
     <Content Include="Administrator\OversiktBrukereSomAdministrator.aspx" />
     <Content Include="Prosjektleder\OversiktBrukereSomProsjektleder.aspx" />
     <Content Include="OversiktBrukerSomUtvikler.aspx" />
-    <Content Include="Prosjektleder\OversiktOppgaver.aspx" />
+    <Content Include="OversiktOppgaver.aspx" />
     <Content Include="Prosjektleder\OversiktOverAlleTeam.aspx" />
     <Content Include="OversiktProsjekter.aspx" />
     <Content Include="Prosjektleder\OversiktProsjekterSomProsjektleder.aspx" />
@@ -260,7 +260,7 @@
     <Content Include="Timeregistrering.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Prosjektleder\VisBruker.aspx" />
-    <Content Include="Prosjektleder\VisOppgave.aspx" />
+    <Content Include="VisOppgave.aspx" />
     <Content Include="VisProsjekt.aspx" />
     <Content Include="VisTeam.aspx" />
     <Content Include="Web.config" />
@@ -617,11 +617,11 @@
     <Compile Include="Prosjektleder\OpprettTeam.aspx.designer.cs">
       <DependentUpon>OpprettTeam.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Prosjektleder\OversiktOppgaver.aspx.cs">
+    <Compile Include="OversiktOppgaver.aspx.cs">
       <DependentUpon>OversiktOppgaver.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Prosjektleder\OversiktOppgaver.aspx.designer.cs">
+    <Compile Include="OversiktOppgaver.aspx.designer.cs">
       <DependentUpon>OversiktOppgaver.aspx</DependentUpon>
     </Compile>
     <Compile Include="PameldingTilOppgave.aspx.cs">
@@ -748,11 +748,11 @@
     <Compile Include="Prosjektleder\VisBruker.aspx.designer.cs">
       <DependentUpon>VisBruker.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Prosjektleder\VisOppgave.aspx.cs">
+    <Compile Include="VisOppgave.aspx.cs">
       <DependentUpon>VisOppgave.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Prosjektleder\VisOppgave.aspx.designer.cs">
+    <Compile Include="VisOppgave.aspx.designer.cs">
       <DependentUpon>VisOppgave.aspx</DependentUpon>
     </Compile>
     <Compile Include="VisProsjekt.aspx.cs">

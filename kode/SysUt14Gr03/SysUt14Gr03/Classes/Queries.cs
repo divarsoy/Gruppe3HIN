@@ -547,7 +547,7 @@ namespace SysUt14Gr03.Classes
                 var brukerListe = context.Brukere
                                     .Include("Teams")
                                     .Include("Prosjekter")
-                                    .Where(bruker => bruker.Prosjekter.Any(prosjekt => prosjekt.Prosjekt_id == prosjekt_id))
+                                    .Where(bruker => bruker.Teams.Any(team => team.Prosjekter.Any(prosjekt => prosjekt.Prosjekt_id == prosjekt_id)))
                                     .OrderBy(bruker => bruker.Etternavn)
                                     .ToList();
                 return brukerListe;
