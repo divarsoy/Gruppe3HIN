@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Web;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 using SysUt14Gr03.Models;
 
@@ -60,9 +61,11 @@ namespace SysUt14Gr03.Classes
                 TableCell remainingCell = new TableCell();
                 TableCell brukerCell = new TableCell();
                 TableCell kommentarCell = new TableCell();
+                                
+                string oppgaveLink = idCell.ResolveUrl("~/VisOppgave?oppgave_id=" + oppgave.Oppgave_id.ToString());
 
-                idCell.Text = String.Format("<a href='~/VisOppgave?oppgave_id={0}'>{1}</a>", oppgave.Oppgave_id.ToString(), oppgave.Oppgave_id.ToString());
-                tittelCell.Text = String.Format("<a href='~/VisOppgave?oppgave_id={0}'>{1}</a>", oppgave.Oppgave_id.ToString(), oppgave.Tittel);
+                idCell.Text = string.Format("<a href='{0}'>{1}</a>", oppgaveLink, oppgave.Oppgave_id.ToString());
+                tittelCell.Text = string.Format("<a href='{0}'>{1}</a>", oppgaveLink, oppgave.Oppgave_id.ToString());
                 statusCell.Text = Queries.GetStatus(oppgave.Status_id).Navn;
                 estimatCell.Text = oppgave.Estimat.ToString();
                 bruktTidCell.Text = oppgave.BruktTid.ToString();
