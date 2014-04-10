@@ -21,16 +21,26 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
+
 
                 SessionSjekk.sjekkForBruker_id();
                 SessionSjekk.sjekkForProsjekt_id();
-
                 bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
                 prosjekt_id = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
-
                 Prosjekt prosjekt = Queries.GetProsjekt(prosjekt_id);
+
+                // Legger til Opprett oppgave knapp om innlogget bruker er prosjektlederen for prosjektet.
+                if (prosjekt.Bruker_id == bruker_id)
+                {
+                    Button btnopprettOppgave = new Button();
+                    btnopprettOppgave.Text = "Opprett Oppgave";
+                    btnopprettOppgave.CssClass = "btn btn-primary";
+                    btnopprettOppgave.Click += new EventHandler(btnOpprettOppgave_Click);
+                    PlaceHolderOpprettOppgave.Controls.Add(btnopprettOppgave);
+                }
+
+                if (!IsPostBack)
+                {
 
                 bool isBrukerMedIProsjekt = false;
                 var brukere = Queries.GetAlleBrukereIEtProjekt(prosjekt_id);
@@ -53,17 +63,8 @@ namespace SysUt14Gr03
 
                         Table oppgaveTable = Tabeller.HentOppgaveTabell(query);
                         oppgaveTable.CssClass = "table";
-                        PlaceHolderTable.Controls.Add(oppgaveTable);
-                        
-                        // Legger til Opprett oppgave knapp om innlogget bruker er prosjektlederen for prosjektet.
-                        if (prosjekt.Bruker_id == bruker_id)
-                        {
-                            Button btnopprettOppgave = new Button();
-                            btnopprettOppgave.Text = "Opprett Oppgave";
-                            btnopprettOppgave.CssClass = "btn btn-primary";
-                            btnopprettOppgave.Click += new EventHandler(btnOpprettOppgave_Click);
-                            PlaceHolderOpprettOppgave.Controls.Add(btnopprettOppgave);
-                        }
+                        PlaceHolderTable.Controls.Add(oppgaveTable);                      
+
                     }
                     else
                     {
@@ -84,7 +85,7 @@ namespace SysUt14Gr03
 
         protected void btnOpprettOppgave_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/OpprettOppgave", true);
+            Response.Redirect("~/Prosjektleder/OpprettOppgave", true);
         }
     }
 }
