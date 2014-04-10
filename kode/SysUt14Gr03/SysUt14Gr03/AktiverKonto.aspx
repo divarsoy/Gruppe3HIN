@@ -2,54 +2,63 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container">
         <div class="headerCenter">
-
+    
+            <asp:Label ID="lblAktivert" Visible="false" runat="server"></asp:Label>
+            <hr />
         
-    <p>
-        <asp:Label ID="lblAktivert" Visible="false" runat="server"></asp:Label>
-    </p>
-    <p>
+                <asp:Label CssClass="col-md-2 col-md-offset-3" ID="lblUsername" AssociatedControlID="Username" runat="server">Brukernavn:</asp:Label>
+            <div class="col-md-4">
+                <asp:TextBox CssClass="form-control" ID="Username" runat="server"></asp:TextBox>
+             </div>
+                <asp:RequiredFieldValidator ForeColor="#cc0000" CssClass="col-md-2" runat="server" ControlToValidate="Username" ErrorMessage="Feltet kan ikke være tomt"></asp:RequiredFieldValidator>
+               
+   
+  
+
+                <asp:Label CssClass="col-md-2 col-md-offset-3" ID="lblAftername" AssociatedControlID="Aftername" runat="server">Etternavn:</asp:Label>
+            <div class="col-md-4">
+                <asp:TextBox CssClass="form-control" ID="Aftername" runat="server"></asp:TextBox>
+            </div>
+                <asp:RequiredFieldValidator ForeColor="#cc0000" CssClass="col-md-2" runat="server" ControlToValidate="Aftername" ErrorMessage="Feltet kan ikke være tomt"></asp:RequiredFieldValidator>
+
+   
+        
+                <asp:Label CssClass="col-md-2 col-md-offset-3" ID="lblFirstname" AssociatedControlID="Firstname" runat="server">Fornavn:</asp:Label>
+            <div class="col-md-4">
+                <asp:TextBox CssClass="form-control" ID="Firstname" runat="server"></asp:TextBox>
+            </div>
+                <asp:RequiredFieldValidator ForeColor="#cc0000" CssClass="col-md-2" runat="server" ControlToValidate="Firstname" ErrorMessage="Feltet kan ikke være tomt"></asp:RequiredFieldValidator>
+
      
-        <asp:Label ID="lblUsername" AssociatedControlID="Username" runat="server">Brukernavn:</asp:Label>
-        <asp:TextBox CssClass="form-control" ID="Username" runat="server"></asp:TextBox>
-        <asp:RequiredFieldValidator runat="server" ControlToValidate="Username" ErrorMessage="Feltet kan ikke være tomt"></asp:RequiredFieldValidator>
-        <asp:Label ID="lblBrukernavnFeil" runat="server" Visible="false"></asp:Label>
-    </p>
-    <p>
-
-        <asp:Label ID="lblAftername" AssociatedControlID="Aftername" runat="server">Etternavn:</asp:Label>
-        <asp:TextBox CssClass="form-control" ID="Aftername" runat="server"></asp:TextBox>
-        <asp:RequiredFieldValidator runat="server" ControlToValidate="Aftername" ErrorMessage="Feltet kan ikke være tomt"></asp:RequiredFieldValidator>
-
-    </p>
-    <p>
-        
-        <asp:Label ID="lblFirstname" AssociatedControlID="Firstname" runat="server">Fornavn:</asp:Label>
-        <asp:TextBox CssClass="form-control" ID="Firstname" runat="server"></asp:TextBox>
-        <asp:RequiredFieldValidator runat="server" ControlToValidate="Firstname" ErrorMessage="Feltet kan ikke være tomt"></asp:RequiredFieldValidator>
-
-    </p>
-    <p> 
        
-        <asp:Label ID="lblEmail" AssociatedControlID="Email" runat="server">Epost:</asp:Label>
-        <asp:TextBox CssClass="form-control" ID="Email" runat="server"></asp:TextBox>
-        <asp:RequiredFieldValidator runat="server" ControlToValidate="Email" ErrorMessage="Feltet kan ikke være tomt"></asp:RequiredFieldValidator>
+                <asp:Label CssClass="col-md-2 col-md-offset-3" ID="lblEmail" AssociatedControlID="Email" runat="server">Epost:</asp:Label>
+            <div class="col-md-4">
+                <asp:TextBox CssClass="form-control" ID="Email" runat="server"></asp:TextBox>
+            </div>
+                <asp:RequiredFieldValidator ForeColor="#cc0000" CssClass="col-md-2" runat="server" ControlToValidate="Email" ErrorMessage="Feltet kan ikke være tomt"></asp:RequiredFieldValidator>
 
-    </p>
-    <p>
-        <asp:Label ID="lblImadress" AssociatedControlID="Im_adress" runat="server">IM Adresse:</asp:Label>
-        <asp:TextBox CssClass="form-control" ID="Im_adress" runat="server"></asp:TextBox>
-        <asp:RequiredFieldValidator runat="server" ControlToValidate="Im_adress" ErrorMessage="Feltet kan ikke være tomt"></asp:RequiredFieldValidator>
+    
+                <asp:Label CssClass="col-md-2 col-md-offset-3" ID="lblImadress" AssociatedControlID="Im_adress" runat="server">IM Adresse:</asp:Label>
+            <div class="col-md-4">
+                <asp:TextBox CssClass="form-control" ID="Im_adress" runat="server"></asp:TextBox>
+            </div>
+                <asp:RequiredFieldValidator ForeColor="#cc0000" CssClass="col-md-2" runat="server" ControlToValidate="Im_adress" ErrorMessage="Feltet kan ikke være tomt"></asp:RequiredFieldValidator>
 
-    </p>
-    <p>
-        <asp:Label ID="lblPassword" AssociatedControlID="Password" runat="server">Passord:</asp:Label>
-        <asp:TextBox CssClass="form-control" ID="Password" TextMode="Password" runat="server"></asp:TextBox>
-        <asp:RequiredFieldValidator runat="server" ControlToValidate="Password" ErrorMessage="Feltet kan ikke være tomt"></asp:RequiredFieldValidator>
-
-    </p>
-    <p>
-        <asp:Button CssClass="btn btn-primary" ID="ConfirmButton" runat="server" Text="Fullfør registrering" OnClick="ConfirmButton_Click" /> 
-    </p>
+    
+                <asp:Label CssClass="col-md-2 col-md-offset-3" ID="lblPassword" AssociatedControlID="Password" runat="server">Passord:</asp:Label>
+            <div class="col-md-4">
+                <asp:TextBox CssClass="form-control" ID="Password" TextMode="Password" runat="server"></asp:TextBox>
+            </div>
+                <asp:RequiredFieldValidator ForeColor="#cc0000" CssClass="col-md-2" runat="server" ControlToValidate="Password" ErrorMessage="Feltet kan ikke være tomt"></asp:RequiredFieldValidator>
+            
+            <div style="display:inline-block" class="col-md-2 col-md-offset-5">
+                <asp:Button CssClass="btn btn-primary" ID="ConfirmButton" runat="server" Text="Fullfør registrering" OnClick="ConfirmButton_Click" />
+                <asp:Label ID="lblBrukernavnFeil" runat="server" Visible="false"></asp:Label> 
+            </div> 
+            
+            
+                
+            
 
         </div>
     </div>
