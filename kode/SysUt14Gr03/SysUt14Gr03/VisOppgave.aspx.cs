@@ -161,13 +161,15 @@ namespace SysUt14Gr03
                                     }
                                 }
                             }
+                            txtKommentar.Text = "";
 
                         }
+
                     }
                     
                 }
                 lblKommentarer.Visible = true;
-                txtKommentar.Text = "";
+                
             } 
         }
 
