@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using SysUt14Gr03.Models;
 using SysUt14Gr03.Classes;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace SysUt14Gr03
 {
@@ -114,6 +115,7 @@ namespace SysUt14Gr03
                     {
                         lblMelding.Text = "Velg minst to oppgaver";
                         lblMelding.Visible = true;
+                        lblMelding.ForeColor = Color.Red;
                     }
 
                 }
@@ -122,6 +124,7 @@ namespace SysUt14Gr03
                 {
                     lblMelding.Text = "Maks antall oppgaver i en gruppe er 10";
                     lblMelding.Visible = true;
+                    lblMelding.ForeColor = Color.Red;
                 }
 
             }
@@ -129,6 +132,7 @@ namespace SysUt14Gr03
             {
                 lblMelding.Text = "Skriv inn et navn";
                 lblMelding.Visible = true;
+                lblMelding.ForeColor = Color.Red;
             }
             
         }

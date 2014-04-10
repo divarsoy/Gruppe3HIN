@@ -14,6 +14,7 @@ namespace SysUt14Gr03.Utvikler
         protected void Page_Load(object sender, EventArgs e)
         {
             SessionSjekk.sjekkForBruker_id();
+            SessionSjekk.sjekkForProsjekt_id();
 
             int brukerId = Validator.KonverterTilTall(Session["bruker_id"].ToString());
             List<Time> timer = Queries.GetTimerForBruker(brukerId);

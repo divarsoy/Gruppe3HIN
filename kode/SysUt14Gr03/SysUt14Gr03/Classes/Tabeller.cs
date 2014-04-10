@@ -199,6 +199,7 @@ namespace SysUt14Gr03.Classes
                 tabell.Rows.Add(tRow);
             }
 
+            tabell.CssClass = "table";
             return tabell;
         }
 
@@ -493,8 +494,8 @@ namespace SysUt14Gr03.Classes
             TableHeaderCell manuellHeaderCell = new TableHeaderCell();
 
             headerCell.Text = p.Navn.ToString();
-            oppgaveIdHeaderCell.Text = "Oppgave";
-            oppgaveHeaderCell.Text = "Oppgave ID";
+            oppgaveIdHeaderCell.Text = "Oppgave ID";
+            oppgaveHeaderCell.Text = "Oppgave";
             opprettetHeaderCell.Text = "Opprettet";
             startHeaderCell.Text = "Start";
             stoppHeaderCell.Text = "Stopp";
@@ -566,8 +567,8 @@ namespace SysUt14Gr03.Classes
             TableHeaderCell manuellHeaderCell = new TableHeaderCell();
 
             headerCell.Text = bruker.Brukernavn.ToString();
-            oppgaveIdHeaderCell.Text = "Oppgave";
-            oppgaveHeaderCell.Text = "Oppgave ID";
+            oppgaveIdHeaderCell.Text = "Oppgave ID";
+            oppgaveHeaderCell.Text = "Oppgave";
             opprettetHeaderCell.Text = "Opprettet";
             startHeaderCell.Text = "Start";
             stoppHeaderCell.Text = "Stopp";
