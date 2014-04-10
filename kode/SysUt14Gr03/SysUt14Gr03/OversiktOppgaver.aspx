@@ -3,4 +3,6 @@
     <h1>Liste over oppgaver</h1>
     <asp:Label ID="lblTilbakemelding" runat="server" Text=""></asp:Label>
     <asp:PlaceHolder ID="PlaceHolderTable" runat="server"></asp:PlaceHolder>
+    <asp:PlaceHolder ID="PlaceHolderOpprettOppgave" runat="server"></asp:PlaceHolder>
+
 </asp:Content>
