@@ -14,6 +14,7 @@ namespace SysUt14Gr03.Prosjektleder
         protected void Page_Load(object sender, EventArgs e)
         {
             SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
+            SessionSjekk.sjekkForProsjekt_id();
 
             int prosjektId = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
 
