@@ -18,7 +18,7 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //
+            // ain't nobody got time fo' dat
             //SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
             innloggetBruker_id = 2;
 
@@ -118,7 +118,7 @@ namespace SysUt14Gr03
 
                         if (brukerPrefs != null)
                         {
-                            // Setter valgte verdier
+                            // Leser og setter valgte verdier
                             lblPrefs.Text += " Varsle meg på e-post når jeg blir...<br />";
                             lblPrefs.Text += "<br />" + " lagt til på team: " + (brukerPrefs.EpostTeam ? "Ja" : "Nei");
                             lblPrefs.Text += "<br />" + " tildelt oppgave: " + (brukerPrefs.EpostOppgave ? "Ja" : "Nei");

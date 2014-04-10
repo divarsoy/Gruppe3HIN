@@ -18,7 +18,8 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Oppgave">
                 <ItemTemplate>
-                    <asp:Label ID="lblTittel" runat="server" Text='<%#Bind("Tittel") %>'></asp:Label>
+                    <asp:Label ID="Label1" runat="server" Text='<%#Bind("Oppgave_id") %>'></asp:Label>
+                    <asp:Label ID="lblTittel" runat="server" Text='<%#Bind("Tittel") %>'></asp:Label>          
                 </ItemTemplate>
                  
             </asp:TemplateField>

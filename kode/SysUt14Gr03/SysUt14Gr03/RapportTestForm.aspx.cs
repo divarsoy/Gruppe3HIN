@@ -13,7 +13,24 @@ namespace SysUt14Gr03
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            Rapport rapport = new Rapport(Rapport.TEAMRAPPORT, 1);
+            lblTest.Text = rapport.ToString();
+        }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
             Rapport rapport = new Rapport(Rapport.PROSJEKTRAPPORT, 1);
+            lblTest.Text = rapport.ToString();
+        }
+
+        protected void Button3_Click(object sender, EventArgs e)
+        {
+            Rapport rapport = new Rapport(Rapport.INDIVIDRAPPORT, 1);
             lblTest.Text = rapport.ToString();
         }
     }
