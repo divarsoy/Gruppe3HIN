@@ -7,27 +7,29 @@ using System.Web.UI.WebControls;
 using SysUt14Gr03.Models;
 using SysUt14Gr03.Classes;
 
-namespace SysUt14Gr03.Utvikler
+namespace SysUt14Gr03.Prosjektleder
 {
-    public partial class InnsynIEgneRegistrerteTimerSomBruker : System.Web.UI.Page
+    public partial class InnsynIRegistrerteTimerSomProsjektleder : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            SessionSjekk.sjekkForBruker_id();
+            SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
 
-            int brukerId = Validator.KonverterTilTall(Session["bruker_id"].ToString());
-            List<Time> timer = Queries.GetTimerForBruker(brukerId);
             int prosjektId = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
+
+            List<Bruker> brukerePaProsjekt = Queries.GetAlleBrukereIEtProjekt(prosjektId);
             Prosjekt prosjekt = Queries.GetProsjekt(prosjektId);
 
+            foreach (Bruker b in brukerePaProsjekt)
+            {
+                List<Time> timer = Queries.GetTimerForBruker(b.Bruker_id);
                 if (!IsPostBack)
                 {
-                    Table timeTabell = Tabeller.HentTimerForBruker(timer, brukerId, prosjekt);
+                    Table timeTabell = Tabeller.HentTimerForProsjektleder(timer, b, prosjekt);
 
                     PlaceHolderTable.Controls.Add(timeTabell);
                 }
-            
-            
+            }
         }
     }
 }

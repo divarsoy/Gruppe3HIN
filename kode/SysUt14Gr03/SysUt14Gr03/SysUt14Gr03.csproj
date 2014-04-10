@@ -181,6 +181,7 @@
     <Content Include="ArkiveringAvKommentarer.aspx" />
     <Content Include="Brukere.aspx" />
     <Content Include="Default.aspx" />
+    <Content Include="Prosjektleder\InnsynIRegistrerteTimerSomProsjektleder.aspx" />
     <Content Include="RapportTestForm.aspx" />
     <Content Include="Scripts\MorildSheperdAdministrator.js" />
     <Content Include="Scripts\shepherd.js" />
@@ -444,6 +445,13 @@
     </Compile>
     <Compile Include="Models\Notifikasjon.cs" />
     <Compile Include="Models\NotifikasjonsType.cs" />
+    <Compile Include="Prosjektleder\InnsynIRegistrerteTimerSomProsjektleder.aspx.cs">
+      <DependentUpon>InnsynIRegistrerteTimerSomProsjektleder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Prosjektleder\InnsynIRegistrerteTimerSomProsjektleder.aspx.designer.cs">
+      <DependentUpon>InnsynIRegistrerteTimerSomProsjektleder.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Prosjektleder\OpprettOppgavegruppe.aspx.cs">
       <DependentUpon>OpprettOppgavegruppe.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
