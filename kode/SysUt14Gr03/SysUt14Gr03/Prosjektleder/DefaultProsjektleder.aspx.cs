@@ -42,8 +42,6 @@ namespace SysUt14Gr03
                 ListBoxProsjekt.DataBind();
                 ListBoxProsjekt.CssClass = "form-control";
                 btnVelgProsjekt.CssClass = "btn btn-primary";
-
-
             }
 
 
