@@ -459,5 +459,41 @@ namespace SysUt14Gr03.Classes
             return tabell;
 
         }
+
+        public static Table HentTimerForBruker(List<Time> time_list, int bruker_id, Prosjekt p)
+        {
+            Table tabell = new Table();
+            TableHeaderRow headerRow = new TableHeaderRow();
+            TableHeaderCell headerCell = new TableHeaderCell();
+
+            TableHeaderRow timeRow = new TableHeaderRow();
+            TableHeaderCell oppgaveIdHeaderCell = new TableHeaderCell();
+            TableHeaderCell oppgaveHeaderCell = new TableHeaderCell();
+            TableHeaderCell opprettetHeaderCell = new TableHeaderCell();
+            TableHeaderCell startHeaderCell = new TableHeaderCell();
+            TableHeaderCell stoppHeaderCell = new TableHeaderCell();
+            TableHeaderCell tidHeaderCell = new TableHeaderCell();
+
+            headerCell.Text = p.Navn.ToString();
+            oppgaveIdHeaderCell.Text = "Oppgave";
+            oppgaveHeaderCell.Text = "Oppgave ID";
+            opprettetHeaderCell.Text = "Opprettet";
+            startHeaderCell.Text = "Start";
+            stoppHeaderCell.Text = "Stopp";
+            tidHeaderCell.Text = "Brukt tid";
+
+            timeRow.Cells.Add(oppgaveIdHeaderCell);
+            timeRow.Cells.Add(oppgaveHeaderCell);
+            timeRow.Cells.Add(opprettetHeaderCell);
+            timeRow.Cells.Add(startHeaderCell);
+            timeRow.Cells.Add(stoppHeaderCell);
+            timeRow.Cells.Add(tidHeaderCell);
+            headerRow.Cells.Add(headerCell);
+            tabell.Rows.Add(headerRow);
+            tabell.Rows.Add(timeRow);
+
+
+            return tabell;
+        }
     }
 }

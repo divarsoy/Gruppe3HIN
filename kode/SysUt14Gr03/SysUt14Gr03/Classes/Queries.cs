@@ -662,5 +662,15 @@ namespace SysUt14Gr03.Classes
                 context.SaveChanges();
             }
         }
+
+        public static List<Time> GetTimerForBruker(int bruker_id)
+        {
+            using (var context = new Context())
+            {
+                List<Time> timerForBruker = context.Timer.Where(Time => Time.Bruker_id == bruker_id).ToList();
+
+                return timerForBruker;
+            }
+        }
     }
 }

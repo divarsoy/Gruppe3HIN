@@ -257,6 +257,7 @@
     <Content Include="Site.Master" />
     <Content Include="TidsestimerProsjekt.aspx" />
     <Content Include="Timeregistrering.aspx" />
+    <Content Include="Utvikler\InnsynIEgneRegistrerteTimerSomBruker.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Prosjektleder\VisBruker.aspx" />
     <Content Include="Prosjektleder\VisOppgave.aspx" />
@@ -723,6 +724,13 @@
     </Compile>
     <Compile Include="Timeregistrering.aspx.designer.cs">
       <DependentUpon>Timeregistrering.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Utvikler\InnsynIEgneRegistrerteTimerSomBruker.aspx.cs">
+      <DependentUpon>InnsynIEgneRegistrerteTimerSomBruker.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utvikler\InnsynIEgneRegistrerteTimerSomBruker.aspx.designer.cs">
+      <DependentUpon>InnsynIEgneRegistrerteTimerSomBruker.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
