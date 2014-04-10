@@ -54,11 +54,16 @@ namespace SysUt14Gr03
                         Table oppgaveTable = Tabeller.HentOppgaveTabell(query);
                         oppgaveTable.CssClass = "table";
                         PlaceHolderTable.Controls.Add(oppgaveTable);
-
-                        Button btnopprettOppgave = new Button();
-                        btnopprettOppgave.Text = "Opprett Oppgave";
-                        btnopprettOppgave.CssClass = "btn btn-default";
-   
+                        
+                        // Legger til Opprett oppgave knapp om innlogget bruker er prosjektlederen for prosjektet.
+                        if (prosjekt.Bruker_id == bruker_id)
+                        {
+                            Button btnopprettOppgave = new Button();
+                            btnopprettOppgave.Text = "Opprett Oppgave";
+                            btnopprettOppgave.CssClass = "btn btn-primary";
+                            btnopprettOppgave.Click += new EventHandler(btnOpprettOppgave_Click);
+                            PlaceHolderOpprettOppgave.Controls.Add(btnopprettOppgave);
+                        }
                     }
                     else
                     {
@@ -75,6 +80,11 @@ namespace SysUt14Gr03
 
 
             }
+        }
+
+        protected void btnOpprettOppgave_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/OpprettOppgave", true);
         }
     }
 }

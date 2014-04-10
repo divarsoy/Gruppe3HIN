@@ -704,5 +704,16 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        public static Oppgave GetOppgaveMedTimer(int time_id)
+        {
+            using (var context = new Context())
+            {
+                Oppgave oppg = context.Oppgaver.Where(Oppgave => Oppgave.Time.Any(time => time.Time_id == time_id)).FirstOrDefault();
+
+                return oppg;
+            }
+        }
+
+
     }
 }
