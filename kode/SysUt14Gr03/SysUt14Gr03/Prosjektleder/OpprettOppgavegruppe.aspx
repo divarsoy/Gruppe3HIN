@@ -15,16 +15,20 @@
         </div>
     <hr />
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6"> 
+                <div class="oppgaveGruppe"> 
     <asp:GridView CssClass="table table-striped" RowStyle-HorizontalAlign="Center" ID="gvwOppgaver" runat="server" AutoGenerateColumns="False" OnRowDataBound="gvwOppgaver_RowDataBound">
-        <Columns>
+      
+           <Columns>
             <asp:TemplateField  HeaderText="Oppgavegruppe">
                 <ItemTemplate>
                     <asp:CheckBox ID="chbGruppe" runat="server" />
                 </ItemTemplate>          
                 
             </asp:TemplateField>
-            <asp:TemplateField HeaderStyle-HorizontalAlign="Center" HeaderText="Oppgave">
+
+            
+            <asp:TemplateField  HeaderText="Oppgave">
                 
                 <ItemTemplate>
                     <asp:Label ID="Label1" runat="server" Text='<%#Bind("Oppgave_id") %>'></asp:Label>
@@ -41,6 +45,8 @@
             
         </Columns>
     </asp:GridView>
+
+                </div>
                 </div>
             </div>
     <br />
