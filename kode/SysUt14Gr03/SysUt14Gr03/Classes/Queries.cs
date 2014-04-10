@@ -226,6 +226,7 @@ namespace SysUt14Gr03.Classes
             {
                 var loggListe = context.Logger
                                     .Where(l => l.bruker_id == bruker_id)
+                                    .OrderBy(l => l.Opprettet)
                                     .ToList();
                 return loggListe;
             }
@@ -583,7 +584,7 @@ namespace SysUt14Gr03.Classes
                 var komListe = (from kommentar in context.Kommentarer
                                 where kommentar.Bruker_id == brukder_id 
                                 where kommentar.Aktiv == true
-                                select kommentar).ToList<Kommentar>();
+                                select kommentar).OrderBy(k => k.Opprettet).ToList<Kommentar>();
                 return komListe;
             }
         }
