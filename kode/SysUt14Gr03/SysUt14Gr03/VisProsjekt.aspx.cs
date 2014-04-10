@@ -36,7 +36,7 @@ namespace SysUt14Gr03
                 string navn = Queries.GetBruker(prosjekt.Bruker_id).ToString();
                 string teamNavn = Queries.GetTeam((int)prosjekt.Team_id).Navn;
                 lblInfo.Text += "<br />Team: <a href=\"visTeam?team_id=" + prosjekt.Team_id + "\">" + teamNavn + "</a>";
-                lblInfo.Text += "<br />Prosjekleder: <a href=\"visBruker?bruker_id=" + prosjekt.Bruker_id + "\">" + navn + "</a>";
+                lblInfo.Text += "<br />Prosjektleder: <a href=\"visBruker?bruker_id=" + prosjekt.Bruker_id + "\">" + navn + "</a>";
 
                 lblInfo.Text += "<hr />";
                 lblInfo.Text += "<br />" + "Oppgaver Knyttet til prosjektet";
