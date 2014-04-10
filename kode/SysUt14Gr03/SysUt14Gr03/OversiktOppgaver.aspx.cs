@@ -54,7 +54,10 @@ namespace SysUt14Gr03
                 // Sjekk om prosjektleder er prosjektleder for valgt prosjekt eller om brukeren er med i prosjektet
                 if (prosjekt.Bruker_id == bruker_id || isBrukerMedIProsjekt)
                 {
-                    query = Queries.GetAlleOppgaverForProsjekt(prosjekt_id);
+                    if (Request.QueryString["mine"] != null)
+                        query = Queries.GetAlleAktiveOppgaverForProsjektOgBruker(prosjekt_id, bruker_id);
+                    else
+                        query = Queries.GetAlleOppgaverForProsjekt(prosjekt_id);
 
                     if (query.Count > 0)
                     {
