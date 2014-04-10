@@ -65,7 +65,7 @@ namespace SysUt14Gr03.Classes
                 string oppgaveLink = idCell.ResolveUrl("~/VisOppgave?oppgave_id=" + oppgave.Oppgave_id.ToString());
 
                 idCell.Text = string.Format("<a href='{0}'>{1}</a>", oppgaveLink, oppgave.Oppgave_id.ToString());
-                tittelCell.Text = string.Format("<a href='{0}'>{1}</a>", oppgaveLink, oppgave.Oppgave_id.ToString());
+                tittelCell.Text = string.Format("<a href='{0}'>{1}</a>", oppgaveLink, oppgave.Tittel.ToString());
                 statusCell.Text = Queries.GetStatus(oppgave.Status_id).Navn;
                 estimatCell.Text = oppgave.Estimat.ToString();
                 bruktTidCell.Text = oppgave.BruktTid.ToString();
