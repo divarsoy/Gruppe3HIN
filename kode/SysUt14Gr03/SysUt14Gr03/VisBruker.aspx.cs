@@ -16,11 +16,16 @@ namespace SysUt14Gr03
         private int bruker_id;
         private int innloggetBruker_id;
 
+        protected void Page_PreInit(Object sener, EventArgs e)
+        {
+            string master = SessionSjekk.findMaster();
+            this.MasterPageFile = master;
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            // ain't nobody got time fo' dat
-            //SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
-            innloggetBruker_id = 2;
+            SessionSjekk.sjekkForBruker_id();
+            innloggetBruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
 
             if (Request.QueryString["bruker_id"] != null)
             {
@@ -75,10 +80,10 @@ namespace SysUt14Gr03
                         lblLogg.Text += "<h2>Min aktivitet</h2>";                     
                         List<Kommentar> kommentarListe = Queries.GetAlleKommentarTilBruker(bruker_id);
                         lblLogg.Text += "<h4>Mine kommentarer</h4>";
-                        foreach (Kommentar kommentar in kommentarListe)
+                        for (int i = kommentarListe.Count - 1; i >= 0; i--)
                         {
-                            lsbKommentarer.Items.Add(new ListItem(kommentar.Opprettet + ": " + kommentar.Tekst, "VisOppgave.aspx?oppgave_id="
-                                + kommentar.Oppgave_id));
+                            lsbKommentarer.Items.Add(new ListItem(kommentarListe[i].Opprettet + ": " + kommentarListe[i].Tekst, "VisOppgave.aspx?oppgave_id="
+                                + kommentarListe[i].Oppgave_id));
 
                         }
 
@@ -89,9 +94,9 @@ namespace SysUt14Gr03
                         List<Logg> loggListe = Queries.GetLoggForBruker(bruker_id);
                         if (loggListe.Count > 0)
                         {
-                            foreach (Logg logg in loggListe)
+                            for (int i = loggListe.Count - 1; i >= 0; i--)
                             {
-                                lsbLogg.Items.Add(new ListItem(logg.Opprettet.ToShortDateString() + ": " + logg.Hendelse));
+                                lsbLogg.Items.Add(new ListItem(loggListe[i].Opprettet.ToShortDateString() + ": " + loggListe[i].Hendelse));
 
                             }
                         }
@@ -126,6 +131,7 @@ namespace SysUt14Gr03
                             lblPrefs.Text += "<br />" + " tildelt en tidsfrist: " + (brukerPrefs.EpostTidsfrist ? "Ja" : "Nei");
                             lblPrefs.Text += "<br />" + " noe med rapporter..: " + (brukerPrefs.EpostRapport ? "Ja" : "Nei");
                             lblPrefs.Text += "<br />";
+                            btnPrefs.Visible = true;
                         }
                     }
                     
@@ -135,7 +141,6 @@ namespace SysUt14Gr03
                     lblPrefs.Visible = true;
                     lblOppgaver.Visible = true;
                     lblKommentarer.Visible = true;
-                    btnPrefs.Visible = true;
                 }
                 else
                 {
@@ -161,7 +166,10 @@ namespace SysUt14Gr03
 
         protected void btnPrefs_Click(object sender, EventArgs e)
         {
-            Response.Redirect("utvikler/EpostPreferanser.aspx", true);
+           // De ligger ikke i samme mappe
+           // Hvorfor  ligger ikke VisBruker i Utvikler
+            // Hvorfor
+            Response.Redirect("http://malmen.hin.no/SysUt14Gr03/Utvikler/Epostpreferanser.aspx", true);
         }
 
         protected void lsbKommentarer_SelectedIndexChanged(object sender, EventArgs e)

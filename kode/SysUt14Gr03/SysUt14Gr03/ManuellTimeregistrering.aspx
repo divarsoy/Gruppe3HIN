@@ -21,15 +21,25 @@
     <br />
     <asp:Panel ID="pnlPauser" runat="server">
     </asp:Panel>
-
+    <script type = "text/javascript">
+        function Confirm() {
+            var confirm_value = document.createElement("INPUT");
+            confirm_value.type = "hidden";
+            confirm_value.name = "confirm_value";
+            if (confirm("Lagre timer?")) {
+                confirm_value.value = "Yes";
+            } else {
+                confirm_value.value = "No";
+            }
+            document.forms[0].appendChild(confirm_value);
+        }
+    </script>
     <br />
-    <asp:Button ID="btnLagre" runat="server" OnClick="btnLagre_Click" Text="Lagre timer" Visible="false"/>
-
+    <asp:HiddenField ID="lagreTime" runat="server" value="" />
+    <asp:HiddenField ID="infoField" runat="server" value="" />
+    <asp:Button ID="btnLagre" runat="server" OnClientClick = "Confirm()" Text="Lagre timer" Visible="false" OnClick="btnLagre_Click" />
 
     <asp:Label ID="lblTest" runat="server" Visible="false"></asp:Label>
 
 
-    <asp:Button ID="btnFullfor" runat="server" OnClick="btnFullfor_Click" Text="Godta og lagre" Visible="false"/>
-
-
-</asp:Content>
+    </asp:Content>

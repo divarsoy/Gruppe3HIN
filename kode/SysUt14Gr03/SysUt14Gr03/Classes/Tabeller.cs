@@ -65,7 +65,7 @@ namespace SysUt14Gr03.Classes
                 string oppgaveLink = idCell.ResolveUrl("~/VisOppgave?oppgave_id=" + oppgave.Oppgave_id.ToString());
 
                 idCell.Text = string.Format("<a href='{0}'>{1}</a>", oppgaveLink, oppgave.Oppgave_id.ToString());
-                tittelCell.Text = string.Format("<a href='{0}'>{1}</a>", oppgaveLink, oppgave.Oppgave_id.ToString());
+                tittelCell.Text = string.Format("<a href='{0}'>{1}</a>", oppgaveLink, oppgave.Tittel.ToString());
                 statusCell.Text = Queries.GetStatus(oppgave.Status_id).Navn;
                 estimatCell.Text = oppgave.Estimat.ToString();
                 bruktTidCell.Text = oppgave.BruktTid.ToString();
@@ -278,6 +278,7 @@ namespace SysUt14Gr03.Classes
             TableHeaderCell teamHeaderCell = new TableHeaderCell();
             TableHeaderCell prosjektHeaderCell = new TableHeaderCell();
             TableHeaderCell endreBrukerCell = new TableHeaderCell();
+            TableHeaderCell rolleCell = new TableHeaderCell();
 
             forNavnHeaderCell.Text = "Fornavn";
             etterNavnHeaderCell.Text = " Etternavn";
@@ -286,6 +287,7 @@ namespace SysUt14Gr03.Classes
             IMHeaderCell.Text = " IM";
             teamHeaderCell.Text = " Team";
             prosjektHeaderCell.Text = " Prosjekter";
+            rolleCell.Text = "Rolle";
             endreBrukerCell.Text = "Rediger Bruker";
            
             headerRow.Cells.Add(forNavnHeaderCell);
@@ -295,6 +297,7 @@ namespace SysUt14Gr03.Classes
             headerRow.Cells.Add(IMHeaderCell);
             headerRow.Cells.Add(teamHeaderCell);
             headerRow.Cells.Add(prosjektHeaderCell);
+            headerRow.Cells.Add(rolleCell);
             headerRow.Cells.Add(endreBrukerCell);
             tabell.Rows.Add(headerRow);
 
@@ -308,6 +311,7 @@ namespace SysUt14Gr03.Classes
                 TableCell IMCell = new TableCell();
                 TableCell teamsCell = new TableCell();
                 TableCell prosjekterCell = new TableCell();
+                TableCell rolleCelle = new TableCell();
                 TableCell endreCell = new TableCell();
 
                 foreach (Team team in queryTeam)
@@ -318,7 +322,10 @@ namespace SysUt14Gr03.Classes
                 {
                     prosjekterCell.Text = String.Format("<a href='AdministrasjonAvProsjekt?prosjekt_id={0}'>{1} </a>", prosjekt.Prosjekt_id, prosjekt.Navn);
                 }
+                foreach(Rettighet rett in bruker.Rettigheter){
 
+                    rolleCelle.Text = String.Format(rett.RettighetNavn);
+                }
                 forNavnCell.Text = String.Format("<a href='visBruker?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Fornavn);
                 etterNavnCell.Text = String.Format("<a href='visBruker?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Etternavn);
                 brukerNavnCell.Text = String.Format("<a href='visBruker?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Brukernavn);
@@ -333,6 +340,7 @@ namespace SysUt14Gr03.Classes
                 tRow.Cells.Add(IMCell);
                 tRow.Cells.Add(teamsCell);
                 tRow.Cells.Add(prosjekterCell);
+                tRow.Cells.Add(rolleCelle);
                 tRow.Cells.Add(endreCell);
                 tabell.Rows.Add(tRow);
                 

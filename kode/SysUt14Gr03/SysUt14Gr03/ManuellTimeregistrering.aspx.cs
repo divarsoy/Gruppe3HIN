@@ -19,8 +19,9 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
-            bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
+            //SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Utvikler);
+            //bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
+            bruker_id = 2;
 
             if (Request.QueryString["oppgave_id"] != null)
             {
@@ -37,7 +38,33 @@ namespace SysUt14Gr03
                         DateTime dato = DateTime.Now;
                         ddlDag.Items.Add(new ListItem("I dag (" + dato.ToShortDateString() + ")", dato.ToShortDateString()));
                         ddlDag.Items.Add(new ListItem("I går (" + dato.AddDays(-1).ToShortDateString() + ")", dato.AddDays(-1).ToShortDateString()));
+
                     }
+
+                    // http://www.aspsnippets.com/Articles/Server-Side-Code-Behind-Yes-No-Confirmation-Message-Box-in-ASPNet.aspx
+                    string confirmValue = Request.Form["confirm_value"];
+                    if (confirmValue == "Yes")
+                    {
+                        //this.Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('You clicked YES!')", true);
+                        Lagre();
+                        // Vis flashjævel
+                        // TIlbakestill felter
+                    }
+
+
+                    string lag = lagreTime.Value;
+
+                    string info;
+
+                    if (infoField.Value != string.Empty)
+                    {
+                        info = infoField.Value;
+                        //btnLagre.OnClientClick = "return confirm('" + info + "');";
+                        String confirm = "<script>document.getElementById(\"lagreTime\").value = confirm('" + info + "')? \"Y\" : \"N\"</script>";
+                        // ClientScript.RegisterStartupScript(confirm);
+                        //ClientScript.RegisterStartupScript(GetType(), "confirm", confirm);
+                    }  
+
 
                     lblTittel.Text = "Manuell timeregistrering på oppgave " + oppgave.Tittel;
 
@@ -58,6 +85,8 @@ namespace SysUt14Gr03
                     ddlDag.Visible = true;
                     txtStart.Visible = true;
                     txtSlutt.Visible = true;
+
+                    // Sjekk faenskapet her oppe
                 }
                 else
                 {
@@ -75,7 +104,6 @@ namespace SysUt14Gr03
         protected void btnAddPause_Click(object sender, EventArgs e)
         {
             lblTest.Visible = false;
-            btnFullfor.Visible = false;
 
             LeggTilPausefelt();
             pauseTeller++;
@@ -125,9 +153,25 @@ namespace SysUt14Gr03
             }
         }
 
+        public void VisDialog()
+        {
+        }
+
         protected void btnLagre_Click(object sender, EventArgs e)
         {
             // Lagre timer på oppgave
+            
+
+
+        }
+
+        private void Lagre()
+        {
+            DateTime dato = DateTime.Parse(ddlDag.SelectedValue);
+            //bruktTid = (TimeSpan)ViewState["bruktTid"];
+            //DateTime startTid = (DateTime)ViewState["startTid"];
+            //DateTime sluttTid = (DateTime)ViewState["sluttTid"];
+
             DateTime startTid;
             DateTime sluttTid;
             DateTime.TryParse(txtStart.Text, out startTid);
@@ -135,6 +179,8 @@ namespace SysUt14Gr03
 
             if (startTid != DateTime.MinValue && sluttTid != DateTime.MinValue)
             {
+
+
                 if (DateTime.Compare(startTid, sluttTid) < 0)
                 {
                     TimeSpan pauser = new TimeSpan();
@@ -179,13 +225,23 @@ namespace SysUt14Gr03
                         ViewState["startTid"] = startTid;
                         ViewState["sluttTid"] = sluttTid;
 
-                        DateTime dato = DateTime.Parse(ddlDag.SelectedValue);
+                        //DateTime dato = DateTime.Parse(ddlDag.SelectedValue);
 
                         //debug
-                        lblTest.Text = "Følgende timetall vil bli registrert: " + bruktTid.Hours + " timer og " + bruktTid.Minutes + " minutter.<br />Dato: "
+                        string info = "Følgende timetall vil bli registrert: " + bruktTid.Hours + " timer og " + bruktTid.Minutes + " minutter. Dato: "
                             + dato.ToShortDateString() + " på oppgave " + oppgave.Tittel + ". Godta registrering?";
-                        lblTest.Visible = true;
-                        btnFullfor.Visible = true;
+                        //infoField.Value = info;
+                        //lblTest.Visible = true;
+                        //btnFullfor.Visible = true;
+                        //btnLagre.Attributes.Add("onclick", "javascript:return confirm('" + info + "')");
+                        //Response.Write("<script type=\"text/javascript\"> function Confirmation(){if(confirm('" + info + "')){return true;}else{return false;}}</script>");
+
+
+                        //Response.Write("<script>document.getElementById(\"confirm_value\").value = confirm('" + info + "')? \"Yes\" : \"No\"</script>");
+                        // Gjør et eller annet
+                        // Kall lagre()
+                        //Lagre(bruktTid, startTid, sluttTid);
+
 
                     }
                     else
@@ -203,15 +259,6 @@ namespace SysUt14Gr03
                 lblTest.Text = "Vennligst oppgi start- og sluttid";
             }
 
-
-        }
-
-        protected void btnFullfor_Click(object sender, EventArgs e)
-        {
-            DateTime dato = DateTime.Parse(ddlDag.SelectedValue);
-            bruktTid = (TimeSpan)ViewState["bruktTid"];
-            DateTime startTid = (DateTime)ViewState["startTid"];
-            DateTime sluttTid = (DateTime)ViewState["sluttTid"];
 
             using (var context = new Context())
             {

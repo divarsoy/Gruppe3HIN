@@ -3,7 +3,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
       <h2>Endre Brukerinformasjon</h2>  
-    <asp:GridView RowStyle-HorizontalAlign="Center" ID="gridViewEndre" runat="server" CssClass="table" AutoGenerateColumns="false" DataKeyNames="Bruker_id" OnRowEditing="gridViewEndre_RowEditing" OnRowCancelingEdit="gridViewEndre_RowCancelingEdit" OnRowUpdating="gridViewEndre_RowUpdating" OnRowCommand="gridViewEndre_RowCommand" ShowFooter="False" ShowHeader="True">
+    <asp:GridView RowStyle-HorizontalAlign="Center" ID="gridViewEndre" runat="server" OnRowDataBound="gridViewEndre_RowDataBound" CssClass="table" AutoGenerateColumns="false" DataKeyNames="Bruker_id" OnRowEditing="gridViewEndre_RowEditing" OnRowCancelingEdit="gridViewEndre_RowCancelingEdit" OnRowUpdating="gridViewEndre_RowUpdating" OnRowCommand="gridViewEndre_RowCommand" ShowFooter="False" ShowHeader="True">
         <Columns>
             <asp:TemplateField HeaderText="Etternavn">
                 <ItemTemplate>
@@ -36,7 +36,7 @@
                 <EditItemTemplate>
                     <asp:CheckBox ID="cboxAktiv" Checked='<%#Bind("Aktiv") %>' runat="server" />
                      </EditItemTemplate>
-            </asp:TemplateField>
+            </asp:TemplateField>    
             <asp:TemplateField HeaderText="Aktiveringslink" Visible="false">
         <EditItemTemplate>
             <asp:Button ID="btnSendNy"  
@@ -44,6 +44,14 @@
             " CommandName="Send" runat="server" Text="Send Ny" />
         </EditItemTemplate>
         </asp:TemplateField> 
+            <asp:TemplateField HeaderText="Rolle">
+                <ItemTemplate>
+                    <asp:Label ID="lblRettighet" runat="server" ></asp:Label>
+                </ItemTemplate>
+                <EditItemTemplate>
+                    <asp:DropDownList ID="ddlRettighet" runat="server"></asp:DropDownList>
+                </EditItemTemplate>
+            </asp:TemplateField>
              <asp:CommandField ShowEditButton="true" />
         </Columns>      
     </asp:GridView>       

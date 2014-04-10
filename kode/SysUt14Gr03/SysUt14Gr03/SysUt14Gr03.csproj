@@ -169,6 +169,7 @@
     <Content Include="Content\shepherd-theme-arrows-plain-buttons.css" />
     <Content Include="Content\shepherd-theme-arrows.css" />
     <Content Include="DeaktiveringAvRegistrerteTimer.aspx" />
+    <Content Include="KommentarTest.aspx" />
     <Content Include="Loggut.aspx" />
     <Content Include="ManuellTimeregistrering.aspx" />
     <Content Include="Prosjektleder\AdministrasjonAvProsjekt.aspx" />
@@ -266,7 +267,7 @@
     <Content Include="Timeregistrering.aspx" />
     <Content Include="Utvikler\InnsynIEgneRegistrerteTimerSomBruker.aspx" />
     <Content Include="ViewSwitcher.ascx" />
-    <Content Include="Prosjektleder\VisBruker.aspx" />
+    <Content Include="VisBruker.aspx" />
     <Content Include="VisOppgave.aspx" />
     <Content Include="VisProsjekt.aspx" />
     <Content Include="VisTeam.aspx" />
@@ -330,6 +331,13 @@
     </Compile>
     <Compile Include="DeaktiveringAvRegistrerteTimer.aspx.designer.cs">
       <DependentUpon>DeaktiveringAvRegistrerteTimer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="KommentarTest.aspx.cs">
+      <DependentUpon>KommentarTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KommentarTest.aspx.designer.cs">
+      <DependentUpon>KommentarTest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Loggut.aspx.cs">
       <DependentUpon>Loggut.aspx</DependentUpon>
@@ -761,11 +769,11 @@
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Prosjektleder\VisBruker.aspx.cs">
+    <Compile Include="VisBruker.aspx.cs">
       <DependentUpon>VisBruker.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Prosjektleder\VisBruker.aspx.designer.cs">
+    <Compile Include="VisBruker.aspx.designer.cs">
       <DependentUpon>VisBruker.aspx</DependentUpon>
     </Compile>
     <Compile Include="VisOppgave.aspx.cs">
