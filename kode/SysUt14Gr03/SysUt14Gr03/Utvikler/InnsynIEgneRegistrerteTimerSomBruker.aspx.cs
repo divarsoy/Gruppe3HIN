@@ -11,19 +11,23 @@ namespace SysUt14Gr03.Utvikler
 {
     public partial class InnsynIEgneRegistrerteTimerSomBruker : System.Web.UI.Page
     {
-        int brukerId = 2;
-        Prosjekt prj = new Prosjekt();
+        int brukerId;
+        int prosjektId;
         List<Time> timer;
 
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            SessionSjekk.sjekkForBruker_id();
+
+            brukerId = Validator.KonverterTilTall(Session["bruker_id"].ToString());
             timer = Queries.GetTimerForBruker(brukerId);
-            prj.Navn = "EksempelProsjekt";
+            prosjektId = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
+            Prosjekt prosjekt = Queries.GetProsjekt(prosjektId);
 
                 if (!IsPostBack)
                 {
-                    Table timeTabell = Tabeller.HentTimerForBruker(timer, brukerId, prj);
+                    Table timeTabell = Tabeller.HentTimerForBruker(timer, brukerId, prosjekt);
 
                     PlaceHolderTable.Controls.Add(timeTabell);
                 }

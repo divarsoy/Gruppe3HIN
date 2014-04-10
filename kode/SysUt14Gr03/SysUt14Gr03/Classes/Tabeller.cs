@@ -475,13 +475,14 @@ namespace SysUt14Gr03.Classes
             TableHeaderRow headerRow = new TableHeaderRow();
             TableHeaderCell headerCell = new TableHeaderCell();
 
-            TableHeaderRow timeRow = new TableHeaderRow();
+            TableHeaderRow timeHeaderRow = new TableHeaderRow();
             TableHeaderCell oppgaveIdHeaderCell = new TableHeaderCell();
             TableHeaderCell oppgaveHeaderCell = new TableHeaderCell();
             TableHeaderCell opprettetHeaderCell = new TableHeaderCell();
             TableHeaderCell startHeaderCell = new TableHeaderCell();
             TableHeaderCell stoppHeaderCell = new TableHeaderCell();
             TableHeaderCell tidHeaderCell = new TableHeaderCell();
+            TableHeaderCell manuellHeaderCell = new TableHeaderCell();
 
             headerCell.Text = p.Navn.ToString();
             oppgaveIdHeaderCell.Text = "Oppgave";
@@ -490,18 +491,54 @@ namespace SysUt14Gr03.Classes
             startHeaderCell.Text = "Start";
             stoppHeaderCell.Text = "Stopp";
             tidHeaderCell.Text = "Brukt tid";
+            manuellHeaderCell.Text = "Registrert Manuelt";
 
-            timeRow.Cells.Add(oppgaveIdHeaderCell);
-            timeRow.Cells.Add(oppgaveHeaderCell);
-            timeRow.Cells.Add(opprettetHeaderCell);
-            timeRow.Cells.Add(startHeaderCell);
-            timeRow.Cells.Add(stoppHeaderCell);
-            timeRow.Cells.Add(tidHeaderCell);
+            timeHeaderRow.Cells.Add(oppgaveIdHeaderCell);
+            timeHeaderRow.Cells.Add(oppgaveHeaderCell);
+            timeHeaderRow.Cells.Add(opprettetHeaderCell);
+            timeHeaderRow.Cells.Add(startHeaderCell);
+            timeHeaderRow.Cells.Add(stoppHeaderCell);
+            timeHeaderRow.Cells.Add(tidHeaderCell);
+            timeHeaderRow.Cells.Add(manuellHeaderCell);
             headerRow.Cells.Add(headerCell);
             tabell.Rows.Add(headerRow);
-            tabell.Rows.Add(timeRow);
+            tabell.Rows.Add(timeHeaderRow);
 
+            foreach (Time t in time_list)
+            {
+                TableRow timeRow = new TableRow();
+                TableCell oppgaveIdCell = new TableCell();
+                TableCell oppgaveCell = new TableCell();
+                TableCell opprettetCell = new TableCell();
+                TableCell startCell = new TableCell();
+                TableCell stoppCell = new TableCell();
+                TableCell tidCell = new TableCell();
+                TableCell manuellCell = new TableCell();
 
+                oppgaveIdCell.Text = String.Format(t.Oppgave_id.ToString());
+                //oppgaveCell.Text = String.Format("<a href='VisOppgave?oppgave_id={0}'>{1}</a>", t.Oppgave_id.ToString(), t.Oppgave.ToString());
+                //oppgaveCell.Text = String.Format(t.Oppgave.ToString());
+                oppgaveCell.Text = "Oppgave";
+                opprettetCell.Text = String.Format(t.Opprettet.ToString());
+                startCell.Text = String.Format(t.Start.ToString());
+                stoppCell.Text = String.Format(t.Stopp.ToString());
+                tidCell.Text = String.Format(t.Tid.ToString());
+                if (t.Manuell)
+                    manuellCell.Text = "Ja";
+                else
+                    manuellCell.Text = "Nei";
+
+                timeRow.Cells.Add(oppgaveIdCell);
+                timeRow.Cells.Add(oppgaveCell);
+                timeRow.Cells.Add(opprettetCell);
+                timeRow.Cells.Add(startCell);
+                timeRow.Cells.Add(stoppCell);
+                timeRow.Cells.Add(tidCell);
+                timeRow.Cells.Add(manuellCell);
+                tabell.Rows.Add(timeRow);
+
+            }
+            tabell.CssClass = "Table";
             return tabell;
         }
     }
