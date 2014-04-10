@@ -94,6 +94,24 @@ namespace SysUt14Gr03 {
         protected global::System.Web.UI.WebControls.Panel pnlPauser;
         
         /// <summary>
+        /// lagreTime control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField lagreTime;
+        
+        /// <summary>
+        /// infoField control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField infoField;
+        
+        /// <summary>
         /// btnLagre control.
         /// </summary>
         /// <remarks>
@@ -110,14 +128,5 @@ namespace SysUt14Gr03 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblTest;
-        
-        /// <summary>
-        /// btnFullfor control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnFullfor;
     }
 }
