@@ -3,7 +3,7 @@
 <asp:Content ID="test" ContentPlaceHolderID="testSheep" runat="server">
     
     <div id="admDefault"></div>
-    <script src="~/Scripts/MorildSheperdAdministrator.js"></script>
+    <script src="/SysUt14Gr03/Scripts/MorildSheperdAdministrator.js"></script>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
