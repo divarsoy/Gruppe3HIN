@@ -28,7 +28,7 @@ namespace SysUt14Gr03
             {
 
                 Prosjekt pro = Queries.GetProsjekt(prosjekt_id);
-                brukerProsjekt = Queries.GetAlleBrukereIEtTeam((int)pro.Team_id);
+                brukerProsjekt = Queries.GetAlleBrukereEtTeam((int)pro.Team_id);
                 List<Prosjekt> getProsjekt = Queries.GetProsjektLeder(pro.Prosjekt_id);
                 List<Team> getTeam = Queries.GetTeamMedList((int)pro.Team_id);
                 table = Tabeller.HentBrukerTabellIProsjektTeamProsjektLeder(brukerProsjekt, getProsjekt, getTeam);
