@@ -498,7 +498,7 @@ namespace SysUt14Gr03.Classes
                                   .Include("Kommentarer")
                                   .Where(oppgave => oppgave.Prosjekt_id == _prosjekt_id)
                                   .Where(oppgave => oppgave.Aktiv == true)
-                                  .OrderBy(oppgave => oppgave.Tittel)
+                                  .OrderBy(oppgave => oppgave.Oppgave_id)
                                   .ToList();
                 return oppgaveListe;
             }
@@ -514,7 +514,7 @@ namespace SysUt14Gr03.Classes
                                   .Where(oppgave => oppgave.Prosjekt_id == _prosjekt_id)
                                   .Where(oppgave => oppgave.Brukere.Any(bruker => bruker.Bruker_id == _bruker_id))
                                   .Where(oppgave => oppgave.Aktiv == true)
-                                  .OrderBy(oppgave => oppgave.Tittel)
+                                  .OrderBy(oppgave => oppgave.Oppgave_id)
                                   .ToList();
                 return oppgaveListe;
             }
@@ -528,7 +528,7 @@ namespace SysUt14Gr03.Classes
                                   .Include("Brukere")
                                   .Include("Kommentarer")
                                   .Where(oppgave => oppgave.Prosjekt_id == _prosjekt_id)
-                                  .OrderBy(oppgave => oppgave.Tittel)
+                                  .OrderBy(oppgave => oppgave.Oppgave_id)
                                   .ToList();
                 return oppgaveListe;
             }
