@@ -267,7 +267,7 @@
     <Content Include="Timeregistrering.aspx" />
     <Content Include="Utvikler\InnsynIEgneRegistrerteTimerSomBruker.aspx" />
     <Content Include="ViewSwitcher.ascx" />
-    <Content Include="Prosjektleder\VisBruker.aspx" />
+    <Content Include="VisBruker.aspx" />
     <Content Include="VisOppgave.aspx" />
     <Content Include="VisProsjekt.aspx" />
     <Content Include="VisTeam.aspx" />
@@ -769,11 +769,11 @@
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Prosjektleder\VisBruker.aspx.cs">
+    <Compile Include="VisBruker.aspx.cs">
       <DependentUpon>VisBruker.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Prosjektleder\VisBruker.aspx.designer.cs">
+    <Compile Include="VisBruker.aspx.designer.cs">
       <DependentUpon>VisBruker.aspx</DependentUpon>
     </Compile>
     <Compile Include="VisOppgave.aspx.cs">
