@@ -54,6 +54,11 @@ namespace SysUt14Gr03
                         Table oppgaveTable = Tabeller.HentOppgaveTabell(query);
                         oppgaveTable.CssClass = "table";
                         PlaceHolderTable.Controls.Add(oppgaveTable);
+
+                        Button btnopprettOppgave = new Button();
+                        btnopprettOppgave.Text = "Opprett Oppgave";
+                        btnopprettOppgave.CssClass = "btn btn-default";
+   
                     }
                     else
                     {
