@@ -19,13 +19,12 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
-            //bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
-            bruker_id = 2;
+            SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
+            bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
 
             if (Request.QueryString["oppgave_id"] != null)
             {
-                
+
                 oppgave_id = Validator.KonverterTilTall(Request.QueryString["oppgave_id"]);
                 oppgave = Queries.GetOppgave(oppgave_id);
                 if (oppgave != null)
@@ -177,6 +176,8 @@ namespace SysUt14Gr03
                     {
                         bruktTid -= pauser;
                         ViewState["bruktTid"] = bruktTid;
+                        ViewState["startTid"] = startTid;
+                        ViewState["sluttTid"] = sluttTid;
 
                         DateTime dato = DateTime.Parse(ddlDag.SelectedValue);
 
@@ -209,6 +210,8 @@ namespace SysUt14Gr03
         {
             DateTime dato = DateTime.Parse(ddlDag.SelectedValue);
             bruktTid = (TimeSpan)ViewState["bruktTid"];
+            DateTime startTid = (DateTime)ViewState["startTid"];
+            DateTime sluttTid = (DateTime)ViewState["sluttTid"];
 
             using (var context = new Context())
             {
@@ -218,9 +221,12 @@ namespace SysUt14Gr03
                 {
                     Tid = bruktTid,
                     Opprettet = dato,
+                    Manuell = true,
                     Aktiv = true,
                     Bruker = bruker,
-                    Oppgave = oppgave
+                    Oppgave = oppgave,
+                    Start = startTid,
+                    Stopp = sluttTid
                 };
 
                 context.Timer.Add(time);

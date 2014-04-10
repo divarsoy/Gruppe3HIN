@@ -14,7 +14,12 @@ namespace SysUt14Gr03.Classes
         {
             using (var context = new Context())
             {
-                var bruker = context.Brukere.Find(_bruker_id);
+                var bruker = context.Brukere
+                    .Include("Prosjekter")
+                    .Include("Teams")
+                    .Include("Oppgaver")
+                    .Where(b => b.Bruker_id == _bruker_id)
+                            .FirstOrDefault();
                 return bruker;
             }
         }
@@ -40,6 +45,15 @@ namespace SysUt14Gr03.Classes
                 return context.Brukere.Where(bruker => bruker.Epost == epost).FirstOrDefault();
             }
         }
+
+        static public Bruker GetBrukerVedBrukernavn(string brukernavn)
+        {
+            using (var context = new Context())
+            {
+                return context.Brukere.Where(bruker => bruker.Brukernavn == brukernavn).FirstOrDefault();
+            }
+        }
+
         static public List<Bruker> GetProsjektledere(Konstanter.rettighet _rettighet)
         {
             using (var context = new Context())
@@ -52,6 +66,29 @@ namespace SysUt14Gr03.Classes
                 return prosjektLedere;
             }
         }
+
+        static public List<Time> GetTimerForBruker(int bruker_id)
+        {
+            using (var context = new Context())
+            {
+                var timeListe = context.Timer
+                            .Where(t => t.Bruker_id == bruker_id)
+                            .ToList<Time>();
+                return timeListe;
+            }
+        }
+
+        static public List<Time> GetTimerForOppgave(int oppgave_id)
+        {
+            using (var context = new Context())
+            {
+                var timeListe = context.Timer
+                            .Where(t => t.Oppgave_id == oppgave_id)
+                            .ToList<Time>();
+                return timeListe;
+            }
+        }
+
         static public List<Notifikasjon> GetNotifikasjon(int bruker_id)
         {
             using (var context = new Context())
@@ -113,7 +150,10 @@ namespace SysUt14Gr03.Classes
         {
             using (var context = new Context())
             {
-                Prosjekt prosjekt = context.Prosjekter.Find(prosjekt_id);
+                Prosjekt prosjekt = context.Prosjekter
+                    .Include("Team")
+                    .Include("Oppgaver")
+                    .Where(p => p.Prosjekt_id == prosjekt_id).FirstOrDefault();
                 return prosjekt;
             }
         }
@@ -139,7 +179,7 @@ namespace SysUt14Gr03.Classes
         {
             using (var context = new Context())
             {
-                var result = context.Status.Where(status => status.Status_id == _status_id).FirstOrDefault();
+                var result = context.Statuser.Where(status => status.Status_id == _status_id).FirstOrDefault();
                 return result;
             }
         }
@@ -321,7 +361,7 @@ namespace SysUt14Gr03.Classes
         {
             using (var context = new Context())
             {
-                var status = (from statuser in context.Status
+                var status = (from statuser in context.Statuser
                               select statuser).ToList<Status>();
                 return status;
             }
@@ -421,7 +461,7 @@ namespace SysUt14Gr03.Classes
         {
             using (var context = new Context())
             {
-                Team valgtTeam = context.Teams.Where(Team => Team.Team_id == teamId).FirstOrDefault();
+                Team valgtTeam = context.Teams.Include("Brukere").Include("Prosjekter").Where(Team => Team.Team_id == teamId).FirstOrDefault();
                 return valgtTeam;
             }
         }
@@ -518,7 +558,7 @@ namespace SysUt14Gr03.Classes
                 var brukerListe = context.Brukere
                                     .Include("Teams")
                                     .Include("Prosjekter")
-                                    .Where(bruker => bruker.Prosjekter.Any(prosjekt => prosjekt.Prosjekt_id == prosjekt_id))
+                                    .Where(bruker => bruker.Teams.Any(team => team.Prosjekter.Any(prosjekt => prosjekt.Prosjekt_id == prosjekt_id)))
                                     .OrderBy(bruker => bruker.Etternavn)
                                     .ToList();
                 return brukerListe;
@@ -606,6 +646,7 @@ namespace SysUt14Gr03.Classes
                 return prosjektNavn;
             }
         }
+        // Fungerer ikke pls fix
         public static string getStatusNavn(int status_id)
         {
             using (SqlCommand command = new SqlCommand())

@@ -74,7 +74,7 @@ namespace SysUt14Gr03
                     lblInfo.Visible = true;
 
                     kommentarListe = Queries.GetAlleKommentarerTilOppgave(oppgave_id);
-                    OppdaterKommentarer();
+                    OppdaterKommentarer(false);
                 }
                 else
                 {
@@ -112,7 +112,7 @@ namespace SysUt14Gr03
                     context.SaveChanges();
 
                     kommentarListe.Add(kommentar);
-                    OppdaterKommentarer();
+                    OppdaterKommentarer(true);
 
                     // Gi tilbakemelding
                 }
@@ -121,7 +121,7 @@ namespace SysUt14Gr03
             }
         }
 
-        private void OppdaterKommentarer()
+        private void OppdaterKommentarer(bool sjekkNavn)
         {
             kommentarListe = Queries.GetAlleKommentarerTilOppgave(oppgave_id);
             lblKommentarteller.Text = "Kommentarer (" + kommentarListe.Count + ")";
@@ -136,29 +136,38 @@ namespace SysUt14Gr03
                     lblKommentarer.Text += "<hr /> <a href=\"VisBruker.aspx?bruker_id=" + kommentarListe[i].Bruker.Bruker_id + "\">" + kommentarListe[i].Bruker.IM + "</a>";
                     lblKommentarer.Text += "<br />" + kommentarListe[i].Opprettet.ToString();
                     lblKommentarer.Text += "<br />" + kommentarListe[i].Tekst;
-                    if (kommentarListe[i].Tekst.Contains("@"))
+                    if (sjekkNavn)
                     {
-                        MatchCollection match = Regex.Matches(kommentarListe[i].Tekst, @"(?<!\w)@\w+");
-                        foreach (Match ord in match)
+                        if (kommentarListe[i].Tekst.Contains("@"))
                         {
-                            string[] navn = Regex.Split(ord.Value, @"^@");
-                            using (var context = new Context())
+                            MatchCollection match = Regex.Matches(kommentarListe[i].Tekst, @"(?<!\w)@\w+");
+                            foreach (Match ord in match)
                             {
-                                foreach (string userName in navn)
+                                string[] navn = Regex.Split(ord.Value, @"^@");
+                                using (var context = new Context())
                                 {
-                                    if (userName != String.Empty)
+                                    foreach (string userName in navn)
                                     {
-                                        Bruker bruker = context.Brukere.Where(b => b.Brukernavn == userName).First();
-                                        string fornavn = Queries.GetBruker(bruker_id).ToString();
-                                        Varsel.SendVarsel(bruker.Bruker_id, Varsel.KOMMENTARVARSEL, "Kommentar", fornavn + " har nevnt deg i en kommentar", oppgave.Oppgave_id);
+                                        if (userName != String.Empty)
+                                        {
+                                            Bruker bruker = context.Brukere.Where(b => b.Brukernavn == userName).FirstOrDefault();
+                                            if (bruker != null)
+                                            {
+                                                string fornavn = Queries.GetBruker(bruker_id).ToString();
+                                                Varsel.SendVarsel(bruker.Bruker_id, Varsel.KOMMENTARVARSEL, "Kommentar", fornavn + " har nevnt deg i en kommentar", oppgave.Oppgave_id);
+                                            }
+                                            
+                                        }
                                     }
                                 }
                             }
-                        }
 
+                        }
                     }
+                    
                 }
                 lblKommentarer.Visible = true;
+                txtKommentar.Text = "";
             } 
         }
 
@@ -169,7 +178,7 @@ namespace SysUt14Gr03
             {
                 Bruker bruker = context.Brukere.FirstOrDefault(b => b.Bruker_id == bruker_id);
                 Oppgave oppgave = context.Oppgaver.FirstOrDefault(o => o.Oppgave_id == oppgave_id);
-                Status status = context.Status.FirstOrDefault(s => s.Status_id == 2);
+                Status status = context.Statuser.FirstOrDefault(s => s.Status_id == 2);
 
                 List<Bruker> tmpBruker = oppgave.Brukere;
                 // Sjekker om bruker allerede er lagt til

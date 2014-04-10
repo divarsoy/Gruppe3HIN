@@ -23,10 +23,10 @@ namespace SysUt14Gr03
 
         protected void LoginButton_Click(object sender, EventArgs e)
         {
-            string epost = Epost.Text;
+            string brukernavn = Brukernavn.Text;
             string oppgittPassord = Password.Text;
 
-            Bruker bruker = Queries.GetBrukerVedEpost(epost);
+            Bruker bruker = Queries.GetBrukerVedBrukernavn(brukernavn);
 
             if (bruker != null)
             {
@@ -48,6 +48,14 @@ namespace SysUt14Gr03
                     Session["fornavn"] = bruker.Fornavn;
                     Session["brukernavn"] = bruker.Brukernavn;
                     Session["loggedIn"] = true;
+
+                    // Legger tidspunkt for siste logginn i databasen.
+                    using (var context = new Context()) {
+                        Bruker brukerRed = context.Brukere.Where(b => b.Bruker_id == bruker.Bruker_id).FirstOrDefault<Bruker>();
+                        brukerRed.SistInnlogget = DateTime.Now;
+                        context.SaveChanges();
+                    }
+
                     if (Validator.SjekkRettighet(bruker.Bruker_id, Konstanter.rettighet.Administrator))
                     {
                         Session["rettighet"] = Konstanter.rettighet.Administrator.ToString();

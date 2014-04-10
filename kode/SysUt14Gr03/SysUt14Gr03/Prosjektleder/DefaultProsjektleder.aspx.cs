@@ -17,28 +17,14 @@ namespace SysUt14Gr03
         protected string Fornavn;
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session["bruker_id"] = 3;
-            Session["Fornavn"] = "Martin";
-
-            if (Session["Fornavn"] != null)
-            {
-                Fornavn = Session["Fornavn"].ToString();
-            }
-
+            
             if (!Page.IsPostBack)
             {
 
+                SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
+                
+                bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
 
-                if (Session["bruker_id"] == null)
-                {
-
-                    //Response.Redirect("~/Login.aspx", true);
-
-                }
-                else
-                {
-                    bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
-                }
                 Bruker bruker = Queries.GetBruker(bruker_id);
                 Fornavn = bruker.Fornavn;
                 List<Prosjekt> listeMedProsjekter = Queries.GetAlleAktiveProsjekterForProsjektLeder(bruker_id);
@@ -64,7 +50,7 @@ namespace SysUt14Gr03
         }
         protected void btnVelgProsjekt_Click(object sender, EventArgs e)
         {
-            if (ListBoxProsjekt.SelectedItem.Value != null)
+            if (ListBoxProsjekt.Items.Count > 0 && ListBoxProsjekt.SelectedItem.Value != null)
             {
                 int prosjekt_id = Validator.KonverterTilTall(ListBoxProsjekt.SelectedItem.Value);
                 Session["prosjekt_id"] = prosjekt_id;
