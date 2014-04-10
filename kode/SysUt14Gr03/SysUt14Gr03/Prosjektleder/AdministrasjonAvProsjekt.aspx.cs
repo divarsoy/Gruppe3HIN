@@ -16,10 +16,12 @@ namespace SysUt14Gr03
         private int team_id;
         private List<Team> teamListe = null;
         private List<Bruker> prosjektLeder;
+        private int bruker_id;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
+            bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
             if (!IsPostBack)
             {
                 visProsjekt();
@@ -31,7 +33,7 @@ namespace SysUt14Gr03
             using (var context = new Context())
             {
                 System.Windows.Forms.BindingSource bindingSource1 = new System.Windows.Forms.BindingSource();
-                bindingSource1.DataSource = context.Prosjekter.ToList<Prosjekt>();
+                bindingSource1.DataSource = context.Prosjekter.Where(p => p.Bruker_id == bruker_id).ToList<Prosjekt>();
                 gridViewProsjekt.DataSource = bindingSource1;
                 gridViewProsjekt.DataBind();
 
