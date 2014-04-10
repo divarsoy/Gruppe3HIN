@@ -416,6 +416,17 @@ namespace SysUt14Gr03.Classes
                 return rettighet;
             }
         }
+
+        static public Rettighet GetRettighetId(int rettighet_id)
+        {
+            using (var context = new Context())
+            {
+                var rettighet = context.Rettigheter
+                                .Where(rett => rett.Rettighet_id == rettighet_id)
+                                .FirstOrDefault();
+                return rettighet;
+            }
+        }
         static public List<Rettighet> GetAlleRettigheter()
         {
             using (var context = new Context())
@@ -488,7 +499,7 @@ namespace SysUt14Gr03.Classes
                                   .Include("Kommentarer")
                                   .Where(oppgave => oppgave.Prosjekt_id == _prosjekt_id)
                                   .Where(oppgave => oppgave.Aktiv == true)
-                                  .OrderBy(oppgave => oppgave.Tittel)
+                                  .OrderBy(oppgave => oppgave.Oppgave_id)
                                   .ToList();
                 return oppgaveListe;
             }
@@ -504,7 +515,7 @@ namespace SysUt14Gr03.Classes
                                   .Where(oppgave => oppgave.Prosjekt_id == _prosjekt_id)
                                   .Where(oppgave => oppgave.Brukere.Any(bruker => bruker.Bruker_id == _bruker_id))
                                   .Where(oppgave => oppgave.Aktiv == true)
-                                  .OrderBy(oppgave => oppgave.Tittel)
+                                  .OrderBy(oppgave => oppgave.Oppgave_id)
                                   .ToList();
                 return oppgaveListe;
             }
@@ -518,7 +529,7 @@ namespace SysUt14Gr03.Classes
                                   .Include("Brukere")
                                   .Include("Kommentarer")
                                   .Where(oppgave => oppgave.Prosjekt_id == _prosjekt_id)
-                                  .OrderBy(oppgave => oppgave.Tittel)
+                                  .OrderBy(oppgave => oppgave.Oppgave_id)
                                   .ToList();
                 return oppgaveListe;
             }
@@ -552,6 +563,19 @@ namespace SysUt14Gr03.Classes
                 return brukerListe;
             }
         }
+        static public List<Bruker> GetAlleBrukereEtTeam(int _team_id)
+        {
+            int team_id = _team_id;
+            using (var context = new Context())
+            {
+                var brukerListe = context.Brukere
+                                    .Include("Rettigheter")
+                                    .Where(t => t.Teams.Any(team => team.Team_id == team_id))
+                                    .ToList();
+
+                return brukerListe;
+            }
+        }
         static public List<Bruker> GetAlleBrukereIEtProjekt(int prosjekt_id)
         {
             using (var context = new Context())
@@ -559,6 +583,7 @@ namespace SysUt14Gr03.Classes
                 var brukerListe = context.Brukere
                                     .Include("Teams")
                                     .Include("Prosjekter")
+                                    .Include("Rettigheter")
                                     .Where(bruker => bruker.Teams.Any(team => team.Prosjekter.Any(prosjekt => prosjekt.Prosjekt_id == prosjekt_id)))
                                     .OrderBy(bruker => bruker.Etternavn)
                                     .ToList();

@@ -16,11 +16,16 @@ namespace SysUt14Gr03
         private int bruker_id;
         private int innloggetBruker_id;
 
+        protected void Page_PreInit(Object sener, EventArgs e)
+        {
+            string master = SessionSjekk.findMaster();
+            this.MasterPageFile = master;
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            // ain't nobody got time fo' dat
-            //SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
-            innloggetBruker_id = 2;
+            SessionSjekk.sjekkForBruker_id();
+            innloggetBruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
 
             if (Request.QueryString["bruker_id"] != null)
             {
