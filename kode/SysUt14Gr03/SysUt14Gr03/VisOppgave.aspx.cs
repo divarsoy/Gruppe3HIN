@@ -154,7 +154,7 @@ namespace SysUt14Gr03
                                             if (bruker != null)
                                             {
                                                 string fornavn = Queries.GetBruker(bruker_id).ToString();
-                                                Varsel.SendVarsel(bruker.Bruker_id, Varsel.KOMMENTARVARSEL, "Kommentar", fornavn + " har nevnt deg i en kommentar", oppgave.Oppgave_id);
+                                                Varsel.SendVarsel(bruker.Bruker_id, Varsel.KOMMENTARVARSEL, "Kommentar", fornavn + " har nevnt deg i en kommentar");
                                             }
                                             
                                         }
