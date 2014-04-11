@@ -123,11 +123,15 @@ namespace SysUt14Gr03.Classes
                 Team team = Queries.GetTeam((int)prosjekt.Team_id);
                 Bruker bruker = Queries.GetBruker(prosjekt.Bruker_id);
 
-                navnCell.Text = String.Format("<a href='AdministrasjonAvProsjekt?Prosjekt_id={0}'>{1}</a>", prosjekt.Prosjekt_id.ToString(), prosjekt.Navn);
+                string prosjektLink = navnCell.ResolveUrl("~/VisProsjekt?prosjekt_id=" + prosjekt.Prosjekt_id.ToString());
+                string teamLink = navnCell.ResolveUrl("~/VisTeam?team_id=" + team.Team_id.ToString());
+                string brukerLink = navnCell.ResolveUrl("~/VisBruker?bruker_id=" + bruker.Bruker_id.ToString());
+
+                navnCell.Text = String.Format("<a href='{0}'>{1}</a>", prosjektLink, prosjekt.Navn);
                 startDatoCell.Text = String.Format("{0:dd/MM/yyyy}", prosjekt.StartDato);
                 sluttDatoCell.Text = String.Format("{0:dd/MM/yyyy}", prosjekt.SluttDato);
-                teamCell.Text = String.Format("<a href='AdministrasjonAvTeam?Team_id={0}'>{1}</a>", team.Team_id.ToString(), team.Navn);
-                prosjektlederCell.Text = String.Format("<a href='visBruker?bruker_id={0}'>{1} </a>", bruker.Bruker_id, bruker.ToString());
+                teamCell.Text = String.Format("<a href='{0}'>{1}</a>", teamLink, team.Navn);
+                prosjektlederCell.Text = String.Format("<a href='{0}'>{1} </a>", brukerLink, bruker.ToString());
 
                 tRow.Cells.Add(navnCell);
                 tRow.Cells.Add(startDatoCell);
