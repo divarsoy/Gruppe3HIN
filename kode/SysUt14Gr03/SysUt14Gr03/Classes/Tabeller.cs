@@ -155,7 +155,7 @@ namespace SysUt14Gr03.Classes
             TableHeaderCell epostHeaderCell = new TableHeaderCell();
             TableHeaderCell IMHeaderCell = new TableHeaderCell();
 
-            string teamLink = teamNavnCell.ResolveUrl("~/VisTeam?team_id=" + nesteTeam.Team_id.ToString());
+            string teamLink = teamNavnCell.ResolveUrl("~/Prosjektleder/VisTeam?team_id=" + nesteTeam.Team_id.ToString());
             forNavnHeaderCell.Text = "Fornavn";
             etterNavnHeaderCell.Text = "Etternavn";
             brukerNavnHeaderCell.Text = "Brukernavn";
