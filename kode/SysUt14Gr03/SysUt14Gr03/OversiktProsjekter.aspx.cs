@@ -11,29 +11,47 @@ namespace SysUt14Gr03
 {
     public partial class OversiktProsjekter : System.Web.UI.Page
     {
+
+        private int bruker_id;
+        private List<Prosjekt> prosjektListe;
+
+        // Laster inn riktig masterfil
+        protected void Page_PreInit(Object sener, EventArgs e)
+        {
+            string master = SessionSjekk.findMaster();
+            this.MasterPageFile = master;
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            List<Prosjekt> query = null;
-            LblTilbakemelding.Text = "";
 
-            int bruker_id;
+            SessionSjekk.sjekkForBruker_id();
 
-            //Sjekker om brukeren er logget inn
-            if (Session["bruker_id"] != null)
-                bruker_id = Validator.KonverterTilTall((string)Session["bruker_id"]);
-            else
-                bruker_id = 3;
+            bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
 
             if (Validator.SjekkRettighet(bruker_id, Konstanter.rettighet.Prosjektleder))
-                query = Queries.GetAlleAktiveProsjekter();
+            {
+                prosjektListe = Queries.GetAlleAktiveProsjekter();
+
+                Button btnProsjektleder = new Button();
+                btnProsjektleder.Click += new EventHandler(BtnOpprettProsjekt_Click);
+                btnProsjektleder.Text = "Opprett Prosjekt";
+                btnProsjektleder.CssClass = "btn btn-primary";
+                PlaceHolderProsjektleder.Controls.Add(btnProsjektleder);
+            }
             else
-                query = Queries.GetAlleAktiveProsjekterForBruker(bruker_id);
+                prosjektListe = Queries.GetAlleAktiveProsjekterForBruker(bruker_id);
 
             if (!IsPostBack)
             {
-                Table prosjektTabell = Tabeller.HentProsjekterTabell(query);
+                Table prosjektTabell = Tabeller.HentProsjekterTabell(prosjektListe);
                 PlaceHolderTable.Controls.Add(prosjektTabell);
             }
+        }
+
+        protected void BtnOpprettProsjekt_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Prosjektleder/OpprettProsjekt");
         }
     }
 }

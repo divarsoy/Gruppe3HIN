@@ -211,7 +211,6 @@
     <Content Include="OversiktOppgaver.aspx" />
     <Content Include="Prosjektleder\OversiktOverAlleTeam.aspx" />
     <Content Include="OversiktProsjekter.aspx" />
-    <Content Include="Prosjektleder\OversiktProsjekterSomProsjektleder.aspx" />
     <Content Include="PameldingTilOppgave.aspx" />
     <Content Include="Pictures\blomst.jpg" />
     <Content Include="Prosjektleder\OpprettTeam.aspx" />
@@ -517,13 +516,6 @@
     </Compile>
     <Compile Include="OversiktProsjekter.aspx.designer.cs">
       <DependentUpon>OversiktProsjekter.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Prosjektleder\OversiktProsjekterSomProsjektleder.aspx.cs">
-      <DependentUpon>OversiktProsjekterSomProsjektleder.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Prosjektleder\OversiktProsjekterSomProsjektleder.aspx.designer.cs">
-      <DependentUpon>OversiktProsjekterSomProsjektleder.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administrator\RegistreringAvBrukereSomAdministrator.aspx.cs">
       <DependentUpon>RegistreringAvBrukereSomAdministrator.aspx</DependentUpon>
