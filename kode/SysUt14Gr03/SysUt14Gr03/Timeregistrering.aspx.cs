@@ -14,10 +14,15 @@ namespace SysUt14Gr03
     public partial class Timeregistrering : System.Web.UI.Page
     {
         private List<Oppgave> oppgaver;
+        private List<Pause> pauser;
+        private Pause pause;
+        private Time timer;
         private int brukerID;
         private int prosjektID;
         private int oppgaveID;
         private int PauseTeller;
+        private int pauseID;
+        private int timeID;
 
         private TimeSpan bruktTid;
         private DateTime Start;
@@ -30,11 +35,16 @@ namespace SysUt14Gr03
         {
             if (Session["loggedIn"] == null)
                 Response.Redirect("Login.aspx", true);
-            SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
 
             if (!IsPostBack)
             {
                 PauseTeller = 0;
+                if (Request.QueryString["pause_id"] != null && Request.QueryString["time_id"] != null)
+                {
+                    pauseID = Classes.Validator.KonverterTilTall(Request.QueryString["pause_id"]);
+                    timeID = Classes.Validator.KonverterTilTall(Request.QueryString["time_id"]);
+                    this.GetTimers(pauseID, timeID);
+                }
                 oppgaveID = Classes.Validator.KonverterTilTall(Request.QueryString["oppgave_id"]);
                 prosjektID = Classes.Validator.KonverterTilTall(Request.QueryString["prosjekt_id"]);
                 brukerID = Classes.Validator.KonverterTilTall(Request.QueryString["bruker_id"]);
@@ -58,6 +68,30 @@ namespace SysUt14Gr03
                 btnSnart.Enabled = false;
                 btnStop.Enabled = true;
                 btnPause.Enabled = true;
+
+                using(var context = new Context())
+                {
+                    oppgaveID = Classes.Validator.KonverterTilTall(Request.QueryString["oppgave_id"]);
+                    brukerID = Classes.Validator.KonverterTilTall(Request.QueryString["bruker_id"]);
+                    Oppgave oppgave = context.Oppgaver.Where(o => o.Oppgave_id == oppgaveID).FirstOrDefault();
+                    Bruker bruker = context.Brukere.Where(b => b.Bruker_id == brukerID).FirstOrDefault();
+
+                    timer = new Time()
+                    {
+                        Start = Start,
+                        Opprettet = DateTime.Now,
+                        Aktiv = true,
+                        Manuell = false,
+                        IsFerdig = false,
+                        Oppgave_id = oppgave.Oppgave_id,
+                        Oppgave = oppgave,
+                        Bruker_id = brukerID,
+                        Bruker = bruker
+                    };
+
+                    context.Timer.Add(timer);
+                    context.SaveChanges();
+                }
             }
             else
             {
@@ -73,6 +107,19 @@ namespace SysUt14Gr03
                 btnSnart.Enabled = false;
                 btnPause.Enabled = true;
                 btnStop.Enabled = true;
+
+                using (var context2 = new Context())
+                {
+                    pauseID = Classes.Validator.KonverterTilTall(Request.QueryString["pause_id"]);
+                    timeID = Classes.Validator.KonverterTilTall(Request.QueryString["time_id"]);
+                    pause = context2.Pauser.Where(p => p.Pause_id == pauseID).FirstOrDefault();
+                    timer = context2.Timer.Where(t => t.Time_id == timeID).FirstOrDefault();
+
+                    pause.Pause_id = pauseID;
+                    pause.Stopp = StartEtterPause;
+
+                    context2.SaveChanges();
+                }
             }
         }
 
@@ -91,6 +138,22 @@ namespace SysUt14Gr03
             DateTime Pause = DateTime.Now;
             PauseStartObjekter.Add(Pause);
             ViewState["Pause"] = PauseStartObjekter;
+
+            using(var context1 = new Context())
+            {
+                oppgaveID = Classes.Validator.KonverterTilTall(Request.QueryString["oppgave_id"]);
+                Oppgave oppgave = context1.Oppgaver.Where(o => o.Oppgave_id == oppgaveID).FirstOrDefault();
+
+                pause = new Pause()
+                {
+                    Start = Pause,
+                    Oppgave_id = oppgave.Oppgave_id,
+                    Oppgave = oppgave
+                };
+
+                context1.Pauser.Add(pause);
+                context1.SaveChanges();
+            }
 
             tbTidsregistrert.Text += "Tid takingen pauset: " + Pause + "\n";
             btnPause.Enabled = false;
@@ -139,22 +202,27 @@ namespace SysUt14Gr03
             {
                 bruktTid = (TimeSpan)ViewState["bruktTid"];
                 TimeSpan timespan = new TimeSpan(bruktTid.Hours, bruktTid.Minutes, bruktTid.Seconds);
-                Start = (DateTime)ViewState["Start"];
                 Stopp = (DateTime)ViewState["Stopp"];
                 double time = bruktTid.TotalHours;
                 float tid = (float)time;
                 float rounded = (float)(Math.Round((double)tid, 2));
-                using (var context = new Context())
+                using (var context3 = new Context())
                 {
                     oppgaveID = Classes.Validator.KonverterTilTall(Request.QueryString["oppgave_id"]);
                     brukerID = Classes.Validator.KonverterTilTall(Request.QueryString["bruker_id"]);
-
-                    Oppgave oppgave = context.Oppgaver.Where(o => o.Oppgave_id == oppgaveID).FirstOrDefault();
-                    Bruker bruker = context.Brukere.Where(b => b.Bruker_id == brukerID).FirstOrDefault();
+                    timeID = Classes.Validator.KonverterTilTall(Request.QueryString["time_id"]);
+                    
+                    Oppgave oppgave = context3.Oppgaver.Where(o => o.Oppgave_id == oppgaveID).FirstOrDefault();
+                    Bruker bruker = context3.Brukere.Where(b => b.Bruker_id == brukerID).FirstOrDefault();
+                    timer = context3.Timer.Where(t => t.Time_id == timeID).FirstOrDefault();
 
                     oppgave.BruktTid = rounded;
                     oppgave.RemainingTime = oppgave.Estimat - tid;
                     oppgave.Oppdatert = DateTime.Now;
+
+                    timer.Tid = timespan;
+                    timer.IsFerdig = true;
+                    timer.Stopp = Stopp;
 
                     var Kommentar = new Kommentar
                     {
@@ -166,26 +234,31 @@ namespace SysUt14Gr03
                         Bruker = bruker,
                         Oppgave = oppgave
                     };
-                    
-                    var times = new Time
-                    {
-                        Tid = timespan,
-                        Opprettet = DateTime.Now,
-                        Aktiv = true,
-                        Bruker = bruker,
-                        Oppgave = oppgave,
-                        Start = Start,
-                        Stopp = Stopp
-                    };
 
-                    context.Kommentarer.Add(Kommentar);
-                    context.Timer.Add(times);
-                    context.SaveChanges();
+                    context3.Kommentarer.Add(Kommentar);
+                    context3.Timer.Add(timer);
+                    context3.SaveChanges();
                 }
             }
             else
             {
                 Debug.WriteLine("Du må legge til en kommentar på oppgaven. Kommentere det du har gjort.");
+            }
+        }
+        private void GetTimers(int pauseId, int timeId)
+        {
+            timer = Queries.GetTimer(timeId);
+            pauser = timer.Pause;
+            pause = Queries.GetPause(pauseId);
+
+            tbTidsregistrert.Text += "Tid takingen startet: " + timer.Start + "\n";
+            if(pauser != null)
+            {
+                for (int i = 0; i < pauser.Count; i++)
+                {
+                    tbTidsregistrert.Text += "Tid takingen pauset: " + pause.Start + "\n";
+                    tbTidsregistrert.Text += "Tid takingen startet etter pause: " + pause.Stopp + "\n";
+                }
             }
         }
     }

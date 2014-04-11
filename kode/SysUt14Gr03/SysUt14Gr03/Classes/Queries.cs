@@ -67,6 +67,29 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        static public Time GetTimer(int time_id)
+        {
+            using (var context = new Context())
+            {
+                var time = context.Timer
+                            .Include("Pause")
+                            .Where(t => t.Time_id == time_id)
+                            .FirstOrDefault();
+                return time;
+            }
+        }
+
+        static public Pause GetPause(int pause_id)
+        {
+            using (var context = new Context())
+            {
+                var pause = context.Pauser
+                            .Where(p => p.Pause_id == pause_id)
+                            .FirstOrDefault();
+                return pause;
+            }
+        }
+
         static public List<Time> GetTimerForBruker(int bruker_id)
         {
             using (var context = new Context())

@@ -3,7 +3,7 @@
     <h1>
         Få tilsendt et nytt passord</h1>
     <p>
-        Bruker navn:
+        Brukernavn:
         <asp:TextBox ID="Email" runat="server"></asp:TextBox></p>
     <p>
         <asp:Button ID="sendPassword" runat="server" Text="Send Passord" OnClick="sendPasswordButton_Click" CssClass="btn btn-primary btn-large"/> </p>
