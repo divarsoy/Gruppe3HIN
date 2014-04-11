@@ -469,6 +469,15 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        static public Team GetTeamByProsjekt(int prosjekt_id)
+        {
+            using (var context = new Context())
+            {
+                var valgtTeam = context.Teams.Where(team => team.Prosjekter.Any(prosjekt => prosjekt.Prosjekt_id == prosjekt_id)).FirstOrDefault();
+                return valgtTeam;
+            }
+        }
+
         static public Team GetTeamById(int teamId)
         {
             using (var context = new Context())
