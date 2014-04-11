@@ -9,25 +9,25 @@
             <asp:Label ID="lblOppgaver" runat="server" Visible="False"></asp:Label>
     
         <div class="listboxTest">
-            <asp:ListBox ID="lsbOppgaver" CssClass="form-control" Height="100px" Width="500px" AutoPostBack="True" runat="server" Visible="False" OnSelectedIndexChanged="lsbOppgaver_SelectedIndexChanged" ></asp:ListBox>
+            <asp:ListBox ID="lsbOppgaver" CssClass="form-control" Height="100px" Width="500px" AutoPostBack="True" runat="server" Visible="False" OnSelectedIndexChanged="lsbOppgaver_SelectedIndexChanged" Rows="6" ></asp:ListBox>
         </div>
       
             <asp:Label ID="lblKommentarer" runat="server" Visible="False"></asp:Label>
             <asp:Label ID="lblLogg" runat="server" Visible="False"></asp:Label>
         <div class="listboxTest">
-            <asp:ListBox ID="lsbKommentarer" CssClass="form-control" Height="100px" Width="500px" AutoPostBack="True" runat="server" Visible="False" OnSelectedIndexChanged="lsbKommentarer_SelectedIndexChanged"></asp:ListBox>
+            <asp:ListBox ID="lsbKommentarer" CssClass="form-control" Height="100px" Width="500px" AutoPostBack="True" runat="server" Visible="False" OnSelectedIndexChanged="lsbKommentarer_SelectedIndexChanged" Rows="6"></asp:ListBox>
         </div>
 
             
             <asp:Label ID="lblHistorikk" runat="server"></asp:Label>
         <div class="listboxTest">
-            <asp:ListBox ID="lsbLogg" CssClass="form-control" Height="100px" Width="500px" runat="server" Visible="False"></asp:ListBox>
+            <asp:ListBox ID="lsbLogg" CssClass="form-control" Height="100px" Width="500px" runat="server" Visible="False" Rows="6"></asp:ListBox>
         </div>
 
             <asp:Label ID="lblFullfort" runat="server" Visible="False"></asp:Label>
 
         <div class="listboxTest">
-            <asp:ListBox ID="lsbFFullfort" CssClass="form-control" Height="100px" Width="500px" runat="server" Visible="False"></asp:ListBox>
+            <asp:ListBox ID="lsbFFullfort" CssClass="form-control" Height="100px" Width="500px" runat="server" Visible="False" Rows="6"></asp:ListBox>
         </div>
             <asp:Label ID="lblPrefs" runat="server" Visible="False"></asp:Label>
             <br />

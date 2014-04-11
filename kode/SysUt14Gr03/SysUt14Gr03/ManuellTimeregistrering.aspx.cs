@@ -19,9 +19,9 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Utvikler);
-            //bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
-            bruker_id = 2;
+            SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Utvikler);
+            bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
+            //bruker_id = 2;
 
             if (Request.QueryString["oppgave_id"] != null)
             {
@@ -41,30 +41,24 @@ namespace SysUt14Gr03
 
                     }
 
-                    // http://www.aspsnippets.com/Articles/Server-Side-Code-Behind-Yes-No-Confirmation-Message-Box-in-ASPNet.aspx
-                    string confirmValue = Request.Form["confirm_value"];
-                    if (confirmValue == "Yes")
+                    // Tusen takk til http://forums.asp.net/post/2145517.aspx
+                    string eventTarget = (this.Request["__EVENTTARGET"] == null) ? string.Empty : this.Request["__EVENTTARGET"];
+                    string eventArgument = (this.Request["__EVENTARGUMENT"] == null) ? string.Empty : this.Request["__EVENTARGUMENT"];
+
+                    if (eventTarget == "UserConfirmationPostBack")
                     {
-                        //this.Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('You clicked YES!')", true);
-                        Lagre();
-                        // Vis flashjævel
-                        // TIlbakestill felter
+                        if (eventArgument == "true")
+                        {
+                            Lagre();
+                            lblTest.Text = "Lagret";
+                            lblTest.Visible = true;
+                            // Rydd opp
+                            RyddOpp();
+
+                        }
+
+                        // User said NOT to do it...
                     }
-
-
-                    string lag = lagreTime.Value;
-
-                    string info;
-
-                    if (infoField.Value != string.Empty)
-                    {
-                        info = infoField.Value;
-                        //btnLagre.OnClientClick = "return confirm('" + info + "');";
-                        String confirm = "<script>document.getElementById(\"lagreTime\").value = confirm('" + info + "')? \"Y\" : \"N\"</script>";
-                        // ClientScript.RegisterStartupScript(confirm);
-                        //ClientScript.RegisterStartupScript(GetType(), "confirm", confirm);
-                    }  
-
 
                     lblTittel.Text = "Manuell timeregistrering på oppgave " + oppgave.Tittel;
 
@@ -86,13 +80,12 @@ namespace SysUt14Gr03
                     txtStart.Visible = true;
                     txtSlutt.Visible = true;
 
-                    // Sjekk faenskapet her oppe
                 }
                 else
                 {
                     lblTittel.Text = "Oppgaven finnes ikke";
                 }
-   
+
             }
             else
             {
@@ -101,13 +94,27 @@ namespace SysUt14Gr03
 
         }
 
+        private void RyddOpp()
+        {
+            txtStart.Text = "";
+            txtSlutt.Text = "";
+
+            for (int i = 0; i < pauseTeller; i++)
+            {
+                TextBox txtPST = pnlPauser.FindControl("txtPauseStart" + i) as TextBox;
+                TextBox txtPSL = pnlPauser.FindControl("txtPauseSlutt" + i) as TextBox;
+                txtPST.Text = "";
+                txtPSL.Text = "";
+            }
+        }
+
         protected void btnAddPause_Click(object sender, EventArgs e)
         {
             lblTest.Visible = false;
 
             LeggTilPausefelt();
             pauseTeller++;
-            ViewState["pauseteller"] = pauseTeller;          
+            ViewState["pauseteller"] = pauseTeller;
 
         }
 
@@ -153,112 +160,131 @@ namespace SysUt14Gr03
             }
         }
 
-        public void VisDialog()
-        {
-        }
-
         protected void btnLagre_Click(object sender, EventArgs e)
         {
-            // Lagre timer på oppgave
-            
+            bool isConfirmNeeded = false;
+            string confirmMessage = string.Empty;
 
+            // All server side execution goes here and set isConfirmNeeded to true,
+            // and create the confirmMessage text, if user confirmation is needed.
+
+            DateTime dato = DateTime.Parse(ddlDag.SelectedValue);
+
+            DateTime startTid;
+            DateTime sluttTid;
+            if (txtStart.Text != string.Empty && txtSlutt.Text != string.Empty)
+            {
+                DateTime.TryParse(txtStart.Text, out startTid);
+                DateTime.TryParse(txtSlutt.Text, out sluttTid);
+
+                if (startTid != DateTime.MinValue && sluttTid != DateTime.MinValue)
+                {
+
+
+                    if (DateTime.Compare(startTid, sluttTid) < 0)
+                    {
+                        TimeSpan pauser = new TimeSpan();
+                        bruktTid = sluttTid - startTid;
+                        bool innenforOkt = true;
+
+                        for (int i = 0; i < pauseTeller; i++)
+                        {
+                            TextBox txtPST = pnlPauser.FindControl("txtPauseStart" + i) as TextBox;
+                            TextBox txtPSL = pnlPauser.FindControl("txtPauseSlutt" + i) as TextBox;
+
+                            if (txtPSL != null && txtPST != null)
+                            {
+                                // Samler opp alle pausetimer og -minutter
+                                txtPST.TextMode = TextBoxMode.Time;
+                                txtPSL.TextMode = TextBoxMode.Time;
+                                DateTime pauseStartTid;
+                                DateTime pauseSluttTid;
+                                DateTime.TryParse(txtPST.Text, out pauseStartTid);
+                                DateTime.TryParse(txtPSL.Text, out pauseSluttTid);
+
+                                if (pauseStartTid != DateTime.MinValue && pauseSluttTid != DateTime.MinValue)
+                                {
+                                    bool startOK = DateTime.Compare(startTid, pauseStartTid) < 0 && DateTime.Compare(sluttTid, pauseStartTid) > 0;
+                                    bool sluttOK = DateTime.Compare(startTid, pauseSluttTid) < 0 && DateTime.Compare(sluttTid, pauseSluttTid) > 0;
+
+                                    innenforOkt = startOK && sluttOK;
+
+                                    if (innenforOkt)
+                                    {
+                                        pauser += pauseSluttTid - pauseStartTid;
+                                    }
+                                }
+
+                            }
+                        }
+
+                        if (innenforOkt)
+                        {
+                            bruktTid -= pauser;
+                            ViewState["bruktTid"] = bruktTid;
+                            ViewState["startTid"] = startTid;
+                            ViewState["sluttTid"] = sluttTid;
+
+                            confirmMessage = "Følgende timetall vil bli registrert: " + bruktTid.Hours;
+                            confirmMessage += (bruktTid.Hours == 1 ? " time" : " timer") + " og ";
+                            confirmMessage += bruktTid.Minutes + (bruktTid.Minutes == 1 ? " minutt" : " minutter") +  ". Dato: "
+                                + dato.ToShortDateString() + " på oppgave " + oppgave.Tittel + ". Godta registrering?";
+
+                            ViewState["info"] = confirmMessage;
+
+                            isConfirmNeeded = true;
+
+
+                        }
+                        else
+                        {
+                            lblTest.Text = "Pauser kan ikke være utenfor arbeidsøkten";
+                            lblTest.Visible = true;
+                        }
+                    }
+                    else
+                    {
+                        lblTest.Text = "Sluttid kan ikke være før starttid";
+                        lblTest.Visible = true;
+                    }
+                }
+                else
+                {
+                    lblTest.Text = "Vennligst oppgi start- og sluttid";
+                    lblTest.Visible = true;
+                }
+
+            }
+            else
+            {
+                lblTest.Text = "Vennligst oppgi start- og sluttid";
+                lblTest.Visible = true;
+            }
+
+            if (isConfirmNeeded)
+            {
+                System.Text.StringBuilder javaScript = new System.Text.StringBuilder();
+
+                javaScript.Append("\n<script type=text/javascript>\n");
+                javaScript.Append("<!--\n");
+
+                javaScript.Append("var userConfirmation = window.confirm('" + confirmMessage + "');\n");
+                javaScript.Append("__doPostBack('UserConfirmationPostBack', userConfirmation);\n");
+
+                javaScript.Append("// -->\n");
+                javaScript.Append("</script>\n");
+
+                ClientScript.RegisterStartupScript(GetType(), "confirmScript", javaScript.ToString());
+            }
 
         }
 
         private void Lagre()
         {
+            bruktTid = (TimeSpan)ViewState["bruktTid"];
+            DateTime startTid = (DateTime)ViewState["startTid"];
+            DateTime sluttTid = (DateTime)ViewState["sluttTid"];
             DateTime dato = DateTime.Parse(ddlDag.SelectedValue);
-            //bruktTid = (TimeSpan)ViewState["bruktTid"];
-            //DateTime startTid = (DateTime)ViewState["startTid"];
-            //DateTime sluttTid = (DateTime)ViewState["sluttTid"];
-
-            DateTime startTid;
-            DateTime sluttTid;
-            DateTime.TryParse(txtStart.Text, out startTid);
-            DateTime.TryParse(txtSlutt.Text, out sluttTid);
-
-            if (startTid != DateTime.MinValue && sluttTid != DateTime.MinValue)
-            {
-
-
-                if (DateTime.Compare(startTid, sluttTid) < 0)
-                {
-                    TimeSpan pauser = new TimeSpan();
-                    bruktTid = sluttTid - startTid;
-                    bool innenforOkt = true;
-
-                    for (int i = 0; i < pauseTeller; i++)
-                    {
-                        TextBox txtPST = pnlPauser.FindControl("txtPauseStart" + i) as TextBox;
-                        TextBox txtPSL = pnlPauser.FindControl("txtPauseSlutt" + i) as TextBox;
-
-                        if (txtPSL != null && txtPST != null)
-                        {
-                            // Samler opp alle pausetimer og -minutter
-                            txtPST.TextMode = TextBoxMode.Time;
-                            txtPSL.TextMode = TextBoxMode.Time;
-                            DateTime pauseStartTid;
-                            DateTime pauseSluttTid;
-                            DateTime.TryParse(txtPST.Text, out pauseStartTid);
-                            DateTime.TryParse(txtPSL.Text, out pauseSluttTid);
-
-                            if (pauseStartTid != DateTime.MinValue && pauseSluttTid != DateTime.MinValue)
-                            {
-                                bool startOK = DateTime.Compare(startTid, pauseStartTid) < 0 && DateTime.Compare(sluttTid, pauseStartTid) > 0;
-                                bool sluttOK = DateTime.Compare(startTid, pauseSluttTid) < 0 && DateTime.Compare(sluttTid, pauseSluttTid) > 0;
-
-                                innenforOkt = startOK && sluttOK;
-
-                                if (innenforOkt)
-                                {
-                                    pauser += pauseSluttTid - pauseStartTid;
-                                }
-                            }
-
-                        }
-                    }
-
-                    if (innenforOkt)
-                    {
-                        bruktTid -= pauser;
-                        ViewState["bruktTid"] = bruktTid;
-                        ViewState["startTid"] = startTid;
-                        ViewState["sluttTid"] = sluttTid;
-
-                        //DateTime dato = DateTime.Parse(ddlDag.SelectedValue);
-
-                        //debug
-                        string info = "Følgende timetall vil bli registrert: " + bruktTid.Hours + " timer og " + bruktTid.Minutes + " minutter. Dato: "
-                            + dato.ToShortDateString() + " på oppgave " + oppgave.Tittel + ". Godta registrering?";
-                        //infoField.Value = info;
-                        //lblTest.Visible = true;
-                        //btnFullfor.Visible = true;
-                        //btnLagre.Attributes.Add("onclick", "javascript:return confirm('" + info + "')");
-                        //Response.Write("<script type=\"text/javascript\"> function Confirmation(){if(confirm('" + info + "')){return true;}else{return false;}}</script>");
-
-
-                        //Response.Write("<script>document.getElementById(\"confirm_value\").value = confirm('" + info + "')? \"Yes\" : \"No\"</script>");
-                        // Gjør et eller annet
-                        // Kall lagre()
-                        //Lagre(bruktTid, startTid, sluttTid);
-
-
-                    }
-                    else
-                    {
-                        lblTest.Text = "Pauser kan ikke være utenfor arbeidsøkten";
-                    }
-                }
-                else
-                {
-                    lblTest.Text = "Sluttid kan ikke være før starttid";
-                }
-            }
-            else
-            {
-                lblTest.Text = "Vennligst oppgi start- og sluttid";
-            }
-
 
             using (var context = new Context())
             {
@@ -280,6 +306,5 @@ namespace SysUt14Gr03
                 context.SaveChanges();
             }
         }
-
     }
 }
