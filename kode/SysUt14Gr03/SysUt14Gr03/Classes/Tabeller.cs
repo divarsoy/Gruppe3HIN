@@ -155,12 +155,13 @@ namespace SysUt14Gr03.Classes
             TableHeaderCell epostHeaderCell = new TableHeaderCell();
             TableHeaderCell IMHeaderCell = new TableHeaderCell();
 
+            string teamLink = teamNavnCell.ResolveUrl("~/VisTeam?team_id=" + nesteTeam.Team_id.ToString());
             forNavnHeaderCell.Text = "Fornavn";
             etterNavnHeaderCell.Text = "Etternavn";
             brukerNavnHeaderCell.Text = "Brukernavn";
             epostHeaderCell.Text = "Epost";
             IMHeaderCell.Text = "IM";
-            teamNavnCell.Text = String.Format("<a href='VisTeam?Team_id={0}'>{1}</a>", nesteTeam.Team_id.ToString(), nesteTeam.Navn);
+            teamNavnCell.Text = String.Format("<a href='{0}'>{1}</a>", teamLink, nesteTeam.Navn.ToString());
                
             teamNavnHeader.Cells.Add(teamNavnCell);
             tabell.Rows.Add(teamNavnHeader);
@@ -184,7 +185,6 @@ namespace SysUt14Gr03.Classes
                 StringBuilder brukereITeam = new StringBuilder();
 
                 forNavnCell.Text = bruker.Fornavn;
-
                 etterNavnCell.Text = bruker.Etternavn;
                 brukerNavnCell.Text = String.Format("<a href='VisBruker?bruker_id={0}'>{1}</a>", bruker.Bruker_id, bruker.Brukernavn);
                 epostCell.Text = bruker.Epost;
