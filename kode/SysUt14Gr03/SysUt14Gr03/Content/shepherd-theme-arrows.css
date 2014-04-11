@@ -120,7 +120,7 @@
       border-right-color: white; }
 
 .shepherd-element.shepherd-theme-arrows.shepherd-element-attached-top.shepherd-element-attached-center.shepherd-has-title .shepherd-content:before, .shepherd-element.shepherd-theme-arrows.shepherd-element-attached-top.shepherd-element-attached-right.shepherd-target-attached-bottom.shepherd-has-title .shepherd-content:before, .shepherd-element.shepherd-theme-arrows.shepherd-element-attached-top.shepherd-element-attached-left.shepherd-target-attached-bottom.shepherd-has-title .shepherd-content:before {
-  border-bottom-color: #eeeeee; }
+  border-bottom-color: #303030; }
 .shepherd-element.shepherd-theme-arrows .shepherd-content {
   padding: 0; }
   .shepherd-element.shepherd-theme-arrows .shepherd-content * {
@@ -131,7 +131,7 @@
     -ms-border-radius: 5px 5px 0 0;
     -o-border-radius: 5px 5px 0 0;
     border-radius: 5px 5px 0 0;
-    background: #eeeeee;
+    background: #303030;
     padding: 1em; }
     .shepherd-element.shepherd-theme-arrows .shepherd-content header h3 {
       margin: 0;
@@ -180,6 +180,6 @@
           color: white; }
           .shepherd-element.shepherd-theme-arrows .shepherd-content footer .shepherd-buttons li .shepherd-button.shepherd-button-secondary {
             background: #eeeeee;
-            color: #888888; }
+            color: #5F5F5F; }
         .shepherd-element.shepherd-theme-arrows .shepherd-content footer .shepherd-buttons li:last-child .shepherd-button {
           margin-right: 0; }
