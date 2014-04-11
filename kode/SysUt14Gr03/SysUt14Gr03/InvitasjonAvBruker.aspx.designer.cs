@@ -13,13 +13,13 @@ namespace SysUt14Gr03 {
     public partial class InvitasjonAvBruker {
         
         /// <summary>
-        /// ddlOppgave control.
+        /// lblInvitasjon control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlOppgave;
+        protected global::System.Web.UI.WebControls.Label lblInvitasjon;
         
         /// <summary>
         /// ddlBrukere control.
@@ -38,14 +38,5 @@ namespace SysUt14Gr03 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSendInvitasjon;
-        
-        /// <summary>
-        /// lblInvitasjon control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblInvitasjon;
     }
 }
