@@ -166,10 +166,8 @@ namespace SysUt14Gr03
 
         protected void btnPrefs_Click(object sender, EventArgs e)
         {
-           // De ligger ikke i samme mappe
-           // Hvorfor  ligger ikke VisBruker i Utvikler
-            // Hvorfor
-            Response.Redirect("http://malmen.hin.no/SysUt14Gr03/Utvikler/Epostpreferanser.aspx", true);
+
+            Response.Redirect("/Epostpreferanser.aspx", true);
         }
 
         protected void lsbKommentarer_SelectedIndexChanged(object sender, EventArgs e)

@@ -19,14 +19,14 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //SessionSjekk.sjekkForBruker_id();
-            //bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
-            bruker_id = 3;
+            SessionSjekk.sjekkForBruker_id();
+            bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
+            //bruker_id = 3;
 
             if (Request.QueryString["oppgave_id"] != null)
             {
-                oppgave_id = 1;
-                //oppgave_id = Validator.KonverterTilTall(Request.QueryString["oppgave_id"]);
+                //oppgave_id = 1;
+                oppgave_id = Validator.KonverterTilTall(Request.QueryString["oppgave_id"]);
                 oppgave = Queries.GetOppgave(oppgave_id);
                 if (oppgave != null)
                 {
@@ -41,6 +41,7 @@ namespace SysUt14Gr03
                     {
                         btnInviter.Visible = true;
                         btnReturn.Visible = true;
+                        btnTimer.Visible = true;
                     }
                     else
                     {
@@ -137,39 +138,42 @@ namespace SysUt14Gr03
 
                     lblKommentarer.Text += "<p> <a href=\"VisBruker.aspx?bruker_id=" + kommentarListe[i].Bruker.Bruker_id + "\">" + kommentarListe[i].Bruker.Brukernavn + "</a>";
                     lblKommentarer.Text += "<p><b>" + kommentarListe[i].Opprettet.ToString() + "</b></p>\n";
-                    lblKommentarer.Text += "<p>" + kommentarListe[i].Tekst + "<p>\n<hr>\n";
-                    if (sjekkNavn)
+                    lblKommentarer.Text += "<p>" + kommentarListe[i].Tekst + "<p>\n<hr>\n";                 
+                }
+
+                lblKommentarer.Visible = true;
+
+                if (sjekkNavn)
+                {
+                    Kommentar nyKommentar = kommentarListe[kommentarListe.Count - 1];
+                    if (nyKommentar.Tekst.Contains("@"))
                     {
-                        if (kommentarListe[i].Tekst.Contains("@"))
+                        MatchCollection match = Regex.Matches(nyKommentar.Tekst, @"(?<!\w)@\w+");
+                        foreach (Match ord in match)
                         {
-                            MatchCollection match = Regex.Matches(kommentarListe[i].Tekst, @"(?<!\w)@\w+");
-                            foreach (Match ord in match)
+                            string[] navn = Regex.Split(ord.Value, @"^@");
+                            using (var context = new Context())
                             {
-                                string[] navn = Regex.Split(ord.Value, @"^@");
-                                using (var context = new Context())
+                                foreach (string userName in navn)
                                 {
-                                    foreach (string userName in navn)
+                                    if (userName != String.Empty)
                                     {
-                                        if (userName != String.Empty)
+                                        Bruker bruker = context.Brukere.Where(b => b.Brukernavn == userName).FirstOrDefault();
+                                        if (bruker != null)
                                         {
-                                            Bruker bruker = context.Brukere.Where(b => b.Brukernavn == userName).FirstOrDefault();
-                                            if (bruker != null)
-                                            {
-                                                string fornavn = Queries.GetBruker(bruker_id).ToString();
-                                                Varsel.SendVarsel(bruker.Bruker_id, Varsel.KOMMENTARVARSEL, "Kommentar", fornavn + " har nevnt deg i en kommentar");
-                                            }
-                                            
+                                            string fornavn = Queries.GetBruker(bruker_id).ToString();
+                                            Varsel.SendVarsel(bruker.Bruker_id, Varsel.KOMMENTARVARSEL, "Kommentar", fornavn + " har nevnt deg i en kommentar på oppgave " + oppgave.Tittel);
                                         }
+
                                     }
                                 }
                             }
-                            txtKommentar.Text = "";
-
                         }
+                        txtKommentar.Text = "";
 
-                    }                   
-                }
-                lblKommentarer.Visible = true;
+                    }
+
+                } 
                 
             } 
         }
@@ -206,6 +210,11 @@ namespace SysUt14Gr03
         {
             // Bruker kan returnere oppgaven
             Response.Redirect("ReturAvOppgave.aspx?oppgave_id=" + oppgave_id, true);
+        }
+
+        protected void btnTimer_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ManuellTimeregistrering.aspx?oppgave_id=" + oppgave_id, true);
         }
     }
 }
