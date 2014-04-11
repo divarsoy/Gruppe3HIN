@@ -119,7 +119,7 @@ namespace SysUt14Gr03.Classes
             if (oppgave)
             {
                 Oppgave o = Queries.GetOppgave(oppgave_id);
-                melding += Environment.NewLine + "<a href=\"http://malmen.hin.no/stud/SysUt14Gr03/MottaOppgave.aspx?oppgave_id=" + oppgave_id + "\">" + o.Tittel + "</a>";
+                melding += Environment.NewLine + "<a href=\"http://malmen.hin.no/SysUt14Gr03/MottaOppgave.aspx?oppgave_id=" + oppgave_id + "\">" + o.Tittel + "</a>";
             }
 
             if (selectedItems[varsel])
