@@ -19,14 +19,13 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
-
-            //bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
-            bruker_id = 2;
-
+            SessionSjekk.sjekkForBruker_id();
+            bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
+            //bruker_id = 3;
 
             if (Request.QueryString["oppgave_id"] != null)
             {
+                //oppgave_id = 1;
                 oppgave_id = Validator.KonverterTilTall(Request.QueryString["oppgave_id"]);
                 oppgave = Queries.GetOppgave(oppgave_id);
                 if (oppgave != null)
@@ -42,6 +41,7 @@ namespace SysUt14Gr03
                     {
                         btnInviter.Visible = true;
                         btnReturn.Visible = true;
+                        btnTimer.Visible = true;
                     }
                     else
                     {
@@ -49,24 +49,26 @@ namespace SysUt14Gr03
                     }
 
                     lblNavn.Text = oppgave.Tittel;
-                    lblInfo.Text = "User story: " + oppgave.UserStory;
-                    lblInfo.Text += "<br />" + "Oppgave-ID: " + oppgave.Oppgave_id;
-                    lblInfo.Text += "<br />" + "Krav: " + oppgave.Krav;
-                    lblInfo.Text += "<br />" + "Estimat: " + oppgave.Estimat + " timer";
-                    lblInfo.Text += "<br />" + "Resterende tid: " + oppgave.RemainingTime.ToString() + " timer";
-                    lblInfo.Text += "<br />" + "Brukt tid: " + oppgave.BruktTid.ToString() + " timer";
-                    lblInfo.Text += "<br />" + "Tidsfrist: " + oppgave.Tidsfrist == null ? "Nei" : oppgave.Tidsfrist.ToString();
-                    lblInfo.Text += "<br />" + "Status: " + oppgave.Status.Navn;
-                    lblInfo.Text += "<br />" + "Prioritet: " + oppgave.Prioritering_id;
+                    lblInfo.Text = "";
+                    lblInfo.Text += "<p><b>User story: </b>" + oppgave.UserStory + "</p>\n";
+                    lblInfo.Text += "<p><b>" + "Oppgave-ID: </b>" + oppgave.Oppgave_id + "</p>\n";
+                    lblInfo.Text += "<p><b>" + "Krav: </b>" + oppgave.Krav + "</p>\n";
+                    lblInfo.Text += "<p><b>" + "Estimat: </b>" + oppgave.Estimat + " timer</p>\n";
+                    lblInfo.Text += "<p><b>" + "Resterende tid: </b>" + oppgave.RemainingTime.ToString() + " timer</p>\n";
+                    lblInfo.Text += "<p><b>" + "Brukt tid: </b>" + oppgave.BruktTid.ToString() + " timer</p>\n";
+                    lblInfo.Text += "<p><b>" + "Tidsfrist: </b>" + oppgave.Tidsfrist == null ? "Nei</p>\n" : oppgave.Tidsfrist.ToString() + "</p>\n";
+                    lblInfo.Text += "<p><b>" + "Status: </b>" + oppgave.Status.Navn + "</p>\n";
+                    lblInfo.Text += "<p><b>" + "Prioritet: </b>" + oppgave.Prioritering_id + "</p>\n";
                     int avhengigOppgave = Validator.SjekkAvhengighet(oppgave_id);
-                    lblInfo.Text += "<br />" + "Avhengighet: " + (avhengigOppgave == -1 ? "Nei" : "<a href=\"visOppgave?oppgave_id=" + avhengigOppgave + "\">" + "Ja, vis oppgave" + "</a>");
-                    lblInfo.Text += "<br />" + "Dato opprettet: " + oppgave.Opprettet;
-                    lblInfo.Text += "<br />" + "Dato endret: " + oppgave.Oppdatert == null ? "Ikke endret" : oppgave.Oppdatert.ToString();
-                    lblInfo.Text += "<br />" + "Prosjekt: " + "<a href=\"visProsjekt?Prosjekt_id=" + oppgave.Prosjekt_id + "\">" + oppgave.Prosjekt.Navn + "</a>";
-                    lblInfo.Text += "<hr />" + "Deltaker(e) ";
+                    lblInfo.Text += "<p><b>" + "Avhengighet: </b>" + (avhengigOppgave == -1 ? "Nei</p>\n" : "<a href=\"visOppgave?oppgave_id=" + avhengigOppgave + "\">" + "Ja, vis oppgave" + "</a></p>\n");
+                    lblInfo.Text += "<p><b>" + "Dato opprettet: </b>" + oppgave.Opprettet + "</p>\n";
+                    lblInfo.Text += "<p><b>" + "Dato endret: </b>" + oppgave.Oppdatert == null ? "Ikke endret" : oppgave.Oppdatert.ToString();
+                    lblInfo.Text += "</p>\n";
+                    lblInfo.Text += "<p><b>" + "Prosjekt: </b>" + "<a href=\"visProsjekt?Prosjekt_id=" + oppgave.Prosjekt_id + "\">" + oppgave.Prosjekt.Navn + "</a></p>\n";
+                    lblInfo.Text += "<hr />" + "<b>Deltaker(e) </b>";
                     foreach (Bruker bruker in oppgave.Brukere)
                     {
-                        lblInfo.Text += "<br /><a href=\"VisBruker.aspx?bruker_id=" + bruker.Bruker_id + "\">" + bruker.IM + "</a>";
+                        lblInfo.Text += "<p><a href=\"VisBruker.aspx?bruker_id=" + bruker.Bruker_id + "\">" + bruker.IM + "</a></p>\n";
                     }
                     //lblInfo.Text += "<br />" + "Dato endret: " + oppgave.Oppdatert == null ? "Ikke endret" : oppgave.Oppdatert.ToString();
                     //txtInfo.Wrap = true;
@@ -124,7 +126,7 @@ namespace SysUt14Gr03
         private void OppdaterKommentarer(bool sjekkNavn)
         {
             kommentarListe = Queries.GetAlleKommentarerTilOppgave(oppgave_id);
-            lblKommentarteller.Text = "Kommentarer (" + kommentarListe.Count + ")";
+            lblKommentarteller.Text = "<h2>Kommentarer (" + kommentarListe.Count + ")</h2>";
             txtKommentar.Visible = true;
             btnKommentar.Visible = true;
             lblKommentarteller.Visible = true;
@@ -133,41 +135,46 @@ namespace SysUt14Gr03
                 lblKommentarer.Text = "";
                 for (int i = kommentarListe.Count - 1; i >= 0; i--)
                 {
-                    lblKommentarer.Text += "<hr /> <a href=\"VisBruker.aspx?bruker_id=" + kommentarListe[i].Bruker.Bruker_id + "\">" + kommentarListe[i].Bruker.IM + "</a>";
-                    lblKommentarer.Text += "<br />" + kommentarListe[i].Opprettet.ToString();
-                    lblKommentarer.Text += "<br />" + kommentarListe[i].Tekst;
-                    if (sjekkNavn)
+
+                    lblKommentarer.Text += "<p> <a href=\"VisBruker.aspx?bruker_id=" + kommentarListe[i].Bruker.Bruker_id + "\">" + kommentarListe[i].Bruker.Brukernavn + "</a>";
+                    lblKommentarer.Text += "<p><b>" + kommentarListe[i].Opprettet.ToString() + "</b></p>\n";
+                    lblKommentarer.Text += "<p>" + kommentarListe[i].Tekst + "<p>\n<hr>\n";                 
+                }
+
+                lblKommentarer.Visible = true;
+
+                if (sjekkNavn)
+                {
+                    Kommentar nyKommentar = kommentarListe[kommentarListe.Count - 1];
+                    if (nyKommentar.Tekst.Contains("@"))
                     {
-                        if (kommentarListe[i].Tekst.Contains("@"))
+                        MatchCollection match = Regex.Matches(nyKommentar.Tekst, @"(?<!\w)@\w+");
+                        foreach (Match ord in match)
                         {
-                            MatchCollection match = Regex.Matches(kommentarListe[i].Tekst, @"(?<!\w)@\w+");
-                            foreach (Match ord in match)
+                            string[] navn = Regex.Split(ord.Value, @"^@");
+                            using (var context = new Context())
                             {
-                                string[] navn = Regex.Split(ord.Value, @"^@");
-                                using (var context = new Context())
+                                foreach (string userName in navn)
                                 {
-                                    foreach (string userName in navn)
+                                    if (userName != String.Empty)
                                     {
-                                        if (userName != String.Empty)
+                                        Bruker bruker = context.Brukere.Where(b => b.Brukernavn == userName).FirstOrDefault();
+                                        if (bruker != null)
                                         {
-                                            Bruker bruker = context.Brukere.Where(b => b.Brukernavn == userName).FirstOrDefault();
-                                            if (bruker != null)
-                                            {
-                                                string fornavn = Queries.GetBruker(bruker_id).ToString();
-                                                Varsel.SendVarsel(bruker.Bruker_id, Varsel.KOMMENTARVARSEL, "Kommentar", fornavn + " har nevnt deg i en kommentar", oppgave.Oppgave_id);
-                                            }
-                                            
+                                            string fornavn = Queries.GetBruker(bruker_id).ToString();
+                                            Varsel.SendVarsel(bruker.Bruker_id, Varsel.KOMMENTARVARSEL, "Kommentar", fornavn + " har nevnt deg i en kommentar på oppgave " + oppgave.Tittel);
                                         }
+
                                     }
                                 }
                             }
-
                         }
+                        txtKommentar.Text = "";
+
                     }
-                    
-                }
-                lblKommentarer.Visible = true;
-                txtKommentar.Text = "";
+
+                } 
+                
             } 
         }
 
@@ -203,6 +210,11 @@ namespace SysUt14Gr03
         {
             // Bruker kan returnere oppgaven
             Response.Redirect("ReturAvOppgave.aspx?oppgave_id=" + oppgave_id, true);
+        }
+
+        protected void btnTimer_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ManuellTimeregistrering.aspx?oppgave_id=" + oppgave_id, true);
         }
     }
 }

@@ -40,6 +40,15 @@ namespace SysUt14Gr03 {
         protected global::System.Web.UI.WebControls.Button btnPameld;
         
         /// <summary>
+        /// btnTimer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnTimer;
+        
+        /// <summary>
         /// btnInviter control.
         /// </summary>
         /// <remarks>
@@ -58,15 +67,6 @@ namespace SysUt14Gr03 {
         protected global::System.Web.UI.WebControls.Button btnReturn;
         
         /// <summary>
-        /// lblKommentarteller control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblKommentarteller;
-        
-        /// <summary>
         /// txtKommentar control.
         /// </summary>
         /// <remarks>
@@ -83,6 +83,15 @@ namespace SysUt14Gr03 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnKommentar;
+        
+        /// <summary>
+        /// lblKommentarteller control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblKommentarteller;
         
         /// <summary>
         /// lblKommentarer control.

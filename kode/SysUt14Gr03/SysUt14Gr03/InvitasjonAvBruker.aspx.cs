@@ -17,21 +17,17 @@ namespace SysUt14Gr03
         private List<Bruker> brukerListe;
         private List<Oppgave> oppgListe;
         private int brukerid;
-
+        private Bruker innloggetbruker;
         protected void Page_Load(object sender, EventArgs e)
         {
+            SessionSjekk.sjekkForBruker_id();
+            brukerid = Validator.KonverterTilTall(Session["bruker_id"].ToString());
+            innloggetbruker = Queries.GetBruker(brukerid);
+
             
             if (!IsPostBack)
             {
-                if (Session["loggedIn"] == null)
-                {
-                    //Response.Redirect("Login.aspx", true);
-                    brukerid = 2;
-                }
-                else
-                {
-                   brukerid = Validator.KonverterTilTall(Session["bruker_id"].ToString());
-                }
+            
 
                 brukerListe = Queries.GetAlleAktiveBrukere();
                 oppgListe = Queries.GetAlleAktiveOppgaverForBruker(brukerid);
@@ -50,13 +46,7 @@ namespace SysUt14Gr03
                         ddlBrukere.Items.Remove(ddlBrukere.Items.FindByValue(brukerid.ToString()));
 
                     }
-                using (var context = new Context())
-                {
-                   
-                    Bruker bruker = context.Brukere.Where(b => b.Bruker_id == brukerid).First();
-                    lblbrukerInnlogget.Text = "Logget inn som: " + bruker.ToString();
-                    lblbrukerInnlogget.ForeColor = Color.Green; 
-                }
+              
             }
         }
    
@@ -65,7 +55,7 @@ namespace SysUt14Gr03
             
             brukerid = Convert.ToInt32(ddlBrukere.SelectedValue);
             int oppgave_id = Convert.ToInt32(ddlOppgave.SelectedValue);
-            Varsel.SendVarsel(brukerid, Varsel.OPPGAVEVARSEL, "Hjelp", "Trenger hjelp til oppgaven: ", oppgave_id);
+            Varsel.SendVarsel(brukerid, Varsel.OPPGAVEVARSEL, "Hjelp", innloggetbruker.ToString() + " trenger hjelp til oppgaven: ", oppgave_id, 1);
             lblInvitasjon.ForeColor = Color.Green;
             lblInvitasjon.Text = "Invitasjon sendt til: " + ddlBrukere.SelectedItem.ToString();
         }

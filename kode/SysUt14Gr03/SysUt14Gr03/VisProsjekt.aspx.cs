@@ -17,40 +17,41 @@ namespace SysUt14Gr03
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            SessionSjekk.sjekkForBruker_id();
+            SessionSjekk.sjekkForProsjekt_id();
+
+            // if (Request.QueryString["prosjekt_id"] != null)
+            //{
+            //     prosjekt_id = Validator.KonverterTilTall(Request.QueryString["prosjekt_id"]);
+            prosjekt_id = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
+
+            Prosjekt prosjekt = Queries.GetProsjekt(prosjekt_id);
+            prosjektNavn.Text = prosjekt.Navn;
+            oppgaveProsjekt = Queries.GetAlleAktiveOppgaverForProsjekt(prosjekt.Prosjekt_id);
 
 
-            if (Request.QueryString["prosjekt_id"] != null)
+            lblInfo.Text += "<br />" + "StartDato: " + String.Format("{0:dd/MM/yyyy}", prosjekt.StartDato);
+            lblInfo.Text += "<br />" + "SluttDato: " + String.Format("{0:dd/MM/yyyy}", prosjekt.SluttDato);
+            lblInfo.Text += "<br />" + "Opprettet: " + String.Format("{0:dd/MM/yyyy}", prosjekt.Opprettet);
+            lblInfo.Text += "<hr />";
+            string navn = Queries.GetBruker(prosjekt.Bruker_id).ToString();
+            string teamNavn = Queries.GetTeam((int)prosjekt.Team_id).Navn;
+            lblInfo.Text += "<br />Team: <a href=\"visTeam?team_id=" + prosjekt.Team_id + "\">" + teamNavn + "</a>";
+            lblInfo.Text += "<br />Prosjektleder: <a href=\"visBruker?bruker_id=" + prosjekt.Bruker_id + "\">" + navn + "</a>";
+
+            lblInfo.Text += "<hr />";
+            lblInfo.Text += "<br />" + "Oppgaver Knyttet til prosjektet";
+            for (int i = 0; i < oppgaveProsjekt.Count; i++)
             {
-                prosjekt_id = Validator.KonverterTilTall(Request.QueryString["prosjekt_id"]);
-
-
-                Prosjekt prosjekt = Queries.GetProsjekt(prosjekt_id);
-                prosjektNavn.Text = prosjekt.Navn;
-                oppgaveProsjekt = Queries.GetAlleAktiveOppgaverForProsjekt(prosjekt.Prosjekt_id);
-                
-
-                lblInfo.Text += "<br />" + "StartDato: " + String.Format("{0:dd/MM/yyyy}", prosjekt.StartDato);
-                lblInfo.Text += "<br />" + "SluttDato: " + String.Format("{0:dd/MM/yyyy}", prosjekt.SluttDato);
-                lblInfo.Text += "<br />" + "Opprettet: " + String.Format("{0:dd/MM/yyyy}", prosjekt.Opprettet);
-                lblInfo.Text += "<hr />";
-                string navn = Queries.GetBruker(prosjekt.Bruker_id).ToString();
-                string teamNavn = Queries.GetTeam((int)prosjekt.Team_id).Navn;
-                lblInfo.Text += "<br />Team: <a href=\"visTeam?team_id=" + prosjekt.Team_id + "\">" + teamNavn + "</a>";
-                lblInfo.Text += "<br />Prosjekleder: <a href=\"visBruker?bruker_id=" + prosjekt.Bruker_id + "\">" + navn + "</a>";
-
-                lblInfo.Text += "<hr />";
-                lblInfo.Text += "<br />" + "Oppgaver Knyttet til prosjektet";
-                for(int i = 0; i < oppgaveProsjekt.Count; i++)
-                {
-                    Oppgave oppg = oppgaveProsjekt[i];
-                    lblInfo.Text += "<br /><a href=\"visOppgave?oppgave_id=" + oppg.Oppgave_id + "\">" + oppg.Tittel + "</a>";
-                }
+                Oppgave oppg = oppgaveProsjekt[i];
+                lblInfo.Text += "<br /><a href=\"visOppgave?oppgave_id=" + oppg.Oppgave_id + "\">" + oppg.Tittel + "</a>";
             }
-            else
-            {
-                lblInfo.Text = "Prosjekt finnes ikke";
-                lblInfo.ForeColor = Color.Red;
-            }
+            // }
+            /* else
+             {
+                 lblInfo.Text = "Prosjekt finnes ikke";
+                 lblInfo.ForeColor = Color.Red;
+             } */
         }
     }
 }

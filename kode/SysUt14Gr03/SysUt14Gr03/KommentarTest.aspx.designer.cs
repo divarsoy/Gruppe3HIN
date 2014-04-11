@@ -10,42 +10,33 @@
 namespace SysUt14Gr03 {
     
     
-    public partial class OpprettOppgavegruppe {
+    public partial class KommentarTest {
         
         /// <summary>
-        /// txtNavn control.
+        /// Label1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNavn;
+        protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
-        /// gvwOppgaver control.
+        /// TextBox1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvwOppgaver;
+        protected global::System.Web.UI.WebControls.TextBox TextBox1;
         
         /// <summary>
-        /// lblMelding control.
+        /// Button1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMelding;
-        
-        /// <summary>
-        /// btnOpprett control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnOpprett;
+        protected global::System.Web.UI.WebControls.Button Button1;
     }
 }

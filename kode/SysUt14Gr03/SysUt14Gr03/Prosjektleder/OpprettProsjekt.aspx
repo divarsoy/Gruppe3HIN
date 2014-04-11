@@ -35,12 +35,12 @@
         <br />
         <div class="form-group">
         <div class="col-sm-5">
-        <asp:Calendar ID="cal" CssClass="form-control" BorderColor="Blue" ShowGridLines="true" NextMonthText="Neste" PrevMonthText="Forrige" TodayDayStyle-BackColor="Blue" TodayDayStyle-ForeColor="White" WeekendDayStyle-ForeColor="Red" runat="server" Width="400px" ></asp:Calendar>
+        <asp:Calendar ID="cal" Width="400px" BorderColor="Blue" ShowGridLines="true" NextMonthText="Neste" PrevMonthText="Forrige" TodayDayStyle-BackColor="Blue" TodayDayStyle-ForeColor="White" WeekendDayStyle-ForeColor="Red" runat="server"  ></asp:Calendar>
             </div>
             </div>
          <div class="clearfix"></div>
-        <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
-
+        
+        <br />
         
         <div class="form-group">
             <label for="inputStartdato" class="col-sm-1 control-label">Startdato</label>

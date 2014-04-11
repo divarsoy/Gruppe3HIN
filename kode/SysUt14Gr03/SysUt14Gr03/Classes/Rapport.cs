@@ -18,6 +18,12 @@ namespace SysUt14Gr03.Classes
         private Prosjekt prosjekt;
         private Bruker bruker;
         private string info;
+        private TimeSpan bruktTidProsjekt;
+        private float estimertTidProsjekt;
+        private TimeSpan varighetProsjekt;
+        private TimeSpan sumTimerForBruker;
+        private int antallFerdigeOppgaver;
+        private int antallDeltakerePaTeam;
 
         /// <summary>
         /// Lag en rapport
@@ -27,6 +33,12 @@ namespace SysUt14Gr03.Classes
         public Rapport(int type, int _id)
         {
             info = "";
+            bruktTidProsjekt = new TimeSpan();
+            estimertTidProsjekt = 0;
+            varighetProsjekt = new TimeSpan();
+            sumTimerForBruker = new TimeSpan();
+            antallFerdigeOppgaver = 0;
+            antallDeltakerePaTeam = 0;
 
             switch (type) {
                 case 0:
@@ -44,6 +56,7 @@ namespace SysUt14Gr03.Classes
                             info += "<br /><h3>Prosjekter:</h3>";
                             foreach (Prosjekt p in team.Prosjekter)
                                 info += "<br /><t />" + p.Navn;
+                            antallDeltakerePaTeam = team.Brukere.Count;
                         }
                     }
                     break;
@@ -72,10 +85,16 @@ namespace SysUt14Gr03.Classes
                                 info += "<br /><t />Opprettet: " + o.Opprettet.ToShortDateString();
                                 info += "<br /><t />User story: " + o.UserStory;
                                 info += "<br /><t />Krav: " + o.Krav;
+                                int avhengigOppgave = Validator.SjekkAvhengighet(o.Oppgave_id);
+                                info += "<br />" + "Avhengighet: " + (avhengigOppgave == -1 ? "Nei" : "Ja");
                                 info += "<br /><t />Estimat: " + o.Estimat;
                                 info += "<br /><t />Brukt tid: " + o.BruktTid;
                                 Status status = Queries.GetStatus(o.Status_id);
                                 info += "<br /><t />Status: " + status.Navn;
+                                estimertTidProsjekt += (float)o.Estimat;
+                                List<Time> timeListe = Queries.GetTimerForOppgave(o.Oppgave_id);
+                                foreach (Time t in timeListe)
+                                    bruktTidProsjekt += t.Tid;
                             }
 
                         }
@@ -108,25 +127,32 @@ namespace SysUt14Gr03.Classes
                             {
                                 foreach (Oppgave oppgave in bruker.Oppgaver)
                                 {
-                                    TimeSpan sum = new TimeSpan();
                                     foreach (Time time in timeListe)
                                     {
                                         if (time.Oppgave_id == oppgave.Oppgave_id)
                                         {
-                                            sum += time.Tid;
+                                            sumTimerForBruker += time.Tid;
                                         }
                                     }
-                                    info += "<br /><t />" + oppgave.Tittel + "Brukt tid: " + sum.ToString();
+                                    info += "<br /><t />" + oppgave.Tittel + "Brukt tid: " + sumTimerForBruker.ToString();
 
                                 }
                             }
+
+                            List<Oppgave> ferdigeOppgaver = Queries.GetAlleFerdigeOppgaverForBruker(_id);
+                            antallFerdigeOppgaver = ferdigeOppgaver.Count;
+
+                            info += "<br /><h3>Hendelser:</h3>";
+                            List<Logg> loggListe = Queries.GetLoggForBruker(_id);
+                            foreach (Logg l in loggListe)
+                                info += "<br /><t />" + l.Hendelse;
                             
                         }
                     }
                     break;
                 default:
                     {
-
+                        info += "Feil valg, bruk Rapport.<noke>";
                     }
                     break;
             }
@@ -136,9 +162,46 @@ namespace SysUt14Gr03.Classes
 
         public TimeSpan GetBruktTidPaProsjekt()
         {
-            return new TimeSpan();
+            if (bruktTidProsjekt != null)
+                return bruktTidProsjekt;
+            else
+                return new TimeSpan(0);
         }
 
+        public float GetEstimatForProsjekt()
+        {
+            return estimertTidProsjekt;
+        }
+
+        public TimeSpan GetProsjektvarighet()
+        {
+            if (prosjekt != null)
+            {
+                DateTime start = (DateTime)prosjekt.StartDato;
+                DateTime slutt = (DateTime)prosjekt.SluttDato;
+                return slutt - start;
+            }
+            else
+            {
+                return new TimeSpan(0);
+            }
+                
+        }
+
+        public TimeSpan GetSumTimerForBruker()
+        {
+            return sumTimerForBruker;
+        }
+
+        public int GetAntallFerdigeOppgaverForBruker()
+        {
+            return antallFerdigeOppgaver;
+        }
+
+        public int GetAntallTeammedlemmer()
+        {
+            return antallDeltakerePaTeam;
+        }
 
         public override string ToString()
         {
