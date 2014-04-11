@@ -104,6 +104,7 @@ namespace SysUt14Gr03
                 {
                     var Bruker = (from bruker in db.Brukere
                                   where bruker.Epost == epost
+                                  where bruker.Aktiv == false
                                   select bruker).FirstOrDefault();
 
                     // Default rettighet er utvikler

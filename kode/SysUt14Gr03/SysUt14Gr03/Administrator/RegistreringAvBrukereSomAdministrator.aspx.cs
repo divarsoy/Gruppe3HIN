@@ -79,7 +79,7 @@ namespace SysUt14Gr03
             else
                 FeilMeldingFornavn.Visible = true;
 
-            using (var context = new Context())
+     /*       using (var context = new Context())
             {
                 
                 var query = context.Brukere.FirstOrDefault(bruker =>bruker.Epost == tb_reg_epost.Text);
@@ -93,8 +93,8 @@ namespace SysUt14Gr03
                 if(_epost == tb_reg_epost.Text)
                 {
                     emailUnq = false;
-                } */
-            }
+                } 
+            } */
             if (ddlRettighet.SelectedValue == "0")
             {
                 lblRettighetfeil.Visible = true;
@@ -114,7 +114,7 @@ namespace SysUt14Gr03
                 
             } */
 
-            if (emailUnq && tb_reg_epost.Text.Length < 256) {
+            if (tb_reg_epost.Text.Length < 256) {
                 epost = tb_reg_epost.Text;
              opprettBruker(etternavn, fornavn, epost);
                 //AktiverKonto.SetBrukerFelter(fornavn, etternavn, epost);
