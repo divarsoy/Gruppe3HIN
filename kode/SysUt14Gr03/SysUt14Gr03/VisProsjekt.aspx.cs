@@ -18,13 +18,17 @@ namespace SysUt14Gr03
         {
 
             SessionSjekk.sjekkForBruker_id();
-            SessionSjekk.sjekkForProsjekt_id();
 
-            // if (Request.QueryString["prosjekt_id"] != null)
-            //{
-            //     prosjekt_id = Validator.KonverterTilTall(Request.QueryString["prosjekt_id"]);
-            prosjekt_id = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
-
+            if (Request.QueryString["prosjekt_id"] != null)
+            {
+                //NB!!! Sjekker ikke om bruker er med i prosjektet som listes
+                prosjekt_id = Validator.KonverterTilTall(Request.QueryString["prosjekt_id"]);
+            }
+            else
+            {
+                SessionSjekk.sjekkForProsjekt_id();
+                prosjekt_id = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
+            }
             Prosjekt prosjekt = Queries.GetProsjekt(prosjekt_id);
             prosjektNavn.Text = prosjekt.Navn;
             oppgaveProsjekt = Queries.GetAlleAktiveOppgaverForProsjekt(prosjekt.Prosjekt_id);
