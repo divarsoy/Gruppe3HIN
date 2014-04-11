@@ -270,7 +270,7 @@
     <Content Include="VisBruker.aspx" />
     <Content Include="VisOppgave.aspx" />
     <Content Include="VisProsjekt.aspx" />
-    <Content Include="Prosjektleder\VisTeam.aspx" />
+    <Content Include="VisTeam.aspx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
     <None Include="Project_Readme.html" />
@@ -790,11 +790,11 @@
     <Compile Include="VisProsjekt.aspx.designer.cs">
       <DependentUpon>VisProsjekt.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Prosjektleder\VisTeam.aspx.cs">
+    <Compile Include="VisTeam.aspx.cs">
       <DependentUpon>VisTeam.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Prosjektleder\VisTeam.aspx.designer.cs">
+    <Compile Include="VisTeam.aspx.designer.cs">
       <DependentUpon>VisTeam.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
