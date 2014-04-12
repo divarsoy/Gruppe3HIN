@@ -68,22 +68,17 @@ namespace SysUt14Gr03
                 int rettighet_id = Validator.KonverterTilTall(ddlRettighet.SelectedValue);
                 List<Rettighet> rettighetListe = new List<Rettighet>();
                 var rettighet = context.Rettigheter.Where(r => r.Rettighet_id == rettighet_id).First();
-
                 rettighetListe.Add(rettighet);
-                var Bruker = (from bruker in context.Brukere
-                              where bruker.Bruker_id == bruker_id
-                              select bruker).FirstOrDefault();
-                //Bruker bruker = context.Brukere.Where(b => b.Bruker_id == bruker_id).First();
-              //  bruker.Etternavn = tbEtternavn.Text;
-                //bruker.Fornavn = tbFornavn.Text;
-                //bruker.Epost = tbEpost.Text;
-                
-                //bruker.Aktiv = Convert.ToBoolean(cbAktiv.Checked);
-                Bruker.Etternavn = tbEtternavn.Text;
-                Bruker.Fornavn = tbFornavn.Text;
-                Bruker.Epost = tbEpost.Text;
-                Bruker.Aktiv = Convert.ToBoolean(cbAktiv.Checked);
-                //Bruker.Rettigheter.Add(Queries.GetRettighetId(rettighet_id));
+
+                Bruker bruker = context.Brukere
+                                .Include("Rettigheter")
+                                .Where(b => b.Bruker_id == bruker_id)
+                                .First();
+                bruker.Etternavn = tbEtternavn.Text;
+                bruker.Fornavn = tbFornavn.Text;
+                bruker.Epost = tbEpost.Text;
+                bruker.Rettigheter = rettighetListe;
+                bruker.Aktiv = Convert.ToBoolean(cbAktiv.Checked);
                 context.SaveChanges();
             }
             gridViewEndre.Columns[4].Visible = false;
@@ -117,11 +112,16 @@ namespace SysUt14Gr03
                 string lsDataKeyValue = gridViewEndre.DataKeys[e.Row.RowIndex].Values[0].ToString();
                 bruker_id = Convert.ToInt32(lsDataKeyValue);
 
+
                 List<Rettighet> rettighet = Queries.GetAlleRettigheter();
                 DropDownList ddlRettighet = e.Row.FindControl("ddlRettighet") as DropDownList;
-                foreach(Rettighet rett in rettighet)
-                ddlRettighet.Items.Add(new ListItem(rett.RettighetNavn, rett.Rettighet_id.ToString()));
-            }
+                foreach (Rettighet rett in rettighet)
+                {
+                    ddlRettighet.Items.Add(new ListItem(rett.RettighetNavn, rett.Rettighet_id.ToString()));
+                }
+                int id = Queries.GetRettighet(bruker_id).Rettighet_id;
+                ddlRettighet.SelectedIndex = id - 1;
+                }
         }
         protected void gridViewEndre_RowDataBound(object sender, GridViewRowEventArgs e)
         {
