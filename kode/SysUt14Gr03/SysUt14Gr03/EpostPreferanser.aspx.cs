@@ -71,6 +71,8 @@ namespace SysUt14Gr03
         {
 
             lagrePreferanser(false);
+            Session["flashMelding"] = "Innstillinger lagret";
+            Session["flashStatus"] = Konstanter.notifikasjonsTyper.success.ToString();
 
         }
 

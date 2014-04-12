@@ -53,7 +53,9 @@ namespace SysUt14Gr03
             
             brukerid = Convert.ToInt32(ddlBrukere.SelectedValue);
             int oppgave_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
-            Varsel.SendVarsel(brukerid, Varsel.OPPGAVEVARSEL, "Hjelp", innloggetbruker.ToString() + " trenger hjelp til oppgaven: ", oppgaveid, 1);
+            // Sorry Eivind
+            // Varsel.SendVarsel(brukerid, Varsel.OPPGAVEVARSEL, "Hjelp", innloggetbruker.ToString() + " trenger hjelp til oppgaven: ", oppgaveid, 1);
+            Varsel.SendInvitasjon(brukerid, innloggetbruker.Bruker_id, oppgave_id, innloggetbruker.ToString() + " trenger hjelp til oppgaven: ");
            // lblInvitasjon.ForeColor = Color.Green;
             Oppgave oppgave = Queries.GetOppgave(oppgaveid);
             //lblInvitasjon.Text = "Invitasjon sendt til: " + ddlBrukere.SelectedItem.ToString();

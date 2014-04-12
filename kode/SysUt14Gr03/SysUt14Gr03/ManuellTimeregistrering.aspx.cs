@@ -19,9 +19,9 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Utvikler);
-            bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
-            //bruker_id = 2;
+            //SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Utvikler);
+            //bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
+            bruker_id = 2;
 
             if (Request.QueryString["oppgave_id"] != null)
             {
@@ -50,14 +50,18 @@ namespace SysUt14Gr03
                         if (eventArgument == "true")
                         {
                             Lagre();
-                            lblTest.Text = "Lagret";
-                            lblTest.Visible = true;
                             // Rydd opp
                             RyddOpp();
+                            Session["flashMelding"] = "Timer registrert på " + oppgave.Tittel;
+                            Session["flashStatus"] = Konstanter.notifikasjonsTyper.success.ToString();
 
                         }
 
                         // User said NOT to do it...
+                        // You're the worst, you forget things quicker
+                        // than they're told to you. It goes in one ear,
+                        // and out your arse.
+
                     }
 
                     lblTittel.Text = "Manuell timeregistrering på oppgave " + oppgave.Tittel;
@@ -238,27 +242,29 @@ namespace SysUt14Gr03
                         }
                         else
                         {
-                            lblTest.Text = "Pauser kan ikke være utenfor arbeidsøkten";
-                            lblTest.Visible = true;
+                            Session["flashMelding"] = "Pauser kan ikke være utenfor arbeidsøkten";
+                            Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
+
                         }
                     }
                     else
                     {
-                        lblTest.Text = "Sluttid kan ikke være før starttid";
-                        lblTest.Visible = true;
+                        Session["flashMelding"] = "Sluttid kan ikke være før starttid";
+                        Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
+
                     }
                 }
                 else
                 {
-                    lblTest.Text = "Vennligst oppgi start- og sluttid";
-                    lblTest.Visible = true;
+                    Session["flashMelding"] = "Vennligst oppgi start- og sluttid";
+                    Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
                 }
 
             }
             else
             {
-                lblTest.Text = "Vennligst oppgi start- og sluttid";
-                lblTest.Visible = true;
+                Session["flashMelding"] = "Vennligst oppgi start- og sluttid";
+                Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
             }
 
             if (isConfirmNeeded)
