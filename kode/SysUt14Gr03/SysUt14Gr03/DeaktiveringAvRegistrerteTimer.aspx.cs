@@ -24,7 +24,7 @@ namespace SysUt14Gr03
                 {
                     Oppgave oppgListe = Queries.GetOppgave(time.Oppgave_id);
                     lbTimer.Visible = true;
-                    lbTimer.Items.Add(new ListItem(time.Tid + " (t/m/s) : " + oppgListe.Tittel, oppgListe.Oppgave_id.ToString()));
+                    lbTimer.Items.Add(new ListItem(time.Tid + " (t/m/s) : " + oppgListe.Tittel, time.Time_id.ToString()));
                     // lblRegTimer.Text += "<br />" + time.Tid + " (t/m/s) " + oppgListe.Tittel + "\n";
                 }
             }
@@ -32,6 +32,17 @@ namespace SysUt14Gr03
 
         protected void btnDeaktiver_Click(object sender, EventArgs e)
         {
+
+            using (var context = new Context())
+            {
+                int time_id = Convert.ToInt32(lbTimer.SelectedValue);
+
+                var timer = (from time in context.Timer
+                            where time.Time_id == time_id
+                            select time).FirstOrDefault();
+                timer.Aktiv = false;
+                context.SaveChanges();
+            }
 
         }
 
