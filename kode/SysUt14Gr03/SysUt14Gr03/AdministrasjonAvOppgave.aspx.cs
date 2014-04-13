@@ -97,7 +97,7 @@ namespace SysUt14Gr03
 
                     int priorietring_id = Convert.ToInt32(ddlPrioritet.SelectedValue);
                     int prosjekt_id = Convert.ToInt32(ddlProsjekt.SelectedValue);
-                    float estimering = Convert.ToInt16(TbEstimering.Text);
+                    TimeSpan estimering = TimeSpan.Parse(TbEstimering.Text);
                     int status_id = Convert.ToInt32(ddlStatus.SelectedValue);
                     Prioritering pri = context.Prioriteringer.FirstOrDefault(id => id.Prioritering_id == priorietring_id);
                     Prosjekt pro = context.Prosjekter.FirstOrDefault(id => id.Prosjekt_id == prosjekt_id);
@@ -122,8 +122,8 @@ namespace SysUt14Gr03
                         endres.Aktiv = cbAktiv.Checked;
                         endres.Brukere = selectedBruker;
                         endres.Estimat = estimering;
-                        endres.BruktTid = float.Parse(tbBruktTid.Text);
-                        endres.RemainingTime = float.Parse(tbRemainingTime.Text);
+                        endres.BruktTid = TimeSpan.Parse(tbBruktTid.Text);
+                        endres.RemainingTime = TimeSpan.Parse(tbRemainingTime.Text);
                         endres.Tidsfrist = Convert.ToDateTime(tbTidsfristSlutt.Text);
                     }
 

@@ -110,7 +110,7 @@ namespace SysUt14Gr03
                         List<Oppgave> ferdigeOppgaver = Queries.GetAlleFerdigeOppgaverForBruker(bruker_id);
                         foreach (Oppgave oppgave in ferdigeOppgaver)
                         {
-                            lsbFFullfort.Items.Add(new ListItem(oppgave.Tittel + ", brukt tid: " + oppgave.BruktTid + (oppgave.BruktTid == 1 ? " time" : " timer")));
+                            lsbFFullfort.Items.Add(new ListItem(oppgave.Tittel + ", brukt tid: " + oppgave.BruktTid + (oppgave.BruktTid.GetValueOrDefault().Hours == 1 ? " time" : " timer")));
 
                         }
 
