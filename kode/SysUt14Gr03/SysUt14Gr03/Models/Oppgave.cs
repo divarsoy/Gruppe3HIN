@@ -10,6 +10,7 @@ namespace SysUt14Gr03.Models
     {
         [Key]
         public int Oppgave_id { get; set; }
+        public string RefOppgaveId { get; set; }
         public string Tittel { get; set; }
         public string UserStory { get; set; }
         public string Krav { get; set; }

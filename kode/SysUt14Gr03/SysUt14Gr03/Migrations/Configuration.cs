@@ -621,6 +621,7 @@ namespace SysUt14Gr03.Migrations
 
             var oppgaver = new List <Oppgave> {
                 new Oppgave {
+                    RefOppgaveId = "1.0.1",
                     Tittel = "Opprette notat",
                     UserStory = "Som bruker ønsker jeg å kunne opprette et notat",
                     Krav = "Notatet skal ikke overgå en side",
@@ -641,6 +642,7 @@ namespace SysUt14Gr03.Migrations
                     Brukere = new List<Bruker>()
                 },
                 new Oppgave {
+                    RefOppgaveId = "1.0.2",
                     Tittel = "Redigere notat",
                     UserStory = "Som bruker ønsker jeg å kunne redigere et notat",
                     Krav = "Notatet skal ikke overgå en side",
@@ -660,6 +662,7 @@ namespace SysUt14Gr03.Migrations
                     Brukere = new List<Bruker>()
                 },
                 new Oppgave {
+                    RefOppgaveId = "1.0.3",
                     Tittel = "Slette notat",
                     UserStory = "Som bruker ønsker jeg å kunne slette et notat",
                     Krav = "Notatet skal ikke overgå en side",
@@ -679,6 +682,7 @@ namespace SysUt14Gr03.Migrations
                     Brukere = new List<Bruker>()
                 },
                 new Oppgave {
+                    RefOppgaveId = "1.1.1",
                     Tittel = "Opprette bruker",
                     UserStory = "Som administrator ønsker jeg å kunne opprette en ny bruker",
                     Krav = "Brukeren må ikke finnes i databasen fra før av",
@@ -694,6 +698,7 @@ namespace SysUt14Gr03.Migrations
                     Brukere = new List<Bruker>()
                 },
                 new Oppgave {
+                    RefOppgaveId = "1.2.1",
                     Tittel = "Opprette Prosjekt",
                     UserStory = "Som bruker ønsker jeg å kunne opprette et prosjekt",
                     Krav = "Prosjektet må være unikt",
@@ -711,6 +716,7 @@ namespace SysUt14Gr03.Migrations
                     Brukere = new List<Bruker>()
                 },
                 new Oppgave {
+                    RefOppgaveId = "1.2.2",
                     Tittel = "Administrere prosjekt",
                     UserStory = "Som bruker ønsker jeg å kunne administrere et prosjekt",
                     Krav = "Prosjektet må være aktivt",
@@ -729,6 +735,7 @@ namespace SysUt14Gr03.Migrations
                     Brukere = new List<Bruker>()
                 },
                 new Oppgave {
+                    RefOppgaveId = "1.2.3",
                     Tittel = "Arkivere prosjekt",
                     UserStory = "Som bruker ønsker jeg å kunne arkivere et prosjekt",
                     Krav = "Prosjektet må være aktivt",
@@ -744,6 +751,7 @@ namespace SysUt14Gr03.Migrations
                     Brukere = new List<Bruker>()
                 },
                 new Oppgave {
+                    RefOppgaveId = "1.3.1",
                     Tittel = "Opprette møte",
                     UserStory = "Som bruker ønsker jeg å kunne opprette et møte",
                     Krav = "Må spesifisere minst en deltaker",
@@ -764,6 +772,7 @@ namespace SysUt14Gr03.Migrations
                     Brukere = new List<Bruker>()
                 },
                 new Oppgave {
+                    RefOppgaveId = "1.3.2",
                     Tittel = "Redigere møte",
                     UserStory = "Som bruker ønsker jeg å kunne redigere et møte",
                     Krav = "Møtetidspunkt må ikke ha vært",
@@ -783,6 +792,7 @@ namespace SysUt14Gr03.Migrations
                     Brukere = new List<Bruker>()
                 },
                 new Oppgave {
+                    RefOppgaveId = "1.3.3",
                     Tittel = "Slette et møte",
                     UserStory = "Som bruker ønsker jeg å kunne slette et møte",
                     Krav = "Møtetidspunkt må ikke ha vært",
@@ -800,6 +810,7 @@ namespace SysUt14Gr03.Migrations
                     Brukere = new List<Bruker>()
                 },
                 new Oppgave {
+                    RefOppgaveId = "1.3.4",
                     Tittel = "Påmelding til møte",
                     UserStory = "Som bruker ønsker jeg å kunne melde meg på et møte",
                     Krav = "Brukeren må ikke allede være påmeldt møtet",

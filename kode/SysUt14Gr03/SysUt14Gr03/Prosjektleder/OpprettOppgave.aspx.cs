@@ -97,6 +97,7 @@ namespace SysUt14Gr03
                     Krav = tbKrav.Text,
                     Opprettet = DateTime.Now,
                     Tittel = tbTittel.Text,
+                    RefOppgaveId = tbID.Text,
                     Aktiv = true,
                     UserStory = tbBeskrivelse.Text,
                     Estimat = estimering,

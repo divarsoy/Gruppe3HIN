@@ -72,6 +72,7 @@ namespace SysUt14Gr03
                 tbRemainingTime.Text = endres.RemainingTime.ToString();
                 tbTidsfristStart.Text = endres.Opprettet.ToString();
                 tbTidsfristSlutt.Text = endres.Tidsfrist.ToString();
+                tbID.Text = endres.RefOppgaveId;
                 tbTittel.Text = endres.Tittel;
                 ddlPrioritet.SelectedIndex = Convert.ToInt32(endres.Prioritering.Navn) - 1;
                 ddlProsjekt.SelectedIndex = endres.Prosjekt_id - 1;
@@ -118,6 +119,7 @@ namespace SysUt14Gr03
                         endres.Prosjekt = pro;
                         endres.Status = sta;
                         endres.Tittel = tbTittel.Text;
+                        endres.RefOppgaveId = tbID.Text;
                         endres.UserStory = tbBeskrivelse.Text;
                         endres.Aktiv = cbAktiv.Checked;
                         endres.Brukere = selectedBruker;

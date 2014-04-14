@@ -48,7 +48,7 @@ namespace SysUt14Gr03
             for (int i = 0; i < oppgaveProsjekt.Count; i++)
             {
                 Oppgave oppg = oppgaveProsjekt[i];
-                lblInfo.Text += "<br /><a href=\"visOppgave?oppgave_id=" + oppg.Oppgave_id + "\">" + oppg.Tittel + "</a>";
+                lblInfo.Text += "<br /><a href=\"visOppgave?oppgave_id=" + oppg.RefOppgaveId + "\">" + oppg.Tittel + "</a>";
             }
             // }
             /* else

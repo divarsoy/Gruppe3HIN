@@ -14,6 +14,7 @@
             <div class="row">
                 <div style="display: inline-block" class="col-md-4">
                     
+                        <asp:TextBox ID="tbID" CssClass="form-control" runat="server" placeholder="ID på oppgave!"></asp:TextBox>
                         <asp:TextBox ID="tbTittel" CssClass="form-control" runat="server" placeholder="Tittel på oppgave!"></asp:TextBox>
                         <asp:Textbox ID="tbBeskrivelse" CssClass="form-control" TextMode="MultiLine" runat="server" placeholder="Beskrivelse av oppgaven!"></asp:Textbox>
                         <asp:TextBox ID="tbKrav" CssClass="form-control" runat="server"  placeholder="Krav til oppgaven!"></asp:TextBox>
