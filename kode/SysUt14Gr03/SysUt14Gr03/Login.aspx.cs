@@ -66,11 +66,6 @@ namespace SysUt14Gr03
                         Session["rettighet"] = Konstanter.rettighet.Prosjektleder.ToString();
                         Response.Redirect("~/Prosjektleder/DefaultProsjektleder", true);
                     }
-                    else if (Validator.SjekkRettighet(bruker.Bruker_id, Konstanter.rettighet.Teamleder))
-                    {
-                        Session["rettighet"] = Konstanter.rettighet.Teamleder.ToString();
-                        Response.Redirect("~/Utvikler/DefaultUtvikler", true);
-                    }
                     else if (Validator.SjekkRettighet(bruker.Bruker_id, Konstanter.rettighet.Utvikler))
                     {
                         Session["rettighet"] = Konstanter.rettighet.Utvikler.ToString();

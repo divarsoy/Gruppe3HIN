@@ -31,7 +31,8 @@ namespace SysUt14Gr03.Models
         public virtual List<Oppgave> Oppgaver { get; set; }
         public virtual List<Prosjekt> Prosjekter { get; set; }
         public virtual List<Team> Teams { get; set; }
-        public virtual List<Time> Time { get; set; }
+        public virtual List<Time> Timer { get; set; }
+        public virtual List<Fase> Faser { get; set; }
 
         public override string ToString()
         {
