@@ -43,6 +43,8 @@ namespace SysUt14Gr03
                 timer.Aktiv = false;
                 context.SaveChanges();
             }
+            Session["flashMelding"] = "Du har dekativert tiden på oppgaven: ";
+            Session["flashStatus"] = Konstanter.notifikasjonsTyper.info.ToString();
 
         }
 

@@ -14,6 +14,7 @@ namespace SysUt14Gr03
     {
         private int prosjekt_id;
         private List<Oppgave> oppgaveProsjekt;
+        private List<Fase> faseListe;
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -42,7 +43,18 @@ namespace SysUt14Gr03
             string teamNavn = Queries.GetTeam((int)prosjekt.Team_id).Navn;
             lblInfo.Text += "<br />Team: <a href=\"visTeam?team_id=" + prosjekt.Team_id + "\">" + teamNavn + "</a>";
             lblInfo.Text += "<br />Prosjektleder: <a href=\"visBruker?bruker_id=" + prosjekt.Bruker_id + "\">" + navn + "</a>";
+            lblInfo.Text += "<hr />";
 
+            faseListe = Queries.GetFaseForProsjekt(prosjekt_id);
+            foreach (Fase fase in faseListe)
+            {
+                lblInfo.Text += "<br />Fase: <a href=\"visFase?fase_id=" + fase.Fase_id + "\">" + fase.Navn + "</a>";
+                lblInfo.Text += "<br />" + "StartDato: " + String.Format("{0:dd/MM/yyyy}", fase.Start);
+                lblInfo.Text += "<br />" + "SluttDato: " + String.Format("{0:dd/MM/yyyy}", fase.Stopp);
+                lblInfo.Text += "<br />Faseleder: " + fase.Bruker.ToString();
+                lblInfo.Text += "<br />";
+                
+            }
             lblInfo.Text += "<hr />";
             lblInfo.Text += "<br />" + "Oppgaver Knyttet til prosjektet";
             for (int i = 0; i < oppgaveProsjekt.Count; i++)

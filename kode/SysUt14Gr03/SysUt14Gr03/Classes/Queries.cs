@@ -66,7 +66,17 @@ namespace SysUt14Gr03.Classes
                 return prosjektLedere;
             }
         }
-
+        static public List<Fase> GetFaseForProsjekt(int prosjekt_id)
+        {
+            using (var context = new Context())
+            {
+                var faseListe = context.Faser
+                            .Include("Bruker")
+                            .Where(fase => fase.Prosjekt_id == prosjekt_id)
+                            .ToList<Fase>();
+                return faseListe;
+            }
+        }
         static public Time GetTimer(int time_id)
         {
             using (var context = new Context())
