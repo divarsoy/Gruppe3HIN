@@ -77,6 +77,17 @@ namespace SysUt14Gr03.Classes
                 return faseListe;
             }
         }
+        static public Fase GetFase(int fase_id)
+        {
+            using (var context = new Context())
+            {
+                var fase = context.Faser
+                            .Include("Oppgaver")
+                            .Where(f => f.Fase_id == fase_id)
+                            .FirstOrDefault();
+                return fase;
+            }
+        }
         static public Time GetTimer(int time_id)
         {
             using (var context = new Context())
