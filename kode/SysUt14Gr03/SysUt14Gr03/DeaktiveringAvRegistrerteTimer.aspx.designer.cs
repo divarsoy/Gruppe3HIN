@@ -13,22 +13,13 @@ namespace SysUt14Gr03 {
     public partial class DeaktiveringAvRegistrerteTimer {
         
         /// <summary>
-        /// lbTimer control.
+        /// ddlTimer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox lbTimer;
-        
-        /// <summary>
-        /// lblRegTimer control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblRegTimer;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTimer;
         
         /// <summary>
         /// btnDeaktiver control.
@@ -49,12 +40,12 @@ namespace SysUt14Gr03 {
         protected global::System.Web.UI.WebControls.Button btnEndre;
         
         /// <summary>
-        /// lbEndre control.
+        /// lblInfo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox lbEndre;
+        protected global::System.Web.UI.WebControls.Label lblInfo;
     }
 }

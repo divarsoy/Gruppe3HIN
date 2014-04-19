@@ -246,6 +246,7 @@ namespace SysUt14Gr03.Classes
                                   .Include("Prioritering")
                                   .Include("Status")
                                   .Include("Prosjekt")
+                                  .Include("Timer")
                                   .Where(o => o.Oppgave_id == oppgave_id)
                                   .Where(o => o.Aktiv == true)
                                   .FirstOrDefault<Oppgave>();

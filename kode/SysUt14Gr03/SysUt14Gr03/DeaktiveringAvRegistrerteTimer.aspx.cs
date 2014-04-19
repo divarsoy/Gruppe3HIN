@@ -13,7 +13,6 @@ namespace SysUt14Gr03
     {
         private int bruker_id;
         private List<Time> timeListe = null;
-       
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -22,45 +21,54 @@ namespace SysUt14Gr03
                 timeListe = Queries.GetTimerForBruker((int)bruker_id);
                 foreach (Time time in timeListe)
                 {
-                    Oppgave oppgListe = Queries.GetOppgave(time.Oppgave_id);
-                    lbTimer.Visible = true;
-                    lbTimer.Items.Add(new ListItem(time.Tid + " (t/m/s) : " + oppgListe.Tittel, time.Time_id.ToString()));
-                    // lblRegTimer.Text += "<br />" + time.Tid + " (t/m/s) " + oppgListe.Tittel + "\n";
+                    Oppgave oppgListe = Queries.GetOppgave(time.Oppgave_id);                  
+                    ddlTimer.Items.Add(new ListItem(time.Tid + " (t/m/s) : " + oppgListe.Tittel, time.Time_id.ToString()));
                 }
             }
         }
 
         protected void btnDeaktiver_Click(object sender, EventArgs e)
         {
-
+            int oppg_id;
             using (var context = new Context())
             {
-                int time_id = Convert.ToInt32(lbTimer.SelectedValue);
+                int time_id = Convert.ToInt32(ddlTimer.SelectedValue);
 
                 var timer = (from time in context.Timer
                             where time.Time_id == time_id
                             select time).FirstOrDefault();
                 timer.Aktiv = false;
+                oppg_id = timer.Oppgave_id;
                 context.SaveChanges();
             }
-            Session["flashMelding"] = "Du har dekativert tiden på oppgaven: ";
+            string oppgave = Queries.GetOppgave(oppg_id).Tittel;
+            Session["flashMelding"] = "Du har dekativert tiden på oppgaven " + oppgave;
             Session["flashStatus"] = Konstanter.notifikasjonsTyper.info.ToString();
 
         }
 
         protected void btnEndre_Click(object sender, EventArgs e)
         {
-            lbEndre.Items.Clear();
-            int oppg_id = Convert.ToInt32(lbTimer.SelectedValue);
-            lbEndre.Visible = true;
-            Oppgave oppg = Queries.GetOppgave(oppg_id);
+            int oppg_id = Convert.ToInt32(ddlTimer.SelectedValue);
+            Oppgave oppgave = Queries.GetOppgaveMedTimer(oppg_id);
+            lblInfo.Visible = true;
+            lblInfo.Text += "<br />Info om oppgaven";
+            lblInfo.Text += "<hr />";        
+            lblInfo.Text += "<br />" + oppgave.Tittel;
+            lblInfo.Text += "<br />" + oppgave.UserStory;
+            lblInfo.Text += "<br />" + oppgave.Krav;
+            Oppgave oppg = Queries.GetOppgave(oppgave.Oppgave_id);
+            foreach (Time t in oppg.Timer)
+            {
+                lblInfo.Text += "<br />Tid: " + t.Tid;
+                lblInfo.Text += "<br />Start: " + t.Start;
+                lblInfo.Text += "<br />Stopp: " + t.Stopp;
+                lblInfo.Text += "<br />Ferdig: " + t.IsFerdig;
+            }
 
-            lbEndre.Items.Add(new ListItem(oppg.Tittel + " " + oppg.UserStory, oppg.Oppgave_id.ToString()));
         }
+       
 
-        protected void lbTimer_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
-        }
     }
 }
