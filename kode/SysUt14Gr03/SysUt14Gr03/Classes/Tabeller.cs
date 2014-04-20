@@ -609,10 +609,17 @@ namespace SysUt14Gr03.Classes
                 startCell.Text = String.Format(t.Start.ToString());
                 stoppCell.Text = String.Format(t.Stopp.ToString());
                 tidCell.Text = String.Format(t.Tid.ToString());
-                if (t.Manuell)
+                if (t.Manuell) {
                     manuellCell.Text = "Ja";
+                    timeRow.BackColor = Color.DarkGray;
+                }
+
                 else
+                {
                     manuellCell.Text = "Nei";
+                    timeRow.BackColor = Color.PaleGreen;
+                }
+
 
                 timeRow.Cells.Add(oppgaveIdCell);
                 timeRow.Cells.Add(oppgaveCell);
