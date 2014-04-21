@@ -114,9 +114,8 @@
         <br />
 
 
-
-        <asp:PlaceHolder ID="phFaser" runat="server"></asp:PlaceHolder>
-
+        <asp:GridView ID="gvFaser" runat="server" CssClass="table">
+        </asp:GridView>
         <asp:Button ID="btnLagre" CssClass="btn btn-primary" runat="server" Text="Lagre Prosjekt" OnClick="btnLagre_Click" Width="300px" />
         <div class="clearfix"></div>
 

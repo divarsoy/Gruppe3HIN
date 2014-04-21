@@ -157,13 +157,13 @@ namespace SysUt14Gr03 {
         protected global::System.Web.UI.WebControls.Button btnLeggTilFase;
         
         /// <summary>
-        /// phFaser control.
+        /// gvFaser control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder phFaser;
+        protected global::System.Web.UI.WebControls.GridView gvFaser;
         
         /// <summary>
         /// btnLagre control.

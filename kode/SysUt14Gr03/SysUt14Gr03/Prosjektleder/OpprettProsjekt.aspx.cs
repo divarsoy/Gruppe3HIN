@@ -18,9 +18,8 @@ namespace SysUt14Gr03
         private DateTime dtSlutt;
         private List<Bruker> brukerListe;
         private List<Team> teamListe;
+//        private List<Fase> faseListe = new List<Fase>();
         private DataTable dtFaser = new DataTable();
-        GridView gvFaser;
-        private List<Fase> faseListe = new List<Fase>();
     
         private int team_id;
         private int bruker_id;
@@ -61,23 +60,26 @@ namespace SysUt14Gr03
                 }
 
             }
-            //Viser fram faselisten
-            if (faseListe.Count > 0)
-            {
-                makeDataTableForFaser();
-                gvFaser = new GridView();
-                gvFaser.DataSource = dtFaser;
-                gvFaser.DataBind();
-                phFaser.Controls.Add(gvFaser);
-            }
-            else {
-                gvFaser = null;
-                phFaser.Controls.Clear();
-            }
 
 
             if (!IsPostBack)
             {
+                //Setter opp gridviewen for faser
+              /*
+                BoundField fieldFasenavn = new BoundField();
+                BoundField fieldFaseleder = new BoundField();
+                BoundField fieldFaseStart = new BoundField();
+                BoundField fieldFaseSlutt = new BoundField();
+                fieldFasenavn.HeaderText = "Fasenavn";
+                fieldFaseleder.HeaderText = "Faseleder";
+                fieldFaseStart.HeaderText = "Fase Start";
+                fieldFaseSlutt.HeaderText = "Fase Slutt";
+                gvFaser.Columns.Add(fieldFasenavn);
+                gvFaser.Columns.Add(fieldFaseleder);
+                gvFaser.Columns.Add(fieldFaseStart);
+                gvFaser.Columns.Add(fieldFaseSlutt);
+*/
+                makeDataTableForFaser();
                 teamListe = Queries.GetAlleAktiveTeam();
                 brukerListe = Queries.GetProsjektledere(Konstanter.rettighet.Prosjektleder);
                 
@@ -183,18 +185,25 @@ namespace SysUt14Gr03
                 team_id = Validator.KonverterTilTall(TeamDropDown.SelectedValue);
             }
         }
-
+        
         protected void btnLeggTilFase_Click(object sender, EventArgs e)
         {
             if (tbFasenavn.Text != string.Empty && tbFaseStart.Text != string.Empty && tbFaseSlutt.Text != string.Empty && ddFaseLeder.SelectedValue != "0")
             {
+                AddNewFaseRow();
+/*
                 Fase nyFase = new Fase();
                 nyFase.Navn = tbFasenavn.Text;
                 nyFase.Start = Convert.ToDateTime(tbFaseStart.Text);
                 nyFase.Stopp = Convert.ToDateTime(tbFaseSlutt.Text);
                 nyFase.Bruker_id = Validator.KonverterTilTall(ddFaseLeder.SelectedValue);
                 faseListe.Add(nyFase);
+
+
+                gvFaser.Columns.Add("Fasenavn");
+
                 lblFaseFeil.Visible = false;
+ * */
             }
             else
             {
@@ -204,26 +213,52 @@ namespace SysUt14Gr03
 
         private void makeDataTableForFaser()
         {
+           
             DataColumn colFaseNavn = new DataColumn("Fasenavn");
             DataColumn colFaseLeder = new DataColumn("Faseleder");
+            DataColumn colFaseLederId = new DataColumn("FaselederId");
             DataColumn colFaseStart = new DataColumn("Start");
             DataColumn colFaseSlutt = new DataColumn("Slutt");
             dtFaser.Columns.Add(colFaseNavn);
             dtFaser.Columns.Add(colFaseLeder);
+            dtFaser.Columns.Add(colFaseLederId);
             dtFaser.Columns.Add(colFaseStart);
             dtFaser.Columns.Add(colFaseSlutt);
 
-            foreach (Fase fase in faseListe)
-            {
-                DataRow row = dtFaser.NewRow();
-                row[colFaseNavn] = fase.Navn;
-                row[colFaseLeder] = fase.Bruker_id.ToString();
-                row[colFaseStart] = fase.Start.ToString();
-                row[colFaseSlutt] = fase.Stopp.ToString();
-                dtFaser.Rows.Add(row);
-            }
+            DataRow row = dtFaser.NewRow();
+            row[colFaseNavn] = "TestFaseNavn";
+            row[colFaseLeder] = "TestFaseLeder";
+            row[colFaseLederId] = "3";
+            row[colFaseStart] = "12.03.2014";
+            row[colFaseSlutt] = "21.03.2014";
+            dtFaser.Rows.Add(row);
 
+            ViewState["FaseTable"] = dtFaser;
+
+            gvFaser.DataSource = dtFaser;
+            gvFaser.DataBind();
         }
 
+        private void AddNewFaseRow()
+        {
+
+            if (ViewState["FaseTable"] != null)
+            {
+                dtFaser = (DataTable)ViewState["FaseTable"];
+
+                DataRow row = dtFaser.NewRow();
+                row[0] = tbFasenavn.Text;
+                row[1] = ddFaseLeder.SelectedItem.Text;
+                row[2] = ddFaseLeder.SelectedValue;
+                row[3] = tbFaseStart.Text;
+                row[4] = tbFaseSlutt.Text;
+
+                dtFaser.Rows.Add(row);
+                ViewState["FaseTable"] = dtFaser;
+
+                gvFaser.DataSource = dtFaser;
+                gvFaser.DataBind();
+            }
+        }
     }
 }
