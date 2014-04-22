@@ -113,9 +113,15 @@
         <div class="clearfix"></div>
         <br />
 
-
-        <asp:GridView ID="gvFaser" runat="server" CssClass="table">
+        <asp:GridView ID="gvFaser" CssClass="table" DataKeyNames="bruker_id" runat="server" AlternatingRowStyle-CssClass="alt" AutoGenerateColumns="false">
+                <Columns>
+                    <asp:BoundField DataField="Fasenavn" HeaderText="Fasenavn" />
+                    <asp:BoundField DataField="Faseleder" HeaderText="Faseleder"  />                    
+                    <asp:BoundField DataField="Start" HeaderText="Start"  />
+                    <asp:BoundField DataField="Slutt" HeaderText="Slutt" />
+                </Columns>
         </asp:GridView>
+
         <asp:Button ID="btnLagre" CssClass="btn btn-primary" runat="server" Text="Lagre Prosjekt" OnClick="btnLagre_Click" Width="300px" />
         <div class="clearfix"></div>
 

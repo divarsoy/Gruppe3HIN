@@ -213,27 +213,22 @@ namespace SysUt14Gr03
 
         private void makeDataTableForFaser()
         {
-           
-            DataColumn colFaseNavn = new DataColumn("Fasenavn");
-            DataColumn colFaseLeder = new DataColumn("Faseleder");
-            DataColumn colFaseLederId = new DataColumn("FaselederId");
-            DataColumn colFaseStart = new DataColumn("Start");
-            DataColumn colFaseSlutt = new DataColumn("Slutt");
-            dtFaser.Columns.Add(colFaseNavn);
-            dtFaser.Columns.Add(colFaseLeder);
-            dtFaser.Columns.Add(colFaseLederId);
-            dtFaser.Columns.Add(colFaseStart);
-            dtFaser.Columns.Add(colFaseSlutt);
+            dtFaser.Columns.Add(new DataColumn("bruker_id", typeof(System.Int32)));
+            dtFaser.Columns.Add(new DataColumn("Fasenavn", typeof(System.String)));
+            dtFaser.Columns.Add(new DataColumn("Faseleder", typeof(System.String)));
+            dtFaser.Columns.Add(new DataColumn("Start", typeof(System.String)));
+            dtFaser.Columns.Add(new DataColumn("Slutt", typeof(System.String)));
 
             DataRow row = dtFaser.NewRow();
-            row[colFaseNavn] = "TestFaseNavn";
-            row[colFaseLeder] = "TestFaseLeder";
-            row[colFaseLederId] = "3";
-            row[colFaseStart] = "12.03.2014";
-            row[colFaseSlutt] = "21.03.2014";
+            row["bruker_id"] = Validator.KonverterTilTall("3");
+            row["Fasenavn"] = "TestFase";
+            row["Faseleder"] = "Tony";
+            row["Start"] = "14.05.2014";
+            row["Slutt"] = "21.05.2014";
+
             dtFaser.Rows.Add(row);
 
-            ViewState["FaseTable"] = dtFaser;
+            Session["FaseTable"] = dtFaser;
 
             gvFaser.DataSource = dtFaser;
             gvFaser.DataBind();
@@ -242,22 +237,28 @@ namespace SysUt14Gr03
         private void AddNewFaseRow()
         {
 
-            if (ViewState["FaseTable"] != null)
+            if (Session["FaseTable"] != null)
             {
-                dtFaser = (DataTable)ViewState["FaseTable"];
+                dtFaser = (DataTable)Session["FaseTable"];
 
                 DataRow row = dtFaser.NewRow();
-                row[0] = tbFasenavn.Text;
-                row[1] = ddFaseLeder.SelectedItem.Text;
-                row[2] = ddFaseLeder.SelectedValue;
-                row[3] = tbFaseStart.Text;
-                row[4] = tbFaseSlutt.Text;
+                row["bruker_id"] = ddFaseLeder.SelectedValue;
+                row["Fasenavn"] = tbFasenavn.Text;
+                row["Faseleder"] = ddFaseLeder.SelectedItem.Text;
+                row["Start"] = tbFaseStart.Text;
+                row["Slutt"] = tbFaseSlutt.Text;
 
                 dtFaser.Rows.Add(row);
-                ViewState["FaseTable"] = dtFaser;
+                Session["FaseTable"] = dtFaser;
 
                 gvFaser.DataSource = dtFaser;
                 gvFaser.DataBind();
+
+                //Tømmer input feltene
+                tbFasenavn.Text = string.Empty;
+                ddFaseLeder.SelectedIndex = 0;
+                tbFaseStart.Text = string.Empty;
+                tbFaseSlutt.Text = string.Empty;
             }
         }
     }
