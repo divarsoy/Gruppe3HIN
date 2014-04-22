@@ -6,12 +6,14 @@
         <br />
         Begrunnelse:
         <br />
-        <asp:TextBox ID="txtSvar" runat="server" MaxLength="255" TextMode="MultiLine" Height="56px" Width="233px"></asp:TextBox>
+        <asp:TextBox ID="txtSvar" runat="server" cssClass="form-control" MaxLength="255" TextMode="MultiLine" Height="56px" Width="233px"></asp:TextBox>
     </asp:Panel>
+    <div class="clearfix"></div>
     <p>
+
         <asp:Label ID="lblFeil" runat="server" visible="false"></asp:Label>
         <br />
-        <asp:Button ID="btnSend" runat="server" OnClick="btnSend_Click" Text="Send" />
+        <asp:Button ID="btnSend" runat="server" OnClick="btnSend_Click" Text="Send" CssClass="btn btn-primary" />
 
     </p>
     <br />

@@ -19,7 +19,7 @@ namespace SysUt14Gr03.Classes
         private Bruker bruker;
         private string info;
         private TimeSpan bruktTidProsjekt;
-        private float estimertTidProsjekt;
+        private TimeSpan estimertTidProsjekt;
         private TimeSpan varighetProsjekt;
         private TimeSpan sumTimerForBruker;
         private int antallFerdigeOppgaver;
@@ -34,7 +34,7 @@ namespace SysUt14Gr03.Classes
         {
             info = "";
             bruktTidProsjekt = new TimeSpan();
-            estimertTidProsjekt = 0;
+            estimertTidProsjekt = new TimeSpan();
             varighetProsjekt = new TimeSpan();
             sumTimerForBruker = new TimeSpan();
             antallFerdigeOppgaver = 0;
@@ -91,7 +91,7 @@ namespace SysUt14Gr03.Classes
                                 info += "<br /><t />Brukt tid: " + o.BruktTid;
                                 Status status = Queries.GetStatus(o.Status_id);
                                 info += "<br /><t />Status: " + status.Navn;
-                                estimertTidProsjekt += (float)o.Estimat;
+                                estimertTidProsjekt.Add((TimeSpan) o.Estimat);
                                 List<Time> timeListe = Queries.GetTimerForOppgave(o.Oppgave_id);
                                 foreach (Time t in timeListe)
                                     bruktTidProsjekt += t.Tid;
@@ -168,7 +168,7 @@ namespace SysUt14Gr03.Classes
                 return new TimeSpan(0);
         }
 
-        public float GetEstimatForProsjekt()
+        public TimeSpan GetEstimatForProsjekt()
         {
             return estimertTidProsjekt;
         }

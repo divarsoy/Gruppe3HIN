@@ -15,7 +15,7 @@ namespace SysUt14Gr03
     public partial class InvitasjonAvBruker : System.Web.UI.Page
     {
         private List<Bruker> brukerListe;
-        private List<Oppgave> oppgListe;
+        private int oppgaveid;
         private int brukerid;
         private Bruker innloggetbruker;
         protected void Page_Load(object sender, EventArgs e)
@@ -25,27 +25,25 @@ namespace SysUt14Gr03
             innloggetbruker = Queries.GetBruker(brukerid);
 
             
-            if (!IsPostBack)
-            {
-            
+           
 
-                brukerListe = Queries.GetAlleAktiveBrukere();
-                oppgListe = Queries.GetAlleAktiveOppgaverForBruker(brukerid);
-
-                for (int i = 0; i < oppgListe.Count; i++ )
+                if (Request.QueryString["oppgave_id"] != null)
                 {
-                    Oppgave oppg = oppgListe[i];
-                    ddlOppgave.Items.Add(new ListItem(oppg.Tittel, oppg.Oppgave_id.ToString()));
-                }
-
+                    brukerListe = Queries.GetAlleAktiveBrukere();
+                    oppgaveid = Validator.KonverterTilTall(Request.QueryString["oppgave_id"]);
+                    Oppgave oppg = Queries.GetOppgave(oppgaveid);
+                    lblInvitasjon.Text = "<h2>" + oppg.Tittel + "</h2>";
+                    if (!IsPostBack)
+                    {
                     for (int i = 0; i < brukerListe.Count; i++)
                     {
-                     
+
                         Bruker bruker = brukerListe[i];
                         ddlBrukere.Items.Add(new ListItem(bruker.ToString(), bruker.Bruker_id.ToString()));
                         ddlBrukere.Items.Remove(ddlBrukere.Items.FindByValue(brukerid.ToString()));
 
                     }
+                }
               
             }
         }
@@ -54,10 +52,15 @@ namespace SysUt14Gr03
         {
             
             brukerid = Convert.ToInt32(ddlBrukere.SelectedValue);
-            int oppgave_id = Convert.ToInt32(ddlOppgave.SelectedValue);
-            Varsel.SendVarsel(brukerid, Varsel.OPPGAVEVARSEL, "Hjelp", innloggetbruker.ToString() + " trenger hjelp til oppgaven: ", oppgave_id, 1);
-            lblInvitasjon.ForeColor = Color.Green;
-            lblInvitasjon.Text = "Invitasjon sendt til: " + ddlBrukere.SelectedItem.ToString();
+            int oppgave_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
+            // Sorry Eivind
+            // Varsel.SendVarsel(brukerid, Varsel.OPPGAVEVARSEL, "Hjelp", innloggetbruker.ToString() + " trenger hjelp til oppgaven: ", oppgaveid, 1);
+            Varsel.SendInvitasjon(brukerid, innloggetbruker.Bruker_id, oppgave_id, innloggetbruker.ToString() + " trenger hjelp til oppgaven: ");
+           // lblInvitasjon.ForeColor = Color.Green;
+            Oppgave oppgave = Queries.GetOppgave(oppgaveid);
+            //lblInvitasjon.Text = "Invitasjon sendt til: " + ddlBrukere.SelectedItem.ToString();
+            Session["flashMelding"] = "Invitasjon til hjelp av oppgave " + oppgave.Tittel + " er sendt til " + ddlBrukere.SelectedItem.ToString();
+            Session["flashStatus"] = Konstanter.notifikasjonsTyper.info.ToString();
         }
     }
 }

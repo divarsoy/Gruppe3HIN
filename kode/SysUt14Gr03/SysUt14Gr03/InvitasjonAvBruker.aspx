@@ -2,12 +2,20 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h1>Invitasjon Til Bruker</h1>
 
-    <h4>Oppgaver som jeg deltar i</h4>
-    <asp:DropDownList ID="ddlOppgave" runat="server"></asp:DropDownList>
+    <h4>Oppgave som jeg trenger hjelp til</h4>
+    <div class="form-group">
+  
+    <asp:Label ID="lblInvitasjon" runat="server"></asp:Label>
+        </div>
+        
+    <div class="clearfix"></div>
 
     <h4>Send invitasjon til en annen bruker</h4>
-    <asp:DropDownList ID="ddlBrukere" runat="server"></asp:DropDownList>
-    <asp:Button ID="btnSendInvitasjon" runat="server" Text="Send Invitasjon" OnClick="btnSendInvitasjon_Click" Height="33px"/>
-    <asp:Label ID="lblInvitasjon" runat="server"></asp:Label>
+    <div class="col-sm-3">
+    <asp:DropDownList ID="ddlBrukere"  CssClass="form-control" runat="server"></asp:DropDownList>
+        </div>
+    <div class="clearfix"></div>
+    <asp:Button ID="btnSendInvitasjon" CssClass="btn btn-primary" runat="server" Text="Send Invitasjon" OnClick="btnSendInvitasjon_Click" Height="33px"/>
+    
     
 </asp:Content>

@@ -13,8 +13,7 @@ namespace SysUt14Gr03
     public partial class ReturAvOppgave : System.Web.UI.Page
     {
         private int bruker_id;
-        private int faseleder_id = 1;
-        private List<Oppgave> oppgaveListe;
+        private int faseleder_id = 1; // kommer senere
         private Oppgave oppgave;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -43,18 +42,17 @@ namespace SysUt14Gr03
                 Bruker bruker = Queries.GetBruker(bruker_id);
                 string tittel = bruker.ToString() + " har returnert oppgave " + oppgave.Tittel;
                 Varsel.SendVarsel(faseleder_id, Varsel.OPPGAVEVARSEL, tittel, melding);
-                lblFeil.Text = "Melding sendt til faseleder";
-                lblFeil.ForeColor = Color.Green;
-                lblFeil.Visible = true;
+                // Flash en melding
+                Session["flashMelding"] = "Melding sendt til faseleder";
+                Session["flashStatus"] = Konstanter.notifikasjonsTyper.info.ToString();
                 txtSvar.Text = "";
                 Response.Redirect("OversiktOppgaver.aspx", true);
-                // Flash en melding
+                
             }
             else
             {
-                lblFeil.Text = "Vennligst skriv inn en begrunnelse";
-                lblFeil.ForeColor = Color.Red;
-                lblFeil.Visible = true;
+                Session["flashMelding"] = "Vennligst skriv inn en begrunnelse";
+                Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
             }
         }
     }

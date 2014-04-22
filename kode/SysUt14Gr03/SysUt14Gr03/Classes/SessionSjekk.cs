@@ -61,8 +61,6 @@ namespace SysUt14Gr03.Classes
                 master = "~/Site.SysAdm.Master";
             else if (rettighet.RettighetNavn == Konstanter.rettighet.Prosjektleder.ToString())
                 master = "~/Site.Prosjektleder.master";
-            else if (rettighet.RettighetNavn == Konstanter.rettighet.Teamleder.ToString())
-                master = "~/Site.Utvikler.Master";
             else if (rettighet.RettighetNavn == Konstanter.rettighet.Utvikler.ToString())
                 master = "~/Site.Utvikler.Master";
 

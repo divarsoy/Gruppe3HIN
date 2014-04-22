@@ -267,6 +267,7 @@
     <Content Include="Utvikler\InnsynIEgneRegistrerteTimerSomBruker.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="VisBruker.aspx" />
+    <Content Include="visFase.aspx" />
     <Content Include="VisOppgave.aspx" />
     <Content Include="VisProsjekt.aspx" />
     <Content Include="VisTeam.aspx" />
@@ -348,6 +349,7 @@
     <Compile Include="ManuellTimeregistrering.aspx.designer.cs">
       <DependentUpon>ManuellTimeregistrering.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Fase.cs" />
     <Compile Include="Models\Pause.cs" />
     <Compile Include="Models\Time.cs" />
     <Compile Include="ManuellTimeregistrering.aspx.cs">
@@ -767,6 +769,13 @@
     </Compile>
     <Compile Include="VisBruker.aspx.designer.cs">
       <DependentUpon>VisBruker.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="visFase.aspx.cs">
+      <DependentUpon>visFase.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="visFase.aspx.designer.cs">
+      <DependentUpon>visFase.aspx</DependentUpon>
     </Compile>
     <Compile Include="VisOppgave.aspx.cs">
       <DependentUpon>VisOppgave.aspx</DependentUpon>

@@ -80,7 +80,7 @@ namespace SysUt14Gr03
             {
 
                 int priorietring_id = Convert.ToInt32(ddlPrioritet.SelectedValue);
-                float estimering = Convert.ToInt16(TbEstimering.Text);
+                TimeSpan estimering = TimeSpan.Parse(TbEstimering.Text);
                 int status_id = Convert.ToInt32(ddlStatus.SelectedValue);
                 tidsfrist = Convert.ToDateTime(tbFrist.Text);
                 foreach (ListItem s in lbBrukere.Items)
@@ -97,6 +97,7 @@ namespace SysUt14Gr03
                     Krav = tbKrav.Text,
                     Opprettet = DateTime.Now,
                     Tittel = tbTittel.Text,
+                    RefOppgaveId = tbID.Text,
                     Aktiv = true,
                     UserStory = tbBeskrivelse.Text,
                     Estimat = estimering,

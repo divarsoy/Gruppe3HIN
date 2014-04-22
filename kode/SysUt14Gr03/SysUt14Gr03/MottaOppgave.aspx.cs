@@ -12,7 +12,7 @@ namespace SysUt14Gr03
 {
     public partial class MottaOppgave : System.Web.UI.Page
     {
-        private int avsender_id = 2;
+        private int avsender_id;
         private int mottaker_id;
         private int oppgave_id;
         private Bruker avsender;
@@ -21,30 +21,24 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["loggedIn"] == null)
-            {
-                //Response.Redirect("Login.aspx", true);
-                mottaker_id = 2;
-            }
-            else
-            {
-                mottaker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
-                if (mottaker_id == -1)
-                    Response.Redirect("Login.aspx", true);
-            }
+
+            SessionSjekk.sjekkForBruker_id();
+            mottaker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
 
             List<Bruker> brukerListe = Queries.GetAlleAktiveBrukere();
             mottaker = Queries.GetBruker(mottaker_id);
-            avsender = Queries.GetBruker(avsender_id);
 
             btnGodta.Enabled = false;
             btnAvsla.Enabled = false;
 
-            if (Request.QueryString["oppgave_id"] != null)
+            if (Request.QueryString["oppgave_id"] != null && Request.QueryString["bruker_id"] != null)
             {
+                avsender_id = Validator.KonverterTilTall(Request.QueryString["bruker_id"].ToString());
                 oppgave_id = Convert.ToInt32(Request.QueryString["oppgave_id"]);
                 oppgave = Queries.GetOppgave(oppgave_id);
-                if (oppgave != null)
+                avsender = Queries.GetBruker(avsender_id);
+
+                if (oppgave != null && avsender != null)
                 {
                     lblMessage.Text = "Bruker " + avsender.IM + " ønsker hjelp på oppgave "
                     + oppgave.Tittel + "." + Environment.NewLine + "Ved å godta invitasjonen blir du lagt til "
@@ -77,10 +71,9 @@ namespace SysUt14Gr03
                     tmpBruker.Add(mottaker);
                     oppgave.Brukere = tmpBruker;
                     context.SaveChanges();
-                    
-                    lblMessage.Text = "Du har nå blitt lagt til på " + oppgave.Tittel;
-                    lblMessage.ForeColor = Color.Green;
-                    lblMessage.Visible = true;
+
+                    Session["flashMelding"] = "Du har nå blitt lagt til på " + oppgave.Tittel;
+                    Session["flashStatus"] = Konstanter.notifikasjonsTyper.info.ToString();
 
                     // Sender varsel til avsender
                     string melding = "Bruker " + mottaker.ToString() + " har godtatt invitasjonen til oppgave " + oppgave.Tittel;
@@ -98,6 +91,8 @@ namespace SysUt14Gr03
 
             Varsel.SendVarsel(avsender_id, Varsel.OPPGAVEVARSEL, "Avslag på oppgave", message);
 
+            Session["flashMelding"] = "Du har avslått invitasjonen";
+            Session["flashStatus"] = Konstanter.notifikasjonsTyper.info.ToString();
             // sender mottaker tilbake til forsiden
             Response.Redirect("default.aspx", true);
         }

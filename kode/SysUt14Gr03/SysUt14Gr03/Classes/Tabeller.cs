@@ -64,7 +64,7 @@ namespace SysUt14Gr03.Classes
                                 
                 string oppgaveLink = idCell.ResolveUrl("~/VisOppgave?oppgave_id=" + oppgave.Oppgave_id.ToString());
 
-                idCell.Text = string.Format("<a href='{0}'>{1}</a>", oppgaveLink, oppgave.Oppgave_id.ToString());
+                idCell.Text = string.Format("<a href='{0}'>{1}</a>", oppgaveLink, oppgave.RefOppgaveId.ToString());
                 tittelCell.Text = string.Format("<a href='{0}'>{1}</a>", oppgaveLink, oppgave.Tittel.ToString());
                 statusCell.Text = Queries.GetStatus(oppgave.Status_id).Navn;
                 estimatCell.Text = oppgave.Estimat.ToString();
@@ -609,10 +609,17 @@ namespace SysUt14Gr03.Classes
                 startCell.Text = String.Format(t.Start.ToString());
                 stoppCell.Text = String.Format(t.Stopp.ToString());
                 tidCell.Text = String.Format(t.Tid.ToString());
-                if (t.Manuell)
+                if (t.Manuell) {
                     manuellCell.Text = "Ja";
+                    timeRow.BackColor = Color.DarkGray;
+                }
+
                 else
+                {
                     manuellCell.Text = "Nei";
+                    timeRow.BackColor = Color.PaleGreen;
+                }
+
 
                 timeRow.Cells.Add(oppgaveIdCell);
                 timeRow.Cells.Add(oppgaveCell);

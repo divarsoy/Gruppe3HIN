@@ -119,7 +119,8 @@ namespace SysUt14Gr03.Classes
             if (oppgave)
             {
                 Oppgave o = Queries.GetOppgave(oppgave_id);
-                melding += Environment.NewLine + "<a href=\"http://malmen.hin.no/SysUt14Gr03/MottaOppgave.aspx?oppgave_id=" + oppgave_id + "\">" + o.Tittel + "</a>";
+                melding += Environment.NewLine + "<a href=\"http://malmen.hin.no/SysUt14Gr03/MottaOppgave.aspx?oppgave_id=" 
+                    + oppgave_id + "&bruker_id=" + "\">" + o.Tittel + "</a>";
             }
 
             if (selectedItems[varsel])
@@ -146,6 +147,57 @@ namespace SysUt14Gr03.Classes
                     context.Notifikasjoner.Add(nyVarsel);
                     context.SaveChanges();
             }
+        }
+
+        /// <summary>
+        /// Sender bruker en invitasjon til en oppgave
+        /// </summary>
+        /// <param name="mottaker_id">bruker_id til mottaker</param>
+        /// <param name="avsender_id">bruker_id til avsender</param>
+        /// <param name="oppgave_id">oppgave_id til oppgaven</param>
+        /// <param name="melding">forklarende tekst til mottaker</param>
+        static public string SendInvitasjon(int mottaker_id, int avsender_id, int oppgave_id, string melding)
+        {
+            // Sjekker brukerpreferanser
+            Bruker mottaker = Queries.GetBruker(mottaker_id);
+            BrukerPreferanse brukerPrefs = Queries.GetEpostPreferanser(mottaker_id);
+
+            bool oppgaveVarsel = brukerPrefs.EpostOppgave;
+
+            // Genererer melding + tittel
+            string tittel = mottaker.ToString() + " ønsker hjelp";
+
+                Oppgave o = Queries.GetOppgave(oppgave_id);
+                melding += "<a href=\"http://malmen.hin.no/SysUt14Gr03/MottaOppgave.aspx?oppgave_id="
+                    + oppgave_id + "&bruker_id=" + avsender_id + "\">" + o.Tittel + "</a>";
+
+
+            if (oppgaveVarsel)
+            {
+                string epost = mottaker.Epost;
+                // Sender e-post
+                sendEmail sendEmail = new sendEmail();
+                sendEmail.sendEpost(epost, melding, tittel, null, null, null);
+            }
+
+            // Sender intern varsel
+            using (var context = new Context())
+            {
+                mottaker = context.Brukere.FirstOrDefault(b => b.Bruker_id == mottaker_id);
+                NotifikasjonsType type = context.NotifikasjonsType.FirstOrDefault(nt => nt.NotifikasjonsType_id == 1);
+                // Legger varsel inn i databasen:
+                var nyVarsel = new Notifikasjon
+                {
+                    Melding = melding,
+                    notifikasjonsType = type,
+                    bruker = mottaker
+                };
+
+                context.Notifikasjoner.Add(nyVarsel);
+                context.SaveChanges();
+            }
+            // debug
+            return melding;
         }
                 
 

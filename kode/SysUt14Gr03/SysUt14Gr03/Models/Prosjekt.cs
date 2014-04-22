@@ -23,6 +23,7 @@ namespace SysUt14Gr03.Models
 
         public virtual Team Team { get; set; }
         public virtual Bruker Bruker { get; set; }
+        public virtual List<Fase> Faser { get; set; }
         public virtual List<Oppgave> Oppgaver { get; set; }
     }
 }

@@ -25,6 +25,7 @@ namespace SysUt14Gr03.Models
         public DbSet<NotifikasjonsType> NotifikasjonsType { get; set; }
         public DbSet<Time> Timer { get; set; }
         public DbSet<Pause> Pauser { get; set; }
+        public DbSet<Fase> Faser { get; set; }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

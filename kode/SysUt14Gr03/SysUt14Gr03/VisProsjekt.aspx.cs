@@ -14,17 +14,22 @@ namespace SysUt14Gr03
     {
         private int prosjekt_id;
         private List<Oppgave> oppgaveProsjekt;
+        private List<Fase> faseListe;
         protected void Page_Load(object sender, EventArgs e)
         {
 
             SessionSjekk.sjekkForBruker_id();
-            SessionSjekk.sjekkForProsjekt_id();
 
-            // if (Request.QueryString["prosjekt_id"] != null)
-            //{
-            //     prosjekt_id = Validator.KonverterTilTall(Request.QueryString["prosjekt_id"]);
-            prosjekt_id = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
-
+            if (Request.QueryString["prosjekt_id"] != null)
+            {
+                //NB!!! Sjekker ikke om bruker er med i prosjektet som listes
+                prosjekt_id = Validator.KonverterTilTall(Request.QueryString["prosjekt_id"]);
+            }
+            else
+            {
+                SessionSjekk.sjekkForProsjekt_id();
+                prosjekt_id = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
+            }
             Prosjekt prosjekt = Queries.GetProsjekt(prosjekt_id);
             prosjektNavn.Text = prosjekt.Navn;
             oppgaveProsjekt = Queries.GetAlleAktiveOppgaverForProsjekt(prosjekt.Prosjekt_id);
@@ -38,13 +43,24 @@ namespace SysUt14Gr03
             string teamNavn = Queries.GetTeam((int)prosjekt.Team_id).Navn;
             lblInfo.Text += "<br />Team: <a href=\"visTeam?team_id=" + prosjekt.Team_id + "\">" + teamNavn + "</a>";
             lblInfo.Text += "<br />Prosjektleder: <a href=\"visBruker?bruker_id=" + prosjekt.Bruker_id + "\">" + navn + "</a>";
+            lblInfo.Text += "<hr />";
 
+            faseListe = Queries.GetFaseForProsjekt(prosjekt_id);
+            foreach (Fase fase in faseListe)
+            {
+                lblInfo.Text += "<br />Fase: <a href=\"visFase?fase_id=" + fase.Fase_id + "\">" + fase.Navn + "</a>";
+                lblInfo.Text += "<br />" + "StartDato: " + String.Format("{0:dd/MM/yyyy}", fase.Start);
+                lblInfo.Text += "<br />" + "SluttDato: " + String.Format("{0:dd/MM/yyyy}", fase.Stopp);
+                lblInfo.Text += "<br />Faseleder: " + fase.Bruker.ToString();
+                lblInfo.Text += "<br />";
+                
+            }
             lblInfo.Text += "<hr />";
             lblInfo.Text += "<br />" + "Oppgaver Knyttet til prosjektet";
             for (int i = 0; i < oppgaveProsjekt.Count; i++)
             {
                 Oppgave oppg = oppgaveProsjekt[i];
-                lblInfo.Text += "<br /><a href=\"visOppgave?oppgave_id=" + oppg.Oppgave_id + "\">" + oppg.Tittel + "</a>";
+                lblInfo.Text += "<br /><a href=\"visOppgave?oppgave_id=" + oppg.RefOppgaveId + "\">" + oppg.Tittel + "</a>";
             }
             // }
             /* else

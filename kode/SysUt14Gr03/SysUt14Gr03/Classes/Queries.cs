@@ -66,7 +66,28 @@ namespace SysUt14Gr03.Classes
                 return prosjektLedere;
             }
         }
-
+        static public List<Fase> GetFaseForProsjekt(int prosjekt_id)
+        {
+            using (var context = new Context())
+            {
+                var faseListe = context.Faser
+                            .Include("Bruker")
+                            .Where(fase => fase.Prosjekt_id == prosjekt_id)
+                            .ToList<Fase>();
+                return faseListe;
+            }
+        }
+        static public Fase GetFase(int fase_id)
+        {
+            using (var context = new Context())
+            {
+                var fase = context.Faser
+                            .Include("Oppgaver")
+                            .Where(f => f.Fase_id == fase_id)
+                            .FirstOrDefault();
+                return fase;
+            }
+        }
         static public Time GetTimer(int time_id)
         {
             using (var context = new Context())
@@ -248,6 +269,7 @@ namespace SysUt14Gr03.Classes
                                   .Include("Prioritering")
                                   .Include("Status")
                                   .Include("Prosjekt")
+                                  .Include("Timer")
                                   .Where(o => o.Oppgave_id == oppgave_id)
                                   .Where(o => o.Aktiv == true)
                                   .FirstOrDefault<Oppgave>();
@@ -789,7 +811,7 @@ namespace SysUt14Gr03.Classes
         {
             using (var context = new Context())
             {
-                Oppgave oppg = context.Oppgaver.Where(Oppgave => Oppgave.Time.Any(time => time.Time_id == time_id)).FirstOrDefault();
+                Oppgave oppg = context.Oppgaver.Where(Oppgave => Oppgave.Timer.Any(time => time.Time_id == time_id)).FirstOrDefault();
 
                 return oppg;
             }
