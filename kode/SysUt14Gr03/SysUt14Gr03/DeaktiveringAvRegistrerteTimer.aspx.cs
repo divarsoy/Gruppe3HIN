@@ -49,6 +49,7 @@ namespace SysUt14Gr03
 
         protected void btnEndre_Click(object sender, EventArgs e)
         {
+            lblInfo.Text = "";
             int oppg_id = Convert.ToInt32(ddlTimer.SelectedValue);
             Oppgave oppgave = Queries.GetOppgaveMedTimer(oppg_id);
             lblInfo.Visible = true;
@@ -60,8 +61,10 @@ namespace SysUt14Gr03
             Oppgave oppg = Queries.GetOppgave(oppgave.Oppgave_id);
             foreach (Time t in oppg.Timer)
             {
+                tbStart.Visible = true;
                 lblInfo.Text += "<br />Tid: " + t.Tid;
                 lblInfo.Text += "<br />Start: " + t.Start;
+                tbStart.Text = Convert.ToString(t.Start);
                 lblInfo.Text += "<br />Stopp: " + t.Stopp;
                 lblInfo.Text += "<br />Ferdig: " + t.IsFerdig;
             }

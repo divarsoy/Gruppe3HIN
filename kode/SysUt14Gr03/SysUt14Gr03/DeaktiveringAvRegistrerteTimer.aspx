@@ -12,7 +12,8 @@
     <hr />
     <asp:Button ID="btnDeaktiver" runat="server" Text="Deaktiver" BackColor="Red" Height="90%" ForeColor="Wheat" OnClick="btnDeaktiver_Click" Width="40%" />
     <br />
-    <asp:Button ID="btnEndre" runat="server" Text="Endre" OnClick="btnEndre_Click" Width="40%" BackColor="Green" ForeColor="White" Height="90%" />
+    <asp:Button ID="btnEndre" runat="server" Text="Se Oppgave" OnClick="btnEndre_Click" Width="40%" BackColor="Green" ForeColor="White" Height="90%" />
     <asp:Label ID="lblInfo" Visible="false" runat="server"></asp:Label>
+        <asp:Textbox ID="tbStart" runat="server" TextMode="Time" Visible="false"></asp:Textbox>
 </div>
 </asp:Content>
