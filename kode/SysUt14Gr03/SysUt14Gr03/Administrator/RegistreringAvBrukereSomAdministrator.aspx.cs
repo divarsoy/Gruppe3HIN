@@ -116,7 +116,10 @@ namespace SysUt14Gr03
 
             if (tb_reg_epost.Text.Length < 256) {
                 epost = tb_reg_epost.Text;
-             opprettBruker(etternavn, fornavn, epost);
+                opprettBruker(etternavn, fornavn, epost);
+                //Oppretter logg i database STH PGGS
+                string hendelse = "Bruker " + fornavn + " " + etternavn + " har blitt opprettet av Administrator";
+                OppretteLogg.opprettLoggForBruker(hendelse, DateTime.Now, epost);
                 //AktiverKonto.SetBrukerFelter(fornavn, etternavn, epost);
                 EpostFullforReg();
           

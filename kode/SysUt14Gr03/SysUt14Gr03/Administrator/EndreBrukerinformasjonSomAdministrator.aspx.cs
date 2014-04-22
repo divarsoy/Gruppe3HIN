@@ -16,6 +16,7 @@ namespace SysUt14Gr03
         private int bruker_id;
         private MailMessage msg;
         private sendEmail sendMsg;
+        private bool aktiv;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -80,10 +81,24 @@ namespace SysUt14Gr03
                 bruker.Rettigheter = rettighetListe;
                 bruker.Aktiv = Convert.ToBoolean(cbAktiv.Checked);
                 context.SaveChanges();
+               
+                aktiv = bruker.Aktiv;
+                string hendelseEndring = "Bruker " + bruker.Bruker_id + " er blitt endret: Fornavn: " + bruker.Fornavn +
+                    " Etternavn: " + bruker.Etternavn + " epost: " + bruker.Epost + " Rettigheter: " + rettighet.RettighetNavn;
+
+                OppretteLogg.opprettLoggForBruker(hendelseEndring, DateTime.Now, bruker.Epost);
+
+                if (!aktiv)
+                {
+                    OppretteLogg.opprettLoggForBruker("Bruker " + bruker.Bruker_id + " er arkivert",
+                    DateTime.Now, bruker.Epost);
+                }
             }
             gridViewEndre.Columns[4].Visible = false;
             gridViewEndre.EditIndex = -1;
             visBrukere();
+
+            
         }
         private void sendBekreftelse(string epost, string fornavn)
         {

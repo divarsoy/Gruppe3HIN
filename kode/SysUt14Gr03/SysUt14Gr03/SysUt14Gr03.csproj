@@ -323,6 +323,7 @@
     <Compile Include="Account\RegisterExternalLogin.aspx.designer.cs">
       <DependentUpon>RegisterExternalLogin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Classes\OppretteLogg.cs" />
     <Compile Include="Classes\Rapport.cs" />
     <Compile Include="Classes\SessionSjekk.cs" />
     <Compile Include="DeaktiveringAvRegistrerteTimer.aspx.cs">

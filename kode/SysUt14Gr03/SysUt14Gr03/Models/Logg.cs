@@ -15,5 +15,6 @@ namespace SysUt14Gr03.Models
         public int bruker_id { get; set; }
 
         public virtual Bruker Bruker { get; set; }
+        
     }
 }
