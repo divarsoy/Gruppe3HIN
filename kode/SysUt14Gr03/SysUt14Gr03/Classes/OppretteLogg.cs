@@ -10,7 +10,7 @@ namespace SysUt14Gr03.Classes
 {
     public class OppretteLogg
     {
-        public static void opprettLoggForBruker(string hendelse, DateTime opprettet, string epost)
+        public static void opprettLoggForBruker(string hendelse, DateTime opprettet, int brukerId)
         {
             using (var context = new Context())
             {
@@ -18,7 +18,7 @@ namespace SysUt14Gr03.Classes
                 {
                     Hendelse = hendelse,
                     Opprettet = opprettet,
-                    bruker_id = Queries.GetBrukerVedEpost(epost).Bruker_id
+                    bruker_id = brukerId
                 };
 
                 context.Logger.Add(nyLogg);

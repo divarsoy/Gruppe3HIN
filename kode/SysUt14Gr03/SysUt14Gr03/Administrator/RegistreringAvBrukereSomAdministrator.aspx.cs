@@ -119,7 +119,9 @@ namespace SysUt14Gr03
                 opprettBruker(etternavn, fornavn, epost);
                 //Oppretter logg i database STH PGGS
                 string hendelse = "Bruker " + fornavn + " " + etternavn + " har blitt opprettet av Administrator";
-                OppretteLogg.opprettLoggForBruker(hendelse, DateTime.Now, epost);
+                int idBruker = Queries.GetBrukerVedEpost(epost).Bruker_id;
+                OppretteLogg.opprettLoggForBruker(hendelse, DateTime.Now, (int)Session["bruker_id"]);
+                OppretteLogg.opprettLoggForBruker(hendelse, DateTime.Now, idBruker );
                 //AktiverKonto.SetBrukerFelter(fornavn, etternavn, epost);
                 EpostFullforReg();
           
