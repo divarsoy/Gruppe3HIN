@@ -92,6 +92,8 @@ namespace SysUt14Gr03
                     context.Timer.Add(timer);
                     context.SaveChanges();
                 }
+                timer = Queries.GetTimerMedStartDato(Start);
+                Session["time_id"] = timer.Time_id;
             }
             else
             {
@@ -154,6 +156,8 @@ namespace SysUt14Gr03
                 context1.Pauser.Add(pause);
                 context1.SaveChanges();
             }
+            pause = Queries.GetPauseMedStartDato(Pause);
+            Session["pause_id"] = pause.Pause_id;
 
             tbTidsregistrert.Text += "Tid takingen pauset: " + Pause + "\n";
             btnPause.Enabled = false;
@@ -249,7 +253,7 @@ namespace SysUt14Gr03
         {
             timer = Queries.GetTimer(timeId);
             pauser = timer.Pause;
-            pause = Queries.GetPause(pauseId);
+            pause = Queries.GetPauseMedPauseID(pauseId);
 
             tbTidsregistrert.Text += "Tid takingen startet: " + timer.Start + "\n";
             if(pauser != null)

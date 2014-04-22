@@ -79,12 +79,35 @@ namespace SysUt14Gr03.Classes
             }
         }
 
-        static public Pause GetPause(int pause_id)
+        static public Time GetTimerMedStartDato(DateTime start)
+        {
+            using (var context = new Context())
+            {
+                var time = context.Timer
+                            .Include("Pause")
+                            .Where(t => t.Start == start)
+                            .FirstOrDefault();
+                return time;
+            }
+        }
+
+        static public Pause GetPauseMedPauseID(int pause_id)
         {
             using (var context = new Context())
             {
                 var pause = context.Pauser
                             .Where(p => p.Pause_id == pause_id)
+                            .FirstOrDefault();
+                return pause;
+            }
+        }
+
+        static public Pause GetPauseMedStartDato(DateTime start)
+        {
+            using (var context = new Context())
+            {
+                var pause = context.Pauser
+                            .Where(p => p.Start == start)
                             .FirstOrDefault();
                 return pause;
             }
