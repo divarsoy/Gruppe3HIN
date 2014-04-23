@@ -45,7 +45,7 @@
         <div class="form-group">
             <label for="inputStartdato" class="col-sm-1 control-label">Startdato</label>
             <div class="col-sm-2">
-            <asp:TextBox ID="tbStart" CssClass="form-control" runat="server"></asp:TextBox>
+            <asp:TextBox ID="tbStart" Placeholder="DD.MM.YYYY" CssClass="form-control" runat="server"></asp:TextBox>
             </div>
             <div class="col-sm-1">
             <asp:Button ID="btnStart" CssClass="btn btn-primary" Text="Sett Startdato" OnClick="btnDato_Click" runat="server"  />
@@ -56,7 +56,7 @@
         <div class="form-group">
             <label for="inputSluttdato" class="col-sm-1 control-label">Sluttdato</label>
             <div class="col-sm-2">
-                <asp:TextBox ID="tbSlutt" CssClass="form-control" runat="server" ></asp:TextBox>
+                <asp:TextBox ID="tbSlutt" Placeholder="DD.MM.YYYY" CssClass="form-control" runat="server" ></asp:TextBox>
             </div>
             <div class="col-sm-1">
                 <asp:Button ID="btnSlutt" CssClass="btn btn-primary" Text="Sett Sluttdato" OnClick="btnDato_Click" runat="server"/>
@@ -122,7 +122,6 @@
                     <asp:BoundField DataField="Slutt" HeaderText="Slutt" />
                     <asp:CommandField ShowEditButton="True" ButtonType="Link" />
                     <asp:CommandField ShowDeleteButton="True" ButtonType="Link" />
-
                 </Columns>
         </asp:GridView>
 

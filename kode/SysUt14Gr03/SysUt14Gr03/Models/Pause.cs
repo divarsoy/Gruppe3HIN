@@ -15,6 +15,7 @@ namespace SysUt14Gr03.Models
         public DateTime Start { get; set; }
         public DateTime? Stopp { get; set; }
         public int Oppgave_id { get; set; }
+        public bool IsFerdig { get; set; }
 
         public virtual Oppgave Oppgave { get; set; }
     }
