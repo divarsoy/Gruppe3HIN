@@ -86,7 +86,7 @@
         <div class="form-group">
             <label for="tbFaseStart" class="col-sm-1 control-label">Startdato</label>
             <div class="col-sm-2">
-                <asp:TextBox ID="tbFaseStart" CssClass="form-control" runat="server" ></asp:TextBox>
+                <asp:TextBox ID="tbFaseStart" Placeholder="DD.MM.YYYY" CssClass="form-control" runat="server" ></asp:TextBox>
             </div>
             <div class="col-sm-1">
                 <asp:Button ID="btnFaseStart" CssClass="btn btn-primary" Text="Sett Startdato" OnClick="btnDato_Click" runat="server"/>
@@ -97,7 +97,7 @@
         <div class="form-group">
             <label for="tbFaseSlutt" class="col-sm-1 control-label">Sluttdato</label>
             <div class="col-sm-2">
-                <asp:TextBox ID="tbFaseSlutt" CssClass="form-control" runat="server" ></asp:TextBox>
+                <asp:TextBox ID="tbFaseSlutt" Placeholder="DD.MM.YYYY" CssClass="form-control" runat="server" ></asp:TextBox>
             </div>
             <div class="col-sm-1">
                 <asp:Button ID="btnFaseSlutt" CssClass="btn btn-primary" Text="Sett Sluttdato" OnClick="btnDato_Click" runat="server"/>
@@ -113,12 +113,16 @@
         <div class="clearfix"></div>
         <br />
 
-        <asp:GridView ID="gvFaser" CssClass="table" DataKeyNames="bruker_id" runat="server" AlternatingRowStyle-CssClass="alt" AutoGenerateColumns="false">
+        <asp:GridView ID="gvFaser" CssClass="table" DataKeyNames="bruker_id" runat="server" AlternatingRowStyle-CssClass="alt" AutoGenerateColumns="false"
+            onRowDeleting="OnRowDeleting">
                 <Columns>
                     <asp:BoundField DataField="Fasenavn" HeaderText="Fasenavn" />
                     <asp:BoundField DataField="Faseleder" HeaderText="Faseleder"  />                    
                     <asp:BoundField DataField="Start" HeaderText="Start"  />
                     <asp:BoundField DataField="Slutt" HeaderText="Slutt" />
+                    <asp:CommandField ShowEditButton="True" ButtonType="Link" />
+                    <asp:CommandField ShowDeleteButton="True" ButtonType="Link" />
+
                 </Columns>
         </asp:GridView>
 

@@ -180,7 +180,7 @@ namespace SysUt14Gr03
         protected void TeamDropDown_Change(object sender, EventArgs e)
         {
             DropDownList TeamDropDown = (DropDownList)sender;
-            if (TeamDropDown.SelectedIndex != null && TeamDropDown.SelectedIndex > 0)
+            if (TeamDropDown.Items != null && TeamDropDown.SelectedIndex > 0)
             {
                 team_id = Validator.KonverterTilTall(TeamDropDown.SelectedValue);
             }
@@ -191,19 +191,7 @@ namespace SysUt14Gr03
             if (tbFasenavn.Text != string.Empty && tbFaseStart.Text != string.Empty && tbFaseSlutt.Text != string.Empty && ddFaseLeder.SelectedValue != "0")
             {
                 AddNewFaseRow();
-/*
-                Fase nyFase = new Fase();
-                nyFase.Navn = tbFasenavn.Text;
-                nyFase.Start = Convert.ToDateTime(tbFaseStart.Text);
-                nyFase.Stopp = Convert.ToDateTime(tbFaseSlutt.Text);
-                nyFase.Bruker_id = Validator.KonverterTilTall(ddFaseLeder.SelectedValue);
-                faseListe.Add(nyFase);
-
-
-                gvFaser.Columns.Add("Fasenavn");
-
                 lblFaseFeil.Visible = false;
- * */
             }
             else
             {
@@ -220,13 +208,28 @@ namespace SysUt14Gr03
             dtFaser.Columns.Add(new DataColumn("Slutt", typeof(System.String)));
 
             DataRow row = dtFaser.NewRow();
-            row["bruker_id"] = Validator.KonverterTilTall("3");
+            row["bruker_id"] = Validator.KonverterTilTall("1");
             row["Fasenavn"] = "TestFase";
             row["Faseleder"] = "Tony";
             row["Start"] = "14.05.2014";
             row["Slutt"] = "21.05.2014";
-
             dtFaser.Rows.Add(row);
+
+            DataRow row2 = dtFaser.NewRow();
+            row2["bruker_id"] = Validator.KonverterTilTall("2");
+            row2["Fasenavn"] = "TestFase2";
+            row2["Faseleder"] = "Lars";
+            row2["Start"] = "14.05.2014";
+            row2["Slutt"] = "21.05.2014";
+            dtFaser.Rows.Add(row2);
+
+            DataRow row3 = dtFaser.NewRow();
+            row3["bruker_id"] = Validator.KonverterTilTall("3");
+            row3["Fasenavn"] = "TestFase2";
+            row3["Faseleder"] = "Markus";
+            row3["Start"] = "14.05.2014";
+            row3["Slutt"] = "21.05.2014";
+            dtFaser.Rows.Add(row3);
 
             Session["FaseTable"] = dtFaser;
 
@@ -239,7 +242,7 @@ namespace SysUt14Gr03
 
             if (Session["FaseTable"] != null)
             {
-                dtFaser = (DataTable)Session["FaseTable"];
+                dtFaser = Session["FaseTable"] as DataTable;
 
                 DataRow row = dtFaser.NewRow();
                 row["bruker_id"] = ddFaseLeder.SelectedValue;
@@ -260,6 +263,15 @@ namespace SysUt14Gr03
                 tbFaseStart.Text = string.Empty;
                 tbFaseSlutt.Text = string.Empty;
             }
+        }
+        protected void OnRowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+           int index = Convert.ToInt32(e.RowIndex);
+           dtFaser = Session["FaseTable"] as DataTable;
+           dtFaser.Rows[index].Delete();
+           Session["FaseTable"] = dtFaser;
+           gvFaser.DataSource = dtFaser;
+           gvFaser.DataBind();
         }
     }
 }
