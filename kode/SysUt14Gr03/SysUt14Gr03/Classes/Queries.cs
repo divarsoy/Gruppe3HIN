@@ -93,6 +93,7 @@ namespace SysUt14Gr03.Classes
             using (var context = new Context())
             {
                 var time = context.Timer
+                            .Include("Oppgave")
                             .Include("Pause")
                             .Where(t => t.Time_id == time_id)
                             .FirstOrDefault();
@@ -140,6 +141,7 @@ namespace SysUt14Gr03.Classes
             {
                 var timeListe = context.Timer
                             .Where(t => t.Bruker_id == bruker_id)
+                            .Where(tid => tid.Aktiv == true)
                             .ToList<Time>();
                 return timeListe;
             }
@@ -811,7 +813,9 @@ namespace SysUt14Gr03.Classes
         {
             using (var context = new Context())
             {
-                Oppgave oppg = context.Oppgaver.Where(Oppgave => Oppgave.Timer.Any(time => time.Time_id == time_id)).FirstOrDefault();
+                Oppgave oppg = context.Oppgaver.Include("Timer")
+                    .Where(Oppgave => Oppgave.Timer.Any(time => time.Time_id == time_id))
+                    .FirstOrDefault();
 
                 return oppg;
             }

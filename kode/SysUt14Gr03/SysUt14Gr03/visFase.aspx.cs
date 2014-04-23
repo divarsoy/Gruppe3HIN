@@ -26,7 +26,7 @@ namespace SysUt14Gr03
                 Fase fase = Queries.GetFase(fase_id);
                 lblFase.Text = "Fase: " + fase.Navn;
                 string navn = Queries.GetBruker(fase.Bruker_id).ToString();
-
+                lblInfo.Visible = true;
                 lblInfo.Text += "<br />Faseleder: <a href=\"visBruker?bruker_id=" + fase.Bruker_id + "\">" + navn + "</a>";
                 lblInfo.Text += "<br />" + "StartDato: " + String.Format("{0:dd/MM/yyyy}", fase.Start);
                 lblInfo.Text += "<br />" + "SluttDato: " + String.Format("{0:dd/MM/yyyy}", fase.Stopp);
@@ -61,7 +61,11 @@ namespace SysUt14Gr03
                 lblInfo.Text += "<br />" + "Sum estimert tid: " + estimertTid + " timer";
                 lblInfo.Text += "<br />" + "Sum resterende tid: " + restTid + " timer";
             }
-
+            else
+            {
+                Session["flashMelding"] = "Fasen finnes ikke";
+                Session["flashStatus"] = Konstanter.notifikasjonsTyper.info.ToString();
+            }
         }
 
     }
