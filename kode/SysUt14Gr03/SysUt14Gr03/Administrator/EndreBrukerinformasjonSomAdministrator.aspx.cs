@@ -86,12 +86,13 @@ namespace SysUt14Gr03
                 string hendelseEndring = "Bruker " + bruker.Bruker_id + " er blitt endret: Fornavn: " + bruker.Fornavn +
                     " Etternavn: " + bruker.Etternavn + " epost: " + bruker.Epost + " Rettigheter: " + rettighet.RettighetNavn;
 
-                OppretteLogg.opprettLoggForBruker(hendelseEndring, DateTime.Now, bruker.Epost);
+                OppretteLogg.opprettLoggForBruker(hendelseEndring, DateTime.Now, bruker.Bruker_id);
+                OppretteLogg.opprettLoggForBruker(hendelseEndring, DateTime.Now, (int)Session["bruker_id"]);
 
                 if (!aktiv)
                 {
                     OppretteLogg.opprettLoggForBruker("Bruker " + bruker.Bruker_id + " er arkivert",
-                    DateTime.Now, bruker.Epost);
+                    DateTime.Now, bruker.Bruker_id);
                 }
             }
             gridViewEndre.Columns[4].Visible = false;
