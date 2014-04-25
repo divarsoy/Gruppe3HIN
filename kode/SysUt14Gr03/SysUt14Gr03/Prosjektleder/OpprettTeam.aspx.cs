@@ -81,6 +81,8 @@ namespace SysUt14Gr03
 
                         context.Teams.Add(nyttTeam);
                         context.SaveChanges();
+                        //Oppretter log for hendelsen
+                        OppretteLogg.opprettLoggForBruker("Team " + teamNavn + " ble opprettet.", DateTime.Now, (int)Session["bruker_id"]);
                         Varsel.SendVarsel(selectedBrukers, Varsel.TEAMVARSEL, Varsel.VARSELTITTEL[Varsel.TEAMVARSEL], Varsel.VARSELTEKST[Varsel.TEAMVARSEL] + ": " + teamNavn, 2);
                     
                 }
