@@ -72,6 +72,7 @@ namespace SysUt14Gr03.Classes
             {
                 var faseListe = context.Faser
                             .Include("Bruker")
+                            .Include("Oppgaver")
                             .Where(fase => fase.Prosjekt_id == prosjekt_id)
                             .ToList<Fase>();
                 return faseListe;

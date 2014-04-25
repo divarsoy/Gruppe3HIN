@@ -65,6 +65,7 @@ namespace SysUt14Gr03.Classes
                         prosjekt = Queries.GetProsjekt(_id);
                         if (prosjekt != null)
                         {
+                            List<Fase> faseListe = Queries.GetFaseForProsjekt(_id);
                             info += "Navn på prosjekt: " + prosjekt.Navn;
                             info += "<br />Opprettet: " + prosjekt.Opprettet.ToShortDateString();
                             DateTime start = (DateTime)prosjekt.StartDato;
@@ -77,26 +78,36 @@ namespace SysUt14Gr03.Classes
                             info += "<br /><h3>Team:</h3>";
                             info += "<br /><t />" + prosjekt.Team.Navn;
 
-                            info += "<br /><h3>Oppgaver:</h3>";
-                            foreach (Oppgave o in prosjekt.Oppgaver)
+                            info += "<br /><h3>Faser:</h3>";
+                            foreach (Fase f in faseListe)
                             {
-                                info += "<br /><tb />Navn: " + o.Tittel;
-                                info += "<br /><t />ID: " + o.Oppgave_id;
-                                info += "<br /><t />Opprettet: " + o.Opprettet.ToShortDateString();
-                                info += "<br /><t />User story: " + o.UserStory;
-                                info += "<br /><t />Krav: " + o.Krav;
-                                int avhengigOppgave = Validator.SjekkAvhengighet(o.Oppgave_id);
-                                info += "<br />" + "Avhengighet: " + (avhengigOppgave == -1 ? "Nei" : "Ja");
-                                info += "<br /><t />Estimat: " + o.Estimat;
-                                info += "<br /><t />Brukt tid: " + o.BruktTid;
-                                Status status = Queries.GetStatus(o.Status_id);
-                                info += "<br /><t />Status: " + status.Navn;
-                                estimertTidProsjekt.Add((TimeSpan) o.Estimat);
-                                List<Time> timeListe = Queries.GetTimerForOppgave(o.Oppgave_id);
-                                foreach (Time t in timeListe)
-                                    bruktTidProsjekt += t.Tid;
-                            }
+                                info += "<br /><tb />Navn: " + f.Navn;
+                                info += "<br /><tb />Faseleder: " + f.Bruker.ToString();
+                                info += "<br /><tb />Opprettet: " + f.Opprettet.ToShortDateString();
+                                info += "<br /><tb />Startdato: " + f.Start.ToShortDateString();
+                                info += "<br /><tb />Sluttdato: " + f.Stopp.ToShortDateString();
+                                info += "<hr />";
+                                foreach (Oppgave o in f.Oppgaver)
+                                {
+                                    info += "<br /><tb />Navn: " + o.Tittel;
+                                    info += "<br /><t />ID: " + o.RefOppgaveId;
+                                    info += "<br /><t />Opprettet: " + o.Opprettet.ToShortDateString();
+                                    info += "<br /><t />User story: " + o.UserStory;
+                                    info += "<br /><t />Krav: " + o.Krav;
+                                    int avhengigOppgave = Validator.SjekkAvhengighet(o.Oppgave_id);
+                                    info += "<br />" + "Avhengighet: " + (avhengigOppgave == -1 ? "Nei" : "Ja");
+                                    info += "<br /><t />Estimat: " + o.Estimat;
+                                    info += "<br /><t />Brukt tid: " + o.BruktTid;
+                                    Status status = Queries.GetStatus(o.Status_id);
+                                    info += "<br /><t />Status: " + status.Navn;
+                                    estimertTidProsjekt.Add((TimeSpan)o.Estimat);
+                                    List<Time> timeListe = Queries.GetTimerForOppgave(o.Oppgave_id);
+                                    foreach (Time t in timeListe)
+                                        bruktTidProsjekt += t.Tid;
+                                }
 
+                            }
+                            
                         }
 
                     }
