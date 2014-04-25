@@ -183,6 +183,7 @@
     <Content Include="Brukere.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Prosjektleder\InnsynIRegistrerteTimerSomProsjektleder.aspx" />
+    <Content Include="Prosjektleder\KorrigerRegistrerteTimer.aspx" />
     <Content Include="RapportTestForm.aspx" />
     <Content Include="Scripts\MorildSheperdAdministrator.js" />
     <Content Include="Scripts\shepherd.js" />
@@ -461,6 +462,13 @@
     </Compile>
     <Compile Include="Prosjektleder\InnsynIRegistrerteTimerSomProsjektleder.aspx.designer.cs">
       <DependentUpon>InnsynIRegistrerteTimerSomProsjektleder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Prosjektleder\KorrigerRegistrerteTimer.aspx.cs">
+      <DependentUpon>KorrigerRegistrerteTimer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Prosjektleder\KorrigerRegistrerteTimer.aspx.designer.cs">
+      <DependentUpon>KorrigerRegistrerteTimer.aspx</DependentUpon>
     </Compile>
     <Compile Include="Prosjektleder\OpprettOppgavegruppe.aspx.cs">
       <DependentUpon>OpprettOppgavegruppe.aspx</DependentUpon>
