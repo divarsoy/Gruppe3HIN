@@ -42,8 +42,9 @@ namespace SysUt14Gr03
                 context.SaveChanges();
             }
             string oppgave = Queries.GetOppgave(oppg_id).Tittel;
-            Session["flashMelding"] = "Du har dekativert tiden på oppgaven: " + oppgave;
+            Session["flashMelding"] = "Du har deaktivert tiden på oppgaven: " + oppgave;
             Session["flashStatus"] = Konstanter.notifikasjonsTyper.info.ToString();
+            Response.Redirect(Request.RawUrl);
 
         }
 
@@ -92,24 +93,28 @@ namespace SysUt14Gr03
         {
             int time_id = Validator.KonverterTilTall(ddlTimer.SelectedValue);
             int oppg_id;
-            using (var context = new Context())
-            {
-               
-                var timer = (from time in context.Timer
-                             where time.Time_id == time_id
-                             select time).FirstOrDefault();
-                DateTime stopp = Convert.ToDateTime(tbSlutt.Text);
-                DateTime start = Convert.ToDateTime(tbStart.Text);
-                oppg_id = timer.Oppgave_id;
-                timer.Stopp = (DateTime)stopp;
-                timer.Start = (DateTime)start;
-                timer.Tid = TimeSpan.Parse(tbTid.Text);
-                context.SaveChanges();
+          
+                using (var context = new Context())
+                {
+
+                    var timer = (from time in context.Timer
+                                 where time.Time_id == time_id
+                                 select time).FirstOrDefault();
+                    DateTime stopp = Convert.ToDateTime(tbSlutt.Text);
+                    DateTime start = Convert.ToDateTime(tbStart.Text);
+                    oppg_id = timer.Oppgave_id;
+                    timer.Stopp = (DateTime)stopp;
+                    timer.Start = (DateTime)start;
+                    timer.Tid = TimeSpan.Parse(tbTid.Text);
+                    context.SaveChanges();
+                }
+                string oppgave = Queries.GetOppgave(oppg_id).Tittel;
+                Session["flashMelding"] = "Du har endret tiden på oppgaven: " + oppgave;
+                Session["flashStatus"] = Konstanter.notifikasjonsTyper.info.ToString();
+                Response.Redirect(Request.RawUrl);
             }
-            string oppgave = Queries.GetOppgave(oppg_id).Tittel;
-            Session["flashMelding"] = "Du har endret tiden på oppgaven: " + oppgave;
-            Session["flashStatus"] = Konstanter.notifikasjonsTyper.info.ToString();
-        }
+          
+        
 
     }
 }
