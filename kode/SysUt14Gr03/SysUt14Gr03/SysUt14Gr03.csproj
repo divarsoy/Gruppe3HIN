@@ -53,6 +53,7 @@
       <HintPath>..\packages\FakeO.1.0.4447.26941\lib\net40\FakeO.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.2.1402.2112\lib\net40\Moq.dll</HintPath>
     </Reference>
@@ -230,6 +231,17 @@
     <Content Include="Account\Web.config" />
     <Content Include="ReturAvOppgave.aspx" />
     <Content Include="Content\MorildDataStylesheet.less" />
+    <Content Include="gruppe3DataSet.xsc">
+      <DependentUpon>gruppe3DataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="gruppe3DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>gruppe3DataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="gruppe3DataSet.xss">
+      <DependentUpon>gruppe3DataSet.xsd</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\SysUt14Gr03.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -272,6 +284,7 @@
     <Content Include="visFase.aspx" />
     <Content Include="VisOppgave.aspx" />
     <Content Include="VisProsjekt.aspx" />
+    <Content Include="VisRapport.aspx" />
     <Content Include="VisTeam.aspx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -334,6 +347,11 @@
     </Compile>
     <Compile Include="DeaktiveringAvRegistrerteTimer.aspx.designer.cs">
       <DependentUpon>DeaktiveringAvRegistrerteTimer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="gruppe3DataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>gruppe3DataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="KommentarTest.aspx.cs">
       <DependentUpon>KommentarTest.aspx</DependentUpon>
@@ -808,6 +826,13 @@
     <Compile Include="VisProsjekt.aspx.designer.cs">
       <DependentUpon>VisProsjekt.aspx</DependentUpon>
     </Compile>
+    <Compile Include="VisRapport.aspx.cs">
+      <DependentUpon>VisRapport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="VisRapport.aspx.designer.cs">
+      <DependentUpon>VisRapport.aspx</DependentUpon>
+    </Compile>
     <Compile Include="VisTeam.aspx.cs">
       <DependentUpon>VisTeam.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -821,6 +846,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Report1.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -18,12 +18,13 @@ namespace SysUt14Gr03.Classes
         private Prosjekt prosjekt;
         private Bruker bruker;
         private string info;
+        private string prosjektRapportForBruker;
         private TimeSpan bruktTidProsjekt;
         private TimeSpan estimertTidProsjekt;
-        private TimeSpan varighetProsjekt;
         private TimeSpan sumTimerForBruker;
         private int antallFerdigeOppgaver;
         private int antallDeltakerePaTeam;
+        private int antallFaser;
 
         /// <summary>
         /// Lag en rapport
@@ -35,7 +36,6 @@ namespace SysUt14Gr03.Classes
             info = "";
             bruktTidProsjekt = new TimeSpan();
             estimertTidProsjekt = new TimeSpan();
-            varighetProsjekt = new TimeSpan();
             sumTimerForBruker = new TimeSpan();
             antallFerdigeOppgaver = 0;
             antallDeltakerePaTeam = 0;
@@ -79,6 +79,9 @@ namespace SysUt14Gr03.Classes
                             info += "<br /><t />" + prosjekt.Team.Navn;
 
                             info += "<br /><h3>Faser:</h3>";
+
+                            antallFaser = faseListe.Count;
+
                             foreach (Fase f in faseListe)
                             {
                                 info += "<br /><tb />Navn: " + f.Navn;
@@ -86,7 +89,6 @@ namespace SysUt14Gr03.Classes
                                 info += "<br /><tb />Opprettet: " + f.Opprettet.ToShortDateString();
                                 info += "<br /><tb />Startdato: " + f.Start.ToShortDateString();
                                 info += "<br /><tb />Sluttdato: " + f.Stopp.ToShortDateString();
-                                info += "<hr />";
                                 foreach (Oppgave o in f.Oppgaver)
                                 {
                                     info += "<br /><tb />Navn: " + o.Tittel;
@@ -105,6 +107,7 @@ namespace SysUt14Gr03.Classes
                                     foreach (Time t in timeListe)
                                         bruktTidProsjekt += t.Tid;
                                 }
+                                info += "<hr />";
 
                             }
                             
@@ -125,7 +128,13 @@ namespace SysUt14Gr03.Classes
                             info += "<br /><h3>Prosjekter:</h3>";
                             List<Prosjekt> prosjektListe = Queries.GetAlleAktiveProsjekterForBruker(_id);
                             foreach (Prosjekt p in prosjektListe)
+                            {
                                 info += "<br /><t />" + p.Navn;
+                                prosjektRapportForBruker += "<br />Navn: " + p.Navn;
+                                // vi tar det sia
+                                prosjektRapportForBruker += "<br />" + "Min rolle: " + (_id == p.Bruker_id ? "Prosjektleder" : "Utvikler");
+                                // if faseleder prosjektRapportForBruker = faseleder
+                            }      
 
                             info += "<br /><h3>Team:</h3>";
                             foreach (Team t in bruker.Teams)
@@ -136,7 +145,8 @@ namespace SysUt14Gr03.Classes
                             List<Time> timeListe = Queries.GetTimerForBruker(_id);
                             if (timeListe != null)
                             {
-                                foreach (Oppgave oppgave in bruker.Oppgaver)
+                                List<Oppgave> oppgaverTilBruker = Queries.GetAlleAktiveOppgaverForBruker(_id);
+                                foreach (Oppgave oppgave in oppgaverTilBruker)
                                 {
                                     foreach (Time time in timeListe)
                                     {
@@ -145,7 +155,10 @@ namespace SysUt14Gr03.Classes
                                             sumTimerForBruker += time.Tid;
                                         }
                                     }
-                                    info += "<br /><t />" + oppgave.Tittel + "Brukt tid: " + sumTimerForBruker.ToString();
+                                    info += "<br /><t />" + oppgave.Tittel + " Brukt tid: " + sumTimerForBruker.ToString();
+                                    prosjektRapportForBruker += "<br /><t />" + oppgave.Tittel + " Brukt tid: " + sumTimerForBruker.ToString();
+                                    info += "<br />Prosjekt: " + oppgave.Prosjekt.Navn;
+                                    info += "<br />Fase: " + oppgave.Fase.Navn;
 
                                 }
                             }
@@ -169,6 +182,11 @@ namespace SysUt14Gr03.Classes
             }
                 
             
+        }
+
+        public int getAntallFaser()
+        {
+            return antallFaser;
         }
 
         public TimeSpan GetBruktTidPaProsjekt()
@@ -197,6 +215,12 @@ namespace SysUt14Gr03.Classes
                 return new TimeSpan(0);
             }
                 
+        }
+
+        public string VisProsjektRapportForBruker()
+        {
+
+            return prosjektRapportForBruker;
         }
 
         public TimeSpan GetSumTimerForBruker()

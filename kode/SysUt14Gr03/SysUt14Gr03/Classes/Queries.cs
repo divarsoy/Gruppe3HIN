@@ -621,6 +621,8 @@ namespace SysUt14Gr03.Classes
                 var oppgaveListe = context.Oppgaver
                                   .Include("Brukere")
                                   .Include("Kommentarer")
+                                  .Include("Prosjekt")
+                                  .Include("Fase")
                                   .Where(oppgave => oppgave.Brukere.Any(bruker => bruker.Bruker_id == _bruker_id))
                                   .Where(oppgave => oppgave.Aktiv == true)
                                   .OrderBy(oppgave => oppgave.Tittel)
@@ -656,6 +658,7 @@ namespace SysUt14Gr03.Classes
                 return brukerListe;
             }
         }
+
         static public List<Bruker> GetAlleBrukereIEtProjekt(int prosjekt_id)
         {
             using (var context = new Context())
