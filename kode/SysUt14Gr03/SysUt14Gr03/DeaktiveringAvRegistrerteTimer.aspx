@@ -5,24 +5,25 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MenyTemplate" runat="server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
-    <h2 style="text-align: center">Endre/Deaktiver Registrerte Timer</h2>
-    
+    <h2 style="text-align: center">
+        <asp:Label ID="lblHeader" Visible="false" runat="server"></asp:Label>
+    </h2>
     <div class="text-center">
-        
+
         <asp:DropDownList ID="ddlTimer" runat="server"></asp:DropDownList>
-            
+
         <div class="clearfix"></div>
-        <hr />
+        
         <asp:Button ID="btnDeaktiver" CssClass="btn btn-primary" OnClientClick="return confirm('Er du sikker på at du vil deaktivere registreringen?');" runat="server" Text="Deaktiver" OnClick="btnDeaktiver_Click" />
         <asp:Button ID="btnSeOppg" CssClass="btn btn-primary" runat="server" Text="Se Oppgave" OnClick="btnSeOppg_Click" />
         <asp:Button ID="btnEndre" CssClass="btn btn-primary" runat="server" Text="Endre" OnClick="btnEndre_Click" />
         <div class="clearfix"></div>
         <br />
         <asp:Label ID="lblStart" Text="Start" runat="server" Visible="false"></asp:Label>
-        <asp:TextBox ID="tbStart" runat="server" TextMode="DateTime" Visible="false"></asp:TextBox>
+        <asp:TextBox ID="tbStart" runat="server" TextMode="Date" Visible="false"></asp:TextBox>
         <br />
         <asp:Label ID="lblSlutt" Text="Stopp" runat="server" Visible="false"></asp:Label>
-        <asp:TextBox ID="tbSlutt" runat="server" TextMode="DateTime" Visible="false"></asp:TextBox>
+        <asp:TextBox ID="tbSlutt" runat="server" TextMode="Date" Visible="false"></asp:TextBox>
         <br />
         <asp:Label ID="lblTid" Text="Tid" runat="server" Visible="false"></asp:Label>
         <asp:TextBox ID="tbTid" runat="server" TextMode="Time" Visible="false"></asp:TextBox>

@@ -15,12 +15,13 @@ namespace SysUt14Gr03.Prosjektleder
         protected void Page_Load(object sender, EventArgs e)
         {
             SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
-            
-            if (!IsPostBack || Request.QueryString["prosjekt_id"] != null)
+            if (Request.QueryString["prosjekt_id"] != null)
             {
                 prosjekt_id = Validator.KonverterTilTall(Request.QueryString["prosjekt_id"].ToString());
+            }
+            if (!IsPostBack)
+            {
                 visFase();
-             
             }
         }
         private void visFase()
@@ -36,7 +37,7 @@ namespace SysUt14Gr03.Prosjektleder
         }
         protected void gridViewFase_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
-            gridViewFase.EditIndex = - 1;
+            gridViewFase.EditIndex = -1;
             visFase();
         }
 
@@ -67,7 +68,7 @@ namespace SysUt14Gr03.Prosjektleder
                 fase.Start = DateTime.Parse(tbStart.Text);
                 fase.Stopp = DateTime.Parse(tbSlutt.Text);
                 fase.Aktiv = Convert.ToBoolean(cbAktiv.Checked);
-                fase.Bruker_id = 3;
+                fase.Bruker_id = bruker_id;
 
                 context.SaveChanges();
             }
@@ -84,9 +85,8 @@ namespace SysUt14Gr03.Prosjektleder
                 Label Bruker_id = e.Row.FindControl("Bruker_id") as Label;
                 Bruker bruker = Queries.GetBruker(Convert.ToInt32(Bruker_id.Text));
                 int id = bruker.Bruker_id;
-               // ddlFaseleder.Items.Add(new ListItem(bruker.ToString(), bruker.Bruker_id.ToString()));
                 List<Bruker> listBrukere = Queries.GetAlleAktiveBrukere();
-                for (int i = 0; i < listBrukere.Count; i++ )
+                for (int i = 0; i < listBrukere.Count; i++)
                 {
                     Bruker brukere = listBrukere[i];
                     ddlFaseleder.Items.Add(new ListItem(brukere.ToString(), brukere.Bruker_id.ToString()));
@@ -103,42 +103,55 @@ namespace SysUt14Gr03.Prosjektleder
                 List<Bruker> listBrukere = Queries.GetAlleAktiveBrukere();
 
                 ddlFaseledere.Items.Add("Velg faseleder");
-                foreach(Bruker bruker in listBrukere)
+                foreach (Bruker bruker in listBrukere)
                 {
                     ddlFaseledere.Items.Add(new ListItem(bruker.ToString(), bruker.Bruker_id.ToString()));
                 }
 
             }
-          
-            /*    if (e.Row.RowType == DataControlRowType.DataRow)
+
+               if (e.Row.RowType == DataControlRowType.DataRow)
                 {
                     Label lblBruker_id = e.Row.FindControl("lblBruker_id") as Label;
                     Label lblBrukere = e.Row.FindControl("lblBrukere") as Label;
                     string navn = Queries.GetBruker(Convert.ToInt32(lblBruker_id.Text)).ToString();
                     lblBrukere.Text = navn;
-                }  */
-                
+                }  
+
         }
         private void nyFase()
         {
 
-            System.Web.UI.WebControls.TextBox tbFase = (TextBox)gridViewFase.FooterRow.FindControl("tbFase");
+            System.Web.UI.WebControls.TextBox tbNyFase = (TextBox)gridViewFase.FooterRow.FindControl("tbNyFase");
             System.Web.UI.WebControls.DropDownList ddlFaseledere = (DropDownList)gridViewFase.FooterRow.FindControl("ddlFaseledere");
+            System.Web.UI.WebControls.TextBox tbStartny = (TextBox)gridViewFase.FooterRow.FindControl("tbStartny");
+            System.Web.UI.WebControls.TextBox tbStoppny = (TextBox)gridViewFase.FooterRow.FindControl("tbStoppny");
 
-
-            using (var context = new Context())
+            if (tbNyFase.Text != String.Empty && tbStartny.Text != String.Empty && tbStoppny.Text != String.Empty && ddlFaseledere.SelectedValue != "0")
             {
-                Fase fase = new Fase();
-                fase.Prosjekt_id = prosjekt_id;
-                fase.Navn = tbFase.Text;
-                fase.Bruker_id = Convert.ToInt32(ddlFaseledere.SelectedValue);
-                fase.Aktiv = true;
+                using (var context = new Context())
+                {
+                    Fase fase = new Fase();
+                    fase.Prosjekt_id = prosjekt_id;
+                    fase.Navn = tbNyFase.Text;
+                    fase.Start = DateTime.Parse(tbStartny.Text);
+                    fase.Stopp = DateTime.Parse(tbStoppny.Text);
+                    fase.Bruker_id = Convert.ToInt32(ddlFaseledere.SelectedValue);
+                    fase.Opprettet = DateTime.Now;
+                    fase.Aktiv = true;
 
-                context.Faser.Add(fase);
-                context.SaveChanges();
+                    context.Faser.Add(fase);
+                    context.SaveChanges();
+                }
+
+                visFase();
             }
-
-            visFase();
+            else
+            {
+                Session["flashMelding"] = "Feltene kan ikke være tomme!";
+                Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
+                Response.Redirect(Request.RawUrl);
+            }
         }
 
         protected void btnLagre_Click(object sender, EventArgs e)

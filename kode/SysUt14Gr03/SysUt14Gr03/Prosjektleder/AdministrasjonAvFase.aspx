@@ -25,7 +25,9 @@
                 <EditItemTemplate>
                     <asp:TextBox ID="tbStart" runat="server" Text='<%#Bind("Start", "{0:dd/MM/yyyy}") %>'></asp:TextBox>
                 </EditItemTemplate>
-                 
+                 <FooterTemplate>
+                     <asp:TextBox ID="tbStartny" TextMode="Date" runat="server"></asp:TextBox>
+                 </FooterTemplate>
             </asp:TemplateField>
              <asp:TemplateField HeaderText="Stopp">
                 <ItemTemplate>
@@ -34,12 +36,14 @@
                 <EditItemTemplate>
                     <asp:TextBox ID="tbStopp" runat="server" Text='<%#Bind("Stopp", "{0:dd/MM/yyyy}") %>'></asp:TextBox>
                 </EditItemTemplate>
-               
+               <FooterTemplate>
+                   <asp:TextBox ID="tbStoppny" TextMode="Date" runat="server"></asp:TextBox>
+               </FooterTemplate>
             </asp:TemplateField>
              <asp:TemplateField HeaderText="Faseleder">
                 <ItemTemplate>
                         <asp:Label ID="lblBruker_id" runat="server" Visible="false" Text='<%#Bind("Bruker_id") %>' ></asp:Label>
-                      <asp:Label ID="lblBrukere" Text='<%#Bind("Bruker.Fornavn") %>' runat="server"></asp:Label>            
+                      <asp:Label ID="lblBrukere" runat="server"></asp:Label>            
                 </ItemTemplate>          
                 <EditItemTemplate>
                     <asp:Label ID="Bruker_id" runat="server" Visible="false" Text='<%#Bind("Bruker_id") %>' ></asp:Label>
