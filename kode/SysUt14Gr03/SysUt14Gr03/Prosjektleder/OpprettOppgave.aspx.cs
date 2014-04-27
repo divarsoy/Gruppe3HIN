@@ -80,7 +80,8 @@ namespace SysUt14Gr03
             {
 
                 int priorietring_id = Convert.ToInt32(ddlPrioritet.SelectedValue);
-                TimeSpan estimering = TimeSpan.Parse(TbEstimering.Text);
+                // TimeSpan estimering = TimeSpan.Parse(TbEstimering.Text);
+                TimeSpan estimering = new TimeSpan(Validator.KonverterTilTall(TbEstimering.Text), 0, 0);
                 int status_id = Convert.ToInt32(ddlStatus.SelectedValue);
                 tidsfrist = Convert.ToDateTime(tbFrist.Text);
                 foreach (ListItem s in lbBrukere.Items)

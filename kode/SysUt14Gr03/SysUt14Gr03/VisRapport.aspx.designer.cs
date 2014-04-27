@@ -31,24 +31,6 @@ namespace SysUt14Gr03 {
         protected global::System.Web.UI.WebControls.DropDownList ddlBrukere;
         
         /// <summary>
-        /// pnlGrafikk control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlGrafikk;
-        
-        /// <summary>
-        /// crtKake control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.DataVisualization.Charting.Chart crtKake;
-        
-        /// <summary>
         /// btnTeam control.
         /// </summary>
         /// <remarks>
@@ -74,6 +56,15 @@ namespace SysUt14Gr03 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnIndivid;
+        
+        /// <summary>
+        /// pnlGrafikk control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlGrafikk;
         
         /// <summary>
         /// lblTest control.
