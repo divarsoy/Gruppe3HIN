@@ -18,7 +18,6 @@ namespace SysUt14Gr03
         private DateTime dtSlutt;
         private List<Bruker> brukerListe;
         private List<Team> teamListe;
-//        private List<Fase> faseListe = new List<Fase>();
         private DataTable dtFaser = new DataTable();
     
         private int team_id;
@@ -30,7 +29,7 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
+            SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
 
             // Henter alle medlemmene av et team hvis team er valgt og fyller de inn i FaselederDropDown
             if (ddFaseLeder.SelectedValue != null && ddFaseLeder.SelectedValue == "0")
@@ -56,29 +55,11 @@ namespace SysUt14Gr03
                             ddFaseLeder.Items.Add(item);
                         }
                     }
-
                 }
-
             }
-
 
             if (!IsPostBack)
             {
-                //Setter opp gridviewen for faser
-              /*
-                BoundField fieldFasenavn = new BoundField();
-                BoundField fieldFaseleder = new BoundField();
-                BoundField fieldFaseStart = new BoundField();
-                BoundField fieldFaseSlutt = new BoundField();
-                fieldFasenavn.HeaderText = "Fasenavn";
-                fieldFaseleder.HeaderText = "Faseleder";
-                fieldFaseStart.HeaderText = "Fase Start";
-                fieldFaseSlutt.HeaderText = "Fase Slutt";
-                gvFaser.Columns.Add(fieldFasenavn);
-                gvFaser.Columns.Add(fieldFaseleder);
-                gvFaser.Columns.Add(fieldFaseStart);
-                gvFaser.Columns.Add(fieldFaseSlutt);
-*/
                 makeDataTableForFaser();
                 teamListe = Queries.GetAlleAktiveTeam();
                 brukerListe = Queries.GetProsjektledere(Konstanter.rettighet.Prosjektleder);
@@ -111,8 +92,6 @@ namespace SysUt14Gr03
 
                 dtStart = Convert.ToDateTime(tbStart.Text);
                 dtSlutt = Convert.ToDateTime(tbSlutt.Text);
-
-
                 team_id = Convert.ToInt32(dropTeam.SelectedValue);
                 Team team = Queries.GetTeamById(team_id);
                 bruker_id = Convert.ToInt32(ddlBrukere.SelectedValue);
@@ -122,15 +101,38 @@ namespace SysUt14Gr03
                     var nyttProsjekt = new Prosjekt { Navn = tbProsjektnavn.Text, Bruker_id = bruker_id, Aktiv = true, Opprettet = DateTime.Now, Team_id = team_id, StartDato = dtStart, SluttDato = dtSlutt };
                     context.Prosjekter.Add(nyttProsjekt);
                     context.SaveChanges();
+
+                    if (dtFaser != null)
+                    {
+                        for (int i = 0; i < dtFaser.Rows.Count; i++)
+                        {
+                            Fase fase = new Fase
+                            {
+                                Navn = dtFaser.Rows[i]["Fasenavn"].ToString(),
+                                Bruker_id = Convert.ToInt32(dtFaser.Rows[i]["bruker_id"]),
+                                Start = Convert.ToDateTime(dtFaser.Rows[i]["Start"]),
+                                Stopp = Convert.ToDateTime(dtFaser.Rows[i]["Slutt"]),
+                                Prosjekt_id = nyttProsjekt.Prosjekt_id
+                            };
+                            context.Faser.Add(fase);
+                        }
+                        context.SaveChanges();
+                    }
                 }
 
-                lblFeil.Visible = true;
-                lblFeil.ForeColor = Color.Green;
-                lblFeil.Text = "Prosjektet ble lagret!";
-                Response.AddHeader("REFRESH", "3;URL=OpprettProsjekt");
+//                lblFeil.Visible = true;
+//                lblFeil.ForeColor = Color.Green;
+//                lblFeil.Text = "Prosjektet ble lagret!";
+//                Response.AddHeader("REFRESH", "3;URL=OpprettProsjekt");
 
                 Varsel.SendVarsel(team.Brukere, Varsel.PROSJEKTVARSEL, "Du har blitt lagt til i prosjekt "
                     + tbProsjektnavn.Text + " av prosjektleder " + ddlBrukere.SelectedItem.ToString());
+
+                Session["flashMelding"] = string.Format("Prosjektet '{0}' ble opprettet ", tbProsjektnavn.Text);
+                Session["flashStatus"] = Konstanter.notifikasjonsTyper.success.ToString();
+                Session["dtFaser"] = null;
+
+                Response.Redirect("~/OversiktProsjekter", true);
 
             }
             else
@@ -207,39 +209,11 @@ namespace SysUt14Gr03
             dtFaser.Columns.Add(new DataColumn("Start", typeof(System.String)));
             dtFaser.Columns.Add(new DataColumn("Slutt", typeof(System.String)));
 
-            DataRow row = dtFaser.NewRow();
-            row["bruker_id"] = Validator.KonverterTilTall("1");
-            row["Fasenavn"] = "TestFase";
-            row["Faseleder"] = "Tony";
-            row["Start"] = "14.05.2014";
-            row["Slutt"] = "21.05.2014";
-            dtFaser.Rows.Add(row);
-
-            DataRow row2 = dtFaser.NewRow();
-            row2["bruker_id"] = Validator.KonverterTilTall("2");
-            row2["Fasenavn"] = "TestFase2";
-            row2["Faseleder"] = "Lars";
-            row2["Start"] = "14.05.2014";
-            row2["Slutt"] = "21.05.2014";
-            dtFaser.Rows.Add(row2);
-
-            DataRow row3 = dtFaser.NewRow();
-            row3["bruker_id"] = Validator.KonverterTilTall("3");
-            row3["Fasenavn"] = "TestFase2";
-            row3["Faseleder"] = "Markus";
-            row3["Start"] = "14.05.2014";
-            row3["Slutt"] = "21.05.2014";
-            dtFaser.Rows.Add(row3);
-
-            Session["FaseTable"] = dtFaser;
-
-            gvFaser.DataSource = dtFaser;
-            gvFaser.DataBind();
+            BindGrid();
         }
 
         private void AddNewFaseRow()
         {
-
             if (Session["FaseTable"] != null)
             {
                 dtFaser = Session["FaseTable"] as DataTable;
@@ -250,12 +224,9 @@ namespace SysUt14Gr03
                 row["Faseleder"] = ddFaseLeder.SelectedItem.Text;
                 row["Start"] = tbFaseStart.Text;
                 row["Slutt"] = tbFaseSlutt.Text;
-
                 dtFaser.Rows.Add(row);
-                Session["FaseTable"] = dtFaser;
 
-                gvFaser.DataSource = dtFaser;
-                gvFaser.DataBind();
+                BindGrid();
 
                 //Tømmer input feltene
                 tbFasenavn.Text = string.Empty;
@@ -264,14 +235,98 @@ namespace SysUt14Gr03
                 tbFaseSlutt.Text = string.Empty;
             }
         }
-        protected void OnRowDeleting(object sender, GridViewDeleteEventArgs e)
+        protected void FaserOnRowDeleting(object sender, GridViewDeleteEventArgs e)
         {
            int index = Convert.ToInt32(e.RowIndex);
            dtFaser = Session["FaseTable"] as DataTable;
            dtFaser.Rows[index].Delete();
-           Session["FaseTable"] = dtFaser;
-           gvFaser.DataSource = dtFaser;
-           gvFaser.DataBind();
+
+           BindGrid();
+        }
+
+        protected void FaserRowEditing(object sender, GridViewEditEventArgs e)
+        {
+            gvFaser.EditIndex = e.NewEditIndex;
+            dtFaser = Session["FaseTable"] as DataTable;
+            BindGrid();
+        }
+
+        protected void FaserEditRowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            // Denne ifen er utrolig viktig for å få hentet ut ddFaselederEdit!!! Dersom den ikke står her blir ddFaselederEdit = null
+            if (e.Row.RowType == DataControlRowType.DataRow && (e.Row.RowState & DataControlRowState.Edit) == DataControlRowState.Edit)
+            {
+                DropDownList ddFaselederEdit = e.Row.FindControl("ddFaselederEdit") as DropDownList;
+                int index = gvFaser.EditIndex;
+
+                string faseleder_id = dtFaser.Rows[index]["bruker_id"].ToString();
+                string faselederText = dtFaser.Rows[index]["Faseleder"].ToString();
+
+                if (ddFaselederEdit != null)
+                {
+                    if (ddFaselederEdit.SelectedValue != null && ddFaselederEdit.SelectedValue != faseleder_id)
+                    {
+                        ddFaselederEdit.Items.Clear();
+                        ListItem firstItem = new ListItem();
+                        firstItem.Text = faselederText;
+                        firstItem.Value = faseleder_id;
+                        ddFaselederEdit.Items.Add(firstItem);
+
+                        team_id = Validator.KonverterTilTall(dropTeam.SelectedValue);
+                        var teamMedlemerListe = Queries.GetAlleBrukereIEtTeam(team_id);
+                        foreach (Bruker bruker in teamMedlemerListe)
+                        {
+                            ListItem item = new ListItem();
+                            item.Text = bruker.ToString();
+                            item.Value = bruker.Bruker_id.ToString();
+                            ddFaselederEdit.Items.Add(item);
+                        }
+                    }
+                }
+            }
+        }       
+ 
+        protected void FaserRowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            gvFaser.EditIndex = -1;
+            dtFaser = Session["FaseTable"] as DataTable;
+            BindGrid();
+
+        }
+
+        protected void FaserRowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            dtFaser = Session["FaseTable"] as DataTable;
+            GridViewRow row = gvFaser.Rows[e.RowIndex];
+
+            dtFaser.Rows[row.DataItemIndex]["bruker_id"] = gvFaser.DataKeys[e.RowIndex].Value.ToString();
+
+            dtFaser.Rows[row.DataItemIndex]["Fasenavn"] = e.NewValues["Fasenavn"];
+            dtFaser.Rows[row.DataItemIndex]["Start"] = e.NewValues["Start"];
+            dtFaser.Rows[row.DataItemIndex]["Slutt"] = e.NewValues["Slutt"];
+                        
+            gvFaser.EditIndex = -1;
+
+            BindGrid();
+        }
+
+        private void BindGrid()
+        {
+            Session["FaseTable"] = dtFaser;
+            gvFaser.DataSource = dtFaser;
+            gvFaser.DataBind();
+        }
+
+        protected void ddFaselederEdit_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DropDownList ddFaselederEdit = sender as DropDownList;
+            int index = gvFaser.EditIndex;
+            DataTable dtFaser = Session["FaseTable"] as DataTable;
+            string nyFaselederId = ddFaselederEdit.SelectedValue;
+            string nyFaseleder = ddFaselederEdit.SelectedItem.Text;
+            dtFaser.Rows[index]["bruker_id"] = Validator.KonverterTilTall(nyFaselederId);
+            dtFaser.Rows[index]["Faseleder"] = nyFaseleder;
+            Session["FaseTable"] = dtFaser;
         }
     }
 }

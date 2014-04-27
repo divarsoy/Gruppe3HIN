@@ -63,10 +63,15 @@
             </div>          
         </div>
          <div class="clearfix"></div>
+         <asp:CompareValidator id="CompareValidator1" runat="server" Display="Dynamic" Type="Date" Operator="DataTypeCheck" ControlToValidate="tbStart"
+                ErrorMessage="Du må tast inn en gyldig dato" CssClass="clearfix feilMelding">
+         </asp:CompareValidator>
+         <asp:CompareValidator id="CompareValidator2" runat="server" Display="Dynamic" Type="Date" Operator="DataTypeCheck" ControlToValidate="tbSlutt"
+                ErrorMessage="Du må tast inn en gyldig dato" CssClass="clearfix feilMelding">
+         </asp:CompareValidator>
         <br />
         <h2>Faser</h2>
         <div class="clearfix"></div>
-        <p class="feilMelding">Lagring av faser er ikke implementert ennå</p>
         <div class="form-group">
             <label for="faseNavn" class="col-sm-1 control-label">Fasenavn</label>
             <div class="col-sm-2">
@@ -104,8 +109,14 @@
             </div>          
         </div>
          <div class="clearfix"></div>
-        <br />
 
+         <asp:CompareValidator id="CompareValidator3" runat="server" Display="Dynamic" Type="Date" Operator="DataTypeCheck" ControlToValidate="tbFaseStart"
+                ErrorMessage="Du må tast inn en gyldig dato" CssClass="feilMelding clearfix">
+         </asp:CompareValidator>
+         <asp:CompareValidator id="CompareValidator4" runat="server" Display="Dynamic" Type="Date" Operator="DataTypeCheck" ControlToValidate="tbFaseSlutt"
+                ErrorMessage="Du må tast inn en gyldig dato" CssClass="feilMelding clearfix">
+         </asp:CompareValidator>
+        <br />
         </div>
         <asp:Label ID="lblFaseFeil" CssClass="feilMelding" runat="server" Text="Alle feltene under faser må fylles ut!" Visible="False"></asp:Label>
             <div class="clearfix"></div>
@@ -114,16 +125,45 @@
         <br />
 
         <asp:GridView ID="gvFaser" CssClass="table" DataKeyNames="bruker_id" runat="server" AlternatingRowStyle-CssClass="alt" AutoGenerateColumns="false"
-            onRowDeleting="OnRowDeleting">
+            onRowDeleting="FaserOnRowDeleting" OnRowDataBound="FaserEditRowDataBound" OnRowEditing="FaserRowEditing" OnRowCancelingEdit="FaserRowCancelingEdit" OnRowUpdating="FaserRowUpdating">
                 <Columns>
                     <asp:BoundField DataField="Fasenavn" HeaderText="Fasenavn" />
-                    <asp:BoundField DataField="Faseleder" HeaderText="Faseleder"  />                    
-                    <asp:BoundField DataField="Start" HeaderText="Start"  />
-                    <asp:BoundField DataField="Slutt" HeaderText="Slutt" />
+                    <asp:TemplateField HeaderText="Faseleder">
+                        <ItemTemplate>
+                            <asp:Label ID="lblFaseleder" runat="server" Text='<%#Bind("Faseleder")%>'></asp:label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:DropDownList ID="ddFaselederEdit" OnSelectedIndexChanged="ddFaselederEdit_SelectedIndexChanged" AutoPostBack="true" runat="server" ></asp:DropDownList>
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Start">
+                        <ItemTemplate>
+                            <asp:Label ID="lblFaseStartEdit" runat="server" Text='<%#Bind("Start") %>'></asp:label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="tbFaseStartEdit" runat="server" Text='<%#Bind("Start") %>'></asp:TextBox>
+                            <asp:CompareValidator id="CompareValidator5" runat="server" Display="Dynamic" Type="Date" Operator="DataTypeCheck" ControlToValidate="tbFaseStartEdit"
+                                ErrorMessage="<br />Du må taste inn en gyldig dato" CssClass="feilMelding">
+                            </asp:CompareValidator>
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Slutt">
+                        <ItemTemplate>
+                            <asp:Label ID="lblFaseSluttEdit" runat="server" Text='<%#Bind("Slutt") %>'></asp:label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="tbFaseSluttEdit" runat="server" Text='<%#Bind("Slutt") %>'></asp:TextBox>
+                            <asp:CompareValidator id="CompareValidator6" runat="server" Display="Dynamic" Type="Date" Operator="DataTypeCheck" ControlToValidate="tbFaseSluttEdit"
+                                ErrorMessage="<br />Du må taste inn en gyldig dato" CssClass="feilMelding">
+                            </asp:CompareValidator>
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+
                     <asp:CommandField ShowEditButton="True" ButtonType="Link" />
                     <asp:CommandField ShowDeleteButton="True" ButtonType="Link" />
                 </Columns>
         </asp:GridView>
+
 
         <asp:Button ID="btnLagre" CssClass="btn btn-primary" runat="server" Text="Lagre Prosjekt" OnClick="btnLagre_Click" Width="300px" />
         <div class="clearfix"></div>
