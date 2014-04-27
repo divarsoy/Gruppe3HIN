@@ -30,7 +30,7 @@ namespace SysUt14Gr03
 
         protected void Button3_Click(object sender, EventArgs e)
         {
-            Rapport rapport = new Rapport(Rapport.INDIVIDRAPPORT, 1);
+            Rapport rapport = new Rapport(Rapport.INDIVIDRAPPORT, 2);
             lblTest.Text = rapport.ToString();
         }
     }

@@ -423,9 +423,9 @@ namespace SysUt14Gr03.Classes
             return tabell;
         }
 
-        static public Table HentBrukereTabellForAdministrator(List<Bruker> query)
+        static public DataTable HentBrukereTabellForAdministrator(List<Bruker> query)
         {
-            Table tabell = new Table();
+            DataTable tabell = new DataTable();
             TableHeaderRow headerRow = new TableHeaderRow();
             TableHeaderCell forNavnHeaderCell = new TableHeaderCell();
             TableHeaderCell etterNavnHeaderCell = new TableHeaderCell();
@@ -477,7 +477,7 @@ namespace SysUt14Gr03.Classes
                 tRow.Cells.Add(aktivCell);
                 tabell.Rows.Add(tRow);
             }
-            tabell.CssClass = "table";
+            //tabell.CssClass = "table";
             return tabell;
 
         }

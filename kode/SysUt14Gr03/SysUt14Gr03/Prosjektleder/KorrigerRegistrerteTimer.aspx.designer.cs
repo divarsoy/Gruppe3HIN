@@ -7,109 +7,109 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SysUt14Gr03 {
+namespace SysUt14Gr03.Prosjektleder {
     
     
-    public partial class DeaktiveringAvRegistrerteTimer {
+    public partial class KorrigerRegistrerteTimer {
         
         /// <summary>
-        /// lblHeader control.
+        /// lblTittel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblHeader;
+        protected global::System.Web.UI.WebControls.Label lblTittel;
         
         /// <summary>
-        /// ddlTimer control.
+        /// Label1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTimer;
+        protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
-        /// btnDeaktiver control.
+        /// ddlDag control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnDeaktiver;
+        protected global::System.Web.UI.WebControls.DropDownList ddlDag;
         
         /// <summary>
-        /// btnSeOppg control.
+        /// Label2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSeOppg;
+        protected global::System.Web.UI.WebControls.Label Label2;
         
         /// <summary>
-        /// btnEndre control.
+        /// txtStart control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnEndre;
+        protected global::System.Web.UI.WebControls.TextBox txtStart;
         
         /// <summary>
-        /// lblStart control.
+        /// Label3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblStart;
+        protected global::System.Web.UI.WebControls.Label Label3;
         
         /// <summary>
-        /// tbStart control.
+        /// txtSlutt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbStart;
+        protected global::System.Web.UI.WebControls.TextBox txtSlutt;
         
         /// <summary>
-        /// lblSlutt control.
+        /// btnAddPause control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblSlutt;
+        protected global::System.Web.UI.WebControls.Button btnAddPause;
         
         /// <summary>
-        /// tbSlutt control.
+        /// pnlPauser control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbSlutt;
+        protected global::System.Web.UI.WebControls.Panel pnlPauser;
         
         /// <summary>
-        /// lblTid control.
+        /// lagreTime control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTid;
+        protected global::System.Web.UI.WebControls.HiddenField lagreTime;
         
         /// <summary>
-        /// tbTid control.
+        /// infoField control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbTid;
+        protected global::System.Web.UI.WebControls.HiddenField infoField;
         
         /// <summary>
         /// btnLagre control.
@@ -121,12 +121,12 @@ namespace SysUt14Gr03 {
         protected global::System.Web.UI.WebControls.Button btnLagre;
         
         /// <summary>
-        /// lblInfo control.
+        /// lblTest control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblInfo;
+        protected global::System.Web.UI.WebControls.Label lblTest;
     }
 }

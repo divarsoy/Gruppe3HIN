@@ -17,12 +17,29 @@ namespace SysUt14Gr03
         {
             if (!IsPostBack)
             {
-                bruker_id = 2;
+                SessionSjekk.sjekkForBruker_id();
+                bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
                 timeListe = Queries.GetTimerForBruker((int)bruker_id);
-                foreach (Time time in timeListe)
+                if (timeListe.Count != 0)
                 {
-                    Oppgave oppgListe = Queries.GetOppgave(time.Oppgave_id);                  
-                    ddlTimer.Items.Add(new ListItem(time.Tid + " (t/m/s) : " + oppgListe.Tittel, time.Time_id.ToString()));
+                    lblHeader.Visible = true;
+                    lblHeader.Text = "Endre/Deaktivere Registrerte Timer";
+                    lblHeader.Text += "<hr />";
+                    foreach (Time time in timeListe)
+                    {
+                        Oppgave oppgListe = Queries.GetOppgave(time.Oppgave_id);
+                        ddlTimer.Items.Add(new ListItem(time.Tid + " (t/m/s) : " + oppgListe.Tittel, time.Time_id.ToString()));
+                    }
+                }
+                else
+                {
+                    lblHeader.Visible = true;
+                    lblHeader.Text = "Du har ingen registrerte timer";
+                    btnDeaktiver.Visible = false;
+                    btnEndre.Visible = false;
+                    btnSeOppg.Visible = false;
+                    ddlTimer.Visible = false;
+                    
                 }
             }
         }
@@ -42,8 +59,9 @@ namespace SysUt14Gr03
                 context.SaveChanges();
             }
             string oppgave = Queries.GetOppgave(oppg_id).Tittel;
-            Session["flashMelding"] = "Du har dekativert tiden på oppgaven: " + oppgave;
+            Session["flashMelding"] = "Du har deaktivert tiden på oppgaven: " + oppgave;
             Session["flashStatus"] = Konstanter.notifikasjonsTyper.info.ToString();
+            Response.Redirect(Request.RawUrl);
 
         }
 
@@ -83,8 +101,8 @@ namespace SysUt14Gr03
 
             DateTime stopp = (DateTime)oppgave.Stopp;
             DateTime start = (DateTime)oppgave.Start;
-            tbStart.Text = start.ToString();
-            tbSlutt.Text = stopp.ToString();
+            tbStart.Text = DateTime.Parse(start.ToShortDateString()).ToString("yyyy-MM-dd");
+            tbSlutt.Text = DateTime.Parse(stopp.ToShortDateString()).ToString("yyyy-MM-dd");
             tbTid.Text = Convert.ToString(oppgave.Tid);
         }
 
@@ -92,24 +110,29 @@ namespace SysUt14Gr03
         {
             int time_id = Validator.KonverterTilTall(ddlTimer.SelectedValue);
             int oppg_id;
-            using (var context = new Context())
-            {
-               
-                var timer = (from time in context.Timer
-                             where time.Time_id == time_id
-                             select time).FirstOrDefault();
-                DateTime stopp = Convert.ToDateTime(tbSlutt.Text);
-                DateTime start = Convert.ToDateTime(tbStart.Text);
-                oppg_id = timer.Oppgave_id;
-                timer.Stopp = (DateTime)stopp;
-                timer.Start = (DateTime)start;
-                timer.Tid = TimeSpan.Parse(tbTid.Text);
-                context.SaveChanges();
-            }
-            string oppgave = Queries.GetOppgave(oppg_id).Tittel;
-            Session["flashMelding"] = "Du har endret tiden på oppgaven: " + oppgave;
-            Session["flashStatus"] = Konstanter.notifikasjonsTyper.info.ToString();
+           
+                using (var context = new Context())
+                {
+
+                    var timer = (from time in context.Timer
+                                 where time.Time_id == time_id
+                                 select time).FirstOrDefault();
+                    DateTime stopp = Convert.ToDateTime(tbSlutt.Text);
+                    DateTime start = Convert.ToDateTime(tbStart.Text);
+                    oppg_id = timer.Oppgave_id;
+                    timer.Stopp = (DateTime)stopp;
+                    timer.Start = (DateTime)start;
+                    timer.Tid = TimeSpan.Parse(tbTid.Text);
+                    context.SaveChanges();
+                }
+                string oppgave = Queries.GetOppgave(oppg_id).Tittel;
+                Session["flashMelding"] = "Du har endret tiden på oppgaven: " + oppgave;
+                Session["flashStatus"] = Konstanter.notifikasjonsTyper.info.ToString();
+                Response.Redirect(Request.RawUrl);
+            
         }
+    
+        
 
     }
 }

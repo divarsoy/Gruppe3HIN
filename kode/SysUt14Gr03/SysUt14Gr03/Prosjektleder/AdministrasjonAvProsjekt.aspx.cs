@@ -69,6 +69,7 @@ namespace SysUt14Gr03
                 }
                 gridViewProsjekt.EditIndex = -1;
                 gridViewProsjekt.Columns[6].Visible = true;
+                gridViewProsjekt.Columns[7].Visible = true;
                 visProsjekt();
             }
             catch
@@ -84,6 +85,7 @@ namespace SysUt14Gr03
         {
             gridViewProsjekt.EditIndex = -1;
             gridViewProsjekt.Columns[6].Visible = true;
+            gridViewProsjekt.Columns[7].Visible = true;
             visProsjekt();
         }
 
@@ -94,6 +96,8 @@ namespace SysUt14Gr03
             gridViewProsjekt.RowDataBound -= new GridViewRowEventHandler(gridViewProsjekt_RowDataBound);
             gridViewProsjekt.RowDataBound += new GridViewRowEventHandler(gridViewProsjekt_EditRowDataBound);
             gridViewProsjekt.Columns[6].Visible = false;
+            gridViewProsjekt.Columns[7].Visible = false;
+
             visProsjekt();
         }
 
@@ -106,19 +110,20 @@ namespace SysUt14Gr03
                 DropDownList ddlt = e.Row.FindControl("ddlTeam") as DropDownList;
                 Label lbTeam = e.Row.FindControl("lbTeam") as Label;
                 Label lblProsjekt = e.Row.FindControl("lbProsjektnavn") as Label;
+                                
                 int t_id = Validator.KonverterTilTall(lbTeam.Text);
                 using (var context = new Context())
                 {
                     Team team_id = context.Teams.Where(t => t.Team_id == t_id).First();
                     int Prosjekt_id = Validator.KonverterTilTall(lblProsjekt.Text);
-
+                   
                     for (int i = 0; i < teamListe.Count; i++)
                     {
                         Team team = teamListe[i];
                         ddlt.Items.Add(new ListItem(team.Navn, team.Team_id.ToString()));
-
                     }
                     ddlt.SelectedIndex = Prosjekt_id - 1;
+
                     DropDownList ddlLeder = e.Row.FindControl("ddlLeder") as DropDownList;
                     for (int i = 0; i < prosjektLeder.Count; i++)
                     {
@@ -152,7 +157,9 @@ namespace SysUt14Gr03
                     prosjektLink.NavigateUrl = "visProsjekt?Prosjekt_id=" + prosjekt_id;
                     HyperLink link = e.Row.FindControl("asp") as HyperLink;
                     link.NavigateUrl = "AdministrasjonAvTeamBrukere?Team_id=" + team_id;
-
+                    HyperLink linkFase = e.Row.FindControl("hlFase") as HyperLink;
+                    linkFase.NavigateUrl = "AdministrasjonAvFase?prosjekt_id=" + prosjekt_id;
+                   
                 }
             }
         }

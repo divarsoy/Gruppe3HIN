@@ -37,8 +37,7 @@
                 <EditItemTemplate>
                     <asp:TextBox ID="tbSlutt" runat="server"  Text='<%#Bind("Sluttdato", "{0:dd/MM/yyyy}") %>'></asp:TextBox>
                 </EditItemTemplate>
-            </asp:TemplateField>
-            
+            </asp:TemplateField>           
               <asp:TemplateField HeaderText="Team">
                 <ItemTemplate>
                 <asp:Label ID="lbTeam" runat="server" Text='<%#Bind("Team.Navn") %>'></asp:Label>
@@ -65,6 +64,12 @@
                 <EditItemTemplate>
                 </EditItemTemplate>
             </asp:TemplateField>
+             <asp:TemplateField HeaderText="Endre/legg til Fase">
+                 <ItemTemplate>
+                     <asp:HyperLink ID="hlFase" Text="AdministrasjonAvFaseTilProsjekt" runat="server"></asp:HyperLink>
+                 </ItemTemplate>
+             </asp:TemplateField>
+           
              <asp:CommandField ShowEditButton="true" />
         </Columns>
     </asp:GridView>

@@ -19,7 +19,7 @@ namespace SysUt14Gr03
             if (!IsPostBack)
             {
                 List<Bruker> brukerListe = Queries.GetAlleBrukere();
-                PlaceHolderBrukere.Controls.Add(Tabeller.HentBrukereTabellForAdministrator(brukerListe));                    
+                //PlaceHolderBrukere.Controls.Add(Tabeller.HentBrukereTabellForAdministrator(brukerListe));                    
             }            
         }
     }
