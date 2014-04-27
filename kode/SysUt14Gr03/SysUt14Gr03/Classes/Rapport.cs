@@ -22,7 +22,9 @@ namespace SysUt14Gr03.Classes
         private TimeSpan bruktTidProsjekt;
         private TimeSpan estimertTidProsjekt;
         private TimeSpan sumTimerForBruker;
+        private TimeSpan sumFullforteTimerForBruker;
         private int antallFerdigeOppgaver;
+        private int antallOppgaver;
         private int antallDeltakerePaTeam;
         private int antallFaser;
 
@@ -91,7 +93,7 @@ namespace SysUt14Gr03.Classes
                                 info += "<br /><tb />Sluttdato: " + f.Stopp.ToShortDateString();
                                 foreach (Oppgave o in f.Oppgaver)
                                 {
-                                    info += "<br /><tb />Navn: " + o.Tittel;
+                                    info += "<br /><tb /><h4>Navn: " + o.Tittel + "</h4>";
                                     info += "<br /><t />ID: " + o.RefOppgaveId;
                                     info += "<br /><t />Opprettet: " + o.Opprettet.ToShortDateString();
                                     info += "<br /><t />User story: " + o.UserStory;
@@ -99,13 +101,22 @@ namespace SysUt14Gr03.Classes
                                     int avhengigOppgave = Validator.SjekkAvhengighet(o.Oppgave_id);
                                     info += "<br />" + "Avhengighet: " + (avhengigOppgave == -1 ? "Nei" : "Ja");
                                     info += "<br /><t />Estimat: " + o.Estimat;
-                                    info += "<br /><t />Brukt tid: " + o.BruktTid;
+
+                                    int test1 = o.Oppgave_id;
+                                    List<Time> timeListe = Queries.GetTimerForOppgave(o.Oppgave_id);
+                                    TimeSpan bruktTid = new TimeSpan(0);
+                                    foreach (Time t in timeListe)
+                                    {
+                                        bruktTidProsjekt += t.Tid;
+                                        bruktTid += t.Tid;
+
+                                    }
+                                        
+                                    info += "<br /><t />Brukt tid: " + bruktTid.ToString();
                                     Status status = Queries.GetStatus(o.Status_id);
                                     info += "<br /><t />Status: " + status.Navn;
-                                    estimertTidProsjekt.Add((TimeSpan)o.Estimat);
-                                    List<Time> timeListe = Queries.GetTimerForOppgave(o.Oppgave_id);
-                                    foreach (Time t in timeListe)
-                                        bruktTidProsjekt += t.Tid;
+                                    estimertTidProsjekt += (TimeSpan)o.Estimat;
+                                    
                                 }
                                 info += "<hr />";
 
@@ -129,7 +140,7 @@ namespace SysUt14Gr03.Classes
                             List<Prosjekt> prosjektListe = Queries.GetAlleAktiveProsjekterForBruker(_id);
                             foreach (Prosjekt p in prosjektListe)
                             {
-                                info += "<br /><t />" + p.Navn;
+                                info += "<br /><t /><h4>" + p.Navn + "</h4>";
                                 prosjektRapportForBruker += "<br />Navn: " + p.Navn;
                                 // vi tar det sia
                                 prosjektRapportForBruker += "<br />" + "Min rolle: " + (_id == p.Bruker_id ? "Prosjektleder" : "Utvikler");
@@ -146,6 +157,8 @@ namespace SysUt14Gr03.Classes
                             if (timeListe != null)
                             {
                                 List<Oppgave> oppgaverTilBruker = Queries.GetAlleAktiveOppgaverForBruker(_id);
+                                antallOppgaver = oppgaverTilBruker.Count;
+
                                 foreach (Oppgave oppgave in oppgaverTilBruker)
                                 {
                                     foreach (Time time in timeListe)
@@ -155,7 +168,7 @@ namespace SysUt14Gr03.Classes
                                             sumTimerForBruker += time.Tid;
                                         }
                                     }
-                                    info += "<br /><t />" + oppgave.Tittel + " Brukt tid: " + sumTimerForBruker.ToString();
+                                    info += "<br /><t /><h4>" + oppgave.Tittel + " Brukt tid: " + sumTimerForBruker.ToString() + "</h4>";
                                     prosjektRapportForBruker += "<br /><t />" + oppgave.Tittel + " Brukt tid: " + sumTimerForBruker.ToString();
                                     info += "<br />Prosjekt: " + oppgave.Prosjekt.Navn;
                                     info += "<br />Fase: " + oppgave.Fase.Navn;
@@ -165,6 +178,8 @@ namespace SysUt14Gr03.Classes
 
                             List<Oppgave> ferdigeOppgaver = Queries.GetAlleFerdigeOppgaverForBruker(_id);
                             antallFerdigeOppgaver = ferdigeOppgaver.Count;
+                            foreach (Oppgave o in ferdigeOppgaver)
+                                sumFullforteTimerForBruker += (TimeSpan) o.BruktTid;
 
                             info += "<br /><h3>Hendelser:</h3>";
                             List<Logg> loggListe = Queries.GetLoggForBruker(_id);
@@ -228,10 +243,21 @@ namespace SysUt14Gr03.Classes
             return sumTimerForBruker;
         }
 
+        public TimeSpan GetSumFullforteTimerForBruker()
+        {
+            return sumFullforteTimerForBruker;
+        }
+
         public int GetAntallFerdigeOppgaverForBruker()
         {
             return antallFerdigeOppgaver;
         }
+
+        public int GetAntallOppgaverForBruker()
+        {
+            return antallOppgaver;
+        }
+
 
         public int GetAntallTeammedlemmer()
         {
