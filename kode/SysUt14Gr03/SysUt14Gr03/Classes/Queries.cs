@@ -839,6 +839,15 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        public static List<Logg> GetLoggForAdministrator()
+        {
+            using (var context = new Context())
+            {
+                List<Logg> loggListe = context.Logger.ToList();
+                return loggListe;
+            }      
+        }
+
 
     }
 }
