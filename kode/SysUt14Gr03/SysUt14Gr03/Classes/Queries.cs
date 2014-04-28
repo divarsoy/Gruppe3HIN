@@ -825,6 +825,20 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        public static List<Fase> GetAlleAktiveFaserForBrukerOgProsjekt(int bruker_id, int prosjekt_id)
+        {
+            using (var context = new Context())
+            {
+                var faseListe = context.Faser
+                                .Where(bruker => bruker.Bruker_id == bruker_id)
+                                .Where(prosjekt => prosjekt.Prosjekt_id == prosjekt_id)
+                                .Where(fase => fase.Aktiv == true)
+                                .ToList();
+
+                return faseListe;
+            }
+        }
+
 
     }
 }

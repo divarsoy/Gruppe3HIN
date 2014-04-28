@@ -9,7 +9,7 @@ namespace SysUt14Gr03.Classes
 {
     public class SessionSjekk : System.Web.HttpApplication
     {
-        static public void sjekkForBruker_id (){
+        public static void sjekkForBruker_id (){
             HttpContext http = HttpContext.Current;
             if (http.Session["bruker_id"] == null)
             { 
@@ -18,7 +18,7 @@ namespace SysUt14Gr03.Classes
                 http.Response.Redirect("~/login", true);
             }
         }
-        static public void sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet rettighet)
+        public static void sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet rettighet)
         {
             HttpContext http = HttpContext.Current;
             sjekkForBruker_id();
@@ -36,7 +36,7 @@ namespace SysUt14Gr03.Classes
                 http.Response.Redirect(("~/Login.aspx"), true);
             }
         }
-        static public void sjekkForProsjekt_id()
+        public static void sjekkForProsjekt_id()
         {
             HttpContext http = HttpContext.Current;
             sjekkForBruker_id();
@@ -48,7 +48,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
-        static public string findMaster()
+        public static string findMaster()
         {
             HttpContext http = HttpContext.Current;
             sjekkForBruker_id();
@@ -67,11 +67,53 @@ namespace SysUt14Gr03.Classes
             return master;
         }
 
-        /*
-        void Application_AcquireRequestState(object sender, EventArgs e)
-        {            
+        public static bool IsFaseleder(int bruker_id, int prosjekt_id)
+        {
+            var faser = Queries.GetAlleAktiveFaserForBrukerOgProsjekt(bruker_id, prosjekt_id);
 
+            if (faser.Count > 0)
+            {
+                foreach (Fase fase in faser)
+                {
+                    if (DateTime.Now >= fase.Start && DateTime.Now <= fase.Stopp)
+                        return true;
+                }
+            }
+            return false;
         }
-         * */
+
+        public static bool IsFaseleder(int prosjekt_id)
+        {
+            HttpContext http = HttpContext.Current;
+
+            if (http.Session["bruker_id"] != null)
+            {
+                int bruker_id = Validator.KonverterTilTall(http.Session["bruker_id"].ToString());
+                return IsFaseleder(bruker_id, prosjekt_id);
+            }
+            else
+            {
+                throw new NullReferenceException("Session objektet for bruker_id er ikke satt");
+            }
+        }
+
+        public static bool IsFaseleder()
+        {
+            HttpContext http = HttpContext.Current;
+
+            if (http.Session["bruker_id"] != null)
+            {
+                if (http.Session["prosjekt_id"] != null)
+                {
+                    int bruker_id = Validator.KonverterTilTall(http.Session["bruker_id"].ToString());
+                    int prosjekt_id = Validator.KonverterTilTall(http.Session["prosjekt_id"].ToString());
+                    return IsFaseleder(bruker_id, prosjekt_id);
+                }
+                else
+                    throw new NullReferenceException("Session objektet for prosjekt_id er ikke satt");
+            }
+            else
+                throw new NullReferenceException("Session objektet for bruker_id er ikke satt");
+        }
     }
 }
