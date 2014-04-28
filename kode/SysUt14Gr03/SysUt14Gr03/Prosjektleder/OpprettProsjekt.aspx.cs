@@ -89,7 +89,7 @@ namespace SysUt14Gr03
 
             if (tbProsjektnavn.Text != String.Empty && tbStart.Text != String.Empty && tbSlutt.Text != String.Empty && dropTeam.SelectedValue != "0" && ddlBrukere.SelectedValue != "0")
             {
-
+                dtFaser = Session["FaseTable"] as DataTable;
                 dtStart = Convert.ToDateTime(tbStart.Text);
                 dtSlutt = Convert.ToDateTime(tbSlutt.Text);
                 team_id = Convert.ToInt32(dropTeam.SelectedValue);
@@ -122,10 +122,10 @@ namespace SysUt14Gr03
                     }
                 }
 
-                lblFeil.Visible = true;
-                lblFeil.ForeColor = Color.Green;
-                lblFeil.Text = "Prosjektet ble lagret!";
-                Response.AddHeader("REFRESH", "3;URL=OpprettProsjekt");
+//                lblFeil.Visible = true;
+//                lblFeil.ForeColor = Color.Green;
+//                lblFeil.Text = "Prosjektet ble lagret!";
+//                Response.AddHeader("REFRESH", "3;URL=OpprettProsjekt");
 
                 Varsel.SendVarsel(team.Brukere, Varsel.PROSJEKTVARSEL, "Du har blitt lagt til i prosjekt "
                     + tbProsjektnavn.Text + " av prosjektleder " + ddlBrukere.SelectedItem.ToString());
@@ -134,7 +134,7 @@ namespace SysUt14Gr03
                 Session["flashStatus"] = Konstanter.notifikasjonsTyper.success.ToString();
                 Session["dtFaser"] = null;
 
-//                Response.Redirect("~/OversiktProsjekter", true);
+                Response.Redirect("~/OversiktProsjekter", true);
 
             }
             else
