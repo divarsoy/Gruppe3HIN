@@ -17,11 +17,16 @@ namespace SysUt14Gr03
         private Oppgave oppgave;
         private List<Kommentar> kommentarListe;
 
+        protected void Page_PreInit(Object sener, EventArgs e)
+        {
+            string master = SessionSjekk.findMaster();
+            this.MasterPageFile = master;
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             SessionSjekk.sjekkForBruker_id();
             bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
-            //bruker_id = 3;
 
             if (Request.QueryString["oppgave_id"] != null)
             {

@@ -381,6 +381,9 @@
     <Content Include="Prosjektleder\KorrigerRegistrerteTimer.aspx" />
     <Content Include="RapportTestForm.aspx" />
     <Content Include="Scripts\MorildSheperdAdministrator.js" />
+    <Content Include="Scripts\MorildShepherdProsjektleder.js" />
+    <Content Include="Scripts\MorildShepherdTeamLeder.js" />
+    <Content Include="Scripts\MorildShepherdUtvikler.js" />
     <Content Include="Scripts\shepherd.js" />
     <Content Include="Scripts\shepherd.min.js" />
     <Content Include="SprintBacklogFase.aspx" />
