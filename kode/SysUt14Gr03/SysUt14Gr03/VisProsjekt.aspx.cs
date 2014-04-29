@@ -15,6 +15,13 @@ namespace SysUt14Gr03
         private int prosjekt_id;
         private List<Oppgave> oppgaveProsjekt;
         private List<Fase> faseListe;
+
+        protected void Page_PreInit(Object sener, EventArgs e)
+        {
+            string master = SessionSjekk.findMaster();
+            this.MasterPageFile = master;
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
