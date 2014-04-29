@@ -12,11 +12,11 @@
                 classes: 'shepherd-element shepherd-open shepherd-theme-arrows'
             }
         });
-        shepherd.addStep('RegistrerNyBruker', {
-            title: 'Velkommen administrator :)',
-            text: ['Her kan du registrere nye brukere', 'Du velger hvilken rettighet en bruker skal ha, skriver inn fornavn og etternavn og til slutt epost-adressen til vedkommede',
-            'Når du har trykket på "Registrer bruker" knappen, vil vedkommede få en epost med en aktiveringslink han/hun må trykke på for å fullføre registreringen. '],
-            attachTo: '.pro1 bottom',
+        shepherd.addStep('VelgProsjekt', {
+            title: 'Velkommen prosjektleder :)',
+            text: ['Etter du har logget inn må du velge ett prosjekt før du går videre.',
+            'Det gjør du ved å velge ett prosjekt i listen nedenfor. '],
+            attachTo: '.ShepherdVelgProsjekt bottom',
             classes: 'shepherd shepherd-open shepherd-theme-arrows shepherd-transparent-text',
             buttons: [
               {
@@ -33,10 +33,11 @@
               }
             ]
         });
-        shepherd.addStep('OversiktOverBrukere', {
-            title: 'Oversikt over brukere!',
-            text: ['En detaljert oversikt over brukere finner du her!.'],
-            attachTo: '.adm2 bottom',
+
+        shepherd.addStep('Prosjekter', {
+            title: 'Prosjekter!',
+            text: ['Her finner du en oversikt over alle prosjekter, du kan opprette ett nytt prosjekt samt administrere alle prosjekter du er leder for og de prosjektene du oppretter.'],
+            attachTo: '.ShepherdMenyProsjekter bottom',
             buttons: [
               {
                   text: 'Tilbake',
@@ -55,12 +56,13 @@
               }
             ]
         });
-        shepherd.addStep('AdministrereBrukere', {
-            title: 'Administrere brukere!',
-            text: ['Her har du mulighet til å endre informasjonen om hver enkelt bruker.',
-                'Fornavn, Etternavn, Epost er mulig å endre, og du har i tillegg muligheten til å huke av en bruker som aktiv eller ei.',
-                'Det er også mulig å sende en ny aktiveringslink dersom bruker av en eller annen grunn ikke mottatt den tidligere.'],
-            attachTo: '.adm3 bottom',
+
+        shepherd.addStep('Team', {
+            title: 'Team',
+            text: ['Her finner du en oversikt over alle team og en oversikt over team i det prosjektet du valgte i listen i starten av touren.',
+                'Du vil også ha et menyvalg der du kan administrere teamene. Der kan du legge til eller fjerne utviklere fra et team, og du kan arkivere ett team.',
+                'Det siste menyvalget gir deg mulighet til å opprette ett team. Du må gi teamet ett navn og legge til ønskede utviklere.'],
+            attachTo: '.ShepherdMenyTeam bottom',
             buttons: [
               {
                   text: 'Tilbake',
@@ -79,11 +81,12 @@
               }
             ]
         });
-        shepherd.addStep('AdministrereRettigheter', {
-            title: 'Administrere rettigheter!',
-            text: ['Her har du mulighet til å legge til rettigeter.',
-            'Det vil også være valg for å endre navn på rettigheter som allerede er opprettet.'],
-            attachTo: '.adm4 bottom',
+
+        shepherd.addStep('Brukere', {
+            title: 'Brukere!',
+            text: ['Her ligger det en oversikt over utviklere i prosjektet du valgte i starten, med diverse kontaktinformasjon ',
+            'Du har også muligheten til å legge til en ny bruker.'],
+            attachTo: '.ShepherdMenyBruker bottom',
             buttons: [
               {
                   text: 'Tilbake',
@@ -102,12 +105,83 @@
               }
             ]
         });
-        shepherd.addStep('EpostVarsler', {
-            title: 'Epost varsler',
+
+        shepherd.addStep('Oppgaver', {
+            title: 'Oppgaver',
+            text: ['Her ligger det en oversikt over oppgaver i valgt prosjekt, du kan opprette en ny oppgave i valg prosjekt, ',
+            'samt opprette en oppgavegruppe i valgt prosjekt.'],
+            attachTo: '.ShepherdMenyOppgaver bottom',
+            buttons: [
+              {
+                  text: 'Tilbake',
+                  classes: 'shepherd-button-secondary',
+                  action: shepherd.back
+              }, {
+                  text: 'Avslutt',
+                  classes: 'shepherd-button-secondary',
+                  action: function () {
+                      completeShepherd();
+                      return shepherd.hide();
+                  }
+              }, {
+                  text: 'Neste',
+                  action: shepherd.next
+              }
+            ]
+        });
+
+        shepherd.addStep('Timeregistrering', {
+            title: 'Timeregistrering',
+            text: ['Her ligger det en oversikt registrerte timer.'],
+            attachTo: '.ShepherdMenyTimereg bottom',
+            buttons: [
+              {
+                  text: 'Tilbake',
+                  classes: 'shepherd-button-secondary',
+                  action: shepherd.back
+              }, {
+                  text: 'Avslutt',
+                  classes: 'shepherd-button-secondary',
+                  action: function () {
+                      completeShepherd();
+                      return shepherd.hide();
+                  }
+              }, {
+                  text: 'Neste',
+                  action: shepherd.next
+              }
+            ]
+        });
+
+        shepherd.addStep('Rapporter', {
+            title: 'Rapporter',
+            text: ['Her har du muligheten til å generere rapporter over team, prosjekt og individer.'],
+            attachTo: '.ShepherdMenyRapporter bottom',
+            buttons: [
+              {
+                  text: 'Tilbake',
+                  classes: 'shepherd-button-secondary',
+                  action: shepherd.back
+              }, {
+                  text: 'Avslutt',
+                  classes: 'shepherd-button-secondary',
+                  action: function () {
+                      completeShepherd();
+                      return shepherd.hide();
+                  }
+              }, {
+                  text: 'Neste',
+                  action: shepherd.next
+              }
+            ]
+        });
+
+        shepherd.addStep('Innstillinger', {
+            title: 'Innstillinger',
             text: ['Her kan du endre innstillinger på hvilke epost varsler du vil motta.',
             'Dette er slutten på omvisningen.',
             'Lykke til :)'],
-            attachTo: '.adm5 bottom',
+            attachTo: '.ShepherdMenyInnstillinger bottom',
             buttons: [
               {
                   text: 'Tilbake',

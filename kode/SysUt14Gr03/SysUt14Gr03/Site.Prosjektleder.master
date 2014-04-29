@@ -21,9 +21,10 @@
     
     <ul class="nav navbar-nav">
         <li class="dropdown">
-            <a href="#" id="pro1" class="dropdown-toggle" data-toggle="dropdown">Prosjekter <b class="caret"></b></a>
+            <a href="#" id="ShepherdMenyProsjekter" class="dropdown-toggle ShepherdMenyProsjekter" data-toggle="dropdown">Prosjekter <b class="caret"></b></a>
+            
                 <ul class="dropdown-menu">
-                    <li> <a runat="server" href="~/OversiktProsjekter">Oversikt over prosjekter</a></li>
+                    <li > <a  runat="server" href="~/OversiktProsjekter">Oversikt over prosjekter</a></li>
                     <li> <a runat="server" href="~/Prosjektleder/AdministrasjonAvProsjekt">Admininstrasjon av prosjekter</a></li>
                     <li> <a runat="server" href="~/ProsjektLeder/OpprettProsjekt">Opprett Prosjekt</a></li>
                 </ul>                  
@@ -31,7 +32,7 @@
 
     <ul class="nav navbar-nav">
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Team <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle ShepherdMenyTeam" data-toggle="dropdown">Team <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li> <a runat="server" href="~/Prosjektleder/OversiktOverAlleTeam">Oversikt over alle Team</a></li>
                     <li> <a runat="server" href="~/VisTeam">Oversikt over Team i valgt prosjekt</a></li>
@@ -41,7 +42,7 @@
     </ul>
         <ul class="nav navbar-nav">
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Brukere <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle ShepherdMenyBruker" data-toggle="dropdown">Brukere <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li> <a runat="server" href="~/Prosjektleder/OversiktBrukereSomProsjektleder">Oversikt over Brukere i valgt prosjekt</a></li>
                     <li> <a runat="server" href="~/Prosjektleder/RegistreringAvBrukere">Opprett bruker</a></li>
@@ -50,7 +51,7 @@
 
     <ul class="nav navbar-nav">
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Oppgaver <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle ShepherdMenyOppgaver" data-toggle="dropdown">Oppgaver <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li> <a runat="server" href="~/OversiktOppgaver">Oversikt over Oppgaver i valgt prosjekt</a></li>
                     <li> <a runat="server" href="~/Prosjektleder/OpprettOppgave">Opprett Oppgave i valgt prosjekt</a></li>
@@ -60,7 +61,7 @@
     </ul>
     <ul class="nav navbar-nav">
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">TimeRegistrering <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle ShepherdMenyTimereg" data-toggle="dropdown">TimeRegistrering <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li> <a runat="server" href="~/Prosjektleder/InnsynIRegistrerteTimerSomProsjektleder">Alle Registrerte Timer I et Prosjekt</a></li>
                     <li> <a runat="server" href="~/Utvikler/InnsynIEgneRegistrerteTimerSomBruker">Dine Registrerte Timer</a></li>
@@ -69,7 +70,7 @@
 
     <ul class="nav navbar-nav">
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Rapporter <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle ShepherdMenyRapporter" data-toggle="dropdown">Rapporter <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li> <a runat="server" href="~/VisRapport">Vis Rapporter</a></li>
                 </ul> 
@@ -77,7 +78,7 @@
 
     <ul class="nav navbar-nav">
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Innstillinger <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle ShepherdMenyInnstillinger" data-toggle="dropdown">Innstillinger <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li> <a runat="server" href="~/EpostPreferanser">E-Post Varsler</a></li>
                 </ul> 
