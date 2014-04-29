@@ -221,6 +221,7 @@
     <Content Include="Content\shepherd-theme-arrows-plain-buttons.css" />
     <Content Include="Content\shepherd-theme-arrows.css" />
     <Content Include="DeaktiveringAvRegistrerteTimer.aspx" />
+    <Content Include="Innstillinger.aspx" />
     <Content Include="KommentarTest.aspx" />
     <Content Include="Loggut.aspx" />
     <Content Include="ManuellTimeregistrering.aspx" />
@@ -365,6 +366,7 @@
     <Content Include="obj\Release\SysUt14Gr03.dll" />
     <Content Include="obj\Release\SysUt14Gr03.pdb" />
     <Content Include="obj\Release\_WPPLastBuildInfo.txt" />
+    <Content Include="Prosjektleder\AdministrasjonAvFase.aspx" />
     <Content Include="Prosjektleder\AdministrasjonAvProsjekt.aspx" />
     <Content Include="Prosjektleder\AdministrasjonAvTeam.aspx" />
     <Content Include="Prosjektleder\AdministrasjonAvTeamBrukere.aspx" />
@@ -571,6 +573,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>gruppe3DataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Innstillinger.aspx.cs">
+      <DependentUpon>Innstillinger.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Innstillinger.aspx.designer.cs">
+      <DependentUpon>Innstillinger.aspx</DependentUpon>
+    </Compile>
     <Compile Include="KommentarTest.aspx.cs">
       <DependentUpon>KommentarTest.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -594,6 +603,13 @@
     <Compile Include="ManuellTimeregistrering.aspx.cs">
       <DependentUpon>ManuellTimeregistrering.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Prosjektleder\AdministrasjonAvFase.aspx.cs">
+      <DependentUpon>AdministrasjonAvFase.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Prosjektleder\AdministrasjonAvFase.aspx.designer.cs">
+      <DependentUpon>AdministrasjonAvFase.aspx</DependentUpon>
     </Compile>
     <Compile Include="Prosjektleder\AdministrasjonAvProsjekt.aspx.cs">
       <DependentUpon>AdministrasjonAvProsjekt.aspx</DependentUpon>
