@@ -48,7 +48,13 @@ namespace SysUt14Gr03
                     ddlBrukere.Visible = true;
                     ddlProsjekter.Visible = true;
                     btnIndivid.Visible = true;
+                    btnTeam.Visible = true;
                     btnProsjekt.Visible = true;
+                }
+                if (SessionSjekk.IsFaseleder(bruker_id))
+                {
+                    ddlTeam.Visible = true;
+                    btnTeam.Visible = true;
                 }
 
                 if (rettighet.Rettighet_id == 3)
@@ -72,7 +78,11 @@ namespace SysUt14Gr03
 
         protected void btnTeam_Click(object sender, EventArgs e)
         {
-
+            int prosjekt_id = Validator.KonverterTilTall(ddlProsjekter.SelectedValue);
+            Team team = Queries.GetTeamByProsjekt(prosjekt_id);
+            Rapport rapport = new Rapport(Rapport.TEAMRAPPORT, team.Team_id);
+            lblTest.Text = rapport.ToString();
+            lblTest.Visible = true;
         }
 
         protected void btnProsjekt_Click(object sender, EventArgs e)

@@ -115,5 +115,23 @@ namespace SysUt14Gr03.Classes
             else
                 throw new NullReferenceException("Session objektet for bruker_id er ikke satt");
         }
+        public static Bruker GetFaseleder(int prosjekt_id)
+        {
+            var faser = Queries.GetFaseForProsjekt(prosjekt_id);
+            var brukere = Queries.GetAlleAktiveBrukere();
+
+            if (brukere.Count > 0)
+            {
+                if (faser.Count > 0)
+                {
+                    foreach (Bruker b in brukere)
+                    {
+                        if (IsFaseleder(b.Bruker_id, prosjekt_id))
+                            return b;
+                    }
+                }
+            }
+            return null;
+        }
     }
 }
