@@ -12,9 +12,9 @@ namespace SysUt14Gr03
 {
     public partial class DefaultAdministrator : System.Web.UI.Page
     {
-        DataTable dt = new DataTable();
-        Table tabell = new Table();
-        List<Logg> query = Queries.GetLoggForAdministrator();
+        private DataTable dt = new DataTable();
+        private Table tabell = new Table();
+        private List<Logg> query = Queries.GetLoggForAdministrator();
         
         protected void Page_Load(object sender, EventArgs e)
         {
