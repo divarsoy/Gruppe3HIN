@@ -239,7 +239,10 @@ namespace SysUt14Gr03.Classes
         static public List<Prosjekt> GetAlleAktiveProsjekterForProsjektLeder(int bruker_id) 
         {
             using (var context = new Context()) {
-                var prosjektListe = context.Prosjekter.Where(prosjekt => prosjekt.Bruker_id == bruker_id).ToList();
+                var prosjektListe = context.Prosjekter
+                    .Where(prosjekt => prosjekt.Bruker_id == bruker_id)
+                    .Where(prosjekt => prosjekt.Aktiv == true)
+                    .ToList();
                 return prosjektListe;
             }
         }
