@@ -23,7 +23,7 @@
                       <asp:Label ID="lblStart" runat="server" Visible="true" Text='<%#Bind("Start", "{0:dd/MM/yyyy}") %>'></asp:Label>                   
                 </ItemTemplate>          
                 <EditItemTemplate>
-                    <asp:TextBox ID="tbStart" runat="server" Text='<%#Bind("Start", "{0:dd/MM/yyyy}") %>'></asp:TextBox>
+                    <asp:TextBox ID="tbStart" TextMode="Date" runat="server" Text='<%#Bind("Start", "{0:yyyy-MM-dd}") %>'></asp:TextBox>
                 </EditItemTemplate>
                  <FooterTemplate>
                      <asp:TextBox ID="tbStartny" TextMode="Date" runat="server"></asp:TextBox>
@@ -34,7 +34,7 @@
                       <asp:Label ID="lblStopp" runat="server" Visible="true" Text='<%#Bind("Stopp", "{0:dd/MM/yyyy}") %>'></asp:Label>   
                 </ItemTemplate>          
                 <EditItemTemplate>
-                    <asp:TextBox ID="tbStopp" runat="server" Text='<%#Bind("Stopp", "{0:dd/MM/yyyy}") %>'></asp:TextBox>
+                    <asp:TextBox ID="tbStopp" runat="server" TextMode="Date" Text='<%#Bind("Stopp", "{0:yyyy-MM-dd}") %>'></asp:TextBox>
                 </EditItemTemplate>
                <FooterTemplate>
                    <asp:TextBox ID="tbStoppny" TextMode="Date" runat="server"></asp:TextBox>

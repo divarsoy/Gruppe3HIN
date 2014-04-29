@@ -84,6 +84,7 @@ namespace SysUt14Gr03.Classes
             {
                 var fase = context.Faser
                             .Include("Oppgaver")
+                            .Include("Bruker")
                             .Where(f => f.Fase_id == fase_id)
                             .FirstOrDefault();
                 return fase;

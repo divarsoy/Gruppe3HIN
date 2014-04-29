@@ -207,6 +207,7 @@
     <Content Include="Scripts\MorildSheperdAdministrator.js" />
     <Content Include="Scripts\shepherd.js" />
     <Content Include="Scripts\shepherd.min.js" />
+    <Content Include="SprintBacklogFase.aspx" />
     <Content Include="TestPaaEksportExcel.aspx" />
     <Content Include="Utvikler\DefaultUtvikler.aspx" />
     <Content Include="changeUser.aspx" />
@@ -613,6 +614,13 @@
     </Compile>
     <Compile Include="Site.Morild.master.designer.cs">
       <DependentUpon>Site.Morild.master</DependentUpon>
+    </Compile>
+    <Compile Include="SprintBacklogFase.aspx.cs">
+      <DependentUpon>SprintBacklogFase.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SprintBacklogFase.aspx.designer.cs">
+      <DependentUpon>SprintBacklogFase.aspx</DependentUpon>
     </Compile>
     <Compile Include="TestPaaEksportExcel.aspx.cs">
       <DependentUpon>TestPaaEksportExcel.aspx</DependentUpon>
