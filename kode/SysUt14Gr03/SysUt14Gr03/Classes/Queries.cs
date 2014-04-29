@@ -46,6 +46,14 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        static public Bruker GetBrukerVedIM(string IM)
+        {
+            using (var context = new Context())
+            {
+                return context.Brukere.Where(bruker => bruker.IM == IM).FirstOrDefault();
+            }
+        }
+
         static public Bruker GetBrukerVedBrukernavn(string brukernavn)
         {
             using (var context = new Context())
