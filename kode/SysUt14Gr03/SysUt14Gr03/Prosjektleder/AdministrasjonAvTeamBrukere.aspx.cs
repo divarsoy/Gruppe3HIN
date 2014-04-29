@@ -11,7 +11,7 @@ namespace SysUt14Gr03
 {
     public partial class AdministrasjonAvTeamBrukere : System.Web.UI.Page
     {
-        static int teamId = 2;
+        static int teamId = -1;
         static List<Bruker> team_brukerListe;
         static List<Bruker> brukerListe;
         static Team tempTeam;
@@ -68,13 +68,19 @@ namespace SysUt14Gr03
         protected void bt_endreTeamNavn_Click(object sender, EventArgs e)
         {
 
-
             using (var context = new Context())
             {
+
                 Team t = context.Teams.Where(Team => Team.Team_id == teamId).FirstOrDefault();
+                //string med navn før endring brukes til å opprette logg
+                string navnForEndring = t.Navn;
                 t.Navn = tb_TeamNavn.Text;
                 context.SaveChanges();
+                //Oppretter logg
+                string hendelse = "Navn på team " + teamId + " ble endret fra " + navnForEndring + " til " + tb_TeamNavn.Text;
+                OppretteLogg.opprettLoggForBruker(hendelse, DateTime.Now, (int)Session["bruker_id"]);
             }
+            
         }
 
         protected void bt_fjerneBruker_Click(object sender, EventArgs e)
@@ -86,6 +92,13 @@ namespace SysUt14Gr03
                     tempTeam = Queries.GetTeamById(teamId);
                     Bruker tempBruker = team_brukerListe[i];
                     Queries.UpdateBrukerePaaTeam(tempTeam, tempBruker, 2);
+
+                    //Oppretter logg
+                    string hendelse = "Bruker " + tempBruker.Fornavn + " " + tempBruker.Etternavn + " ble fjernet fra team " + tempTeam.Navn;
+                    //Oppretter logg for bruker som utfører handling
+                    OppretteLogg.opprettLoggForBruker(hendelse, DateTime.Now, (int)Session["bruker_id"]);
+                    //Oppretter logg for bruker som blir påvirket av handling
+                    OppretteLogg.opprettLoggForBruker(hendelse, DateTime.Now, tempBruker.Bruker_id);
                 }
             }
                 
@@ -102,6 +115,13 @@ namespace SysUt14Gr03
                     tempTeam = Queries.GetTeamById(teamId);
                     Bruker tempBruker = brukerListe[i];
                     Queries.UpdateBrukerePaaTeam(tempTeam, tempBruker, 1);
+
+                    //Oppretter logg
+                    string hendelse = "Bruker " + tempBruker.Fornavn + " " + tempBruker.Etternavn + " ble lagt til i team " + tempTeam.Navn;
+                    //Oppretter logg for bruker som utfører handling
+                    OppretteLogg.opprettLoggForBruker(hendelse, DateTime.Now, (int)Session["bruker_id"]);
+                    //Oppretter logg for bruker som blir påvirket av handling
+                    OppretteLogg.opprettLoggForBruker(hendelse, DateTime.Now, tempBruker.Bruker_id);
                 }
             }
             Response.Redirect(Request.RawUrl);
