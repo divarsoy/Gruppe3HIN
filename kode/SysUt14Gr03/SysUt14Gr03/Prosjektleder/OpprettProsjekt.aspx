@@ -64,10 +64,10 @@
         </div>
          <div class="clearfix"></div>
          <asp:CompareValidator id="CompareValidator1" runat="server" Display="Dynamic" Type="Date" Operator="DataTypeCheck" ControlToValidate="tbStart"
-                ErrorMessage="Du må tast inn en gyldig dato" CssClass="clearfix feilMelding">
+                ErrorMessage="Du må taste inn en gyldig dato" CssClass="clearfix feilMelding">
          </asp:CompareValidator>
          <asp:CompareValidator id="CompareValidator2" runat="server" Display="Dynamic" Type="Date" Operator="DataTypeCheck" ControlToValidate="tbSlutt"
-                ErrorMessage="Du må tast inn en gyldig dato" CssClass="clearfix feilMelding">
+                ErrorMessage="Du må taste inn en gyldig dato" CssClass="clearfix feilMelding">
          </asp:CompareValidator>
         <br />
         <h2>Faser</h2>
@@ -111,10 +111,10 @@
          <div class="clearfix"></div>
 
          <asp:CompareValidator id="CompareValidator3" runat="server" Display="Dynamic" Type="Date" Operator="DataTypeCheck" ControlToValidate="tbFaseStart"
-                ErrorMessage="Du må tast inn en gyldig dato" CssClass="feilMelding clearfix">
+                ErrorMessage="Du må taste inn en gyldig dato" CssClass="feilMelding clearfix">
          </asp:CompareValidator>
          <asp:CompareValidator id="CompareValidator4" runat="server" Display="Dynamic" Type="Date" Operator="DataTypeCheck" ControlToValidate="tbFaseSlutt"
-                ErrorMessage="Du må tast inn en gyldig dato" CssClass="feilMelding clearfix">
+                ErrorMessage="Du må taste inn en gyldig dato" CssClass="feilMelding clearfix">
          </asp:CompareValidator>
         <br />
         </div>
