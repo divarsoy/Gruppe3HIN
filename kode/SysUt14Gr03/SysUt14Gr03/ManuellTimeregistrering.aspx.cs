@@ -16,12 +16,13 @@ namespace SysUt14Gr03
         private int oppgave_id;
         private Oppgave oppgave;
         private TimeSpan bruktTid;
+        private List<Pause> pauseListe;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             //SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Utvikler);
             //bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
-            bruker_id = 2;
+             bruker_id = 2;
 
             if (Request.QueryString["oppgave_id"] != null)
             {
@@ -110,6 +111,8 @@ namespace SysUt14Gr03
                 txtPST.Text = "";
                 txtPSL.Text = "";
             }
+
+            Response.Redirect(Request.RawUrl);
         }
 
         protected void btnAddPause_Click(object sender, EventArgs e)
@@ -190,6 +193,7 @@ namespace SysUt14Gr03
                         TimeSpan pauser = new TimeSpan();
                         bruktTid = sluttTid - startTid;
                         bool innenforOkt = true;
+                        pauseListe = new List<Pause>();
 
                         for (int i = 0; i < pauseTeller; i++)
                         {
@@ -216,6 +220,12 @@ namespace SysUt14Gr03
                                     if (innenforOkt)
                                     {
                                         pauser += pauseSluttTid - pauseStartTid;
+                                        Pause pause = new Pause();
+                                        pause.IsFerdig = true;
+                                        pause.Start = pauseStartTid;
+                                        pause.Stopp = pauseSluttTid;
+                                        pauseListe.Add(pause);
+                                        
                                     }
                                 }
 
@@ -290,6 +300,7 @@ namespace SysUt14Gr03
             bruktTid = (TimeSpan)ViewState["bruktTid"];
             DateTime startTid = (DateTime)ViewState["startTid"];
             DateTime sluttTid = (DateTime)ViewState["sluttTid"];
+            pauseListe = ViewState["pauseListe"] as List<Pause>;
             DateTime dato = DateTime.Parse(ddlDag.SelectedValue);
 
             using (var context = new Context())

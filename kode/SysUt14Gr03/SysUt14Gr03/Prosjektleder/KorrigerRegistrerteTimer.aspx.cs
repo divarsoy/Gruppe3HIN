@@ -17,6 +17,7 @@ namespace SysUt14Gr03.Prosjektleder
         // private Oppgave oppgave;
         private TimeSpan bruktTid;
         private Time time;
+        private List<Pause> pauseListe;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -32,6 +33,7 @@ namespace SysUt14Gr03.Prosjektleder
                 if (time != null)
                 {
                     pauseTeller = time.Pause.Count;
+                    pauseListe = time.Pause;
 
                     if (!IsPostBack)
                     {
@@ -40,8 +42,8 @@ namespace SysUt14Gr03.Prosjektleder
                         DateTime dato = DateTime.Now;
                         ddlDag.Items.Add(new ListItem("I dag (" + dato.ToShortDateString() + ")", dato.ToShortDateString()));
                         ddlDag.Items.Add(new ListItem("I går (" + dato.AddDays(-1).ToShortDateString() + ")", dato.AddDays(-1).ToShortDateString()));
-                        txtStart.Text = time.Start.ToString();
-                        txtSlutt.Text = time.Stopp.ToString();
+                        txtStart.Text = ((DateTime)time.Start).ToShortTimeString();
+                        txtSlutt.Text = ((DateTime)time.Stopp).ToShortTimeString();
 
                     }
 
@@ -160,6 +162,8 @@ namespace SysUt14Gr03.Prosjektleder
                 txtPSL.TextMode = TextBoxMode.Time;
                 txtPST.ID = "txtPauseStart" + i;
                 txtPSL.ID = "txtPauseSlutt" + i;
+                txtPST.Text = pauseListe[i].Start.ToShortTimeString();
+                txtPSL.Text = ((DateTime)pauseListe[i].Stopp).ToShortTimeString();
                 pnlPauser.Controls.Add(lblPST);
                 pnlPauser.Controls.Add(txtPST);
                 pnlPauser.Controls.Add(lblPSL);
@@ -296,27 +300,17 @@ namespace SysUt14Gr03.Prosjektleder
             DateTime sluttTid = (DateTime)ViewState["sluttTid"];
             DateTime dato = DateTime.Parse(ddlDag.SelectedValue);
 
-            /*
+            
             using (var context = new Context())
             {
-                //oppgave = context.Oppgaver.Where(o => o.Oppgave_id == oppgave_id).FirstOrDefault();
-                Bruker bruker = context.Brukere.Where(b => b.Bruker_id == bruker_id).FirstOrDefault();
-                var time = new Time
-                {
-                    Tid = bruktTid,
-                    Opprettet = dato,
-                    Manuell = true,
-                    Aktiv = true,
-                    Bruker = bruker,
-                    Oppgave = oppgave,
-                    Start = startTid,
-                    Stopp = sluttTid
-                };
+                Time time = context.Timer.Where(t => t.Time_id == time_id).FirstOrDefault();
 
-                context.Timer.Add(time);
+                time.Tid = bruktTid;
+                time.Start = startTid;
+                time.Stopp = sluttTid;
+
                 context.SaveChanges();
             }
-             * */
         }
 	}
 }
