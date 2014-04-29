@@ -81,13 +81,21 @@ namespace SysUt14Gr03
                         _bruker.IM = txtIM.Text.Trim();
 
                         context.SaveChanges();
+                        Session["flashMelding"] = "Innstillinger lagret";
+                        Session["flashStatus"] = Konstanter.notifikasjonsTyper.success.ToString();
                     }
                 }
                 else
                 {
-                    // vis feilmelding IM allerede tatt
+                    Session["flashMelding"] = "\"" + txtIM + "\" brukes av en annen bruker";
+                    Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
                 }
                 
+            }
+            else
+            {
+                Session["flashMelding"] = "Et eller flere felt er ikke fylt ut";
+                Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
             }
         }
 
@@ -115,16 +123,21 @@ namespace SysUt14Gr03
                             _bruker.Passord = Hash.GetHash(nyttPassord, nyttSalt);
 
                             context.SaveChanges();
+
+                            Session["flashMelding"] = "Nytt passord lagret";
+                            Session["flashStatus"] = Konstanter.notifikasjonsTyper.success.ToString();
                         }
 
                     }
                     else {
-                        // passordene er ikke like
+                        Session["flashMelding"] = "Passordene er ikke like";
+                        Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
                     }
                 }
                 else
                 {
-                    // feil oppgitt passord
+                    Session["flashMelding"] = "Feil passord oppgitt for bruker";
+                    Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
                 }
             }
                     
