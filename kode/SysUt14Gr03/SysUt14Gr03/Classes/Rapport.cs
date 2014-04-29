@@ -57,8 +57,14 @@ namespace SysUt14Gr03.Classes
 
                             info += "<br /><h3>Prosjekter:</h3>";
                             foreach (Prosjekt p in team.Prosjekter)
+                            {
                                 info += "<br /><t />" + p.Navn;
-                            antallDeltakerePaTeam = team.Brukere.Count;
+                                Bruker faseleder = SessionSjekk.GetFaseleder(p.Prosjekt_id);
+                                if(faseleder != null)   
+                                    info += "<br />Faseleder: " + SessionSjekk.GetFaseleder(p.Prosjekt_id).ToString();
+                            }
+                                antallDeltakerePaTeam = team.Brukere.Count;
+                            
                         }
                     }
                     break;
@@ -143,8 +149,10 @@ namespace SysUt14Gr03.Classes
                                 info += "<br /><t /><h4>" + p.Navn + "</h4>";
                                 prosjektRapportForBruker += "<br />Navn: " + p.Navn;
                                 // vi tar det sia
-                                prosjektRapportForBruker += "<br />" + "Min rolle: " + (_id == p.Bruker_id ? "Prosjektleder" : "Utvikler");
-                                // if faseleder prosjektRapportForBruker = faseleder
+                                if (SessionSjekk.IsFaseleder(_id, p.Prosjekt_id))
+                                    prosjektRapportForBruker += "<br />" + "Min rolle: faseleder. ";
+                                else
+                                    prosjektRapportForBruker += "<br />" + "Min rolle: " + (_id == p.Bruker_id ? "Prosjektleder" : "Utvikler");
                             }      
 
                             info += "<br /><h3>Team:</h3>";

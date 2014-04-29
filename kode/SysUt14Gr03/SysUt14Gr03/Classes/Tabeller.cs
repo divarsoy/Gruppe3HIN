@@ -423,9 +423,9 @@ namespace SysUt14Gr03.Classes
             return tabell;
         }
 
-        static public DataTable HentBrukereTabellForAdministrator(List<Bruker> query)
+        static public Table HentBrukereTabellForAdministrator(List<Bruker> query)
         {
-            DataTable tabell = new DataTable();
+            Table tabell = new Table();
             TableHeaderRow headerRow = new TableHeaderRow();
             TableHeaderCell forNavnHeaderCell = new TableHeaderCell();
             TableHeaderCell etterNavnHeaderCell = new TableHeaderCell();
@@ -477,7 +477,7 @@ namespace SysUt14Gr03.Classes
                 tRow.Cells.Add(aktivCell);
                 tabell.Rows.Add(tRow);
             }
-            //tabell.CssClass = "table";
+            tabell.CssClass = "table";
             return tabell;
 
         }
@@ -704,6 +704,62 @@ namespace SysUt14Gr03.Classes
             }
             tabell.CssClass = "Table";
             return tabell;
+        }
+
+        public static Table hentLoggForAdministrator(List<Logg> loggLister)
+        {
+            Table tabell = new Table();
+            TableHeaderRow headerRow = new TableHeaderRow();
+            TableHeaderCell headerCell1 = new TableHeaderCell();
+            TableHeaderRow innholdHeaderRow = new TableHeaderRow();
+            TableHeaderCell loggIdHeaderCell = new TableHeaderCell();
+            TableHeaderCell hendelseHeaderCell = new TableHeaderCell();
+            TableHeaderCell brukerIdHeaderCell = new TableHeaderCell();
+            TableHeaderCell prosjektIdHeaderCell = new TableHeaderCell();
+            TableHeaderCell datoHeaderCell = new TableHeaderCell();
+
+            headerCell1.Text = "Logg";
+            loggIdHeaderCell.Text = "Logg ID";
+            hendelseHeaderCell.Text = "Hendelse";
+            brukerIdHeaderCell.Text = "Bruker ID";
+            prosjektIdHeaderCell.Text = "Prosjekt ID";
+            datoHeaderCell.Text = "Dato";
+
+            headerRow.Cells.Add(headerCell1);
+            tabell.Rows.Add(headerRow);
+            innholdHeaderRow.Cells.Add(loggIdHeaderCell);
+            innholdHeaderRow.Cells.Add(hendelseHeaderCell);
+            innholdHeaderRow.Cells.Add(brukerIdHeaderCell);
+            innholdHeaderRow.Cells.Add(prosjektIdHeaderCell);
+            innholdHeaderRow.Cells.Add(datoHeaderCell);
+            tabell.Rows.Add(innholdHeaderRow);
+
+            foreach (Logg logg in loggLister)
+            {
+                TableRow tr = new TableRow();
+                TableCell tcLID = new TableCell();
+                TableCell tcHendelse = new TableCell();
+                TableCell tcBID = new TableCell();
+                TableCell tcPID = new TableCell();
+                TableCell tcDato = new TableCell();
+
+                tcLID.Text = logg.Logg_id.ToString();
+                tcHendelse.Text = logg.Hendelse.ToString();
+                tcBID.Text = logg.bruker_id.ToString();
+                tcPID.Text = logg.Prosjekt_id.ToString();
+                tcDato.Text = logg.Opprettet.ToString();
+
+                tr.Cells.Add(tcLID);
+                tr.Cells.Add(tcHendelse);
+                tr.Cells.Add(tcBID);
+                tr.Cells.Add(tcPID);
+                tr.Cells.Add(tcDato);
+
+                tabell.Rows.Add(tr);
+            }
+            tabell.CssClass = "Table";
+            return tabell;
+
         }
     }
 }

@@ -5,9 +5,14 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
     <h1>Rapportsiden</h1>
-    <asp:DropDownList ID="ddlProsjekter" runat="server" Visible="false"></asp:DropDownList>
-    <asp:DropDownList ID="ddlBrukere" runat="server" Visible="false">
+    <div class="col-sm-3">
+    <asp:DropDownList ID="ddlProsjekter" CssClass="form-control" runat="server" Visible="false"></asp:DropDownList>
+    <asp:DropDownList ID="ddlBrukere" CssClass="form-control" runat="server" Visible="false">
     </asp:DropDownList>
+    <asp:DropDownList ID="ddlTeam" CssClass="form-control" runat="server" Visible="False">
+    </asp:DropDownList>
+        </div>
+        <div class="clearfix"></div>
     <br /> 
     <asp:Button ID="btnTeam" runat="server" Text="Vis en teamrapport" CssClass="btn btn-primary" Visible="false" OnClick="btnTeam_Click"/>
     <asp:Button ID="btnProsjekt" runat="server" Text="Vis en prosjektrapport" CssClass="btn btn-primary" Visible="false" OnClick="btnProsjekt_Click"/>
