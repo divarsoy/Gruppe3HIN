@@ -33,7 +33,7 @@ namespace SysUt14Gr03
             using (var context = new Context())
             {
                 System.Windows.Forms.BindingSource bindingSource1 = new System.Windows.Forms.BindingSource();
-                bindingSource1.DataSource = context.Prosjekter.Where(p => p.Bruker_id == bruker_id).ToList<Prosjekt>();
+                bindingSource1.DataSource = context.Prosjekter.Where(P => P.Aktiv == true).Where(p => p.Bruker_id == bruker_id).ToList<Prosjekt>();
                 gridViewProsjekt.DataSource = bindingSource1;
                 gridViewProsjekt.DataBind();
 
