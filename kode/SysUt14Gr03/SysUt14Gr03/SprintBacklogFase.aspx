@@ -6,4 +6,6 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
     <asp:Label ID="lblfasenavn" runat="server"></asp:Label>
     <asp:PlaceHolder ID="phFase" runat="server"></asp:PlaceHolder>
+    <asp:Button ID="btnExport" runat="server" Text="Exporter til excel dokument" />
+    <asp:DropDownList ID="ddlfaser" runat="server"></asp:DropDownList>
 </asp:Content>
