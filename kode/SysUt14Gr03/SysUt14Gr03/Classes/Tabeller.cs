@@ -517,9 +517,9 @@ namespace SysUt14Gr03.Classes
             headerRow.Cells.Add(statusHeaderCell);
             tabell.Rows.Add(headerRow);
 
-            TimeSpan sumEst = new TimeSpan(0);
-            TimeSpan sumBrukt = new TimeSpan(0);
-            TimeSpan sumGjenstaende = new TimeSpan(0);
+            TimeSpan sumEst = new TimeSpan(0, 0, 0);
+            TimeSpan sumBrukt = new TimeSpan(0, 0, 0);
+            TimeSpan sumGjenstaende = new TimeSpan(0, 0, 0);
 
             TableRow sumRow = new TableRow();
             TableCell sumEstimertCell = new TableCell();
@@ -565,12 +565,73 @@ namespace SysUt14Gr03.Classes
             }
             sumEstimertCell.Text = "Sum Estimert tid: " + Convert.ToString(sumEst);
             sumBruktCell.Text = "Sum Brukt tid: " + Convert.ToString(sumBrukt);
-            sumGjenstaendeCell.Text = "Sum Gjenstående tid: " + Convert.ToString(sumGjenstaende);
+            TimeSpan remainingTime = new TimeSpan(0);
+            remainingTime = sumEst - sumBrukt;
+            sumGjenstaendeCell.Text = "Sum Gjenstående tid: " + (sumGjenstaende == null ? Convert.ToString(sumGjenstaende) : Convert.ToString(remainingTime));
             sumRow.Cells.Add(sumEstimertCell);
             sumRow.Cells.Add(sumBruktCell);
             sumRow.Cells.Add(sumGjenstaendeCell);
             tabell.Rows.Add(sumRow);
             tabell.CssClass = "Table";
+            return tabell;
+        }
+        public static Table HentProsjektTabell(Prosjekt prosjekt)
+        {
+            Table tabell = new Table();
+            TableHeaderRow headerRow = new TableHeaderRow();
+
+
+            TableHeaderCell oppgaveIDHeaderCell = new TableHeaderCell();
+            TableHeaderCell oppgaveHeaderCell = new TableHeaderCell();
+            TableHeaderCell faseHeaderCell = new TableHeaderCell();
+            TableHeaderCell statusHeaderCell = new TableHeaderCell();
+
+            oppgaveIDHeaderCell.Text = "Oppgave ID";
+            oppgaveHeaderCell.Text = "Oppgavenavn";
+            faseHeaderCell.Text = "Fase";
+            statusHeaderCell.Text = "Status";
+
+
+            headerRow.Cells.Add(oppgaveIDHeaderCell);
+            headerRow.Cells.Add(oppgaveHeaderCell);
+            headerRow.Cells.Add(faseHeaderCell);
+            headerRow.Cells.Add(statusHeaderCell);
+            tabell.Rows.Add(headerRow);
+
+            TimeSpan sumEst = new TimeSpan(0, 0, 0);
+            TimeSpan sumBrukt = new TimeSpan(0, 0, 0);
+            TimeSpan sumGjenstaende = new TimeSpan(0, 0, 0);
+
+            TableRow sumRow = new TableRow();
+            TableCell sumEstimertCell = new TableCell();
+            TableCell sumBruktCell = new TableCell();
+            TableCell sumGjenstaendeCell = new TableCell();
+
+            foreach (Oppgave o in prosjekt.Oppgaver)
+            {
+                TableRow faseRow = new TableRow();
+
+                TableCell oppgaveIdCell = new TableCell();
+                TableCell oppgaveCell = new TableCell();
+                TableCell statusCell = new TableCell();
+                TableCell faseCell = new TableCell();
+
+                oppgaveIdCell.Text = o.RefOppgaveId;
+                oppgaveCell.Text = String.Format("<a href='VisOppgave?oppgave_id={0}'>{1}</a>", o.Oppgave_id, o.Tittel);
+                string status = Queries.GetStatus(o.Status_id).Navn;
+                statusCell.Text = status;
+                faseCell.Text = String.Format("<a href='visFase?fase_id={0}'>{1}</a>", o.Fase_id, o.Fase.Navn);
+
+
+
+                faseRow.Cells.Add(oppgaveIdCell);
+                faseRow.Cells.Add(oppgaveCell);
+                faseRow.Cells.Add(faseCell);         
+                faseRow.Cells.Add(statusCell);
+
+                tabell.Rows.Add(faseRow);
+
+            }
             return tabell;
         }
         public static Table HentTimerForBruker(List<Time> time_list, int bruker_id, Prosjekt p)

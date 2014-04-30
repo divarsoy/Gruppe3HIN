@@ -67,6 +67,15 @@ namespace SysUt14Gr03 {
         protected global::System.Web.UI.WebControls.TextBox TbEstimering;
         
         /// <summary>
+        /// ddlFaser control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlFaser;
+        
+        /// <summary>
         /// ddlBrukere control.
         /// </summary>
         /// <remarks>
@@ -130,6 +139,15 @@ namespace SysUt14Gr03 {
         protected global::System.Web.UI.WebControls.TextBox tbFrist;
         
         /// <summary>
+        /// CompareValidator6 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator CompareValidator6;
+        
+        /// <summary>
         /// btnSett control.
         /// </summary>
         /// <remarks>
@@ -173,14 +191,5 @@ namespace SysUt14Gr03 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnOpprett;
-        
-        /// <summary>
-        /// lblCheck control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCheck;
     }
 }

@@ -44,6 +44,12 @@ namespace SysUt14Gr03
                         lblProsjekt.Text = prosjektNavn;
                         pri = Queries.GetAllePrioriteringer();
                         visStatus = Queries.GetAlleStatuser();
+                        List<Fase> faseListe = Queries.GetFaseForProsjekt(prosjekt_id);
+                        ddlFaser.Items.Add(new ListItem("Velg Fase", "0"));
+                        foreach (Fase fase in faseListe)
+                        {
+                            ddlFaser.Items.Add(new ListItem(fase.Navn, fase.Fase_id.ToString()));
+                        }
                         for (int i = 0; i < visStatus.Count; i++)
                         {
                             Status status = visStatus[i];
@@ -73,12 +79,11 @@ namespace SysUt14Gr03
         private void OpprettOppg()
         {
             List<Bruker> selectedBruker = new List<Bruker>();
-            lblCheck.Visible = false;
-            if (tbKrav.Text != String.Empty && tbTittel.Text != String.Empty && tbBeskrivelse.Text != String.Empty && TbEstimering.Text != String.Empty && tbFrist.Text != String.Empty)
+            if (tbKrav.Text != String.Empty && tbTittel.Text != String.Empty && tbBeskrivelse.Text != String.Empty && TbEstimering.Text != String.Empty && tbFrist.Text != String.Empty && ddlFaser.SelectedValue != "0")
             {   
             using (var context = new Context())
             {
-
+                string oppgave_navn = tbTittel.Text;
                 int priorietring_id = Convert.ToInt32(ddlPrioritet.SelectedValue);
                 // TimeSpan estimering = TimeSpan.Parse(TbEstimering.Text);
                 TimeSpan estimering = new TimeSpan(Validator.KonverterTilTall(TbEstimering.Text), 0, 0);
@@ -102,8 +107,10 @@ namespace SysUt14Gr03
                     Aktiv = true,
                     UserStory = tbBeskrivelse.Text,
                     Estimat = estimering,
+                    Fase_id = Validator.KonverterTilTall(ddlFaser.SelectedValue),
                     Status_id = status_id,
                     Brukere = selectedBruker,
+                    BruktTid = new TimeSpan(0, 0, 0),
                     Prosjekt_id = prosjekt_id,
                     Prioritering_id = priorietring_id,
                     RemainingTime = estimering,
@@ -113,17 +120,16 @@ namespace SysUt14Gr03
 
                 context.Oppgaver.Add(oppgave);
                 context.SaveChanges();
-                lblCheck.Visible = true;
-                lblCheck.ForeColor = Color.Green;
-                lblCheck.Text = "Oppgave opprettet";
-                Response.AddHeader("REFRESH", "3;URL=OpprettOppgave.aspx");
+                Session["flashMelding"] = "Du har opprettet oppgaven: " + oppgave_navn;
+                Session["flashStatus"] = Konstanter.notifikasjonsTyper.info.ToString();
+                Response.Redirect(Request.RawUrl);
             }
             }
             else
             {
-                lblCheck.Visible = true;
-                lblCheck.ForeColor = Color.Red;
-                lblCheck.Text = "Feltene kan ikke være tomme!";
+                Session["flashMelding"] = "Feltene kan ikke være tomme";
+                Session["flashStatus"] = Konstanter.notifikasjonsTyper.info.ToString();
+                Response.Redirect(Request.RawUrl);
             }
         }
 

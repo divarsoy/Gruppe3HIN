@@ -18,7 +18,8 @@
                         <asp:TextBox ID="tbTittel" CssClass="form-control" runat="server" placeholder="Tittel på oppgave!"></asp:TextBox>
                         <asp:Textbox ID="tbBeskrivelse" CssClass="form-control" TextMode="MultiLine" runat="server" placeholder="Beskrivelse av oppgaven!"></asp:Textbox>
                         <asp:TextBox ID="tbKrav" CssClass="form-control" runat="server"  placeholder="Krav til oppgaven!"></asp:TextBox>
-                        <asp:TextBox ID="TbEstimering" CssClass="form-control" runat="server"  placeholder="Estimering av tid på oppgave!"></asp:TextBox>
+                        <asp:TextBox ID="TbEstimering" TextMode="Number" CssClass="form-control" runat="server"  placeholder="Estimering av tid på oppgave!"></asp:TextBox>
+                        <asp:DropDownList ID="ddlFaser" CssClass="form-control" runat="server"></asp:DropDownList>
                         &nbsp&nbsp&nbsp<label>Tilgjengelige Brukere</label>
                         <asp:DropDownList ID="ddlBrukere" CssClass="form-control" runat="server"></asp:DropDownList>
                         <asp:ListBox ID="lbBrukere" CssClass="form-control" runat="server" Height="100px"  Enabled="True"></asp:ListBox>
@@ -33,6 +34,9 @@
                     <asp:Calendar Width="300px" ID="cal" BorderColor="Blue" ShowGridLines="true" NextMonthText="Neste" PrevMonthText="Forrige" TodayDayStyle-BackColor="Blue" TodayDayStyle-ForeColor="White" WeekendDayStyle-ForeColor="Red" runat="server" ></asp:Calendar>
                     <br />
                     <asp:TextBox ID="tbFrist" CssClass="form-control" width="280px" runat="server" placeholder="Tidsfrist på oppgave!"></asp:TextBox>
+                    <asp:CompareValidator id="CompareValidator6" runat="server" Display="Dynamic" Type="Date" Operator="DataTypeCheck" ControlToValidate="tbFrist"
+                        ErrorMessage="<br />Du må taste inn en gyldig dato" CssClass="feilMelding"></asp:CompareValidator>
+                    <br />
                     <asp:Button ID="btnSett" CssClass="btn btn-primary" runat="server" Text="Sett Tidsfrist" OnClick="btnSett_Click" />
                 </div>
             </div>
@@ -70,7 +74,6 @@
             <asp:DropDownList ID="ddlPrioritet" style="display: inline-block" CssClass="form-control" Width="80px" runat="server"></asp:DropDownList>
             <br />
             <asp:Button ID="btnOpprett" CssClass="btn btn-primary" runat="server" OnClick="btnOpprett_Click" Text="Opprett Oppgave" />
-            <asp:label id="lblCheck" visible="false" runat="server" ></asp:label>
             
        
  </div>

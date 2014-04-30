@@ -75,6 +75,27 @@ namespace SysUt14Gr03.Classes
 
             
         }
+        public static DataTable ProductBacklogProsjekt(Prosjekt prosjekt)
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add(new DataColumn("Oppgave-Id", typeof(System.String)));
+            dt.Columns.Add(new DataColumn("Oppgavenavn", typeof(System.String)));
+            dt.Columns.Add(new DataColumn("Fase", typeof(System.String)));
+            dt.Columns.Add(new DataColumn("Status", typeof(System.String)));
+
+            foreach (Oppgave o in prosjekt.Oppgaver)
+            {
+                DataRow row = dt.NewRow();
+                row["Oppgave-Id"] = o.RefOppgaveId;
+                row["Oppgavenavn"] = o.Tittel;
+                row["Fase"] = o.Fase.Navn;
+                string status = Queries.GetStatus(o.Status_id).Navn;
+                row["Status"] = status;
+
+                dt.Rows.Add(row);
+            }
+            return dt;
+        }
         public static DataTable OversiktLoggAdministrator(List<Logg> query)
         {
             DataTable dt = new DataTable();

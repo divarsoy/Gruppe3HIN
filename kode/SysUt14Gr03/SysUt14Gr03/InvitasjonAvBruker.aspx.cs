@@ -61,6 +61,7 @@ namespace SysUt14Gr03
             //lblInvitasjon.Text = "Invitasjon sendt til: " + ddlBrukere.SelectedItem.ToString();
             Session["flashMelding"] = "Invitasjon til hjelp av oppgave " + oppgave.Tittel + " er sendt til " + ddlBrukere.SelectedItem.ToString();
             Session["flashStatus"] = Konstanter.notifikasjonsTyper.info.ToString();
+            Response.Redirect(Request.RawUrl);
         }
     }
 }

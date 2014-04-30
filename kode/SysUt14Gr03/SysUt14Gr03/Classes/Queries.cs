@@ -233,6 +233,7 @@ namespace SysUt14Gr03.Classes
                 Prosjekt prosjekt = context.Prosjekter
                     .Include("Team")
                     .Include("Oppgaver")
+                    .Include("Faser")
                     .Where(p => p.Prosjekt_id == prosjekt_id).FirstOrDefault();
                 return prosjekt;
             }

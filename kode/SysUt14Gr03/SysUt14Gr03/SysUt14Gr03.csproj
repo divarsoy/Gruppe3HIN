@@ -365,6 +365,7 @@
     <Content Include="obj\Release\SysUt14Gr03.dll" />
     <Content Include="obj\Release\SysUt14Gr03.pdb" />
     <Content Include="obj\Release\_WPPLastBuildInfo.txt" />
+    <Content Include="ProductBacklogProsjekt.aspx" />
     <Content Include="Prosjektleder\AdministrasjonAvFase.aspx" />
     <Content Include="Prosjektleder\AdministrasjonAvProsjekt.aspx" />
     <Content Include="Prosjektleder\AdministrasjonAvTeam.aspx" />
@@ -598,6 +599,13 @@
     <Compile Include="ManuellTimeregistrering.aspx.cs">
       <DependentUpon>ManuellTimeregistrering.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProductBacklogProsjekt.aspx.cs">
+      <DependentUpon>ProductBacklogProsjekt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProductBacklogProsjekt.aspx.designer.cs">
+      <DependentUpon>ProductBacklogProsjekt.aspx</DependentUpon>
     </Compile>
     <Compile Include="Prosjektleder\AdministrasjonAvFase.aspx.cs">
       <DependentUpon>AdministrasjonAvFase.aspx</DependentUpon>
