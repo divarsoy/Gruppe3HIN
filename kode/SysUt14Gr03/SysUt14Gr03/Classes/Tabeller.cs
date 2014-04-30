@@ -481,7 +481,78 @@ namespace SysUt14Gr03.Classes
             return tabell;
 
         }
+        public static Table HentFaseTabell(Fase fase)
+        {
+            Table tabell = new Table();
+            TableHeaderRow headerRow = new TableHeaderRow();
+          
 
+
+            TableHeaderCell oppgaveIDHeaderCell = new TableHeaderCell();
+            TableHeaderCell oppgaveHeaderCell = new TableHeaderCell();
+            TableHeaderCell estimertHeaderCell = new TableHeaderCell();
+            TableHeaderCell bruktHeaderCell = new TableHeaderCell();
+            TableHeaderCell gjenstaendeHeaderCell = new TableHeaderCell();
+            TableHeaderCell ansvarligHeaderCell = new TableHeaderCell();
+            TableHeaderCell statusHeaderCell = new TableHeaderCell();
+
+            oppgaveIDHeaderCell.Text = "Oppgave ID";
+            oppgaveHeaderCell.Text = "Oppgavenavn";
+            estimertHeaderCell.Text = "Estimert tid";
+            bruktHeaderCell.Text = "Brukt tid";
+            gjenstaendeHeaderCell.Text = "Gjenstående tid";
+            ansvarligHeaderCell.Text = "Ansvarlig Bruker";
+            statusHeaderCell.Text = "Status";
+
+
+            headerRow.Cells.Add(oppgaveIDHeaderCell);
+            headerRow.Cells.Add(oppgaveHeaderCell);
+            headerRow.Cells.Add(estimertHeaderCell);
+            headerRow.Cells.Add(bruktHeaderCell);
+            headerRow.Cells.Add(gjenstaendeHeaderCell);
+            headerRow.Cells.Add(ansvarligHeaderCell);
+            headerRow.Cells.Add(statusHeaderCell);
+          
+            tabell.Rows.Add(headerRow);
+
+
+            foreach (Oppgave o in fase.Oppgaver)
+            {
+                TableRow faseRow = new TableRow();
+                TableCell oppgaveIdCell = new TableCell();
+                TableCell oppgaveCell = new TableCell();
+                TableCell statusCell = new TableCell();
+                TableCell estimertCell = new TableCell();
+                TableCell gjenstaendeCell = new TableCell();
+                TableCell bruktCell = new TableCell();
+                TableCell ansvarligCell = new TableCell();
+
+               
+                oppgaveIdCell.Text = o.RefOppgaveId;
+                oppgaveCell.Text = o.Tittel;
+                estimertCell.Text = Convert.ToString(o.Estimat);
+                gjenstaendeCell.Text = Convert.ToString(o.RemainingTime);
+                bruktCell.Text = Convert.ToString(o.BruktTid);
+                ansvarligCell.Text = fase.Bruker.ToString();
+                string status = Queries.GetStatus(o.Status_id).Navn;
+                statusCell.Text = status;
+
+
+
+               
+                faseRow.Cells.Add(oppgaveIdCell);
+                faseRow.Cells.Add(oppgaveCell);
+                faseRow.Cells.Add(estimertCell);
+                faseRow.Cells.Add(bruktCell);         
+                faseRow.Cells.Add(gjenstaendeCell);     
+                faseRow.Cells.Add(ansvarligCell);
+                faseRow.Cells.Add(statusCell);
+                tabell.Rows.Add(faseRow);
+            }
+            
+            tabell.CssClass = "Table";
+            return tabell;
+        }
         public static Table HentTimerForBruker(List<Time> time_list, int bruker_id, Prosjekt p)
         {
             Table tabell = new Table();
@@ -633,6 +704,62 @@ namespace SysUt14Gr03.Classes
             }
             tabell.CssClass = "Table";
             return tabell;
+        }
+
+        public static Table hentLoggForAdministrator(List<Logg> loggLister)
+        {
+            Table tabell = new Table();
+            TableHeaderRow headerRow = new TableHeaderRow();
+            TableHeaderCell headerCell1 = new TableHeaderCell();
+            TableHeaderRow innholdHeaderRow = new TableHeaderRow();
+            TableHeaderCell loggIdHeaderCell = new TableHeaderCell();
+            TableHeaderCell hendelseHeaderCell = new TableHeaderCell();
+            TableHeaderCell brukerIdHeaderCell = new TableHeaderCell();
+            TableHeaderCell prosjektIdHeaderCell = new TableHeaderCell();
+            TableHeaderCell datoHeaderCell = new TableHeaderCell();
+
+            headerCell1.Text = "Logg";
+            loggIdHeaderCell.Text = "Logg ID";
+            hendelseHeaderCell.Text = "Hendelse";
+            brukerIdHeaderCell.Text = "Bruker ID";
+            prosjektIdHeaderCell.Text = "Prosjekt ID";
+            datoHeaderCell.Text = "Dato";
+
+            headerRow.Cells.Add(headerCell1);
+            tabell.Rows.Add(headerRow);
+            innholdHeaderRow.Cells.Add(loggIdHeaderCell);
+            innholdHeaderRow.Cells.Add(hendelseHeaderCell);
+            innholdHeaderRow.Cells.Add(brukerIdHeaderCell);
+            innholdHeaderRow.Cells.Add(prosjektIdHeaderCell);
+            innholdHeaderRow.Cells.Add(datoHeaderCell);
+            tabell.Rows.Add(innholdHeaderRow);
+
+            foreach (Logg logg in loggLister)
+            {
+                TableRow tr = new TableRow();
+                TableCell tcLID = new TableCell();
+                TableCell tcHendelse = new TableCell();
+                TableCell tcBID = new TableCell();
+                TableCell tcPID = new TableCell();
+                TableCell tcDato = new TableCell();
+
+                tcLID.Text = logg.Logg_id.ToString();
+                tcHendelse.Text = logg.Hendelse.ToString();
+                tcBID.Text = logg.bruker_id.ToString();
+                tcPID.Text = logg.Prosjekt_id.ToString();
+                tcDato.Text = logg.Opprettet.ToString();
+
+                tr.Cells.Add(tcLID);
+                tr.Cells.Add(tcHendelse);
+                tr.Cells.Add(tcBID);
+                tr.Cells.Add(tcPID);
+                tr.Cells.Add(tcDato);
+
+                tabell.Rows.Add(tr);
+            }
+            tabell.CssClass = "Table";
+            return tabell;
+
         }
     }
 }

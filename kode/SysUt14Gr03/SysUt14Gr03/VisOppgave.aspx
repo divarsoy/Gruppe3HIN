@@ -16,7 +16,7 @@
         <hr />
         <div class="col-sm-6">
             <h2>Ny kommentar</h2>
-            <asp:TextBox ID="txtKommentar" runat="server" TextMode="MultiLine" cssClass="form-control" Visibl="False"></asp:TextBox>
+            <asp:TextBox ID="txtKommentar" runat="server" TextMode="MultiLine" cssClass="form-control" Visible="False"></asp:TextBox>
         </div>
         <div class="clearfix"></div>
         <hr />

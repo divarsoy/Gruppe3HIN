@@ -8,10 +8,9 @@
     <h2>
         <asp:Label ID="lblFase" runat="server"></asp:Label>
     </h2>
-    <hr />
-    <br />
+    
     <h3>
-    <asp:Label ID="lblInfo" runat="server"></asp:Label>       
+    <asp:Label ID="lblInfo" runat="server" Visible="false"></asp:Label>       
     </h3>
         </div>
 </asp:Content>

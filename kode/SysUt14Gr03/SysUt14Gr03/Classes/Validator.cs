@@ -20,6 +20,13 @@ namespace SysUt14Gr03.Classes
             else return -1;
         }
 
+        public static bool isDateTime(string dato)
+        {
+            DateTime resultat;
+            bool vellykketKonvertering = DateTime.TryParse(dato, out resultat);
+            return vellykketKonvertering;
+        }
+
         public static bool SjekkRettighet(int bruker_id, Konstanter.rettighet rettighet) {
             Bruker bruker = Queries.GetBrukerMedRettighet(bruker_id, rettighet);
             if (bruker == null)

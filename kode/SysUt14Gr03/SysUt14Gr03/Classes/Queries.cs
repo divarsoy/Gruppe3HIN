@@ -46,6 +46,14 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        static public Bruker GetBrukerVedIM(string IM)
+        {
+            using (var context = new Context())
+            {
+                return context.Brukere.Where(bruker => bruker.IM == IM).FirstOrDefault();
+            }
+        }
+
         static public Bruker GetBrukerVedBrukernavn(string brukernavn)
         {
             using (var context = new Context())
@@ -72,6 +80,7 @@ namespace SysUt14Gr03.Classes
             {
                 var faseListe = context.Faser
                             .Include("Bruker")
+                            .Include("Oppgaver")
                             .Where(fase => fase.Prosjekt_id == prosjekt_id)
                             .ToList<Fase>();
                 return faseListe;
@@ -83,6 +92,7 @@ namespace SysUt14Gr03.Classes
             {
                 var fase = context.Faser
                             .Include("Oppgaver")
+                            .Include("Bruker")
                             .Where(f => f.Fase_id == fase_id)
                             .FirstOrDefault();
                 return fase;
@@ -93,6 +103,7 @@ namespace SysUt14Gr03.Classes
             using (var context = new Context())
             {
                 var time = context.Timer
+                            .Include("Oppgave")
                             .Include("Pause")
                             .Where(t => t.Time_id == time_id)
                             .FirstOrDefault();
@@ -162,6 +173,7 @@ namespace SysUt14Gr03.Classes
             {
                 var timeListe = context.Timer
                             .Where(t => t.Bruker_id == bruker_id)
+                            .Where(tid => tid.Aktiv == true)
                             .ToList<Time>();
                 return timeListe;
             }
@@ -249,7 +261,10 @@ namespace SysUt14Gr03.Classes
         static public List<Prosjekt> GetAlleAktiveProsjekterForProsjektLeder(int bruker_id) 
         {
             using (var context = new Context()) {
-                var prosjektListe = context.Prosjekter.Where(prosjekt => prosjekt.Bruker_id == bruker_id).ToList();
+                var prosjektListe = context.Prosjekter
+                    .Where(prosjekt => prosjekt.Bruker_id == bruker_id)
+                    .Where(prosjekt => prosjekt.Aktiv == true)
+                    .ToList();
                 return prosjektListe;
             }
         }
@@ -640,6 +655,8 @@ namespace SysUt14Gr03.Classes
                 var oppgaveListe = context.Oppgaver
                                   .Include("Brukere")
                                   .Include("Kommentarer")
+                                  .Include("Prosjekt")
+                                  .Include("Fase")
                                   .Where(oppgave => oppgave.Brukere.Any(bruker => bruker.Bruker_id == _bruker_id))
                                   .Where(oppgave => oppgave.Aktiv == true)
                                   .OrderBy(oppgave => oppgave.Tittel)
@@ -675,6 +692,7 @@ namespace SysUt14Gr03.Classes
                 return brukerListe;
             }
         }
+
         static public List<Bruker> GetAlleBrukereIEtProjekt(int prosjekt_id)
         {
             using (var context = new Context())
@@ -833,10 +851,35 @@ namespace SysUt14Gr03.Classes
         {
             using (var context = new Context())
             {
-                Oppgave oppg = context.Oppgaver.Where(Oppgave => Oppgave.Timer.Any(time => time.Time_id == time_id)).FirstOrDefault();
+                Oppgave oppg = context.Oppgaver.Include("Timer")
+                    .Where(Oppgave => Oppgave.Timer.Any(time => time.Time_id == time_id))
+                    .FirstOrDefault();
 
                 return oppg;
             }
+        }
+
+        public static List<Fase> GetAlleAktiveFaserForBrukerOgProsjekt(int bruker_id, int prosjekt_id)
+        {
+            using (var context = new Context())
+            {
+                var faseListe = context.Faser
+                                .Where(bruker => bruker.Bruker_id == bruker_id)
+                                .Where(prosjekt => prosjekt.Prosjekt_id == prosjekt_id)
+                                .Where(fase => fase.Aktiv == true)
+                                .ToList();
+
+                return faseListe;
+            }
+        }
+
+        public static List<Logg> GetLoggForAdministrator()
+        {
+            using (var context = new Context())
+            {
+                List<Logg> loggListe = context.Logger.OrderByDescending(logg => logg.Opprettet).ToList();
+                return loggListe;
+            }      
         }
 
 
