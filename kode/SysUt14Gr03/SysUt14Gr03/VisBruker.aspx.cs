@@ -167,7 +167,7 @@ namespace SysUt14Gr03
         protected void btnPrefs_Click(object sender, EventArgs e)
         {
 
-            Response.Redirect("/Epostpreferanser.aspx", true);
+            Response.Redirect("/Innstillinger.aspx", true);
         }
 
         protected void lsbKommentarer_SelectedIndexChanged(object sender, EventArgs e)

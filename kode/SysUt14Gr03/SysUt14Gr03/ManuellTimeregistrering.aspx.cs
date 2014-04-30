@@ -319,6 +319,7 @@ namespace SysUt14Gr03
                     Stopp = sluttTid
                 };
 
+                oppgave.BruktTid += bruktTid;
                 context.Timer.Add(time);
                 context.SaveChanges();
             }
