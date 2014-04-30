@@ -20,7 +20,13 @@ namespace SysUt14Gr03
         {
             SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
             SessionSjekk.sjekkForProsjekt_id();
-
+            
+            if (Session["prosjekt_id"] != null)
+            {
+                string prosjektNavn = Session["prosjekt_navn"].ToString();
+                lblProsjekt.Text = String.Format("Prosjekt: <b>{0}</b>", prosjektNavn);
+            }
+            
             brukerid = Validator.KonverterTilTall(Session["bruker_id"].ToString());
             int prosjekt_id = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
 
