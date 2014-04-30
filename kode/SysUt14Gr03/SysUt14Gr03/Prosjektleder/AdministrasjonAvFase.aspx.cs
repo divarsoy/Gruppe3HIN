@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -51,30 +52,39 @@ namespace SysUt14Gr03.Prosjektleder
 
         protected void gridViewFase_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
+            try
+            {
             int fase_id = (int)gridViewFase.DataKeys[e.RowIndex].Value;
-
+          
             System.Web.UI.WebControls.TextBox tbFase = (TextBox)gridViewFase.Rows[e.RowIndex].FindControl("tbFase");
             System.Web.UI.WebControls.TextBox tbStart = (TextBox)gridViewFase.Rows[e.RowIndex].FindControl("tbStart");
             System.Web.UI.WebControls.TextBox tbSlutt = (TextBox)gridViewFase.Rows[e.RowIndex].FindControl("tbStopp");
             System.Web.UI.WebControls.CheckBox cbAktiv = (CheckBox)gridViewFase.Rows[e.RowIndex].FindControl("cboxAktiv");
             System.Web.UI.WebControls.DropDownList ddlFaseleder = (DropDownList)gridViewFase.Rows[e.RowIndex].FindControl("ddlFaseleder");
 
+          
+                using (var context = new Context())
+                {
+                    int bruker_id = Validator.KonverterTilTall(ddlFaseleder.SelectedValue);
+                    Fase fase = context.Faser.Where(f => f.Fase_id == fase_id).FirstOrDefault();
+                    fase.Navn = tbFase.Text;
+                    fase.Start = DateTime.Parse(tbStart.Text);
+                    fase.Stopp = DateTime.Parse(tbSlutt.Text);
+                    fase.Aktiv = Convert.ToBoolean(cbAktiv.Checked);
+                    fase.Bruker_id = bruker_id;
 
-            using (var context = new Context())
-            {
-                int bruker_id = Validator.KonverterTilTall(ddlFaseleder.SelectedValue);
-                Fase fase = context.Faser.Where(f => f.Fase_id == fase_id).FirstOrDefault();
-                fase.Navn = tbFase.Text;
-                fase.Start = DateTime.Parse(tbStart.Text);
-                fase.Stopp = DateTime.Parse(tbSlutt.Text);
-                fase.Aktiv = Convert.ToBoolean(cbAktiv.Checked);
-                fase.Bruker_id = bruker_id;
+                    context.SaveChanges();
+                }
 
-                context.SaveChanges();
+                gridViewFase.EditIndex = -1;
+                visFase();
             }
-            gridViewFase.EditIndex = -1;
-            visFase();
-
+            catch
+            {
+                Session["flashMelding"] = "Du må oppgi en gyldig dato!";
+                Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
+                Response.Redirect(Request.RawUrl);
+            }
 
         }
         protected void gridViewFase_EditRowDataBound(object sender, GridViewRowEventArgs e)

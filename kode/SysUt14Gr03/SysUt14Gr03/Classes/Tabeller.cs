@@ -25,6 +25,8 @@ namespace SysUt14Gr03.Classes
             TableHeaderCell remainingTimeHeaderCell = new TableHeaderCell();
             TableHeaderCell brukerHeaderCell = new TableHeaderCell();
             TableHeaderCell kommentarerHeaderCell = new TableHeaderCell();
+            TableHeaderCell sumHeaderCell = new TableHeaderCell();
+
 
             idHeaderCell.Text = "Id";
             tittelHeaderCell.Text = "Tittel";
@@ -61,6 +63,7 @@ namespace SysUt14Gr03.Classes
                 TableCell remainingCell = new TableCell();
                 TableCell brukerCell = new TableCell();
                 TableCell kommentarCell = new TableCell();
+
                                 
                 string oppgaveLink = idCell.ResolveUrl("~/VisOppgave?oppgave_id=" + oppgave.Oppgave_id.ToString());
 
@@ -72,6 +75,7 @@ namespace SysUt14Gr03.Classes
                 remainingCell.Text = oppgave.RemainingTime.ToString();
                 brukerCell.Text = brukereIOppgave.ToString();
                 kommentarCell.Text = oppgave.Kommentarer.Count.ToString();
+          
 
                 tRow.Cells.Add(idCell);
                 tRow.Cells.Add(tittelCell);
@@ -485,7 +489,6 @@ namespace SysUt14Gr03.Classes
         {
             Table tabell = new Table();
             TableHeaderRow headerRow = new TableHeaderRow();
-          
 
 
             TableHeaderCell oppgaveIDHeaderCell = new TableHeaderCell();
@@ -512,13 +515,21 @@ namespace SysUt14Gr03.Classes
             headerRow.Cells.Add(gjenstaendeHeaderCell);
             headerRow.Cells.Add(ansvarligHeaderCell);
             headerRow.Cells.Add(statusHeaderCell);
-          
             tabell.Rows.Add(headerRow);
 
+            TimeSpan sumEst = new TimeSpan(0);
+            TimeSpan sumBrukt = new TimeSpan(0);
+            TimeSpan sumGjenstaende = new TimeSpan(0);
+
+            TableRow sumRow = new TableRow();
+            TableCell sumEstimertCell = new TableCell();
+            TableCell sumBruktCell = new TableCell();
+            TableCell sumGjenstaendeCell = new TableCell();
 
             foreach (Oppgave o in fase.Oppgaver)
             {
                 TableRow faseRow = new TableRow();
+               
                 TableCell oppgaveIdCell = new TableCell();
                 TableCell oppgaveCell = new TableCell();
                 TableCell statusCell = new TableCell();
@@ -526,6 +537,7 @@ namespace SysUt14Gr03.Classes
                 TableCell gjenstaendeCell = new TableCell();
                 TableCell bruktCell = new TableCell();
                 TableCell ansvarligCell = new TableCell();
+                
 
                
                 oppgaveIdCell.Text = o.RefOppgaveId;
@@ -536,10 +548,10 @@ namespace SysUt14Gr03.Classes
                 ansvarligCell.Text = fase.Bruker.ToString();
                 string status = Queries.GetStatus(o.Status_id).Navn;
                 statusCell.Text = status;
+                sumEst += (TimeSpan)o.Estimat;
+                sumBrukt += (TimeSpan)o.BruktTid;
+                sumGjenstaende += (TimeSpan)o.RemainingTime;
 
-
-
-               
                 faseRow.Cells.Add(oppgaveIdCell);
                 faseRow.Cells.Add(oppgaveCell);
                 faseRow.Cells.Add(estimertCell);
@@ -547,9 +559,17 @@ namespace SysUt14Gr03.Classes
                 faseRow.Cells.Add(gjenstaendeCell);     
                 faseRow.Cells.Add(ansvarligCell);
                 faseRow.Cells.Add(statusCell);
+                
                 tabell.Rows.Add(faseRow);
+                
             }
-            
+            sumEstimertCell.Text = "Sum Estimert tid: " + Convert.ToString(sumEst);
+            sumBruktCell.Text = "Sum Brukt tid: " + Convert.ToString(sumBrukt);
+            sumGjenstaendeCell.Text = "Sum Gjenstående tid: " + Convert.ToString(sumGjenstaende);
+            sumRow.Cells.Add(sumEstimertCell);
+            sumRow.Cells.Add(sumBruktCell);
+            sumRow.Cells.Add(sumGjenstaendeCell);
+            tabell.Rows.Add(sumRow);
             tabell.CssClass = "Table";
             return tabell;
         }
