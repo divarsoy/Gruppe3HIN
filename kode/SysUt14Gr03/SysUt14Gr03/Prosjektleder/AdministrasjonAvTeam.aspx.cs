@@ -46,6 +46,9 @@ namespace SysUt14Gr03
                 {
                     Team valgtTeam = teamListe[i];
                     Queries.ArkiverTeam(valgtTeam);
+                    //Oppretter logg
+                    string hendelse = "Team " + valgtTeam.Navn + " er blitt arkivert";
+                    OppretteLogg.opprettLoggForBruker(hendelse, DateTime.Now, (int)Session["bruker_id"]);
                 }
             }
            

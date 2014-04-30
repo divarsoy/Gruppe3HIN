@@ -17,10 +17,10 @@ namespace SysUt14Gr03
 
             
             Fase fase = Queries.GetFase(fase_id);
-            lblfasenavn.Text = "<h2>" + fase.Navn + "<h2/>";
-            Table FaseTabell = Tabeller.HentFaseTabell(fase);
-            FaseTabell.CssClass = "table";
-            phFase.Controls.Add(FaseTabell);
+           lblfasenavn.Text = "<h2>" + fase.Navn + "<h2/>";
+           Table FaseTabell = Tabeller.HentFaseTabell(fase);
+           FaseTabell.CssClass = "table";
+           phFase.Controls.Add(FaseTabell);
 
         }
     }

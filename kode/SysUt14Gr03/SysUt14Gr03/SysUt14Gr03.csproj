@@ -365,6 +365,7 @@
     <Content Include="obj\Release\SysUt14Gr03.dll" />
     <Content Include="obj\Release\SysUt14Gr03.pdb" />
     <Content Include="obj\Release\_WPPLastBuildInfo.txt" />
+    <Content Include="Prosjektleder\AdministrasjonAvFase.aspx" />
     <Content Include="Prosjektleder\AdministrasjonAvProsjekt.aspx" />
     <Content Include="Prosjektleder\AdministrasjonAvTeam.aspx" />
     <Content Include="Prosjektleder\AdministrasjonAvTeamBrukere.aspx" />
@@ -376,8 +377,12 @@
     <Content Include="Brukere.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Prosjektleder\InnsynIRegistrerteTimerSomProsjektleder.aspx" />
+    <Content Include="Prosjektleder\KorrigerRegistrerteTimer.aspx" />
     <Content Include="RapportTestForm.aspx" />
     <Content Include="Scripts\MorildSheperdAdministrator.js" />
+    <Content Include="Scripts\MorildShepherdProsjektleder.js" />
+    <Content Include="Scripts\MorildShepherdTeamLeder.js" />
+    <Content Include="Scripts\MorildShepherdUtvikler.js" />
     <Content Include="Scripts\shepherd.js" />
     <Content Include="Scripts\shepherd.min.js" />
     <Content Include="SprintBacklogFase.aspx" />
@@ -594,12 +599,13 @@
       <DependentUpon>ManuellTimeregistrering.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
-    <Compile Include="obj\Release\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="obj\Release\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="obj\Release\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="Prosjektleder\AdministrasjonAvFase.aspx.cs">
+      <DependentUpon>AdministrasjonAvFase.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Prosjektleder\AdministrasjonAvFase.aspx.designer.cs">
+      <DependentUpon>AdministrasjonAvFase.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Prosjektleder\AdministrasjonAvProsjekt.aspx.cs">
       <DependentUpon>AdministrasjonAvProsjekt.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -704,6 +710,13 @@
     </Compile>
     <Compile Include="Prosjektleder\InnsynIRegistrerteTimerSomProsjektleder.aspx.designer.cs">
       <DependentUpon>InnsynIRegistrerteTimerSomProsjektleder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Prosjektleder\KorrigerRegistrerteTimer.aspx.cs">
+      <DependentUpon>KorrigerRegistrerteTimer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Prosjektleder\KorrigerRegistrerteTimer.aspx.designer.cs">
+      <DependentUpon>KorrigerRegistrerteTimer.aspx</DependentUpon>
     </Compile>
     <Compile Include="Prosjektleder\OpprettOppgavegruppe.aspx.cs">
       <DependentUpon>OpprettOppgavegruppe.aspx</DependentUpon>
