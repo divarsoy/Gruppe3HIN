@@ -16,7 +16,9 @@ namespace SysUt14Gr03.Models
         public DateTime? Stopp { get; set; }
         public int Oppgave_id { get; set; }
         public bool IsFerdig { get; set; }
+        public int Time_id { get; set; }
 
         public virtual Oppgave Oppgave { get; set; }
+        public virtual Time Time { get; set; }
     }
 }
