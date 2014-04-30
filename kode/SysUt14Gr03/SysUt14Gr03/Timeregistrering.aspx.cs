@@ -23,6 +23,7 @@ namespace SysUt14Gr03
         private int PauseTeller;
         private int pauseID;
         private int timeID;
+        private List<int> pauseId;
 
         private TimeSpan bruktTid;
         private DateTime Start;
@@ -39,11 +40,11 @@ namespace SysUt14Gr03
             if (!IsPostBack)
             {
                 PauseTeller = 0;
-                if (Request.QueryString["pause_id"] != null && Request.QueryString["time_id"] != null)
+                if (Session["time_id"] != null)
                 {
-                    pauseID = Classes.Validator.KonverterTilTall(Request.QueryString["pause_id"]);
-                    timeID = Classes.Validator.KonverterTilTall(Request.QueryString["time_id"]);
-                    this.GetTimers(pauseID, timeID);
+                    pauseID = Classes.Validator.KonverterTilTall(Session["pause_id"].ToString());
+                    timeID = Classes.Validator.KonverterTilTall(Session["time_id"].ToString());
+                    this.GetTimers(pauseId, timeID);
                 }
                 prosjektID = 2;// Classes.Validator.KonverterTilTall(Request.QueryString["prosjekt_id"]);
                 brukerID = 4;// Classes.Validator.KonverterTilTall(Request.QueryString["bruker_id"]);
@@ -114,10 +115,11 @@ namespace SysUt14Gr03
 
                     using (var context2 = new Context())
                     {
-                        pauseID = Classes.Validator.KonverterTilTall(Request.QueryString["pause_id"]);
+                        pauseID = Classes.Validator.KonverterTilTall(Session["pause_id"].ToString());
                         pause = context2.Pauser.Where(p => p.Pause_id == pauseID).FirstOrDefault();
 
                         pause.Stopp = StartEtterPause;
+                        pause.IsFerdig = true;
 
                         context2.SaveChanges();
                     }
@@ -156,13 +158,15 @@ namespace SysUt14Gr03
                     {
                         Start = Pause,
                         Oppgave_id = oppgave.Oppgave_id,
-                        Oppgave = oppgave
+                        Oppgave = oppgave,
+                        IsFerdig = false
                     };
 
                     context1.Pauser.Add(pause);
                     context1.SaveChanges();
 
                     pause = Queries.GetPauseMedOppgaveID(oppgave.Oppgave_id);
+                    pauser.Add(pause);
                     Session["pause_id"] = pause.Pause_id;
                 }
 
@@ -220,7 +224,7 @@ namespace SysUt14Gr03
                 {
                     oppgaveID = Convert.ToInt32(ddlOppgaver.SelectedValue);
                     brukerID = 4;// Classes.Validator.KonverterTilTall(Request.QueryString["bruker_id"]);
-                    timeID = Classes.Validator.KonverterTilTall(Request.QueryString["time_id"]);
+                    timeID = Classes.Validator.KonverterTilTall(Session["time_id"].ToString());
 
                     Oppgave oppgave = context3.Oppgaver.Where(o => o.Oppgave_id == oppgaveID).FirstOrDefault();
                     Bruker bruker = context3.Brukere.Where(b => b.Bruker_id == brukerID).FirstOrDefault();
@@ -256,23 +260,28 @@ namespace SysUt14Gr03
                 Session["flashStatus"] = Konstanter.notifikasjonsTyper.info.ToString();
             }
         }
-        private void GetTimers(int pauseId, int timeId)
+        private void GetTimers(List<int> pause_id, int timeId)
         {
             timer = Queries.GetTimer(timeId);
-            pauser = timer.Pause;
-            pause = Queries.GetPauseMedPauseID(pauseId);
+            tbTidsregistrert.Text += "Tid takingen startet: " + timer.Start + "\n";
             ddlOppgaver.SelectedValue = timer.Oppgave.ToString();
             ViewState["Start"] = timer.Start;
-
-            tbTidsregistrert.Text += "Tid takingen startet: " + timer.Start + "\n";
-            if (pauser != null)
+            for (int i = 0; i < pause_id.Count; i++)
             {
-                for (int i = 0; i < pauser.Count; i++)
+                pause = Queries.GetPauseMedPauseID(i);
+
+                if (pause != null)
                 {
                     tbTidsregistrert.Text += "Tid takingen pauset: " + pause.Start + "\n";
                     tbTidsregistrert.Text += "Tid takingen startet etter pause: " + pause.Stopp + "\n";
                 }
+                PauseTeller++;
+                PauseStartObjekter.Add(pause.Start);
+                PauseSluttObjekter.Add((DateTime)pause.Stopp);
             }
+            ViewState["PauseTeller"] = PauseTeller;
+            ViewState["StartEtterPause"] = PauseSluttObjekter;
+            ViewState["Pause"] = PauseStartObjekter;
         }
     }
 }
