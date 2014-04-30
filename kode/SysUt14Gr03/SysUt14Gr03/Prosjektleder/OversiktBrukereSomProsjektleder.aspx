@@ -3,7 +3,7 @@
 
     <h2>Oversikt over brukere</h2>
     
-    <asp:Label ID="lblProsjekt" runat="server"></asp:Label>
+    <h4><asp:Label ID="lblProsjekt" runat="server"></asp:Label></h4>
    
     <asp:PlaceHolder ID="PlaceHolderBrukere" runat="server"></asp:PlaceHolder>
 
