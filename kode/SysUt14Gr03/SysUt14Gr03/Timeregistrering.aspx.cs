@@ -33,8 +33,8 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (Session["loggedIn"] == null)
-            //    Response.Redirect("Login.aspx", true);
+            if (Session["loggedIn"] == null)
+                Response.Redirect("Login.aspx", true);
 
             if (!IsPostBack)
             {
@@ -56,8 +56,8 @@ namespace SysUt14Gr03
                     btnPause.Enabled = false;
                 }
 
-                prosjektID = 1;// Classes.Validator.KonverterTilTall(Request.QueryString["prosjekt_id"]);
-                brukerID = 3;// Classes.Validator.KonverterTilTall(Request.QueryString["bruker_id"]);
+                prosjektID = Classes.Validator.KonverterTilTall(Request.QueryString["prosjekt_id"]);
+                brukerID = Classes.Validator.KonverterTilTall(Request.QueryString["bruker_id"]);
                 oppgaver = Queries.GetAlleAktiveOppgaverForProsjektOgBruker(prosjektID, brukerID);
                 btnRegistrer.Enabled = false;
 
@@ -82,7 +82,7 @@ namespace SysUt14Gr03
                     using (var context = new Context())
                     {
                         oppgaveID = Convert.ToInt32(ddlOppgaver.SelectedValue);
-                        brukerID = 3;// Classes.Validator.KonverterTilTall(Request.QueryString["bruker_id"]);
+                        brukerID = Classes.Validator.KonverterTilTall(Request.QueryString["bruker_id"]);
                         Oppgave oppgave = context.Oppgaver.Where(o => o.Oppgave_id == oppgaveID).FirstOrDefault();
                         Bruker bruker = context.Brukere.Where(b => b.Bruker_id == brukerID).FirstOrDefault();
 
@@ -231,7 +231,7 @@ namespace SysUt14Gr03
                 using (var context3 = new Context())
                 {
                     oppgaveID = Convert.ToInt32(ddlOppgaver.SelectedValue);
-                    brukerID = 3;// Classes.Validator.KonverterTilTall(Request.QueryString["bruker_id"]);
+                    brukerID = Classes.Validator.KonverterTilTall(Request.QueryString["bruker_id"]);
                     timeID = Classes.Validator.KonverterTilTall(Session["time_id"].ToString());
 
                     Oppgave oppgave = context3.Oppgaver.Where(o => o.Oppgave_id == oppgaveID).FirstOrDefault();
