@@ -35,6 +35,8 @@ namespace SysUt14Gr03
             else if (Session["prosjekt_id"] != null)
             {
                 prosjekt_id = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
+                Prosjekt prosjekt = Queries.GetProsjekt(prosjekt_id);
+                lblProsjekt.Text = string.Format("<h1>Valgt Prosjekt: {0}</h1>", prosjekt.Navn); 
                 team = Queries.GetTeamByProsjekt(prosjekt_id);
                 teamId = team.Team_id;
             }
