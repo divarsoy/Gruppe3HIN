@@ -221,7 +221,6 @@
     <Content Include="Content\shepherd-theme-arrows-plain-buttons.css" />
     <Content Include="Content\shepherd-theme-arrows.css" />
     <Content Include="DeaktiveringAvRegistrerteTimer.aspx" />
-    <Content Include="Innstillinger.aspx" />
     <Content Include="KommentarTest.aspx" />
     <Content Include="Loggut.aspx" />
     <Content Include="ManuellTimeregistrering.aspx" />
@@ -575,13 +574,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>gruppe3DataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Innstillinger.aspx.cs">
-      <DependentUpon>Innstillinger.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Innstillinger.aspx.designer.cs">
-      <DependentUpon>Innstillinger.aspx</DependentUpon>
     </Compile>
     <Compile Include="KommentarTest.aspx.cs">
       <DependentUpon>KommentarTest.aspx</DependentUpon>

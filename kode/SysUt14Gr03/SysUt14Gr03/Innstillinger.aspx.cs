@@ -11,7 +11,7 @@ namespace SysUt14Gr03
 {
     public partial class Innstillinger : System.Web.UI.Page
     {
-        private int bruker_id;
+        private int bruker_id = 1;
         private Bruker bruker;
         private List<string> elementer = new List<string>();
         private BrukerPreferanse brukerPrefs;
@@ -20,8 +20,8 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            SessionSjekk.sjekkForBruker_id();
-            bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
+            //SessionSjekk.sjekkForBruker_id();
+            //bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
             bruker = Queries.GetBruker(bruker_id);
             if (bruker != null)
             {

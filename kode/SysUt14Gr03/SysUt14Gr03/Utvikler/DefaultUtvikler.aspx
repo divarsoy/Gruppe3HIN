@@ -12,7 +12,9 @@
       <div class="row">
         <div class="col-md-4">
           <h2>Velg Prosjekt</h2>
-          <asp:ListBox ID="ListBoxProsjekt" runat="server" Rows="1"></asp:ListBox>
+          <asp:ListBox ID="ListBoxProsjekt" runat="server" Rows="1">
+                <asp:ListItem Selected = "True" Text = "Velg Prosjekt" Value = "0"></asp:ListItem>
+          </asp:ListBox>
           <asp:Button ID="btnVelgProsjekt" runat="server" Text="Velg Prosjekt" OnClick="btnVelgProsjekt_Click" />
         </div>
         <div class="col-md-4">
