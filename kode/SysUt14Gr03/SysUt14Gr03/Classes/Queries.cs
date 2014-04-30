@@ -112,13 +112,13 @@ namespace SysUt14Gr03.Classes
             }
         }
 
-        static public Time GetTimerMedStartDato(DateTime start)
+        static public Time GetTimerMedOppgaveIDBoolean(int oppgaveID, bool isFerdig)
         {
             using (var context = new Context())
             {
                 var time = context.Timer
                             .Include("Pause")
-                            .Where(t => t.Start == start)
+                            .Where(t => t.Oppgave_id == oppgaveID && t.IsFerdig == false)
                             .FirstOrDefault();
                 return time;
             }
@@ -135,14 +135,35 @@ namespace SysUt14Gr03.Classes
             }
         }
 
-        static public Pause GetPauseMedStartDato(DateTime start)
+        static public List<Pause> GetPauseMedTimeID(int time_id)
         {
             using (var context = new Context())
             {
                 var pause = context.Pauser
-                            .Where(p => p.Start == start)
+                            .Where(p => p.Time_id == time_id)
+                            .ToList<Pause>();
+                return pause;
+            }
+        }
+        static public Pause GetPauseMedOppgaveID(int oppgave_id, bool isFerdig)
+        {
+            using (var context = new Context())
+            {
+                var pause = context.Pauser
+                            .Where(p => p.Oppgave_id == oppgave_id && p.IsFerdig == isFerdig)
                             .FirstOrDefault();
                 return pause;
+            }
+        }
+
+        static public List<Pause> GetPauserMedOppgaveID(int oppgave_id)
+        {
+            using(var context = new Context())
+            {
+                var pauseListe = context.Pauser
+                                .Where(p => p.Oppgave_id == oppgave_id)
+                                .ToList<Pause>();
+                return pauseListe;
             }
         }
 
@@ -603,7 +624,7 @@ namespace SysUt14Gr03.Classes
         {
             using (var context = new Context())
             {
-                var oppgaveListe = context.Oppgaver
+                List<Oppgave> oppgaveListe = context.Oppgaver
                                   .Include("Brukere")
                                   .Include("Kommentarer")
                                   .Where(oppgave => oppgave.Prosjekt_id == _prosjekt_id)
