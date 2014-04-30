@@ -14,38 +14,50 @@ namespace SysUt14Gr03
     public partial class DefaultProsjektleder : System.Web.UI.Page
     {
         private int bruker_id;
-        protected string Fornavn;
+        List<Prosjekt> listeMedProsjekter;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
+
+            if (Session["prosjekt_id"] != null)
+            {
+                string prosjektNavn = Session["prosjekt_navn"].ToString();
+                lblValgtProsjekt.Text = String.Format("Valgt prosjekt er <b>{0}</b>", prosjektNavn);
+            }
+
             if (!Page.IsPostBack)
             {
-
-                SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
-                
                 bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
 
                 Bruker bruker = Queries.GetBruker(bruker_id);
-                Fornavn = bruker.Fornavn;
-                List<Prosjekt> listeMedProsjekter = Queries.GetAlleAktiveProsjekterForProsjektLeder(bruker_id);
-                DataTable datatable = new DataTable();
-                datatable.Columns.Add("Prosjekt_id");
-                datatable.Columns.Add("Navn");
-                foreach (Prosjekt prosjekt in listeMedProsjekter)
+
+                // Henter alle aktive prosjekter for innlogget bruker
+                if (ListBoxProsjekt.SelectedValue != null && ListBoxProsjekt.SelectedValue == "0")
                 {
-                    datatable.Rows.Add(prosjekt.Prosjekt_id, prosjekt.Navn);
+                    listeMedProsjekter = Queries.GetAlleAktiveProsjekterForProsjektLeder(bruker_id);
+                    if (listeMedProsjekter.Count > 0)
+                    {
+                        ListBoxProsjekt.Items.Clear();
+                        ListItem firstItem = new ListItem();
+                        firstItem.Text = "Velg Prosjekt";
+                        firstItem.Value = "0";
+                        ListBoxProsjekt.Items.Add(firstItem);
+
+                        foreach (Prosjekt prosjekt in listeMedProsjekter)
+                        {
+                            ListItem item = new ListItem();
+                            item.Text = prosjekt.Navn;
+                            item.Value = prosjekt.Prosjekt_id.ToString();
+                            ListBoxProsjekt.Items.Add(item);
+                        }
+                    }
+                    ListBoxProsjekt.CssClass = "form-control";
+                    btnVelgProsjekt.CssClass = "btn btn-primary";
                 }
-                ListBoxProsjekt.DataValueField = "Prosjekt_id";
-                ListBoxProsjekt.DataTextField = "Navn";
-                ListBoxProsjekt.SelectionMode = ListSelectionMode.Single;
-                ListBoxProsjekt.DataSource = datatable;
-                ListBoxProsjekt.DataBind();
-                ListBoxProsjekt.CssClass = "form-control";
-                btnVelgProsjekt.CssClass = "btn btn-primary";
             }
-
-
         }
+
         protected void btnVelgProsjekt_Click(object sender, EventArgs e)
         {
             if (ListBoxProsjekt.Items.Count > 0 && ListBoxProsjekt.SelectedItem.Value != null)
@@ -54,7 +66,7 @@ namespace SysUt14Gr03
                 Session["prosjekt_id"] = prosjekt_id;
                 Prosjekt prosjekt = Queries.GetProsjekt(prosjekt_id);
                 Session["prosjekt_navn"] = prosjekt.Navn;
-                lblValgtProsjekt.Text = String.Format("<h4>Valgt prosjekt er <b>{0}</b></h4>", prosjekt.Navn);
+                lblValgtProsjekt.Text = String.Format("Valgt prosjekt er <b>{0}</b>", prosjekt.Navn);
                 //Response.Redirect(String.Format("OversiktOppgaver?bruker_id={0}&prosjekt_id={1}", Session["bruker_id"], ListBoxProsjekt.SelectedItem.Value));
             }
         }
