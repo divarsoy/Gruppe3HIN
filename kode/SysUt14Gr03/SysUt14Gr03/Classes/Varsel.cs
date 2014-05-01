@@ -99,7 +99,7 @@ namespace SysUt14Gr03.Classes
         {
             // Sjekker brukerpreferanser
             Bruker bruker = Queries.GetBruker(bruker_id);
-            BrukerPreferanse brukerPrefs = Queries.GetEpostPreferanser(bruker_id);
+            BrukerPreferanse brukerPrefs = Queries.GetBrukerPreferanse(bruker_id);
             bool[] selectedItems = new bool[6];
             if (brukerPrefs != null)
             {
@@ -108,7 +108,7 @@ namespace SysUt14Gr03.Classes
                 selectedItems[2] = brukerPrefs.EpostOppgave;
                 selectedItems[3] = brukerPrefs.EpostKommentar;
                 selectedItems[4] = brukerPrefs.EpostTidsfrist;
-                selectedItems[5] = brukerPrefs.EpostRapport;
+                selectedItems[5] = brukerPrefs.Sheperd;
             }   
 
             // Genererer melding + tittel
@@ -160,7 +160,7 @@ namespace SysUt14Gr03.Classes
         {
             // Sjekker brukerpreferanser
             Bruker mottaker = Queries.GetBruker(mottaker_id);
-            BrukerPreferanse brukerPrefs = Queries.GetEpostPreferanser(mottaker_id);
+            BrukerPreferanse brukerPrefs = Queries.GetBrukerPreferanse(mottaker_id);
 
             bool oppgaveVarsel = brukerPrefs.EpostOppgave;
 

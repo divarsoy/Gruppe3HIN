@@ -60,7 +60,7 @@ namespace SysUt14Gr03
 
         protected void btnVelgProsjekt_Click(object sender, EventArgs e)
         {
-            if (ListBoxProsjekt.Items.Count > 0 && ListBoxProsjekt.SelectedItem.Value != null)
+            if (ListBoxProsjekt.Items.Count > 0 && ListBoxProsjekt.SelectedValue != null && ListBoxProsjekt.SelectedValue != "0")
             {
                 int prosjekt_id = Validator.KonverterTilTall(ListBoxProsjekt.SelectedItem.Value);
                 Session["prosjekt_id"] = prosjekt_id;

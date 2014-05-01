@@ -14,13 +14,24 @@ namespace SysUt14Gr03
     {
         private DataTable dt = new DataTable();
         private Table tabell = new Table();
+        private int bruker_id;
         private List<Logg> query = Queries.GetLoggForAdministrator();
         
         protected void Page_Load(object sender, EventArgs e)
         {
             SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Administrator);
+            bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
+
             tabell = Tabeller.hentLoggForAdministrator(query);
             PlaceHolderTable.Controls.Add(tabell);
+
+            if (!Page.IsPostBack)
+            {
+                //Sjekker om Sheperd skal aktiveres
+                BrukerPreferanse brukerpreferanse = Queries.GetBrukerPreferanse(bruker_id);
+                SheperdBool.Value = brukerpreferanse.Sheperd.ToString();
+                //SheperdBool.Value = "False";
+            }
         }
 
         protected void Button1_Click(object sender, EventArgs e)

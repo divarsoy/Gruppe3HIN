@@ -35,5 +35,5 @@
     <br />
     <br />
     <br />
-    <script src="/SysUt14Gr03/Scripts/MorildShepherdProsjektleder.js"></script>
+    <script  src="../Scripts/MorildShepherdProsjektleder.js"></script>
 </asp:Content>

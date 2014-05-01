@@ -14,6 +14,14 @@ namespace SysUt14Gr03
     {
         private Prosjekt prosjekt;
         private DataTable dt = new DataTable();
+
+        // Laster inn riktig masterfil
+        protected void Page_PreInit(Object sener, EventArgs e)
+        {
+            string master = SessionSjekk.findMaster();
+            this.MasterPageFile = master;
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             SessionSjekk.sjekkForProsjekt_id();
@@ -28,7 +36,7 @@ namespace SysUt14Gr03
         protected void btnExport_Click(object sender, EventArgs e)
         {
             dt = DataTabeller.ProductBacklogProsjekt(prosjekt);
-            EksporterTilExcel.CreateExcelDocument(dt, "ProductBacklog for prosjekt", Response);
+            EksporterTilExcel.CreateExcelDocument(dt, "ProductBacklog for prosjekt.xlsx", Response);
         }
     }
 }

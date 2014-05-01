@@ -7,5 +7,5 @@
    <h2><asp:Label ID="lblProsjektnavn" runat="server"></asp:Label></h2>
     <br />
     <asp:PlaceHolder ID="phProsjekt" runat="server"></asp:PlaceHolder>
-    <asp:Button ID="btnExport" CssClass="btn btn-primary" runat="server" Text="Eksportert til excel" OnClick="btnExport_Click" />
+    <asp:Button ID="btnExport" CssClass="btn btn-success" runat="server" Text="Eksportert til excel" OnClick="btnExport_Click" />
 </asp:Content>

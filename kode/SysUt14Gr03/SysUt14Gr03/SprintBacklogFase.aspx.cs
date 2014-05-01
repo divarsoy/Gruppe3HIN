@@ -14,6 +14,14 @@ namespace SysUt14Gr03
     {
         private Fase fase;
         private DataTable dt = new DataTable();
+
+        // Laster inn riktig masterfil
+        protected void Page_PreInit(Object sener, EventArgs e)
+        {
+            string master = SessionSjekk.findMaster();
+            this.MasterPageFile = master;
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             SessionSjekk.sjekkForProsjekt_id();
@@ -37,7 +45,7 @@ namespace SysUt14Gr03
         protected void btnExport_Click(object sender, EventArgs e)
         {
             dt = DataTabeller.SprintBacklogFase(fase);
-            EksporterTilExcel.CreateExcelDocument(dt, "SprintBacklog for fase", Response);
+            EksporterTilExcel.CreateExcelDocument(dt, "SprintBacklog for fase.xlsx", Response);
         }
     }
 }

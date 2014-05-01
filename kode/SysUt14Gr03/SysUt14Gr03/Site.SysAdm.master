@@ -2,8 +2,8 @@
 
 <asp:Content ID="Content3" ContentPlaceHolderID="LogoTemplate" runat="server">
     <asp:ContentPlaceHolder ID="LogoTemplate" runat="server"></asp:ContentPlaceHolder>
-    <link type="text/css" rel="stylesheet" href="/SysUt14Gr03/Content/shepherd-theme-arrows.css" />
-    <script type="text/javascript" src="/SysUt14Gr03/Scripts/shepherd.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="../Content/shepherd-theme-arrows.css" />
+    <script type="text/javascript" src="../Scripts/shepherd.min.js"></script>
     <a class="navbar-brand" runat="server" href="~/Administrator/DefaultAdministrator">Morild Data BA</a>
 </asp:Content>
 
@@ -20,8 +20,7 @@
     <ul class="nav navbar-nav">
         
         <li><a id="Adm1" class="adm1" runat="server" href="~/Administrator/RegistreringAvBrukereSomAdministrator">Registrer Ny Bruker</a></li>
-        <li><a id="Adm2" class="adm2" runat="server" href="~/Administrator/OversiktBrukereSomAdministrator">Oversikt Over Brukere</a></li>
-        <li><a id="Adm3" class="adm3" runat="server" href="~/Administrator/EndreBrukerinformasjonSomAdministrator">Administrere Brukere</a></li>
+        <li><a id="Adm3" class="adm3" runat="server" href="~/Administrator/EndreBrukerinformasjonSomAdministrator">Oversikt Over Brukere</a></li>
         <li><a id="Adm4" class="adm4" runat="server" href="~/Administrator/Rettigheter">Administrere Rettigheter</a></li>
         <li><a id="Adm5" class="adm5" runat="server" href="~/EpostPreferanser">E-Post Varsler</a></li>
     </ul>
