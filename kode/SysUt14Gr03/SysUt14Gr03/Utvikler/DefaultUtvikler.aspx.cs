@@ -18,7 +18,10 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
             SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Utvikler);
+            bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
+
 
             if (Session["prosjekt_id"] != null)
             {
@@ -27,11 +30,13 @@ namespace SysUt14Gr03
             }
 
             if (!Page.IsPostBack)
-            {          
-                bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
-
+            {
                 Bruker bruker = Queries.GetBruker(bruker_id);
 
+                //Sjekker om Sheperd skal aktiveres
+                BrukerPreferanse brukerpreferanse = Queries.GetBrukerPreferanse(bruker_id);
+                SheperdBool.Value = brukerpreferanse.Sheperd.ToString();
+                
                 // Henter alle aktive prosjekter for innlogget bruker
                 if (ListBoxProsjekt.SelectedValue != null && ListBoxProsjekt.SelectedValue == "0")
                 {
@@ -62,7 +67,7 @@ namespace SysUt14Gr03
 
         protected void btnVelgProsjekt_Click(object sender, EventArgs e)
         {
-            if (ListBoxProsjekt.Items.Count > 0 && ListBoxProsjekt.SelectedItem.Value != null)
+            if (ListBoxProsjekt.Items.Count > 0 && ListBoxProsjekt.SelectedValue != null && ListBoxProsjekt.SelectedValue != "0")
             {
                 int prosjekt_id = Validator.KonverterTilTall(ListBoxProsjekt.SelectedItem.Value);
                 Session["prosjekt_id"] = ListBoxProsjekt.SelectedItem.Value;

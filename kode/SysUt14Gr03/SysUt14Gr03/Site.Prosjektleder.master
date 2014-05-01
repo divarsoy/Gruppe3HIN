@@ -7,8 +7,8 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="LogoTemplate" runat="server">
                 <asp:ContentPlaceHolder ID="LogoTemplate" runat="server"></asp:ContentPlaceHolder>
-    <link type="text/css" rel="stylesheet" href="/SysUt14Gr03/Content/shepherd-theme-arrows.css" />
-    <script type="text/javascript" src="/SysUt14Gr03/Scripts/shepherd.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="../Content/shepherd-theme-arrows.css" />
+    <script type="text/javascript" src="../Scripts/shepherd.min.js"></script>
 
     <a class="navbar-brand" runat="server" href="~/Prosjektleder/DefaultProsjektleder">Morild Data BA</a>
 </asp:Content>

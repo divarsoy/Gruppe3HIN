@@ -127,7 +127,7 @@ namespace SysUt14Gr03
             {
                 string lsDataKeyValue = gridViewEndre.DataKeys[e.Row.RowIndex].Values[0].ToString();
                 bruker_id = Convert.ToInt32(lsDataKeyValue);
-
+                Bruker bruker = Queries.GetBruker(bruker_id);          
 
                 List<Rettighet> rettighet = Queries.GetAlleRettigheter();
                 DropDownList ddlRettighet = e.Row.FindControl("ddlRettighet") as DropDownList;
@@ -154,6 +154,17 @@ namespace SysUt14Gr03
                         Label lblRett = e.Row.FindControl("lblRettighet") as Label;
                         lblRett.Text = rett.RettighetNavn;
                     }
+                    HyperLink EtternavnLink = e.Row.FindControl("EtternavnLink") as HyperLink;
+                    Label lblEtternavn = e.Row.FindControl("lblEtternavn") as Label;
+                    lblEtternavn.Visible = false;
+                    EtternavnLink.Text = bruker.Etternavn;
+                    EtternavnLink.NavigateUrl = ResolveUrl("~/visBruker?bruker_id=" + bruker_id);
+                    
+                    HyperLink FornavnLink = e.Row.FindControl("FornavnLink") as HyperLink;
+                    Label lblFornavn = e.Row.FindControl("lblFornavn") as Label;
+                    lblFornavn.Visible = false;
+                    FornavnLink.Text = bruker.Fornavn;
+                    FornavnLink.NavigateUrl = ResolveUrl("~/visBruker?bruker_id=" + bruker_id);
                 }
             }
         }

@@ -39,12 +39,12 @@ namespace SysUt14Gr03
                 cblElementer.Items.Add("tildelt en oppgave");
                 cblElementer.Items.Add("nevnt i en kommentar");
                 cblElementer.Items.Add("tildelt en tidsfrist på oppgave");
-                cblElementer.Items.Add("rapportert");
+                cblElementer.Items.Add("Opplæring på førstesiden");
             }
 
             if (!IsPostBack)
             {
-                brukerPrefs = Queries.GetEpostPreferanser(brukerId);
+                brukerPrefs = Queries.GetBrukerPreferanse(brukerId);
 
                 if (brukerPrefs != null)
                 {

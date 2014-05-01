@@ -2,7 +2,7 @@
     var completeShepherd, init, setupShepherd;
 
     init = function () {
-        return setupShepherd();
+            return setupShepherd();
     };
 
     setupShepherd = function () {
@@ -31,6 +31,12 @@
                   action: shepherd.next,
                   classes: 'shepherd-button-example-primary'
               }
+            ],
+            checkbox: [
+             {
+                 text: 'Huk av tekstboksen for å skjule opplæringen neste gang du logger inn.',
+                 value: true
+             }
             ]
         });
 
