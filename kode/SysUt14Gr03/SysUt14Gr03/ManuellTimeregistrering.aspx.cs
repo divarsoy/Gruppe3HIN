@@ -55,6 +55,7 @@ namespace SysUt14Gr03
                             RyddOpp();
                             Session["flashMelding"] = "Timer registrert på " + oppgave.Tittel;
                             Session["flashStatus"] = Konstanter.notifikasjonsTyper.success.ToString();
+                            Response.Redirect(Request.Url.ToString());
 
                         }
 

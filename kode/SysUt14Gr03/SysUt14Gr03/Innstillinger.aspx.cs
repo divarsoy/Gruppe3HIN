@@ -104,6 +104,8 @@ namespace SysUt14Gr03
                 Session["flashMelding"] = "Et eller flere felt er ikke fylt ut";
                 Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
             }
+
+            Response.Redirect(Request.Url.ToString());
         }
 
         protected void btnLagrePassord_Click(object sender, EventArgs e)
@@ -147,6 +149,7 @@ namespace SysUt14Gr03
                     Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
                 }
             }
+            Response.Redirect(Request.Url.ToString());
                     
         }
 
