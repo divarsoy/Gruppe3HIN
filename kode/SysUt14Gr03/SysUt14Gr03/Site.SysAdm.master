@@ -20,8 +20,7 @@
     <ul class="nav navbar-nav">
         
         <li><a id="Adm1" class="adm1" runat="server" href="~/Administrator/RegistreringAvBrukereSomAdministrator">Registrer Ny Bruker</a></li>
-        <li><a id="Adm2" class="adm2" runat="server" href="~/Administrator/OversiktBrukereSomAdministrator">Oversikt Over Brukere</a></li>
-        <li><a id="Adm3" class="adm3" runat="server" href="~/Administrator/EndreBrukerinformasjonSomAdministrator">Administrere Brukere</a></li>
+        <li><a id="Adm3" class="adm3" runat="server" href="~/Administrator/EndreBrukerinformasjonSomAdministrator">Oversikt Over Brukere</a></li>
         <li><a id="Adm4" class="adm4" runat="server" href="~/Administrator/Rettigheter">Administrere Rettigheter</a></li>
         <li><a id="Adm5" class="adm5" runat="server" href="~/EpostPreferanser">E-Post Varsler</a></li>
     </ul>
