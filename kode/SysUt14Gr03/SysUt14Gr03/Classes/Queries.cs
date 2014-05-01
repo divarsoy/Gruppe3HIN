@@ -212,20 +212,15 @@ namespace SysUt14Gr03.Classes
             }
         }
 
-        // Henter epostpreferanser til bruker med bruker_id
-        static public BrukerPreferanse GetEpostPreferanser(int _bruker_id)
+        // Henter brukerpreferanser til bruker med bruker_id
+        static public BrukerPreferanse GetBrukerPreferanse(int bruker_id)
         {
             using (var context = new Context())
             {
-                List<BrukerPreferanse> brukPrefs = context.BrukerPreferanser.Where(p => p.Bruker_id == _bruker_id).ToList();
-                if (brukPrefs.Count > 0)
-                {
-                    return brukPrefs[0];
-                }
-                else
-                {
-                    return null;
-                }
+                var brukerPreferanse = context.BrukerPreferanser
+                                        .Where(bruker => bruker.Bruker_id == bruker_id)
+                                        .FirstOrDefault();
+                return brukerPreferanse;
             }
         }
 
@@ -438,6 +433,7 @@ namespace SysUt14Gr03.Classes
             using (var context = new Context()) 
             {
                 var prosjektListe = context.Prosjekter
+                                    .Include("Bruker")
                                     .Where(prosjekta => prosjekta.Aktiv == true)
                                     .Where(team => team.Team.Brukere.Any(bruker => bruker.Bruker_id == bruker_id))
                                     .ToList();

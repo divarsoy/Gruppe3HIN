@@ -8,14 +8,17 @@ using SysUt14Gr03.Classes;
 using SysUt14Gr03.Models;
 using System.Drawing;
 using System.Web.UI.DataVisualization.Charting;
+using System.Data;
 
 namespace SysUt14Gr03
 {
     public partial class VisRapport : System.Web.UI.Page
     {
         private int bruker_id;
+        private int prosjekt_id;
         private Rettighet rettighet;
         private Chart crtKake = new Chart();
+        private Bruker bruker;
 
         protected void Page_PreInit(Object sener, EventArgs e)
         {
@@ -29,7 +32,10 @@ namespace SysUt14Gr03
             bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
             if (bruker_id != -1)
             {
-                Bruker bruker = Queries.GetBruker(bruker_id);
+                SessionSjekk.sjekkForProsjekt_id();
+                prosjekt_id = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
+
+                bruker = Queries.GetBruker(bruker_id);
                 rettighet = Queries.GetRettighet(bruker_id);
                 if (rettighet.Rettighet_id == 2)
                 {
@@ -54,13 +60,17 @@ namespace SysUt14Gr03
                     ddlBrukere.Visible = true;
                     ddlProsjekter.Visible = true;
                     btnIndivid.Visible = true;
+                    btnLastNedIndivid.Visible = true;
                     btnTeam.Visible = true;
+                    btnLastNedTeam.Visible = true;
+                    btnLastNedProsjekt.Visible = true;
                     btnProsjekt.Visible = true;
                 }
                 if (SessionSjekk.IsFaseleder(bruker_id))
                 {
                     ddlTeam.Visible = true;
                     btnTeam.Visible = true;
+                    btnLastNedTeam.Visible = true;
                 }
 
                 if (rettighet.Rettighet_id == 3)
@@ -75,7 +85,9 @@ namespace SysUt14Gr03
                         }
 
                         btnIndivid.Visible = true;
+                        btnLastNedIndivid.Visible = true;
                         btnProsjekt.Visible = true;
+                        btnLastNedProsjekt.Visible = true;
 
                     }
                 }
@@ -232,6 +244,56 @@ namespace SysUt14Gr03
             }
 
             lblTest.Visible = true;
+        }
+
+        protected void btnLastNedTeam_Click(object sender, EventArgs e)
+        {
+            int prosjekt_id = Validator.KonverterTilTall(ddlProsjekter.SelectedValue);
+            Team team = Queries.GetTeamByProsjekt(prosjekt_id);
+
+            DataTable dt = DataTabeller.GetRapport(Rapport.TEAMRAPPORT, team.Team_id);
+            string filnavn = team.Navn + "_" + DateTime.Now.ToShortDateString() + ".xlsx";
+            EksporterTilExcel.CreateExcelDocument(dt, filnavn, Response);
+        }
+
+        protected void btnLastNedProsjekt_Click(object sender, EventArgs e)
+        {
+            if (rettighet.Rettighet_id == 2)
+            {
+
+                prosjekt_id = Validator.KonverterTilTall(ddlProsjekter.SelectedValue);
+                DataTable dt = DataTabeller.GetRapport(Rapport.PROSJEKTRAPPORT, prosjekt_id);
+                string filnavn = ddlProsjekter.SelectedItem.Text + "_" + DateTime.Now.ToShortDateString() + ".xlsx";
+                EksporterTilExcel.CreateExcelDocument(dt, filnavn, Response);
+                
+            }
+            else
+            {
+                DataTable dt = DataTabeller.GetProsjektRapportForBruker(bruker_id, prosjekt_id);
+                string filnavn = ddlProsjekter.SelectedItem.Text + "_" + DateTime.Now.ToShortDateString() + ".xlsx";
+                EksporterTilExcel.CreateExcelDocument(dt, filnavn, Response);
+            }
+
+            
+        }
+
+        protected void btnLastNedIndivid_Click(object sender, EventArgs e)
+        {
+
+            if (rettighet.Rettighet_id == 2)
+            {
+                DataTable dt = DataTabeller.GetRapport(Rapport.INDIVIDRAPPORT, Validator.KonverterTilTall(ddlBrukere.SelectedValue));
+                string filnavn = ddlBrukere.SelectedItem.Text + "_" + DateTime.Now.ToShortDateString() + ".xlsx";
+
+                EksporterTilExcel.CreateExcelDocument(dt, filnavn, Response);
+            }
+            else
+            {
+                DataTable dt = DataTabeller.GetRapport(Rapport.INDIVIDRAPPORT, bruker_id);
+                string filnavn = bruker.ToString() + "_" + DateTime.Now.ToShortDateString() + ".xlsx";
+
+                EksporterTilExcel.CreateExcelDocument(dt, filnavn, Response);
+            }
         }
     }
 }

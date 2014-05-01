@@ -13,6 +13,8 @@
       </div>
     </div>
 
+   <asp:HiddenField ID="SheperdBool" runat="server" />
+    
     <div class="container">
       <div class="row">
         <div class="col-md-8">
@@ -35,5 +37,5 @@
 
 
     <div id="admDefault"></div>
-    <script src="/SysUt14Gr03/Scripts/MorildSheperdAdministrator.js"></script>
+    <script src="../Scripts/MorildSheperdAdministrator.js"></script>
 </asp:Content>

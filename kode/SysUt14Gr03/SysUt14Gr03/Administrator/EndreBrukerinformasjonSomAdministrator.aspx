@@ -2,12 +2,14 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-      <h2>Endre Brukerinformasjon</h2>  
+      <h2>Oversikt brukere</h2>  
     <asp:GridView RowStyle-HorizontalAlign="Center" ID="gridViewEndre" runat="server" OnRowDataBound="gridViewEndre_RowDataBound" CssClass="table" AutoGenerateColumns="false" DataKeyNames="Bruker_id" OnRowEditing="gridViewEndre_RowEditing" OnRowCancelingEdit="gridViewEndre_RowCancelingEdit" OnRowUpdating="gridViewEndre_RowUpdating" OnRowCommand="gridViewEndre_RowCommand" ShowFooter="False" ShowHeader="True">
         <Columns>
             <asp:TemplateField HeaderText="Etternavn">
                 <ItemTemplate>
-                      <asp:Label ID="lbEtternavn" runat="server" Text='<%#Bind("Etternavn") %>'></asp:Label>                
+                      <asp:Label ID="lblEtternavn" runat="server" Visible="true" Text='<%#Bind("Etternavn") %>' ></asp:Label>  
+                      <asp:HyperLink ID="EtternavnLink" runat="server"></asp:HyperLink> 
+              
                 </ItemTemplate>          
                 <EditItemTemplate>
                     <asp:TextBox ID="tbEtternavn" runat="server" Text='<%#Bind("Etternavn") %>'></asp:TextBox>
@@ -15,7 +17,9 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Fornavn">
                 <ItemTemplate>
-                    <asp:Label ID="lbFornavn" runat="server" Text='<%#Bind("Fornavn") %>'></asp:Label>
+                    <asp:Label ID="lblFornavn" runat="server" Visible="true" Text='<%#Bind("Fornavn") %>'></asp:Label>
+                    <asp:HyperLink ID="FornavnLink" runat="server"></asp:HyperLink> 
+
                 </ItemTemplate>
                   <EditItemTemplate>
                       <asp:TextBox ID="tbFornavn" runat="server" Text='<%#Bind("Fornavn") %>'></asp:TextBox>

@@ -36,7 +36,6 @@ namespace SysUt14Gr03
                     cblElementer.Items.Add("tildelt en oppgave");
                     cblElementer.Items.Add("nevnt i en kommentar");
                     cblElementer.Items.Add("tildelt en tidsfrist på oppgave");
-                    cblElementer.Items.Add("rapportert");
                 }
 
                 if (!IsPostBack)
@@ -51,7 +50,6 @@ namespace SysUt14Gr03
                         cblElementer.Items[2].Selected = brukerPrefs.EpostOppgave;
                         cblElementer.Items[3].Selected = brukerPrefs.EpostKommentar;
                         cblElementer.Items[4].Selected = brukerPrefs.EpostTidsfrist;
-                        cblElementer.Items[5].Selected = brukerPrefs.EpostRapport;
                     }
                 }
             }
@@ -164,7 +162,6 @@ namespace SysUt14Gr03
                 EpostOppgave = selectedItems[2],
                 EpostKommentar = selectedItems[3],
                 EpostTidsfrist = selectedItems[4],
-                EpostRapport = selectedItems[5]
             };
 
             string info;
@@ -183,7 +180,6 @@ namespace SysUt14Gr03
                         brukerPref.EpostOppgave = selectedItems[2];
                         brukerPref.EpostKommentar = selectedItems[3];
                         brukerPref.EpostTidsfrist = selectedItems[4];
-                        brukerPref.EpostRapport = selectedItems[5];
                     }
                     else
                     {
