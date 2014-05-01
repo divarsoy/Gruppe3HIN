@@ -438,6 +438,7 @@ namespace SysUt14Gr03.Classes
             using (var context = new Context()) 
             {
                 var prosjektListe = context.Prosjekter
+                                    .Include("Bruker")
                                     .Where(prosjekta => prosjekta.Aktiv == true)
                                     .Where(team => team.Team.Brukere.Any(bruker => bruker.Bruker_id == bruker_id))
                                     .ToList();
