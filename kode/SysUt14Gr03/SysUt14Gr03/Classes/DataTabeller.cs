@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web;
+using System.Windows.Forms;
 using SysUt14Gr03.Models;
 
 namespace SysUt14Gr03.Classes
@@ -91,7 +92,7 @@ namespace SysUt14Gr03.Classes
                 row["Fase"] = o.Fase.Navn;
                 string status = Queries.GetStatus(o.Status_id).Navn;
                 row["Status"] = status;
-
+                
                 dt.Rows.Add(row);
             }
             return dt;

@@ -28,7 +28,7 @@ namespace SysUt14Gr03
         protected void btnExport_Click(object sender, EventArgs e)
         {
             dt = DataTabeller.ProductBacklogProsjekt(prosjekt);
-            EksporterTilExcel.CreateExcelDocument(dt, "ProductBacklog for prosjekt", Response);
+            EksporterTilExcel.CreateExcelDocument(dt, "ProductBacklog for prosjekt.xlsx", Response);
         }
     }
 }

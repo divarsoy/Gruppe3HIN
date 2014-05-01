@@ -37,7 +37,7 @@ namespace SysUt14Gr03
         protected void btnExport_Click(object sender, EventArgs e)
         {
             dt = DataTabeller.SprintBacklogFase(fase);
-            EksporterTilExcel.CreateExcelDocument(dt, "SprintBacklog for fase", Response);
+            EksporterTilExcel.CreateExcelDocument(dt, "SprintBacklog for fase.xlsx", Response);
         }
     }
 }

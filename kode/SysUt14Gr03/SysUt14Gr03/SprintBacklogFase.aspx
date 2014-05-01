@@ -12,6 +12,6 @@
     </div>
     <br />
     <asp:PlaceHolder ID="phFase" runat="server"></asp:PlaceHolder>
-    <asp:Button ID="btnExport" CssClass="btn btn-primary" runat="server" OnClick="btnExport_Click" Text="Exporter til excel dokument" />
+    <asp:Button ID="btnExport" CssClass="btn btn-success" runat="server" OnClick="btnExport_Click" Text="Exporter til excel dokument" />
 
 </asp:Content>
