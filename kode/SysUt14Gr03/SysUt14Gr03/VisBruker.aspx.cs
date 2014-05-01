@@ -119,7 +119,7 @@ namespace SysUt14Gr03
 
                         lblPrefs.Text += "<h2>Mine instillinger</h2>";
 
-                        BrukerPreferanse brukerPrefs = Queries.GetEpostPreferanser(bruker_id);
+                        BrukerPreferanse brukerPrefs = Queries.GetBrukerPreferanse(bruker_id);
 
                         if (brukerPrefs != null)
                         {
