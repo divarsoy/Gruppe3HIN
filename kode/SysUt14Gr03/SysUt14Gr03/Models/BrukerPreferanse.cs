@@ -15,7 +15,7 @@ namespace SysUt14Gr03.Models
         public bool EpostOppgave { get; set; }
         public bool EpostKommentar { get; set; }
         public bool EpostTidsfrist { get; set; }
-        public bool EpostRapport { get; set; }
+        public bool Sheperd { get; set; }
         public int Bruker_id { get; set; }
         public virtual Bruker Bruker { get; set; }
 

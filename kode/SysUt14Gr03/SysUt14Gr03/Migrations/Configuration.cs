@@ -262,7 +262,7 @@ namespace SysUt14Gr03.Migrations
                     EpostOppgave = false,
                     EpostKommentar = false,
                     EpostTidsfrist = false,
-                    EpostRapport = false,
+                    Sheperd = true,
                     Bruker_id = brukere.Single(bruker => bruker.Brukernavn == "admin" ).Bruker_id
                 },
                 new BrukerPreferanse {
@@ -271,7 +271,7 @@ namespace SysUt14Gr03.Migrations
                     EpostOppgave = true,
                     EpostKommentar = true,
                     EpostTidsfrist = true,
-                    EpostRapport = true,
+                    Sheperd = true,
                     Bruker_id = brukere.Single(bruker => bruker.Brukernavn == "prosjektleder" ).Bruker_id
                 },
                 new BrukerPreferanse {
@@ -280,7 +280,7 @@ namespace SysUt14Gr03.Migrations
                     EpostOppgave = true,
                     EpostKommentar = true,
                     EpostTidsfrist = true,
-                    EpostRapport = true,
+                    Sheperd = true,
                     Bruker_id = brukere.Single(bruker => bruker.Brukernavn == "utvikler" ).Bruker_id
                 },
                 new BrukerPreferanse {
@@ -289,7 +289,7 @@ namespace SysUt14Gr03.Migrations
                     EpostOppgave = true,
                     EpostKommentar = true,
                     EpostTidsfrist = true,
-                    EpostRapport = true,
+                    Sheperd = true,
                     Bruker_id = brukere.Single(bruker => bruker.Brukernavn == "vkarlsen" ).Bruker_id
                 },
                 new BrukerPreferanse {
@@ -298,7 +298,7 @@ namespace SysUt14Gr03.Migrations
                     EpostOppgave = true,
                     EpostKommentar = true,
                     EpostTidsfrist = true,
-                    EpostRapport = true,
+                    Sheperd = true,
                     Bruker_id = brukere.Single(bruker => bruker.Brukernavn == "hhansen" ).Bruker_id
                 },
                 new BrukerPreferanse {
@@ -307,7 +307,7 @@ namespace SysUt14Gr03.Migrations
                     EpostOppgave = true,
                     EpostKommentar = true,
                     EpostTidsfrist = true,
-                    EpostRapport = true,
+                    Sheperd = true,
                     Bruker_id = brukere.Single(bruker => bruker.Brukernavn == "aaskoy" ).Bruker_id
                 },
                 new BrukerPreferanse {
@@ -316,7 +316,7 @@ namespace SysUt14Gr03.Migrations
                     EpostOppgave = true,
                     EpostKommentar = true,
                     EpostTidsfrist = true,
-                    EpostRapport = true,
+                    Sheperd = true,
                     Bruker_id = brukere.Single(bruker => bruker.Brukernavn == "jpolden" ).Bruker_id
                 },
                 new BrukerPreferanse {
@@ -325,7 +325,7 @@ namespace SysUt14Gr03.Migrations
                     EpostOppgave = true,
                     EpostKommentar = true,
                     EpostTidsfrist = true,
-                    EpostRapport = true,
+                    Sheperd = true,
                     Bruker_id = brukere.Single(bruker => bruker.Brukernavn == "pholm" ).Bruker_id
                 }
             };

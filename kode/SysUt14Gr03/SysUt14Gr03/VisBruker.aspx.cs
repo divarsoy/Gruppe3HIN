@@ -129,8 +129,8 @@ namespace SysUt14Gr03
                             lblPrefs.Text += "<br />" + " tildelt oppgave: " + (brukerPrefs.EpostOppgave ? "Ja" : "Nei");
                             lblPrefs.Text += "<br />" + " nevnt i kommentar: " + (brukerPrefs.EpostKommentar ? "Ja" : "Nei");
                             lblPrefs.Text += "<br />" + " tildelt en tidsfrist: " + (brukerPrefs.EpostTidsfrist ? "Ja" : "Nei");
-                            lblPrefs.Text += "<br />" + " noe med rapporter..: " + (brukerPrefs.EpostRapport ? "Ja" : "Nei");
                             lblPrefs.Text += "<br />";
+                            lblPrefs.Text += "<br />" + " Opplæring på hjemmeside: " + (brukerPrefs.Sheperd ? "Ja" : "Nei");
                             btnPrefs.Visible = true;
                         }
                     }

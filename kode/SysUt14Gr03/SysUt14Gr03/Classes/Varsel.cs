@@ -108,7 +108,7 @@ namespace SysUt14Gr03.Classes
                 selectedItems[2] = brukerPrefs.EpostOppgave;
                 selectedItems[3] = brukerPrefs.EpostKommentar;
                 selectedItems[4] = brukerPrefs.EpostTidsfrist;
-                selectedItems[5] = brukerPrefs.EpostRapport;
+                selectedItems[5] = brukerPrefs.Sheperd;
             }   
 
             // Genererer melding + tittel
