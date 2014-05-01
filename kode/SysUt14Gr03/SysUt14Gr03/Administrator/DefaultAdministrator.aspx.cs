@@ -30,6 +30,7 @@ namespace SysUt14Gr03
                 //Sjekker om Sheperd skal aktiveres
                 BrukerPreferanse brukerpreferanse = Queries.GetBrukerPreferanse(bruker_id);
                 SheperdBool.Value = brukerpreferanse.Sheperd.ToString();
+                //SheperdBool.Value = "False";
             }
         }
 
