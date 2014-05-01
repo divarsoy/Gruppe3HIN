@@ -85,6 +85,15 @@ namespace SysUt14Gr03 {
         protected global::System.Web.UI.WebControls.Button btnLagrePassord;
         
         /// <summary>
+        /// chkShepherd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkShepherd;
+        
+        /// <summary>
         /// cblElementer control.
         /// </summary>
         /// <remarks>

@@ -18,10 +18,16 @@ namespace SysUt14Gr03
         public bool[] selectedItems { get; set; }
         public string brukernavn { get; set; }
 
+        protected void Page_PreInit(Object sener, EventArgs e)
+        {
+            string master = SessionSjekk.findMaster();
+            this.MasterPageFile = master;
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            //SessionSjekk.sjekkForBruker_id();
-            //bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
+            SessionSjekk.sjekkForBruker_id();
+            bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
             bruker = Queries.GetBruker(bruker_id);
             if (bruker != null)
             {
@@ -40,7 +46,7 @@ namespace SysUt14Gr03
 
                 if (!IsPostBack)
                 {
-                    brukerPrefs = Queries.GetEpostPreferanser(bruker_id);
+                    brukerPrefs = Queries.GetBrukerPreferanse(bruker_id);
 
                     if (brukerPrefs != null)
                     {
@@ -50,6 +56,7 @@ namespace SysUt14Gr03
                         cblElementer.Items[2].Selected = brukerPrefs.EpostOppgave;
                         cblElementer.Items[3].Selected = brukerPrefs.EpostKommentar;
                         cblElementer.Items[4].Selected = brukerPrefs.EpostTidsfrist;
+                        chkShepherd.Checked = brukerPrefs.Sheperd;
                     }
                 }
             }
@@ -59,7 +66,6 @@ namespace SysUt14Gr03
         protected void btnLagre_Click(object sender, EventArgs e)
         {
             // Lagrer innstillinger til databasen..
-            lagrePreferanser(false);
 
             if (txtFornavn.Text != string.Empty &&
                 txtEtternavn.Text != string.Empty &&
@@ -67,7 +73,7 @@ namespace SysUt14Gr03
                 txtIM.Text != string.Empty)
             {
                 Bruker brukerTestIM = Queries.GetBrukerVedIM(txtIM.Text);
-                if (brukerTestIM.IM == string.Empty)
+                if (true)
                 {
                     using (var context = new Context())
                     {
@@ -78,14 +84,17 @@ namespace SysUt14Gr03
                         _bruker.Brukernavn = txtBrukernavn.Text.Trim();
                         _bruker.IM = txtIM.Text.Trim();
 
+                        lagrePreferanser();
+
                         context.SaveChanges();
                         Session["flashMelding"] = "Innstillinger lagret";
                         Session["flashStatus"] = Konstanter.notifikasjonsTyper.success.ToString();
+
                     }
                 }
                 else
                 {
-                    Session["flashMelding"] = "\"" + txtIM + "\" brukes av en annen bruker";
+                    Session["flashMelding"] = "\"" + txtIM.Text + "\" brukes av en annen bruker";
                     Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
                 }
                 
@@ -141,18 +150,17 @@ namespace SysUt14Gr03
                     
         }
 
-        public String lagrePreferanser(bool test)
+        private void lagrePreferanser()
         {
-            if (!test)
-            {
-                selectedItems = new bool[cblElementer.Items.Count];
+
+            selectedItems = new bool[6];
 
                 for (int i = 0; i < cblElementer.Items.Count; i++)
                 {
                     selectedItems[i] = cblElementer.Items[i].Selected;
                 }
-            }
 
+                selectedItems[5] = chkShepherd.Checked;
 
             var nyBrukerpreferanser = new BrukerPreferanse
             {
@@ -162,41 +170,32 @@ namespace SysUt14Gr03
                 EpostOppgave = selectedItems[2],
                 EpostKommentar = selectedItems[3],
                 EpostTidsfrist = selectedItems[4],
+                Sheperd = chkShepherd.Checked
             };
 
-            string info;
 
-            if (!test)
+            using (var db = new Context())
             {
 
-                using (var db = new Context())
+                BrukerPreferanse brukerPref = db.BrukerPreferanser.FirstOrDefault(o => o.Bruker_id == bruker_id);
+                if (brukerPref != null)
                 {
-
-                    BrukerPreferanse brukerPref = db.BrukerPreferanser.FirstOrDefault(o => o.Bruker_id == bruker_id);
-                    if (brukerPref != null)
-                    {
-                        brukerPref.EpostTeam = selectedItems[0];
-                        brukerPref.EpostProsjekt = selectedItems[1];
-                        brukerPref.EpostOppgave = selectedItems[2];
-                        brukerPref.EpostKommentar = selectedItems[3];
-                        brukerPref.EpostTidsfrist = selectedItems[4];
-                    }
-                    else
-                    {
-                        db.BrukerPreferanser.Add(nyBrukerpreferanser);
-                    }
-
-                    db.SaveChanges();
+                    brukerPref.EpostTeam = selectedItems[0];
+                    brukerPref.EpostProsjekt = selectedItems[1];
+                    brukerPref.EpostOppgave = selectedItems[2];
+                    brukerPref.EpostKommentar = selectedItems[3];
+                    brukerPref.EpostTidsfrist = selectedItems[4];
+                    brukerPref.Sheperd = selectedItems[5];
                 }
-                info = Queries.GetBruker(bruker_id).Fornavn;
+                else
+                {
+                    db.BrukerPreferanser.Add(nyBrukerpreferanser);
+                }
+
+                db.SaveChanges();
             }
-
-            info = brukernavn;
-            for (int i = 0; i < selectedItems.Length; i++)
-                info += " " + selectedItems[i].ToString();
-
-            return info;
         }
+
 
     }
 }

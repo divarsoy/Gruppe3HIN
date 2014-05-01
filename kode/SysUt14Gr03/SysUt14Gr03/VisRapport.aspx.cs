@@ -32,8 +32,6 @@ namespace SysUt14Gr03
             bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
             if (bruker_id != -1)
             {
-                SessionSjekk.sjekkForProsjekt_id();
-                prosjekt_id = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
 
                 bruker = Queries.GetBruker(bruker_id);
                 rettighet = Queries.GetRettighet(bruker_id);
@@ -46,17 +44,15 @@ namespace SysUt14Gr03
                         foreach (Prosjekt p in prosjektListe)
                         {
                             ddlProsjekter.Items.Add(new ListItem(p.Navn, p.Prosjekt_id.ToString()));
-                            foreach (Bruker b in Queries.GetAlleBrukereIEtProjekt(p.Prosjekt_id))
-                            {
-                                brukerListe.Add(b);
-                            }
+
                         }
 
-                        foreach (Bruker b in brukerListe)
-                        {
+                        int _prosjekt_id = Validator.KonverterTilTall(ddlProsjekter.SelectedValue);
+                        List<Bruker> brukereITeam = Queries.GetTeamByProsjekt(_prosjekt_id).Brukere;
+                        foreach (Bruker b in brukereITeam)
                             ddlBrukere.Items.Add(new ListItem(b.ToString(), b.Bruker_id.ToString()));
-                        }
                     }
+
                     ddlBrukere.Visible = true;
                     ddlProsjekter.Visible = true;
                     btnIndivid.Visible = true;
@@ -66,15 +62,12 @@ namespace SysUt14Gr03
                     btnLastNedProsjekt.Visible = true;
                     btnProsjekt.Visible = true;
                 }
-                if (SessionSjekk.IsFaseleder(bruker_id))
-                {
-                    ddlTeam.Visible = true;
-                    btnTeam.Visible = true;
-                    btnLastNedTeam.Visible = true;
-                }
 
                 if (rettighet.Rettighet_id == 3)
                 {
+                    SessionSjekk.sjekkForProsjekt_id();
+                    prosjekt_id = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
+
                     if (!IsPostBack)
                     {
                         List<Prosjekt> prosjektListe = Queries.GetAlleAktiveProsjekterForBruker(bruker_id);
@@ -88,6 +81,8 @@ namespace SysUt14Gr03
                         btnLastNedIndivid.Visible = true;
                         btnProsjekt.Visible = true;
                         btnLastNedProsjekt.Visible = true;
+                        btnTeam.Visible = true;
+                        btnLastNedTeam.Visible = true;
 
                     }
                 }
@@ -294,6 +289,16 @@ namespace SysUt14Gr03
 
                 EksporterTilExcel.CreateExcelDocument(dt, filnavn, Response);
             }
+        }
+
+        protected void ddlProsjekter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int _prosjekt_id = Validator.KonverterTilTall(ddlProsjekter.SelectedValue);
+            List<Bruker> brukereITeam = Queries.GetTeamByProsjekt(_prosjekt_id).Brukere;
+
+            ddlBrukere.Items.Clear();
+            foreach (Bruker b in brukereITeam)
+                ddlBrukere.Items.Add(new ListItem(b.ToString(), b.Bruker_id.ToString()));
         }
     }
 }

@@ -8,12 +8,12 @@
     <h2>Personlige opplysninger</h2>
     <div class="form-group">
         <div class="col-sm-3">
-            <asp:TextBox ID="txtFornavn" runat="server" CssClass="form-control" PlaceHolder="Fornavn"></asp:TextBox>
-            <asp:TextBox ID="txtEtternavn" runat="server" CssClass="form-control" PlaceHolder="Etternavn"></asp:TextBox>
+            <asp:TextBox ID="txtFornavn" runat="server" CssClass="form-control" placeholder="Fornavn"></asp:TextBox>
+            <asp:TextBox ID="txtEtternavn" runat="server" CssClass="form-control" placeholder="Etternavn"></asp:TextBox>
 
-            <asp:TextBox ID="txtBrukernavn" runat="server" CssClass="form-control" PlaceHolder="Brukernavn"></asp:TextBox>
+            <asp:TextBox ID="txtBrukernavn" runat="server" CssClass="form-control" placeholder="Brukernavn"></asp:TextBox>
 
-            <asp:TextBox ID="txtIM" runat="server" CssClass="form-control" PlaceHolder="Internt kallenavn"></asp:TextBox>
+            <asp:TextBox ID="txtIM" runat="server" CssClass="form-control" placeholder="Internt kallenavn"></asp:TextBox>
        </div>
     </div>
             
@@ -28,6 +28,9 @@
             <asp:Button ID="btnLagrePassord" runat="server" CssClass="btn btn-primary" Text="Lagre nytt passord" OnClick="btnLagrePassord_Click" />
         </div>
     </div>
+    <div class="clearfix"></div>
+    <h3>Vis shepherd</h3>
+    <asp:CheckBox ID="chkShepherd" runat="server" Text="Vis Shepherd på hovedsiden" />
     <div class="clearfix"></div>
     <h2>Varsler for e-post</h2>
     <asp:CheckBoxList ID="cblElementer" runat="server" CssClass="epost_pref_tabell">

@@ -26,7 +26,7 @@
         </div>
         <div class="col-md-4">
           <h2>Meny</h2>
-          <p>Velg ett element fra menyen øverst på websiden</p>
+          <p>Velg et element fra menyen øverst på websiden</p>
         </div>
       </div>
     </div>

@@ -12,7 +12,6 @@ namespace SysUt14Gr03.Prosjektleder
 	public partial class KorrigerRegistrerteTimer : System.Web.UI.Page
 	{
         private int pauseTeller;
-        private int bruker_id;
         private int time_id;
         // private Oppgave oppgave;
         private TimeSpan bruktTid;
@@ -21,9 +20,9 @@ namespace SysUt14Gr03.Prosjektleder
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
-            //bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
-            bruker_id = 2;
+            SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
+            // bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
+            // bruker_id = 2;
 
             if (Request.QueryString["time_id"] != null)
             {
