@@ -40,7 +40,7 @@ namespace SysUt14Gr03
 
                 if (!IsPostBack)
                 {
-                    brukerPrefs = Queries.GetEpostPreferanser(bruker_id);
+                    brukerPrefs = Queries.GetBrukerPreferanse(bruker_id);
 
                     if (brukerPrefs != null)
                     {
