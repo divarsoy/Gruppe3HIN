@@ -53,12 +53,15 @@ namespace SysUt14Gr03
                 System.Web.UI.WebControls.DropDownList tbTeam = (DropDownList)gridViewProsjekt.Rows[e.RowIndex].FindControl("ddlTeam");
                 System.Web.UI.WebControls.CheckBox cbAktiv = (CheckBox)gridViewProsjekt.Rows[e.RowIndex].FindControl("cboxAktiv");
 
+                String prosjektNavnFoerOppdatering;
+                bool currentIsActive = true;
                 using (var context = new Context())
-                {
+                {                    
                     team_id = Validator.KonverterTilTall(tbTeam.SelectedValue);
                     int bruker_id = Validator.KonverterTilTall(tbProsjektleder.SelectedValue);
 
                     Prosjekt prosjekt = context.Prosjekter.Where(p => p.Prosjekt_id == prosjekt_id).First();
+                    prosjektNavnFoerOppdatering = prosjekt.Navn;
                     prosjekt.Navn = tbProsjektnavn.Text;
                     prosjekt.Aktiv = Convert.ToBoolean(cbAktiv.Checked);
                     prosjekt.StartDato = Convert.ToDateTime(tbStart.Text);
@@ -66,11 +69,28 @@ namespace SysUt14Gr03
                     prosjekt.Team_id = team_id;
                     prosjekt.Bruker_id = bruker_id;
                     context.SaveChanges();
+                    
+                    currentIsActive = prosjekt.Aktiv;
                 }
                 gridViewProsjekt.EditIndex = -1;
                 gridViewProsjekt.Columns[6].Visible = true;
                 gridViewProsjekt.Columns[7].Visible = true;
                 visProsjekt();
+
+                //Oppretter logg for opprettelse av prosjektet
+                String hendelse = "Prosjektet " + prosjektNavnFoerOppdatering + " ble endret";
+                String arkiveringHendelse = "Prosjektet " + prosjektNavnFoerOppdatering + " ble arkivert";
+
+                if (prosjektNavnFoerOppdatering != tbProsjektnavn.Text)
+                {
+                    hendelse = hendelse + ". Nytt navn på prosjektet er " + tbProsjektnavn.Text;
+                }
+
+                if (!currentIsActive)
+                    OppretteLogg.opprettLoggForBruker(arkiveringHendelse, DateTime.Now, (int)Session["bruker_id"]);
+                else
+                    OppretteLogg.opprettLoggForBruker(hendelse, DateTime.Now, (int)Session["bruker_id"]);
+
             }
             catch
             {
