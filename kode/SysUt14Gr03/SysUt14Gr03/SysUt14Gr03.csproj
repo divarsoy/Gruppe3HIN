@@ -65,8 +65,11 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DataVisualization" />
+    <Reference Include="System.Web.DataVisualization.Design" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Windows.Forms.DataVisualization.Design" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -222,6 +225,7 @@
     <Content Include="Content\shepherd-theme-arrows.css" />
     <Content Include="DeaktiveringAvRegistrerteTimer.aspx" />
     <Content Include="GodkjennTimer.aspx" />
+    <Content Include="Fremdriftsdiagram.aspx" />
     <Content Include="Innstillinger.aspx" />
     <Content Include="KommentarTest.aspx" />
     <Content Include="Loggut.aspx" />
@@ -581,6 +585,12 @@
     </Compile>
     <Compile Include="GodkjennTimer.aspx.designer.cs">
       <DependentUpon>GodkjennTimer.aspx</DependentUpon>
+    <Compile Include="Fremdriftsdiagram.aspx.cs">
+      <DependentUpon>Fremdriftsdiagram.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Fremdriftsdiagram.aspx.designer.cs">
+      <DependentUpon>Fremdriftsdiagram.aspx</DependentUpon>
     </Compile>
     <Compile Include="gruppe3DataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1125,6 +1135,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Report1.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

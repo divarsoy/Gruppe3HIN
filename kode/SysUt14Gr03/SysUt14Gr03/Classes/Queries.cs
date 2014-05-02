@@ -329,6 +329,17 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        static public List<Oppgave> getOppgaverIFase(int fase_id)
+        {
+            using (var context = new Context())
+            {
+                var oppgaveListe = context.Oppgaver
+                                    .Where(o => o.Fase_id == fase_id)
+                                    .ToList();
+                return oppgaveListe;
+            }
+        }
+
         static public List<Oppgave> GetOppgaverIOppgaveGruppe(int oppgaveGruppe_id)
         {
             using (var context = new Context())
@@ -337,6 +348,19 @@ namespace SysUt14Gr03.Classes
                                     .Where(o => o.OppgaveGruppe_id == oppgaveGruppe_id)
                                     .ToList();
                 return oppgaveListe;
+            }
+        }
+
+        public static Oppgave GetOppgaveMedTimer(int time_id)
+        {
+            using (var context = new Context())
+            {
+                Oppgave oppg = context.Oppgaver
+                    .Include("Timer")
+                    .Where(Oppgave => Oppgave.Timer.Any(time => time.Time_id == time_id))
+                    .FirstOrDefault();
+
+                return oppg;
             }
         }
 
@@ -863,18 +887,6 @@ namespace SysUt14Gr03.Classes
             }
         }
 
-        public static Oppgave GetOppgaveMedTimer(int time_id)
-        {
-            using (var context = new Context())
-            {
-                Oppgave oppg = context.Oppgaver.Include("Timer")
-                    .Where(Oppgave => Oppgave.Timer.Any(time => time.Time_id == time_id))
-                    .FirstOrDefault();
-
-                return oppg;
-            }
-        }
-
         public static List<Fase> GetAlleAktiveFaserForBrukerOgProsjekt(int bruker_id, int prosjekt_id)
         {
             using (var context = new Context())
@@ -896,6 +908,18 @@ namespace SysUt14Gr03.Classes
                 List<Logg> loggListe = context.Logger.OrderByDescending(logg => logg.Opprettet).ToList();
                 return loggListe;
             }      
+        }
+
+        public static void SetSheperd(int bruker_id)
+        {
+            using (var context = new Context())
+            {
+                BrukerPreferanse brukerpreferanse = context.BrukerPreferanser
+                                                    .Where(bruker => bruker.Bruker_id == bruker_id)
+                                                    .FirstOrDefault();
+                brukerpreferanse.Sheperd = false;
+                context.SaveChanges();
+            }
         }
 
 
