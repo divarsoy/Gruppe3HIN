@@ -38,30 +38,6 @@
             shepherd.addStep('OversiktOverBrukere', {
                 title: 'Oversikt over brukere!',
                 text: ['En detaljert oversikt over brukere finner du her!.'],
-                attachTo: '.adm2 bottom',
-                buttons: [
-                  {
-                      text: 'Tilbake',
-                      classes: 'shepherd-button-secondary',
-                      action: shepherd.back
-                  }, {
-                      text: 'Avslutt',
-                      classes: 'shepherd-button-secondary',
-                      action: function () {
-                          completeShepherd();
-                          return shepherd.hide();
-                      }
-                  }, {
-                      text: 'Neste',
-                      action: shepherd.next
-                  }
-                ]
-            });
-            shepherd.addStep('AdministrereBrukere', {
-                title: 'Administrere brukere!',
-                text: ['Her har du mulighet til å endre informasjonen om hver enkelt bruker.',
-                    'Fornavn, Etternavn, Epost er mulig å endre, og du har i tillegg muligheten til å huke av en bruker som aktiv eller ei.',
-                    'Det er også mulig å sende en ny aktiveringslink dersom bruker av en eller annen grunn ikke mottatt den tidligere.'],
                 attachTo: '.adm3 bottom',
                 buttons: [
                   {
@@ -81,6 +57,7 @@
                   }
                 ]
             });
+            
             shepherd.addStep('AdministrereRettigheter', {
                 title: 'Administrere rettigheter!',
                 text: ['Her har du mulighet til å legge til rettigeter.',
