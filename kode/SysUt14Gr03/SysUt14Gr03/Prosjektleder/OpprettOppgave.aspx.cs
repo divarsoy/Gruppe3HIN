@@ -122,6 +122,10 @@ namespace SysUt14Gr03
                 context.SaveChanges();
                 Session["flashMelding"] = "Du har opprettet oppgaven: " + oppgave_navn;
                 Session["flashStatus"] = Konstanter.notifikasjonsTyper.info.ToString();
+
+                //Oppretter logg for oppretting av oppgave
+                String hendelse = "Oppgave med navn " + oppgave_navn + " ble opprettet";
+                OppretteLogg.opprettLoggForBruker(hendelse, DateTime.Now, (int)Session["bruker_id"]);
                 Response.Redirect(Request.RawUrl);
             }
             }

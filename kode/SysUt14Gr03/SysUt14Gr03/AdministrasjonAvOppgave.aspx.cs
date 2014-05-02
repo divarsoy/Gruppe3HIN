@@ -21,6 +21,7 @@ namespace SysUt14Gr03
         private List<int> valgtBrukerid = new List<int>();
         private Oppgave endres;
         private int oppgaveID;
+        private String oppgaveTittel;
 
         protected void Page_Load()
         {
@@ -36,6 +37,7 @@ namespace SysUt14Gr03
                 pri = Queries.GetAllePrioriteringer();
                 oppgaveID = Classes.Validator.KonverterTilTall(Request.QueryString["oppgave_id"]);
                 endres = Queries.GetOppgave(oppgaveID);
+                oppgaveTittel = endres.Tittel.ToString();
 
                 for (int i = 0; i < visStatus.Count; i++)
                 {
@@ -131,6 +133,18 @@ namespace SysUt14Gr03
 
                     try {
                         context.SaveChanges();
+                        //legger til logg for endring og arkivering av oppgave
+                        String hendelse;
+                        if (!endres.Aktiv)
+                        {
+                            hendelse = "Oppgave " + oppgaveTittel + "ble endret";
+                            if (oppgaveTittel != endres.Tittel)
+                                hendelse = hendelse + ". Nytt navn på oppgaven er " + endres.Tittel;
+                        }
+                        else
+                            hendelse = "Oppgave " + oppgaveTittel + "ble arkivert";
+
+                        OppretteLogg.opprettLoggForBruker(hendelse, DateTime.Now, (int)Session["bruker_id"]);
                         Response.Redirect("FerdigstillelsAvOppgave.aspx");
                     }
                     catch (System.Data.Entity.Infrastructure.DbUpdateException ex) {
