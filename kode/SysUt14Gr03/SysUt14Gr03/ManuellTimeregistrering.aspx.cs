@@ -20,9 +20,9 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Utvikler);
-            //bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
-             bruker_id = 2;
+            SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Utvikler);
+            bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
+             //bruker_id = 2;
 
             if (Request.QueryString["oppgave_id"] != null)
             {
@@ -55,6 +55,7 @@ namespace SysUt14Gr03
                             RyddOpp();
                             Session["flashMelding"] = "Timer registrert på " + oppgave.Tittel;
                             Session["flashStatus"] = Konstanter.notifikasjonsTyper.success.ToString();
+                            Response.Redirect(Request.Url.ToString());
 
                         }
 

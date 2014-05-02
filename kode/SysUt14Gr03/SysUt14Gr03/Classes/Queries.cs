@@ -50,7 +50,11 @@ namespace SysUt14Gr03.Classes
         {
             using (var context = new Context())
             {
-                return context.Brukere.Where(bruker => bruker.IM == IM).FirstOrDefault();
+                var bruker = context.Brukere.Where(b => b.IM == IM);
+                if (bruker.Any())
+                    return bruker.ToList<Bruker>()[0];
+                else
+                    return null;
             }
         }
 
@@ -599,7 +603,7 @@ namespace SysUt14Gr03.Classes
         {
             using (var context = new Context())
             {
-                var valgtTeam = context.Teams.Where(team => team.Prosjekter.Any(prosjekt => prosjekt.Prosjekt_id == prosjekt_id)).FirstOrDefault();
+                var valgtTeam = context.Teams.Include("Brukere").Where(team => team.Prosjekter.Any(prosjekt => prosjekt.Prosjekt_id == prosjekt_id)).FirstOrDefault();
                 return valgtTeam;
             }
         }

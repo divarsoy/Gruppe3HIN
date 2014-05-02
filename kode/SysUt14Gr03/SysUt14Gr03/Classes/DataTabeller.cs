@@ -119,55 +119,50 @@ namespace SysUt14Gr03.Classes
 
         }
 
+        /// <summary>
+        /// Denne metoden returnerer en datatable for en rapport
+        /// </summary>
+        /// <param name="type">Hvilken type rapport</param>
+        /// <param name="_id">Id til det som skal rapporteres</param>
+        /// <returns></returns>
         public static DataTable GetRapport(int type, int _id)
         {
-            string info = "";
             TimeSpan bruktTidProsjekt = new TimeSpan();
             TimeSpan estimertTidProsjekt = new TimeSpan();
-            TimeSpan sumTimerForBruker = new TimeSpan();
             int antallFerdigeOppgaver = 0;
             int antallDeltakerePaTeam = 0;
 
             DataTable dt = new DataTable();
 
+            // Her er en switch. Den velger på type
             switch (type)
             {
                 case 0:
                     {
                         
+                        // Oppretter kolonner
                         dt.Columns.Add(new DataColumn("Team id", typeof(System.String)));
                         dt.Columns.Add(new DataColumn("Navn på team", typeof(System.String)));
                         dt.Columns.Add(new DataColumn("Dato opprettet", typeof(System.String)));
 
-
+                        // Henter team
                         Team team = Queries.GetTeamById(_id);
                         if (team != null)
                         {
-                            info += "Navn på team: " + team.Navn;
-                            info += "<br />Opprettet: " + team.Opprettet.ToShortDateString();
+                            // Legger til en ny rad
                             DataRow rowMain = dt.NewRow();
                             rowMain["Team id"] = team.Team_id.ToString();
                             rowMain["Navn på team"] = team.Navn;
                             rowMain["Dato opprettet"] = team.Opprettet.ToShortDateString();
 
                             dt.Rows.Add(rowMain);
-                            // Teamleder?
-                            info += "<br /><h3>Deltakere:</h3>";
-                            foreach (Bruker b in team.Brukere)
-                                info += "<br /><t />" + b.ToString();
 
-                            //dt.Columns.Add(new DataColumn("Bruker id", typeof(System.Int32)));
-                            //dt.Columns.Add(new DataColumn("Navn", typeof(System.String)));
-
-                            info += "<br /><h3>Prosjekter:</h3>";
-                            //dt.Columns.Add(new DataColumn("Prosjekt id", typeof(System.Int32)));
-                            //dt.Columns.Add(new DataColumn("Prosjektnavn", typeof(System.String)));
-                            //dt.Columns.Add(new DataColumn("Faseleder", typeof(System.String)));
-
+                            // Legger til mellomrom
                             DataRow rowLuft1 = dt.NewRow();
                             rowLuft1["Team id"] = "";
                             dt.Rows.Add(rowLuft1);
 
+                            // Legger til rad
                             DataRow rowProsjekt = dt.NewRow();
                             rowProsjekt["Team id"] = "Prosjekt id";
                             rowProsjekt["Navn på team"] = "Prosjektnavn";
@@ -176,7 +171,6 @@ namespace SysUt14Gr03.Classes
 
                             foreach (Prosjekt p in team.Prosjekter)
                             {
-                                info += "<br /><t />" + p.Navn;
                                 Bruker faseleder = SessionSjekk.GetFaseleder(p.Prosjekt_id);
 
                                 DataRow prosjektRow = dt.NewRow();
@@ -226,17 +220,9 @@ namespace SysUt14Gr03.Classes
                             dt.Columns.Add(new DataColumn("Team", typeof(System.String)));
 
                             List<Fase> faseListe = Queries.GetFaseForProsjekt(_id);
-                            info += "Navn på prosjekt: " + prosjekt.Navn;
-                            info += "<br />Opprettet: " + prosjekt.Opprettet.ToShortDateString();
                             DateTime start = (DateTime)prosjekt.StartDato;
                             DateTime slutt = (DateTime)prosjekt.SluttDato;
-                            info += "<br />Startdato: " + start.ToShortDateString();
-                            info += "<br />Sluttdato: " + slutt.ToShortDateString();
                             Bruker prosjektLeder = Queries.GetBruker(prosjekt.Bruker_id);
-                            info += "<br />Prosjektleder: " + prosjektLeder.ToString();
-
-                            info += "<br /><h3>Team:</h3>";
-                            info += "<br /><t />" + prosjekt.Team.Navn;
 
                             DataRow rowMain = dt.NewRow();
                             rowMain["Prosjekt id"] = prosjekt.Prosjekt_id.ToString();
@@ -248,8 +234,6 @@ namespace SysUt14Gr03.Classes
                             rowMain["Team"] = prosjekt.Team.Navn;
 
                             dt.Rows.Add(rowMain);
-
-                            info += "<br /><h3>Faser:</h3>";
 
                             int antallFaser = faseListe.Count;
 
@@ -267,12 +251,6 @@ namespace SysUt14Gr03.Classes
 
                             foreach (Fase f in faseListe)
                             {
-
-                                info += "<br /><tb />Navn: " + f.Navn;
-                                info += "<br /><tb />Faseleder: " + f.Bruker.ToString();
-                                info += "<br /><tb />Opprettet: " + f.Opprettet.ToShortDateString();
-                                info += "<br /><tb />Startdato: " + f.Start.ToShortDateString();
-                                info += "<br /><tb />Sluttdato: " + f.Stopp.ToShortDateString();
 
                                 DataRow faseRow = dt.NewRow();
                                 faseRow["Prosjekt id"] = f.Navn;
@@ -295,14 +273,7 @@ namespace SysUt14Gr03.Classes
 
                                 foreach (Oppgave o in f.Oppgaver)
                                 {
-                                    info += "<br /><tb /><h4>Navn: " + o.Tittel + "</h4>";
-                                    info += "<br /><t />ID: " + o.RefOppgaveId;
-                                    info += "<br /><t />Opprettet: " + o.Opprettet.ToShortDateString();
-                                    info += "<br /><t />User story: " + o.UserStory;
-                                    info += "<br /><t />Krav: " + o.Krav;
                                     int avhengigOppgave = Validator.SjekkAvhengighet(o.Oppgave_id);
-                                    info += "<br />" + "Avhengighet: " + (avhengigOppgave == -1 ? "Nei" : "Ja");
-                                    info += "<br /><t />Estimat: " + o.Estimat;
 
                                     int test1 = o.Oppgave_id;
                                     List<Time> timeListe = Queries.GetTimerForOppgave(o.Oppgave_id);
@@ -314,9 +285,7 @@ namespace SysUt14Gr03.Classes
 
                                     }
 
-                                    info += "<br /><t />Brukt tid: " + bruktTid.ToString();
                                     Status status = Queries.GetStatus(o.Status_id);
-                                    info += "<br /><t />Status: " + status.Navn;
                                     estimertTidProsjekt += (TimeSpan)o.Estimat;
 
                                     DataRow oppgaveRow = dt.NewRow();
@@ -330,7 +299,6 @@ namespace SysUt14Gr03.Classes
                                     dt.Rows.Add(oppgaveRow);
 
                                 }
-                                info += "<hr />";
 
                                 DataRow rowLuft2 = dt.NewRow();
                                 rowLuft2["Prosjekt id"] = "";
@@ -345,18 +313,12 @@ namespace SysUt14Gr03.Classes
                 case 2:
                     {
                         Bruker bruker = Queries.GetBruker(_id);
-                        string prosjektRapportForBruker = "";
                         if (bruker != null)
                         {
                             dt.Columns.Add(new DataColumn("Navn på bruker", typeof(System.String)));
                             dt.Columns.Add(new DataColumn("Internt brukernavn", typeof(System.String)));
                             dt.Columns.Add(new DataColumn("Lagt til", typeof(System.String)));
                             dt.Columns.Add(new DataColumn("E-post", typeof(System.String)));
-
-                            info += "Navn på bruker: " + bruker.ToString();
-                            info += "<br />Internt brukernavn: " + bruker.Brukernavn;
-                            info += "<br />Lagt til: " + bruker.Opprettet.ToShortDateString();
-                            info += "<br />E-post: " + bruker.Epost;
 
                             DataRow rowMain = dt.NewRow();
                             rowMain["Navn på bruker"] = bruker.ToString();
@@ -375,13 +337,9 @@ namespace SysUt14Gr03.Classes
                             rowProsjekt["Internt brukernavn"] = "Rolle";
                             dt.Rows.Add(rowProsjekt);
 
-                            info += "<br /><h3>Prosjekter:</h3>";
                             List<Prosjekt> prosjektListe = Queries.GetAlleAktiveProsjekterForBruker(_id);
                             foreach (Prosjekt p in prosjektListe)
                             {
-                                info += "<br /><t /><h4>" + p.Navn + "</h4>";
-                                prosjektRapportForBruker += "<br />Navn: " + p.Navn;
-                                // vi tar det sia
                                 string rolle;
                                 if (SessionSjekk.IsFaseleder(_id, p.Prosjekt_id))
                                     rolle = "Faseleder";
@@ -403,10 +361,8 @@ namespace SysUt14Gr03.Classes
                             rowTeam["Navn på bruker"] = "Medlem i team";
                             dt.Rows.Add(rowTeam);
 
-                            info += "<br /><h3>Team:</h3>";
                             foreach (Team t in bruker.Teams)
                             {
-                                info += "<br /><t />" + t.Navn;
                                 DataRow teamRow = dt.NewRow();
                                 teamRow["Navn på bruker"] = t.Navn;
                                 dt.Rows.Add(teamRow);
@@ -423,8 +379,6 @@ namespace SysUt14Gr03.Classes
                             rowOppgave["E-post"] = "Gjenstående tid";
                             dt.Rows.Add(rowOppgave);
 
-                            info += "<br /><h3>Oppgaver:</h3>";
-
                             List<Time> timeListe = Queries.GetTimerForBruker(_id);
                             if (timeListe != null)
                             {
@@ -440,11 +394,6 @@ namespace SysUt14Gr03.Classes
                                     oppgaveRow["E-post"] = (oppgave.Estimat - oppgave.BruktTid).ToString();
 
                                     dt.Rows.Add(oppgaveRow);
-
-                                    info += "<br /><t /><h4>" + oppgave.Tittel + " Brukt tid: " + sumTimerForBruker.ToString() + "</h4>";
-                                    prosjektRapportForBruker += "<br /><t />" + oppgave.Tittel + " Brukt tid: " + sumTimerForBruker.ToString();
-                                    info += "<br />Prosjekt: " + oppgave.Prosjekt.Navn;
-                                    info += "<br />Fase: " + oppgave.Fase.Navn;
 
                                 }
                             }
@@ -467,14 +416,12 @@ namespace SysUt14Gr03.Classes
                             rowLogg["Navn på bruker"] = "Hendelse";
                             dt.Rows.Add(rowLogg);
 
-                            info += "<br /><h3>Hendelser:</h3>";
                             List<Logg> loggListe = Queries.GetLoggForBruker(_id);
                             foreach (Logg l in loggListe)
                             {
                                 DataRow oppgaveRow = dt.NewRow();
                                 oppgaveRow["Navn på bruker"] = l.Hendelse;
                                 dt.Rows.Add(oppgaveRow);
-                                info += "<br /><t />" + l.Hendelse;
                             }
                                 
 
@@ -483,7 +430,7 @@ namespace SysUt14Gr03.Classes
                     break;
                 default:
                     {
-                        info += "Feil valg, bruk Rapport.<noke>";
+
                     }
                     break;
             }
@@ -496,7 +443,6 @@ namespace SysUt14Gr03.Classes
 
 
             Bruker bruker = Queries.GetBruker(bruker_id);
-            string prosjektRapportForBruker = "";
             if (bruker != null)
             {
                 dt.Columns.Add(new DataColumn("Navn på prosjekt", typeof(System.String)));
@@ -506,22 +452,10 @@ namespace SysUt14Gr03.Classes
                 dt.Columns.Add(new DataColumn("Startdato", typeof(System.String)));
                 dt.Columns.Add(new DataColumn("Sluttdato", typeof(System.String)));
 
-                //info += "Navn på bruker: " + bruker.ToString();
-                //info += "<br />Internt brukernavn: " + bruker.Brukernavn;
-                //info += "<br />E-post: " + bruker.Epost;
-
-
-
-                //info += "<br /><h3>Prosjekter:</h3>";
                 List<Prosjekt> prosjektListe = Queries.GetAlleAktiveProsjekterForBruker(bruker_id);
                 foreach (Prosjekt p in prosjektListe)
                 {
 
-                   
-
-                    //info += "<br /><t /><h4>" + p.Navn + "</h4>";
-                    prosjektRapportForBruker += "<br />Navn: " + p.Navn;
-                    // vi tar det sia
                     string rolle;
                     if (SessionSjekk.IsFaseleder(bruker_id, p.Prosjekt_id))
                         rolle = "Faseleder";

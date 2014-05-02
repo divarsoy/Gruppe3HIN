@@ -13,7 +13,7 @@ namespace SysUt14Gr03
     public partial class ReturAvOppgave : System.Web.UI.Page
     {
         private int bruker_id;
-        private int faseleder_id = 1; // kommer senere
+        private int faseleder_id = -1; // ja
         private Oppgave oppgave;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -23,9 +23,16 @@ namespace SysUt14Gr03
 
             if (Request.QueryString["oppgave_id"] != null)
             {
+                SessionSjekk.sjekkForProsjekt_id();
+                int prosjekt_id = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
+
                 int oppgave_id = Validator.KonverterTilTall(Request.QueryString["oppgave_id"]);
                 oppgave = Queries.GetOppgave(oppgave_id);
                 lblNavn.Text += ": " + oppgave.Tittel;
+
+                Bruker faseleder = SessionSjekk.GetFaseleder(prosjekt_id);
+                if (faseleder != null)
+                    faseleder_id = faseleder.Bruker_id;
             }
             else
             {
@@ -41,7 +48,8 @@ namespace SysUt14Gr03
             {    
                 Bruker bruker = Queries.GetBruker(bruker_id);
                 string tittel = bruker.ToString() + " har returnert oppgave " + oppgave.Tittel;
-                Varsel.SendVarsel(faseleder_id, Varsel.OPPGAVEVARSEL, tittel, melding);
+                if (faseleder_id != -1)
+                    Varsel.SendVarsel(faseleder_id, Varsel.OPPGAVEVARSEL, tittel, melding);
                 // Flash en melding
                 Session["flashMelding"] = "Melding sendt til faseleder";
                 Session["flashStatus"] = Konstanter.notifikasjonsTyper.info.ToString();

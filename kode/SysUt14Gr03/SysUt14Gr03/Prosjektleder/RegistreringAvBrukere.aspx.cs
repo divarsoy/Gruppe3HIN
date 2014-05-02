@@ -17,7 +17,7 @@ namespace SysUt14Gr03
         private string etternavn;
         private string fornavn;
         private string epost;
-        private bool emailUnq = true;
+//        private bool emailUnq = true;
         private string password = "blahimmel";
         private MailMessage msg;
     
@@ -76,6 +76,9 @@ namespace SysUt14Gr03
                     };
                     db.Brukere.Add(nyBruker);
                     db.SaveChanges();
+
+                    String hendelse = "Bruker med navn " + fornavn + " " + etternavn + "ble opprettet";
+                    OppretteLogg.opprettLoggForBruker(hendelse, DateTime.Now, (int)Session["bruker_id"]);
                 }
                 else
                 {

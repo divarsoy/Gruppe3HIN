@@ -33,11 +33,11 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["loggedIn"] == null)
-                Response.Redirect("Login.aspx", true);
+            SessionSjekk.sjekkForProsjekt_id();
 
             if (!IsPostBack)
             {
+                lblTimeregistrering.Text = string.Format("Timeregistrering for prosjekt: {0}", Session["prosjektNavn"]);
                 PauseTeller = 0;
                 if (Session["time_id"] != null)
                 {
@@ -56,8 +56,8 @@ namespace SysUt14Gr03
                     btnPause.Enabled = false;
                 }
 
-                prosjektID = Classes.Validator.KonverterTilTall(Request.QueryString["prosjekt_id"]);
-                brukerID = Classes.Validator.KonverterTilTall(Request.QueryString["bruker_id"]);
+                prosjektID = Classes.Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
+                brukerID = Classes.Validator.KonverterTilTall(Session["bruker_id"].ToString());
                 oppgaver = Queries.GetAlleAktiveOppgaverForProsjektOgBruker(prosjektID, brukerID);
                 btnRegistrer.Enabled = false;
 
@@ -82,7 +82,7 @@ namespace SysUt14Gr03
                     using (var context = new Context())
                     {
                         oppgaveID = Convert.ToInt32(ddlOppgaver.SelectedValue);
-                        brukerID = Classes.Validator.KonverterTilTall(Request.QueryString["bruker_id"]);
+                        brukerID = Classes.Validator.KonverterTilTall(Session["bruker_id"].ToString());
                         Oppgave oppgave = context.Oppgaver.Where(o => o.Oppgave_id == oppgaveID).FirstOrDefault();
                         Bruker bruker = context.Brukere.Where(b => b.Bruker_id == brukerID).FirstOrDefault();
 
@@ -231,7 +231,7 @@ namespace SysUt14Gr03
                 using (var context3 = new Context())
                 {
                     oppgaveID = Convert.ToInt32(ddlOppgaver.SelectedValue);
-                    brukerID = Classes.Validator.KonverterTilTall(Request.QueryString["bruker_id"]);
+                    brukerID = Classes.Validator.KonverterTilTall(Session["bruker_id"].ToString());
                     timeID = Classes.Validator.KonverterTilTall(Session["time_id"].ToString());
 
                     Oppgave oppgave = context3.Oppgaver.Where(o => o.Oppgave_id == oppgaveID).FirstOrDefault();
@@ -268,6 +268,7 @@ namespace SysUt14Gr03
             {
                 Session["flashMelding"] = "Du må legge til en kommentar på oppgaven. Kommentere det du har gjort.";
                 Session["flashStatus"] = Konstanter.notifikasjonsTyper.info.ToString();
+                Response.Redirect(Request.Url.ToString());
             }
         }
         private void GetTimers(List<Pause> Pause, int timeId)

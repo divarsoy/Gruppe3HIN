@@ -134,6 +134,11 @@ namespace SysUt14Gr03
                 Session["flashStatus"] = Konstanter.notifikasjonsTyper.success.ToString();
                 Session["dtFaser"] = null;
 
+                //Oppretter logg for opprettelse av prosjektet
+                String hendelse = "Prosjektet " + tbProsjektnavn.Text + "ble opprettet med startdato " + tbStart.Text
+                    + " og sluttdato " + tbSlutt.Text;
+                OppretteLogg.opprettLoggForBruker(hendelse, DateTime.Now, (int)Session["bruker_id"]);
+
                 Response.Redirect("~/OversiktProsjekter", true);
 
             }

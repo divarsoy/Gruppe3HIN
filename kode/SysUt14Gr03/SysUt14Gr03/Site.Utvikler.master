@@ -45,6 +45,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">TimeRegistrering <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li> <a runat="server" href="~/Utvikler/InnsynIEgneRegistrerteTimerSomBruker">Dine Registrerte Timer</a></li>
+                    <li> <a runat="server" href="~/Timeregistrering">Timeregistrering for valgt prosjekt</a></li>
                 </ul> 
     </ul>
 
