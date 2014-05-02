@@ -81,10 +81,6 @@ namespace SysUt14Gr03
         protected void btnLagre_Click(object sender, EventArgs e)
         {
             opprettProsjekt();
-            //Oppretter logg for opprettelse av prosjektet
-            String hendelse = "Prosjektet " + tbProsjektnavn.Text + "ble opprettet med startdato " + tbStart.Text 
-                + " og sluttdato " + tbSlutt.Text;
-            OppretteLogg.opprettLoggForBruker(hendelse, DateTime.Now, (int)Session["bruker_id"]);
         }
 
         private void opprettProsjekt()
@@ -137,6 +133,11 @@ namespace SysUt14Gr03
                 Session["flashMelding"] = string.Format("Prosjektet '{0}' ble opprettet ", tbProsjektnavn.Text);
                 Session["flashStatus"] = Konstanter.notifikasjonsTyper.success.ToString();
                 Session["dtFaser"] = null;
+
+                //Oppretter logg for opprettelse av prosjektet
+                String hendelse = "Prosjektet " + tbProsjektnavn.Text + "ble opprettet med startdato " + tbStart.Text
+                    + " og sluttdato " + tbSlutt.Text;
+                OppretteLogg.opprettLoggForBruker(hendelse, DateTime.Now, (int)Session["bruker_id"]);
 
                 Response.Redirect("~/OversiktProsjekter", true);
 
