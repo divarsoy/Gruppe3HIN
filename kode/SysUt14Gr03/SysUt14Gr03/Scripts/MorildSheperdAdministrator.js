@@ -124,14 +124,7 @@
                   }
                 ]
             });
-            if ($('#MainContent_MainContent_SheperdBool').val() == "True") {
-                return shepherd.start();
-            }
-            else {
-                throw "Sheperd Start er satt til False";
-            }
-
-        
+                return shepherd.start();       
     };
 
     completeShepherd = function () {

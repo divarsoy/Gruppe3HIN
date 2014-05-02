@@ -15,7 +15,9 @@
         shepherd.addStep('VelgProsjekt', {
             title: 'Velkommen prosjektleder :)',
             text: ['Etter du har logget inn må du velge ett prosjekt før du går videre.',
-            'Det gjør du ved å velge ett prosjekt i listen nedenfor. '],
+            'Det gjør du ved å velge ett prosjekt i listen nedenfor. ', '',
+            '<a href="DefaultProsjektleder.aspx?sheperd=false">Trykk her for å deaktivere denne opplæringsmodulen ved framtidige besøk</a><br />(Opplæringsmodulen kan reaktivires under "innstillinger" i menyen)'
+            ],
             attachTo: '.ShepherdVelgProsjekt bottom',
             classes: 'shepherd shepherd-open shepherd-theme-arrows shepherd-transparent-text',
             buttons: [

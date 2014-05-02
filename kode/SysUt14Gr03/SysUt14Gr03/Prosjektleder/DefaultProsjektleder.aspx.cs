@@ -29,8 +29,18 @@ namespace SysUt14Gr03
             if (!Page.IsPostBack)
             {
                 bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
-
                 Bruker bruker = Queries.GetBruker(bruker_id);
+
+                //Sjekker om sheperd skal deaktiveres eller vises
+                if (Request.QueryString["sheperd"] != null)
+                {
+                    Queries.SetSheperd(bruker_id);
+                }
+                else if (Queries.GetBrukerPreferanse(bruker_id).Sheperd)
+                {
+                    ScriptManager.RegisterClientScriptInclude(this.Page, this.GetType(), "jquery", "../Scripts/jquery-1.10.2.js");
+                    ScriptManager.RegisterClientScriptInclude(this.Page, this.GetType(), "SheperdScript", "../Scripts/MorildShepherdProsjektleder.js");
+                }
 
                 // Henter alle aktive prosjekter for innlogget bruker
                 if (ListBoxProsjekt.SelectedValue != null && ListBoxProsjekt.SelectedValue == "0")
