@@ -225,7 +225,6 @@
     <Content Include="Content\shepherd-theme-arrows.css" />
     <Content Include="DeaktiveringAvRegistrerteTimer.aspx" />
     <Content Include="GodkjennTimer.aspx" />
-    <Content Include="Fremdriftsdiagram.aspx" />
     <Content Include="Innstillinger.aspx" />
     <Content Include="KommentarTest.aspx" />
     <Content Include="Loggut.aspx" />
@@ -585,13 +584,6 @@
     </Compile>
     <Compile Include="GodkjennTimer.aspx.designer.cs">
       <DependentUpon>GodkjennTimer.aspx</DependentUpon>
-</Compile>
-    <Compile Include="Fremdriftsdiagram.aspx.cs">
-      <DependentUpon>Fremdriftsdiagram.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Fremdriftsdiagram.aspx.designer.cs">
-      <DependentUpon>Fremdriftsdiagram.aspx</DependentUpon>
     </Compile>
     <Compile Include="gruppe3DataSet1.Designer.cs">
       <AutoGen>True</AutoGen>

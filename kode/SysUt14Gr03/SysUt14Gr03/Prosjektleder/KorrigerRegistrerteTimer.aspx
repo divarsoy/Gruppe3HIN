@@ -11,9 +11,9 @@
     <div class="form-group">
             <div class="row">
                 <div style="display: inline-block" class="col-md-4">
-                    <asp:Label ID="Label1" runat="server" Text="Registrer timer for..." Visible="false"></asp:Label>
+                    <asp:Label ID="Label1" runat="server" Text="Sett dato" Visible="false"></asp:Label>
                     <br />
-                    <asp:DropDownList ID="ddlDag" runat="server" Visible="false" CssClass="form-control"></asp:DropDownList>
+                    <asp:TextBox ID="txtDato" runat="server" Visible="false" CssClass="form-control" TextMode="Date"></asp:TextBox>
 
                     <br />
                     <asp:Label ID="Label2" runat="server" Text="Starttidspunkt:" Visible="false"></asp:Label>

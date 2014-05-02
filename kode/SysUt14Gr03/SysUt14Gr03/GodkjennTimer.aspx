@@ -8,31 +8,30 @@
         <asp:Label ID="lblTittel" runat="server"></asp:Label>
     </h1>
 
-    <asp:GridView CssClass="table table-striped" RowStyle-HorizontalAlign="Center" ID="gvwTimer" runat="server" AutoGenerateColumns="False" OnRowDataBound="gvwTimer_RowDataBound">
+    <asp:GridView CssClass="table table-striped" RowStyle-HorizontalAlign="Center" ID="gvwTimer" runat="server" AutoGenerateColumns="False" OnRowDataBound="gvwTimer_RowDataBound" OnRowCommand="gvwTimer_RowCommand">
       
            <Columns>
 
-            <asp:TemplateField  HeaderText="Timeregistrering">
+            <asp:TemplateField  HeaderText="Detaljer">
                 
                 <ItemTemplate>
-                    <asp:Label ID="Label1" runat="server" Text='<%#Bind("Bruker") %>'></asp:Label>
-                    <asp:Label ID="Label2" runat="server" Text='<%#Bind("Opprettet") %>'></asp:Label>
-                    <asp:Label ID="Label3" runat="server" Text='<%#Bind("Start") %>'></asp:Label>
-                    <asp:Label ID="Label4" runat="server" Text='<%#Bind("Stopp") %>'></asp:Label>
-                    <asp:Label ID="lblTittel" runat="server" Text='<%#Bind("Tid") %>'></asp:Label>          
+                    
+                    <asp:Label ID="lblTittel" runat="server" Text='<%#Container.DataItem %>'></asp:Label>          
                 </ItemTemplate>
          
             </asp:TemplateField>
             <asp:TemplateField  HeaderText="Godkjenn">
                 <ItemTemplate>
-                    <asp:Button ID="btnGodkjenn" runat="server" Text="Godkjenn" />
+                    <asp:Button ID="btnGodkjenn" runat="server" Text="Godkjenn" CssClass="btn btn-success"
+                        CommandName="Godkjenn" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"/>
                 </ItemTemplate>
                
             </asp:TemplateField>
 
                <asp:TemplateField  HeaderText="Korriger">
                 <ItemTemplate>
-                    <asp:Button ID="btnKorriger" runat="server" Text="Button" />
+                    <asp:Button ID="btnKorriger" runat="server" Text="Korriger" CssClass="btn btn-warning"
+                        CommandName="Korriger" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"/>
                 </ItemTemplate>
                
             </asp:TemplateField>

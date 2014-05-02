@@ -176,12 +176,12 @@ namespace SysUt14Gr03
             // All server side execution goes here and set isConfirmNeeded to true,
             // and create the confirmMessage text, if user confirmation is needed.
 
-            DateTime dato = DateTime.Parse(txtDato.Text);
-
             DateTime startTid;
             DateTime sluttTid;
-            if (txtStart.Text != string.Empty && txtSlutt.Text != string.Empty)
+            if (txtStart.Text != string.Empty && txtSlutt.Text != string.Empty
+                && txtDato.Text != string.Empty)
             {
+                DateTime dato = DateTime.Parse(txtDato.Text);
                 DateTime.TryParse(txtStart.Text, out startTid);
                 DateTime.TryParse(txtSlutt.Text, out sluttTid);
 
