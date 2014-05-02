@@ -28,8 +28,8 @@ namespace SysUt14Gr03
             int prosjekt_id = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
             if (!IsPostBack)
             {
-                List<Fase> prosjektListe = Queries.GetFaseForProsjekt(prosjekt_id);
-                foreach (Fase f in prosjektListe)
+                List<Fase> faseListe = Queries.GetFaseForProsjekt(prosjekt_id);
+                foreach (Fase f in faseListe)
                 {
                     ddlfaser.Items.Add(new ListItem(f.Navn, f.Fase_id.ToString()));
                 }
