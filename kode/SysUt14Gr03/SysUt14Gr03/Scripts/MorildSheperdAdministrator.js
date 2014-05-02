@@ -15,7 +15,9 @@
             shepherd.addStep('RegistrerNyBruker', {
                 title: 'Velkommen administrator :)',
                 text: ['Her kan du registrere nye brukere', 'Du velger hvilken rettighet en bruker skal ha, skriver inn fornavn og etternavn og til slutt epost-adressen til vedkommede',
-                'Når du har trykket på "Registrer bruker" knappen, vil vedkommede få en epost med en aktiveringslink han/hun må trykke på for å fullføre registreringen. '],
+                'Når du har trykket på "Registrer bruker" knappen, vil vedkommede få en epost med en aktiveringslink han/hun må trykke på for å fullføre registreringen. ','',
+                '<a href="DefaultAdministrator.aspx?sheperd=false">Trykk her for å deaktivere denne opplæringsmodulen ved framtidige besøk</a><br />(Opplæringsmodulen kan reaktivires under "innstillinger" i menyen)'
+                ],
                 attachTo: '.adm1 bottom',
                 classes: 'shepherd shepherd-open shepherd-theme-arrows shepherd-transparent-text',
                 buttons: [

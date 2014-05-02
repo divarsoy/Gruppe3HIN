@@ -37,5 +37,4 @@
 
 
     <div id="admDefault"></div>
-    <script src="../Scripts/MorildSheperdAdministrator.js"></script>
 </asp:Content>

@@ -895,6 +895,18 @@ namespace SysUt14Gr03.Classes
             }      
         }
 
+        public static void SetSheperd(int bruker_id)
+        {
+            using (var context = new Context())
+            {
+                BrukerPreferanse brukerpreferanse = context.BrukerPreferanser
+                                                    .Where(bruker => bruker.Bruker_id == bruker_id)
+                                                    .FirstOrDefault();
+                brukerpreferanse.Sheperd = false;
+                context.SaveChanges();
+            }
+        }
+
 
     }
 }
