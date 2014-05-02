@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using SysUt14Gr03.Models;
 using SysUt14Gr03.Classes;
+using System.Drawing;
 
 namespace SysUt14Gr03.Prosjektleder
 {
@@ -18,90 +19,107 @@ namespace SysUt14Gr03.Prosjektleder
         private Time time;
         private List<Pause> pauseListe;
 
+        protected void Page_PreInit(Object sener, EventArgs e)
+        {
+            string master = SessionSjekk.findMaster();
+            this.MasterPageFile = master;
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
+            // SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
             // bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
             // bruker_id = 2;
 
-            if (Request.QueryString["time_id"] != null)
-            {
+            SessionSjekk.sjekkForBruker_id();
 
-                time_id = Validator.KonverterTilTall(Request.QueryString["time_id"]);
-                time = Queries.GetTimer(time_id);
-                if (time != null)
+            lblTest.Visible = false;
+
+            if (SessionSjekk.IsFaseleder()) {
+
+                if (Request.QueryString["time_id"] != null)
                 {
-                    pauseTeller = time.Pause.Count;
-                    pauseListe = time.Pause;
 
-                    if (!IsPostBack)
+                    time_id = Validator.KonverterTilTall(Request.QueryString["time_id"]);
+                    time = Queries.GetTimer(time_id);
+                    if (time != null)
                     {
+                        pauseTeller = time.Pause.Count;
+                        pauseListe = time.Pause;
 
-                        // skal byttes ut med kalender
-                        DateTime dato = DateTime.Now;
-                        ddlDag.Items.Add(new ListItem("I dag (" + dato.ToShortDateString() + ")", dato.ToShortDateString()));
-                        ddlDag.Items.Add(new ListItem("I går (" + dato.AddDays(-1).ToShortDateString() + ")", dato.AddDays(-1).ToShortDateString()));
-                        txtStart.Text = ((DateTime)time.Start).ToShortTimeString();
-                        txtSlutt.Text = ((DateTime)time.Stopp).ToShortTimeString();
-
-                    }
-
-                    // Tusen takk til http://forums.asp.net/post/2145517.aspx
-                    string eventTarget = (this.Request["__EVENTTARGET"] == null) ? string.Empty : this.Request["__EVENTTARGET"];
-                    string eventArgument = (this.Request["__EVENTARGUMENT"] == null) ? string.Empty : this.Request["__EVENTARGUMENT"];
-
-                    if (eventTarget == "UserConfirmationPostBack")
-                    {
-                        if (eventArgument == "true")
+                        if (!IsPostBack)
                         {
-                            Lagre();
-                            // Rydd opp
-                            RyddOpp();
-                            Session["flashMelding"] = "Timer registrert på " + time.Oppgave.Tittel;
-                            Session["flashStatus"] = Konstanter.notifikasjonsTyper.success.ToString();
+
+                            // skal byttes ut med kalender
+                            DateTime dato = DateTime.Now;
+                            txtDato.Text = dato.ToShortDateString();
+                            txtStart.Text = ((DateTime)time.Start).ToShortTimeString();
+                            txtSlutt.Text = ((DateTime)time.Stopp).ToShortTimeString();
 
                         }
 
-                        // User said NOT to do it...
-                        // You're the worst, you forget things quicker
-                        // than they're told to you. It goes in one ear,
-                        // and out your arse.
+                        // Tusen takk til http://forums.asp.net/post/2145517.aspx
+                        string eventTarget = (this.Request["__EVENTTARGET"] == null) ? string.Empty : this.Request["__EVENTTARGET"];
+                        string eventArgument = (this.Request["__EVENTARGUMENT"] == null) ? string.Empty : this.Request["__EVENTARGUMENT"];
+
+                        if (eventTarget == "UserConfirmationPostBack")
+                        {
+                            if (eventArgument == "true")
+                            {
+                                Lagre();
+                                // Rydd opp
+                                RyddOpp();
+                                Session["flashMelding"] = "Timer registrert på " + time.Oppgave.Tittel;
+                                Session["flashStatus"] = Konstanter.notifikasjonsTyper.success.ToString();
+
+                            }
+
+                            // User said NOT to do it...
+                            // You're the worst, you forget things quicker
+                            // than they're told to you. It goes in one ear,
+                            // and out your arse.
+
+                        }
+
+                        lblTittel.Text = "Korriger timeregistrering på oppgave " + time.Oppgave.Tittel;
+
+                        if (ViewState["pauseteller"] != null)
+                        {
+                            pauseTeller = Validator.KonverterTilTall(ViewState["pauseteller"].ToString());
+                        }
+
+                        // Legger til nytt felt for pauser
+                        // http://www.codeproject.com/Articles/35360/ViewState-in-Dynamic-Control
+                        LeggTilPausefelt(pauseTeller);
+
+                        Label1.Visible = true;
+                        Label2.Visible = true;
+                        Label3.Visible = true;
+                        btnAddPause.Visible = true;
+                        btnLagre.Visible = true;
+                        txtDato.Visible = true;
+                        txtStart.Visible = true;
+                        txtSlutt.Visible = true;
 
                     }
-
-                    lblTittel.Text = "Korriger timeregistrering på oppgave " + time.Oppgave.Tittel;
-
-                    if (ViewState["pauseteller"] != null)
+                    else
                     {
-                        pauseTeller = Validator.KonverterTilTall(ViewState["pauseteller"].ToString());
+                        lblTittel.Text = "Oppgaven finnes ikke";
                     }
-
-                    // Legger til nytt felt for pauser
-                    // http://www.codeproject.com/Articles/35360/ViewState-in-Dynamic-Control
-                    LeggTilPausefelt(pauseTeller);
-
-                    Label1.Visible = true;
-                    Label2.Visible = true;
-                    Label3.Visible = true;
-                    btnAddPause.Visible = true;
-                    btnLagre.Visible = true;
-                    ddlDag.Visible = true;
-                    txtStart.Visible = true;
-                    txtSlutt.Visible = true;
 
                 }
                 else
                 {
-                    lblTittel.Text = "Oppgaven finnes ikke";
+                    lblTittel.Text = "Ingen oppgave valgt";
                 }
-
             }
             else
             {
-                lblTittel.Text = "Ingen oppgave valgt";
+                SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
             }
 
         }
+
 
         private void RyddOpp()
         {
@@ -179,12 +197,12 @@ namespace SysUt14Gr03.Prosjektleder
             // All server side execution goes here and set isConfirmNeeded to true,
             // and create the confirmMessage text, if user confirmation is needed.
 
-            DateTime dato = DateTime.Parse(ddlDag.SelectedValue);
-
             DateTime startTid;
             DateTime sluttTid;
-            if (txtStart.Text != string.Empty && txtSlutt.Text != string.Empty)
+            if (txtStart.Text != string.Empty && txtSlutt.Text != string.Empty
+                && txtDato.Text != string.Empty)
             {
+                DateTime dato = DateTime.Parse(txtDato.Text);
                 DateTime.TryParse(txtStart.Text, out startTid);
                 DateTime.TryParse(txtSlutt.Text, out sluttTid);
 
@@ -249,29 +267,37 @@ namespace SysUt14Gr03.Prosjektleder
                         }
                         else
                         {
-                            Session["flashMelding"] = "Pauser kan ikke være utenfor arbeidsøkten";
-                            Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
+                            lblTest.Text = "Pauser kan ikke være utenfor arbeidsøkten";
+                            lblTest.ForeColor = Color.Red;
+                            lblTest.Visible = true;
+                            //Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
 
                         }
                     }
                     else
                     {
-                        Session["flashMelding"] = "Sluttid kan ikke være før starttid";
-                        Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
+                        lblTest.Text = "Sluttid kan ikke være før starttid";
+                        lblTest.ForeColor = Color.Red;
+                        lblTest.Visible = true;
+                        //Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
 
                     }
                 }
                 else
                 {
-                    Session["flashMelding"] = "Vennligst oppgi start- og sluttid";
-                    Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
+                    lblTest.Text = "Vennligst oppgi start- og sluttid";
+                    lblTest.ForeColor = Color.Red;
+                    lblTest.Visible = true;
+                    // Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
                 }
 
             }
             else
             {
-                Session["flashMelding"] = "Vennligst oppgi start- og sluttid";
-                Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
+                lblTest.Text = "Vennligst oppgi start-, sluttid og dato";
+                lblTest.ForeColor = Color.Red;
+                lblTest.Visible = true;
+                // Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
             }
 
             if (isConfirmNeeded)
@@ -297,7 +323,7 @@ namespace SysUt14Gr03.Prosjektleder
             bruktTid = (TimeSpan)ViewState["bruktTid"];
             DateTime startTid = (DateTime)ViewState["startTid"];
             DateTime sluttTid = (DateTime)ViewState["sluttTid"];
-            DateTime dato = DateTime.Parse(ddlDag.SelectedValue);
+            DateTime dato = DateTime.Parse(txtDato.Text);
 
             
             using (var context = new Context())
@@ -310,6 +336,9 @@ namespace SysUt14Gr03.Prosjektleder
 
                 context.SaveChanges();
             }
+
         }
+
 	}
+
 }

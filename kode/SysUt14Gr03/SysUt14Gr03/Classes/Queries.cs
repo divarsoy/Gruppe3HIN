@@ -183,6 +183,21 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        static public List<Time> GetTimerForGodkjenning(int oppgave_id)
+        {
+            using (var context = new Context())
+            {
+                var timeListe = context.Timer
+                            .Include("Bruker")
+                            .Where(t => t.Oppgave_id == oppgave_id)
+                            .Where(t => t.Aktiv == true)
+                            .Where(t => t.Manuell == true)
+                            .Where(t => t.IsFerdig == false)
+                            .ToList<Time>();
+                return timeListe;
+            }
+        }
+
         static public List<Time> GetTimerForOppgave(int oppgave_id)
         {
             using (var context = new Context())
@@ -314,6 +329,17 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        static public List<Oppgave> getOppgaverIFase(int fase_id)
+        {
+            using (var context = new Context())
+            {
+                var oppgaveListe = context.Oppgaver
+                                    .Where(o => o.Fase_id == fase_id)
+                                    .ToList();
+                return oppgaveListe;
+            }
+        }
+
         static public List<Oppgave> GetOppgaverIOppgaveGruppe(int oppgaveGruppe_id)
         {
             using (var context = new Context())
@@ -322,6 +348,19 @@ namespace SysUt14Gr03.Classes
                                     .Where(o => o.OppgaveGruppe_id == oppgaveGruppe_id)
                                     .ToList();
                 return oppgaveListe;
+            }
+        }
+
+        public static Oppgave GetOppgaveMedTimer(int time_id)
+        {
+            using (var context = new Context())
+            {
+                Oppgave oppg = context.Oppgaver
+                    .Include("Timer")
+                    .Where(Oppgave => Oppgave.Timer.Any(time => time.Time_id == time_id))
+                    .FirstOrDefault();
+
+                return oppg;
             }
         }
 
@@ -845,18 +884,6 @@ namespace SysUt14Gr03.Classes
                 Team _t = context.Teams.Where(Team => Team.Team_id == t.Team_id).FirstOrDefault();
                 _t.Aktiv = false;
                 context.SaveChanges();
-            }
-        }
-
-        public static Oppgave GetOppgaveMedTimer(int time_id)
-        {
-            using (var context = new Context())
-            {
-                Oppgave oppg = context.Oppgaver.Include("Timer")
-                    .Where(Oppgave => Oppgave.Timer.Any(time => time.Time_id == time_id))
-                    .FirstOrDefault();
-
-                return oppg;
             }
         }
 
