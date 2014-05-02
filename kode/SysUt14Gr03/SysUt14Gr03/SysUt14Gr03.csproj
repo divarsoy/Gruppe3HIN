@@ -585,6 +585,7 @@
     </Compile>
     <Compile Include="GodkjennTimer.aspx.designer.cs">
       <DependentUpon>GodkjennTimer.aspx</DependentUpon>
+</Compile>
     <Compile Include="Fremdriftsdiagram.aspx.cs">
       <DependentUpon>Fremdriftsdiagram.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
