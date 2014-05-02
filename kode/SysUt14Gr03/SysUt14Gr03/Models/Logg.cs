@@ -13,7 +13,7 @@ namespace SysUt14Gr03.Models
         public string Hendelse { get; set; }
         public DateTime Opprettet { get; set; }
         public int bruker_id { get; set; }
-        public int Prosjekt_id { get; set; }
+        public int? Prosjekt_id { get; set; }
 
         public virtual Bruker Bruker { get; set; }
         

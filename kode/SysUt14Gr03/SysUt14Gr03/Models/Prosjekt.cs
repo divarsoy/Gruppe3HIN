@@ -21,6 +21,7 @@ namespace SysUt14Gr03.Models
         [Display(Name = "Prosjektleder")]
         public int Bruker_id { get; set; }
 
+        public virtual Logg Logg { get; set; }
         public virtual Team Team { get; set; }
         public virtual Bruker Bruker { get; set; }
         public virtual List<Fase> Faser { get; set; }

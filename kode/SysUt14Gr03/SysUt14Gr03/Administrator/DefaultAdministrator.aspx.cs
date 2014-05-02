@@ -27,6 +27,16 @@ namespace SysUt14Gr03
 
             if (!Page.IsPostBack)
             {
+                if (Request.QueryString["sheperd"] != null)
+                {
+                    Queries.SetSheperd(bruker_id);
+                }
+                else
+                {
+                    ScriptManager.RegisterClientScriptInclude(this.Page, this.GetType(), "SheperdScript", "../Scripts/MorildSheperdAdministrator.js");
+                }
+
+
                 //Sjekker om Sheperd skal aktiveres
                 BrukerPreferanse brukerpreferanse = Queries.GetBrukerPreferanse(bruker_id);
                 SheperdBool.Value = brukerpreferanse.Sheperd.ToString();
