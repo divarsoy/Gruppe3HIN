@@ -224,7 +224,7 @@
     <Content Include="Content\shepherd-theme-arrows-plain-buttons.css" />
     <Content Include="Content\shepherd-theme-arrows.css" />
     <Content Include="DeaktiveringAvRegistrerteTimer.aspx" />
-    <Content Include="Fremdriftsdiagram.aspx" />
+    <Content Include="GodkjennTimer.aspx" />
     <Content Include="Innstillinger.aspx" />
     <Content Include="KommentarTest.aspx" />
     <Content Include="Loggut.aspx" />
@@ -392,6 +392,7 @@
     <Content Include="Scripts\MorildShepherdUtvikler.js" />
     <Content Include="Scripts\shepherd.js" />
     <Content Include="Scripts\shepherd.min.js" />
+    <Content Include="Site.Utvikler.master" />
     <Content Include="SprintBacklogFase.aspx" />
     <Content Include="TestPaaEksportExcel.aspx" />
     <Content Include="Utvikler\DefaultUtvikler.aspx" />
@@ -520,8 +521,8 @@
     <Content Include="Site.Mobile.Master" />
     <Content Include="Site.SysAdm.master" />
     <Content Include="Site.Prosjektleder.master" />
-    <Content Include="Site.Utvikler.master" />
     <Content Include="Site.Morild.master" />
+    <Content Include="Site.Faseleder.master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -577,12 +578,12 @@
     <Compile Include="DeaktiveringAvRegistrerteTimer.aspx.designer.cs">
       <DependentUpon>DeaktiveringAvRegistrerteTimer.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Fremdriftsdiagram.aspx.cs">
-      <DependentUpon>Fremdriftsdiagram.aspx</DependentUpon>
+    <Compile Include="GodkjennTimer.aspx.cs">
+      <DependentUpon>GodkjennTimer.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Fremdriftsdiagram.aspx.designer.cs">
-      <DependentUpon>Fremdriftsdiagram.aspx</DependentUpon>
+    <Compile Include="GodkjennTimer.aspx.designer.cs">
+      <DependentUpon>GodkjennTimer.aspx</DependentUpon>
     </Compile>
     <Compile Include="gruppe3DataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -837,12 +838,26 @@
     </Compile>
     <Compile Include="Classes\Tabeller.cs" />
     <Compile Include="Classes\Validator.cs" />
+    <Compile Include="Site.Faseleder.master.cs">
+      <DependentUpon>Site.Faseleder.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Faseleder.master.designer.cs">
+      <DependentUpon>Site.Faseleder.master</DependentUpon>
+    </Compile>
     <Compile Include="Site.Morild.master.cs">
       <DependentUpon>Site.Morild.master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Site.Morild.master.designer.cs">
       <DependentUpon>Site.Morild.master</DependentUpon>
+    </Compile>
+    <Compile Include="Site.Utvikler.master.cs">
+      <DependentUpon>Site.Utvikler.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Utvikler.master.designer.cs">
+      <DependentUpon>Site.Utvikler.master</DependentUpon>
     </Compile>
     <Compile Include="SprintBacklogFase.aspx.cs">
       <DependentUpon>SprintBacklogFase.aspx</DependentUpon>
@@ -1025,13 +1040,6 @@
     </Compile>
     <Compile Include="Site.SysAdm.master.designer.cs">
       <DependentUpon>Site.SysAdm.master</DependentUpon>
-    </Compile>
-    <Compile Include="Site.Utvikler.master.cs">
-      <DependentUpon>Site.Utvikler.master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Site.Utvikler.master.designer.cs">
-      <DependentUpon>Site.Utvikler.master</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="TidsestimerProsjekt.aspx.cs">

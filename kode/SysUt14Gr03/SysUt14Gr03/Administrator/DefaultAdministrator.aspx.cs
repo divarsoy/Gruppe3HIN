@@ -27,20 +27,16 @@ namespace SysUt14Gr03
 
             if (!Page.IsPostBack)
             {
+                //Sjekker om sheperd skal deaktiveres eller vises
                 if (Request.QueryString["sheperd"] != null)
                 {
                     Queries.SetSheperd(bruker_id);
                 }
-                else
+                else if (Queries.GetBrukerPreferanse(bruker_id).Sheperd)
                 {
+                    ScriptManager.RegisterClientScriptInclude(this.Page, this.GetType(), "jquery", "../Scripts/jquery-1.10.2.js");
                     ScriptManager.RegisterClientScriptInclude(this.Page, this.GetType(), "SheperdScript", "../Scripts/MorildSheperdAdministrator.js");
                 }
-
-
-                //Sjekker om Sheperd skal aktiveres
-                BrukerPreferanse brukerpreferanse = Queries.GetBrukerPreferanse(bruker_id);
-                SheperdBool.Value = brukerpreferanse.Sheperd.ToString();
-                //SheperdBool.Value = "False";
             }
         }
 

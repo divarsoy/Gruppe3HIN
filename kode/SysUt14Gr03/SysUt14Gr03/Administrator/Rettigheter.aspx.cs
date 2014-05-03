@@ -52,8 +52,13 @@ namespace SysUt14Gr03
             using (var context = new Context())
             {
                 Rettighet rettighet = context.Rettigheter.Where(c => c.Rettighet_id == rettighet_id).First();
+                String rettighetNavnFoerEndring = rettighet.RettighetNavn;
                 rettighet.RettighetNavn = txtRettighetNavn.Text;
                 context.SaveChanges();
+
+                //Oppretter logg for ny rettighet
+                String hendelse = "Rettighet med navn " + rettighetNavnFoerEndring + " ble enret til " + rettighet.RettighetNavn;
+                OppretteLogg.opprettLoggForBruker(hendelse, DateTime.Now, (int)Session["bruker_id"]);
             }
             GridViewRettigheter.EditIndex = -1;
             BindRettigheter();
@@ -70,7 +75,14 @@ namespace SysUt14Gr03
 
                 context.Rettigheter.Add(rettighet);
                 context.SaveChanges();
+
+                //Oppretter logg for ny rettighet
+                String hendelse = "Rettighet med navn " + rettighet.RettighetNavn + " ble opprettet";
+                OppretteLogg.opprettLoggForBruker(hendelse, DateTime.Now, (int)Session["bruker_id"]);
             }
+
+
+
             BindRettigheter();
         }
         protected void btnLagre_Click(object sender, EventArgs e)

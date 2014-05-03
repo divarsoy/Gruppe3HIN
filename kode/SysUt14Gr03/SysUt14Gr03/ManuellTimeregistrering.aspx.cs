@@ -37,8 +37,7 @@ namespace SysUt14Gr03
                     {
 
                         DateTime dato = DateTime.Now;
-                        ddlDag.Items.Add(new ListItem("I dag (" + dato.ToShortDateString() + ")", dato.ToShortDateString()));
-                        ddlDag.Items.Add(new ListItem("I går (" + dato.AddDays(-1).ToShortDateString() + ")", dato.AddDays(-1).ToShortDateString()));
+                        txtDato.Text = dato.ToShortDateString();
 
                     }
 
@@ -53,8 +52,7 @@ namespace SysUt14Gr03
                             Lagre();
                             // Rydd opp
                             RyddOpp();
-                            Session["flashMelding"] = "Timer registrert på " + oppgave.Tittel;
-                            Session["flashStatus"] = Konstanter.notifikasjonsTyper.success.ToString();
+                            
                             Response.Redirect(Request.Url.ToString());
 
                         }
@@ -82,7 +80,7 @@ namespace SysUt14Gr03
                     Label3.Visible = true;
                     btnAddPause.Visible = true;
                     btnLagre.Visible = true;
-                    ddlDag.Visible = true;
+                    txtDato.Visible = true;
                     txtStart.Visible = true;
                     txtSlutt.Visible = true;
 
@@ -113,7 +111,9 @@ namespace SysUt14Gr03
                 txtPSL.Text = "";
             }
 
-            Response.Redirect(Request.RawUrl);
+            Session["flashMelding"] = "Timer registrert på " + oppgave.Tittel;
+            Session["flashStatus"] = Konstanter.notifikasjonsTyper.success.ToString();
+            Response.Redirect("Utvikler/InnsynIEgneRegistrerteTimerSomBruker.aspx", true);
         }
 
         protected void btnAddPause_Click(object sender, EventArgs e)
@@ -176,12 +176,12 @@ namespace SysUt14Gr03
             // All server side execution goes here and set isConfirmNeeded to true,
             // and create the confirmMessage text, if user confirmation is needed.
 
-            DateTime dato = DateTime.Parse(ddlDag.SelectedValue);
-
             DateTime startTid;
             DateTime sluttTid;
-            if (txtStart.Text != string.Empty && txtSlutt.Text != string.Empty)
+            if (txtStart.Text != string.Empty && txtSlutt.Text != string.Empty
+                && txtDato.Text != string.Empty)
             {
+                DateTime dato = DateTime.Parse(txtDato.Text);
                 DateTime.TryParse(txtStart.Text, out startTid);
                 DateTime.TryParse(txtSlutt.Text, out sluttTid);
 
@@ -302,7 +302,10 @@ namespace SysUt14Gr03
             DateTime startTid = (DateTime)ViewState["startTid"];
             DateTime sluttTid = (DateTime)ViewState["sluttTid"];
             pauseListe = ViewState["pauseListe"] as List<Pause>;
-            DateTime dato = DateTime.Parse(ddlDag.SelectedValue);
+            DateTime dato = DateTime.Parse(txtDato.Text);
+            bool godkjent = true;
+            if (dato > DateTime.Now || dato < DateTime.Now.AddDays(-1))
+                godkjent = false;
 
             using (var context = new Context())
             {
@@ -314,6 +317,7 @@ namespace SysUt14Gr03
                     Opprettet = dato,
                     Manuell = true,
                     Aktiv = true,
+                    IsFerdig = godkjent,
                     Bruker = bruker,
                     Oppgave = oppgave,
                     Start = startTid,
@@ -321,6 +325,7 @@ namespace SysUt14Gr03
                 };
 
                 oppgave.BruktTid += bruktTid;
+                oppgave.RemainingTime -= bruktTid;
                 context.Timer.Add(time);
                 context.SaveChanges();
             }
