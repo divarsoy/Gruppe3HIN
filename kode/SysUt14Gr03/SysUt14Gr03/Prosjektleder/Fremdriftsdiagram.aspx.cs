@@ -24,6 +24,8 @@ namespace SysUt14Gr03
         private Fase fase;
         private List<Fase> faser;
         private List<Oppgave> oppgaver;
+        private List<Time> registrerteTimer;
+        private List<int> tidPaaOppgaver;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -52,10 +54,22 @@ namespace SysUt14Gr03
         }
         private void fillGraph()
         {
+
             faseID = Convert.ToInt32(ddlFaser.SelectedValue);
             fase = Queries.GetFase(faseID);
 
             oppgaver = Queries.getOppgaverIFase(faseID);
+
+            for (int i = 0; i < oppgaver.Count; i++ )
+            {
+                tidPaaOppgaver.Add(Validator.KonverterTilTall(oppgaver[i].Estimat.ToString()));
+                List<Time> t = Queries.GetTimerForOppgave(oppgaver[i].Oppgave_id);
+                foreach (Time time in t)
+                {
+                    registrerteTimer.Add(time);
+                }
+
+            }
 
             for (int i = 0; i < oppgaver.Count; i++)
             {
@@ -79,12 +93,21 @@ namespace SysUt14Gr03
                 .Select(i => startDato.AddDays(i))
                 .ToList();
 
-            tidIgjen = estimat;
+            int[] xVerdier = new int[range.Count];
+            int[,] yVerdier = new int[range.Count, 2];
+
+            yVerdier[0, 0] = Validator.KonverterTilTall(estimat.TotalHours.ToString());
+
+                tidIgjen = estimat;
             TimeSpan h = new TimeSpan();
             foreach (var d in range)
             {
                 for (int i = 0; i < oppgaver.Count; i++)
                 {
+                   /* yVerdier[i, 0] = Validator.KonverterTilTall(oppgaver[i].BruktTid.ToString());
+                    if (i > 0)
+                        yVerdier[i, 0] = yVerdier[i - 1, 0] + yVerdier[i, 0]; */
+
                     if ((TimeSpan)oppgaver[i].BruktTid > (TimeSpan)oppgaver[i].Estimat)
                     {
                         h = tidIgjen + ((TimeSpan)oppgaver[i].BruktTid - (TimeSpan)oppgaver[i].Estimat);
@@ -99,7 +122,6 @@ namespace SysUt14Gr03
                         tidIgjen = tidIgjen - (TimeSpan)oppgaver[i].BruktTid;
                     }
                 }
-                
                 if(h != null)
                 {
                     Object[] yvalues = new Object[2];
