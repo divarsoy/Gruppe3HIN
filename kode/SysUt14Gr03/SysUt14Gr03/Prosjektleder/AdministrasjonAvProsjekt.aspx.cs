@@ -17,6 +17,7 @@ namespace SysUt14Gr03
         private List<Team> teamListe = null;
         private List<Bruker> prosjektLeder;
         private int bruker_id;
+        private int prosjekt_id;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -69,6 +70,8 @@ namespace SysUt14Gr03
                     prosjekt.Team_id = team_id;
                     prosjekt.Bruker_id = bruker_id;
                     context.SaveChanges();
+
+                    prosjekt_id = prosjekt.Prosjekt_id;
                     
                     currentIsActive = prosjekt.Aktiv;
                 }
@@ -87,9 +90,9 @@ namespace SysUt14Gr03
                 }
 
                 if (!currentIsActive)
-                    OppretteLogg.opprettLoggForBruker(arkiveringHendelse, DateTime.Now, (int)Session["bruker_id"]);
+                    OppretteLogg.opprettLoggForProsjekt(arkiveringHendelse, DateTime.Now, (int)Session["bruker_id"], prosjekt_id);
                 else
-                    OppretteLogg.opprettLoggForBruker(hendelse, DateTime.Now, (int)Session["bruker_id"]);
+                    OppretteLogg.opprettLoggForProsjekt(hendelse, DateTime.Now, (int)Session["bruker_id"], prosjekt_id);
 
             }
             catch

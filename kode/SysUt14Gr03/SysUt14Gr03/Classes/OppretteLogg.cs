@@ -25,5 +25,22 @@ namespace SysUt14Gr03.Classes
                 context.SaveChanges();
             }
         }
+
+        public static void opprettLoggForProsjekt(string hendelse, DateTime opprettet, int brukerId, int prosjektId)
+        {
+            using (var context = new Context())
+            {
+                Logg nyLogg = new Logg
+                {
+                    Hendelse = hendelse,
+                    Opprettet = opprettet,
+                    bruker_id = brukerId,
+                    Prosjekt_id = prosjektId
+                };
+
+                context.Logger.Add(nyLogg);
+                context.SaveChanges();
+            }
+        }
     }
 }

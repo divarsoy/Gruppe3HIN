@@ -22,6 +22,7 @@ namespace SysUt14Gr03
     
         private int team_id;
         private int bruker_id;
+        private int prosjekt_id;
         private const string BTN_START = "btnStart";
         private const string BTN_SLUTT = "btnSlutt";
         private const string BTN_FASE_START = "btnFaseStart";
@@ -120,6 +121,7 @@ namespace SysUt14Gr03
                         }
                         context.SaveChanges();
                     }
+                    prosjekt_id = nyttProsjekt.Prosjekt_id;
                 }
 
 //                lblFeil.Visible = true;
@@ -137,7 +139,7 @@ namespace SysUt14Gr03
                 //Oppretter logg for opprettelse av prosjektet
                 String hendelse = "Prosjektet " + tbProsjektnavn.Text + "ble opprettet med startdato " + tbStart.Text
                     + " og sluttdato " + tbSlutt.Text;
-                OppretteLogg.opprettLoggForBruker(hendelse, DateTime.Now, (int)Session["bruker_id"]);
+                OppretteLogg.opprettLoggForProsjekt(hendelse, DateTime.Now, (int)Session["bruker_id"], prosjekt_id);
 
                 Response.Redirect("~/OversiktProsjekter", true);
 
