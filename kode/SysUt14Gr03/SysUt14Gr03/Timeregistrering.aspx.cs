@@ -238,7 +238,7 @@ namespace SysUt14Gr03
                     Bruker bruker = context3.Brukere.Where(b => b.Bruker_id == brukerID).FirstOrDefault();
                     timer = context3.Timer.Where(t => t.Time_id == timeID).FirstOrDefault();
 
-                    oppgave.BruktTid = timespan;
+                    oppgave.BruktTid += timespan;
                     oppgave.RemainingTime = oppgave.Estimat - oppgave.BruktTid;
                     oppgave.Oppdatert = DateTime.Now;
 
