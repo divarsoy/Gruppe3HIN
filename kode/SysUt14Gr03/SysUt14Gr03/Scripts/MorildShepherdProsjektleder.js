@@ -13,8 +13,8 @@
             }
         });
         shepherd.addStep('VelgProsjekt', {
-            title: 'Velkommen prosjektleder :)',
-            text: ['<span class="sheperd-link"><a href="DefaultProsjektleder.aspx?sheperd=false">Trykk her</a> for å deaktivere tutorialen ved framtidige besøk.<br />(Tutorialen kan reaktivires under "innstillinger" i menyen)</span>',
+            title: '<span class="overskrift-shepherd">Velkommen prosjektleder :)</span>',
+            text: ['<span class="sheperd-link"><a href="DefaultProsjektleder.aspx?sheperd=false">Trykk her</a> for å deaktivere tutorialen ved framtidige besøk.<br />(Tutorialen kan reaktiveres under "innstillinger" i menyen)</span>',
             'Etter du har logget inn må du velge ett prosjekt før du går videre.',
             'Det gjør du ved å velge ett prosjekt i listen nedenfor. '
             ],
@@ -43,7 +43,7 @@
         });
 
         shepherd.addStep('Prosjekter', {
-            title: 'Prosjekter!',
+            title: '<span class="overskrift-shepherd">Prosjekter</span>',
             text: ['Her finner du en oversikt over alle prosjekter, du kan opprette ett nytt prosjekt samt administrere alle prosjekter du er leder for og de prosjektene du oppretter.'],
             attachTo: '.ShepherdMenyProsjekter bottom',
             buttons: [
@@ -66,7 +66,7 @@
         });
 
         shepherd.addStep('Team', {
-            title: 'Team',
+            title: '<span class="overskrift-shepherd">Team</span>',
             text: ['Her finner du en oversikt over alle team og en oversikt over team i det prosjektet du valgte i listen i starten av touren.',
                 'Du vil også ha et menyvalg der du kan administrere teamene. Der kan du legge til eller fjerne utviklere fra et team, og du kan arkivere ett team.',
                 'Det siste menyvalget gir deg mulighet til å opprette ett team. Du må gi teamet ett navn og legge til ønskede utviklere.'],
@@ -91,7 +91,7 @@
         });
 
         shepherd.addStep('Brukere', {
-            title: 'Brukere!',
+            title: '<span class="overskrift-shepherd">Brukere</span>',
             text: ['Her ligger det en oversikt over utviklere i prosjektet du valgte i starten, med diverse kontaktinformasjon ',
             'Du har også muligheten til å legge til en ny bruker.'],
             attachTo: '.ShepherdMenyBruker bottom',
@@ -115,7 +115,7 @@
         });
 
         shepherd.addStep('Oppgaver', {
-            title: 'Oppgaver',
+            title: '<span class="overskrift-shepherd">Oppgaver</span>',
             text: ['Her ligger det en oversikt over oppgaver i valgt prosjekt, du kan opprette en ny oppgave i valg prosjekt, ',
             'samt opprette en oppgavegruppe i valgt prosjekt.'],
             attachTo: '.ShepherdMenyOppgaver bottom',
@@ -139,7 +139,7 @@
         });
 
         shepherd.addStep('Timeregistrering', {
-            title: 'Timeregistrering',
+            title: '<span class="overskrift-shepherd">Timeregistrering</span>',
             text: ['Her ligger det en oversikt registrerte timer.'],
             attachTo: '.ShepherdMenyTimereg bottom',
             buttons: [
@@ -162,7 +162,7 @@
         });
 
         shepherd.addStep('Rapporter', {
-            title: 'Rapporter',
+            title: '<span class="overskrift-shepherd">Rapporter</span>',
             text: ['Her har du muligheten til å generere rapporter over team, prosjekt og individer.'],
             attachTo: '.ShepherdMenyRapporter bottom',
             buttons: [
@@ -185,8 +185,8 @@
         });
 
         shepherd.addStep('Innstillinger', {
-            title: 'Innstillinger',
-            text: ['Her kan du endre innstillinger på hvilke epost varsler du vil motta.',
+            title: '<span class="overskrift-shepherd">Innstillinger</span>',
+            text: ['Her kan du endre innstillinger, endre personlige opplysninger, bytte passord og endre innstillinger for epost varsling.',
             'Dette er slutten på omvisningen.',
             'Lykke til :)'],
             attachTo: '.ShepherdMenyInnstillinger bottom',
