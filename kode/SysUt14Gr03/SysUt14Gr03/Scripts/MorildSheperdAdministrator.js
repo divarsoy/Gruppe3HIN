@@ -13,7 +13,7 @@
                 }
             });
             shepherd.addStep('RegistrerNyBruker', {
-                title: 'Velkommen administrator :)',
+                title: '<span class="overskrift-shepherd">Velkommen administrator</span>',
                 text: ['<span class="sheperd-link"><a href="DefaultAdministrator.aspx?sheperd=false">Trykk her</a> for å deaktivere tutorialen ved framtidige besøk.<br />(Tutorialen kan reaktivires under "innstillinger" i menyen)</span>',
                        'Her kan du registrere nye brukere', 'Du velger hvilken rettighet en bruker skal ha, skriver inn fornavn og etternavn og til slutt epost-adressen til vedkommede',
                        'Når du har trykket på "Registrer bruker" knappen, vil vedkommede få en epost med en aktiveringslink han/hun må trykke på for å fullføre registreringen. '
@@ -36,7 +36,7 @@
                 ]
             });
             shepherd.addStep('OversiktOverBrukere', {
-                title: 'Oversikt over brukere!',
+                title: '<span class="overskrift-shepherd">Oversikt over brukere.</span>',
                 text: ['En detaljert oversikt over brukere finner du her!.'],
                 attachTo: '.adm3 bottom',
                 buttons: [
@@ -59,7 +59,7 @@
             });
             
             shepherd.addStep('AdministrereRettigheter', {
-                title: 'Administrere rettigheter!',
+                title: '<span class="overskrift-shepherd">Administrere rettigheter</span>',
                 text: ['Her har du mulighet til å legge til rettigeter.',
                 'Det vil også være valg for å endre navn på rettigheter som allerede er opprettet.'],
                 attachTo: '.adm4 bottom',
@@ -82,8 +82,8 @@
                 ]
             });
             shepherd.addStep('EpostVarsler', {
-                title: 'Epost varsler',
-                text: ['Her kan du endre innstillinger på hvilke epost varsler du vil motta.',
+                title: '<span class="overskrift-shepherd">Innstillinger</span>',
+                text: ['Her kan du endre innstillinger, endre personlige opplysninger, bytte passord og endre innstillinger for epost varsling.',
                 'Dette er slutten på omvisningen.',
                 'Lykke til :)'],
                 attachTo: '.adm5 bottom',
