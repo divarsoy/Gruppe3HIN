@@ -613,7 +613,17 @@ namespace SysUt14Gr03.Classes
                                    where teams.Aktiv == true
                                    select teams).ToList<Team>();
                 return teamListe;
+            }
+        }
 
+        static public List<Team> GetAlleArkiverteTeam()
+        {
+            using (var context = new Context())
+            {
+                var teamListe = (from teams in context.Teams.Include("Prosjekter")
+                                    where teams.Aktiv == false
+                                    select teams).ToList<Team>();
+                return teamListe;
             }
         }
 
@@ -896,6 +906,16 @@ namespace SysUt14Gr03.Classes
             {
                 Team _t = context.Teams.Where(Team => Team.Team_id == t.Team_id).FirstOrDefault();
                 _t.Aktiv = false;
+                context.SaveChanges();
+            }
+        }
+
+        public static void AktiverTeam(Team t)
+        {
+            using (var context = new Context())
+            {
+                Team _t = context.Teams.Where(Team => Team.Team_id == t.Team_id).FirstOrDefault();
+                _t.Aktiv = true;
                 context.SaveChanges();
             }
         }

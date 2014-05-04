@@ -33,8 +33,6 @@ namespace SysUt14Gr03.Prosjektleder
 
             SessionSjekk.sjekkForBruker_id();
 
-            lblTest.Visible = false;
-
             if (SessionSjekk.IsFaseleder()) {
 
                 if (Request.QueryString["time_id"] != null)
@@ -137,8 +135,6 @@ namespace SysUt14Gr03.Prosjektleder
 
         protected void btnAddPause_Click(object sender, EventArgs e)
         {
-            lblTest.Visible = false;
-
             LeggTilPausefelt();
             pauseTeller++;
             ViewState["pauseteller"] = pauseTeller;
@@ -267,37 +263,27 @@ namespace SysUt14Gr03.Prosjektleder
                         }
                         else
                         {
-                            lblTest.Text = "Pauser kan ikke være utenfor arbeidsøkten";
-                            lblTest.ForeColor = Color.Red;
-                            lblTest.Visible = true;
-                            //Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
-
+                            Session["flashMelding"] = "Pauser kan ikke være utenfor arbeidsøkten";
+                            Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
                         }
                     }
                     else
                     {
-                        lblTest.Text = "Sluttid kan ikke være før starttid";
-                        lblTest.ForeColor = Color.Red;
-                        lblTest.Visible = true;
-                        //Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
-
+                        Session["flashMelding"] = "Sluttid kan ikke være før starttid";
+                        Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
                     }
                 }
                 else
                 {
-                    lblTest.Text = "Vennligst oppgi start- og sluttid";
-                    lblTest.ForeColor = Color.Red;
-                    lblTest.Visible = true;
-                    // Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
+                    Session["flashMelding"] = "Vennligst oppgi start- og sluttid";
+                    Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
                 }
 
             }
             else
             {
-                lblTest.Text = "Vennligst oppgi start-, sluttid og dato";
-                lblTest.ForeColor = Color.Red;
-                lblTest.Visible = true;
-                // Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
+                Session["flashMelding"] = "Vennligst oppgi start-, sluttid og dato";
+                Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
             }
 
             if (isConfirmNeeded)

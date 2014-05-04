@@ -40,24 +40,6 @@ namespace SysUt14Gr03 {
         protected global::System.Web.UI.WebControls.CheckBoxList cblBrukere;
         
         /// <summary>
-        /// NoUsersSelected control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label NoUsersSelected;
-        
-        /// <summary>
-        /// TeamOK control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label TeamOK;
-        
-        /// <summary>
         /// btnOK control.
         /// </summary>
         /// <remarks>

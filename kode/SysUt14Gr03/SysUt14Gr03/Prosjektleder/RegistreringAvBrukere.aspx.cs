@@ -79,6 +79,9 @@ namespace SysUt14Gr03
 
                     String hendelse = "Bruker med navn " + fornavn + " " + etternavn + "ble opprettet";
                     OppretteLogg.opprettLoggForBruker(hendelse, DateTime.Now, (int)Session["bruker_id"]);
+                    
+                    Session["flashMelding"] = "Ny bruker har blitt registrert";
+                    Session["flashStatus"] = Konstanter.notifikasjonsTyper.success;
                 }
                 else
                 {
@@ -90,15 +93,21 @@ namespace SysUt14Gr03
 
         protected void bt_adm_reg_Click(object sender, EventArgs e)
         {
-            lblRettighetfeil.Visible = false;
             if (tb_reg_etternavn.Text.Length < 256)
                 etternavn = tb_reg_etternavn.Text;
             else
-                FeilmeldingEtternavn.Visible = true;
+            {
+                Session["flashMelding"] = "Etternavn kan ikke være lenger enn 256 tegn";
+                Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger;
+            }
+
             if (tb_reg_fornavn.Text.Length < 256)
                 fornavn = tb_reg_fornavn.Text;
             else
-                FeilMeldingFornavn.Visible = true;
+            {
+                Session["flashMelding"] = "Fornavn kan ikke være lenger enn 256 tegn";
+                Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger;
+            }
 
             /* //Utgår!
             using (var context = new Context())
@@ -115,9 +124,8 @@ namespace SysUt14Gr03
 
             if (ddlRettighet.SelectedValue == "0")
             {
-                lblRettighetfeil.Visible = true;
-                lblRettighetfeil.ForeColor = Color.Red;
-                lblRettighetfeil.Text = "Du må velge en rettighet";
+                Session["flashMelding"] = "Du må velge en rettighet";
+                Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger;
             }
           /*  for (int i = 0; i < Queries.GetAlleAktiveBrukere().Count; i++)
             {
@@ -144,7 +152,10 @@ namespace SysUt14Gr03
                 EpostFullforReg();          
             }    
             else
-                FeilMeldingEpost.Visible = true;
+            {
+                Session["flashMelding"] = "Epost kan ikke være lenger enn 256 tegn";
+                Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger;
+            }
         }
 
         public void EpostFullforReg()
@@ -188,9 +199,6 @@ namespace SysUt14Gr03
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('Error occured : " + ex.Message.ToString() + "');", true);
                 return;
             }
-   
-          
         }
-
     }
 }

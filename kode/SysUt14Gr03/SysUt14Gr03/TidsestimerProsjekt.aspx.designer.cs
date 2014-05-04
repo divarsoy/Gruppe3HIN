@@ -76,24 +76,6 @@ namespace SysUt14Gr03 {
         protected global::System.Web.UI.WebControls.TextBox txtArbeid;
         
         /// <summary>
-        /// FristOK control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label FristOK;
-        
-        /// <summary>
-        /// Feilmelding control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Feilmelding;
-        
-        /// <summary>
         /// btnFrist control.
         /// </summary>
         /// <remarks>

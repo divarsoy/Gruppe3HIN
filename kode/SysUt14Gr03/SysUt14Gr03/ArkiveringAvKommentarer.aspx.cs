@@ -33,8 +33,8 @@ namespace SysUt14Gr03
                 using (var context = new Context())
                 {
                     Bruker bruker = context.Brukere.Where(b => b.Bruker_id == bruker_id).First();
-                    lblBruker.ForeColor = Color.Green;
-                    lblBruker.Text = "Logget inn som " + bruker.ToString();
+                    Session["flashMelding"] = "Logget inn som " + bruker.ToString();
+                    Session["flashStatus"] = Konstanter.notifikasjonsTyper.success;
                 }
                
             }
@@ -46,9 +46,8 @@ namespace SysUt14Gr03
             {
                 if(lbKommentarer.SelectedValue == String.Empty)
                 {
-                    lblMelding.Visible = true;
-                    lblMelding.ForeColor = Color.Red;
-                    lblMelding.Text = "Du må velge hvilen kommentar som skal slettes!";
+                    Session["flashMelding"] = "Du må velge hvilen kommentar som skal slettes!";
+                    Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger;
                 }
                 else
                 { 
@@ -79,11 +78,9 @@ namespace SysUt14Gr03
                
                 else
                 {
-                    lblMelding.Visible = false;
                     lbOppgave.Items.Add(new ListItem(oppg.Tittel, oppg.Oppgave_id.ToString()));
                 }
             }
-            }
-           
         }
     }
+}

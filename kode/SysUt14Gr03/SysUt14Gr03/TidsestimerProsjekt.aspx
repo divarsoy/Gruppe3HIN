@@ -14,8 +14,6 @@
             <asp:TextBox ID="txtArbeid" runat="server" TextMode="Number" Width="128px"></asp:TextBox>
             &nbsp;timer</asp:Panel>
         <br />
-        <asp:Label ID="FristOK" runat="server" ForeColor="Green" Text="Frist satt!" Visible="False"></asp:Label>
-        <asp:Label ID="Feilmelding" runat="server" ForeColor="Red" Text="Noko gjekk gale" Visible="False"></asp:Label>
     </asp:Panel>
     <asp:Button ID="btnFrist" runat="server" Text="Endre frist" OnClick="btnFrist_Click" />
 </asp:Content>

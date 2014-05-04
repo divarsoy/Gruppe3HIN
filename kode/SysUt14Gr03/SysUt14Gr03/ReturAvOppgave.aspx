@@ -11,7 +11,6 @@
     <div class="clearfix"></div>
     <p>
 
-        <asp:Label ID="lblFeil" runat="server" visible="false"></asp:Label>
         <br />
         <asp:Button ID="btnSend" runat="server" OnClick="btnSend_Click" Text="Send" CssClass="btn btn-primary" />
 

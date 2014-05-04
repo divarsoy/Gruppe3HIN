@@ -7,36 +7,36 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SysUt14Gr03 {
+namespace SysUt14Gr03.Prosjektleder {
     
     
-    public partial class ArkiveringAvKommentarer {
+    public partial class AktiveringAvTeam {
         
         /// <summary>
-        /// lbKommentarer control.
+        /// cbl_team control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox lbKommentarer;
+        protected global::System.Web.UI.WebControls.CheckBoxList cbl_team;
         
         /// <summary>
-        /// lbOppgave control.
+        /// lblTilbakeMelding control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox lbOppgave;
+        protected global::System.Web.UI.WebControls.Label lblTilbakeMelding;
         
         /// <summary>
-        /// btnSlett control.
+        /// bt_aktivereTeam control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSlett;
+        protected global::System.Web.UI.WebControls.Button bt_aktivereTeam;
     }
 }

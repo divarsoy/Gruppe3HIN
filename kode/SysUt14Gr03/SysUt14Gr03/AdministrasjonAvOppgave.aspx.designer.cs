@@ -103,15 +103,6 @@ namespace SysUt14Gr03 {
         protected global::System.Web.UI.WebControls.ListBox lbBrukere;
         
         /// <summary>
-        /// lblFeil control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFeil;
-        
-        /// <summary>
         /// btnLeggTilBrukere control.
         /// </summary>
         /// <remarks>
@@ -191,15 +182,6 @@ namespace SysUt14Gr03 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlProsjekt;
-        
-        /// <summary>
-        /// lblCheck control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCheck;
         
         /// <summary>
         /// btnEndre control.

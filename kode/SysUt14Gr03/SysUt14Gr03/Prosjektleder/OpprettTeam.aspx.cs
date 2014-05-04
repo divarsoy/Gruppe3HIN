@@ -19,9 +19,6 @@ namespace SysUt14Gr03
         {
             SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
 
-            TeamOK.Visible = false;
-            NoUsersSelected.Visible = false;
-           
             brukerListe = Queries.GetAlleAktiveBrukere();
 
             if (cblBrukere.Items.Count == 0)
@@ -32,7 +29,6 @@ namespace SysUt14Gr03
                     cblBrukere.Items.Add(bruker.Etternavn + ", " + bruker.Fornavn);
                 }
             }
-            
         }
 
         protected void btnOK_Click(object sender, EventArgs e)
@@ -68,7 +64,8 @@ namespace SysUt14Gr03
 
                 if (teamNavn != string.Empty && selectedUsers.Count > 0)
                 {
-                    TeamOK.Visible = true;
+                    Session["flashMelding"] = "Team opprettet!";
+                    Session["flashStatus"] = Konstanter.notifikasjonsTyper.success.ToString();
                     // Legger teamet inn i databasen:
                     
                         var nyttTeam = new Team
@@ -88,7 +85,8 @@ namespace SysUt14Gr03
                 }
                 else
                 {
-                    NoUsersSelected.Visible = true;
+                    Session["flashMelding"] = "Ingen brukere valgt";
+                    Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
                 }
             }
         }
@@ -98,6 +96,5 @@ namespace SysUt14Gr03
             // Popup spør om bekreftelse
             // Går tilbake til forrige side
         }
-
     }
 }

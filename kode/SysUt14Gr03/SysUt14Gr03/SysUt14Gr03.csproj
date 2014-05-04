@@ -224,6 +224,7 @@
     <Content Include="Content\shepherd-theme-arrows-plain-buttons.css" />
     <Content Include="Content\shepherd-theme-arrows.css" />
     <Content Include="DeaktiveringAvRegistrerteTimer.aspx" />
+    <Content Include="Prosjektleder\AktiveringAvTeam.aspx" />
     <Content Include="Prosjektleder\Fremdriftsdiagram.aspx" />
     <Content Include="GodkjennTimer.aspx" />
     <Content Include="Innstillinger.aspx" />
@@ -578,6 +579,13 @@
     </Compile>
     <Compile Include="DeaktiveringAvRegistrerteTimer.aspx.designer.cs">
       <DependentUpon>DeaktiveringAvRegistrerteTimer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Prosjektleder\AktiveringAvTeam.aspx.cs">
+      <DependentUpon>AktiveringAvTeam.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Prosjektleder\AktiveringAvTeam.aspx.designer.cs">
+      <DependentUpon>AktiveringAvTeam.aspx</DependentUpon>
     </Compile>
     <Compile Include="Prosjektleder\Fremdriftsdiagram.aspx.cs">
       <DependentUpon>Fremdriftsdiagram.aspx</DependentUpon>

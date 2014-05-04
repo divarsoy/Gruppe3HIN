@@ -50,7 +50,6 @@
                 </div>
             </div>
     <br />
-    &nbsp&nbsp&nbsp<asp:Label ID="lblMelding" runat="server" Visible="false"></asp:Label>
     <br /><br />
 
     <asp:Button ID="btnOpprett" CssClass="btn btn-primary" runat="server" Text="Lagre" OnClick="btnOpprett_Click" />

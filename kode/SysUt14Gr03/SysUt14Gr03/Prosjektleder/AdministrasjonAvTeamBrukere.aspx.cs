@@ -131,8 +131,5 @@ namespace SysUt14Gr03
         {
             bt_fjerneBruker.Visible = false;
         }
-
-
-
     }
 }

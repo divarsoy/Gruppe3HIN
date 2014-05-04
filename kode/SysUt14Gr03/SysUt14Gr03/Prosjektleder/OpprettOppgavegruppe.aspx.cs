@@ -113,28 +113,24 @@ namespace SysUt14Gr03
                     }
                     else
                     {
-                        lblMelding.Text = "Velg minst to oppgaver";
-                        lblMelding.Visible = true;
-                        lblMelding.ForeColor = Color.Red;
+                        Session["flashMelding"] = "Velg minst to oppgaver";
+                        Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
                     }
 
                 }
 
                 else
                 {
-                    lblMelding.Text = "Maks antall oppgaver i en gruppe er 10";
-                    lblMelding.Visible = true;
-                    lblMelding.ForeColor = Color.Red;
+                    Session["flashMelding"] = "Maks antall oppgaver i en gruppe er 10";
+                    Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
                 }
 
             }
             else
             {
-                lblMelding.Text = "Skriv inn et navn";
-                lblMelding.Visible = true;
-                lblMelding.ForeColor = Color.Red;
+                Session["flashMelding"] = "Skriv inn et navn";
+                Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
             }
-            
         }
     }
 }

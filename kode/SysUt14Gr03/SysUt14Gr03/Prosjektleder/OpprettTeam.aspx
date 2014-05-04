@@ -12,12 +12,7 @@
             <asp:CheckBoxList ID="cblBrukere" CssClass="epost_pref_tabell" runat="server">
             </asp:CheckBoxList>
         </asp:Panel>
-    
 
-        <asp:Label ID="NoUsersSelected" runat="server" ForeColor="Red" Text="Ingen brukere valgt"
-            Visible="False"></asp:Label> 
-        <asp:Label ID="TeamOK" runat="server" ForeColor="Green" Text="Team opprettet!"
-            Visible="False"></asp:Label><br />
         <asp:Button ID="btnOK" class="btn btn-primary" runat="server" Text="Opprett team" OnClick="btnOK_Click" />
             &nbsp;&nbsp;&nbsp;
         <asp:Button ID="btnCancel" CssClass="btn btn-warning" runat="server" OnClick="btnCancel_Click" Text="Avbryt" />

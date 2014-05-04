@@ -2,8 +2,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container">
         <div class="headerCenter">
-    
-            <asp:Label ID="lblAktivert" Visible="false" runat="server"></asp:Label>
             <hr />
         
                 <asp:Label CssClass="col-md-2 col-md-offset-3" ID="lblUsername" AssociatedControlID="Username" runat="server">Brukernavn:</asp:Label>
@@ -53,13 +51,7 @@
             
             <div style="display:inline-block" class="col-md-2 col-md-offset-5">
                 <asp:Button CssClass="btn btn-primary" ID="ConfirmButton" runat="server" Text="Fullfør registrering" OnClick="ConfirmButton_Click" />
-                <asp:Label ID="lblBrukernavnFeil" runat="server" Visible="false"></asp:Label> 
             </div> 
-            
-            
-                
-            
-
         </div>
     </div>
 </asp:Content>

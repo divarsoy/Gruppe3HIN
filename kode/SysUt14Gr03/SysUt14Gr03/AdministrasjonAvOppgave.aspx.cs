@@ -148,17 +148,15 @@ namespace SysUt14Gr03
                         Response.Redirect("FerdigstillelsAvOppgave.aspx");
                     }
                     catch (System.Data.Entity.Infrastructure.DbUpdateException ex) {
-                        lblCheck.Visible = true;
-                        lblCheck.ForeColor = Color.Red;
-                        lblCheck.Text = ex.Message + "\n" + ex.InnerException.Message;
+                        Session["flashMelding"] = ex.Message + "\n" + ex.InnerException.Message;
+                        Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger;
                     }
                 }
             }
             else
             {
-                lblCheck.Visible = true;
-                lblCheck.ForeColor = Color.Red;
-                lblCheck.Text = "Feltene kan ikke være tomme!";
+                Session["flashMelding"] = "Feltene kan ikke være tomme!";
+                Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger;
             }
         }
 
@@ -173,13 +171,11 @@ namespace SysUt14Gr03
             selectedUser.Selected = false;
             if (lbBrukere.Items.Contains(selectedUser))
             {
-                lblFeil.Visible = true;
-                lblFeil.ForeColor = Color.Red;
-                lblFeil.Text = selectedUser + " er allerede valgt!";
+                Session["flashMelding"] = selectedUser + " er allerede valgt!";
+                Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger;
             }
             else
             {
-                lblFeil.Visible = false;
                 lbBrukere.Items.Add(selectedUser);
             }
         }

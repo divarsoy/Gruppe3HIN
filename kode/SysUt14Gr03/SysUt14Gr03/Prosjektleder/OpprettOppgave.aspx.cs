@@ -172,7 +172,5 @@ namespace SysUt14Gr03
             
             lbBrukere.Items.Remove(lbBrukere.SelectedItem);
         }
-
-
     }
 }

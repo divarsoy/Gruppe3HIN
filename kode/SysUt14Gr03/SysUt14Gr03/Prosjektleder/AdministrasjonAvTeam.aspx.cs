@@ -15,7 +15,6 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
             SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
 
             teamListe = Queries.GetAlleAktiveTeam();
@@ -32,10 +31,16 @@ namespace SysUt14Gr03
 
         protected void bt_endreTeam_Click(object sender, EventArgs e)
         {
-            Team valgtTeam = Queries.GetTeamByName(cbl_team.SelectedValue);
-            Response.Redirect("~/Prosjektleder/AdministrasjonAvTeamBrukere?Team_id=" + valgtTeam.Team_id);
-            
-            
+            if (cbl_team.SelectedItem != null)
+            {
+                Team valgtTeam = Queries.GetTeamByName(cbl_team.SelectedValue);
+                Response.Redirect("~/Prosjektleder/AdministrasjonAvTeamBrukere?Team_id=" + valgtTeam.Team_id);
+            }
+            else
+            {
+                Session["flashMelding"] = "Vennligst velg et team du vil endre på";
+                Session["flashStatus"] = Konstanter.notifikasjonsTyper.info.ToString();
+            }
         }
 
         protected void bt_arkivereTeam_Click(object sender, EventArgs e)
@@ -55,5 +60,9 @@ namespace SysUt14Gr03
             Response.Redirect(Request.RawUrl);
         }
 
+        protected void bt_aktiverTeam_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Prosjektleder/AktiveringAvTeam.aspx");
+        }
     }
 }

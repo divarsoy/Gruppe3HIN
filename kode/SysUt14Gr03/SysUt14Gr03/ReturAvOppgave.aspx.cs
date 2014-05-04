@@ -36,7 +36,8 @@ namespace SysUt14Gr03
             }
             else
             {
-                lblFeil.Text = "Ingen oppgave valgt!";
+                Session["flashMelding"] = "Ingen oppgave valgt!";
+                Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
                 btnSend.Enabled = false;
             }
         }

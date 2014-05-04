@@ -167,7 +167,4 @@
 
         <asp:Button ID="btnLagre" CssClass="btn btn-primary" runat="server" Text="Lagre Prosjekt" OnClick="btnLagre_Click" Width="300px" />
         <div class="clearfix"></div>
-
-        <p><asp:Label ID="lblFeil" class="feilMelding" runat="server" Visible="False"></asp:Label></p>
-
 </asp:Content>

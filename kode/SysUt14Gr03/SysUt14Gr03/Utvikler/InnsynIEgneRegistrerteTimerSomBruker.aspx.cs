@@ -21,14 +21,12 @@ namespace SysUt14Gr03.Utvikler
             int prosjektId = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
             Prosjekt prosjekt = Queries.GetProsjekt(prosjektId);
 
-                if (!IsPostBack)
-                {
-                    Table timeTabell = Tabeller.HentTimerForBruker(timer, brukerId, prosjekt);
+            if (!IsPostBack)
+            {
+                Table timeTabell = Tabeller.HentTimerForBruker(timer, brukerId, prosjekt);
 
-                    PlaceHolderTable.Controls.Add(timeTabell);
-                }
-            
-            
+                PlaceHolderTable.Controls.Add(timeTabell);
+            }
         }
     }
 }
