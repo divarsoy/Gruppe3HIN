@@ -329,6 +329,17 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        static public List<Bruker> GetBrukereForOppgave(int oppgave_id)
+        {
+            using (var context = new Context())
+            {
+                var brukerListe = context.Brukere
+                                       .Where(bruker => bruker.Oppgaver.Any(oppgave => oppgave.Oppgave_id == oppgave_id))
+                                       .ToList();
+                return brukerListe;
+            }
+        }
+
         static public List<Oppgave> getOppgaverIFase(int fase_id)
         {
             using (var context = new Context())

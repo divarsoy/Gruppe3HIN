@@ -502,5 +502,62 @@ namespace SysUt14Gr03.Classes
             return dt;
         }
 
+        public static DataTable BurnDownChartForFase(int faseId)
+        {
+            DataTable datatabell = new DataTable();
+
+            Fase fase = Queries.GetFase(faseId);
+            List<Oppgave> oppgaverForFase = Queries.getOppgaverIFase(faseId);
+
+            List<DateTime> range = Enumerable.Range(0, (fase.Stopp - fase.Start).Days + 1)
+                .Select(i => fase.Start.AddDays(i))
+                .ToList();
+
+            datatabell.Columns.Add("Oppgave ID", typeof(System.String));
+            datatabell.Columns.Add("Oppgavenavn", typeof(System.String));
+            datatabell.Columns.Add("Ansvarlig utvikler(e)", typeof(System.String));
+            datatabell.Columns.Add("Estimat", typeof(System.String));
+            for(int i = range.Count; i > 0; i--) {
+                datatabell.Columns.Add(i + "", typeof(System.String));
+            }
+            datatabell.Columns.Add("Slutt", typeof(System.String));
+            datatabell.Columns.Add("Avvik", typeof(System.String));
+
+            foreach (Oppgave o in oppgaverForFase)
+            {
+                TimeSpan resterendeTid = (TimeSpan)o.Estimat;
+                List<Time> registrerteTimerPaaOppgave = Queries.GetTimerForOppgave(o.Oppgave_id);
+
+                String utviklere = "";
+                List<Bruker> brukerePaaOppgave = Queries.GetBrukereForOppgave(o.Oppgave_id);
+                foreach(Bruker b in brukerePaaOppgave) {
+                    utviklere = utviklere + b.Fornavn + " " + b.Etternavn + " ";
+                }
+
+                DataRow oppgaveRow = datatabell.NewRow();
+                oppgaveRow["Oppgave ID"] = o.RefOppgaveId.ToString();
+                oppgaveRow["Oppgavenavn"] = o.Tittel;
+                oppgaveRow["Ansvarlig utvikler(e)"] = utviklere;
+                oppgaveRow["Estimat"] = o.Estimat.ToString();
+
+                for (int i = 0; i < range.Count; i++)
+                {
+                    for (int j = 0; j < registrerteTimerPaaOppgave.Count; j++) {
+                        if (range.ElementAt(i).Equals(registrerteTimerPaaOppgave.ElementAt(j).Stopp))
+                            resterendeTid = resterendeTid - (TimeSpan)registrerteTimerPaaOppgave.ElementAt(j).Tid;
+                    }
+
+                    oppgaveRow[range.Count - i + ""] = resterendeTid;
+
+                }
+
+                oppgaveRow["Slutt"] = o.BruktTid.ToString();
+                oppgaveRow["Avvik"] = (o.BruktTid - o.Estimat).ToString();
+
+                datatabell.Rows.Add(oppgaveRow);
+            }
+            return datatabell;
+        }
+
     }
 }

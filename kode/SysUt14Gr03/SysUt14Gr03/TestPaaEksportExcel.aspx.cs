@@ -22,9 +22,12 @@ namespace SysUt14Gr03
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            var query = Queries.GetAlleBrukere();
-            dt = DataTabeller.OversiktBrukere(query);
-            EksporterTilExcel.CreateExcelDocument(dt, "reg.xlsx", Response);
+//            var query = Queries.GetAlleBrukere();
+//            dt = DataTabeller.OversiktBrukere(query); 
+            dt = DataTabeller.BurnDownChartForFase(1);
+            EksporterTilExcel.CreateExcelDocument(dt, "reg.xlsx", Response); 
+
+
 
         }
     }
