@@ -24,7 +24,7 @@ namespace SysUt14Gr03
         {
 //            var query = Queries.GetAlleBrukere();
 //            dt = DataTabeller.OversiktBrukere(query); 
-            dt = DataTabeller.BurnDownChartForFase(1);
+            dt = DataTabeller.BurnDownChartForFase(10);
             EksporterTilExcel.CreateExcelDocument(dt, "reg.xlsx", Response); 
 
 

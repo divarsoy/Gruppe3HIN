@@ -517,8 +517,9 @@ namespace SysUt14Gr03.Classes
             datatabell.Columns.Add("Oppgavenavn", typeof(System.String));
             datatabell.Columns.Add("Ansvarlig utvikler(e)", typeof(System.String));
             datatabell.Columns.Add("Estimat", typeof(System.String));
-            for(int i = range.Count; i > 0; i--) {
-                datatabell.Columns.Add(i + "", typeof(System.String));
+            for (int i = 0; i < range.Count; i++)
+            {
+                datatabell.Columns.Add(range.ElementAt(i).ToString(), typeof(System.String));
             }
             datatabell.Columns.Add("Slutt", typeof(System.String));
             datatabell.Columns.Add("Avvik", typeof(System.String));
@@ -543,11 +544,14 @@ namespace SysUt14Gr03.Classes
                 for (int i = 0; i < range.Count; i++)
                 {
                     for (int j = 0; j < registrerteTimerPaaOppgave.Count; j++) {
-                        if (range.ElementAt(i).Equals(registrerteTimerPaaOppgave.ElementAt(j).Stopp))
+                        DateTime en = range.ElementAt(i);
+                        DateTime to = (DateTime)registrerteTimerPaaOppgave.ElementAt(j).Stopp;
+
+                        if (range.ElementAt(i).Date.Equals(to.Date))
                             resterendeTid = resterendeTid - (TimeSpan)registrerteTimerPaaOppgave.ElementAt(j).Tid;
                     }
 
-                    oppgaveRow[range.Count - i + ""] = resterendeTid;
+                    oppgaveRow[range.ElementAt(i).ToString()] = resterendeTid;
 
                 }
 
