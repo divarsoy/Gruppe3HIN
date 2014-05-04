@@ -151,7 +151,7 @@ namespace SysUt14Gr03.Classes
 
         }
 
-        public static Table HentBrukerTabellForTeam(List<Bruker> query, Team nesteTeam)
+        public static Table HentBrukerTabellForTeam(List<Bruker> query, Team nesteTeam, int prosjekt_id)
         {
             Table tabell = new Table();
             TableHeaderRow headerRow = new TableHeaderRow();
@@ -162,14 +162,16 @@ namespace SysUt14Gr03.Classes
             TableHeaderCell brukerNavnHeaderCell = new TableHeaderCell();
             TableHeaderCell epostHeaderCell = new TableHeaderCell();
             TableHeaderCell IMHeaderCell = new TableHeaderCell();
+            TableHeaderCell rolleHeaderCell = new TableHeaderCell();
 
-            string teamLink = teamNavnCell.ResolveUrl("~/Prosjektleder/VisTeam?team_id=" + nesteTeam.Team_id.ToString());
+            string teamLink = teamNavnCell.ResolveUrl("~/VisTeam?team_id=" + nesteTeam.Team_id.ToString());
             forNavnHeaderCell.Text = "Fornavn";
             etterNavnHeaderCell.Text = "Etternavn";
             brukerNavnHeaderCell.Text = "Brukernavn";
             epostHeaderCell.Text = "Epost";
             IMHeaderCell.Text = "IM";
             teamNavnCell.Text = String.Format("<a href='{0}'>{1}</a>", teamLink, nesteTeam.Navn.ToString());
+            rolleHeaderCell.Text = "Rolle";
                
             teamNavnHeader.Cells.Add(teamNavnCell);
             tabell.Rows.Add(teamNavnHeader);
@@ -179,6 +181,7 @@ namespace SysUt14Gr03.Classes
             headerRow.Cells.Add(brukerNavnHeaderCell);
             headerRow.Cells.Add(epostHeaderCell);
             headerRow.Cells.Add(IMHeaderCell);
+            headerRow.Cells.Add(rolleHeaderCell);
             tabell.Rows.Add(headerRow);
 
             foreach (Bruker bruker in query)
@@ -189,21 +192,30 @@ namespace SysUt14Gr03.Classes
                 TableCell brukerNavnCell = new TableCell();
                 TableCell epostCell = new TableCell();
                 TableCell IMCell = new TableCell();
+                TableCell rolleCell = new TableCell();
 
                 StringBuilder brukereITeam = new StringBuilder();
 
                 forNavnCell.Text = bruker.Fornavn;
                 etterNavnCell.Text = bruker.Etternavn;
-                brukerNavnCell.Text = String.Format("<a href='VisBruker?bruker_id={0}'>{1}</a>", bruker.Bruker_id, bruker.Brukernavn);
+                brukerNavnCell.Text = String.Format("<a href='/VisBruker?bruker_id={0}'>{1}</a>", bruker.Bruker_id, bruker.Brukernavn);
                 epostCell.Text = bruker.Epost;
                 IMCell.Text = bruker.IM;
+
+                string rettighet = Queries.GetRettighet(bruker.Bruker_id).RettighetNavn;
+
+                if (SessionSjekk.IsFaseleder(bruker.Bruker_id, prosjekt_id))
+                    rolleCell.Text = "Faseleder";
+                else
+                    rolleCell.Text = rettighet;
 
                 tRow.Cells.Add(forNavnCell);
                 tRow.Cells.Add(etterNavnCell);
                 tRow.Cells.Add(brukerNavnCell);
                 tRow.Cells.Add(epostCell);
                 tRow.Cells.Add(IMCell);
-
+                tRow.Cells.Add(rolleCell);
+               
                 tabell.Rows.Add(tRow);
             }
 
@@ -329,10 +341,19 @@ namespace SysUt14Gr03.Classes
                 foreach (Prosjekt prosjekt in queryProsjekt)
                 {
                     prosjekterCell.Text = String.Format("<a href='AdministrasjonAvProsjekt?prosjekt_id={0}'>{1} </a>", prosjekt.Prosjekt_id, prosjekt.Navn);
-                }
-                foreach(Rettighet rett in bruker.Rettigheter){
 
-                    rolleCelle.Text = String.Format(rett.RettighetNavn);
+                    foreach (Rettighet rett in bruker.Rettigheter)
+                    {
+
+                        if (SessionSjekk.IsFaseleder(bruker.Bruker_id, prosjekt.Prosjekt_id).Equals(true))
+                        {
+                            rolleCelle.Text = "Faseleder";
+                        }
+                        else
+                        {
+                            rolleCelle.Text = String.Format(rett.RettighetNavn);
+                        }
+                    }
                 }
                 forNavnCell.Text = String.Format("<a href='visBruker?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Fornavn);
                 etterNavnCell.Text = String.Format("<a href='visBruker?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Etternavn);

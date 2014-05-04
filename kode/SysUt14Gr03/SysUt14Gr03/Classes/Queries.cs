@@ -422,7 +422,9 @@ namespace SysUt14Gr03.Classes
         {
             using (var context = new Context())
             {
-                List<Bruker> brk = context.Brukere.Where(bruker => bruker.Teams.Any(team => team.Team_id == valgtTeam_id)).ToList();
+                List<Bruker> brk = context.Brukere
+                    .Include("Prosjekter")
+                    .Where(bruker => bruker.Teams.Any(team => team.Team_id == valgtTeam_id)).ToList();
                 return brk;
                  
             }
@@ -596,7 +598,7 @@ namespace SysUt14Gr03.Classes
         {
             using (var context = new Context())
             {
-                var teamListe = (from teams in context.Teams
+                var teamListe = (from teams in context.Teams.Include("Prosjekter")
                                    where teams.Aktiv == true
                                    select teams).ToList<Team>();
                 return teamListe;
@@ -618,7 +620,7 @@ namespace SysUt14Gr03.Classes
         {
             using (var context = new Context())
             {
-                var valgtTeam = context.Teams.Include("Brukere").Where(team => team.Prosjekter.Any(prosjekt => prosjekt.Prosjekt_id == prosjekt_id)).FirstOrDefault();
+                var valgtTeam = context.Teams.Include("Prosjekter").Include("Brukere").Where(team => team.Prosjekter.Any(prosjekt => prosjekt.Prosjekt_id == prosjekt_id)).FirstOrDefault();
                 return valgtTeam;
             }
         }

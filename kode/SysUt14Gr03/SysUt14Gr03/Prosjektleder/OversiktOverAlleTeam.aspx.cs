@@ -11,6 +11,7 @@ namespace SysUt14Gr03
 {
     public partial class OversiktOverTeam : System.Web.UI.Page
     {
+        private Table brukerTabell;
         protected void Page_Load(object sender, EventArgs e)
         {
             List<Team> teamene = Queries.GetAlleAktiveTeam();
@@ -21,9 +22,12 @@ namespace SysUt14Gr03
 
                 if (!IsPostBack)
                 {
-                    Table brukerTabell = Tabeller.HentBrukerTabellForTeam(query, t);
+                    foreach (Prosjekt p in t.Prosjekter)
+                    {
+                        brukerTabell = Tabeller.HentBrukerTabellForTeam(query, t, p.Prosjekt_id);
+                    }
+                        PlaceHolderTable.Controls.Add(brukerTabell);
                     
-                    PlaceHolderTable.Controls.Add(brukerTabell);
                 }
             }
         }

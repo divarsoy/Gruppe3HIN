@@ -46,7 +46,7 @@ namespace SysUt14Gr03
                 if (!IsPostBack)
                 {
                     List<Bruker> query = Queries.GetAlleBrukerePaaTeam(teamId);
-                    Table brukerTabell = Tabeller.HentBrukerTabellForTeam(query, team);
+                    Table brukerTabell = Tabeller.HentBrukerTabellForTeam(query, team, prosjekt_id);
                     PlaceHolderTable.Controls.Add(brukerTabell);
                 }
             }
