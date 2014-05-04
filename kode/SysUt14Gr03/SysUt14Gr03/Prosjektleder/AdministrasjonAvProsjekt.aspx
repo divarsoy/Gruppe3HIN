@@ -73,5 +73,4 @@
              <asp:CommandField ShowEditButton="true" />
         </Columns>
     </asp:GridView>
-    <asp:Label ID="lblFeil" runat="server" Visible="false"></asp:Label>
 </asp:Content>

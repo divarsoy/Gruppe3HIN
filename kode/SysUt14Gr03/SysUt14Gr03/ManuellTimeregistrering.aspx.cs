@@ -118,8 +118,6 @@ namespace SysUt14Gr03
 
         protected void btnAddPause_Click(object sender, EventArgs e)
         {
-            lblTest.Visible = false;
-
             LeggTilPausefelt();
             pauseTeller++;
             ViewState["pauseteller"] = pauseTeller;

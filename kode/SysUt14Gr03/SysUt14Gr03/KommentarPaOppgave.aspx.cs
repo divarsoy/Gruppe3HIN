@@ -62,18 +62,14 @@ namespace SysUt14Gr03
                     context.Kommentarer.Add(kommentar);
                     context.SaveChanges();
 
-                    lblFeil.Text = "Kommentar lagret";
-                    lblFeil.ForeColor = Color.Green;
-                    lblFeil.Visible = true;
-
+                    Session["flashMelding"] = "Kommentar lagret";
+                    Session["flashStatus"] = Konstanter.notifikasjonsTyper.success.ToString();
                 }
-
             }
             else
             {
-                lblFeil.Text = "Skriv inn kommentar";
-                lblFeil.ForeColor = Color.Red;
-                lblFeil.Visible = true;
+                Session["flashMelding"] = "Skriv inn kommentar";
+                Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
             }
         }
     }

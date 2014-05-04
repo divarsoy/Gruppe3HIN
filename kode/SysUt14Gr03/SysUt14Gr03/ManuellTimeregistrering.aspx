@@ -33,8 +33,4 @@
     <asp:HiddenField ID="infoField" runat="server" value="" />
     <br />
     <asp:Button ID="btnLagre" runat="server" CssClass="btn btn-success" Text="Lagre timer" Visible="false" OnClick="btnLagre_Click" />
-
-    <asp:Label ID="lblTest" runat="server" Visible="false"></asp:Label>
-
-
     </asp:Content>

@@ -32,8 +32,4 @@
         <asp:TextBox ID="IM" runat="server"></asp:TextBox></p>    
     <p>
         <asp:Button ID="btnUserChange" runat="server" Text="Lagre endringer" OnClick="btnUserChange_Click" /> </p>
-    <p>
-        <asp:Label ID="InvalidCredentialsMessage" runat="server" ForeColor="Red" Text=""
-            Visible="False"></asp:Label> </p>
-
 </asp:Content>

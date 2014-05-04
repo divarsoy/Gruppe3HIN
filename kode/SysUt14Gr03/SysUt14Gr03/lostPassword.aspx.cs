@@ -46,8 +46,8 @@ namespace SysUt14Gr03
             }
             else
             {
-                InvalidEmailMessage.Text = "Ville ikke oppdateres i databasen";
-                InvalidEmailMessage.Visible = true;
+                Session["flashMelding"] = "Ville ikke oppdateres i databasen";
+                Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
             }
         }
         public static string CreatePassword(int length)

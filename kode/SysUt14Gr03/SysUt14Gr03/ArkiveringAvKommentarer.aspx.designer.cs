@@ -13,15 +13,6 @@ namespace SysUt14Gr03 {
     public partial class ArkiveringAvKommentarer {
         
         /// <summary>
-        /// lblBruker control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblBruker;
-        
-        /// <summary>
         /// lbKommentarer control.
         /// </summary>
         /// <remarks>
@@ -29,15 +20,6 @@ namespace SysUt14Gr03 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ListBox lbKommentarer;
-        
-        /// <summary>
-        /// lblMelding control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMelding;
         
         /// <summary>
         /// lbOppgave control.

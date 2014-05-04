@@ -7,7 +7,6 @@
     <br />
     <h4>Dine tidsregistreringer:</h4>
     <asp:TextBox ID="tbTidsregistrert" runat="server" TextMode="MultiLine" Height="100px" Width="300px" ReadOnly="true"></asp:TextBox>
-    <asp:Label ID="lblTest" runat="server"></asp:Label>
     <div class="btn-Group">
         <asp:Button id="btnSnart" CssClass="btn btn-success btn-large" runat="server" Onclick="btnStart_Click" Text="Start"/>
         <asp:Button id="btnPause" CssClass="btn btn-warning btn-large" runat="server" OnClick="btnPause_Click" Text="Pause"/>

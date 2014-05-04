@@ -9,9 +9,6 @@
         <asp:TextBox ID="txtKommentar" runat="server" MaxLength="128" TextMode="MultiLine"></asp:TextBox>
     </p>
     <p> 
-        <asp:Label ID="lblFeil" runat="server" Visible="false"></asp:Label>
-    </p>
-    <p> 
         <asp:Button ID="btnKommentar" runat="server" OnClick="btnKommentar_Click" Text="Legg inn kommentar" />
     </p>
 </asp:Content>

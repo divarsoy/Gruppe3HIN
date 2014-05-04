@@ -12,7 +12,6 @@
                     <asp:DropDownList ID="ddlRettighet" runat="server" CssClass="form-control">
                         <asp:ListItem Text="Velg Rettighet" Value="0"></asp:ListItem>
                     </asp:DropDownList>
-                    <asp:Label ID="lblRettighetfeil" runat="server" Visible="false"></asp:Label>
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -49,12 +48,6 @@
                 </div>
             </div>
             <div class="clearfix"></div>
-
-                <p><asp:Label ID="FeilmeldingEtternavn" runat="server" ForeColor="Red" Text="Etternavn kan ikke være lenger enn 256 tegn" Visible="False"></asp:Label> </p>
-                <p><asp:Label ID="FeilMeldingFornavn" runat="server" ForeColor="Red" Text="Fornavn kan ikke være lenger enn 256 tegn" Visible="False"></asp:Label> </p>
-                <p><asp:Label ID="FeilMeldingEpost" runat="server" ForeColor="Red" Text="Epost kan ikke være lenger enn 256 tegn" Visible="False"></asp:Label> </p>
-                <p><asp:Label ID="BrukerRegistrert" runat="server" ForeColor="Red" Text="Ny bruker har blitt registrert" Visible="False"></asp:Label> </p>
-                
     </div>
         
 </asp:Content>

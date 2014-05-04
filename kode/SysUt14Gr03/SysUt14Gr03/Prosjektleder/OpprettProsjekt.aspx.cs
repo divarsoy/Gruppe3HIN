@@ -86,8 +86,6 @@ namespace SysUt14Gr03
 
         private void opprettProsjekt()
         {
-            lblFeil.Visible = false;
-
             if (tbProsjektnavn.Text != String.Empty && tbStart.Text != String.Empty && tbSlutt.Text != String.Empty && dropTeam.SelectedValue != "0" && ddlBrukere.SelectedValue != "0")
             {
                 dtFaser = Session["FaseTable"] as DataTable;
@@ -124,9 +122,8 @@ namespace SysUt14Gr03
                     prosjekt_id = nyttProsjekt.Prosjekt_id;
                 }
 
-//                lblFeil.Visible = true;
-//                lblFeil.ForeColor = Color.Green;
-//                lblFeil.Text = "Prosjektet ble lagret!";
+//                Session["flashMelding"] = "Velg minst to oppgaver";
+//                Session["flashStatus"] = Konstanter.notifikasjonsTyper.success.ToString();
 //                Response.AddHeader("REFRESH", "3;URL=OpprettProsjekt");
 
                 Varsel.SendVarsel(team.Brukere, Varsel.PROSJEKTVARSEL, "Du har blitt lagt til i prosjekt "
@@ -146,21 +143,18 @@ namespace SysUt14Gr03
             }
             else
             {
-                lblFeil.Visible = true;
-                lblFeil.ForeColor = Color.Red;
-                lblFeil.Text = "Feltene kan ikke være tomme";
+                Session["flashMelding"] = "Feltene kan ikke være tomme";
+                Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
             }
         }
     
 
         protected void btnDato_Click(object sender, EventArgs e)
         {
-            lblFeil.Visible = false;
             if (cal.SelectedDate == DateTime.Parse("01.01.0001"))
             {
-                lblFeil.Visible = true;
-                lblFeil.Text = "Du må velge en dato";
-                lblFeil.ForeColor = Color.Red;
+                Session["flashMelding"] = "Du må velge en dato";
+                Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
             }
             else
             {

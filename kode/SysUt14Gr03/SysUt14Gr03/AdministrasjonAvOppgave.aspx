@@ -14,7 +14,6 @@
     <p>Tilgjengelige Brukere: <asp:DropDownList ID="ddlBrukere" runat="server"></asp:DropDownList></p>
     <asp:ListBox ID="lbBrukere" runat="server" Width="252px" Enabled="False" EnableViewState="true"></asp:ListBox>
     <br />
-    <asp:Label ID="lblFeil" runat="server" Visible="false" Text=""></asp:Label>
     <br />
     <asp:Button ID="btnLeggTilBrukere" Text="Legg Til Brukere" runat="server" OnClick="btnLeggTilBrukere_Click" />
     <asp:Button ID="btnSlettBrukere" Text="Ta bort Bruker" runat="server" OnClick="btnSlettBrukere_Click" />
@@ -28,6 +27,5 @@
     <p>Status<asp:DropDownList ID="ddlStatus" runat="server"></asp:DropDownList></p>
     <p>Prioritet: <asp:DropDownList ID="ddlPrioritet" runat="server"></asp:DropDownList></p>
     <p>Prosjekt: <asp:DropDownList ID="ddlProsjekt" runat="server"></asp:DropDownList></p>
-    <asp:label id="lblCheck" visible="false" runat="server" ></asp:label>
     <asp:Button ID="btnEndre" runat="server" OnClick="btnEndre_Click" Text="Endre Oppgave" />
 </asp:Content>

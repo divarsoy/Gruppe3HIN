@@ -16,22 +16,15 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
             prosjektListe = Queries.GetAlleAktiveProsjekter();
 
             if (!IsPostBack)
             {
-
                 foreach (Prosjekt prosjekt in prosjektListe)
                 {
                     lsbProsjekt.Items.Add(new ListItem(prosjekt.Navn, prosjekt.Prosjekt_id.ToString()));
                 }
-
-
             }
-            
-
-
         }
 
         protected void btnDetaljer_Click(object sender, EventArgs e)
@@ -39,12 +32,10 @@ namespace SysUt14Gr03
             Prosjekt prosjekt = prosjektListe[lsbProsjekt.SelectedIndex];
             txtInfo.Text = prosjekt.Navn + "\n" + prosjekt.SluttDato;
             txtInfo.Visible = true;
-
         }
 
         protected void btnFrist_Click(object sender, EventArgs e)
         {
-            Feilmelding.Visible = false;
             int index = lsbProsjekt.SelectedIndex;
             // Vis en kalender for å velge dato/tid
             DateTime dato = calCalendar.SelectedDate;
@@ -60,15 +51,14 @@ namespace SysUt14Gr03
                     prosjekt.SluttDato = dato;
                     context.SaveChanges();
 
-                    FristOK.Text = "Frist satt til " + dato.ToShortDateString() + " på " + prosjektListe[index].Navn;
-                    FristOK.Visible = true;
-
+                    Session["flashMelding"] = "Frist satt til " + dato.ToShortDateString() + " på " + prosjektListe[index].Navn;
+                    Session["flashStatus"] = Konstanter.notifikasjonsTyper.success.ToString();
                 }
             }
             else
             {
-                Feilmelding.Text = "Velg en dato";
-                Feilmelding.Visible = true;
+                Session["flashMelding"] = "Velg en dato";
+                Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
             }
         }
     }

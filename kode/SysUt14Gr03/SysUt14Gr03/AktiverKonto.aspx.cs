@@ -52,8 +52,6 @@ namespace SysUt14Gr03
             {
                 if ((!string.IsNullOrEmpty(Request.QueryString["Epost"])) & (!string.IsNullOrEmpty(Request.QueryString["Token"])))
                 {
-                    lblAktivert.Visible = true;
-                    lblAktivert.Text = "<h2 align=center> Fyll ut resterende felt for å aktivere kontoen din</h2>";
                     using (var context = new Context())
                     {
                         epost = Email.Text = Request.QueryString["Epost"];
@@ -61,18 +59,16 @@ namespace SysUt14Gr03
                         bruker_id = bruk.Bruker_id;
                         Firstname.Text = bruk.Fornavn;
                         Aftername.Text = bruk.Etternavn;
-                       
                     }
-                    
+                    Session["flashMelding"] = "<h2 align=center> Fyll ut resterende felt for å aktivere kontoen din</h2>";
+                    Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger;
                 }
                 else
                 {
                     disable();
-                    lblAktivert.Visible = true;
-                    lblAktivert.Text = "<h2 align=center>Det skjedde noe galt, Kontoen din ble ikke aktivert!</h2>";
-                  
+                    Session["flashMelding"] = "<h2 align=center>Det skjedde noe galt, Kontoen din ble ikke aktivert!</h2>";
+                    Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger;
                     //Response.Write("<h2 align=center>Det skjedde noe galt, Kontoen din ble ikke aktivert!</h2>");
-
                 }
             }
             catch (Exception ex)
@@ -86,8 +82,6 @@ namespace SysUt14Gr03
      
         protected void ConfirmButton_Click(object sender, EventArgs e)
         {
-            
-                lblBrukernavnFeil.Visible = false;
                 token = Request.QueryString["Token"];
                 //passord = MD5Hash(Password.Text);
                 //passord = Passord.HashPassord(Password.Text);
@@ -113,9 +107,8 @@ namespace SysUt14Gr03
                     var queryBrukernavn = db.Brukere.FirstOrDefault(b => b.Brukernavn == brukernavn);
                     if (queryBrukernavn != null)
                     {
-                        lblBrukernavnFeil.Visible = true;
-                        lblBrukernavnFeil.ForeColor = Color.Red;
-                        lblBrukernavnFeil.Text = "Brukernavnet er allerede tatt";
+                        Session["flashMelding"] = "Brukernavnet er allerede tatt";
+                        Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger;
                         check = false;
                     }
                     if(check)
@@ -136,7 +129,6 @@ namespace SysUt14Gr03
                         disable();
                     }
                 }
-
         }
         protected void disable()
         {

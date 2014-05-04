@@ -17,7 +17,6 @@ namespace SysUt14Gr03
         private List<Team> teamListe = null;
         private List<Bruker> prosjektLeder;
         private int bruker_id;
-        private int prosjekt_id;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -45,7 +44,6 @@ namespace SysUt14Gr03
         {
             try
             {
-                lblFeil.Visible = false;
                 int prosjekt_id = (int)gridViewProsjekt.DataKeys[e.RowIndex].Value;
                 System.Web.UI.WebControls.TextBox tbProsjektnavn = (TextBox)gridViewProsjekt.Rows[e.RowIndex].FindControl("tbProsjektnavn");
                 System.Web.UI.WebControls.DropDownList tbProsjektleder = (DropDownList)gridViewProsjekt.Rows[e.RowIndex].FindControl("ddlLeder");
@@ -97,10 +95,8 @@ namespace SysUt14Gr03
             }
             catch
             {
-                lblFeil.Visible = true;
-                lblFeil.ForeColor = Color.Red;
-                lblFeil.Text = "Stemmer ikke overrens med databasen!";
-
+                Session["flashMelding"] = "Stemmer ikke overrens med databasen!";
+                Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
             }
         }
 
