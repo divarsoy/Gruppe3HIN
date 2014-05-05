@@ -186,6 +186,7 @@ namespace SysUt14Gr03
                 smtp.Host = "smtp.gmail.com";
                 smtp.EnableSsl = true;
                 smtp.Send(msg);
+                smtp.UseDefaultCredentials = false;
 
                 if(ActivationUrl != null)
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('En link for å aktivere brukerkontoen er sendt til brukereposten');", true);
