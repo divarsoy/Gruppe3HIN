@@ -35,6 +35,8 @@ namespace SysUt14Gr03
                 oppgave = Queries.GetOppgave(oppgave_id);
                 if (oppgave != null)
                 {
+                    bool isFerdig = (oppgave.Status_id == 3);
+
                     bool isDeltaker = false;
                     foreach (Bruker bruker in oppgave.Brukere)
                     {
@@ -42,11 +44,12 @@ namespace SysUt14Gr03
                             isDeltaker = true;
                     }
 
-                    if (isDeltaker)
+                    if (isDeltaker && !isFerdig)
                     {
                         btnInviter.Visible = true;
                         btnReturn.Visible = true;
                         btnTimer.Visible = true;
+                        btnFullfor.Visible = true;
                     }
                     else
                     {
@@ -79,6 +82,7 @@ namespace SysUt14Gr03
                         btnPameld.ToolTip = "Oppgaven er avhengig av " + avhengig.Tittel;
                         btnTimer.Enabled = false;
                         btnTimer.ToolTip = "Oppgaven er avhengig av " + avhengig.Tittel;
+                        btnFullfor.Visible = false;
                         
                     }
 
@@ -245,6 +249,19 @@ namespace SysUt14Gr03
         protected void btnTimer_Click(object sender, EventArgs e)
         {
             Response.Redirect("ManuellTimeregistrering.aspx?oppgave_id=" + oppgave_id, true);
+        }
+
+        protected void btnFullfor_Click(object sender, EventArgs e)
+        {
+            using (var context = new Context())
+            {
+                Oppgave oppgave = context.Oppgaver.FirstOrDefault(o => o.Oppgave_id == oppgave_id);
+                Status status = context.Statuser.FirstOrDefault(s => s.Status_id == 3);
+
+                oppgave.Status = status;
+                context.SaveChanges();
+            }
+            Response.Redirect("/OversiktOppgaver.aspx?mine=true");
         }
     }
 }

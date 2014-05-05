@@ -14,14 +14,15 @@ namespace SysUt14Gr03
     {
         private Bruker bruker;
         private int bruker_id;
-        private int innloggetBruker_id;
+        private int innloggetBruker_id = 3;
 
+        
         protected void Page_PreInit(Object sener, EventArgs e)
         {
             string master = SessionSjekk.findMaster();
             this.MasterPageFile = master;
         }
-
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             SessionSjekk.sjekkForBruker_id();
@@ -43,6 +44,14 @@ namespace SysUt14Gr03
                     lblInfo.Text += "<br />" + "Epost: <a href=\"mailto:" + bruker.Epost + "\">" + bruker.Epost + "</a>";
                     lblInfo.Text += "<br />Ble med: " + bruker.Opprettet.ToShortDateString();
                     lblInfo.Text += "<br />Sist innlogget: " + bruker.SistInnlogget.GetValueOrDefault().ToString();
+                    foreach (Prosjekt p in Queries.GetAlleAktiveProsjekterForBruker(bruker_id))
+                    {
+                        foreach (Fase f in Queries.GetFaseForProsjekt(p.Prosjekt_id))
+                        {
+                            if (SessionSjekk.IsFaseleder(bruker_id, p.Prosjekt_id))
+                                lblInfo.Text += "<br />Faseleder i " + p.Navn + ", " + f.Navn;
+                        }
+                    }
                     
                     if (isBruker)
                     {

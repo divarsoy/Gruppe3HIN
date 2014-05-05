@@ -2,37 +2,21 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
     <div class="container">
-        <div class="headerCenter">
 
             <h1><asp:Label ID="lblNavn"  runat="server" Text="Navn"></asp:Label></h1>
             <asp:Label ID="lblInfo" Font-Bold="true" runat="server" Text="Info" Visible="False"></asp:Label>
-            <asp:Label ID="lblOppgaver" runat="server" Visible="False"></asp:Label>
-    
-        <div class="listboxTest">
-            <asp:ListBox ID="lsbOppgaver" CssClass="form-control" Height="100px" Width="500px" AutoPostBack="True" runat="server" Visible="False" OnSelectedIndexChanged="lsbOppgaver_SelectedIndexChanged" Rows="6" ></asp:ListBox>
-        </div>
-      
+            <asp:Label ID="lblOppgaver" runat="server" Visible="False"></asp:Label>   
+            <asp:ListBox ID="lsbOppgaver" CssClass="form-control" Height="100px" Width="500px" AutoPostBack="True" runat="server" Visible="False" OnSelectedIndexChanged="lsbOppgaver_SelectedIndexChanged" Rows="6" ></asp:ListBox>     
             <asp:Label ID="lblKommentarer" runat="server" Visible="False"></asp:Label>
             <asp:Label ID="lblLogg" runat="server" Visible="False"></asp:Label>
-        <div class="listboxTest">
-            <asp:ListBox ID="lsbKommentarer" CssClass="form-control" Height="100px" Width="500px" AutoPostBack="True" runat="server" Visible="False" OnSelectedIndexChanged="lsbKommentarer_SelectedIndexChanged" Rows="6"></asp:ListBox>
-        </div>
-
-            
+            <asp:ListBox ID="lsbKommentarer" CssClass="form-control" Height="100px" Width="500px" AutoPostBack="True" runat="server" Visible="False" OnSelectedIndexChanged="lsbKommentarer_SelectedIndexChanged" Rows="6"></asp:ListBox>            
             <asp:Label ID="lblHistorikk" runat="server"></asp:Label>
-        <div class="listboxTest">
-            <asp:ListBox ID="lsbLogg" CssClass="form-control" Height="100px" Width="500px" runat="server" Visible="False" Rows="6"></asp:ListBox>
-        </div>
-
-            <asp:Label ID="lblFullfort" runat="server" Visible="False"></asp:Label>
-
-        <div class="listboxTest">
-            <asp:ListBox ID="lsbFFullfort" CssClass="form-control" Height="100px" Width="500px" runat="server" Visible="False" Rows="6"></asp:ListBox>
-        </div>
+            <asp:ListBox ID="lsbLogg" CssClass="form-control" Height="100px" Width="500px" runat="server" Visible="False" Rows="6"></asp:ListBox>  
+            <asp:Label ID="lblFullfort" runat="server" Visible="False"></asp:Label>        
+            <asp:ListBox ID="lsbFFullfort" CssClass="form-control" Height="100px" Width="500px" runat="server" Visible="False" Rows="6"></asp:ListBox>        
             <asp:Label ID="lblPrefs" runat="server" Visible="False"></asp:Label>
-            <br />
+            <div class="clearfix" />
             <asp:Button ID="btnPrefs" CssClass="btn btn-primary" runat="server" OnClick="btnPrefs_Click" Text="Endre instillinger" Visible="False"/>
 
-        </div>
     </div>
 </asp:Content>
