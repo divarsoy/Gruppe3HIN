@@ -61,19 +61,44 @@ namespace SysUt14Gr03
                     lblInfo.Text += "<p><b>" + "Estimat: </b>" + oppgave.Estimat + " timer</p>\n";
                     lblInfo.Text += "<p><b>" + "Resterende tid: </b>" + oppgave.RemainingTime.ToString() + " timer</p>\n";
                     lblInfo.Text += "<p><b>" + "Brukt tid: </b>" + oppgave.BruktTid.ToString() + " timer</p>\n";
+
+                    
                     lblInfo.Text += "<p><b>" + "Tidsfrist: </b>" + oppgave.Tidsfrist == null ? "Nei</p>\n" : oppgave.Tidsfrist.ToString() + "</p>\n";
                     lblInfo.Text += "<p><b>" + "Status: </b>" + oppgave.Status.Navn + "</p>\n";
                     lblInfo.Text += "<p><b>" + "Prioritet: </b>" + oppgave.Prioritering_id + "</p>\n";
+
                     int avhengigOppgave = Validator.SjekkAvhengighet(oppgave_id);
-                    lblInfo.Text += "<p><b>" + "Avhengighet: </b>" + (avhengigOppgave == -1 ? "Nei</p>\n" : "<a href=\"visOppgave?oppgave_id=" + avhengigOppgave + "\">" + "Ja, vis oppgave" + "</a></p>\n");
+                    Oppgave avhengig = null;
+                    // Gjør noen sjekker ang. avhengighet
+                    if (avhengigOppgave != -1)
+                    {
+                        avhengig = Queries.GetOppgave(avhengigOppgave);
+                        btnInviter.Enabled = false;
+                        btnInviter.ToolTip = "Oppgaven er avhengig av " + avhengig.Tittel;
+                        btnPameld.Enabled = false;
+                        btnPameld.ToolTip = "Oppgaven er avhengig av " + avhengig.Tittel;
+                        btnTimer.Enabled = false;
+                        btnTimer.ToolTip = "Oppgaven er avhengig av " + avhengig.Tittel;
+                        
+                    }
+
+                    lblInfo.Text += "<p><b>" + "Avhengighet: </b>" + (avhengigOppgave == -1 ? "Nei</p>\n" : "<a href=\"visOppgave?oppgave_id=" + avhengigOppgave + "\">" + avhengig.Tittel + "</a></p>\n");
                     lblInfo.Text += "<p><b>" + "Dato opprettet: </b>" + oppgave.Opprettet + "</p>\n";
-                    lblInfo.Text += "<p><b>" + "Dato endret: </b>" + oppgave.Oppdatert == null ? "Ikke endret" : oppgave.Oppdatert.ToString();
+                    lblInfo.Text += "<p><b>" + "Dato endret: </b>" + (oppgave.Oppdatert == null ? "Ikke endret" : oppgave.Oppdatert.ToString());
                     lblInfo.Text += "</p>\n";
                     lblInfo.Text += "<p><b>" + "Prosjekt: </b>" + "<a href=\"visProsjekt?Prosjekt_id=" + oppgave.Prosjekt_id + "\">" + oppgave.Prosjekt.Navn + "</a></p>\n";
                     lblInfo.Text += "<hr />" + "<b>Deltaker(e) </b>";
+                    // Innsyn i annen brukers registrerte timer
                     foreach (Bruker bruker in oppgave.Brukere)
                     {
-                        lblInfo.Text += "<p><a href=\"VisBruker.aspx?bruker_id=" + bruker.Bruker_id + "\">" + bruker.IM + "</a></p>\n";
+                        TimeSpan sum = new TimeSpan(0);
+                        List<Time> timeListe = Queries.GetTimerForOppgaveOgBruker(oppgave_id, bruker.Bruker_id);
+                        foreach (Time t in timeListe)
+                            sum += t.Tid;
+
+                        lblInfo.Text += "<p><a href=\"VisBruker.aspx?bruker_id=" + bruker.Bruker_id + "\">" + bruker.IM + "</a>";
+                        lblInfo.Text += ": " + (int)sum.TotalHours + "t " + sum.Minutes + "m";
+                        lblInfo.Text += "</p>\n";
                     }
                     //lblInfo.Text += "<br />" + "Dato endret: " + oppgave.Oppdatert == null ? "Ikke endret" : oppgave.Oppdatert.ToString();
                     //txtInfo.Wrap = true;

@@ -302,7 +302,7 @@ namespace SysUt14Gr03
             pauseListe = ViewState["pauseListe"] as List<Pause>;
             DateTime dato = DateTime.Parse(txtDato.Text);
             bool godkjent = true;
-            if (dato > DateTime.Now || dato < DateTime.Now.AddDays(-1))
+            if (dato > DateTime.Now || dato < DateTime.Now.AddDays(-1)) // Sjekker om han er utenfor tillatt intervall
                 godkjent = false;
 
             using (var context = new Context())
@@ -324,6 +324,7 @@ namespace SysUt14Gr03
 
                 oppgave.BruktTid += bruktTid;
                 oppgave.RemainingTime -= bruktTid;
+                oppgave.Status = context.Statuser.Where(s => s.Status_id == 2).FirstOrDefault(); // Setter status til under arbeid
                 context.Timer.Add(time);
                 context.SaveChanges();
             }
