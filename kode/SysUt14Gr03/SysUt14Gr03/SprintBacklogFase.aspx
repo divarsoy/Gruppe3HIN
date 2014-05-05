@@ -12,6 +12,8 @@
     </div>
     <br />
     <asp:PlaceHolder ID="phFase" runat="server"></asp:PlaceHolder>
-    <asp:Button ID="btnExport" CssClass="btn btn-success" runat="server" OnClick="btnExport_Click" Text="Exporter til excel dokument" />
+    <asp:Button ID="btnExport" CssClass="btn btn-success" runat="server" OnClick="btnExport_Click" Text="Exporter Sprintbacklog til excel dokument" />
+
+    <asp:Button ID="btnExportBurndown" CssClass="btn btn-success" runat="server" OnClick="btnExportBurndownskjema_Click" Text="Exporter Sprintburndownskjema til excel dokument" />
 
 </asp:Content>
