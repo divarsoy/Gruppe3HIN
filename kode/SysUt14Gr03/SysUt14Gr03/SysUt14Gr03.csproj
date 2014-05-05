@@ -221,6 +221,9 @@
     <Content Include="bin\SysUt14Gr03.dll" />
     <Content Include="bin\SysUt14Gr03.pdb" />
     <Content Include="bin\WebGrease.dll" />
+    <Content Include="Content\MorildDataStylesheet.css">
+      <DependentUpon>MorildDataStylesheet.less</DependentUpon>
+    </Content>
     <Content Include="Content\shepherd-theme-arrows-plain-buttons.css" />
     <Content Include="Content\shepherd-theme-arrows.css" />
     <Content Include="DeaktiveringAvRegistrerteTimer.aspx" />
@@ -358,6 +361,9 @@
     <Content Include="obj\Release\Package\PackageTmp\Scripts\WebForms\WebUIValidation.js" />
     <Content Include="bin\SysUt14Gr03.dll.config" />
     <Content Include="ClassDiagram1.cd" />
+    <Content Include="Content\MorildDataStylesheet.css.map">
+      <DependentUpon>MorildDataStylesheet.css</DependentUpon>
+    </Content>
     <None Include="obj\Release\Package\PackageTmp\Scripts\_references.js" />
     <Content Include="obj\Release\Package\PackageTmp\TidsestimerProsjekt.aspx" />
     <Content Include="obj\Release\Package\PackageTmp\Timeregistrering.aspx" />
