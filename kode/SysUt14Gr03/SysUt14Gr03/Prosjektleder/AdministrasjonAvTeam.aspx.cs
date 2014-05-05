@@ -16,7 +16,9 @@ namespace SysUt14Gr03
         protected void Page_Load(object sender, EventArgs e)
         {
             SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
-
+            
+            this.hide();
+            
             teamListe = Queries.GetAlleAktiveTeam();
 
             if (cbl_team.Items.Count == 0)
@@ -45,6 +47,15 @@ namespace SysUt14Gr03
 
         protected void bt_arkivereTeam_Click(object sender, EventArgs e)
         {
+            this.show();
+        }
+
+        protected void bt_aktiverTeam_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Prosjektleder/AktiveringAvTeam.aspx");
+        }
+        protected void yes_Click(object sender, EventArgs e)
+        {
             for (int i = 0; i < cbl_team.Items.Count; i++)
             {
                 if (cbl_team.Items[i].Selected)
@@ -56,13 +67,28 @@ namespace SysUt14Gr03
                     OppretteLogg.opprettLoggForBruker(hendelse, DateTime.Now, (int)Session["bruker_id"]);
                 }
             }
-           
+            this.hide();
             Response.Redirect(Request.RawUrl);
         }
-
-        protected void bt_aktiverTeam_Click(object sender, EventArgs e)
+        protected void no_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Prosjektleder/AktiveringAvTeam.aspx");
+            for (int i = 0; i < cbl_team.Items.Count; i++)
+            {
+                cbl_team.Items[i].Selected = false;
+            }
+            this.hide();
+        }
+        private void show()
+        {
+            lblMessage.Visible = true;
+            yes.Visible = true;
+            no.Visible = true;
+        }
+        private void hide()
+        {
+            lblMessage.Visible = false;
+            no.Visible = false;
+            yes.Visible = false;
         }
     }
 }

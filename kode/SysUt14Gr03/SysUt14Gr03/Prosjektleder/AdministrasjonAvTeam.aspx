@@ -11,6 +11,11 @@
         <asp:Button ID="bt_arkivereTeam" CssClass="btn btn-danger" runat="server" Text="Arkivere Team" OnClick="bt_arkivereTeam_Click" />
         <asp:Button ID="bt_aktivereTeam" CssClass="btn btn-primary" runat="server" Text="Aktiver Team" OnClick="bt_aktiverTeam_Click" />
     </div>
+    <div>
+        <h2><asp:Label ID="lblMessage" Visible="false" runat ="server" Text="Sikker på at du vil arkivere disse teamene?"></asp:Label></h2>
+        <asp:Button ID="yes" Visible="false" runat="server" Text="Ja" CssClass="btn btn-primary" OnClick="yes_Click" />
+        <asp:Button ID="no" Visible="false" runat="server" Text="Nei" CssClass="btn btn-danger" OnClick="no_Click" />
+    </div>
         <%-- <asp:GridView ID="gridViewProsjekt" runat="server" AutoGenerateColumns="false" DataKeyNames="Team_id" OnRowUpdating="gridViewProsjekt_RowUpdating" OnRowCancelingEdit="gridViewProsjekt_RowCancelingEdit" OnRowEditing="gridViewProsjekt_RowEditing">
         <Columns>
                 <asp:Label ID="lbTeam" runat="server" Text='<%#Bind("Team.Navn") %>'></asp:Label>
