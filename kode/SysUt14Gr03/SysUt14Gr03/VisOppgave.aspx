@@ -11,6 +11,7 @@
         <asp:Button ID="btnPameld" runat="server" OnClick="btnPaMeld_Click" Text="Meld deg på" CssClass="btn btn-primary" Visible="False"/>
         <asp:Button ID="btnTimer" runat="server" Text="Registrer timer" CssClass="btn btn-primary" OnClick="btnTimer_Click" Visible="False"/>
         <asp:Button ID="btnInviter" runat="server" OnClick="btnInviter_Click" Text="Inviter andre brukere" cssClass="btn btn-success" Visible="False"/>
+        <asp:Button ID="btnFullfor" runat="server" OnClientClick="return(confirm('Merke oppgaven som ferdig?'))" Text="Merk som fullført" cssClass="btn btn-success" Visible="False" OnClick="btnFullfor_Click"/>
         <asp:Button ID="btnReturn" runat="server" OnClick="btnReturn_Click" Text="Returner oppgave" CssClass="btn btn-danger" Visible="False"/>   
 
         <hr />
