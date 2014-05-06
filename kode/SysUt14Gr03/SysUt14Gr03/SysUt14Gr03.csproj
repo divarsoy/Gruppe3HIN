@@ -171,6 +171,7 @@
     <Content Include="Account\OpenAuthProviders.ascx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\RegisterExternalLogin.aspx" />
+    <Content Include="Administrator\VisBrukerAdmin.aspx" />
     <Content Include="bin\Antlr3.Runtime.dll" />
     <Content Include="bin\AspNet.ScriptManager.bootstrap.dll" />
     <Content Include="bin\AspNet.ScriptManager.jQuery.dll" />
@@ -567,6 +568,13 @@
     </Compile>
     <Compile Include="Account\RegisterExternalLogin.aspx.designer.cs">
       <DependentUpon>RegisterExternalLogin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrator\VisBrukerAdmin.aspx.cs">
+      <DependentUpon>VisBrukerAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrator\VisBrukerAdmin.aspx.designer.cs">
+      <DependentUpon>VisBrukerAdmin.aspx</DependentUpon>
     </Compile>
     <Compile Include="Classes\DataTabeller.cs" />
     <Compile Include="Classes\EksporterTilExcel.cs" />

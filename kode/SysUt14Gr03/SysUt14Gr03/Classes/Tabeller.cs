@@ -844,10 +844,10 @@ namespace SysUt14Gr03.Classes
                 TableCell tcBID = new TableCell();
                 TableCell tcPID = new TableCell();
                 TableCell tcDato = new TableCell();
-
+                
                 tcLID.Text = logg.Logg_id.ToString();
                 tcHendelse.Text = logg.Hendelse.ToString();
-                tcBID.Text = logg.bruker_id.ToString();
+                tcBID.Text = String.Format("<a href='VisbrukerAdmin?Bruker_id={0}'>{1}</a>", logg.bruker_id, logg.Bruker.Brukernavn.ToString());
                 tcPID.Text = logg.Prosjekt_id.ToString();
                 tcDato.Text = logg.Opprettet.ToString();
 
