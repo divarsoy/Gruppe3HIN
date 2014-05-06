@@ -229,6 +229,7 @@
     <Content Include="Content\shepherd-theme-arrows.css" />
     <Content Include="DeaktiveringAvRegistrerteTimer.aspx" />
     <Content Include="Prosjektleder\AktiveringAvTeam.aspx" />
+    <Content Include="Prosjektleder\BurnDownChartFase.aspx" />
     <Content Include="Prosjektleder\Fremdriftsdiagram.aspx" />
     <Content Include="GodkjennTimer.aspx" />
     <Content Include="Innstillinger.aspx" />
@@ -600,6 +601,13 @@
     </Compile>
     <Compile Include="Prosjektleder\AktiveringAvTeam.aspx.designer.cs">
       <DependentUpon>AktiveringAvTeam.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Prosjektleder\BurnDownChartFase.aspx.cs">
+      <DependentUpon>BurnDownChartFase.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Prosjektleder\BurnDownChartFase.aspx.designer.cs">
+      <DependentUpon>BurnDownChartFase.aspx</DependentUpon>
     </Compile>
     <Compile Include="Prosjektleder\Fremdriftsdiagram.aspx.cs">
       <DependentUpon>Fremdriftsdiagram.aspx</DependentUpon>
