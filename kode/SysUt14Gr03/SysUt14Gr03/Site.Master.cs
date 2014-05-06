@@ -104,6 +104,11 @@ namespace SysUt14Gr03
 
         }
 
+        protected void OnPreRender(object sender, EventArgs e)
+        {
+
+        }
+
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
         {
             Context.GetOwinContext().Authentication.SignOut();

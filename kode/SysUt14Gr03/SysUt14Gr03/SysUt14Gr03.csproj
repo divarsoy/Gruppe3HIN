@@ -248,7 +248,6 @@
     <Content Include="obj\Release\Package\PackageTmp\Administrator\DefaultAdministrator.aspx" />
     <Content Include="obj\Release\Package\PackageTmp\Administrator\EndreBrukerinformasjonSomAdministrator.aspx" />
     <Content Include="obj\Release\Package\PackageTmp\Administrator\OversiktBrukereSomAdministrator.aspx" />
-    <Content Include="obj\Release\Package\PackageTmp\Administrator\RegistreringAvBrukereSomAdministrator.aspx" />
     <Content Include="obj\Release\Package\PackageTmp\Administrator\Rettigheter.aspx" />
     <Content Include="obj\Release\Package\PackageTmp\AdministrerOppgavegruppe.aspx" />
     <Content Include="obj\Release\Package\PackageTmp\AktiverKonto.aspx" />
@@ -325,7 +324,6 @@
     <Content Include="obj\Release\Package\PackageTmp\Prosjektleder\OpprettTeam.aspx" />
     <Content Include="obj\Release\Package\PackageTmp\Prosjektleder\OversiktBrukereSomProsjektleder.aspx" />
     <Content Include="obj\Release\Package\PackageTmp\Prosjektleder\OversiktOverAlleTeam.aspx" />
-    <Content Include="obj\Release\Package\PackageTmp\Prosjektleder\RegistreringAvBrukere.aspx" />
     <Content Include="obj\Release\Package\PackageTmp\RapportTestForm.aspx" />
     <Content Include="obj\Release\Package\PackageTmp\ReturAvOppgave.aspx" />
     <Content Include="obj\Release\Package\PackageTmp\Scripts\bootstrap.js" />
@@ -430,8 +428,7 @@
     <Content Include="PameldingTilOppgave.aspx" />
     <Content Include="Pictures\blomst.jpg" />
     <Content Include="Prosjektleder\OpprettTeam.aspx" />
-    <Content Include="Administrator\RegistreringAvBrukereSomAdministrator.aspx" />
-    <Content Include="Prosjektleder\RegistreringAvBrukere.aspx" />
+    <Content Include="RegistreringAvBrukere.aspx" />
     <Content Include="Administrator\Rettigheter.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="HowToQueryTheDatabase.aspx" />
@@ -827,13 +824,6 @@
     <Compile Include="OversiktProsjekter.aspx.designer.cs">
       <DependentUpon>OversiktProsjekter.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Administrator\RegistreringAvBrukereSomAdministrator.aspx.cs">
-      <DependentUpon>RegistreringAvBrukereSomAdministrator.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Administrator\RegistreringAvBrukereSomAdministrator.aspx.designer.cs">
-      <DependentUpon>RegistreringAvBrukereSomAdministrator.aspx</DependentUpon>
-    </Compile>
     <Compile Include="RapportTestForm.aspx.cs">
       <DependentUpon>RapportTestForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -982,11 +972,11 @@
     <Compile Include="PameldingTilOppgave.aspx.designer.cs">
       <DependentUpon>PameldingTilOppgave.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Prosjektleder\RegistreringAvBrukere.aspx.cs">
+    <Compile Include="RegistreringAvBrukere.aspx.cs">
       <DependentUpon>RegistreringAvBrukere.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Prosjektleder\RegistreringAvBrukere.aspx.designer.cs">
+    <Compile Include="RegistreringAvBrukere.aspx.designer.cs">
       <DependentUpon>RegistreringAvBrukere.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administrator\Rettigheter.aspx.cs">

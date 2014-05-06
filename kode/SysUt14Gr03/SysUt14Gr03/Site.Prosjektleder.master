@@ -45,7 +45,7 @@
             <a href="#" class="dropdown-toggle ShepherdMenyBruker" data-toggle="dropdown">Brukere <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li> <a runat="server" href="~/Prosjektleder/OversiktBrukereSomProsjektleder">Oversikt over Brukere i valgt prosjekt</a></li>
-                    <li> <a runat="server" href="~/Prosjektleder/RegistreringAvBrukere">Opprett bruker</a></li>
+                    <li> <a runat="server" href="~/RegistreringAvBrukere">Opprett bruker</a></li>
                 </ul>                  
     </ul>
 
