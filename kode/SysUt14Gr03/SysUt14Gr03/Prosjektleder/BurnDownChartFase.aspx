@@ -5,6 +5,9 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="MenyTemplate" runat="server">
 </asp:Content>
+
 <asp:Content ID="Content4" ContentPlaceHolderID="MainContent" runat="server">
-     <asp:PlaceHolder ID="PlaceHolderTable" runat="server"></asp:PlaceHolder>
-</asp:Content>
+    <div class="table table-responsive">
+     <asp:PlaceHolder ID="PlaceHolderTable"  runat="server"></asp:PlaceHolder>
+        </div>       
+</asp:Content>  
