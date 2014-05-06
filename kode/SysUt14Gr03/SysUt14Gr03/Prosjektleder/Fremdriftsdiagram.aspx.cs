@@ -55,11 +55,37 @@ namespace SysUt14Gr03
         }
         private void fillGraph()
         {
+<<<<<<< HEAD
+=======
+
+            faseID = Convert.ToInt32(ddlFaser.SelectedValue);
+            fase = Queries.GetFase(faseID);
+
+            oppgaver = Queries.getOppgaverIFase(faseID);
+
+  /*          for (int i = 0; i < oppgaver.Count; i++)
+            {
+                tidPaaOppgaver.Add(Validator.KonverterTilTall(oppgaver[i].Estimat.ToString()));
+                List<Time> t = Queries.GetTimerForOppgave(oppgaver[i].Oppgave_id);
+                foreach (Time time in t)
+                {
+                    registrerteTimer.Add(time);
+                }
+
+            } */
+
+            for (int i = 0; i < oppgaver.Count; i++)
+            {
+                estimat += (TimeSpan)oppgaver[i].Estimat;
+                bruktTid += (TimeSpan)oppgaver[i].BruktTid;
+            }
+>>>>>>> 24136d9504c01ed6271a4d53abdf629fe26d4610
             // Diagramm egenskaper
-            this.ChartHolder.ChartAreas["ChartArea1"].AxisX.Interval = 1; // makes sure each point has a label
+            this.ChartHolder.ChartAreas["ChartArea1"].AxisX.Interval = 2; // makes sure each point has a label
             this.ChartHolder.Series["Brukte tid"].BorderWidth = 3; // changes the width of the burn-up-line
             this.ChartHolder.Series["Estimert tid"].BorderWidth = 3; // changes the width of the burn-up-ceiling
             this.ChartHolder.Series["Estimert tid"].Color = System.Drawing.Color.Red; // changes the color of the burn-up-ceiling to red
+            this.ChartHolder.Series["Brukte tid"].YValuesPerPoint = 2;
             this.ChartHolder.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = -45;
             this.ChartHolder.ChartAreas["ChartArea1"].Area3DStyle.Enable3D = false;
             this.ChartHolder.Legends.Add(new Legend("Legend"));
@@ -128,15 +154,18 @@ namespace SysUt14Gr03
                         tidIgjen = tidIgjen - (TimeSpan)oppgaver[i].BruktTid;
                     }
                 }
-                if (h != null)
+          /*      if (h != null)
                 {
                     Object[] yvalues = new Object[2];
                     yvalues[0] = h.TotalHours;
                     yvalues[1] = tidIgjen.TotalHours;
                     this.ChartHolder.Series["Brukte tid"].Points.AddXY(d.DayOfWeek + " " + d.ToShortDateString(), yvalues);
                 }
-                else
-                    this.ChartHolder.Series["Brukte tid"].Points.AddXY(d.DayOfWeek + " " + d.ToShortDateString(), tidIgjen.TotalHours);
+                else 
+//                    this.ChartHolder.Series["Estimert tid"]. */
+
+                this.ChartHolder.Series["Brukte tid"].Points.AddXY(d.DayOfWeek + " " + d.ToShortDateString(), tidIgjen.TotalHours);
+                this.ChartHolder.Series["Brukte tid"].Points.AddXY(d.DayOfWeek + " " + d.ToShortDateString(), tidIgjen.TotalHours);
 
                 this.ChartHolder.Series["Estimert tid"].Points.AddXY(d.DayOfWeek + " " + d.ToShortDateString(), estimat.TotalHours);
             }*/

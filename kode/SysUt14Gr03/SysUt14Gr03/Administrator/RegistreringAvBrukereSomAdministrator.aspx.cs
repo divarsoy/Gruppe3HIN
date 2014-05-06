@@ -116,6 +116,7 @@ namespace SysUt14Gr03
 
             if (tb_reg_epost.Text.Length < 256) {
                 epost = tb_reg_epost.Text;
+                EpostFullforReg();
                 opprettBruker(etternavn, fornavn, epost);
                 //Oppretter logg i database STH PGGS
                 string hendelse = "Bruker " + fornavn + " " + etternavn + " har blitt opprettet av Administrator";
@@ -123,7 +124,7 @@ namespace SysUt14Gr03
                 OppretteLogg.opprettLoggForBruker(hendelse, DateTime.Now, (int)Session["bruker_id"]);
                 OppretteLogg.opprettLoggForBruker(hendelse, DateTime.Now, idBruker );
                 //AktiverKonto.SetBrukerFelter(fornavn, etternavn, epost);
-                EpostFullforReg();
+                
           
             }    
             else
@@ -154,7 +155,7 @@ namespace SysUt14Gr03
 
                 msg.Body = "Hei " + tb_reg_fornavn.Text.Trim() + "!\n" + "Takk for at du registrerte deg hos oss\n" + " <a href='" + ActivationUrl + "'>Klikk her for å aktivere</a>  din konto.";
                 msg.IsBodyHtml = true;
-                smtp.Credentials = new NetworkCredential("sysut14gr03@gmail.com", password);
+                smtp.Credentials = new NetworkCredential("sysut14gr03@gmail.com", "blahimmel");      
                 smtp.Port = 587;
                 smtp.Host = "smtp.gmail.com";
                 smtp.EnableSsl = true;

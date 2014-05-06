@@ -47,5 +47,11 @@ namespace SysUt14Gr03
             dt = DataTabeller.SprintBacklogFase(fase);
             EksporterTilExcel.CreateExcelDocument(dt, "SprintBacklog for fase.xlsx", Response);
         }
+
+        protected void btnExportBurndownskjema_Click(object sender, EventArgs e)
+        {
+            dt = DataTabeller.BurnDownChartForFase(fase.Fase_id);
+            EksporterTilExcel.CreateExcelDocument(dt, "SprintBacklog for fase.xlsx", Response);
+        }
     }
 }

@@ -46,8 +46,10 @@ namespace SysUt14Gr03
         {
             string melding = txtSvar.Text;
             if (melding != string.Empty)
-            {    
+            {   
                 Bruker bruker = Queries.GetBruker(bruker_id);
+                melding = "Bruker " + bruker.ToString() + " har returnert <a href=\"http://malmen.hin.no/SysUt14Gr03/VisOppgave.aspx?oppgave_id="
+                    + oppgave.RefOppgaveId + " " + oppgave.Oppgave_id + "\">" + oppgave.Tittel + "</a>. Begrunnelse: \"" + melding + "\"";
                 string tittel = bruker.ToString() + " har returnert oppgave " + oppgave.Tittel;
                 if (faseleder_id != -1)
                     Varsel.SendVarsel(faseleder_id, Varsel.OPPGAVEVARSEL, tittel, melding);

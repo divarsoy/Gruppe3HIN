@@ -1,0 +1,81 @@
+﻿.listbox {
+  height: 50px;
+}
+.epost_pref_tabell {
+  margin-left: 10px;
+}
+.epost_pref_tabell label {
+  margin-left: 10px;
+}
+.alert {
+  margin-bottom: 0;
+}
+.navbar {
+  margin-bottom: 0;
+}
+button,
+input,
+select,
+textarea,
+.checkbox {
+  margin: 0 0 12px 12px;
+}
+.jumbotron {
+  padding-top: 20px;
+  padding-bottom: 60px;
+}
+.jumbotron p {
+  width: auto;
+}
+.jumbotron .glyphicon.glyphicon-paperclip,
+.jumbotron .glyphicon.glyphicon-pencil,
+.jumbotron .glyphicon.glyphicon-plane {
+  display: table-footer-group;
+  float: left;
+  font-size: 130px;
+  margin-left: -40px;
+  margin-right: 53px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.no-padding {
+  padding: 0;
+}
+#oppgaveGruppe th {
+  text-align: center;
+}
+.headerCenter {
+  text-align: center;
+}
+.listboxTest {
+  padding-left: 30%;
+}
+.footerPadding {
+  padding-bottom: 40px;
+}
+.headerPadding {
+  padding-top: 60px;
+}
+.maxBeskrivelseBredde {
+  max-width: 400px;
+  max-height: 400px;
+}
+.visOppgave p {
+  height: auto;
+  width: auto;
+}
+.feilMelding {
+  color: red;
+  padding-left: 15px;
+}
+.sheperd-link {
+  background-color: #D3D3D3;
+  display: block;
+  font-size: 0.75em !important;
+  line-height: 1.3em;
+  padding: 10px;
+}
+.overskrift-shepherd {
+  color: white;
+}
+/*# sourceMappingURL=MorildDataStylesheet.css.map */

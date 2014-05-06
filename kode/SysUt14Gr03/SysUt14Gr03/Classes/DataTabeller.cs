@@ -507,6 +507,9 @@ namespace SysUt14Gr03.Classes
             DataTable datatabell = new DataTable();
 
             Fase fase = Queries.GetFase(faseId);
+            TimeSpan estimatForFase = new TimeSpan();
+            TimeSpan totalSluttTid = new TimeSpan();
+            TimeSpan totalAvvik = new TimeSpan();
             List<Oppgave> oppgaverForFase = Queries.getOppgaverIFase(faseId);
 
             List<DateTime> range = Enumerable.Range(0, (fase.Stopp - fase.Start).Days + 1)
@@ -524,9 +527,23 @@ namespace SysUt14Gr03.Classes
             datatabell.Columns.Add("Slutt", typeof(System.String));
             datatabell.Columns.Add("Avvik", typeof(System.String));
 
+            DataRow luftRow1 = datatabell.NewRow();
+            luftRow1["Oppgavenavn"] = "";
+            datatabell.Rows.Add(luftRow1);
+
+            DataRow totalRow = datatabell.NewRow();
+            totalRow["Oppgavenavn"] = "Total tid for " + fase.Navn;
+
+            List<TimeSpan> totalTider = new List<TimeSpan>();
+            foreach (DateTime d in range)
+            {
+                totalTider.Add(new TimeSpan(0));
+            }
+
             foreach (Oppgave o in oppgaverForFase)
             {
                 TimeSpan resterendeTid = (TimeSpan)o.Estimat;
+                estimatForFase = estimatForFase + resterendeTid;
                 List<Time> registrerteTimerPaaOppgave = Queries.GetTimerForOppgave(o.Oppgave_id);
 
                 String utviklere = "";
@@ -553,13 +570,31 @@ namespace SysUt14Gr03.Classes
 
                     oppgaveRow[range.ElementAt(i).ToString()] = resterendeTid;
 
+                    totalTider[i] = totalTider[i] + resterendeTid;
+
+                }
+
+                for (int i = 0; i < totalTider.Count; i++)
+                {
+                    totalRow[range.ElementAt(i).ToString()] = totalTider[i].ToString();
                 }
 
                 oppgaveRow["Slutt"] = o.BruktTid.ToString();
+                totalSluttTid = totalSluttTid + (TimeSpan)o.BruktTid;
                 oppgaveRow["Avvik"] = (o.BruktTid - o.Estimat).ToString();
+                totalAvvik = totalAvvik + (TimeSpan)(o.BruktTid - o.Estimat);
 
                 datatabell.Rows.Add(oppgaveRow);
             }
+
+            totalRow["Estimat"] = estimatForFase.ToString();
+            totalRow["Slutt"] = totalSluttTid.ToString();
+            totalRow["Avvik"] = totalAvvik.ToString();
+
+            DataRow luftRow2 = datatabell.NewRow();
+            luftRow2["Oppgavenavn"] = "";
+            datatabell.Rows.Add(luftRow2);
+            datatabell.Rows.Add(totalRow);
             return datatabell;
         }
 

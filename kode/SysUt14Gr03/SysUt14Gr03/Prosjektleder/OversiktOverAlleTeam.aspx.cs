@@ -25,9 +25,9 @@ namespace SysUt14Gr03
                     foreach (Prosjekt p in t.Prosjekter)
                     {
                         brukerTabell = Tabeller.HentBrukerTabellForTeam(query, t, p.Prosjekt_id);
+                      
                     }
-                        PlaceHolderTable.Controls.Add(brukerTabell);
-                    
+                    PlaceHolderTable.Controls.Add(brukerTabell);
                 }
             }
         }

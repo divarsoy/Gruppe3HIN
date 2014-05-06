@@ -17,7 +17,7 @@
     
     <div class="container">
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12 no-padding">
           <h2>Loggføring av hendelser!</h2>
             <asp:Panel ID="Pan1" Height="500px" BackColor="#eeeeee" ScrollBars="Auto" runat="server">
              <div class="table table-condensed table-bordered table-striped">
@@ -26,12 +26,7 @@
                 </asp:Panel>
             <br />
             <asp:Button ID="Button1" CssClass="btn btn-primary" runat="server" Text="Eksporter logg til excel!" OnClick="Button1_Click" />
-        </div>
-        <div class="col-md-4">
-          <h2>Valgt prosjekt</h2>
-           
-        </div>
-       
+        </div>       
       </div>
     </div>
 
