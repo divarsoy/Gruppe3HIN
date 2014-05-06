@@ -950,7 +950,9 @@ namespace SysUt14Gr03.Classes
         {
             using (var context = new Context())
             {
-                List<Logg> loggListe = context.Logger.OrderByDescending(logg => logg.Opprettet).ToList();
+                List<Logg> loggListe = context.Logger
+                    .Include("Bruker")
+                    .OrderByDescending(logg => logg.Opprettet).ToList();
                 return loggListe;
             }      
         }

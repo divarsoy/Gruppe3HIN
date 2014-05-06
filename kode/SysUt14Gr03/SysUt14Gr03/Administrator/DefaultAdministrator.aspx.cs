@@ -19,8 +19,8 @@ namespace SysUt14Gr03
         
         protected void Page_Load(object sender, EventArgs e)
         {
-            SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Administrator);
-            bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
+            //SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Administrator);
+            bruker_id = 1;// Validator.KonverterTilTall(Session["bruker_id"].ToString());
 
             tabell = Tabeller.hentLoggForAdministrator(query);
             PlaceHolderTable.Controls.Add(tabell);

@@ -844,10 +844,10 @@ namespace SysUt14Gr03.Classes
                 TableCell tcBID = new TableCell();
                 TableCell tcPID = new TableCell();
                 TableCell tcDato = new TableCell();
-
+                
                 tcLID.Text = logg.Logg_id.ToString();
                 tcHendelse.Text = logg.Hendelse.ToString();
-                tcBID.Text = logg.bruker_id.ToString();
+                tcBID.Text = String.Format("<a href='VisbrukerAdmin?Bruker_id={0}'>{1}</a>", logg.bruker_id, logg.Bruker.Brukernavn.ToString());
                 tcPID.Text = logg.Prosjekt_id.ToString();
                 tcDato.Text = logg.Opprettet.ToString();
 
@@ -862,6 +862,197 @@ namespace SysUt14Gr03.Classes
             tabell.CssClass = "Table";
             return tabell;
 
+        }
+
+        public static Table BurndownChartForFase(int fase_id)
+        {
+            Fase fase = Queries.GetFase(fase_id);
+            List<Oppgave> oppgaverForFase = Queries.getOppgaverIFase(fase_id);
+            TimeSpan estimatForFase = new TimeSpan();
+            TimeSpan totalSluttTid = new TimeSpan();
+            TimeSpan totalAvvikTid = new TimeSpan();
+            Table tabell = new Table();
+            TableHeaderRow headerRow = new TableHeaderRow();
+            TableHeaderCell headerCell = new TableHeaderCell();
+            TableHeaderRow innholdHeaderRow = new TableHeaderRow();
+            TableHeaderCell oppgaveRefHeaderCell = new TableHeaderCell();
+            TableHeaderCell oppgaveNavnHeaderCell = new TableHeaderCell();
+            TableHeaderCell estimatHeaderCell = new TableHeaderCell();
+
+            oppgaveRefHeaderCell.Text = "Oppgaveref.";
+            innholdHeaderRow.Cells.Add(oppgaveRefHeaderCell);
+            oppgaveNavnHeaderCell.Text = "Oppgavenavn";
+            innholdHeaderRow.Cells.Add(oppgaveNavnHeaderCell);
+            estimatHeaderCell.Text = "Estimat";
+            innholdHeaderRow.Cells.Add(estimatHeaderCell);
+
+            List<DateTime> datoOmfang = Enumerable.Range(0, (fase.Stopp - fase.Start).Days + 1)
+                .Select(i => fase.Start.AddDays(i))
+                .ToList();
+
+            for (int i = 0; i < datoOmfang.Count; i++ )
+            {
+                TableHeaderCell tempHeaderCell = new TableHeaderCell();
+                tempHeaderCell.Text = datoOmfang[i].ToShortDateString().ToString();
+                innholdHeaderRow.Cells.Add(tempHeaderCell);
+            }
+
+            
+
+            TableHeaderCell sluttHeaderCell = new TableHeaderCell();
+            TableHeaderCell avvikHeaderCell = new TableHeaderCell();
+
+            sluttHeaderCell.Text = "Slutt";
+            avvikHeaderCell.Text = "Avvik";
+            innholdHeaderRow.Cells.Add(sluttHeaderCell);
+            innholdHeaderRow.Cells.Add(avvikHeaderCell);
+
+            tabell.Rows.Add(innholdHeaderRow);
+
+            List<TimeSpan> totalTider = new List<TimeSpan>();
+            foreach (DateTime d in datoOmfang)
+            {
+                totalTider.Add(new TimeSpan(0));
+            }
+
+
+            foreach(Oppgave o in oppgaverForFase)
+            {
+
+                TimeSpan nullTimeSpan = new TimeSpan(0);
+                
+                totalSluttTid = totalSluttTid + (TimeSpan)o.BruktTid;
+                totalAvvikTid = totalAvvikTid + (TimeSpan)(o.Estimat - o.BruktTid);
+                TimeSpan resterendeTid = (TimeSpan)o.Estimat;
+                estimatForFase = estimatForFase + resterendeTid;
+                List<Time> registrerteTimerPaaOppgaver = Queries.GetTimerForOppgave(o.Oppgave_id);
+                
+                TableRow oppgaveRow = new TableRow();
+                TableCell oppgaveRefCell = new TableCell();
+                TableCell oppgaveNavnCell = new TableCell();
+                TableCell estimatCell = new TableCell();
+
+                oppgaveRefCell.Text = o.RefOppgaveId.ToString();
+                oppgaveNavnCell.Text = o.Tittel.ToString();
+                estimatCell.Text = o.Estimat.ToString();
+
+                oppgaveRow.Cells.Add(oppgaveRefCell);
+                oppgaveRow.Cells.Add(oppgaveNavnCell);
+                oppgaveRow.Cells.Add(estimatCell);
+
+                for (int i = 0; i < datoOmfang.Count; i++)
+                {
+                    for (int j = 0; j < registrerteTimerPaaOppgaver.Count; j++)
+                    {
+                        DateTime stoppTid = (DateTime)registrerteTimerPaaOppgaver[j].Stopp;
+                        if(datoOmfang[i].Date.Equals(stoppTid.Date))
+                        {
+                            resterendeTid = resterendeTid - (TimeSpan)registrerteTimerPaaOppgaver[j].Tid;
+
+                        }
+                    }
+
+                    if (resterendeTid > nullTimeSpan)
+                    {
+                        totalTider[i] = totalTider[i] + resterendeTid;
+                    }
+                    
+
+                    TableCell tempCell = new TableCell();
+                    tempCell.Text = resterendeTid.ToString();
+                    oppgaveRow.Cells.Add(tempCell);
+                }
+
+                TableCell sluttCell = new TableCell();
+                sluttCell.Text = o.BruktTid.ToString();
+                oppgaveRow.Cells.Add(sluttCell);
+
+                TableCell avvikCell = new TableCell();
+                avvikCell.Text = (o.Estimat - o.BruktTid).ToString();
+                oppgaveRow.Cells.Add(avvikCell);
+
+                tabell.Rows.Add(oppgaveRow);
+
+            }
+
+            TableRow totalTid = new TableRow();
+            TableCell luftCell1 = new TableCell();
+            TableCell totalNavn = new TableCell();
+            TableCell totalEstimat = new TableCell();
+
+            luftCell1.Text = " ";
+            totalNavn.Text = "Total tid";
+            totalEstimat.Text = estimatForFase.ToString();
+
+            totalTid.Cells.Add(luftCell1);
+            totalTid.Cells.Add(totalNavn);
+            totalTid.Cells.Add(totalEstimat);
+
+            for (int i = 0; i < totalTider.Count; i++)
+            {
+                TableCell tempCell = new TableCell();
+                tempCell.Text = totalTider[i].ToString();
+                totalTid.Cells.Add(tempCell);
+            }
+
+            TableCell totalSlutt = new TableCell();
+            TableCell totalAvvik = new TableCell();
+
+            totalSlutt.Text = totalSluttTid.ToString();
+            totalAvvik.Text = totalAvvikTid.ToString();
+
+            totalTid.Cells.Add(totalSlutt);
+            totalTid.Cells.Add(totalAvvik);
+
+            tabell.Rows.Add(totalTid);
+
+            TableRow ideellTidRow = new TableRow();
+            TableCell luftCell2 = new TableCell();
+            TableCell ideellNavn = new TableCell();
+            TableCell ideellEstimat = new TableCell();
+
+            luftCell2.Text = "";
+            ideellNavn.Text = "Ideell tidsbruk";
+            ideellEstimat.Text = estimatForFase.ToString();
+
+            ideellTidRow.Cells.Add(luftCell2);
+            ideellTidRow.Cells.Add(ideellNavn);
+            ideellTidRow.Cells.Add(ideellEstimat);
+
+            double estimatSomDouble = (double) estimatForFase.TotalHours;
+            double ideellTid = estimatSomDouble;
+            double ideellTidRest;
+            int ideelleTimer;
+            int ideelleMinutter;
+
+            for (int i = 0; i < datoOmfang.Count; i++)
+            {
+                TableCell tempCell = new TableCell();
+
+                ideellTid = ideellTid - (estimatSomDouble / datoOmfang.Count);
+                ideelleTimer = (int)ideellTid;
+                ideellTidRest = ideellTid - (double)ideelleTimer;
+                ideelleMinutter = (int)(ideellTidRest * 60);
+
+                TimeSpan ideellTidTimeSpan = new TimeSpan(ideelleTimer, ideelleMinutter, 0);
+
+                tempCell.Text = ideellTidTimeSpan.ToString();
+                ideellTidRow.Cells.Add(tempCell);
+
+            }
+
+            TableCell ideellSluttCell = new TableCell();
+            TableCell ideellAvvikCell = new TableCell();
+
+            ideellSluttCell.Text = estimatForFase.ToString();
+            ideellAvvikCell.Text = "00:00:00";
+
+            ideellTidRow.Cells.Add(ideellSluttCell);
+            ideellTidRow.Cells.Add(ideellAvvikCell);
+
+            tabell.Rows.Add(ideellTidRow);
+
+                return tabell;
         }
     }
 }

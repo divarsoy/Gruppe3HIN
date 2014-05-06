@@ -171,6 +171,7 @@
     <Content Include="Account\OpenAuthProviders.ascx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\RegisterExternalLogin.aspx" />
+    <Content Include="Administrator\VisBrukerAdmin.aspx" />
     <Content Include="bin\Antlr3.Runtime.dll" />
     <Content Include="bin\AspNet.ScriptManager.bootstrap.dll" />
     <Content Include="bin\AspNet.ScriptManager.jQuery.dll" />
@@ -228,6 +229,7 @@
     <Content Include="Content\shepherd-theme-arrows.css" />
     <Content Include="DeaktiveringAvRegistrerteTimer.aspx" />
     <Content Include="Prosjektleder\AktiveringAvTeam.aspx" />
+    <Content Include="Prosjektleder\BurnDownChartFase.aspx" />
     <Content Include="Prosjektleder\Fremdriftsdiagram.aspx" />
     <Content Include="GodkjennTimer.aspx" />
     <Content Include="Innstillinger.aspx" />
@@ -571,6 +573,13 @@
     <Compile Include="Account\RegisterExternalLogin.aspx.designer.cs">
       <DependentUpon>RegisterExternalLogin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Administrator\VisBrukerAdmin.aspx.cs">
+      <DependentUpon>VisBrukerAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrator\VisBrukerAdmin.aspx.designer.cs">
+      <DependentUpon>VisBrukerAdmin.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Classes\DataTabeller.cs" />
     <Compile Include="Classes\EksporterTilExcel.cs" />
     <Compile Include="Classes\OppretteLogg.cs" />
@@ -589,6 +598,13 @@
     </Compile>
     <Compile Include="Prosjektleder\AktiveringAvTeam.aspx.designer.cs">
       <DependentUpon>AktiveringAvTeam.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Prosjektleder\BurnDownChartFase.aspx.cs">
+      <DependentUpon>BurnDownChartFase.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Prosjektleder\BurnDownChartFase.aspx.designer.cs">
+      <DependentUpon>BurnDownChartFase.aspx</DependentUpon>
     </Compile>
     <Compile Include="Prosjektleder\Fremdriftsdiagram.aspx.cs">
       <DependentUpon>Fremdriftsdiagram.aspx</DependentUpon>
