@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using SysUt14Gr03.Models;
 using SysUt14Gr03.Classes;
+using System.Drawing;
 
 namespace SysUt14Gr03
 {
@@ -52,8 +53,6 @@ namespace SysUt14Gr03
                             Lagre();
                             // Rydd opp
                             RyddOpp();
-                            
-                            Response.Redirect(Request.Url.ToString());
 
                         }
 
@@ -251,29 +250,28 @@ namespace SysUt14Gr03
                         }
                         else
                         {
-                            Session["flashMelding"] = "Pauser kan ikke være utenfor arbeidsøkten";
-                            Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
+                            // Må bruke label for tilbakemelding, ellers mister jeg info
+                            VisFeilmelding("Pauser kan ikke være utenfor arbeidsøkten");
+                            
 
                         }
                     }
                     else
                     {
-                        Session["flashMelding"] = "Sluttid kan ikke være før starttid";
-                        Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
+                        VisFeilmelding("Sluttid kan ikke være før starttid");
 
                     }
                 }
                 else
                 {
-                    Session["flashMelding"] = "Vennligst oppgi start- og sluttid";
-                    Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
+                    VisFeilmelding("Vennligst oppgi start- og sluttid");
                 }
 
             }
             else
             {
-                Session["flashMelding"] = "Vennligst oppgi start- og sluttid";
-                Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
+                VisFeilmelding("Vennligst oppgi start-, sluttid og dato");
+                
             }
 
             if (isConfirmNeeded)
@@ -292,6 +290,13 @@ namespace SysUt14Gr03
                 ClientScript.RegisterStartupScript(GetType(), "confirmScript", javaScript.ToString());
             }
 
+        }
+
+        private void VisFeilmelding(string melding)
+        {
+            lblFeilmelding.Text = melding;
+            lblFeilmelding.Visible = true;
+            lblFeilmelding.ForeColor = Color.Red;
         }
 
         private void Lagre()
@@ -323,7 +328,8 @@ namespace SysUt14Gr03
                 };
 
                 oppgave.BruktTid += bruktTid;
-                oppgave.RemainingTime -= bruktTid;
+                if (oppgave.RemainingTime >= bruktTid)
+                    oppgave.RemainingTime -= bruktTid;
                 oppgave.Status = context.Statuser.Where(s => s.Status_id == 2).FirstOrDefault(); // Setter status til under arbeid
                 context.Timer.Add(time);
                 context.SaveChanges();

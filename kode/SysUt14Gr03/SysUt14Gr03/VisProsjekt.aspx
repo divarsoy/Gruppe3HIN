@@ -6,8 +6,6 @@
     </h2>
     <hr />
     <br />
-    <h3>
     <asp:Label ID="lblInfo" runat="server"></asp:Label>       
-    </h3>
         </div>
 </asp:Content>

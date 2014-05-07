@@ -49,8 +49,7 @@ namespace SysUt14Gr03.Prosjektleder
                         {
 
                             // skal byttes ut med kalender
-                            DateTime dato = DateTime.Now;
-                            txtDato.Text = dato.ToShortDateString();
+                            txtDato.Text = ((DateTime)time.Opprettet).ToString();
                             txtStart.Text = ((DateTime)time.Start).ToShortTimeString();
                             txtSlutt.Text = ((DateTime)time.Stopp).ToShortTimeString();
 
@@ -67,8 +66,9 @@ namespace SysUt14Gr03.Prosjektleder
                                 Lagre();
                                 // Rydd opp
                                 RyddOpp();
-                                Session["flashMelding"] = "Timer registrert på " + time.Oppgave.Tittel;
+                                Session["flashMelding"] = "Timer korrigert for " + time.Oppgave.Tittel;
                                 Session["flashStatus"] = Konstanter.notifikasjonsTyper.success.ToString();
+                                Response.Redirect("../GodkjennTimer.aspx", true);
 
                             }
 
@@ -102,13 +102,13 @@ namespace SysUt14Gr03.Prosjektleder
                     }
                     else
                     {
-                        lblTittel.Text = "Oppgaven finnes ikke";
+                        lblTittel.Text = "Valgt timeregistrering ble ikke funnet";
                     }
 
                 }
                 else
                 {
-                    lblTittel.Text = "Ingen oppgave valgt";
+                    lblTittel.Text = "Ingen timeregistrering valgt";
                 }
             }
             else
@@ -263,27 +263,24 @@ namespace SysUt14Gr03.Prosjektleder
                         }
                         else
                         {
-                            Session["flashMelding"] = "Pauser kan ikke være utenfor arbeidsøkten";
-                            Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
+                            // Må bruke label for tilbakemelding, ellers mister jeg info
+                            VisFeilmelding("Pauser kan ikke være utenfor arbeidsøkten");
                         }
                     }
                     else
                     {
-                        Session["flashMelding"] = "Sluttid kan ikke være før starttid";
-                        Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
+                        VisFeilmelding("Sluttid kan ikke være før starttid");
                     }
                 }
                 else
                 {
-                    Session["flashMelding"] = "Vennligst oppgi start- og sluttid";
-                    Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
+                    VisFeilmelding("Vennligst oppgi start- og sluttid");
                 }
 
             }
             else
             {
-                Session["flashMelding"] = "Vennligst oppgi start-, sluttid og dato";
-                Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
+                VisFeilmelding("Vennligst oppgi start-, sluttid og dato");
             }
 
             if (isConfirmNeeded)
@@ -304,6 +301,13 @@ namespace SysUt14Gr03.Prosjektleder
 
         }
 
+        private void VisFeilmelding(string melding)
+        {
+            lblFeilmelding.Text = melding;
+            lblFeilmelding.Visible = true;
+            lblFeilmelding.ForeColor = Color.Red;
+        }
+
         private void Lagre()
         {
             bruktTid = (TimeSpan)ViewState["bruktTid"];
@@ -315,7 +319,9 @@ namespace SysUt14Gr03.Prosjektleder
             using (var context = new Context())
             {
                 Time time = context.Timer.Where(t => t.Time_id == time_id).FirstOrDefault();
+                Oppgave oppgave = context.Oppgaver.Where(o => o.Oppgave_id == time.Oppgave_id).FirstOrDefault();
 
+                time.Opprettet = dato;
                 time.Tid = bruktTid;
                 time.Start = startTid;
                 time.Stopp = sluttTid;

@@ -92,6 +92,9 @@ namespace SysUt14Gr03
                     time.IsFerdig = true;
                     context.SaveChanges();
                 }
+                Session["flashMelding"] = "Timeregistrering godkjent";
+                Session["flashStatus"] = Konstanter.notifikasjonsTyper.info.ToString();
+                Response.Redirect(Request.RawUrl, true);
 
             }
 
