@@ -65,8 +65,25 @@ namespace SysUt14Gr03
                     lblInfo.Text += "<p><b>" + "Resterende tid: </b>" + oppgave.RemainingTime.ToString() + " timer</p>\n";
                     lblInfo.Text += "<p><b>" + "Brukt tid: </b>" + oppgave.BruktTid.ToString() + " timer</p>\n";
 
-                    
-                    lblInfo.Text += "<p><b>" + "Tidsfrist: </b>" + oppgave.Tidsfrist == null ? "Nei</p>\n" : oppgave.Tidsfrist.ToString() + "</p>\n";
+                    string frist = "Tidsfrist: </b>";
+                    if (oppgave.Tidsfrist == null)
+                    {
+                        frist += "-";
+                    }
+                    else
+                    {
+                        if ((DateTime)oppgave.Tidsfrist < DateTime.Now) 
+                        {
+                            frist += "<span style=\"color:red\">" + oppgave.Tidsfrist.ToString() + "</span>";
+                        }
+                        else
+                        {
+                            frist += oppgave.Tidsfrist.ToString();
+                        }
+                    }
+                    frist += "</p>\n";
+
+                    lblInfo.Text += "<p><b>" + frist;
                     lblInfo.Text += "<p><b>" + "Status: </b>" + oppgave.Status.Navn + "</p>\n";
                     lblInfo.Text += "<p><b>" + "Prioritet: </b>" + oppgave.Prioritering_id + "</p>\n";
 

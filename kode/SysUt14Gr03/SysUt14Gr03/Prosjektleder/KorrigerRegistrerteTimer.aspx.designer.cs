@@ -119,5 +119,14 @@ namespace SysUt14Gr03.Prosjektleder {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnLagre;
+        
+        /// <summary>
+        /// lblFeilmelding control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblFeilmelding;
     }
 }
