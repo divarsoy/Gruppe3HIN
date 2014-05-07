@@ -37,9 +37,11 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
             SessionSjekk.sjekkForBruker_id();
             bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
             
+            //Sjekker hvilke rettighet brukeren har, og henter opp riktig rettighetliste til dropdownmenyen.
             if (Validator.SjekkRettighet(bruker_id, Konstanter.rettighet.Administrator))
             {
                 rettighetListe = Queries.GetAlleRettigheter();
@@ -53,29 +55,31 @@ namespace SysUt14Gr03
             {
                 SessionSjekk.LoggutFeilRettighet();
             }
-/*
-                if (Session["tb_etternavn"] != null)
-                {
-                    if (tb_reg_etternavn.Text != string.Empty)
-                    {
-                        tb_reg_etternavn.Text = Session["tb_etternavn"].ToString();
-                    }
-                }
-                if (Session["tb_fornavn"] != null)
-                {
-                    tb_reg_fornavn.Text = Session["tb_fornavn"].ToString();
-                }
-                if (Session["tb_epost"] != null)
-                {
-                    tb_reg_epost.Text = Session["tb_epost"].ToString();
-                }
-*/
+
+
+
             if (!IsPostBack)
             {
                 for (int i = 0; i < rettighetListe.Count; i++)
                 {
                     Rettighet rettighet = rettighetListe[i];
                     ddlRettighet.Items.Add(new ListItem(rettighet.RettighetNavn, rettighet.Rettighet_id.ToString()));
+                }
+
+                if (Session["tb_etternavn"] != null)
+                {
+                    if (tb_reg_etternavn.Text != Session["tb_etternavn"].ToString())
+                        tb_reg_etternavn.Text = Session["tb_etternavn"].ToString();
+                }
+                if (Session["tb_fornavn"] != null)
+                {
+                    if (tb_reg_fornavn.Text != Session["tb_fornavn"].ToString())
+                        tb_reg_fornavn.Text = Session["tb_fornavn"].ToString();
+                }
+                if (Session["tb_epost"] != null)
+                {
+                    if (tb_reg_epost.Text != Session["tb_epost"].ToString())
+                        tb_reg_epost.Text = Session["tb_epost"].ToString();
                 }
             }          
         }
@@ -161,7 +165,7 @@ namespace SysUt14Gr03
 
         protected void bt_adm_reg_Click(object sender, EventArgs e)
         {
-            //lagreTekstbokser();
+            lagreTekstbokser();
 
             Session["flashMelding"] = string.Empty;
 
@@ -212,7 +216,7 @@ namespace SysUt14Gr03
             else
             {
                 Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger;
-             //   Response.Redirect(Request.RawUrl);
+                Response.Redirect(Request.RawUrl);
             }
         }
 
