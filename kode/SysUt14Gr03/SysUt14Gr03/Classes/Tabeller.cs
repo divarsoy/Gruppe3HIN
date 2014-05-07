@@ -910,9 +910,13 @@ namespace SysUt14Gr03.Classes
             tabell.Rows.Add(innholdHeaderRow);
 
             List<TimeSpan> totalTider = new List<TimeSpan>();
+            //Ny liste for å ta vare på totalt beregnet estimat for fase for hver dato
+            List<TimeSpan> nyEstimertTidFase = new List<TimeSpan>();
             foreach (DateTime d in datoOmfang)
             {
                 totalTider.Add(new TimeSpan(0));
+                //Legger inn tider i listen, slik at lengden på listen tilsvarer antall datoer
+                nyEstimertTidFase.Add(new TimeSpan(0));
             }
 
 
@@ -925,6 +929,13 @@ namespace SysUt14Gr03.Classes
                 totalAvvikTid = totalAvvikTid + (TimeSpan)(o.Estimat - o.BruktTid);
                 TimeSpan resterendeTid = (TimeSpan)o.Estimat;
                 estimatForFase = estimatForFase + resterendeTid;
+                bool ErFerdig = false;
+                
+                //Legger inn den opprinnelige estimerte tiden for fasen for alle tider i listen
+                for (int i = 0; i < nyEstimertTidFase.Count; i++ )
+                {
+                    nyEstimertTidFase[i] = nyEstimertTidFase[i] + resterendeTid;
+                }
                 List<Time> registrerteTimerPaaOppgaver = Queries.GetTimerForOppgave(o.Oppgave_id);
                 
                 TableRow oppgaveRow = new TableRow();
@@ -942,21 +953,51 @@ namespace SysUt14Gr03.Classes
 
                 for (int i = 0; i < datoOmfang.Count; i++)
                 {
+                    if (o.Avsluttet != null)
+                    {
+                        DateTime avsluttetDato = (DateTime)o.Avsluttet;
+                        if (datoOmfang[i].Date.Equals(avsluttetDato.Date))
+                        {
+                            ErFerdig = true;
+                            if (o.Estimat > o.BruktTid)
+                            {
+                                TimeSpan ubruktTid = (TimeSpan)o.RemainingTime;
+                                for (int k = i; k < datoOmfang.Count; k++)
+                                {
+                                    nyEstimertTidFase[k] = nyEstimertTidFase[k] - ubruktTid;
+                                }
+                            }
+                        }
+                    } /**/
                     for (int j = 0; j < registrerteTimerPaaOppgaver.Count; j++)
                     {
-                        DateTime stoppTid = (DateTime)registrerteTimerPaaOppgaver[j].Stopp;
-                        if(datoOmfang[i].Date.Equals(stoppTid.Date))
+                       /* if (o.Avsluttet != null)
                         {
-                            resterendeTid = resterendeTid - (TimeSpan)registrerteTimerPaaOppgaver[j].Tid;
-
-                        }
+                            DateTime avsluttetDato = (DateTime)o.Avsluttet;
+                            if (datoOmfang[i].Date.Equals(avsluttetDato.Date))
+                            {
+                                ErFerdig = true;
+                            }
+                        } */
+                        if (!ErFerdig)
+                        {
+                            DateTime stoppTid = (DateTime)registrerteTimerPaaOppgaver[j].Stopp;
+                            if (datoOmfang[i].Date.Equals(stoppTid.Date))
+                            {
+                                resterendeTid = resterendeTid - (TimeSpan)registrerteTimerPaaOppgaver[j].Tid;
+                            }
+                        } else
+                            resterendeTid = new TimeSpan(0);
                     }
 
                     if (resterendeTid > nullTimeSpan)
                     {
                         totalTider[i] = totalTider[i] + resterendeTid;
                     }
-                    
+                    else // Legger til tid for estimert tid på datoen dersom det blir brukt mer tid enn beregnet på en oppgave
+                    {
+                        nyEstimertTidFase[i] = nyEstimertTidFase[i] - resterendeTid;
+                    }
 
                     TableCell tempCell = new TableCell();
                     tempCell.Text = resterendeTid.ToString();
@@ -1052,7 +1093,29 @@ namespace SysUt14Gr03.Classes
 
             tabell.Rows.Add(ideellTidRow);
 
-                return tabell;
+            TableRow totalBeregnetTidForFaseRow = new TableRow();
+            TableCell totalBeregnetIdCell = new TableCell();
+            TableCell totalBeregnetNavnCell = new TableCell();
+            TableCell totalBeregnetEstimat = new TableCell();
+
+            totalBeregnetIdCell.Text = "";
+            totalBeregnetNavnCell.Text = "Beregnet estimat (fase)";
+            totalBeregnetEstimat.Text = estimatForFase.ToString();
+
+            totalBeregnetTidForFaseRow.Cells.Add(totalBeregnetIdCell);
+            totalBeregnetTidForFaseRow.Cells.Add(totalBeregnetNavnCell);
+            totalBeregnetTidForFaseRow.Cells.Add(totalBeregnetEstimat);
+
+            for (int i = 0; i < datoOmfang.Count; i++)
+            {
+                TableCell tempCell = new TableCell();
+                tempCell.Text = nyEstimertTidFase[i].ToString();
+                totalBeregnetTidForFaseRow.Cells.Add(tempCell);
+            }
+
+            tabell.Rows.Add(totalBeregnetTidForFaseRow);
+
+            return tabell;
         }
     }
 }
