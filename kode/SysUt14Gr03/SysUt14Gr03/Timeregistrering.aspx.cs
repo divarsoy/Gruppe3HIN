@@ -239,7 +239,7 @@ namespace SysUt14Gr03
                     timer = context3.Timer.Where(t => t.Time_id == timeID).FirstOrDefault();
 
                     oppgave.BruktTid += timespan;
-                    if (oppgave.BruktTid > oppgave.RemainingTime || oppgave.BruktTid > oppgave.Estimat)
+                    if (oppgave.BruktTid > oppgave.Estimat)
                         oppgave.RemainingTime = new TimeSpan(0);
                     else
                         oppgave.RemainingTime = oppgave.Estimat - oppgave.BruktTid;
@@ -336,7 +336,7 @@ namespace SysUt14Gr03
             ViewState["Start"] = null;
             ViewState["bruktTid"] = null;
             Session["pause_id"] = null;
-            Response.Redirect("Timeregistrering.aspx");
+            Response.Redirect("Utvikler/InnsynIEgneRegistrerteTimerSomBruker.aspx", true);
         }
     }
 }
