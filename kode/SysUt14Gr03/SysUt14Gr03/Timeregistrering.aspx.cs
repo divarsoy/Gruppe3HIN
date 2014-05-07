@@ -262,10 +262,11 @@ namespace SysUt14Gr03
 
                     context3.Kommentarer.Add(Kommentar);
                     context3.SaveChanges();
+
+                    Session["flashMelding"] = "Takk for din registrering på oppgave: " + oppgave.Oppgave_id;
+                    Session["flashStatus"] = Konstanter.notifikasjonsTyper.success.ToString();
+                    this.signOut();
                 }
-                Session["flashMelding"] = "Takk for din registrering";
-                Session["flashStatus"] = Konstanter.notifikasjonsTyper.success.ToString();
-                this.signOut();
             }
             else
             {
