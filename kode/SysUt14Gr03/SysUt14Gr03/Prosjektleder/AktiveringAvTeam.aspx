@@ -7,7 +7,7 @@
     <br />
         <div class="checkbox">
             <asp:CheckBoxList ID="cbl_team"  runat="server" /> 
-            <h1><asp:Label ID="lblTilbakeMelding" ForeColor="Red" runat="server" Text="Eksisterer ikke arkiverte team!" CssClass="alert"></asp:Label></h1>
+            <p><asp:Label ID="lblTilbakeMelding" ForeColor="Red" runat="server" Text="Det eksisterer ingen arkiverte team!" CssClass="alert" Visible="false"></asp:Label></p>
         </div>
         <asp:Button ID="bt_aktivereTeam" CssClass="btn btn-primary" runat="server" Text="Aktiver Team" OnClick="bt_aktiverTeam_Click" />
     </div>

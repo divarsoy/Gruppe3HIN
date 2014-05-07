@@ -239,7 +239,10 @@ namespace SysUt14Gr03
                     timer = context3.Timer.Where(t => t.Time_id == timeID).FirstOrDefault();
 
                     oppgave.BruktTid += timespan;
-                    oppgave.RemainingTime = oppgave.Estimat - oppgave.BruktTid;
+                    if (oppgave.BruktTid > oppgave.RemainingTime || oppgave.BruktTid > oppgave.Estimat)
+                        oppgave.RemainingTime = new TimeSpan(0);
+                    else
+                        oppgave.RemainingTime = oppgave.Estimat - oppgave.BruktTid;
                     oppgave.Oppdatert = DateTime.Now;
 
                     timer.Tid = timespan;

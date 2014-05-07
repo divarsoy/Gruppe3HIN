@@ -19,7 +19,7 @@ namespace SysUt14Gr03.Prosjektleder
 
             teamListe = Queries.GetAlleArkiverteTeam();
 
-            if (cbl_team.Items.Count == 0)
+            if (cbl_team.Items.Count == 0 && teamListe.Count != 0)
             {
                 for (int i = 0; i < teamListe.Count(); i++)
                 {
@@ -28,7 +28,10 @@ namespace SysUt14Gr03.Prosjektleder
                 }
             }
             else
+            {
                 lblTilbakeMelding.Visible = true;
+                bt_aktivereTeam.Enabled = false;
+            }
         }
         protected void bt_aktiverTeam_Click(object sender, EventArgs e)
         {
@@ -42,7 +45,7 @@ namespace SysUt14Gr03.Prosjektleder
                     string hendelse = "Team " + valgtTeam.Navn + " er blitt aktivert";
                     OppretteLogg.opprettLoggForBruker(hendelse, DateTime.Now, (int)Session["bruker_id"]);
 
-                    Session["flashMelding"] = hendelse;
+                    Session["flashMelding"] += hendelse + "\n";
                     Session["flashStatus"] = Konstanter.notifikasjonsTyper.success.ToString();
                 }
             }

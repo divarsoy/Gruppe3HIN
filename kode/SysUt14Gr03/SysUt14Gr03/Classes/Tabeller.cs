@@ -823,8 +823,8 @@ namespace SysUt14Gr03.Classes
             headerCell1.Text = "Logg";
             loggIdHeaderCell.Text = "Logg ID";
             hendelseHeaderCell.Text = "Hendelse";
-            brukerIdHeaderCell.Text = "Bruker ID";
-            prosjektIdHeaderCell.Text = "Prosjekt ID";
+            brukerIdHeaderCell.Text = "Bruker";
+            prosjektIdHeaderCell.Text = "Prosjekt";
             datoHeaderCell.Text = "Dato";
 
             headerRow.Cells.Add(headerCell1);
@@ -844,11 +844,19 @@ namespace SysUt14Gr03.Classes
                 TableCell tcBID = new TableCell();
                 TableCell tcPID = new TableCell();
                 TableCell tcDato = new TableCell();
-                
+
+                Prosjekt prosjekt = new Prosjekt();
+                using(var context = new Context())
+                {
+                    prosjekt = context.Prosjekter
+                                .Where(p => p.Prosjekt_id == logg.Prosjekt_id)
+                                .FirstOrDefault();
+                }
+
                 tcLID.Text = logg.Logg_id.ToString();
                 tcHendelse.Text = logg.Hendelse.ToString();
                 tcBID.Text = String.Format("<a href='VisbrukerAdmin?Bruker_id={0}'>{1}</a>", logg.bruker_id, logg.Bruker.Brukernavn.ToString());
-                tcPID.Text = logg.Prosjekt_id.ToString();
+                tcPID.Text = String.Format("<a href='VisProsjektAdmin?=Prosjekt_id={0}'>{1}</a>", logg.Prosjekt_id, prosjekt.Navn.ToString());
                 tcDato.Text = logg.Opprettet.ToString();
 
                 tr.Cells.Add(tcLID);

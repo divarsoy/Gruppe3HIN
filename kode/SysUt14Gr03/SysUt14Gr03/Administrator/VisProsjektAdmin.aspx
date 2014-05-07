@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Utvikler.Master" AutoEventWireup="true" CodeBehind="VisProsjekt.aspx.cs" Inherits="SysUt14Gr03.VisProsjekt" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Prosjektleder.master" AutoEventWireup="true" CodeBehind="VisProsjektAdmin.aspx.cs" Inherits="SysUt14Gr03.Administrator.VisProsjektAdmin" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div style="text-align:center">
         <h2>
@@ -11,3 +11,4 @@
         </h3>
     </div>
 </asp:Content>
+
