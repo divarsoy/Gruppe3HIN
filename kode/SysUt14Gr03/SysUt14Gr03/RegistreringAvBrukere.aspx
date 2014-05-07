@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Prosjektleder.master" AutoEventWireup="true" CodeBehind="RegistreringAvBrukere.aspx.cs" Inherits="SysUt14Gr03.RegistreringAvBrukere" %>
 
-<asp:Content ID="Content1" class="form-horizontal" role="form" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="Content1" class="form-horizontal" role="form" ViewStateMode="Enabled" ContentPlaceHolderID="MainContent" runat="server">
 
     <div class="container">
 
@@ -9,7 +9,7 @@
             <div class="form-group">
                 <label for="ddlRettighet" class="col-sm-1 control-label">Rettighet</label>
                 <div class="col-sm-4">
-                    <asp:DropDownList ID="ddlRettighet" runat="server" CssClass="form-control">
+                    <asp:DropDownList ID="ddlRettighet" runat="server" AutoPostBack="true" CssClass="form-control">
                         <asp:ListItem Text="Velg Rettighet" Value="0"></asp:ListItem>
                     </asp:DropDownList>
                 </div>
@@ -38,13 +38,12 @@
                 <label for="inputEpost" class="col-sm-1 control-label">Epost</label>
                     <div class="col-sm-4">
                         <asp:TextBox ID="tb_reg_epost" placeholder="Tast inn brukers e-post!" runat="server" CssClass="form-control"></asp:TextBox>
-                    </div>
-            </div>
+                    </div>                   
             <div class="clearfix"></div>
                 
             <div class="form-group">
                 <div class="col-sm-offset-1 col-sm-4">
-                    <p><asp:Button ID="bt_adm_reg" CssClass="btn btn-primary" runat="server"  Text="Registrer Bruker" OnClick="bt_adm_reg_Click" /></p>
+                    <p><asp:Button ID="bt_adm_reg" CssClass="btn btn-primary" runat="server" Text="Registrer Bruker" OnClick="bt_adm_reg_Click" /></p>
                 </div>
             </div>
             <div class="clearfix"></div>

@@ -173,7 +173,7 @@ namespace SysUt14Gr03
                     Prosjekt prosjekt = context.Prosjekter.Where(p => p.Prosjekt_id == prosjekt_id).First();
                     HyperLink prosjektLink = e.Row.FindControl("pLink") as HyperLink;
                     prosjektLink.Text = prosjekt.Navn;
-                    prosjektLink.NavigateUrl = "visProsjekt?Prosjekt_id=" + prosjekt_id;
+                    prosjektLink.NavigateUrl = "~/visProsjekt?Prosjekt_id=" + prosjekt_id;
                     HyperLink link = e.Row.FindControl("asp") as HyperLink;
                     link.NavigateUrl = "AdministrasjonAvTeamBrukere?Team_id=" + team_id;
                     HyperLink linkFase = e.Row.FindControl("hlFase") as HyperLink;
