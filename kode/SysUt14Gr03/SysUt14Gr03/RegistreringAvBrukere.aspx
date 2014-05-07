@@ -2,8 +2,7 @@
 
 <asp:Content ID="Content1" class="form-horizontal" role="form" ViewStateMode="Enabled" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div class="container">
-
+<div class="container">
     <h1>Opprett ny bruker</h1>
         <br />
             <div class="form-group">
@@ -48,6 +47,7 @@
             </div>
             <div class="clearfix"></div>
     </div>
+</div>
         
 </asp:Content>
 
