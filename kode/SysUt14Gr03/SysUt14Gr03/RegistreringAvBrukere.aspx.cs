@@ -125,7 +125,16 @@ namespace SysUt14Gr03
                 db.BrukerPreferanser.Add(nybrukerPreferanse);
                 db.SaveChanges();
 
-                String hendelse = "Bruker med navn " + fornavn + " " + etternavn + "ble opprettet";
+                //Oppretter logg i database STH PGGS
+                string hendelse = "Bruker " + fornavn + " " + etternavn + " har blitt opprettet av Prosjektleder";
+                int idBruker = Queries.GetBrukerVedEpost(epost).Bruker_id;
+                OppretteLogg.opprettLoggForBruker(hendelse, DateTime.Now, (int)Session["bruker_id"]);
+                OppretteLogg.opprettLoggForBruker(hendelse, DateTime.Now, idBruker);
+                //AktiverKonto.SetBrukerFelter(fornavn, etternavn, epost);
+                //     slettSession();
+                EpostFullforReg(); 
+
+                hendelse = "Bruker med navn " + fornavn + " " + etternavn + "ble opprettet";
                 OppretteLogg.opprettLoggForBruker(hendelse, DateTime.Now, (int)Session["bruker_id"]);
 
                 Session["flashMelding"] = "Ny bruker har blitt registrert";
@@ -197,14 +206,7 @@ namespace SysUt14Gr03
 
             if (Session["flashMelding"].ToString() == string.Empty){
                 opprettBruker(etternavn, fornavn, epost, rettighet_id);
-                //Oppretter logg i database STH PGGS
-                string hendelse = "Bruker " + fornavn + " " + etternavn + " har blitt opprettet av Prosjektleder";
-                int idBruker = Queries.GetBrukerVedEpost(epost).Bruker_id;
-                OppretteLogg.opprettLoggForBruker(hendelse, DateTime.Now, (int)Session["bruker_id"]);
-                OppretteLogg.opprettLoggForBruker(hendelse, DateTime.Now, idBruker);
-                //AktiverKonto.SetBrukerFelter(fornavn, etternavn, epost);
-           //     slettSession();
-                EpostFullforReg();          
+         
             }
 
             else
