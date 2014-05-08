@@ -31,6 +31,15 @@ namespace SysUt14Gr03 {
         protected global::System.Web.UI.WebControls.TextBox txtEtternavn;
         
         /// <summary>
+        /// txtEpost control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtEpost;
+        
+        /// <summary>
         /// txtBrukernavn control.
         /// </summary>
         /// <remarks>
@@ -92,6 +101,15 @@ namespace SysUt14Gr03 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox chkShepherd;
+        
+        /// <summary>
+        /// Label1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
         /// cblElementer control.

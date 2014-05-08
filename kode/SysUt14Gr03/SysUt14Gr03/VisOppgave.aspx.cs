@@ -265,7 +265,7 @@ namespace SysUt14Gr03
 
         protected void btnTimer_Click(object sender, EventArgs e)
         {
-            Response.Redirect("ManuellTimeregistrering.aspx?oppgave_id=" + oppgave_id, true);
+            Response.Redirect("Timeregistrering.aspx?oppgave_id=" + oppgave_id, true);
         }
 
         protected void btnFullfor_Click(object sender, EventArgs e)
