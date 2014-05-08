@@ -27,7 +27,7 @@
                     <asp:Label ID="lbStart" runat="server" Text='<%#Bind("Startdato", "{0:dd/MM/yyyy}") %>'></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
-                    <asp:TextBox ID="tbStart" TextMode="Date" runat="server"  Text='<%#Bind("Startdato", "{0:dd/MM/yyyy}") %>'></asp:TextBox>
+                    <asp:TextBox ID="tbStart" TextMode="Date" runat="server"  Text='<%#Bind("Startdato", "{0:yyyy-MM-dd}") %>'></asp:TextBox>
                 </EditItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Sluttdato">
@@ -35,7 +35,7 @@
                     <asp:Label ID="lbSlutt" runat="server" Text='<%#Bind("Sluttdato" , "{0:dd/MM/yyyy}") %>'></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
-                    <asp:TextBox ID="tbSlutt" TextMode="Date" runat="server"  Text='<%#Bind("Sluttdato", "{0:dd/MM/yyyy}") %>'></asp:TextBox>
+                    <asp:TextBox ID="tbSlutt" TextMode="Date" runat="server"  Text='<%#Bind("Sluttdato", "{0:yyyy-MM-dd}") %>'></asp:TextBox>
                 </EditItemTemplate>
             </asp:TemplateField>           
               <asp:TemplateField HeaderText="Team">
