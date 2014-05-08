@@ -38,7 +38,8 @@ namespace SysUt14Gr03
                     {
 
                         DateTime dato = DateTime.Now;
-                        txtDato.Text = dato.ToShortDateString();
+                        txtDato.Text = dato.ToString("yyyy-MM-dd");
+                        txtStart.Text = dato.ToShortTimeString();
 
                     }
 

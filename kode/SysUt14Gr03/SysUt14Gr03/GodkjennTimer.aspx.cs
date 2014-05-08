@@ -57,6 +57,9 @@ namespace SysUt14Gr03
                         + " | varighet: " + ((int)t.Tid.TotalHours) + "t " + t.Tid.Minutes + "m");
                 }
 
+                lblInfo.Text = "Ingen elementer";
+                lblInfo.Visible = true;
+
                 if (!IsPostBack)
                 {
                     BindingSource bindingsource = new BindingSource();
