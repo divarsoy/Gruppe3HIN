@@ -30,6 +30,7 @@
                 <ul class="dropdown-menu">
                     <li> <a runat="server" href="~/OversiktOppgaver?mine=true">Oversikt Mine Oppgaver</a></li>
                     <li> <a runat="server" href="~/OversiktOppgaver">Oversikt Alle Oppgaver</a></li>
+                    <li> <a runat="server" href="~/AdministrasjonAvOppgave">Administrer Oppgaver i prosjekt</a></li>
                 </ul> 
     </ul>
 
@@ -46,6 +47,7 @@
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">TimeRegistrering <b class="caret"></b></a>
                 <ul class="dropdown-menu">
+                    <li> <a runat="server" href="~/Prosjektleder/InnsynIRegistrerteTimerSomProsjektleder">Alle Registrerte Timer I et Prosjekt</a></li>
                     <li> <a runat="server" href="~/Utvikler/InnsynIEgneRegistrerteTimerSomBruker">Dine Registrerte Timer</a></li>
                     <li> <a runat="server" href="~/Timeregistrering">Timeregistrering for valgt prosjekt</a></li>
                     <li> <a runat="server" href="~/GodkjennTimer">Godkjenn brukers registrerte timer</a></li>

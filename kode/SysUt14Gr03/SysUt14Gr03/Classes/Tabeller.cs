@@ -25,6 +25,7 @@ namespace SysUt14Gr03.Classes
             TableHeaderCell remainingTimeHeaderCell = new TableHeaderCell();
             TableHeaderCell brukerHeaderCell = new TableHeaderCell();
             TableHeaderCell kommentarerHeaderCell = new TableHeaderCell();
+            TableHeaderCell redigerHeaderCell = new TableHeaderCell();
             TableHeaderCell sumHeaderCell = new TableHeaderCell();
 
 
@@ -36,6 +37,7 @@ namespace SysUt14Gr03.Classes
             remainingTimeHeaderCell.Text = "Gjenstående tid";
             brukerHeaderCell.Text = "Brukere";
             kommentarerHeaderCell.Text = "Kommentarer";
+            redigerHeaderCell.Text = "Rediger";
 
             headerRow.Cells.Add(idHeaderCell);
             headerRow.Cells.Add(tittelHeaderCell);
@@ -45,6 +47,7 @@ namespace SysUt14Gr03.Classes
             headerRow.Cells.Add(remainingTimeHeaderCell);
             headerRow.Cells.Add(brukerHeaderCell);
             headerRow.Cells.Add(kommentarerHeaderCell);
+            headerRow.Cells.Add(redigerHeaderCell);
             tabell.Rows.Add(headerRow);
 
             foreach (Oppgave oppgave in query)
@@ -63,21 +66,21 @@ namespace SysUt14Gr03.Classes
                 TableCell remainingCell = new TableCell();
                 TableCell brukerCell = new TableCell();
                 TableCell kommentarCell = new TableCell();
+                TableCell redigerCell = new TableCell();
 
-                string oppgaveLink;
                 HttpContext http = HttpContext.Current;
                 if (SessionSjekk.IsFaseleder() || Validator.SjekkRettighet(Validator.KonverterTilTall(http.Session["bruker_id"].ToString()), Konstanter.rettighet.Prosjektleder))
                 {
-                    oppgaveLink = idCell.ResolveUrl("~/AdministrasjonAvOppgave?oppgave_id=" + oppgave.Oppgave_id.ToString());
-                    idCell.Text = string.Format("<a href='{0}'>{1}</a>", oppgaveLink, oppgave.RefOppgaveId.ToString());
+                    string oppgaveLink = redigerCell.ResolveUrl("~/AdministrasjonAvOppgave?oppgave_id=" + oppgave.Oppgave_id.ToString());
+                    redigerCell.Text = string.Format("<a href='{0}'>{1}</a>", oppgaveLink, "Rediger oppgave");
                 }
                 else
                 {
-                    oppgaveLink = idCell.ResolveUrl("~/VisOppgave?oppgave_id=" + oppgave.Oppgave_id.ToString());
-                    idCell.Text = string.Format("<a href='{0}'>{1}</a>", oppgaveLink, oppgave.RefOppgaveId.ToString());
+                    redigerHeaderCell.Visible = false;
+                    redigerCell.Visible = false;
                 }
                 string linkOppgave = idCell.ResolveUrl("~/VisOppgave?oppgave_id=" + oppgave.Oppgave_id.ToString());
-                
+                idCell.Text = string.Format("<a href='{0}'>{1}</a>", linkOppgave, oppgave.RefOppgaveId.ToString());
                 tittelCell.Text = string.Format("<a href='{0}'>{1}</a>", linkOppgave, oppgave.Tittel.ToString());
                 statusCell.Text = Queries.GetStatus(oppgave.Status_id).Navn;
                 estimatCell.Text = oppgave.Estimat.ToString();
@@ -85,6 +88,7 @@ namespace SysUt14Gr03.Classes
                 remainingCell.Text = oppgave.RemainingTime.ToString();
                 brukerCell.Text = brukereIOppgave.ToString();
                 kommentarCell.Text = oppgave.Kommentarer.Count.ToString();
+
           
 
                 tRow.Cells.Add(idCell);
@@ -95,6 +99,7 @@ namespace SysUt14Gr03.Classes
                 tRow.Cells.Add(remainingCell);
                 tRow.Cells.Add(brukerCell);
                 tRow.Cells.Add(kommentarCell);
+                tRow.Cells.Add(redigerCell);
 
                 tabell.Rows.Add(tRow);
             }

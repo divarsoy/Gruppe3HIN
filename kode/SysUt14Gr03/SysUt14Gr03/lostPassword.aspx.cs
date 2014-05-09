@@ -24,6 +24,12 @@ namespace SysUt14Gr03
         private string brukernavn;
         private bool updated;
 
+        protected void Page_PreInit(Object sener, EventArgs e)
+        {
+            string master = SessionSjekk.findMaster();
+            this.MasterPageFile = master;
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             updated = false;

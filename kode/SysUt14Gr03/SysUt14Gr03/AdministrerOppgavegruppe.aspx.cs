@@ -14,6 +14,12 @@ namespace SysUt14Gr03
         private int prosjekt_id = 1;
         private List<Oppgave> oppgaveListe;
 
+        protected void Page_PreInit(Object sener, EventArgs e)
+        {
+            string master = SessionSjekk.findMaster();
+            this.MasterPageFile = master;
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             oppgaveListe = Queries.GetAlleAktiveOppgaverForProsjekt(prosjekt_id);

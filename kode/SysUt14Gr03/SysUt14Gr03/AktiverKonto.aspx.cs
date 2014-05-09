@@ -31,6 +31,20 @@ namespace SysUt14Gr03
         private int bruker_id;
         private bool check = true;
 
+        protected void Page_PreInit(Object sener, EventArgs e)
+        {
+            if ((!string.IsNullOrEmpty(Request.QueryString["Epost"])) & (!string.IsNullOrEmpty(Request.QueryString["Token"])))
+            {
+                Session["flashMelding"] = "<h2 align=center> Fyll ut resterende felt for å aktivere kontoen din</h2>";
+                Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger;
+            }
+            else
+            {
+                Session["flashMelding"] = "<h2 align=center>Det skjedde noe galt, Kontoen din ble ikke aktivert!</h2>";
+                Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger;
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -60,14 +74,10 @@ namespace SysUt14Gr03
                         Firstname.Text = bruk.Fornavn;
                         Aftername.Text = bruk.Etternavn;
                     }
-                    Session["flashMelding"] = "<h2 align=center> Fyll ut resterende felt for å aktivere kontoen din</h2>";
-                    Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger;
                 }
                 else
                 {
                     disable();
-                    Session["flashMelding"] = "<h2 align=center>Det skjedde noe galt, Kontoen din ble ikke aktivert!</h2>";
-                    Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger;
                     //Response.Write("<h2 align=center>Det skjedde noe galt, Kontoen din ble ikke aktivert!</h2>");
                 }
             }

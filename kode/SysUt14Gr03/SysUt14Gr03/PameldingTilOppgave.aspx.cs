@@ -17,6 +17,12 @@ namespace SysUt14Gr03
         private List<Bruker> brukerListe;
         private int bruker_id;
 
+        protected void Page_PreInit(Object sener, EventArgs e)
+        {
+            string master = SessionSjekk.findMaster();
+            this.MasterPageFile = master;
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["loggedIn"] == null)

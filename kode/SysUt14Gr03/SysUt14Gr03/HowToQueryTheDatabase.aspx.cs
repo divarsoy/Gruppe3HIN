@@ -15,6 +15,12 @@ namespace SysUt14Gr03
         public string fornavn;
         public List<Bruker> brukerListe;
 
+        protected void Page_PreInit(Object sener, EventArgs e)
+        {
+            string master = SessionSjekk.findMaster();
+            this.MasterPageFile = master;
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             int bruker_id = 1;
