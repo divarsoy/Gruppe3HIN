@@ -20,6 +20,12 @@ namespace SysUt14Gr03
         private DropDownList ddlPrioritet;
         //private DropDownList ddlPrioritet;
 
+        protected void Page_PreInit(Object sener, EventArgs e)
+        {
+            string master = SessionSjekk.findMaster();
+            this.MasterPageFile = master;
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             

@@ -11,7 +11,11 @@ namespace SysUt14Gr03
 {
     public partial class OversiktBrukereSomAdministrator : System.Web.UI.Page
     {
-        private int brukerid;
+        protected void Page_PreInit(Object sener, EventArgs e)
+        {
+            string master = SessionSjekk.findMaster();
+            this.MasterPageFile = master;
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {

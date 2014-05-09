@@ -13,6 +13,15 @@ namespace SysUt14Gr03 {
     public partial class AdministrasjonAvOppgave {
         
         /// <summary>
+        /// ddlOppgaverIProsjekt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlOppgaverIProsjekt;
+        
+        /// <summary>
         /// tbID control.
         /// </summary>
         /// <remarks>

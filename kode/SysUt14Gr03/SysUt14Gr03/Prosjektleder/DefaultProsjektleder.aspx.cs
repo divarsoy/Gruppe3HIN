@@ -16,6 +16,12 @@ namespace SysUt14Gr03
         private int bruker_id;
         List<Prosjekt> listeMedProsjekter;
 
+        protected void Page_PreInit(Object sener, EventArgs e)
+        {
+            string master = SessionSjekk.findMaster();
+            this.MasterPageFile = master;
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
@@ -78,6 +84,12 @@ namespace SysUt14Gr03
                 Session["prosjekt_navn"] = prosjekt.Navn;
                 lblValgtProsjekt.Text = String.Format("Valgt prosjekt er <b>{0}</b>", prosjekt.Navn);
                 //Response.Redirect(String.Format("OversiktOppgaver?bruker_id={0}&prosjekt_id={1}", Session["bruker_id"], ListBoxProsjekt.SelectedItem.Value));
+            }
+            else
+            {
+                Session["flashMelding"] = "Vennligst velg et prosjekt";
+                Session["flashStatus"] = Konstanter.notifikasjonsTyper.info.ToString();
+                Response.Redirect(Request.RawUrl);
             }
         }
     }

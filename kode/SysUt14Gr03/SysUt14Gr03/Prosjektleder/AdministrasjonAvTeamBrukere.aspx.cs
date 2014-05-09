@@ -15,7 +15,12 @@ namespace SysUt14Gr03
         static List<Bruker> team_brukerListe;
         static List<Bruker> brukerListe;
         static Team tempTeam;
-        
+
+        protected void Page_PreInit(Object sener, EventArgs e)
+        {
+            string master = SessionSjekk.findMaster();
+            this.MasterPageFile = master;
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {

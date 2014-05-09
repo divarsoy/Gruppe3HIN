@@ -324,6 +324,17 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        static public List<Bruker> GetBrukereForOppgave(int oppgave_id)
+        {
+            using (var context = new Context())
+            {
+                var brukerListe = context.Brukere
+                                       .Where(bruker => bruker.Oppgaver.Any(oppgave => oppgave.Oppgave_id == oppgave_id))
+                                       .ToList();
+                return brukerListe;
+            }
+        }
+
         static public Oppgave GetOppgave(int oppgave_id)
         {
             using (var context = new Context())
@@ -341,14 +352,19 @@ namespace SysUt14Gr03.Classes
             }
         }
 
-        static public List<Bruker> GetBrukereForOppgave(int oppgave_id)
+        static public List<Oppgave> GetOppgaveIProsjekt(int prosjekt_id)
         {
             using (var context = new Context())
             {
-                var brukerListe = context.Brukere
-                                       .Where(bruker => bruker.Oppgaver.Any(oppgave => oppgave.Oppgave_id == oppgave_id))
-                                       .ToList();
-                return brukerListe;
+                var oppgaver = context.Oppgaver
+                                  .Include("Brukere")
+                                  .Include("Prioritering")
+                                  .Include("Status")
+                                  .Include("Prosjekt")
+                                  .Include("Timer")
+                                  .Where(o => o.Prosjekt_id == prosjekt_id)
+                                  .ToList<Oppgave>();
+                return oppgaver;
             }
         }
 
