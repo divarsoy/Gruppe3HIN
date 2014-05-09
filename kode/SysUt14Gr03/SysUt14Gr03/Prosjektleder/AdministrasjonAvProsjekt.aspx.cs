@@ -17,14 +17,31 @@ namespace SysUt14Gr03
         private List<Team> teamListe = null;
         private List<Bruker> prosjektLeder;
         private int bruker_id;
+        private int prosjekt_id;
+        private Rettighet rettighet;
+
+        protected void Page_PreInit(Object sener, EventArgs e)
+        {
+            string master = SessionSjekk.findMaster();
+            this.MasterPageFile = master;
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
+            SessionSjekk.sjekkForBruker_id();
             bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
-            if (!IsPostBack)
+            rettighet = Queries.GetRettighet(bruker_id);
+            if (rettighet.Rettighet_id == 3)
             {
-                visProsjekt();
+                prosjekt_id = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
+
+            }
+            if (Validator.SjekkRettighet(Validator.KonverterTilTall(Session["bruker_id"].ToString()), Konstanter.rettighet.Prosjektleder) || SessionSjekk.IsFaseleder())
+            {
+                if (!IsPostBack)
+                {
+                    visProsjekt();
+                }
             }
         }
 
@@ -33,7 +50,13 @@ namespace SysUt14Gr03
             using (var context = new Context())
             {
                 System.Windows.Forms.BindingSource bindingSource1 = new System.Windows.Forms.BindingSource();
-                bindingSource1.DataSource = context.Prosjekter.Where(P => P.Aktiv == true).Where(p => p.Bruker_id == bruker_id).ToList<Prosjekt>();
+                if (rettighet.Rettighet_id == 3)
+                {
+                    bindingSource1.DataSource = context.Prosjekter.Where(P => P.Aktiv == true).Where(p => p.Prosjekt_id == prosjekt_id).ToList<Prosjekt>();
+                    gridViewProsjekt.Columns[8].Visible = false;
+                }
+                else if (rettighet.Rettighet_id == 2)
+                    bindingSource1.DataSource = context.Prosjekter.Where(P => P.Aktiv == true).Where(p => p.Bruker_id == bruker_id).ToList<Prosjekt>();
                 gridViewProsjekt.DataSource = bindingSource1;
                 gridViewProsjekt.DataBind();
 

@@ -14,12 +14,16 @@ namespace SysUt14Gr03
         private List<Bruker> brukerListe;
         List<Bruker> selectedBrukers;
         private string teamNavn;
+        private List<Prosjekt> prosjekter;
+        private Prosjekt prosjekt;
+        private Team team;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
 
             brukerListe = Queries.GetAlleAktiveBrukere();
+            prosjekter = Queries.GetAlleAktiveProsjekter();
 
             if (cblBrukere.Items.Count == 0)
             {
@@ -29,6 +33,8 @@ namespace SysUt14Gr03
                     cblBrukere.Items.Add(bruker.Etternavn + ", " + bruker.Fornavn);
                 }
             }
+            for(int i = 0; i < prosjekter.Count; i++)
+                ddlProsjekt.Items.Add(new ListItem(prosjekter[i].Navn, prosjekter[i].Prosjekt_id.ToString()));
         }
 
         protected void btnOK_Click(object sender, EventArgs e)
@@ -66,27 +72,34 @@ namespace SysUt14Gr03
                 {
                     Session["flashMelding"] = "Team opprettet!";
                     Session["flashStatus"] = Konstanter.notifikasjonsTyper.success.ToString();
+                    int prosjektID = Convert.ToInt32(ddlProsjekt.SelectedValue);
+                    prosjekt = context.Prosjekter.Where(p => p.Prosjekt_id == prosjektID).FirstOrDefault();
+                    List<Prosjekt> prosjektList = new List<Prosjekt>();
+                    prosjektList.Add(prosjekt);
                     // Legger teamet inn i databasen:
-                    
-                        var nyttTeam = new Team
-                        {
-                            Navn = teamNavn,
-                            Aktiv = true,
-                            Opprettet = DateTime.Now,
-                            Brukere = selectedBrukers
-                        };
+                    var nyttTeam = new Team
+                    {
+                        Navn = teamNavn,
+                        Aktiv = true,
+                        Opprettet = DateTime.Now,
+                        Brukere = selectedBrukers,
+                        Prosjekter = prosjektList
+                    };
 
-                        context.Teams.Add(nyttTeam);
-                        context.SaveChanges();
-                        //Oppretter log for hendelsen
-                        OppretteLogg.opprettLoggForBruker("Team " + teamNavn + " ble opprettet.", DateTime.Now, (int)Session["bruker_id"]);
-                        Varsel.SendVarsel(selectedBrukers, Varsel.TEAMVARSEL, Varsel.VARSELTITTEL[Varsel.TEAMVARSEL], Varsel.VARSELTEKST[Varsel.TEAMVARSEL] + ": " + teamNavn, 2);
+                    context.Teams.Add(nyttTeam);
+                    context.SaveChanges();
                     
+                    //Oppretter log for hendelsen
+                    OppretteLogg.opprettLoggForBruker("Team " + teamNavn + " ble opprettet.", DateTime.Now, (int)Session["bruker_id"]);
+                    Varsel.SendVarsel(selectedBrukers, Varsel.TEAMVARSEL, Varsel.VARSELTITTEL[Varsel.TEAMVARSEL], Varsel.VARSELTEKST[Varsel.TEAMVARSEL] + ": " + teamNavn, 2);
+
+                    Response.Redirect("OverSiktOverAlleTeam.aspx", true);  
                 }
                 else
                 {
-                    Session["flashMelding"] = "Ingen brukere valgt";
+                    Session["flashMelding"] = "Ingen brukere valgt eller navn ikke angitt";
                     Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
+                    this.failed();
                 }
             }
         }
@@ -95,6 +108,15 @@ namespace SysUt14Gr03
         {
             // Popup spør om bekreftelse
             // Går tilbake til forrige side
+            this.failed();
+        }
+        private void failed()
+        {
+            for (int i = 0; i < cblBrukere.Items.Count; i++)
+            {
+                cblBrukere.Items[i].Selected = false;
+            }
+            Response.Redirect(Request.RawUrl);
         }
     }
 }

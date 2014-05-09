@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Site.Faseleder.master.cs" Inherits="SysUt14Gr03.Site_Utvikler" %>
+﻿<%@ Master Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Site.Faseleder.master.cs" Inherits="SysUt14Gr03.Site_Faseleder" %>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="LogoTemplate" runat="server">
     <asp:ContentPlaceHolder ID="LogoTemplate" runat="server"></asp:ContentPlaceHolder>
@@ -13,6 +13,7 @@
                 <ul class="dropdown-menu">
                     <li> <a runat="server" href="~/visProsjekt">Vis Prosjekt</a></li>
                     <li> <a runat="server" href="~/Prosjektleder/AdministrasjonAvFase">Administrasjon av Fase</a></li>
+                    <li> <a runat="server" href="~/Prosjektleder/AdministrasjonAvProsjekt">Administrasjon av Prosjekt</a></li>
                 </ul> 
     </ul>
     <ul class="nav navbar-nav">

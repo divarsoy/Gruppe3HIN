@@ -64,11 +64,21 @@ namespace SysUt14Gr03.Classes
                 TableCell brukerCell = new TableCell();
                 TableCell kommentarCell = new TableCell();
 
-                                
-                string oppgaveLink = idCell.ResolveUrl("~/VisOppgave?oppgave_id=" + oppgave.Oppgave_id.ToString());
-
-                idCell.Text = string.Format("<a href='{0}'>{1}</a>", oppgaveLink, oppgave.RefOppgaveId.ToString());
-                tittelCell.Text = string.Format("<a href='{0}'>{1}</a>", oppgaveLink, oppgave.Tittel.ToString());
+                string oppgaveLink;
+                HttpContext http = HttpContext.Current;
+                if (SessionSjekk.IsFaseleder() || Validator.SjekkRettighet(Validator.KonverterTilTall(http.Session["bruker_id"].ToString()), Konstanter.rettighet.Prosjektleder))
+                {
+                    oppgaveLink = idCell.ResolveUrl("~/AdministrasjonAvOppgave?oppgave_id=" + oppgave.Oppgave_id.ToString());
+                    idCell.Text = string.Format("<a href='{0}'>{1}</a>", oppgaveLink, oppgave.RefOppgaveId.ToString());
+                }
+                else
+                {
+                    oppgaveLink = idCell.ResolveUrl("~/VisOppgave?oppgave_id=" + oppgave.Oppgave_id.ToString());
+                    idCell.Text = string.Format("<a href='{0}'>{1}</a>", oppgaveLink, oppgave.RefOppgaveId.ToString());
+                }
+                string linkOppgave = idCell.ResolveUrl("~/VisOppgave?oppgave_id=" + oppgave.Oppgave_id.ToString());
+                
+                tittelCell.Text = string.Format("<a href='{0}'>{1}</a>", linkOppgave, oppgave.Tittel.ToString());
                 statusCell.Text = Queries.GetStatus(oppgave.Status_id).Navn;
                 estimatCell.Text = oppgave.Estimat.ToString();
                 bruktTidCell.Text = oppgave.BruktTid.ToString();
@@ -297,7 +307,6 @@ namespace SysUt14Gr03.Classes
             TableHeaderCell IMHeaderCell = new TableHeaderCell();
             TableHeaderCell teamHeaderCell = new TableHeaderCell();
             TableHeaderCell prosjektHeaderCell = new TableHeaderCell();
-            TableHeaderCell endreBrukerCell = new TableHeaderCell();
             TableHeaderCell rolleCell = new TableHeaderCell();
 
             forNavnHeaderCell.Text = "Fornavn";
@@ -308,7 +317,6 @@ namespace SysUt14Gr03.Classes
             teamHeaderCell.Text = " Team";
             prosjektHeaderCell.Text = " Prosjekter";
             rolleCell.Text = "Rolle";
-            endreBrukerCell.Text = "Rediger Bruker";
            
             headerRow.Cells.Add(forNavnHeaderCell);
             headerRow.Cells.Add(etterNavnHeaderCell);
@@ -318,7 +326,6 @@ namespace SysUt14Gr03.Classes
             headerRow.Cells.Add(teamHeaderCell);
             headerRow.Cells.Add(prosjektHeaderCell);
             headerRow.Cells.Add(rolleCell);
-            headerRow.Cells.Add(endreBrukerCell);
             tabell.Rows.Add(headerRow);
 
             foreach (Bruker bruker in query)
@@ -332,7 +339,6 @@ namespace SysUt14Gr03.Classes
                 TableCell teamsCell = new TableCell();
                 TableCell prosjekterCell = new TableCell();
                 TableCell rolleCelle = new TableCell();
-                TableCell endreCell = new TableCell();
 
                 foreach (Team team in queryTeam)
                 {
@@ -360,7 +366,6 @@ namespace SysUt14Gr03.Classes
                 brukerNavnCell.Text = String.Format("<a href='visBruker?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Brukernavn);
                 epostCell.Text = String.Format(bruker.Epost);
                 IMCell.Text = String.Format(bruker.IM);
-                endreCell.Text = String.Format("<a href='EndreBruker?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), "Rediger Bruker");
                     
                 tRow.Cells.Add(forNavnCell);
                 tRow.Cells.Add(etterNavnCell);
@@ -370,7 +375,6 @@ namespace SysUt14Gr03.Classes
                 tRow.Cells.Add(teamsCell);
                 tRow.Cells.Add(prosjekterCell);
                 tRow.Cells.Add(rolleCelle);
-                tRow.Cells.Add(endreCell);
                 tabell.Rows.Add(tRow);
                 
             }
@@ -845,22 +849,16 @@ namespace SysUt14Gr03.Classes
                 TableCell tcPID = new TableCell();
                 TableCell tcDato = new TableCell();
 
-                Prosjekt prosjekt = new Prosjekt();
-                if (logg.Prosjekt_id != null)
-                {
-                    using (var context = new Context())
-                    {
-                        prosjekt = context.Prosjekter
-                                    .Where(p => p.Prosjekt_id == logg.Prosjekt_id)
-                                    .FirstOrDefault();
-                    }
-                }
-
+                string brukerLink = tcBID.ResolveUrl("~/VisBruker?bruker_id=" + logg.bruker_id.ToString());
                 tcLID.Text = logg.Logg_id.ToString();
                 tcHendelse.Text = logg.Hendelse.ToString();
-                tcBID.Text = String.Format("<a href='VisbrukerAdmin?Bruker_id={0}'>{1}</a>", logg.bruker_id, logg.Bruker.Brukernavn.ToString());
+                tcBID.Text = String.Format("<a href='{0}'>{1}</a>", brukerLink, logg.Bruker.Brukernavn.ToString());
                 if (logg.Prosjekt_id != null)
-                    tcPID.Text = String.Format("<a href='VisProsjektAdmin?=Prosjekt_id={0}'>{1}</a>", logg.Prosjekt_id, prosjekt.Navn.ToString());
+                {
+                    Prosjekt prosjekt = Queries.GetProsjekt((int)logg.Prosjekt_id);
+                    string prosjektLink = tcPID.ResolveUrl("~/VisProsjekt?prosjekt_id=" + prosjekt.Prosjekt_id.ToString());
+                    tcPID.Text = String.Format("<a href='{0}'>{1}</a>", prosjektLink, prosjekt.Navn.ToString());
+                }
                 tcDato.Text = logg.Opprettet.ToString();
 
                 tr.Cells.Add(tcLID);
