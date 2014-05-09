@@ -7,6 +7,7 @@
     <h1>
         <asp:Label ID="lblTittel" runat="server"></asp:Label>
     </h1>
+    <asp:Label ID="lblInfo" runat="server" Visible="false"></asp:Label>
 
     <asp:GridView CssClass="table table-striped" RowStyle-HorizontalAlign="Center" ID="gvwTimer" runat="server" AutoGenerateColumns="False" OnRowDataBound="gvwTimer_RowDataBound" OnRowCommand="gvwTimer_RowCommand">
       
@@ -22,7 +23,7 @@
             </asp:TemplateField>
             <asp:TemplateField  HeaderText="Godkjenn">
                 <ItemTemplate>
-                    <asp:Button ID="btnGodkjenn" runat="server" Text="Godkjenn" CssClass="btn btn-success"
+                    <asp:Button ID="btnGodkjenn" runat="server" Text="Godkjenn" CssClass="btn btn-success" OnClientClick="return confirm('Godkjenne denne registreringen?')"
                         CommandName="Godkjenn" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"/>
                 </ItemTemplate>
                

@@ -339,5 +339,11 @@ namespace SysUt14Gr03
             Session["pause_id"] = null;
             Response.Redirect("Utvikler/InnsynIEgneRegistrerteTimerSomBruker.aspx", true);
         }
+
+        protected void btnManuell_Click(object sender, EventArgs e)
+        {
+
+            Response.Redirect("ManuellTimeregistrering.aspx?oppgave_id=" + ddlOppgaver.SelectedValue, true);
+        }
     }
 }

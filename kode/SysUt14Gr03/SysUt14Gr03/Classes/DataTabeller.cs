@@ -33,6 +33,7 @@ namespace SysUt14Gr03.Classes
         public static DataTable SprintBacklogFase(Fase fase)
         {
             DataTable dt = new DataTable();
+            dt.Columns.Add(new DataColumn("ProsjektNavn", typeof(System.String)));
             dt.Columns.Add(new DataColumn("Fase", typeof(System.String)));
             dt.Columns.Add(new DataColumn("Oppgave-ID", typeof(System.String)));
             dt.Columns.Add(new DataColumn("Oppgave", typeof(System.String)));
@@ -51,6 +52,7 @@ namespace SysUt14Gr03.Classes
             foreach (Oppgave o in fase.Oppgaver)
             {
                 DataRow row = dt.NewRow();
+                row["Prosjektnavn"] = o.Prosjekt.Navn;
                 row["fase"] = fase.Navn;
                 row["Oppgave-ID"] = o.RefOppgaveId;
                 row["Oppgave"] = o.Tittel;
@@ -79,6 +81,7 @@ namespace SysUt14Gr03.Classes
         public static DataTable ProductBacklogProsjekt(Prosjekt prosjekt)
         {
             DataTable dt = new DataTable();
+            dt.Columns.Add(new DataColumn("Prosjektnavn", typeof(System.String)));
             dt.Columns.Add(new DataColumn("Oppgave-Id", typeof(System.String)));
             dt.Columns.Add(new DataColumn("Oppgavenavn", typeof(System.String)));
             dt.Columns.Add(new DataColumn("Fase", typeof(System.String)));
@@ -87,6 +90,7 @@ namespace SysUt14Gr03.Classes
             foreach (Oppgave o in prosjekt.Oppgaver)
             {
                 DataRow row = dt.NewRow();
+                row["Prosjektnavn"] = o.Prosjekt.Navn;
                 row["Oppgave-Id"] = o.RefOppgaveId;
                 row["Oppgavenavn"] = o.Tittel;
                 row["Fase"] = o.Fase.Navn;

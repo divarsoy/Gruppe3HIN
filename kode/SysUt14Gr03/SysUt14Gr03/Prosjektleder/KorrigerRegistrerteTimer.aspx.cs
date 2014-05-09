@@ -49,7 +49,7 @@ namespace SysUt14Gr03.Prosjektleder
                         {
 
                             // skal byttes ut med kalender
-                            txtDato.Text = ((DateTime)time.Opprettet).ToString();
+                            txtDato.Text = ((DateTime)time.Opprettet).ToString("yyyy-MM-dd");
                             txtStart.Text = ((DateTime)time.Start).ToShortTimeString();
                             txtSlutt.Text = ((DateTime)time.Stopp).ToShortTimeString();
 
@@ -95,6 +95,7 @@ namespace SysUt14Gr03.Prosjektleder
                         Label3.Visible = true;
                         btnAddPause.Visible = true;
                         btnLagre.Visible = true;
+                        btnGodkjenn.Visible = true;
                         txtDato.Visible = true;
                         txtStart.Visible = true;
                         txtSlutt.Visible = true;
@@ -186,6 +187,20 @@ namespace SysUt14Gr03.Prosjektleder
         }
 
         protected void btnLagre_Click(object sender, EventArgs e)
+        {
+            CheckInput();
+            ViewState["godkjent"] = false;
+
+        }
+
+        private void VisFeilmelding(string melding)
+        {
+            lblFeilmelding.Text = melding;
+            lblFeilmelding.Visible = true;
+            lblFeilmelding.ForeColor = Color.Red;
+        }
+
+        private void CheckInput()
         {
             bool isConfirmNeeded = false;
             string confirmMessage = string.Empty;
@@ -298,14 +313,6 @@ namespace SysUt14Gr03.Prosjektleder
 
                 ClientScript.RegisterStartupScript(GetType(), "confirmScript", javaScript.ToString());
             }
-
-        }
-
-        private void VisFeilmelding(string melding)
-        {
-            lblFeilmelding.Text = melding;
-            lblFeilmelding.Visible = true;
-            lblFeilmelding.ForeColor = Color.Red;
         }
 
         private void Lagre()
@@ -318,6 +325,7 @@ namespace SysUt14Gr03.Prosjektleder
             
             using (var context = new Context())
             {
+                bool godkjent = Convert.ToBoolean(ViewState["godkjent"].ToString());
                 Time time = context.Timer.Where(t => t.Time_id == time_id).FirstOrDefault();
                 Oppgave oppgave = context.Oppgaver.Where(o => o.Oppgave_id == time.Oppgave_id).FirstOrDefault();
 
@@ -325,10 +333,17 @@ namespace SysUt14Gr03.Prosjektleder
                 time.Tid = bruktTid;
                 time.Start = startTid;
                 time.Stopp = sluttTid;
+                time.IsFerdig = godkjent;
 
                 context.SaveChanges();
             }
 
+        }
+
+        protected void btnGodkjenn_Click(object sender, EventArgs e)
+        {
+            ViewState["godkjent"] = true;
+            CheckInput();
         }
 
 	}

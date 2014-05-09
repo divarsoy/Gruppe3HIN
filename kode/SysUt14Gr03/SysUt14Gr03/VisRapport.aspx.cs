@@ -91,8 +91,10 @@ namespace SysUt14Gr03
 
         protected void btnTeam_Click(object sender, EventArgs e)
         {
+            lblRapportnavn.Visible = true;
             int prosjekt_id = Validator.KonverterTilTall(ddlProsjekter.SelectedValue);
             Team team = Queries.GetTeamByProsjekt(prosjekt_id);
+            lblRapportnavn.Text = "Rapport for team: " + team.Navn;
             Rapport rapport = new Rapport(Rapport.TEAMRAPPORT, team.Team_id);
             lblTest.Text = rapport.ToString();
             lblTest.Visible = true;
@@ -107,7 +109,8 @@ namespace SysUt14Gr03
             if (rettighet.Rettighet_id == 2) {
                 Rapport rapport = new Rapport(Rapport.PROSJEKTRAPPORT, Validator.KonverterTilTall(ddlProsjekter.SelectedValue));
                 lblTest.Text = rapport.ToString();
-
+                lblRapportnavn.Text = "Rapport for prosjekt: " + ddlProsjekter.SelectedItem.Text;
+                lblRapportnavn.Visible = true;
                 TimeSpan test1 = rapport.GetEstimatForProsjekt();
                 TimeSpan test2 = rapport.GetBruktTidPaProsjekt();
 
@@ -151,7 +154,10 @@ namespace SysUt14Gr03
             {
                 Rapport rapport = new Rapport(Rapport.INDIVIDRAPPORT, bruker_id);
                 lblTest.Text = rapport.VisProsjektRapportForBruker();
-
+                int prosjekt_id = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
+                string prosjektnavn = Queries.GetProsjekt(prosjekt_id).Navn;
+                lblRapportnavn.Text = "Rapport for prosjekt: " + prosjektnavn;
+                lblRapportnavn.Visible = true;
                 double[] yValues = {Convert.ToDouble(rapport.GetAntallFerdigeOppgaverForBruker()),
                                        Convert.ToDouble(rapport.GetAntallOppgaverForBruker() -  rapport.GetAntallFerdigeOppgaverForBruker())};
 
@@ -231,11 +237,16 @@ namespace SysUt14Gr03
             {
                 Rapport rapport = new Rapport(Rapport.INDIVIDRAPPORT, Validator.KonverterTilTall(ddlBrukere.SelectedValue));
                 lblTest.Text = rapport.ToString();
+                lblRapportnavn.Text = "Rapport for bruker: " + ddlBrukere.SelectedItem.Text;
+                lblRapportnavn.Visible = true;
             }
             else
             {
                 Rapport rapport = new Rapport(Rapport.INDIVIDRAPPORT, bruker_id);
                 lblTest.Text = rapport.ToString();
+                string brukernavn = Queries.GetBruker(bruker_id).ToString();
+                lblRapportnavn.Text = "Rapport for bruker: " + brukernavn;
+                lblRapportnavn.Visible = true;
             }
 
             lblTest.Visible = true;

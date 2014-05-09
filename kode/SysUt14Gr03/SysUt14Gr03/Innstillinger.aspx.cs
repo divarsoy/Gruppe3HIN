@@ -31,10 +31,21 @@ namespace SysUt14Gr03
             bruker = Queries.GetBruker(bruker_id);
             if (bruker != null)
             {
-                txtFornavn.Text = bruker.Fornavn;
-                txtEtternavn.Text = bruker.Etternavn;
-                txtBrukernavn.Text = bruker.Brukernavn;
-                txtIM.Text = bruker.IM;
+                if (!IsPostBack)
+                {
+                    txtFornavn.Text = bruker.Fornavn;
+                    txtEtternavn.Text = bruker.Etternavn;
+                    txtEpost.Text = bruker.Epost;
+                    txtBrukernavn.Text = bruker.Brukernavn;
+                    txtIM.Text = bruker.IM;
+                }
+                
+
+                if (Validator.SjekkRettighet(bruker_id, Konstanter.rettighet.Administrator)) {
+                    cblElementer.Visible = false;
+                    Label1.Visible = false;
+                }
+
                 if (cblElementer.Items.Count == 0)
                 {
                     cblElementer.Items.Add("lagt til i team");
@@ -68,34 +79,31 @@ namespace SysUt14Gr03
             // Lagrer innstillinger til databasen..
 
             if (txtFornavn.Text != string.Empty &&
+                txtEpost.Text != string.Empty &&
                 txtEtternavn.Text != string.Empty &&
                 txtBrukernavn.Text != string.Empty &&
                 txtIM.Text != string.Empty)
             {
-                Bruker brukerTestIM = Queries.GetBrukerVedIM(txtIM.Text);
-                if (true)
+
+                string nyBrukernavn = txtBrukernavn.Text.Trim();
+
+                // Han har ikke endret brukernavn, trenger ikke sjekke
+                if (bruker.Brukernavn.Equals(nyBrukernavn))
                 {
-                    using (var context = new Context())
-                    {
-                        Bruker _bruker = context.Brukere.Where(b => b.Bruker_id == bruker_id).FirstOrDefault();
-
-                        _bruker.Fornavn = txtFornavn.Text.Trim();
-                        _bruker.Etternavn = txtEtternavn.Text.Trim();
-                        _bruker.Brukernavn = txtBrukernavn.Text.Trim();
-                        _bruker.IM = txtIM.Text.Trim();
-
-                        lagrePreferanser();
-
-                        context.SaveChanges();
-                        Session["flashMelding"] = "Innstillinger lagret";
-                        Session["flashStatus"] = Konstanter.notifikasjonsTyper.success.ToString();
-
-                    }
+                    lagrePreferanser();
                 }
-                else
+                else 
                 {
-                    Session["flashMelding"] = "\"" + txtIM.Text + "\" brukes av en annen bruker";
-                    Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
+                    if (Queries.GetBrukerVedBrukernavn(nyBrukernavn).Brukernavn.Equals(nyBrukernavn))
+                    {
+                        Session["flashMelding"] = "\"" + nyBrukernavn + "\" brukes av en annen bruker";
+                        Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
+                    }
+
+                    else
+                    {
+                        lagrePreferanser();
+                    }
                 }
                 
             }
@@ -155,6 +163,28 @@ namespace SysUt14Gr03
 
         private void lagrePreferanser()
         {
+            string nyFornavn = txtFornavn.Text;
+            string nyEtternavn = txtEtternavn.Text;
+            string nyEpost = txtEpost.Text.Trim();
+            string nyBrukernavn = txtBrukernavn.Text.Trim();
+            string nyIM = txtIM.Text.Trim();
+
+            using (var context = new Context())
+            {
+                Bruker _bruker = context.Brukere.Where(b => b.Bruker_id == bruker_id).FirstOrDefault();
+
+                _bruker.Fornavn = nyFornavn;
+                _bruker.Etternavn = nyEtternavn;
+                _bruker.Epost = nyEpost;
+                _bruker.Brukernavn = nyBrukernavn;
+                _bruker.IM = nyIM;
+
+                context.SaveChanges();
+
+            }
+
+            Session["flashMelding"] = "Innstillinger lagret";
+            Session["flashStatus"] = Konstanter.notifikasjonsTyper.success.ToString();
 
             selectedItems = new bool[6];
 

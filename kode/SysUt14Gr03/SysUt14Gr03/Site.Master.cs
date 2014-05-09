@@ -20,7 +20,7 @@ namespace SysUt14Gr03
         public string antallNotifikasjoner = "";
         private int i = 0;
         private int bruker_id;
-
+         
         protected void Page_Init(object sender, EventArgs e)
         {
             // The code below helps to protect against XSRF attacks
@@ -103,9 +103,14 @@ namespace SysUt14Gr03
             //}
 
         }
+        protected void OnLoadComplete(Object sender, EventArgs e)
+        {
+
+        }
 
         protected void OnPreRender(object sender, EventArgs e)
         {
+
 
         }
 
@@ -178,6 +183,7 @@ namespace SysUt14Gr03
             int antallNotifikasjonerInt = Queries.GetNotifikasjon(bruker_id).Count;
             if (antallNotifikasjonerInt > 0)
                 antallNotifikasjoner = String.Format("({0})", antallNotifikasjonerInt.ToString());
+            Response.Redirect(Request.RawUrl);
         }
 
     }

@@ -63,7 +63,7 @@ namespace SysUt14Gr03
                     restTid += (TimeSpan)oppg.RemainingTime;
                 }
                 lblInfo.Text += "<hr />";
-                lblInfo.Text += "<br /><h2>Summer</h2>";
+                lblInfo.Text += "<br /><h2>Sumerte timer</h2>";
                 lblInfo.Text += "<br />" + "Sum brukt tid: " + bruktTid + " timer";
                 lblInfo.Text += "<br />" + "Sum estimert tid: " + estimertTid + " timer";
                 lblInfo.Text += "<br />" + "Sum resterende tid: " + restTid + " timer";

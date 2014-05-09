@@ -20,6 +20,7 @@ namespace SysUt14Gr03
                 SessionSjekk.sjekkForBruker_id();
                 bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
                 timeListe = Queries.GetTimerForBruker((int)bruker_id);
+
                 if (timeListe.Count != 0)
                 {
                     lblHeader.Visible = true;
@@ -27,8 +28,11 @@ namespace SysUt14Gr03
                     lblHeader.Text += "<hr />";
                     foreach (Time time in timeListe)
                     {
-                        Oppgave oppgListe = Queries.GetOppgave(time.Oppgave_id);
-                        ddlTimer.Items.Add(new ListItem(time.Tid + " (t/m/s) : " + oppgListe.Tittel, time.Time_id.ToString()));
+                        if (time.Manuell == true)
+                        {
+                            Oppgave oppgListe = Queries.GetOppgave(time.Oppgave_id);
+                            ddlTimer.Items.Add(new ListItem(time.Tid + " (t/m/s) : " + oppgListe.Tittel, time.Time_id.ToString()));
+                        }
                     }
                 }
                 else
@@ -67,22 +71,10 @@ namespace SysUt14Gr03
 
         protected void btnSeOppg_Click(object sender, EventArgs e)
         {
-            lblInfo.Text = "";
             int oppg_id = Validator.KonverterTilTall(ddlTimer.SelectedValue);
             Time oppg = Queries.GetTimer(oppg_id);
-            lblInfo.Visible = true;
-            lblInfo.Text += "<br />Info om oppgaven";
-            lblInfo.Text += "<hr />";
-           
-                lblInfo.Text += "<br />" + oppg.Oppgave.Tittel;
-                lblInfo.Text += "<br />" + oppg.Oppgave.UserStory;
-                lblInfo.Text += "<br />" + oppg.Oppgave.Krav;
             
-            
-                lblInfo.Text += "<br />Tid: " + oppg.Tid;
-                lblInfo.Text += "<br />Start: " + oppg.Start;
-                lblInfo.Text += "<br />Stopp: " + oppg.Stopp;
-                lblInfo.Text += "<br />Ferdig: " + oppg.IsFerdig;
+            Response.Redirect("/VisOppgave?oppgave_id=" + oppg.Oppgave_id);  
             
         }
 
@@ -101,8 +93,8 @@ namespace SysUt14Gr03
 
             DateTime stopp = (DateTime)oppgave.Stopp;
             DateTime start = (DateTime)oppgave.Start;
-            tbStart.Text = DateTime.Parse(start.ToShortDateString()).ToString("yyyy-MM-dd");
-            tbSlutt.Text = DateTime.Parse(stopp.ToShortDateString()).ToString("yyyy-MM-dd");
+            tbStart.Text = start.ToShortTimeString();
+            tbSlutt.Text = stopp.ToShortTimeString();
             tbTid.Text = Convert.ToString(oppgave.Tid);
         }
 

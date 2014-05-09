@@ -44,14 +44,14 @@ namespace SysUt14Gr03
             gridViewEndre.EditIndex = e.NewEditIndex;
             gridViewEndre.RowDataBound -= new GridViewRowEventHandler(gridViewEndre_RowDataBound);
             gridViewEndre.RowDataBound += new GridViewRowEventHandler(gridViewEndre_EditRowDataBound);
-            gridViewEndre.Columns[4].Visible = true;
+            gridViewEndre.Columns[6].Visible = true;
             visBrukere();
         }
 
         protected void gridViewEndre_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             gridViewEndre.EditIndex = -1;
-            gridViewEndre.Columns[4].Visible = false;
+            gridViewEndre.Columns[6].Visible = false;
             visBrukere();
         }
 
@@ -95,7 +95,7 @@ namespace SysUt14Gr03
                     DateTime.Now, bruker.Bruker_id);
                 }
             }
-            gridViewEndre.Columns[4].Visible = false;
+            gridViewEndre.Columns[6].Visible = false;
             gridViewEndre.EditIndex = -1;
             visBrukere();
 

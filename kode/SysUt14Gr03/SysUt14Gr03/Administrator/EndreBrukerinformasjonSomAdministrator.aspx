@@ -33,6 +33,16 @@
                     <asp:TextBox ID="tbEpost" runat="server"  Text='<%#Bind("Epost") %>'></asp:TextBox>
                 </EditItemTemplate>
             </asp:TemplateField>
+             <asp:TemplateField HeaderText="Brukernavn">
+                <ItemTemplate>
+                    <asp:Label ID="lblBrukernavn" runat="server" Text='<%#Bind("Brukernavn") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
+             <asp:TemplateField HeaderText="IM">
+                <ItemTemplate>
+                    <asp:Label ID="lblIM" runat="server" Text='<%#Bind("IM") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
             <asp:TemplateField HeaderText="Aktiv">
                 <ItemTemplate>
                     <asp:CheckBox ID="cbAktiv" Checked='<%#Bind("Aktiv") %>' Enabled="false" runat="server" />

@@ -38,7 +38,8 @@ namespace SysUt14Gr03
                     {
 
                         DateTime dato = DateTime.Now;
-                        txtDato.Text = dato.ToShortDateString();
+                        txtDato.Text = dato.ToString("yyyy-MM-dd");
+                        txtStart.Text = dato.ToShortTimeString();
 
                     }
 
@@ -307,9 +308,13 @@ namespace SysUt14Gr03
             pauseListe = ViewState["pauseListe"] as List<Pause>;
             DateTime dato = DateTime.Parse(txtDato.Text);
             bool godkjent = true;
-            if (dato > DateTime.Now || dato < DateTime.Now.AddDays(-1)) // Sjekker om han er utenfor tillatt intervall
+            if (dato > DateTime.Now || dato < DateTime.Now.AddDays(-1))
+            { // Sjekker om han er utenfor tillatt intervall {
+                int prosjekt_id = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
                 godkjent = false;
+                Varsel.SendVarsel(SessionSjekk.GetFaseleder(prosjekt_id).Bruker_id, Varsel.OPPGAVEVARSEL);
 
+            }
             using (var context = new Context())
             {
                 oppgave = context.Oppgaver.Where(o => o.Oppgave_id == oppgave_id).FirstOrDefault();

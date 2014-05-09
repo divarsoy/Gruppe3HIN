@@ -20,6 +20,29 @@ namespace SysUt14Gr03
         {
             string master = SessionSjekk.findMaster();
             this.MasterPageFile = master;
+            
+            if (Session["prosjekt_id"] != null)
+            {
+
+                int prosjekt_id = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
+                if (SessionSjekk.IsFaseleder(prosjekt_id))
+                {
+                    List<Oppgave> oppgaveListe = Queries.GetAlleAktiveOppgaverForProsjekt(prosjekt_id);
+                    List<Time> timeListe = new List<Time>();
+                    List<string> infoListe = new List<string>();
+
+                    foreach (Oppgave o in oppgaveListe)
+                    {
+                        timeListe.AddRange(Queries.GetTimerForGodkjenning(o.Oppgave_id));
+                    }
+
+                    if (timeListe.Count > 0)
+                    {
+                        Session["flashMelding"] = "Det finnes timeregistreringer i prosjektet som må godkjennes. <a href=\"../GodkjennTimer.aspx\">Vis oversikt</a>";
+                        Session["flashStatus"] = Konstanter.notifikasjonsTyper.info.ToString();
+                    }
+                }
+            }
         }
 
         protected void Page_Load(object sender, EventArgs e)

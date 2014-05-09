@@ -12,6 +12,8 @@
         <asp:Button id="btnPause" CssClass="btn btn-warning btn-large" runat="server" OnClick="btnPause_Click" Text="Pause"/>
         <asp:Button id="btnStop" CssClass="btn btn-danger btn-large" runat="server" OnClick="btnStop_Click" Text="Stop"/>
     </div>
+    <div class="clearfix"></div>
+    <asp:Button ID="btnManuell" CssClass="btn btn-primary" runat="server" Text="Gå til manuell timeregistrering" OnClick="btnManuell_Click" />
     <br />
 
     <h4>Kommentar til oppgaven:</h4>
