@@ -12,11 +12,11 @@ namespace SysUt14Gr03
 {
     public partial class TestFremdriftsdiagrammer : System.Web.UI.Page
     {
-        protected void Page_PreInit(Object sener, EventArgs e)
+ /*       protected void Page_PreInit(Object sener, EventArgs e)
         {
             string master = SessionSjekk.findMaster();
             this.MasterPageFile = master;
-        }
+        } */
 
         protected void Page_Load(object sender, EventArgs e)
         {

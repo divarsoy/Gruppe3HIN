@@ -18,9 +18,13 @@ namespace SysUt14Gr03.Classes
         private static TimeSpan bruktTid;
         private static TimeSpan nullTimeSpan = new TimeSpan(0);
         private static TimeSpan tillegsTidForDato;
+        private static DateTime ferdigstiltDato;
+        private static TimeSpan fratrekk;
+        private static TimeSpan ideellTidsbruk = new TimeSpan(0);
 
         private static List<float> yVerdier = new List<float>();
         private static List<float> yVerdierTotal = new List<float>();
+        private static List<float> idelleYVerdier = new List<float>();
         private static List<DateTime> xVerdier = new List<DateTime>();
 
         public static Chart getChartForFase(int fase_id)
@@ -43,10 +47,13 @@ namespace SysUt14Gr03.Classes
             chart.ChartAreas.Add(area);
             chart.Series.Add(new Series("Burndown"));
             chart.Series.Add(new Series("Beregnet Totaltid (fase)"));
+            chart.Series.Add(new Series("Ideell Tidsbruk"));
             chart.Series["Burndown"].ChartType = SeriesChartType.Line;
-            chart.Series["Burndown"].Color = System.Drawing.ColorTranslator.FromHtml("#FF0000FF");
             chart.Series["Beregnet Totaltid (fase)"].ChartType = SeriesChartType.Line;
+            chart.Series["Ideell Tidsbruk"].ChartType = SeriesChartType.Line;
+            chart.Series["Burndown"].Color = System.Drawing.ColorTranslator.FromHtml("#FF0000FF");
             chart.Series["Beregnet Totaltid (fase)"].Color = System.Drawing.ColorTranslator.FromHtml("#FFFF0000");
+            chart.Series["Ideell Tidsbruk"].Color = System.Drawing.ColorTranslator.FromHtml("#FF808080");
 
 
             chart.Legends.Add(new Legend("Legend"));
@@ -62,10 +69,34 @@ namespace SysUt14Gr03.Classes
                 bruktTidForOppgaver.Add(new TimeSpan(0));
             }
 
+
+            double estimatSomDouble = (double)estimatForFase.TotalHours;
+            double ideellTid = estimatSomDouble;
+            double ideellTidRest;
+            int ideelleTimer;
+            int ideelleMinutter;
+
+            idelleYVerdier.Add((float)estimatForFase.TotalHours);
+            idelleYVerdier.Add((float)estimatForFase.TotalHours);
+            for (int i = 0; i < (range.Count - 1); i++)
+            {
+                ideellTid = ideellTid - (estimatSomDouble / (range.Count - 1));
+                ideelleTimer = (int)ideellTid;
+                ideellTidRest = ideellTid - (double)ideelleTimer;
+                ideelleMinutter = (int)(ideellTidRest * 60);
+
+                ideellTidsbruk = new TimeSpan(ideelleTimer, ideelleMinutter, 0);
+
+                idelleYVerdier.Add((float)ideellTidsbruk.TotalHours);
+                idelleYVerdier.Add((float)ideellTidsbruk.TotalHours);
+
+            }
+
                 foreach (DateTime d in range)
                 {
                     resterendeTidForFase = new TimeSpan();
                     tillegsTidForDato = new TimeSpan();
+                    fratrekk = new TimeSpan();
 
                     for (int i = 0; i < oppgaverForFase.Count; i++)
                     {
@@ -87,16 +118,30 @@ namespace SysUt14Gr03.Classes
                             }
                         }
 
+
+                        //legger til tid for fasen dersom det er brukt lenger tid på en oppgave
                         if (bruktTidForOppgaver[i] > estimatForOppgave)
                         {
                             tillegsTidForDato = bruktTidForOppgaver[i] - estimatForOppgave;
 
                             bruktTidForOppgaver[i] = estimatForOppgave;
                         }
+
+                        //trekker ifra tid for fase dersom en oppgave er ferdigstilt 
+                        if (oppgaverForFase[i].Status_id == 3)
+                        {
+                            ferdigstiltDato = (DateTime)oppgaverForFase[i].Avsluttet;
+                            if (ferdigstiltDato.Date == d.Date)
+                            {
+                                TimeSpan ubruktTid = estimatForOppgave - bruktTidForOppgaver[i];
+                                fratrekk += ubruktTid;
+                            }
+                        }
+
                     }
                     resterendeTidForFase = estimatForFase - bruktTid;
 
-                    resterendeTidForFaseMedDagensTillegg = resterendeTidForFase + tillegsTidForDato;
+                    resterendeTidForFaseMedDagensTillegg = resterendeTidForFase + tillegsTidForDato - fratrekk;
 
                     yVerdier.Add((float)resterendeTidForFase.TotalHours);
                     yVerdier.Add((float)resterendeTidForFaseMedDagensTillegg.TotalHours);
@@ -105,12 +150,17 @@ namespace SysUt14Gr03.Classes
                     yVerdierTotal.Add((float)estimatForFase.TotalHours);
 
                     estimatForFase += tillegsTidForDato;
+                    estimatForFase -= fratrekk;
 
                     yVerdierTotal.Add((float)estimatForFase.TotalHours);
+
+                    
                 }
 
+            chart.Series["Ideell Tidsbruk"].Points.DataBindXY(xVerdier, idelleYVerdier);
             chart.Series["Burndown"].Points.DataBindXY(xVerdier, yVerdier);
             chart.Series["Beregnet Totaltid (fase)"].Points.DataBindXY(xVerdier, yVerdierTotal);
+
 
             return chart;
         }
