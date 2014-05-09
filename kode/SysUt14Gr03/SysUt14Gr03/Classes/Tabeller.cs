@@ -308,6 +308,7 @@ namespace SysUt14Gr03.Classes
             TableHeaderCell teamHeaderCell = new TableHeaderCell();
             TableHeaderCell prosjektHeaderCell = new TableHeaderCell();
             TableHeaderCell rolleCell = new TableHeaderCell();
+            TableHeaderCell endreCell = new TableHeaderCell();
 
             forNavnHeaderCell.Text = "Fornavn";
             etterNavnHeaderCell.Text = " Etternavn";
@@ -317,6 +318,7 @@ namespace SysUt14Gr03.Classes
             teamHeaderCell.Text = " Team";
             prosjektHeaderCell.Text = " Prosjekter";
             rolleCell.Text = "Rolle";
+            endreCell.Text = "Rediger bruker";
            
             headerRow.Cells.Add(forNavnHeaderCell);
             headerRow.Cells.Add(etterNavnHeaderCell);
@@ -326,6 +328,7 @@ namespace SysUt14Gr03.Classes
             headerRow.Cells.Add(teamHeaderCell);
             headerRow.Cells.Add(prosjektHeaderCell);
             headerRow.Cells.Add(rolleCell);
+            headerRow.Cells.Add(endreCell);
             tabell.Rows.Add(headerRow);
 
             foreach (Bruker bruker in query)
@@ -339,6 +342,7 @@ namespace SysUt14Gr03.Classes
                 TableCell teamsCell = new TableCell();
                 TableCell prosjekterCell = new TableCell();
                 TableCell rolleCelle = new TableCell();
+                TableCell endreCelle = new TableCell();
 
                 foreach (Team team in queryTeam)
                 {
@@ -366,6 +370,7 @@ namespace SysUt14Gr03.Classes
                 brukerNavnCell.Text = String.Format("<a href='visBruker?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), bruker.Brukernavn);
                 epostCell.Text = String.Format(bruker.Epost);
                 IMCell.Text = String.Format(bruker.IM);
+                endreCelle.Text = String.Format("<a href='EndreBrukerinformasjon?Bruker_id={0}'>{1}</a>", bruker.Bruker_id.ToString(), "Rediger bruker");
                     
                 tRow.Cells.Add(forNavnCell);
                 tRow.Cells.Add(etterNavnCell);
@@ -375,11 +380,9 @@ namespace SysUt14Gr03.Classes
                 tRow.Cells.Add(teamsCell);
                 tRow.Cells.Add(prosjekterCell);
                 tRow.Cells.Add(rolleCelle);
+                tRow.Cells.Add(endreCelle);
                 tabell.Rows.Add(tRow);
-                
             }
-           
-
             return tabell;
         }
         public static Table HentProsjekterTabellProsjektLeder(List<Prosjekt> query)

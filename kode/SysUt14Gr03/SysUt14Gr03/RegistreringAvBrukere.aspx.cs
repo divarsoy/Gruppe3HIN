@@ -143,6 +143,9 @@ namespace SysUt14Gr03
 
                 Session["flashMelding"] = "Ny bruker har blitt registrert";
                 Session["flashStatus"] = Konstanter.notifikasjonsTyper.success;
+                tb_reg_epost.Text = "";
+                tb_reg_etternavn.Text = "";
+                tb_reg_fornavn.Text = "";
                 Response.Redirect(Request.RawUrl);
 
             }

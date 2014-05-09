@@ -411,7 +411,7 @@
     <Content Include="Administrator\DefaultAdministrator.aspx" />
     <Content Include="Prosjektleder\DefaultProsjektleder.aspx" />
     <Content Include="Administrator\EndreBrukerinformasjonSomAdministrator.aspx" />
-    <Content Include="EndreBrukerinformasjon.aspx" />
+    <Content Include="Prosjektleder\EndreBrukerinformasjon.aspx" />
     <Content Include="EpostPreferanser.aspx" />
     <Content Include="InvitasjonAvBruker.aspx" />
     <Content Include="KommentarPaOppgave.aspx" />
@@ -916,11 +916,11 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
-    <Compile Include="EndreBrukerinformasjon.aspx.cs">
+    <Compile Include="Prosjektleder\EndreBrukerinformasjon.aspx.cs">
       <DependentUpon>EndreBrukerinformasjon.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="EndreBrukerinformasjon.aspx.designer.cs">
+    <Compile Include="Prosjektleder\EndreBrukerinformasjon.aspx.designer.cs">
       <DependentUpon>EndreBrukerinformasjon.aspx</DependentUpon>
     </Compile>
     <Compile Include="InvitasjonAvBruker.aspx.cs">

@@ -82,6 +82,8 @@ namespace SysUt14Gr03
      
         protected void ConfirmButton_Click(object sender, EventArgs e)
         {
+            if (Password.Text == ConfirmPassword.Text)
+            {
                 token = Request.QueryString["Token"];
                 //passord = MD5Hash(Password.Text);
                 //passord = Passord.HashPassord(Password.Text);
@@ -92,7 +94,7 @@ namespace SysUt14Gr03
                 etternavn = Aftername.Text;
                 fornavn = Firstname.Text;
                 imAdresse = Im_adress.Text;
-               // int id = bruker_id;
+                // int id = bruker_id;
 
                 using (var db = new Context())
                 {
@@ -102,8 +104,8 @@ namespace SysUt14Gr03
                                   select bruker).FirstOrDefault();
 
                     // Default rettighet er utvikler
-                   // string rettighetUtviklerString = Konstanter.rettighet.Utvikler.ToString();
-                   // var rettighetUtvikler = db.Rettigheter.Where(rettighet => rettighet.RettighetNavn == rettighetUtviklerString).FirstOrDefault();
+                    // string rettighetUtviklerString = Konstanter.rettighet.Utvikler.ToString();
+                    // var rettighetUtvikler = db.Rettigheter.Where(rettighet => rettighet.RettighetNavn == rettighetUtviklerString).FirstOrDefault();
                     var queryBrukernavn = db.Brukere.FirstOrDefault(b => b.Brukernavn == brukernavn);
                     if (queryBrukernavn != null)
                     {
@@ -111,7 +113,7 @@ namespace SysUt14Gr03
                         Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger;
                         check = false;
                     }
-                    if(check)
+                    if (check)
                     {
                         Bruker.Aktiv = true;
                         Bruker.Brukernavn = brukernavn;
@@ -129,6 +131,17 @@ namespace SysUt14Gr03
                         disable();
                     }
                 }
+            }
+            else
+            {
+                Session["flashMelding"] = "Vennligst fyll inn like passord";
+                Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger;
+                Username.Text = "";
+                Im_adress.Text = "";
+                Password.Text = "";
+                ConfirmPassword.Text = "";
+                Response.Redirect(Request.RawUrl);
+            }
         }
         protected void disable()
         {
@@ -143,7 +156,9 @@ namespace SysUt14Gr03
             Im_adress.Visible = false;
             lblImadress.Visible = false;
             Password.Visible = false;
+            ConfirmPassword.Visible = false;
             lblPassword.Visible = false;
+            lblConfirmPassword.Visible = false;
             ConfirmButton.Visible = false;
         }
     } 
