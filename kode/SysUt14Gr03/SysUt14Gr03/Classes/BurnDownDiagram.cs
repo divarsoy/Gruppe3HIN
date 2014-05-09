@@ -15,8 +15,6 @@ namespace SysUt14Gr03.Classes
         private static TimeSpan resterendeTidForFase;
         private static TimeSpan resterendeTidForFaseMedDagensTillegg;
         private static TimeSpan resterendeTidForOppgave;
-        private static TimeSpan bruktTidForOppgave;
-        private static TimeSpan tillegsTidForFase;
         private static TimeSpan bruktTid;
         private static TimeSpan nullTimeSpan = new TimeSpan(0);
         private static TimeSpan tillegsTidForDato;
@@ -50,8 +48,6 @@ namespace SysUt14Gr03.Classes
             chart.Series["Beregnet Totaltid (fase)"].ChartType = SeriesChartType.Line;
             chart.Series["Beregnet Totaltid (fase)"].Color = System.Drawing.ColorTranslator.FromHtml("#FFFF0000");
 
-       //     chart.Series["Burndown"].Points.AddXY(5, 5);
-        //    chart.Series["Burndown"].Points.AddXY(10, 10);
 
             chart.Legends.Add(new Legend("Legend"));
             chart.Legends["Legend"].Enabled = true;
@@ -69,15 +65,12 @@ namespace SysUt14Gr03.Classes
                 foreach (DateTime d in range)
                 {
                     resterendeTidForFase = new TimeSpan();
-                    tillegsTidForFase = new TimeSpan();
- //                   estimatForFase = new TimeSpan();
                     tillegsTidForDato = new TimeSpan();
 
-                    //     resterendeTidForFase = estimatForFase;
                     for (int i = 0; i < oppgaverForFase.Count; i++)
                     {
                         estimatForOppgave = (TimeSpan)oppgaverForFase[i].Estimat;
-    //                    estimatForFase += estimatForOppgave;
+
                         resterendeTidForOppgave = estimatForOppgave;
                         List<Time> registrerteTimerPaaOppgave = Queries.GetTimerForOppgave(oppgaverForFase[i].Oppgave_id);
 
@@ -92,25 +85,14 @@ namespace SysUt14Gr03.Classes
                                     bruktTid = bruktTid + registrerteTimerPaaOppgave[j].Tid;
                                 }
                             }
-
-                            //  TimeSpan ex = resterendeTidForOppgave;
-
-
                         }
 
-//                        resterendeTidForFase = resterendeTidForFase + resterendeTidForOppgave;
-
-                        TimeSpan ex = resterendeTidForOppgave;
                         if (bruktTidForOppgaver[i] > estimatForOppgave)
                         {
- //                           tillegsTidForFase -= resterendeTidForOppgaver[i];
                             tillegsTidForDato = bruktTidForOppgaver[i] - estimatForOppgave;
 
                             bruktTidForOppgaver[i] = estimatForOppgave;
                         }
-                        //                   resterendeTidForFase = estimatForFase - bruktTid + tillegsTidForFase;
-                        //resterendeTidForFase = resterendeTidForFase - bruktTid;
-
                     }
                     resterendeTidForFase = estimatForFase - bruktTid;
 
@@ -127,14 +109,10 @@ namespace SysUt14Gr03.Classes
                     yVerdierTotal.Add((float)estimatForFase.TotalHours);
                 }
 
-//            List<float> ex1 = yVerdier;
-//            List<DateTime> ex2 = xVerdier;
-
             chart.Series["Burndown"].Points.DataBindXY(xVerdier, yVerdier);
             chart.Series["Beregnet Totaltid (fase)"].Points.DataBindXY(xVerdier, yVerdierTotal);
-//            chart.Visible = true;
+
             return chart;
-           // chart.Series.Add();
         }
     }
 }
