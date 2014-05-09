@@ -23,13 +23,12 @@ namespace SysUt14Gr03
 
             if (!Page.IsPostBack)
             {
-                team_brukerListe = Queries.GetAlleBrukerePaaTeam(teamId);
                 brukerListe = Queries.GetAlleAktiveBrukere();
 
                 if (Request.QueryString["Team_id"] != null)
                 {
                     teamId = Validator.KonverterTilTall(Request.QueryString["Team_id"]);
-
+                    team_brukerListe = Queries.GetAlleBrukerePaaTeam(teamId);
                 }
 
                 // slå sammen med if over

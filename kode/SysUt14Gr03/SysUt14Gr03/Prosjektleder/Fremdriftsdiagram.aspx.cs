@@ -87,32 +87,42 @@ namespace SysUt14Gr03
             for (int i = 0; i < oppgaver.Count; i++)
             {
                 estimat += (TimeSpan)oppgaver[i].Estimat;
+                bruktTid += (TimeSpan)oppgaver[i].BruktTid;
             }
 
-            List<DateTime> range = Enumerable.Range(0, (sluttDato - startDato).Days + 1)
+            List<DateTime> xRange = Enumerable.Range(0, (sluttDato - startDato).Days + 1)
                 .Select(i => startDato.AddDays(i))
                 .ToList();
             
-            this.ChartHolder.Series["Brukte tid"].Points.AddXY(0, estimat.TotalHours);
+            List<Double> yRange = new List<Double>();
+            //yRange.Add(estimat.TotalHours);
+            //this.ChartHolder.Series["Brukte tid"].Points.AddXY(0, estimat.TotalHours);
             registrertTid = estimat;
-            foreach (var d in range)
+            TimeSpan h = new TimeSpan();
+            foreach (var d in xRange)
             {
                 for (int i = 0; i < oppgaver.Count; i++)
                 {
-                    estimat += (TimeSpan)oppgaver[i].Estimat;
-                    bruktTid += (TimeSpan)oppgaver[i].BruktTid;
                     registrerteTimer = Queries.GetTimerForOppgave(oppgaver[i].Oppgave_id);
 
                     for (int j = 0; j < registrerteTimer.Count; j++)
                     {
-                        if (d.Date == registrerteTimer[j].Start.Value.Date)
+
+                        /*if (d.Date == registrerteTimer[j].Start.Value.Date && registrerteTimer[j]. oppgaver[i].RemainingTime)
+                        {
+                            registrertTid = registrertTid + ((TimeSpan)oppgaver[i].BruktTid - (TimeSpan)oppgaver[i].Estimat);
+                            ChartHolder.Series["Brukte tid"].Points.AddXY(d.Date, registrertTid.TotalHours);
+                        }
+                        else */if (d.Date == registrerteTimer[j].Start.Value.Date)
                         {
                             registrertTid = registrertTid - registrerteTimer[j].Tid;
+                            yRange.Add(registrertTid.TotalHours);
                         }
                     }
                 }
-                this.ChartHolder.Series["Brukte tid"].Points.AddXY(d.DayOfWeek + " " + d.ToShortDateString(), registrertTid.TotalHours);
+                //this.ChartHolder.Series["Brukte tid"].Points.AddXY(d.DayOfWeek + " " + d.ToShortDateString(), registrertTid.TotalHours);
             }
+            ChartHolder.Series["Brukte tid"].Points.DataBindXY(xRange, yRange);
             /*
             //tidIgjen = estimat;
             TimeSpan h = new TimeSpan();

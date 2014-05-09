@@ -14,6 +14,8 @@ namespace SysUt14Gr03
         private Table brukerTabell;
         protected void Page_Load(object sender, EventArgs e)
         {
+            SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
+
             List<Team> teamene = Queries.GetAlleAktiveTeam();
 
             foreach (Team t in teamene)
