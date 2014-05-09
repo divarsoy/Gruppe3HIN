@@ -18,7 +18,11 @@ namespace SysUt14Gr03
         private TimeSpan estimat;
         private TimeSpan bruktTid;
         private TimeSpan tidIgjen;
-        private TimeSpan registrertTid;
+        private TimeSpan resterendeTidUtenTillegg;
+        private TimeSpan resterendeTid;
+        private TimeSpan resterendeTidPaaOppgave;
+        private TimeSpan estimatForOppgave;
+//        private TimeSpan nullTimeSpan = new TimeSpan(0);
         private DateTime startDato;
         private DateTime sluttDato;
 
@@ -26,6 +30,8 @@ namespace SysUt14Gr03
         private List<Fase> faser;
         private List<Oppgave> oppgaver;
         private List<Time> registrerteTimer;
+        private List<float> yVerdier = new List<float>();
+        private List<DateTime> xVerdier = new List<DateTime>();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -34,7 +40,7 @@ namespace SysUt14Gr03
 
             if (!IsPostBack)
             {
-                registrertTid = new TimeSpan();
+                resterendeTid = new TimeSpan();
                 tidIgjen = new TimeSpan();
                 estimat = new TimeSpan();
                 bruktTid = new TimeSpan();
@@ -88,12 +94,27 @@ namespace SysUt14Gr03
             {
                 estimat += (TimeSpan)oppgaver[i].Estimat;
                 bruktTid += (TimeSpan)oppgaver[i].BruktTid;
+<<<<<<< HEAD
+            } 
+=======
             }
+>>>>>>> 7f7242721fbe663ffbb2eb44c24a9c199fd703e8
 
             List<DateTime> xRange = Enumerable.Range(0, (sluttDato - startDato).Days + 1)
                 .Select(i => startDato.AddDays(i))
                 .ToList();
             
+<<<<<<< HEAD
+            this.ChartHolder.Series["Brukte tid"].Points.AddXY(0, estimat.TotalHours);
+            resterendeTid = estimat;
+            foreach (var d in range)
+            {
+                for (int i = 0; i < oppgaver.Count; i++)
+                {
+
+                    estimatForOppgave = (TimeSpan)oppgaver[i].Estimat;
+                    resterendeTidPaaOppgave = estimatForOppgave;
+=======
             List<Double> yRange = new List<Double>();
             //yRange.Add(estimat.TotalHours);
             //this.ChartHolder.Series["Brukte tid"].Points.AddXY(0, estimat.TotalHours);
@@ -103,6 +124,7 @@ namespace SysUt14Gr03
             {
                 for (int i = 0; i < oppgaver.Count; i++)
                 {
+>>>>>>> 7f7242721fbe663ffbb2eb44c24a9c199fd703e8
                     registrerteTimer = Queries.GetTimerForOppgave(oppgaver[i].Oppgave_id);
 
                     for (int j = 0; j < registrerteTimer.Count; j++)
@@ -115,14 +137,36 @@ namespace SysUt14Gr03
                         }
                         else */if (d.Date == registrerteTimer[j].Start.Value.Date)
                         {
+<<<<<<< HEAD
+                            resterendeTid = resterendeTid - registrerteTimer[j].Tid;
+=======
                             registrertTid = registrertTid - registrerteTimer[j].Tid;
                             yRange.Add(registrertTid.TotalHours);
+>>>>>>> 7f7242721fbe663ffbb2eb44c24a9c199fd703e8
                         }
                     }
+
+//                    resterendeTidUtenTillegg = resterendeTidUtenTillegg + resterendeTidPaaOppgave;
+
+                    if (resterendeTidPaaOppgave.TotalHours < 0)
+                    {
+                        resterendeTid = resterendeTidUtenTillegg - resterendeTidPaaOppgave;
+                    }
                 }
+<<<<<<< HEAD
+//                yVerdier.Add((float)resterendeTidUtenTillegg.TotalHours);
+//                yVerdier.Add((float)(resterendeTid.TotalHours));
+//                xVerdier.Add(d);
+//                xVerdier.Add(d); 
+                this.ChartHolder.Series["Brukte tid"].Points.AddXY(d.DayOfWeek + " " + d.ToShortDateString(), resterendeTid.TotalHours);
+            }
+
+            this.ChartHolder.Series["Brukte tid"].Points.DataBindXY(xVerdier, yVerdier);
+=======
                 //this.ChartHolder.Series["Brukte tid"].Points.AddXY(d.DayOfWeek + " " + d.ToShortDateString(), registrertTid.TotalHours);
             }
             ChartHolder.Series["Brukte tid"].Points.DataBindXY(xRange, yRange);
+>>>>>>> 7f7242721fbe663ffbb2eb44c24a9c199fd703e8
             /*
             //tidIgjen = estimat;
             TimeSpan h = new TimeSpan();

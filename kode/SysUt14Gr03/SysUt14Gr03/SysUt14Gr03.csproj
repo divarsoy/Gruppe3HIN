@@ -401,6 +401,7 @@
     <Content Include="Scripts\shepherd.min.js" />
     <Content Include="Site.Utvikler.master" />
     <Content Include="SprintBacklogFase.aspx" />
+    <Content Include="TestFremdriftsdiagrammer.aspx" />
     <Content Include="TestPaaEksportExcel.aspx" />
     <Content Include="Utvikler\DefaultUtvikler.aspx" />
     <Content Include="changeUser.aspx" />
@@ -572,6 +573,21 @@
     <Compile Include="Account\RegisterExternalLogin.aspx.designer.cs">
       <DependentUpon>RegisterExternalLogin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Administrator\VisBrukerAdmin.aspx.cs">
+      <DependentUpon>VisBrukerAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrator\VisBrukerAdmin.aspx.designer.cs">
+      <DependentUpon>VisBrukerAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrator\VisProsjektAdmin.aspx.cs">
+      <DependentUpon>VisProsjektAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrator\VisProsjektAdmin.aspx.designer.cs">
+      <DependentUpon>VisProsjektAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\BurnDownDiagram.cs" />
     <Compile Include="Classes\DataTabeller.cs" />
     <Compile Include="Classes\EksporterTilExcel.cs" />
     <Compile Include="Classes\OppretteLogg.cs" />
@@ -885,6 +901,13 @@
     </Compile>
     <Compile Include="SprintBacklogFase.aspx.designer.cs">
       <DependentUpon>SprintBacklogFase.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestFremdriftsdiagrammer.aspx.cs">
+      <DependentUpon>TestFremdriftsdiagrammer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestFremdriftsdiagrammer.aspx.designer.cs">
+      <DependentUpon>TestFremdriftsdiagrammer.aspx</DependentUpon>
     </Compile>
     <Compile Include="TestPaaEksportExcel.aspx.cs">
       <DependentUpon>TestPaaEksportExcel.aspx</DependentUpon>
