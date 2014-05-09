@@ -17,7 +17,10 @@ namespace SysUt14Gr03
         private int oppgave_id;
         private Oppgave oppgave;
         private TimeSpan bruktTid;
-        private List<Pause> pauseListe;
+        //private List<Pause> pauseListe;
+        // Eez good
+        private List<DateTime> pauseStartListe = new List<DateTime>();
+        private List<DateTime> pauseStoppListe = new List<DateTime>();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -192,7 +195,8 @@ namespace SysUt14Gr03
                         TimeSpan pauser = new TimeSpan();
                         bruktTid = sluttTid - startTid;
                         bool innenforOkt = true;
-                        pauseListe = new List<Pause>();
+                        //pauseListe = new List<Pause>();
+                        
 
                         for (int i = 0; i < pauseTeller; i++)
                         {
@@ -223,7 +227,9 @@ namespace SysUt14Gr03
                                         pause.IsFerdig = true;
                                         pause.Start = pauseStartTid;
                                         pause.Stopp = pauseSluttTid;
-                                        pauseListe.Add(pause);
+                                        //pauseListe.Add(pause);
+                                        pauseStartListe.Add(pauseStartTid);
+                                        pauseStoppListe.Add(pauseSluttTid);
                                         
                                     }
                                 }
@@ -237,6 +243,8 @@ namespace SysUt14Gr03
                             ViewState["bruktTid"] = bruktTid;
                             ViewState["startTid"] = startTid;
                             ViewState["sluttTid"] = sluttTid;
+                            ViewState["pauseStartListe"] = pauseStartListe;
+                            ViewState["pauseStoppListe"] = pauseStoppListe;
 
                             confirmMessage = "Følgende timetall vil bli registrert: " + bruktTid.Hours;
                             confirmMessage += (bruktTid.Hours == 1 ? " time" : " timer") + " og ";
@@ -305,16 +313,34 @@ namespace SysUt14Gr03
             bruktTid = (TimeSpan)ViewState["bruktTid"];
             DateTime startTid = (DateTime)ViewState["startTid"];
             DateTime sluttTid = (DateTime)ViewState["sluttTid"];
-            pauseListe = ViewState["pauseListe"] as List<Pause>;
+            List<Pause> pauseListe = new List<Pause>();
+
+            if (ViewState["pauseStartListe"] != null)
+            {
+                pauseStartListe = ViewState["pauseStartListe"] as List<DateTime>;
+                pauseStoppListe = ViewState["pauseStoppListe"] as List<DateTime>;
+            }
+
+            for (int i = 0; i < pauseStartListe.Count; i++)
+            {
+                Pause p = new Pause();
+                p.Start = pauseStartListe[i];
+                p.Stopp = pauseStoppListe[i];
+                p.Oppgave_id = oppgave_id;
+                p.IsFerdig = true;
+                pauseListe.Add(p);
+            }
+            
             DateTime dato = DateTime.Parse(txtDato.Text);
             bool godkjent = true;
             if (dato > DateTime.Now || dato < DateTime.Now.AddDays(-1))
             { // Sjekker om han er utenfor tillatt intervall {
                 int prosjekt_id = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
                 godkjent = false;
-                Varsel.SendVarsel(SessionSjekk.GetFaseleder(prosjekt_id).Bruker_id, Varsel.OPPGAVEVARSEL);
+                // Varsel.SendVarsel(SessionSjekk.GetFaseleder(prosjekt_id).Bruker_id, Varsel.OPPGAVEVARSEL);
 
             }
+
             using (var context = new Context())
             {
                 oppgave = context.Oppgaver.Where(o => o.Oppgave_id == oppgave_id).FirstOrDefault();
@@ -326,6 +352,7 @@ namespace SysUt14Gr03
                     Manuell = true,
                     Aktiv = true,
                     IsFerdig = godkjent,
+                    Pause = pauseListe,
                     Bruker = bruker,
                     Oppgave = oppgave,
                     Start = startTid,
@@ -335,6 +362,9 @@ namespace SysUt14Gr03
                 oppgave.BruktTid += bruktTid;
                 if (oppgave.RemainingTime >= bruktTid)
                     oppgave.RemainingTime -= bruktTid;
+                else
+                    oppgave.RemainingTime = new TimeSpan(0);
+
                 oppgave.Status = context.Statuser.Where(s => s.Status_id == 2).FirstOrDefault(); // Setter status til under arbeid
                 context.Timer.Add(time);
                 context.SaveChanges();
