@@ -22,6 +22,15 @@ namespace SysUt14Gr03 {
         protected global::System.Web.UI.WebControls.DropDownList ddlRettighet;
         
         /// <summary>
+        /// RequiredFieldValidatorRettighet control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorRettighet;
+        
+        /// <summary>
         /// tb_reg_etternavn control.
         /// </summary>
         /// <remarks>
@@ -29,6 +38,15 @@ namespace SysUt14Gr03 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tb_reg_etternavn;
+        
+        /// <summary>
+        /// RequiredFieldValidatorEtternav control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorEtternav;
         
         /// <summary>
         /// tb_reg_fornavn control.
@@ -40,6 +58,15 @@ namespace SysUt14Gr03 {
         protected global::System.Web.UI.WebControls.TextBox tb_reg_fornavn;
         
         /// <summary>
+        /// RequiredFieldValidatorFornavn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorFornavn;
+        
+        /// <summary>
         /// tb_reg_epost control.
         /// </summary>
         /// <remarks>
@@ -47,6 +74,24 @@ namespace SysUt14Gr03 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tb_reg_epost;
+        
+        /// <summary>
+        /// RequiredFieldValidatorEpost control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorEpost;
+        
+        /// <summary>
+        /// RegularExpressionValidatorEpost control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidatorEpost;
         
         /// <summary>
         /// bt_adm_reg control.
