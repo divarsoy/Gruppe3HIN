@@ -53,9 +53,6 @@ textarea,
 .footerPadding {
   padding-bottom: 40px;
 }
-.headerPadding {
-  padding-top: 60px;
-}
 .maxBeskrivelseBredde {
   max-width: 400px;
   max-height: 400px;
@@ -87,5 +84,71 @@ textarea,
 }
 .rapport2 {
   padding-left: 5%;
+}
+.navbar-right {
+  float: right !important;
+}
+@media (max-width: 1200px) {
+  .navbar-header {
+    float: none;
+  }
+  .navbar-left,
+  .navbar-right {
+    float: none !important;
+  }
+  .navbar-toggle {
+    display: block;
+  }
+  .navbar-collapse {
+    border-top: 1px solid transparent;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+  .navbar-fixed-top {
+    top: 0;
+    border-width: 0 0 1px;
+  }
+  .navbar-collapse.collapse {
+    display: none!important;
+  }
+  .navbar-nav {
+    float: none!important;
+    margin-top: 7.5px;
+  }
+  .navbar-nav > li {
+    float: none;
+  }
+  .navbar-nav > li > a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .collapse.in {
+    display: block !important;
+  }
+  .navbar-right {
+    margin-right: 20px;
+  }
+  .navbar-header:after {
+    clear: none;
+  }
+  .navbar-nav.navbar-right > li {
+    float: left;
+  }
+  .navbar-collapse:before {
+    clear: both;
+  }
+  .navbar-collapse {
+    overflow-y: hidden;
+  }
+  .navbar-collapse.in {
+    overflow-y: visible;
+  }
+  .navbar {
+    border-color: #101010;
+    border-width: 0 0 1px;
+  }
+  .navbar-collapse.in > ul {
+    border-color: #101010;
+    border-top: 1px double;
+  }
 }
 /*# sourceMappingURL=MorildDataStylesheet.css.map */
