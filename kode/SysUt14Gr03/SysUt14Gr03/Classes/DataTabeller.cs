@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Windows.Forms;
 using SysUt14Gr03.Models;
+using System.Web.UI.DataVisualization.Charting;
 
 namespace SysUt14Gr03.Classes
 {
@@ -509,6 +510,7 @@ namespace SysUt14Gr03.Classes
         public static DataTable BurnDownChartForFase(int faseId)
         {
             DataTable datatabell = new DataTable();
+    //        Chart chart = BurnDownChartForFase.g
 
             Fase fase = Queries.GetFase(faseId);
             TimeSpan estimatForFase = new TimeSpan();
@@ -599,6 +601,8 @@ namespace SysUt14Gr03.Classes
             luftRow2["Oppgavenavn"] = "";
             datatabell.Rows.Add(luftRow2);
             datatabell.Rows.Add(totalRow);
+
+
             return datatabell;
         }
 
