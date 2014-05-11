@@ -38,28 +38,30 @@ namespace SysUt14Gr03.Classes
             dt.Columns.Add(new DataColumn("Fase", typeof(System.String)));
             dt.Columns.Add(new DataColumn("Oppgave-ID", typeof(System.String)));
             dt.Columns.Add(new DataColumn("Oppgave", typeof(System.String)));
-            dt.Columns.Add(new DataColumn("Estimert tid", typeof(System.TimeSpan)));
-            dt.Columns.Add(new DataColumn("Brukt tid", typeof(System.TimeSpan)));
-            dt.Columns.Add(new DataColumn("Gjenstående tid", typeof(System.TimeSpan)));
+            dt.Columns.Add(new DataColumn("Estimert tid", typeof(System.String)));
+            dt.Columns.Add(new DataColumn("Brukt tid", typeof(System.String)));
+            dt.Columns.Add(new DataColumn("Gjenstående tid", typeof(System.String)));
             dt.Columns.Add(new DataColumn("Ansvarlig Bruker", typeof(System.String)));
             dt.Columns.Add(new DataColumn("Status", typeof(System.String)));
-
+            
             TimeSpan bruktTid = new TimeSpan(0);
             TimeSpan estimertTid = new TimeSpan(0);
             TimeSpan gjenstaendeTid = new TimeSpan(0);
          
             DataRow sumRow = dt.NewRow();
+          
 
             foreach (Oppgave o in fase.Oppgaver)
             {
+                          
                 DataRow row = dt.NewRow();
                 row["Prosjektnavn"] = o.Prosjekt.Navn;
                 row["fase"] = fase.Navn;
                 row["Oppgave-ID"] = o.RefOppgaveId;
                 row["Oppgave"] = o.Tittel;
-                row["Estimert tid"] = o.Estimat;
-                row["Brukt tid"] = o.BruktTid;
-                row["Gjenstående tid"] = o.RemainingTime;
+                row["Estimert tid"] = o.Estimat.ToString();
+                row["Brukt tid"] = o.BruktTid.ToString();
+                row["Gjenstående tid"] = o.RemainingTime.ToString();
                 row["Ansvarlig Bruker"] = fase.Bruker.ToString();
                 string status = Queries.GetStatus(o.Status_id).Navn;
                 row["Status"] = status;               
@@ -67,14 +69,16 @@ namespace SysUt14Gr03.Classes
                 estimertTid += (TimeSpan)o.Estimat;   
                 gjenstaendeTid += (TimeSpan)o.RemainingTime;
                 dt.Rows.Add(row);
-            }
 
+                
+               
+            }
+        
             sumRow["Oppgave"] = "Sum: ";
             sumRow["Estimert tid"] = estimertTid;
             sumRow["Brukt tid"] = bruktTid;
             sumRow["Gjenstående tid"] = gjenstaendeTid;
             dt.Rows.Add(sumRow);
-
             return dt;
 
             
