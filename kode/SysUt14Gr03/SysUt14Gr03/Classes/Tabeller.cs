@@ -186,8 +186,8 @@ namespace SysUt14Gr03.Classes
             epostHeaderCell.Text = "Epost";
             IMHeaderCell.Text = "IM";
             teamNavnCell.Text = String.Format("<a href='{0}'>{1}</a>", teamLink, nesteTeam.Navn.ToString());
+           
             rolleHeaderCell.Text = "Rolle";
-               
             teamNavnHeader.Cells.Add(teamNavnCell);
             tabell.Rows.Add(teamNavnHeader);
 
@@ -234,7 +234,7 @@ namespace SysUt14Gr03.Classes
                 tabell.Rows.Add(tRow);
             }
 
-            tabell.CssClass = "table";
+            //tabell.CssClass = "table";
             return tabell;
         }
 
@@ -600,7 +600,8 @@ namespace SysUt14Gr03.Classes
             sumBruktCell.Text = "Sum Brukt tid: " + Convert.ToString(sumBrukt);
             TimeSpan remainingTime = new TimeSpan(0);
             remainingTime = sumEst - sumBrukt;
-            sumGjenstaendeCell.Text = "Sum Gjenstående tid: " + (sumGjenstaende == null ? Convert.ToString(sumGjenstaende) : Convert.ToString(remainingTime));
+            string sumGjen = Convert.ToString(sumGjenstaende);
+            sumGjenstaendeCell.Text = "Sum Gjenstående tid: " + (sumGjenstaende == null ? sumGjen : Convert.ToString(remainingTime));
             sumRow.Cells.Add(sumEstimertCell);
             sumRow.Cells.Add(sumBruktCell);
             sumRow.Cells.Add(sumGjenstaendeCell);

@@ -9,6 +9,7 @@ using System.Web.UI.WebControls;
 using SysUt14Gr03.Classes;
 using SysUt14Gr03.Models;
 using System.Drawing;
+using System.Text.RegularExpressions;
 
 namespace SysUt14Gr03
 {
@@ -21,7 +22,7 @@ namespace SysUt14Gr03
 //        private bool emailUnq = true;
         private string password = "blahimmel";
         private MailMessage msg;
-    
+   
         private string subject;
         //private Classes.sendEmail sendMsg
         private string ActivationUrl;
@@ -141,13 +142,25 @@ namespace SysUt14Gr03
                 hendelse = "Bruker med navn " + fornavn + " " + etternavn + "ble opprettet";
                 OppretteLogg.opprettLoggForBruker(hendelse, DateTime.Now, (int)Session["bruker_id"]);
 
+                //Sletter lagrede sessionsobjekter for valgene på siden.
+                slettSession();
+
                 Session["flashMelding"] = "Ny bruker har blitt registrert";
                 Session["flashStatus"] = Konstanter.notifikasjonsTyper.success;
-                tb_reg_epost.Text = "";
-                tb_reg_etternavn.Text = "";
-                tb_reg_fornavn.Text = "";
-                Response.Redirect(Request.RawUrl);
 
+                // Hvis brukeren er administrator så redirect til oversikt over brukere
+                if (Validator.SjekkRettighet(bruker_id, Konstanter.rettighet.Administrator))
+                {
+                    Response.Redirect("~/Administrator/EndreBrukerinformasjonSomAdministrator");
+                }
+                //Hvis ikke, så tøm feltene og forbli på siden.
+                else
+                {
+                    tb_reg_epost.Text = "";
+                    tb_reg_etternavn.Text = "";
+                    tb_reg_fornavn.Text = "";
+                    Response.Redirect(Request.RawUrl);
+                }
             }
 
         }              
@@ -196,6 +209,12 @@ namespace SysUt14Gr03
             else
                 Session["flashMelding"] += "Epost kan ikke være lenger enn 256 tegn<br />";
 
+            String EpostRegex = @"\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*";
+            if(!Regex.IsMatch(tb_reg_epost.Text, EpostRegex))
+            {
+                Session["flashMelding"] += "Du må skrive inn en gyldig epostadresse<br />";
+            }
+            
             // sjekker at brukeren ikke lurer inn en administrator rettighet
             if (ddlRettighet.SelectedValue != null && ddlRettighet.SelectedValue != "0")
             {

@@ -57,8 +57,11 @@ namespace SysUt14Gr03
                         + " | varighet: " + ((int)t.Tid.TotalHours) + "t " + t.Tid.Minutes + "m");
                 }
 
-                lblInfo.Text = "Ingen elementer";
-                lblInfo.Visible = true;
+                if (infoListe.Count == 0)
+                {
+                    lblInfo.Text = "Ingen elementer";
+                    lblInfo.Visible = true;
+                }
 
                 if (!IsPostBack)
                 {

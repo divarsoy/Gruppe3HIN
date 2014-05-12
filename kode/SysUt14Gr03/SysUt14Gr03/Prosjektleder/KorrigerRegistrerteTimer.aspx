@@ -23,11 +23,12 @@
                     <br />
                     <asp:Button ID="btnAddPause" runat="server" CssClass="btn btn-primary" Text="Legg til pause" OnClick="btnAddPause_Click" Visible="false"/>
                     <br />
-                    <asp:Panel ID="pnlPauser" runat="server">
-                    </asp:Panel>
+                    
                     <br />
                  </div>
             </div>
+        <asp:Panel ID="pnlPauser" runat="server">
+                    </asp:Panel>
         </div>
     <asp:HiddenField ID="lagreTime" runat="server" value="" />
     <asp:HiddenField ID="infoField" runat="server" value="" />

@@ -31,10 +31,12 @@ namespace SysUt14Gr03
 
                 if (!IsPostBack)
                 {
+                    
                     foreach (Prosjekt p in t.Prosjekter)
                     {
                         brukerTabell = Tabeller.HentBrukerTabellForTeam(query, t, p.Prosjekt_id);
-                      
+                        brukerTabell.CssClass = "table";
+
                     }
                     PlaceHolderTable.Controls.Add(brukerTabell);
                 }

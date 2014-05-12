@@ -16,8 +16,11 @@ namespace SysUt14Gr03.Prosjektleder
         private int time_id;
         // private Oppgave oppgave;
         private TimeSpan bruktTid;
+        private TimeSpan bruktTidOrig;
         private Time time;
         private List<Pause> pauseListe;
+        private List<DateTime> pauseStartListe = new List<DateTime>();
+        private List<DateTime> pauseStoppListe = new List<DateTime>();
 
         protected void Page_PreInit(Object sener, EventArgs e)
         {
@@ -125,13 +128,7 @@ namespace SysUt14Gr03.Prosjektleder
             txtStart.Text = "";
             txtSlutt.Text = "";
 
-            for (int i = 0; i < pauseTeller; i++)
-            {
-                TextBox txtPST = pnlPauser.FindControl("txtPauseStart" + i) as TextBox;
-                TextBox txtPSL = pnlPauser.FindControl("txtPauseSlutt" + i) as TextBox;
-                txtPST.Text = "";
-                txtPSL.Text = "";
-            }
+
         }
 
         protected void btnAddPause_Click(object sender, EventArgs e)
@@ -176,8 +173,11 @@ namespace SysUt14Gr03.Prosjektleder
                 txtPSL.TextMode = TextBoxMode.Time;
                 txtPST.ID = "txtPauseStart" + i;
                 txtPSL.ID = "txtPauseSlutt" + i;
-                txtPST.Text = pauseListe[i].Start.ToShortTimeString();
-                txtPSL.Text = ((DateTime)pauseListe[i].Stopp).ToShortTimeString();
+                if (i < pauseListe.Count)
+                {
+                    txtPST.Text = pauseListe[i].Start.ToShortTimeString();
+                    txtPSL.Text = ((DateTime)pauseListe[i].Stopp).ToShortTimeString();
+                } 
                 pnlPauser.Controls.Add(lblPST);
                 pnlPauser.Controls.Add(txtPST);
                 pnlPauser.Controls.Add(lblPSL);
@@ -252,6 +252,13 @@ namespace SysUt14Gr03.Prosjektleder
                                     if (innenforOkt)
                                     {
                                         pauser += pauseSluttTid - pauseStartTid;
+                                        Pause pause = new Pause();
+                                        pause.IsFerdig = true;
+                                        pause.Start = pauseStartTid;
+                                        pause.Stopp = pauseSluttTid;
+                                        //pauseListe.Add(pause);
+                                        pauseStartListe.Add(pauseStartTid);
+                                        pauseStoppListe.Add(pauseSluttTid);
                                     }
                                 }
 
@@ -264,6 +271,8 @@ namespace SysUt14Gr03.Prosjektleder
                             ViewState["bruktTid"] = bruktTid;
                             ViewState["startTid"] = startTid;
                             ViewState["sluttTid"] = sluttTid;
+                            ViewState["pauseStartListe"] = pauseStartListe;
+                            ViewState["pauseStoppListe"] = pauseStoppListe;
 
                             confirmMessage = "Følgende timetall vil bli registrert: " + bruktTid.Hours;
                             confirmMessage += (bruktTid.Hours == 1 ? " time" : " timer") + " og ";
@@ -321,19 +330,71 @@ namespace SysUt14Gr03.Prosjektleder
             DateTime startTid = (DateTime)ViewState["startTid"];
             DateTime sluttTid = (DateTime)ViewState["sluttTid"];
             DateTime dato = DateTime.Parse(txtDato.Text);
+            if (ViewState["pauseStartListe"] != null)
+            {
+                pauseStartListe = ViewState["pauseStartListe"] as List<DateTime>;
+                pauseStoppListe = ViewState["pauseStoppListe"] as List<DateTime>;
+            }
+
+            //pauseListe.Clear();
+
+            for (int i = 0; i < pauseStartListe.Count; i++)
+            {
+                if (i < pauseListe.Count)
+                {
+                    pauseListe[i].Start = pauseStartListe[i];
+                    pauseListe[i].Stopp = pauseStoppListe[i];
+                }
+                else
+                {
+                    Pause p = new Pause();
+                    p.Start = pauseStartListe[i];
+                    p.Stopp = pauseStoppListe[i];
+                    p.Oppgave_id = time.Oppgave_id;
+                    p.IsFerdig = true;
+                    pauseListe.Add(p);
+                }
+                
+            }
 
             
             using (var context = new Context())
             {
                 bool godkjent = Convert.ToBoolean(ViewState["godkjent"].ToString());
                 Time time = context.Timer.Where(t => t.Time_id == time_id).FirstOrDefault();
+                bruktTidOrig = time.Tid;
                 Oppgave oppgave = context.Oppgaver.Where(o => o.Oppgave_id == time.Oppgave_id).FirstOrDefault();
+
+                // http://www.codeproject.com/Tips/61339/Replace-an-Entity-in-Entity-Framework-Context
 
                 time.Opprettet = dato;
                 time.Tid = bruktTid;
                 time.Start = startTid;
                 time.Stopp = sluttTid;
+                foreach (Pause p in pauseListe)
+                {
+                    Pause pausex = context.Pauser.Where(c => c.Pause_id == p.Pause_id).FirstOrDefault();
+
+                    if (pausex != null)
+                    {
+                        pausex.Start = p.Start;
+                        pausex.Stopp = p.Stopp;
+                    }
+                    else if (p.Pause_id == 0)
+                    {
+                        time.Pause.Add(p);
+                    }
+                }
+                    //time.Pause.Add(p);
                 time.IsFerdig = godkjent;
+
+                TimeSpan differanse = bruktTid - bruktTidOrig;
+
+                oppgave.BruktTid += differanse;
+                if (oppgave.RemainingTime >= differanse)
+                    oppgave.RemainingTime -= differanse;
+                else
+                    oppgave.RemainingTime = new TimeSpan(0);
 
                 context.SaveChanges();
             }

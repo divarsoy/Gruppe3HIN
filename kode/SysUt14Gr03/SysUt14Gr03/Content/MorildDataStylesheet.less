@@ -2,110 +2,162 @@
 @defaultmargleft: 10px;
 
 .listbox {
-    height: 50px;
+	height: 50px;
 }
 .epost_pref_tabell {
 
-    margin-left: @defaultmargleft;
+	margin-left: @defaultmargleft;
 
-    label {
-        margin-left: @defaultmargleft;
-    }
+	label {
+		margin-left: @defaultmargleft;
+	}
 }
 .alert {
-    margin-bottom: 0;
+	margin-bottom: 0;
 }
 .navbar {
-    margin-bottom:0;
+	margin-bottom:0;
 }
 button, input, select, textarea, .checkbox {
-    margin: 0 0 12px 12px;
+	margin: 0 0 12px 12px;
 }
 .jumbotron {
-    padding-top: 20px;
-    padding-bottom: 60px;
+	padding-top: 20px;
+	padding-bottom: 60px;
 
-    p {
-        width: auto;
-    }
+	p {
+		width: auto;
+	}
 
-    .glyphicon.glyphicon-paperclip, .glyphicon.glyphicon-pencil, .glyphicon.glyphicon-plane {
-        display: table-footer-group;
-        float: left;
-        font-size: 130px;
-        margin-left: -40px;
-        margin-right: 53px;
-        margin-top: 20px;
-        margin-bottom: 20px;
-    }    
+	.glyphicon.glyphicon-paperclip, .glyphicon.glyphicon-pencil, .glyphicon.glyphicon-plane {
+		display: table-footer-group;
+		float: left;
+		font-size: 130px;
+		margin-left: -40px;
+		margin-right: 53px;
+		margin-top: 20px;
+		margin-bottom: 20px;
+	}    
 }
 .no-padding {
-    padding: 0;
+	padding: 0;
 }
 
 #oppgaveGruppe {
-    th {
-        text-align: center;
-    }
+	th {
+		text-align: center;
+	}
 }
 .headerCenter{
-    text-align:center;
+	text-align:center;
 }
 
 .listboxTest{
-    padding-left:30%;
+	padding-left:30%;
 }
 
 .footerPadding{
-    padding-bottom:40px;
+	padding-bottom:40px;
 }
 
 .headerPadding{
-    padding-top:60px;
+	//padding-top:60px;
 }
 
 
 .maxBeskrivelseBredde {
-    max-width: 400px;
-    max-height: 400px;
+	max-width: 400px;
+	max-height: 400px;
 }
-    .visOppgave {
-        p {
-            height: auto;
-            width: auto;
-        }
-    }
-    .feilMelding {
-        color: red;
-        padding-left: 15px;
-    }
+	.visOppgave {
+		p {
+			height: auto;
+			width: auto;
+		}
+	}
+	.feilMelding {
+		color: red;
+		padding-left: 15px;
+	}
 .sheperd-link {
-    background-color: #D3D3D3;
-    display: block;
-    font-size: 0.75em !important;
-    line-height: 1.3em;
-    padding: 10px;
+	background-color: #D3D3D3;
+	display: block;
+	font-size: 0.75em !important;
+	line-height: 1.3em;
+	padding: 10px;
 }
 
 .overskrift-shepherd{
-    color: white;
+	color: white;
 }
 .red {
-    color: red;
+	color: red;
 }
 
 .rapport {
-    p {
-        padding-left : 5%;
-        padding-bottom : 15%;
-    }
-    
+	p {
+		padding-left : 5%;
+		padding-bottom : 15%;
+	}
+	
 }
 
 .rapport2 {
-    
-        padding-left : 5%;
-   
+	
+		padding-left : 5%;  
 }
+.navbar-right {float: right !important;}
 
+
+@media (max-width: 1200px) {
+	.navbar-header {
+		float: none;
+	}
+	.navbar-left,.navbar-right {
+		float: none !important;
+	}
+	.navbar-toggle {
+		display: block;
+	}
+	.navbar-collapse {
+		border-top: 1px solid transparent;
+		box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+	}
+	.navbar-fixed-top {
+		top: 0;
+		border-width: 0 0 1px;
+	}
+	.navbar-collapse.collapse {
+		display: none!important;
+	}
+	.navbar-nav {
+		float: none!important;
+		margin-top: 7.5px;
+	}
+	.navbar-nav>li {
+		float: none;
+	}
+	.navbar-nav>li>a {
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+	.collapse.in{
+		display:block !important;
+	}
+
+		.navbar-right {margin-right:20px;}
+	.navbar-header:after 
+	{
+	clear: none;
+	}
+	.navbar-nav.navbar-right > li { float: left; }
+
+	.navbar-collapse:before {clear:both;}
+
+	.navbar-collapse {overflow-y: hidden;}
+	.navbar-collapse.in {overflow-y: visible;}
+	.navbar{border-color: #101010; border-width: 0 0 1px;}
+	.navbar-collapse.in > ul {border-color: #101010; border-top:1px double;}
+
+}
 
