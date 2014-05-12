@@ -62,7 +62,7 @@ textarea,
   width: auto;
 }
 .feilMelding {
-  color: red;
+  color: #ff0000;
   padding-left: 15px;
 }
 .sheperd-link {
@@ -76,7 +76,7 @@ textarea,
   color: white;
 }
 .red {
-  color: red;
+  color: #ff0000;
 }
 .rapport p {
   padding-left: 5%;
@@ -84,6 +84,9 @@ textarea,
 }
 .rapport2 {
   padding-left: 5%;
+}
+.faseleder-nav {
+  background-color: #ff0000;
 }
 .navbar-right {
   float: right !important;

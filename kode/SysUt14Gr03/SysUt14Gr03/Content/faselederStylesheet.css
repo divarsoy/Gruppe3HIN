@@ -1,0 +1,17 @@
+﻿#morild-nav {
+  background-color: #3276b1;
+  border-color: #3276b1;
+}
+.navbar-inverse .navbar-brand {
+  color: #333333;
+}
+.navbar-inverse .navbar-nav > li > a {
+  color: #333333;
+}
+.navbar-inverse .navbar-nav > .open > a,
+.navbar-inverse .navbar-nav > .open > a:hover,
+.navbar-inverse .navbar-nav > .open > a:focus > .open > a:hover,
+.navbar-inverse .navbar-nav > .open > a:focus {
+  background-color: #3276b1;
+}
+/*# sourceMappingURL=faselederStylesheet.css.map */

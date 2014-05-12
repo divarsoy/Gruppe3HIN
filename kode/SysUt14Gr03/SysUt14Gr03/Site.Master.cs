@@ -84,6 +84,7 @@ namespace SysUt14Gr03
         {
             //if (!IsPostBack)
             //{
+            body.ID = Page.GetType().BaseType.Name;
 
             if (Session["bruker_id"] != null)
             {

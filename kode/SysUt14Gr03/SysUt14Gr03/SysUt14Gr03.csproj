@@ -203,6 +203,9 @@
     <Content Include="bin\SysUt14Gr03.dll" />
     <Content Include="bin\SysUt14Gr03.pdb" />
     <Content Include="bin\WebGrease.dll" />
+    <Content Include="Content\faselederStylesheet.css">
+      <DependentUpon>faselederStylesheet.less</DependentUpon>
+    </Content>
     <Content Include="Content\MorildDataStylesheet.css">
       <DependentUpon>MorildDataStylesheet.less</DependentUpon>
     </Content>
@@ -342,6 +345,10 @@
     <Content Include="ClassDiagram1.cd" />
     <Content Include="Content\MorildDataStylesheet.css.map">
       <DependentUpon>MorildDataStylesheet.css</DependentUpon>
+    </Content>
+    <Content Include="Content\faselederStylesheet.less" />
+    <Content Include="Content\faselederStylesheet.css.map">
+      <DependentUpon>faselederStylesheet.css</DependentUpon>
     </Content>
     <None Include="obj\Release\Package\PackageTmp\Scripts\_references.js" />
     <Content Include="obj\Release\Package\PackageTmp\TidsestimerProsjekt.aspx" />
