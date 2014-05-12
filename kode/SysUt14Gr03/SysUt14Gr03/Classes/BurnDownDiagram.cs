@@ -10,31 +10,33 @@ namespace SysUt14Gr03.Classes
 {
     public class BurnDownDiagram
     {
-        private static TimeSpan estimatForFase;
-        private static TimeSpan estimatForOppgave;
-        private static TimeSpan resterendeTidForFase;
-        private static TimeSpan resterendeTidForFaseMedDagensTillegg;
-        private static TimeSpan resterendeTidForOppgave;
-        private static TimeSpan bruktTid;
-        private static TimeSpan nullTimeSpan = new TimeSpan(0);
-        private static TimeSpan tillegsTidForDato;
-        private static DateTime ferdigstiltDato;
-        private static TimeSpan fratrekk;
-        private static TimeSpan ideellTidsbruk = new TimeSpan(0);
 
-        private static List<float> yVerdier = new List<float>();
-        private static List<float> yVerdierTotal = new List<float>();
-        private static List<float> idelleYVerdier = new List<float>();
-        private static List<DateTime> xVerdier = new List<DateTime>();
 
         public static Chart getChartForFase(int fase_id)
         {
+            TimeSpan estimatForFase = new TimeSpan(0);
+            TimeSpan estimatForOppgave;
+            TimeSpan resterendeTidForFase;
+            TimeSpan resterendeTidForFaseMedDagensTillegg;
+            TimeSpan resterendeTidForOppgave;
+            TimeSpan bruktTid = new TimeSpan(0);
+            TimeSpan nullTimeSpan = new TimeSpan(0);
+            TimeSpan tillegsTidForDato;
+            DateTime ferdigstiltDato;
+            TimeSpan fratrekk;
+            TimeSpan ideellTidsbruk = new TimeSpan(0);
+
+            List<float> yVerdier = new List<float>();
+            List<float> yVerdierTotal = new List<float>();
+            List<float> idelleYVerdier = new List<float>();
+            List<DateTime> xVerdier = new List<DateTime>();
+
             Fase fase = Queries.GetFase(fase_id);
             DateTime sluttDato = fase.Stopp;
             DateTime startDato = fase.Start;
             List<Oppgave> oppgaverForFase = Queries.getOppgaverIFase(fase_id);
             List<TimeSpan> bruktTidForOppgaver = new List<TimeSpan>();
-      
+
             Chart chart = new Chart();
             chart.BackColor = System.Drawing.Color.LightGray;
             chart.Width = 800;
@@ -92,70 +94,71 @@ namespace SysUt14Gr03.Classes
 
             }
 
-                foreach (DateTime d in range)
+            foreach (DateTime d in range)
+            {
+                resterendeTidForFase = new TimeSpan();
+                tillegsTidForDato = new TimeSpan();
+                fratrekk = new TimeSpan();
+
+                for (int i = 0; i < oppgaverForFase.Count; i++)
                 {
-                    resterendeTidForFase = new TimeSpan();
-                    tillegsTidForDato = new TimeSpan();
-                    fratrekk = new TimeSpan();
+                    estimatForOppgave = (TimeSpan)oppgaverForFase[i].Estimat;
 
-                    for (int i = 0; i < oppgaverForFase.Count; i++)
+                    resterendeTidForOppgave = estimatForOppgave;
+                    List<Time> registrerteTimerPaaOppgave = Queries.GetTimerForOppgave(oppgaverForFase[i].Oppgave_id);
+
+                    for (int j = 0; j < registrerteTimerPaaOppgave.Count; j++)
                     {
-                        estimatForOppgave = (TimeSpan)oppgaverForFase[i].Estimat;
-
-                        resterendeTidForOppgave = estimatForOppgave;
-                        List<Time> registrerteTimerPaaOppgave = Queries.GetTimerForOppgave(oppgaverForFase[i].Oppgave_id);
-
-                        for (int j = 0; j < registrerteTimerPaaOppgave.Count; j++)
+                        if (registrerteTimerPaaOppgave[j].Stopp != null)
                         {
-                            if (registrerteTimerPaaOppgave[j].Stopp != null)
+                            DateTime stopDatoForTimeregistrering = (DateTime)registrerteTimerPaaOppgave[j].Stopp;
+
+                            if (stopDatoForTimeregistrering.Date == d.Date)
                             {
-                                DateTime stopDatoForTimeregistrering = (DateTime)registrerteTimerPaaOppgave[j].Stopp;
-                              
-                                if (stopDatoForTimeregistrering.Date == d.Date) {
-                                    bruktTidForOppgaver[i] = bruktTidForOppgaver[i] + registrerteTimerPaaOppgave[j].Tid;
-                                    bruktTid = bruktTid + registrerteTimerPaaOppgave[j].Tid;
-                                }
+                                bruktTidForOppgaver[i] = bruktTidForOppgaver[i] + registrerteTimerPaaOppgave[j].Tid;
+                                bruktTid = bruktTid + registrerteTimerPaaOppgave[j].Tid;
                             }
                         }
-
-
-                        //legger til tid for fasen dersom det er brukt lenger tid på en oppgave
-                        if (bruktTidForOppgaver[i] > estimatForOppgave)
-                        {
-                            tillegsTidForDato = bruktTidForOppgaver[i] - estimatForOppgave;
-
-                            bruktTidForOppgaver[i] = estimatForOppgave;
-                        }
-
-                        //trekker ifra tid for fase dersom en oppgave er ferdigstilt 
-                        if (oppgaverForFase[i].Status_id == 3)
-                        {
-                            ferdigstiltDato = (DateTime)oppgaverForFase[i].Avsluttet;
-                            if (ferdigstiltDato.Date == d.Date)
-                            {
-                                TimeSpan ubruktTid = estimatForOppgave - bruktTidForOppgaver[i];
-                                fratrekk += ubruktTid;
-                            }
-                        }
-
                     }
-                    resterendeTidForFase = estimatForFase - bruktTid;
 
-                    resterendeTidForFaseMedDagensTillegg = resterendeTidForFase + tillegsTidForDato - fratrekk;
 
-                    yVerdier.Add((float)resterendeTidForFase.TotalHours);
-                    yVerdier.Add((float)resterendeTidForFaseMedDagensTillegg.TotalHours);
-                    xVerdier.Add(d);
-                    xVerdier.Add(d);
-                    yVerdierTotal.Add((float)estimatForFase.TotalHours);
+                    //legger til tid for fasen dersom det er brukt lenger tid på en oppgave
+                    if (bruktTidForOppgaver[i] > estimatForOppgave)
+                    {
+                        tillegsTidForDato = bruktTidForOppgaver[i] - estimatForOppgave;
 
-                    estimatForFase += tillegsTidForDato;
-                    estimatForFase -= fratrekk;
+                        bruktTidForOppgaver[i] = estimatForOppgave;
+                    }
 
-                    yVerdierTotal.Add((float)estimatForFase.TotalHours);
+                    //trekker ifra tid for fase dersom en oppgave er ferdigstilt 
+                    if (oppgaverForFase[i].Status_id == 3)
+                    {
+                        ferdigstiltDato = (DateTime)oppgaverForFase[i].Avsluttet;
+                        if (ferdigstiltDato.Date == d.Date)
+                        {
+                            TimeSpan ubruktTid = estimatForOppgave - bruktTidForOppgaver[i];
+                            fratrekk += ubruktTid;
+                        }
+                    }
 
-                    
                 }
+                resterendeTidForFase = estimatForFase - bruktTid;
+
+                resterendeTidForFaseMedDagensTillegg = resterendeTidForFase + tillegsTidForDato - fratrekk;
+
+                yVerdier.Add((float)resterendeTidForFase.TotalHours);
+                yVerdier.Add((float)resterendeTidForFaseMedDagensTillegg.TotalHours);
+                xVerdier.Add(d);
+                xVerdier.Add(d);
+                yVerdierTotal.Add((float)estimatForFase.TotalHours);
+
+                estimatForFase += tillegsTidForDato;
+                estimatForFase -= fratrekk;
+
+                yVerdierTotal.Add((float)estimatForFase.TotalHours);
+
+
+            }
 
             chart.Series["Ideell Tidsbruk"].Points.DataBindXY(xVerdier, idelleYVerdier);
             chart.Series["Burndown"].Points.DataBindXY(xVerdier, yVerdier);

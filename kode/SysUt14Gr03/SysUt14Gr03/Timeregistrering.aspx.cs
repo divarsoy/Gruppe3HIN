@@ -351,5 +351,10 @@ namespace SysUt14Gr03
 
             Response.Redirect("ManuellTimeregistrering.aspx?oppgave_id=" + ddlOppgaver.SelectedValue, true);
         }
+
+        protected void btnIkkeRegistrer_Click(object sender, EventArgs e)
+        {
+            this.signOut();
+        }
     }
 }
