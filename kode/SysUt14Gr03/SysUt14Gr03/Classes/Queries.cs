@@ -178,6 +178,7 @@ namespace SysUt14Gr03.Classes
                 var timeListe = context.Timer
                             .Where(t => t.Bruker_id == bruker_id)
                             .Where(tid => tid.Aktiv == true)
+                            .OrderByDescending(t => t.Stopp)
                             .ToList<Time>();
                 return timeListe;
             }
@@ -193,6 +194,7 @@ namespace SysUt14Gr03.Classes
                             .Where(t => t.Aktiv == true)
                             .Where(t => t.Manuell == true)
                             .Where(t => t.IsFerdig == false)
+                            .OrderByDescending(t => t.Stopp)
                             .ToList<Time>();
                 return timeListe;
             }
@@ -204,6 +206,7 @@ namespace SysUt14Gr03.Classes
             {
                 var timeListe = context.Timer
                             .Where(t => t.Oppgave_id == oppgave_id)
+                            .OrderByDescending(t => t.Stopp)
                             .ToList<Time>();
                 return timeListe;
             }
@@ -216,6 +219,7 @@ namespace SysUt14Gr03.Classes
                 var timeListe = context.Timer
                             .Where(t => t.Oppgave_id == oppgave_id)
                             .Where(t => t.Bruker_id == bruker_id)
+                            .OrderByDescending(t => t.Stopp)
                             .ToList<Time>();
                 return timeListe;
             }
