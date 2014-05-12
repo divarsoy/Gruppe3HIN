@@ -13,6 +13,7 @@
         <asp:Button id="btnStop" CssClass="btn btn-danger btn-large" runat="server" OnClick="btnStop_Click" Text="Stop"/>
     </div>
     <div class="clearfix"></div>
+    <br />
     <asp:Button ID="btnManuell" CssClass="btn btn-primary" runat="server" Text="Gå til manuell timeregistrering" OnClick="btnManuell_Click" />
     <br />
 
@@ -20,4 +21,5 @@
     <asp:TextBox ID="tbKommentar" runat="server" TextMode="MultiLine" Height="150px" Width="300px"></asp:TextBox>
     <br/>
     <asp:Button id="btnRegistrer" CssClass="btn btn-primary btn-large" runat="server" OnClick="btnRegistrer_Click" Text="Registrer"/>
+    <asp:Button id="btnIkkeRegistrer" CssClass="btn btn-danger btn-large" runat="server" OnClick="btnIkkeRegistrer_Click" Text="Ikke registrer"/>
 </asp:Content>
