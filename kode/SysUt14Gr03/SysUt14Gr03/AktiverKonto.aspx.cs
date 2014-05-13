@@ -36,7 +36,7 @@ namespace SysUt14Gr03
             if ((!string.IsNullOrEmpty(Request.QueryString["Epost"])) & (!string.IsNullOrEmpty(Request.QueryString["Token"])))
             {
                 Session["flashMelding"] = "<h2 align=center> Fyll ut resterende felt for å aktivere kontoen din</h2>";
-                Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger;
+                Session["flashStatus"] = Konstanter.notifikasjonsTyper.info;
             }
             else
             {
@@ -69,7 +69,7 @@ namespace SysUt14Gr03
                     using (var context = new Context())
                     {
                         epost = Email.Text = Request.QueryString["Epost"];
-                        Bruker bruk = context.Brukere.Where(b => b.Epost == epost).First();
+                        Bruker bruk = context.Brukere.Where(b => b.Epost == epost).Where(b => b.Aktiv == false).FirstOrDefault();
                         bruker_id = bruk.Bruker_id;
                         Firstname.Text = bruk.Fornavn;
                         Aftername.Text = bruk.Etternavn;
@@ -121,6 +121,7 @@ namespace SysUt14Gr03
                     {
                         Session["flashMelding"] = "Brukernavnet er allerede tatt";
                         Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger;
+                        Response.Redirect(Request.RawUrl);
                         check = false;
                     }
                     if (check)
@@ -134,10 +135,11 @@ namespace SysUt14Gr03
                         Bruker.Token = token;
                         Bruker.Salt = salt;
                         db.SaveChanges();
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('Kontoen din er aktivert, du vil bli videresendt til logg inn siden');", true);
-
-                        Response.AddHeader("REFRESH", "4;URL=Login.aspx");
-                        //Response.Write("<h2>Du kan logge deg inn nå  <a href=Login.aspx>Klikk her for å logge inn</a> </h2>");
+                      //  ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('Kontoen din er aktivert, du vil bli videresendt til logg inn siden');", true);
+                        Session["flashMelding"] = "Kontoen din er aktivert, du vil bli videresendt til logg inn siden";
+                        Session["flashStatus"] = Konstanter.notifikasjonsTyper.success;
+                        Response.AddHeader("REFRESH", "3;URL=Login.aspx");
+                        Response.Redirect(Request.RawUrl);
                         disable();
                     }
                 }
