@@ -169,8 +169,8 @@ namespace SysUt14Gr03.Classes
         public static Table HentBrukerTabellForTeam(List<Bruker> query, Team nesteTeam, int prosjekt_id)
         {
             Table tabell = new Table();
+          
             TableHeaderRow headerRow = new TableHeaderRow();
-            TableHeaderRow teamNavnHeader = new TableHeaderRow();
             TableHeaderCell teamNavnCell = new TableHeaderCell();
             TableHeaderCell forNavnHeaderCell = new TableHeaderCell();
             TableHeaderCell etterNavnHeaderCell = new TableHeaderCell();
@@ -179,17 +179,14 @@ namespace SysUt14Gr03.Classes
             TableHeaderCell IMHeaderCell = new TableHeaderCell();
             TableHeaderCell rolleHeaderCell = new TableHeaderCell();
 
-            string teamLink = teamNavnCell.ResolveUrl("~/VisTeam?team_id=" + nesteTeam.Team_id.ToString());
+         
+            
             forNavnHeaderCell.Text = "Fornavn";
             etterNavnHeaderCell.Text = "Etternavn";
             brukerNavnHeaderCell.Text = "Brukernavn";
             epostHeaderCell.Text = "Epost";
             IMHeaderCell.Text = "IM";
-            teamNavnCell.Text = String.Format("<a href='{0}'>{1}</a>", teamLink, nesteTeam.Navn.ToString());
-           
             rolleHeaderCell.Text = "Rolle";
-            teamNavnHeader.Cells.Add(teamNavnCell);
-            tabell.Rows.Add(teamNavnHeader);
 
             headerRow.Cells.Add(forNavnHeaderCell);
             headerRow.Cells.Add(etterNavnHeaderCell);

@@ -38,6 +38,10 @@ namespace SysUt14Gr03
                         brukerTabell.CssClass = "table";
 
                     }
+                    Label label = new Label();
+                    label.Text =  "<h3>" + t.Navn + "</h3>";
+                    label.Font.Bold = true;
+                    PlaceHolderTable.Controls.Add(label);
                     PlaceHolderTable.Controls.Add(brukerTabell);
                 }
             }
