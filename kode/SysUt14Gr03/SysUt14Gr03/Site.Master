@@ -73,6 +73,7 @@
         </div>
 
         <div class="container body-content">
+            <h4><asp:Label ID="lblInfo" CssClass="prosjektInfo" runat="server" Text=""></asp:Label></h4>
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />

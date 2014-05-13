@@ -89,7 +89,23 @@ namespace SysUt14Gr03
             if (Session["bruker_id"] != null)
             {
                 bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
-                //Response.Redirect("~/Login");
+
+                if (Session["prosjekt_id"] !=null )
+                {
+                    int prosjekt_id = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
+                    Prosjekt prosjekt = Queries.GetProsjekt(prosjekt_id);
+                    var fase = Queries.GetPresentFase(prosjekt_id);
+                    string fasenavn = "";
+                    string faseleder = "";
+                    string fasestring = "";
+                    if (fase != null ){
+                        fasenavn = fase.Navn; 
+                        Bruker bruker = Queries.GetBruker(fase.Bruker_id);
+                        faseleder = bruker.Brukernavn;
+                        fasestring = string.Format("- Nåværende fase: {0} - Faseleder: {1}", fase.Navn, bruker.Brukernavn);
+                    }
+                    lblInfo.Text = string.Format("Prosjekt: {0} {1}", prosjekt.Navn, fasestring);
+                }
 
 
                 int antallNotifikasjonerInt = Queries.GetNotifikasjon(bruker_id).Count;

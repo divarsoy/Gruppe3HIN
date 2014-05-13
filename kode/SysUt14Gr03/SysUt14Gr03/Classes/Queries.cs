@@ -966,6 +966,21 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        public static Fase GetPresentFase(int _prosjekt_id)
+        {
+            using (var context = new Context())
+            {
+                DateTime now = DateTime.Now;
+                var fasen = context.Faser
+                            .Where(fase => fase.Prosjekt_id == _prosjekt_id)
+                            .Where(fase => fase.Start <= now)
+                            .Where(fase => fase.Stopp >= now)
+                            .FirstOrDefault();
+                return fasen;
+            }
+        }
+
+
         public static List<Logg> GetLoggForAdministrator()
         {
             using (var context = new Context())

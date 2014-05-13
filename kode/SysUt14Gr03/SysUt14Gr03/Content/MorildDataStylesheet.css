@@ -85,6 +85,11 @@ textarea,
 .rapport2 {
   padding-left: 5%;
 }
+.prosjektInfo {
+  color: #d2322d;
+  font-weight: normal;
+  padding-left: 15px;
+}
 .faseleder-nav {
   background-color: #ff0000;
 }
