@@ -26,14 +26,9 @@ namespace SysUt14Gr03.Classes
 
             if (!Validator.SjekkRettighet(bruker_id, rettighet))
             {
-                http.Session["bruker_id"] = null;
-                http.Session["bruker"] = null;
-                http.Session["fornavn"] = null;
-                http.Session["brukernavn"] = null;
-                http.Session["loggedIn"] = null;
                 http.Session["flashMelding"] = "Du har ikke korrekte rettighet for aksessere siden du prøvde å nå";
                 http.Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
-                http.Response.Redirect(("~/Login.aspx"), true);
+                http.Response.Redirect(("~/Loggut"), true);
             }
         }
 

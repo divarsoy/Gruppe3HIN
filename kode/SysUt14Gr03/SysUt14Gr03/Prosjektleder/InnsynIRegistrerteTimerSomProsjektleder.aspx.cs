@@ -36,7 +36,6 @@ namespace SysUt14Gr03.Prosjektleder
 
             List<Bruker> brukerePaProsjekt = Queries.GetAlleBrukereIEtProjekt(prosjektId);
             Prosjekt prosjekt = Queries.GetProsjekt(prosjektId);
-            lblProsjekt.Text = String.Format("<a href='../VisProsjekt?prosjekt_id={0}'>{1} </a>", prosjektId, prosjekt.Navn);
 
             foreach (Bruker b in brukerePaProsjekt)
             {

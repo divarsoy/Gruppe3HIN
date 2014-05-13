@@ -61,9 +61,6 @@ namespace SysUt14Gr03
 
                     if (query.Count > 0)
                     {
-                        prosjektNavn = Queries.GetProsjekt(prosjekt_id).Navn;
-                        lblTilbakemelding.Text = string.Format("<h3>Prosjekt: {0}</h3>", prosjektNavn);
-
                         Table oppgaveTable = Tabeller.HentOppgaveTabell(query);
                         oppgaveTable.CssClass = "table";
                         PlaceHolderTable.Controls.Add(oppgaveTable);                      

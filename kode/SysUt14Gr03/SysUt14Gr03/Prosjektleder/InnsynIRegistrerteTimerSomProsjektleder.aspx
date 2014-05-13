@@ -4,8 +4,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MenyTemplate" runat="server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
-    <h2><asp:Label ID="lblProsjekt" runat="server"></asp:Label></h2>
-    <br />
     <div class="table">
         <asp:PlaceHolder ID="PlaceHolderTable" runat="server"></asp:PlaceHolder>
     </div>

@@ -55,7 +55,7 @@ namespace SysUt14Gr03
                     {
                         btnPameld.Visible = true;
                     }
-
+                    
                     lblNavn.Text = oppgave.Tittel;
                     lblInfo.Text = "";
                     lblInfo.Text += "<p><b>User story: </b>" + oppgave.UserStory + "</p>\n";

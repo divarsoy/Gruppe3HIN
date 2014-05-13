@@ -13,6 +13,7 @@ namespace SysUt14Gr03.Prosjektleder
     public partial class AdministrasjonAvFase : System.Web.UI.Page
     {
         private int prosjekt_id;
+        private int bruker_id;
 
         protected void Page_PreInit(Object sener, EventArgs e)
         {
@@ -22,14 +23,23 @@ namespace SysUt14Gr03.Prosjektleder
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
-            if (Request.QueryString["prosjekt_id"] != null)
+            SessionSjekk.sjekkForBruker_id();
+            bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
+            if (Validator.SjekkRettighet(bruker_id, Konstanter.rettighet.Prosjektleder) || SessionSjekk.IsFaseleder())
             {
-                prosjekt_id = Validator.KonverterTilTall(Request.QueryString["prosjekt_id"].ToString());
-            }
-            if (!IsPostBack)
-            {
-                visFase();
+                if (Session["prosjekt_id"] != null)
+                {
+                    prosjekt_id = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
+                }
+                if (Request.QueryString["prosjekt_id"] != null)
+                {
+                    prosjekt_id = Validator.KonverterTilTall(Request.QueryString["prosjekt_id"].ToString());
+                }
+
+                if (!IsPostBack)
+                {
+                    visFase();
+                }
             }
         }
         private void visFase()
