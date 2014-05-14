@@ -146,10 +146,14 @@ namespace SysUt14Gr03
             txtPSL.TextMode = TextBoxMode.Time;
             txtPST.ID = "txtPauseStart" + pauseTeller;
             txtPSL.ID = "txtPauseSlutt" + pauseTeller;
+            Button btnFjernPause = new Button();
+            btnFjernPause.Text = "<i class=\"icon-remove\"></i>";
+            btnFjernPause.ID = "btnFjernPause" + pauseTeller;
             pnlPauser.Controls.Add(lblPST);
             pnlPauser.Controls.Add(txtPST);
             pnlPauser.Controls.Add(lblPSL);
             pnlPauser.Controls.Add(txtPSL);
+            pnlPauser.Controls.Add(btnFjernPause);
             pnlPauser.Controls.Add(new LiteralControl("<br />"));
         }
 
@@ -167,10 +171,14 @@ namespace SysUt14Gr03
                 txtPSL.TextMode = TextBoxMode.Time;
                 txtPST.ID = "txtPauseStart" + i;
                 txtPSL.ID = "txtPauseSlutt" + i;
+                Button btnFjernPause = new Button();
+                btnFjernPause.CssClass = "";
+                btnFjernPause.ID = "btnFjernPause" + i;
                 pnlPauser.Controls.Add(lblPST);
                 pnlPauser.Controls.Add(txtPST);
                 pnlPauser.Controls.Add(lblPSL);
                 pnlPauser.Controls.Add(txtPSL);
+                pnlPauser.Controls.Add(btnFjernPause);
                 pnlPauser.Controls.Add(new LiteralControl("<br />"));
             }
         }
