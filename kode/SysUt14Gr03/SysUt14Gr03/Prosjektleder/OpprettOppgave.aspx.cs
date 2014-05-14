@@ -173,7 +173,6 @@ namespace SysUt14Gr03
 
         protected void btnFjernBruker_Click(object sender, EventArgs e)
         {
-            
             lbBrukere.Items.Remove(lbBrukere.SelectedItem);
         }
     }

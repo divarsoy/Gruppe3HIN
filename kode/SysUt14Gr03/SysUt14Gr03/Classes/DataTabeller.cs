@@ -111,16 +111,23 @@ namespace SysUt14Gr03.Classes
             DataTable dt = new DataTable();
             dt.Columns.Add(new DataColumn("Logg id", typeof(System.Int32)));
             dt.Columns.Add(new DataColumn("Hendelse", typeof(System.String)));
+            dt.Columns.Add(new DataColumn("Bruker navn", typeof(System.String)));
+            dt.Columns.Add(new DataColumn("Prosjekt navn", typeof(System.String))); 
             dt.Columns.Add(new DataColumn("Dato opprettet", typeof(System.DateTime)));
-            dt.Columns.Add(new DataColumn("Bruker id", typeof(System.Int32)));
 
             foreach (Logg bruker in query)
             {
                 DataRow row = dt.NewRow();
                 row["Logg id"] = bruker.Logg_id;
                 row["Hendelse"] = bruker.Hendelse;
+                row["Bruker navn"] = bruker.Bruker.Brukernavn;
+                if (bruker.Prosjekt_id != null)
+                {
+                    Prosjekt prosjekt = Queries.GetProsjekt((int)bruker.Prosjekt_id);
+                    row["Prosjekt navn"] = prosjekt.Navn;
+                }
                 row["Dato opprettet"] = bruker.Opprettet;
-                row["Bruker id"] = bruker.bruker_id;
+                
 
                 dt.Rows.Add(row);
             }

@@ -7,6 +7,10 @@ using System.Web.UI.WebControls;
 using SysUt14Gr03.Models;
 using SysUt14Gr03.Classes;
 
+/// <summary>
+/// Lister ut alle registrerte timer for en utvikler i et prosjekt. 
+/// </summary>
+
 namespace SysUt14Gr03.Utvikler
 {
     public partial class InnsynIEgneRegistrerteTimerSomBruker : System.Web.UI.Page

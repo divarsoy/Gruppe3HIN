@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using SysUt14Gr03.Models;
 using SysUt14Gr03.Classes;
+using System.Web.UI.HtmlControls;
 
 namespace SysUt14Gr03.Prosjektleder
 {
@@ -42,8 +43,10 @@ namespace SysUt14Gr03.Prosjektleder
                 List<Time> timer = Queries.GetTimerForBruker(b.Bruker_id);
                 if (!IsPostBack)
                 {
+                    string navn = b.Brukernavn;
                     Table timeTabell = Tabeller.HentTimerForProsjektleder(timer, b, prosjekt);
-
+                    var brControl3 = new LiteralControl("<br />");
+                    PlaceHolderTable.Controls.Add(brControl3);
                     PlaceHolderTable.Controls.Add(timeTabell);
                 }
             }

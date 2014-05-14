@@ -7,6 +7,11 @@ using System.Web.UI.WebControls;
 using SysUt14Gr03.Classes;
 using SysUt14Gr03.Models;
 
+/// <summary>
+/// Administrering av tema. Man får opp en check box liste med team navn som er aktive. Hvor man da kan velge om man vil endre, arkivere teamene. 
+/// Ligger også en knapp som linker til aktivering av team. 
+/// </summary>
+
 namespace SysUt14Gr03
 {
     public partial class AdministrasjonAvTeam : System.Web.UI.Page

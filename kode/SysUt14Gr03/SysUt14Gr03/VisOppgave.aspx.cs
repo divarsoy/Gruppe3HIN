@@ -8,6 +8,11 @@ using System.Web.UI.WebControls;
 using SysUt14Gr03.Classes;
 using SysUt14Gr03.Models;
 
+/// <summary>
+/// Viser all informasjon om en valgt oppgave + hvilken deltagere som er med på den og demmes totalt registrert tid på den,
+/// og alle kommentarer til oppgaven + at man kan legge til en kommentar til oppgaven. 
+/// </summary>
+
 namespace SysUt14Gr03
 {
     public partial class VisOppgave : System.Web.UI.Page

@@ -23,7 +23,7 @@ namespace SysUt14Gr03
         protected void Page_Load(object sender, EventArgs e)
         {
             bool queryStatus = false;
-            int bruker_id = 2;
+            int bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
 
             if (Session["loggedIn"] == null)
                 Response.Redirect("Login.aspx", true);

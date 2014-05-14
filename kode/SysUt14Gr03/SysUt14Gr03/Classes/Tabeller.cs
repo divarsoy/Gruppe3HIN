@@ -752,6 +752,7 @@ namespace SysUt14Gr03.Classes
             TableHeaderCell stoppHeaderCell = new TableHeaderCell();
             TableHeaderCell tidHeaderCell = new TableHeaderCell();
             TableHeaderCell manuellHeaderCell = new TableHeaderCell();
+            TableHeaderCell feilHeaderCell = new TableHeaderCell();
 
             headerCell.Text = bruker.Brukernavn.ToString();
             oppgaveIdHeaderCell.Text = "Oppgave ID";
@@ -761,15 +762,22 @@ namespace SysUt14Gr03.Classes
             stoppHeaderCell.Text = "Stopp";
             tidHeaderCell.Text = "Brukt tid";
             manuellHeaderCell.Text = "Registrert Manuelt";
+            feilHeaderCell.Text = string.Format("<h4><font color='red'>Det finnes ingen oppgaver for denne brukeren</font></h4>");
 
-            timeHeaderRow.Cells.Add(oppgaveIdHeaderCell);
-            timeHeaderRow.Cells.Add(oppgaveHeaderCell);
-            timeHeaderRow.Cells.Add(opprettetHeaderCell);
-            timeHeaderRow.Cells.Add(startHeaderCell);
-            timeHeaderRow.Cells.Add(stoppHeaderCell);
-            timeHeaderRow.Cells.Add(tidHeaderCell);
-            timeHeaderRow.Cells.Add(manuellHeaderCell);
+            if (time_list.Count > 0)
+            {
+                timeHeaderRow.Cells.Add(oppgaveIdHeaderCell);
+                timeHeaderRow.Cells.Add(oppgaveHeaderCell);
+                timeHeaderRow.Cells.Add(opprettetHeaderCell);
+                timeHeaderRow.Cells.Add(startHeaderCell);
+                timeHeaderRow.Cells.Add(stoppHeaderCell);
+                timeHeaderRow.Cells.Add(tidHeaderCell);
+                timeHeaderRow.Cells.Add(manuellHeaderCell);
+            }
+            else
+                timeHeaderRow.Cells.Add(feilHeaderCell);
             headerRow.Cells.Add(headerCell);
+            
             tabell.Rows.Add(headerRow);
             tabell.Rows.Add(timeHeaderRow);
 
