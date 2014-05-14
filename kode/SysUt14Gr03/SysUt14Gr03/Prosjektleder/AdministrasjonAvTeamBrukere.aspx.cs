@@ -7,6 +7,12 @@ using System.Web.UI.WebControls;
 using SysUt14Gr03.Classes;
 using SysUt14Gr03.Models;
 
+/// <summary>
+/// Tilgjengelig for faseleder og prosjekt leder. Får opp to checkbox lister med brukere. Den til venstre er bruker liste som allerede er i teamet, den lista til høyre 
+/// er en liste over alle brukere som eksistere i databasen minus brukere som allerede er i teamet. Så er det muligheter for å legge til og fjerne brukere
+/// for teamet og endre navnet til teamet. 
+/// </summary>
+
 namespace SysUt14Gr03
 {
     public partial class AdministrasjonAvTeamBrukere : System.Web.UI.Page

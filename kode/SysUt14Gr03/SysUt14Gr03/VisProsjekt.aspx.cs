@@ -8,6 +8,10 @@ using System.Web.UI.WebControls;
 using SysUt14Gr03.Classes;
 using SysUt14Gr03.Models;
 
+/// <summary>
+/// Liste ut all informasjon som er knyttet opp i mot et valgt prosjekt. (Start/stopp dato, opprettet, team, leder, fase informasjon, og oppgaver)
+/// </summary>
+
 namespace SysUt14Gr03
 {
     public partial class VisProsjekt : System.Web.UI.Page
