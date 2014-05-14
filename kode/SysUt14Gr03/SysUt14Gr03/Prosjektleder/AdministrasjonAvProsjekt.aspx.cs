@@ -34,7 +34,7 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            SessionSjekk.sjekkForBruker_id();
+            SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
             bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
             rettighet = Queries.GetRettighet(bruker_id);
             if (rettighet.Rettighet_id == 3)
@@ -210,7 +210,7 @@ namespace SysUt14Gr03
                     HyperLink link = e.Row.FindControl("asp") as HyperLink;
                     link.NavigateUrl = "AdministrasjonAvTeamBrukere?Team_id=" + team_id;
                     HyperLink linkFase = e.Row.FindControl("hlFase") as HyperLink;
-                    linkFase.NavigateUrl = "AdministrasjonAvFase?prosjekt_id=" + prosjekt_id;
+                    linkFase.NavigateUrl = "~/AdministrasjonAvFase?prosjekt_id=" + prosjekt_id;
                    
                 }
             }

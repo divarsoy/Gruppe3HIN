@@ -249,17 +249,7 @@ namespace SysUt14Gr03
         }
         protected void btnSlettBrukere_Click(object sender, EventArgs e)
         {
-            if (lbBrukere.Items.Count > 0 && lbBrukere.SelectedIndex >= 0)
-            {
-                for (int i = 0; i < lbBrukere.Items.Count; i++)
-                {
-                    if (lbBrukere.Items[i].Selected)
-                    {
-                        lbBrukere.Items.Remove(lbBrukere.Items[i]);
-                        i--;
-                    }
-                }
-            }
+            lbBrukere.Items.Remove(lbBrukere.SelectedItem);
         }
 
         protected void btnSlutt_Click(object sender, EventArgs e)
@@ -278,13 +268,13 @@ namespace SysUt14Gr03
             endres = Queries.GetOppgave(oppgaveID);
             if (endres.BruktTid != null)
             {
-                float est = float.Parse(TbEstimering.Text);
-                float bru = float.Parse(tbBruktTid.Text);
-                float sum = est - bru;
-                if (sum > 0)
+                TimeSpan est = TimeSpan.Parse(TbEstimering.Text);
+                TimeSpan bru = TimeSpan.Parse(tbBruktTid.Text);
+                TimeSpan sum = est - bru;
+                if (sum > new TimeSpan(0))
                     tbRemainingTime.Text = sum.ToString();
                 else
-                    tbRemainingTime.Text = "0";
+                    tbRemainingTime.Text = new TimeSpan(0).ToString();
             }
         }
 

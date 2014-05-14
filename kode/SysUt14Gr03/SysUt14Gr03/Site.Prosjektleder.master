@@ -26,6 +26,7 @@
                 <ul class="dropdown-menu">
                     <li > <a  runat="server" href="~/OversiktProsjekter">Oversikt over prosjekter</a></li>
                     <li> <a runat="server" href="~/Prosjektleder/AdministrasjonAvProsjekt">Admininstrasjon av prosjekter</a></li>
+                    <li> <a runat="server" href="~/AdministrasjonAvFase">Admininstrasjon av faser i valgt prosjekt</a></li>
                     <li> <a runat="server" href="~/ProsjektLeder/OpprettProsjekt">Opprett Prosjekt</a></li>
                 </ul>                  
     </ul>
@@ -75,7 +76,7 @@
                     <li> <a runat="server" href="~/VisRapport">Vis Rapporter</a></li>
                     <li> <a runat="server" href="~/ProductBacklogProsjekt">Product Backlog</a></li>
                     <li> <a runat="server" href="~/SprintBacklogFase">Sprint Backlog</a></li>
-
+                    <li> <a runat="server" href="~/Prosjektleder/BurndownChartFase">Burndown for fase</a></li>
                 </ul> 
     </ul>
 

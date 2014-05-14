@@ -4,11 +4,6 @@
     <div class ="container">
         
         <h1>Opprett Oppgave</h1>
-            
-
-        <div class="form-group">
-            <h3 style="display: inline-block">Prosjekt: <asp:Label ID="lblProsjekt" runat="server"></asp:Label> </h3>     
-        </div>
 
         <div class="form-group">
             <div class="row">

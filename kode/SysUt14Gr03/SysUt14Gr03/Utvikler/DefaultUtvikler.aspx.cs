@@ -9,6 +9,10 @@ using SysUt14Gr03;
 using SysUt14Gr03.Classes;
 using SysUt14Gr03.Models;
 
+/// <summary>
+/// Forsiden for utvikler/faseleder. Man kan se kalenderen, velge et prosjekt og se hvilken prosjekt som er valgt. Står også at dette er utvikler forsiden :P 
+/// </summary>
+
 namespace SysUt14Gr03
 {
     public partial class BrukerForside : System.Web.UI.Page

@@ -178,6 +178,7 @@ namespace SysUt14Gr03.Classes
                 var timeListe = context.Timer
                             .Where(t => t.Bruker_id == bruker_id)
                             .Where(tid => tid.Aktiv == true)
+                            .OrderByDescending(t => t.Stopp)
                             .ToList<Time>();
                 return timeListe;
             }
@@ -193,6 +194,7 @@ namespace SysUt14Gr03.Classes
                             .Where(t => t.Aktiv == true)
                             .Where(t => t.Manuell == true)
                             .Where(t => t.IsFerdig == false)
+                            .OrderByDescending(t => t.Stopp)
                             .ToList<Time>();
                 return timeListe;
             }
@@ -204,6 +206,7 @@ namespace SysUt14Gr03.Classes
             {
                 var timeListe = context.Timer
                             .Where(t => t.Oppgave_id == oppgave_id)
+                            .OrderByDescending(t => t.Stopp)
                             .ToList<Time>();
                 return timeListe;
             }
@@ -216,6 +219,7 @@ namespace SysUt14Gr03.Classes
                 var timeListe = context.Timer
                             .Where(t => t.Oppgave_id == oppgave_id)
                             .Where(t => t.Bruker_id == bruker_id)
+                            .OrderByDescending(t => t.Stopp)
                             .ToList<Time>();
                 return timeListe;
             }
@@ -961,6 +965,21 @@ namespace SysUt14Gr03.Classes
                 return faseListe;
             }
         }
+
+        public static Fase GetPresentFase(int _prosjekt_id)
+        {
+            using (var context = new Context())
+            {
+                DateTime now = DateTime.Now;
+                var fasen = context.Faser
+                            .Where(fase => fase.Prosjekt_id == _prosjekt_id)
+                            .Where(fase => fase.Start <= now)
+                            .Where(fase => fase.Stopp >= now)
+                            .FirstOrDefault();
+                return fasen;
+            }
+        }
+
 
         public static List<Logg> GetLoggForAdministrator()
         {

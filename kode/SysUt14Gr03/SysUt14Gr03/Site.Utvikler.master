@@ -30,16 +30,6 @@
                     <li> <a runat="server" href="~/OversiktOppgaver">Oversikt Alle Oppgaver</a></li>
                 </ul> 
     </ul>
-
-    <ul class="nav navbar-nav">
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Konto <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li> <a runat="server" href="~/Innstillinger">Innstillinger</a></li>
-                    <li> <a runat="server" href="~/VisRapport">Vis rapport</a></li>
-                </ul> 
-    </ul>
-
     <ul class="nav navbar-nav">
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">TimeRegistrering <b class="caret"></b></a>
@@ -50,7 +40,23 @@
                 </ul> 
     </ul>
 
+    <ul class="nav navbar-nav">
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle ShepherdMenyRapporter" data-toggle="dropdown">Rapporter <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li> <a runat="server" href="~/VisRapport">Vis Rapporter</a></li>
+                    <li> <a runat="server" href="~/ProductBacklogProsjekt">Product Backlog</a></li>
+                    <li> <a runat="server" href="~/SprintBacklogFase">Sprint Backlog</a></li>
+                </ul> 
+    </ul>
 
+    <ul class="nav navbar-nav">
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Konto <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li> <a runat="server" href="~/Innstillinger">Innstillinger</a></li>
+                </ul> 
+    </ul>
 </asp:Content>
 
 <asp:Content ID= "Content2" ContentPlaceHolderID="MainContent" runat="server">

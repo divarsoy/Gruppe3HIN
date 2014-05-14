@@ -14,6 +14,9 @@ using SysUt14Gr03.Models;
 
 namespace SysUt14Gr03
 {
+    /// <summary>
+    /// Klasse som viser oversikt over et prosjekt.
+    /// </summary>
     public partial class VisProsjekt : System.Web.UI.Page
     {
         private int prosjekt_id;
@@ -64,7 +67,7 @@ namespace SysUt14Gr03
                 lblInfo.Text += "<br />" + "SluttDato: " + String.Format("{0:dd/MM/yyyy}", fase.Stopp);
                 lblInfo.Text += "<br />Faseleder: " + fase.Bruker.ToString();
                 lblInfo.Text += "<br />";
-                
+
             }
             lblInfo.Text += "<hr />";
             lblInfo.Text += "<br />" + "Oppgaver Knyttet til prosjektet";
@@ -73,12 +76,7 @@ namespace SysUt14Gr03
                 Oppgave oppg = oppgaveProsjekt[i];
                 lblInfo.Text += "<br /><a href=\"visOppgave?oppgave_id=" + oppg.RefOppgaveId + "\">" + oppg.Tittel + "</a>";
             }
-            // }
-            /* else
-             {
-                 lblInfo.Text = "Prosjekt finnes ikke";
-                 lblInfo.ForeColor = Color.Red;
-             } */
+
         }
     }
 }

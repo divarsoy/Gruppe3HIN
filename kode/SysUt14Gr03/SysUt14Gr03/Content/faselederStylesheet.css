@@ -1,0 +1,23 @@
+﻿#morild-nav {
+  background-color: #d2322d;
+  border-color: #d2322d;
+}
+.navbar-inverse .navbar-brand {
+  color: #333333;
+}
+.navbar-inverse .navbar-nav > li > a {
+  color: #333333;
+}
+.dropdown-menu > li > a:hover {
+  background-color: #d2322d;
+}
+.navbar-inverse .navbar-nav > .open > a,
+.navbar-inverse .navbar-nav > .open > a:hover,
+.navbar-inverse .navbar-nav > .open > a:focus {
+  background-color: #d2322d;
+}
+.navbar-inverse .navbar-nav > .dropdown > a .caret {
+  border-bottom-color: #333333;
+  border-top-color: #333333;
+}
+/*# sourceMappingURL=faselederStylesheet.css.map */
