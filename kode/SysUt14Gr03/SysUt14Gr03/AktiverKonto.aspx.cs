@@ -19,6 +19,7 @@ namespace SysUt14Gr03
 {
     public partial class AktiverKonto : System.Web.UI.Page
     {
+       
        // static string initialFornavn;
        // static string initialEtternavn;
       //  static string initialEpost;
@@ -30,8 +31,11 @@ namespace SysUt14Gr03
         private string token;
         private int bruker_id;
         private bool check = true;
+        /// <summary>
+        /// 
+        /// </summary>
 
-        protected void Page_PreInit(Object sener, EventArgs e)
+        protected void Page_PreInit(object sender, EventArgs e)
         {
             if ((!string.IsNullOrEmpty(Request.QueryString["Epost"])) & (!string.IsNullOrEmpty(Request.QueryString["Token"])))
             {
@@ -43,7 +47,7 @@ namespace SysUt14Gr03
                 Session["flashMelding"] = "<h2 align=center>Det skjedde noe galt, Kontoen din ble ikke aktivert!</h2>";
                 Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger;
             }
-        }
+        } 
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -74,10 +78,12 @@ namespace SysUt14Gr03
                         Firstname.Text = bruk.Fornavn;
                         Aftername.Text = bruk.Etternavn;
                     }
+                   
                 }
                 else
                 {
                     disable();
+                  
                     //Response.Write("<h2 align=center>Det skjedde noe galt, Kontoen din ble ikke aktivert!</h2>");
                 }
             }
@@ -92,6 +98,8 @@ namespace SysUt14Gr03
      
         protected void ConfirmButton_Click(object sender, EventArgs e)
         {
+            lblFeilBrukernavn.Visible = false;
+            lblPassord.Visible = false;
             if (Password.Text == ConfirmPassword.Text)
             {
                 token = Request.QueryString["Token"];
@@ -119,9 +127,13 @@ namespace SysUt14Gr03
                     var queryBrukernavn = db.Brukere.FirstOrDefault(b => b.Brukernavn == brukernavn);
                     if (queryBrukernavn != null)
                     {
+                        lblFeilBrukernavn.Text = "Brukernavnet er allerede tatt";
+                        lblFeilBrukernavn.Visible = true;
+                        lblFeilBrukernavn.ForeColor = Color.Red;
+                   /*     Session["flashMelding"] = String.Empty;
                         Session["flashMelding"] = "Brukernavnet er allerede tatt";
                         Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger;
-                        Response.Redirect(Request.RawUrl);
+                       */
                         check = false;
                     }
                     if (check)
@@ -135,26 +147,31 @@ namespace SysUt14Gr03
                         Bruker.Token = token;
                         Bruker.Salt = salt;
                         db.SaveChanges();
+                        Session["flashMelding"] = String.Empty;
                       //  ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('Kontoen din er aktivert, du vil bli videresendt til logg inn siden');", true);
-                        Session["flashMelding"] = "Kontoen din er aktivert, du vil bli videresendt til logg inn siden";
+                        Session["flashMelding"] += "Kontoen din er aktivert, du kan nå logge inn";
                         Session["flashStatus"] = Konstanter.notifikasjonsTyper.success;
-                        Response.AddHeader("REFRESH", "3;URL=Login.aspx");
-                        Response.Redirect(Request.RawUrl);
+                        Response.AddHeader("REFRESH", "2;URL=Login.aspx");
+                       //Response.Redirect("");
                         disable();
                     }
                 }
             }
             else
             {
-                Session["flashMelding"] = "Vennligst fyll inn like passord";
-                Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger;
+                /*Session["flashMelding"] = "Vennligst fyll inn like passord";
+                Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger; */
+                lblPassord.Text = "Passordene må være like!";
+                lblPassord.Visible = true;
+                lblPassord.ForeColor = Color.Red;
                 Username.Text = "";
                 Im_adress.Text = "";
                 Password.Text = "";
                 ConfirmPassword.Text = "";
-                Response.Redirect(Request.RawUrl);
+                //Response.Redirect(Request.RawUrl);
             }
         }
+
         protected void disable()
         {
             Username.Visible = false;
