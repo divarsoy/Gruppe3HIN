@@ -10,14 +10,19 @@ using System.Drawing;
 
 namespace SysUt14Gr03
 {
+    /// <summary>
+    /// Dette er klassen som bruker kan registrere timer manuellt, med pauser.
+    /// Siden trenger en oppgave_id, og brukeren kan legge til så mange pauser han
+    /// vil. Hvis timeregistreringen er utenfor tillatte intervaller må faseleder
+    /// godkjenne timen.
+    /// </summary>
     public partial class ManuellTimeregistrering : System.Web.UI.Page
     {
-        private int pauseTeller;
-        private int bruker_id;
-        private int oppgave_id;
-        private Oppgave oppgave;
-        private TimeSpan bruktTid;
-        //private List<Pause> pauseListe;
+        private int pauseTeller; // Antall pauser
+        private int bruker_id; // Brukeren
+        private int oppgave_id; // Oppgaven
+        private Oppgave oppgave; //ditto
+        private TimeSpan bruktTid; // Tiden som er brukt
         // Eez good
         private List<DateTime> pauseStartListe = new List<DateTime>();
         private List<DateTime> pauseStoppListe = new List<DateTime>();
@@ -32,7 +37,6 @@ namespace SysUt14Gr03
         {
             SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Utvikler);
             bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
-             //bruker_id = 2;
 
             if (Request.QueryString["oppgave_id"] != null)
             {
@@ -107,6 +111,9 @@ namespace SysUt14Gr03
 
         }
 
+        /// <summary>
+        /// Metode som rydder opp i tekstfelter
+        /// </summary>
         private void RyddOpp()
         {
             txtStart.Text = "";
@@ -133,13 +140,15 @@ namespace SysUt14Gr03
 
         }
 
-        // Note to self: Husk å rydde opp i dette...
+        // Legger til et pausefelt
         private void LeggTilPausefelt()
         {
             Label lblPST = new Label();
             lblPST.Text = "Pause start:";
+            lblPST.ID = "lblPST" + pauseTeller;
             Label lblPSL = new Label();
             lblPSL.Text = "Pause slutt:";
+            lblPSL.ID = "lblPSL" + pauseTeller;
             TextBox txtPST = new TextBox();
             TextBox txtPSL = new TextBox();
             txtPST.TextMode = TextBoxMode.Time;
@@ -147,8 +156,10 @@ namespace SysUt14Gr03
             txtPST.ID = "txtPauseStart" + pauseTeller;
             txtPSL.ID = "txtPauseSlutt" + pauseTeller;
             Button btnFjernPause = new Button();
-            btnFjernPause.Text = "<i class=\"icon-remove\"></i>";
+            btnFjernPause.Text = "X";
             btnFjernPause.ID = "btnFjernPause" + pauseTeller;
+            btnFjernPause.CssClass = "btn btn-danger";
+            btnFjernPause.Click += btnFjernPause_Click;
             pnlPauser.Controls.Add(lblPST);
             pnlPauser.Controls.Add(txtPST);
             pnlPauser.Controls.Add(lblPSL);
@@ -157,14 +168,17 @@ namespace SysUt14Gr03
             pnlPauser.Controls.Add(new LiteralControl("<br />"));
         }
 
+        // Legger til alle pausefelt
         private void LeggTilPausefelt(int p)
         {
             for (int i = 0; i < p; i++)
             {
                 Label lblPST = new Label();
                 lblPST.Text = "Pause start:";
+                lblPST.ID = "lblPST" + i;
                 Label lblPSL = new Label();
                 lblPSL.Text = "Pause slutt:";
+                lblPSL.ID = "lblPSL" + i;
                 TextBox txtPST = new TextBox();
                 TextBox txtPSL = new TextBox();
                 txtPST.TextMode = TextBoxMode.Time;
@@ -172,8 +186,10 @@ namespace SysUt14Gr03
                 txtPST.ID = "txtPauseStart" + i;
                 txtPSL.ID = "txtPauseSlutt" + i;
                 Button btnFjernPause = new Button();
-                btnFjernPause.CssClass = "";
+                btnFjernPause.Text = "X"; // so hardcore
+                btnFjernPause.CssClass = "btn btn-danger";
                 btnFjernPause.ID = "btnFjernPause" + i;
+                btnFjernPause.Click += btnFjernPause_Click;
                 pnlPauser.Controls.Add(lblPST);
                 pnlPauser.Controls.Add(txtPST);
                 pnlPauser.Controls.Add(lblPSL);
@@ -181,6 +197,32 @@ namespace SysUt14Gr03
                 pnlPauser.Controls.Add(btnFjernPause);
                 pnlPauser.Controls.Add(new LiteralControl("<br />"));
             }
+        }
+
+        protected void btnFjernPause_Click(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            string buttonID = button.ID;
+            // Får tak i ID'en til pausen som skal fjernes
+            int pauseID = Validator.KonverterTilTall(buttonID[buttonID.Length - 1].ToString());
+
+            TextBox txtPST = pnlPauser.FindControl("txtPauseStart" + pauseID) as TextBox;
+            TextBox txtPSL = pnlPauser.FindControl("txtPauseSlutt" + pauseID) as TextBox;
+            Label lblPST = pnlPauser.FindControl("lblPST" + pauseID) as Label;
+            Label lblPSL = pnlPauser.FindControl("lblPSL" + pauseID) as Label;
+            txtPST.Text = "";
+            txtPSL.Text = "";
+            txtPST.Visible = false;
+            txtPSL.Visible = false;
+            lblPST.Visible = false;
+            lblPSL.Visible = false;
+            button.Visible = false;
+            txtPST.Height = 0;
+            txtPSL.Height = 0;
+            lblPST.Height = 0;
+            lblPSL.Height = 0;
+            button.Height = 0;
+            
         }
 
         protected void btnLagre_Click(object sender, EventArgs e)
@@ -209,7 +251,6 @@ namespace SysUt14Gr03
                         TimeSpan pauser = new TimeSpan();
                         bruktTid = sluttTid - startTid;
                         bool innenforOkt = true;
-                        //pauseListe = new List<Pause>();
                         
 
                         for (int i = 0; i < pauseTeller; i++)
@@ -297,6 +338,7 @@ namespace SysUt14Gr03
                 
             }
 
+            // Setter opp script
             if (isConfirmNeeded)
             {
                 System.Text.StringBuilder javaScript = new System.Text.StringBuilder();
@@ -351,7 +393,6 @@ namespace SysUt14Gr03
             { // Sjekker om han er utenfor tillatt intervall {
                 int prosjekt_id = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
                 godkjent = false;
-                // Varsel.SendVarsel(SessionSjekk.GetFaseleder(prosjekt_id).Bruker_id, Varsel.OPPGAVEVARSEL);
 
             }
 
