@@ -1,4 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Utvikler.Master" AutoEventWireup="true" CodeBehind="DefaultUtvikler.aspx.cs" Inherits="SysUt14Gr03.BrukerForside" %>
+<asp:Content ID="test" ContentPlaceHolderID="testSheep" runat="server">
+</asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="jumbotron">
       <div class="container">
@@ -13,7 +15,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-4">
-          <h2>Velg Prosjekt</h2>
+          <h2 id="ShepherdVelgProsjekt" class="ShepherdVelgProsjekt">Velg Prosjekt</h2>
           <asp:ListBox ID="ListBoxProsjekt" runat="server" Rows="1">
                 <asp:ListItem Selected = "True" Text = "Velg Prosjekt" Value = "0"></asp:ListItem>
           </asp:ListBox>

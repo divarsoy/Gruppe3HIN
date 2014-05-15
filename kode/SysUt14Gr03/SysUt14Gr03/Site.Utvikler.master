@@ -1,7 +1,16 @@
 ﻿<%@ Master Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Site.Utvikler.master.cs" Inherits="SysUt14Gr03.Site_Utvikler" %>
 
+<asp:Content ID="shepherd" ContentPlaceHolderID="testSheep" runat="server">
+    <asp:ContentPlaceHolder ID="testSheep" runat="server">
+
+    </asp:ContentPlaceHolder>
+    
+</asp:Content>
+
 <asp:Content ID="Content3" ContentPlaceHolderID="LogoTemplate" runat="server">
     <asp:ContentPlaceHolder ID="LogoTemplate" runat="server"></asp:ContentPlaceHolder>
+     <link type="text/css" rel="stylesheet" href="../Content/shepherd-theme-arrows.css" />
+    <script type="text/javascript" src="../Scripts/shepherd.min.js"></script>
     <a class="navbar-brand" runat="server" href="~/Utvikler/DefaultUtvikler">Morild Data BA</a>
 </asp:Content>
 
@@ -9,14 +18,14 @@
 <asp:ContentPlaceHolder ID="MenyTemplate" runat="server"></asp:ContentPlaceHolder>
     <ul class="nav navbar-nav">
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Prosjekter <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle shepherd-prosjekt" data-toggle="dropdown">Prosjekter <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li> <a runat="server" href="~/visProsjekt">Vis Prosjekt</a></li>
                 </ul> 
     </ul>
     <ul class="nav navbar-nav">
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Team <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle shepherd-team" data-toggle="dropdown">Team <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li> <a runat="server" href="~/VisTeam">Vis Team</a></li>
                 </ul> 
@@ -24,7 +33,7 @@
 
     <ul class="nav navbar-nav">
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Oppgaver <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle shepherd-oppgaver" data-toggle="dropdown">Oppgaver <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li> <a runat="server" href="~/OversiktOppgaver?mine=true">Oversikt Mine Oppgaver</a></li>
                     <li> <a runat="server" href="~/OversiktOppgaver">Oversikt Alle Oppgaver</a></li>
@@ -32,7 +41,7 @@
     </ul>
     <ul class="nav navbar-nav">
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">TimeRegistrering <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle shepherd-timeregistrering" data-toggle="dropdown">TimeRegistrering <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li> <a runat="server" href="~/Utvikler/InnsynIEgneRegistrerteTimerSomBruker">Dine Registrerte Timer</a></li>
                     <li> <a runat="server" href="~/Timeregistrering">Timeregistrering for valgt prosjekt</a></li>
@@ -42,7 +51,7 @@
 
     <ul class="nav navbar-nav">
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle ShepherdMenyRapporter" data-toggle="dropdown">Rapporter <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle shepherd-rapporter" data-toggle="dropdown">Rapporter <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li> <a runat="server" href="~/VisRapport">Vis Rapporter</a></li>
                     <li> <a runat="server" href="~/ProductBacklogProsjekt">Product Backlog</a></li>
@@ -52,7 +61,7 @@
 
     <ul class="nav navbar-nav">
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Konto <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle shepherd-konto" data-toggle="dropdown">Konto <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li> <a runat="server" href="~/Innstillinger">Innstillinger</a></li>
                 </ul> 

@@ -20,7 +20,7 @@
     border-radius: 5px;
     position: relative;
     font-family: inherit;
-    background: white;
+    background: #D3D3D3;
     color: #444444;
     padding: 1em;
     font-size: 1.1em;
@@ -48,7 +48,7 @@
       top: 100%;
       left: 50%;
       margin-left: -16px;
-      border-top-color: white; }
+      border-top-color: #D3D3D3; }
   .shepherd-element.shepherd-theme-arrows.shepherd-element-attached-top.shepherd-element-attached-center .shepherd-content {
     margin-top: 16px; }
     .shepherd-element.shepherd-theme-arrows.shepherd-element-attached-top.shepherd-element-attached-center .shepherd-content:before {
