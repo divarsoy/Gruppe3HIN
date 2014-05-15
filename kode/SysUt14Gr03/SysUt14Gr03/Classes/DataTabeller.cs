@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Spreadsheet;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -8,6 +9,7 @@ using SysUt14Gr03.Models;
 
 namespace SysUt14Gr03.Classes
 {
+
     public class DataTabeller
     {
 
@@ -25,6 +27,9 @@ namespace SysUt14Gr03.Classes
                 row["Fornavn"] = bruker.Fornavn;
                 row["Etternavn"] = bruker.Etternavn;
 
+                DataRow luft = dt.NewRow();
+                luft["Fornavn"] = "";
+                dt.Rows.Add(luft);
                 dt.Rows.Add(row);
 
             }
@@ -238,6 +243,7 @@ namespace SysUt14Gr03.Classes
                             int antallFaser = faseListe.Count;
 
                             DataRow rowLuft1 = dt.NewRow();
+                            
                             rowLuft1["Prosjekt id"] = "";
                             dt.Rows.Add(rowLuft1);
 
