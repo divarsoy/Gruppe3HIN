@@ -32,7 +32,10 @@ namespace SysUt14Gr03
         private int bruker_id;
         private bool check = true;
         /// <summary>
-        /// 
+        /// I denne klassen aktiverer man en bruker når det blir registrert en ny bruker, den sjekker
+        /// først på epost og token, viss det stemmer så bli infoen som ble skrevet i registreringen hentet ut og fylt
+        /// i tekstboksene(Fornavn, etternavn og epost). Blir også sjekket på brukernavn og om man har skrevet inn riktig passord to ganger.
+        /// Stemmer alt så blir kontoen aktivert og du blir videresendt til login med en flashmelding som gir deg bekreftelse på at kontoen er Aktivert.
         /// </summary>
 
         protected void Page_PreInit(object sender, EventArgs e)
@@ -100,6 +103,7 @@ namespace SysUt14Gr03
         {
             lblFeilBrukernavn.Visible = false;
             lblPassord.Visible = false;
+            //sjekker om passordene er like
             if (Password.Text == ConfirmPassword.Text)
             {
                 token = Request.QueryString["Token"];
@@ -124,6 +128,7 @@ namespace SysUt14Gr03
                     // Default rettighet er utvikler
                     // string rettighetUtviklerString = Konstanter.rettighet.Utvikler.ToString();
                     // var rettighetUtvikler = db.Rettigheter.Where(rettighet => rettighet.RettighetNavn == rettighetUtviklerString).FirstOrDefault();
+                    //Sjekker brukernavn
                     var queryBrukernavn = db.Brukere.FirstOrDefault(b => b.Brukernavn == brukernavn);
                     if (queryBrukernavn != null)
                     {
@@ -147,12 +152,12 @@ namespace SysUt14Gr03
                         Bruker.Token = token;
                         Bruker.Salt = salt;
                         db.SaveChanges();
-                        Session["flashMelding"] = String.Empty;
+                       
                       //  ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('Kontoen din er aktivert, du vil bli videresendt til logg inn siden');", true);
                         Session["flashMelding"] += "Kontoen din er aktivert, du kan nå logge inn";
                         Session["flashStatus"] = Konstanter.notifikasjonsTyper.success;
-                        Response.AddHeader("REFRESH", "2;URL=Login.aspx");
-                       //Response.Redirect("");
+                        //Response.AddHeader("REFRESH", "2;URL=Login.aspx");
+                        Response.Redirect("Login.aspx");
                         disable();
                     }
                 }
