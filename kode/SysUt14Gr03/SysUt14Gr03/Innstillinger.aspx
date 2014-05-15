@@ -8,12 +8,11 @@
     <h2>Personlige opplysninger</h2>
     <div class="form-group">
         <div class="col-sm-3">
-            <asp:TextBox ID="txtFornavn" runat="server" CssClass="form-control" placeholder="Fornavn"></asp:TextBox>
-            <asp:TextBox ID="txtEtternavn" runat="server" CssClass="form-control" placeholder="Etternavn"></asp:TextBox>
-
-            <asp:TextBox ID="txtBrukernavn" runat="server" CssClass="form-control" placeholder="Brukernavn"></asp:TextBox>
-
-            <asp:TextBox ID="txtIM" runat="server" CssClass="form-control" placeholder="Internt kallenavn"></asp:TextBox>
+            Fornavn <asp:TextBox ID="txtFornavn" runat="server" CssClass="form-control" placeholder="Fornavn"></asp:TextBox>
+            Etternavn<asp:TextBox ID="txtEtternavn" runat="server" CssClass="form-control" placeholder="Etternavn"></asp:TextBox>
+            E-postadresse<asp:TextBox ID="txtEpost" runat="server" CssClass="form-control" placeholder="E-postadresse"></asp:TextBox>
+            Brukernavn<asp:TextBox ID="txtBrukernavn" runat="server" CssClass="form-control" placeholder="Brukernavn"></asp:TextBox>
+            IM-kallenavn<asp:TextBox ID="txtIM" runat="server" CssClass="form-control" placeholder="Internt kallenavn"></asp:TextBox>
        </div>
     </div>
             
@@ -29,10 +28,11 @@
         </div>
     </div>
     <div class="clearfix"></div>
-    <h3>Vis shepherd</h3>
-    <asp:CheckBox ID="chkShepherd" runat="server" Text="Vis Shepherd på hovedsiden" />
+    <h3>Vis guide</h3>
+    <asp:CheckBox ID="chkShepherd" runat="server" Text="Vis guide på hovedsiden" />
     <div class="clearfix"></div>
-    <h2>Varsler for e-post</h2>
+    <h2>
+        <asp:Label ID="Label1" runat="server" Text="Varsel for e-post"></asp:Label></h2>
     <asp:CheckBoxList ID="cblElementer" runat="server" CssClass="epost_pref_tabell">
         </asp:CheckBoxList>
     <asp:Button ID="btnLagre" runat="server" CssClass="btn btn-primary" Text="Lagre innstillinger" OnClick="btnLagre_Click" />

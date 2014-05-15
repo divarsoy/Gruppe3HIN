@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Site.Faseleder.master.cs" Inherits="SysUt14Gr03.Site_Utvikler" %>
+﻿<%@ Master Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Site.Faseleder.master.cs" Inherits="SysUt14Gr03.Site_Faseleder" %>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="LogoTemplate" runat="server">
     <asp:ContentPlaceHolder ID="LogoTemplate" runat="server"></asp:ContentPlaceHolder>
@@ -12,7 +12,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Prosjekter <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li> <a runat="server" href="~/visProsjekt">Vis Prosjekt</a></li>
-                    <li> <a runat="server" href="~/Prosjektleder/AdministrasjonAvFase">Administrasjon av Fase</a></li>
+                    <li> <a runat="server" href="~/AdministrasjonAvFase">Administrasjon av Fase</a></li>
                 </ul> 
     </ul>
     <ul class="nav navbar-nav">
@@ -29,15 +29,7 @@
                 <ul class="dropdown-menu">
                     <li> <a runat="server" href="~/OversiktOppgaver?mine=true">Oversikt Mine Oppgaver</a></li>
                     <li> <a runat="server" href="~/OversiktOppgaver">Oversikt Alle Oppgaver</a></li>
-                </ul> 
-    </ul>
-
-    <ul class="nav navbar-nav">
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Konto <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li> <a runat="server" href="~/Innstillinger">Innstillinger</a></li>
-                    <li> <a runat="server" href="~/VisRapport">Vis rapport</a></li>
+                    <li> <a runat="server" href="~/AdministrasjonAvOppgave">Administrer Oppgaver i prosjekt</a></li>
                 </ul> 
     </ul>
 
@@ -45,11 +37,31 @@
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">TimeRegistrering <b class="caret"></b></a>
                 <ul class="dropdown-menu">
+                    <li> <a runat="server" href="~/Prosjektleder/InnsynIRegistrerteTimerSomProsjektleder">Alle Registrerte Timer I et Prosjekt</a></li>
                     <li> <a runat="server" href="~/Utvikler/InnsynIEgneRegistrerteTimerSomBruker">Dine Registrerte Timer</a></li>
                     <li> <a runat="server" href="~/Timeregistrering">Timeregistrering for valgt prosjekt</a></li>
                     <li> <a runat="server" href="~/GodkjennTimer">Godkjenn brukers registrerte timer</a></li>
                 </ul> 
     </ul>
+
+    <ul class="nav navbar-nav">
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle ShepherdMenyRapporter" data-toggle="dropdown">Rapporter <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li> <a runat="server" href="~/VisRapport">Vis Rapporter</a></li>
+                    <li> <a runat="server" href="~/ProductBacklogProsjekt">Product Backlog</a></li>
+                    <li> <a runat="server" href="~/SprintBacklogFase">Sprint Backlog</a></li>
+                </ul> 
+    </ul>
+    <ul class="nav navbar-nav">
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Konto <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li> <a runat="server" href="~/Innstillinger">Innstillinger</a></li>
+                </ul> 
+    </ul>
+
+
 
 
 </asp:Content>

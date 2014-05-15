@@ -9,6 +9,12 @@ using System.Web.UI.WebControls;
 using SysUt14Gr03.Classes;
 using SysUt14Gr03.Models;
 
+/// <summary>
+/// Denne webformen gir utvikleren mulighet til og gjøre en live timeregistrering, eller med andre ord gjøre en time registrering med start/pause/stopp knapp
+/// mens han arbeider. Man kan også forlate siden, for så og gå inn på siden igjen å få opp de registrerte tidspunktene han har gjort til nu. 
+/// Denne regner ut alle tidspunkter/brukt tid på datetime/timespan. 
+/// </summary>
+
 namespace SysUt14Gr03
 {
     public partial class Timeregistrering : System.Web.UI.Page
@@ -31,6 +37,19 @@ namespace SysUt14Gr03
         private List<DateTime> PauseSluttObjekter;
         private List<int> PauseTellerList;
 
+        protected void Page_PreInit(Object sener, EventArgs e)
+        {
+            string master = SessionSjekk.findMaster();
+            this.MasterPageFile = master;
+        }
+
+        /// <summary>
+        /// Den sjekker først om det eksisterer en timer session fra før om. Viss det eksisterer betyr det at man kommer tilbake til siden for å fullføre en 
+        /// timeregistrering og den vil da hente ut all informasjonen omg tidsregistreringen som brukeren allerede har gjort og skrive det ut på teksboksen hva som har 
+        /// blitt gjort til nu. Den vil også bli sjekket om hvilken knapp som er blitt trykt sist mellom pause/start knappene og enable knappene etter slik.
+        /// Viss den ikke eksisterer noe tidsregistrering fra før av, så begynner alt på nytt. Så vil alle knapper utenom start være enabla. 
+        /// </summary>
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             SessionSjekk.sjekkForProsjekt_id();
@@ -60,11 +79,22 @@ namespace SysUt14Gr03
                 brukerID = Classes.Validator.KonverterTilTall(Session["bruker_id"].ToString());
                 oppgaver = Queries.GetAlleAktiveOppgaverForProsjektOgBruker(prosjektID, brukerID);
                 btnRegistrer.Enabled = false;
+                btnIkkeRegistrer.Enabled = false;
 
                 for (int i = 0; i < oppgaver.Count; i++)
                     ddlOppgaver.Items.Add(new ListItem(oppgaver[i].Tittel, oppgaver[i].Oppgave_id.ToString()));
             }
         }
+
+        /// <summary>
+        /// Hvis tekstboksen med alle tids registreringer blir vist er tom, betyr det at ikke er noen registrering til nu. 
+        /// Som betyr at det ikke er startet, og den vil da registrere en ny timer i databasen med den informasjonen som eksisterer til nu og setter start punktet i 
+        /// tekstboksen. 
+        /// Er det tekst i tekst boksen, så betyr det at det allerede eksisterer en timer her, og den vil heller starte en pause i steden for å starte en ny timer. 
+        /// Den vil også fylle ut resterende av informasjon i databasen om pausen.
+        /// Denne klassen enable start knappen også til false så man ikke kan trykke på den to ganger, også setter stopp/pause kanppene til true.
+        /// </summary>
+        
         public void btnStart_Click(object sender, EventArgs e)
         {
             if (ddlOppgaver.SelectedItem != null)
@@ -140,6 +170,12 @@ namespace SysUt14Gr03
             }
         }
 
+        /// <summary>
+        /// Skriver ut start punktet på pausen som brukeren tar i en tekst boks. Setter enable på pause knappen til false slik at den ikke kan trykkes på to ganger,
+        /// også start knappen til true slik at man kan starte en pause igjen. 
+        /// registrerer også en ny pause objekt i databasen, fyller inn den informasjonen som eksisterer til nu. 
+        /// </summary>
+        
         protected void btnPause_Click(object sender, EventArgs e)
         {
             PauseTellerList = new List<int>();
@@ -184,6 +220,12 @@ namespace SysUt14Gr03
             btnSnart.Enabled = true;
         }
 
+        /// <summary>
+        /// Skriver ut når tid denne tidsregistrering er stoppen også regner den også ut hvor lang tid som er blitt brukt totalt på denne registreringen
+        /// (trukket i fra pausene) og skriver det også ut i tekstboksen. Enable registrer/ikke registrer knappene slik at man kan gjøre det også setter både start/pause
+        /// til false.  
+        /// </summary>
+        
         protected void btnStop_Click(object sender, EventArgs e)
         {
             Start = (DateTime)ViewState["Start"];
@@ -200,6 +242,7 @@ namespace SysUt14Gr03
             btnSnart.Enabled = false;
             btnStop.Enabled = false;
             btnRegistrer.Enabled = true;
+            btnIkkeRegistrer.Enabled = true;
             if (Start != DateTime.MinValue && Stopp != DateTime.MinValue)
             {
                 TimeSpan pauser = new TimeSpan();
@@ -219,6 +262,12 @@ namespace SysUt14Gr03
             }
             tbTidsregistrert.Text += String.Format("Tid brukt totalt på oppgaven: {0:D2}:{1:D2}:{2:D2}", bruktTid.Hours, bruktTid.Minutes, bruktTid.Seconds);
         }
+
+        /// <summary>
+        /// Henter all informasjon som er blitt satt til nu. Fyller ut alt resterende som trengs i databasen + at den lager et nytt kommentar opbjekt og oppdaterer
+        /// oppgaven som blir registrert på. 
+        /// </summary>
+        
         protected void btnRegistrer_Click(object sender, EventArgs e)
         {
             string kommentar = tbKommentar.Text;
@@ -239,7 +288,10 @@ namespace SysUt14Gr03
                     timer = context3.Timer.Where(t => t.Time_id == timeID).FirstOrDefault();
 
                     oppgave.BruktTid += timespan;
-                    oppgave.RemainingTime = oppgave.Estimat - oppgave.BruktTid;
+                    if (oppgave.BruktTid > oppgave.Estimat)
+                        oppgave.RemainingTime = new TimeSpan(0);
+                    else
+                        oppgave.RemainingTime = oppgave.Estimat - oppgave.BruktTid;
                     oppgave.Oppdatert = DateTime.Now;
 
                     timer.Tid = timespan;
@@ -259,10 +311,11 @@ namespace SysUt14Gr03
 
                     context3.Kommentarer.Add(Kommentar);
                     context3.SaveChanges();
+
+                    Session["flashMelding"] = "Takk for din registrering på oppgave: " + oppgave.Oppgave_id;
+                    Session["flashStatus"] = Konstanter.notifikasjonsTyper.success.ToString();
+                    this.signOut();
                 }
-                Session["flashMelding"] = "Takk for din registrering";
-                Session["flashStatus"] = Konstanter.notifikasjonsTyper.success.ToString();
-                this.signOut();
             }
             else
             {
@@ -271,6 +324,7 @@ namespace SysUt14Gr03
                 Response.Redirect(Request.Url.ToString());
             }
         }
+
         private void GetTimers(List<Pause> Pause, int timeId)
         {
             PauseTeller = 0;
@@ -312,6 +366,7 @@ namespace SysUt14Gr03
             ViewState["StartEtterPause"] = PauseSluttObjekter;
             ViewState["Pause"] = PauseStartObjekter;
         }
+
         private void signOut()
         {
             oppgaver = null;
@@ -333,7 +388,18 @@ namespace SysUt14Gr03
             ViewState["Start"] = null;
             ViewState["bruktTid"] = null;
             Session["pause_id"] = null;
-            Response.Redirect("Timeregistrering.aspx");
+            Response.Redirect("Utvikler/InnsynIEgneRegistrerteTimerSomBruker.aspx", true);
+        }
+
+        protected void btnManuell_Click(object sender, EventArgs e)
+        {
+
+            Response.Redirect("ManuellTimeregistrering.aspx?oppgave_id=" + ddlOppgaver.SelectedValue, true);
+        }
+
+        protected void btnIkkeRegistrer_Click(object sender, EventArgs e)
+        {
+            this.signOut();
         }
     }
 }

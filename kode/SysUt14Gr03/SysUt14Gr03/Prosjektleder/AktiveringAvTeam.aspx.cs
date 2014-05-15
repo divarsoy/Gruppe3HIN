@@ -7,11 +7,24 @@ using System.Web.UI.WebControls;
 using SysUt14Gr03.Classes;
 using SysUt14Gr03.Models;
 
+/// <summary>
+/// Denne klassen tar og henter ut alle teamene som ikke er aktiv i en checkbox liste så du kan sette en merke ved de teamene som du 
+/// vil aktivere igjen. Hvis det er sucsessful, så vil du få en flashmelding om det og hvilken team som er blitt aktivert 
+/// igjen før du da blir sendt videre til administrasjon av team siden igjen.
+/// Er det ingen team som ikke er satt som aktiv vil du få en beskjed om det.
+/// </summary>
+
 namespace SysUt14Gr03.Prosjektleder
-{
+{    
     public partial class AktiveringAvTeam : System.Web.UI.Page
     {
         private List<Team> teamListe;
+
+        protected void Page_PreInit(Object sener, EventArgs e)
+        {
+            string master = SessionSjekk.findMaster();
+            this.MasterPageFile = master;
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -19,7 +32,7 @@ namespace SysUt14Gr03.Prosjektleder
 
             teamListe = Queries.GetAlleArkiverteTeam();
 
-            if (cbl_team.Items.Count == 0)
+            if (cbl_team.Items.Count == 0 && teamListe.Count != 0)
             {
                 for (int i = 0; i < teamListe.Count(); i++)
                 {
@@ -28,7 +41,10 @@ namespace SysUt14Gr03.Prosjektleder
                 }
             }
             else
+            {
                 lblTilbakeMelding.Visible = true;
+                bt_aktivereTeam.Enabled = false;
+            }
         }
         protected void bt_aktiverTeam_Click(object sender, EventArgs e)
         {
@@ -42,7 +58,7 @@ namespace SysUt14Gr03.Prosjektleder
                     string hendelse = "Team " + valgtTeam.Navn + " er blitt aktivert";
                     OppretteLogg.opprettLoggForBruker(hendelse, DateTime.Now, (int)Session["bruker_id"]);
 
-                    Session["flashMelding"] = hendelse;
+                    Session["flashMelding"] += hendelse + "\n";
                     Session["flashStatus"] = Konstanter.notifikasjonsTyper.success.ToString();
                 }
             }

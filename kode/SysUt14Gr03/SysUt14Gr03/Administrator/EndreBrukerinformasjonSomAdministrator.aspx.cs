@@ -9,6 +9,11 @@ using System.Web.UI.WebControls;
 using SysUt14Gr03.Classes;
 using SysUt14Gr03.Models;
 
+/// <summary>
+/// Får en oversikt over alle brukere på hele systemet i en gridview hvor man kan endre på alt av brukeren sin informasjon for utenom på brukernavn og im feltet 
+/// i samme gridview. Man kan også sende ny aktiverings link viss man nu har gjort brukeren inaktiv. 
+/// </summary>
+
 namespace SysUt14Gr03
 {
     public partial class EndreBrukerinformasjonSomAdministrator : System.Web.UI.Page
@@ -17,6 +22,12 @@ namespace SysUt14Gr03
         private MailMessage msg;
         private sendEmail sendMsg;
         private bool aktiv;
+
+        protected void Page_PreInit(Object sener, EventArgs e)
+        {
+            string master = SessionSjekk.findMaster();
+            this.MasterPageFile = master;
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -29,6 +40,7 @@ namespace SysUt14Gr03
             }            
         }
 
+        //Fyller gridview med rett data
         private void visBrukere()
         {
             using (var context = new Context())
@@ -39,19 +51,20 @@ namespace SysUt14Gr03
                 gridViewEndre.DataBind();
             }
         }
+
         protected void gridViewEndre_RowEditing(object sender, GridViewEditEventArgs e)
         {
             gridViewEndre.EditIndex = e.NewEditIndex;
             gridViewEndre.RowDataBound -= new GridViewRowEventHandler(gridViewEndre_RowDataBound);
             gridViewEndre.RowDataBound += new GridViewRowEventHandler(gridViewEndre_EditRowDataBound);
-            gridViewEndre.Columns[4].Visible = true;
+            gridViewEndre.Columns[6].Visible = true;
             visBrukere();
         }
 
         protected void gridViewEndre_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             gridViewEndre.EditIndex = -1;
-            gridViewEndre.Columns[4].Visible = false;
+            gridViewEndre.Columns[6].Visible = false;
             visBrukere();
         }
 
@@ -95,7 +108,7 @@ namespace SysUt14Gr03
                     DateTime.Now, bruker.Bruker_id);
                 }
             }
-            gridViewEndre.Columns[4].Visible = false;
+            gridViewEndre.Columns[6].Visible = false;
             gridViewEndre.EditIndex = -1;
             visBrukere();
 

@@ -8,21 +8,42 @@ using System.Web.UI.WebControls;
 using SysUt14Gr03.Classes;
 using SysUt14Gr03.Models;
 
+/// <summary>
+/// Sjekker om brukeren er enten prosjektleder eller faseleder som har tilgang her. Dem kan legge til eller endre faser som eksisterer i prosjektet. 
+/// Lister opp alle fasene i valgt prosjekt i en greidview hvor man også kan endre fasen i samme gridview. 
+/// </summary>
+
 namespace SysUt14Gr03.Prosjektleder
 {
     public partial class AdministrasjonAvFase : System.Web.UI.Page
     {
         private int prosjekt_id;
+        private int bruker_id;
+
+        protected void Page_PreInit(Object sener, EventArgs e)
+        {
+            string master = SessionSjekk.findMaster();
+            this.MasterPageFile = master;
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
-            if (Request.QueryString["prosjekt_id"] != null)
+            SessionSjekk.sjekkForBruker_id();
+            bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
+            if (Validator.SjekkRettighet(bruker_id, Konstanter.rettighet.Prosjektleder) || SessionSjekk.IsFaseleder())
             {
-                prosjekt_id = Validator.KonverterTilTall(Request.QueryString["prosjekt_id"].ToString());
-            }
-            if (!IsPostBack)
-            {
-                visFase();
+                if (Session["prosjekt_id"] != null)
+                {
+                    prosjekt_id = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
+                }
+                if (Request.QueryString["prosjekt_id"] != null)
+                {
+                    prosjekt_id = Validator.KonverterTilTall(Request.QueryString["prosjekt_id"].ToString());
+                }
+                if (!IsPostBack)
+                {
+                    visFase();
+                }
             }
         }
         private void visFase()

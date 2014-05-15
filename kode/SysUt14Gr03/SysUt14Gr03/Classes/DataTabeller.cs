@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Windows.Forms;
 using SysUt14Gr03.Models;
+using System.Web.UI.DataVisualization.Charting;
 
 namespace SysUt14Gr03.Classes
 {
@@ -38,30 +39,34 @@ namespace SysUt14Gr03.Classes
         public static DataTable SprintBacklogFase(Fase fase)
         {
             DataTable dt = new DataTable();
+            dt.Columns.Add(new DataColumn("ProsjektNavn", typeof(System.String)));
             dt.Columns.Add(new DataColumn("Fase", typeof(System.String)));
             dt.Columns.Add(new DataColumn("Oppgave-ID", typeof(System.String)));
             dt.Columns.Add(new DataColumn("Oppgave", typeof(System.String)));
-            dt.Columns.Add(new DataColumn("Estimert tid", typeof(System.TimeSpan)));
-            dt.Columns.Add(new DataColumn("Brukt tid", typeof(System.TimeSpan)));
-            dt.Columns.Add(new DataColumn("Gjenstående tid", typeof(System.TimeSpan)));
+            dt.Columns.Add(new DataColumn("Estimert tid", typeof(System.String)));
+            dt.Columns.Add(new DataColumn("Brukt tid", typeof(System.String)));
+            dt.Columns.Add(new DataColumn("Gjenstående tid", typeof(System.String)));
             dt.Columns.Add(new DataColumn("Ansvarlig Bruker", typeof(System.String)));
             dt.Columns.Add(new DataColumn("Status", typeof(System.String)));
-
+            
             TimeSpan bruktTid = new TimeSpan(0);
             TimeSpan estimertTid = new TimeSpan(0);
             TimeSpan gjenstaendeTid = new TimeSpan(0);
          
             DataRow sumRow = dt.NewRow();
+          
 
             foreach (Oppgave o in fase.Oppgaver)
             {
+                          
                 DataRow row = dt.NewRow();
+                row["Prosjektnavn"] = o.Prosjekt.Navn;
                 row["fase"] = fase.Navn;
                 row["Oppgave-ID"] = o.RefOppgaveId;
                 row["Oppgave"] = o.Tittel;
-                row["Estimert tid"] = o.Estimat;
-                row["Brukt tid"] = o.BruktTid;
-                row["Gjenstående tid"] = o.RemainingTime;
+                row["Estimert tid"] = o.Estimat.ToString();
+                row["Brukt tid"] = o.BruktTid.ToString();
+                row["Gjenstående tid"] = o.RemainingTime.ToString();
                 row["Ansvarlig Bruker"] = fase.Bruker.ToString();
                 string status = Queries.GetStatus(o.Status_id).Navn;
                 row["Status"] = status;               
@@ -69,14 +74,16 @@ namespace SysUt14Gr03.Classes
                 estimertTid += (TimeSpan)o.Estimat;   
                 gjenstaendeTid += (TimeSpan)o.RemainingTime;
                 dt.Rows.Add(row);
-            }
 
+                
+               
+            }
+        
             sumRow["Oppgave"] = "Sum: ";
             sumRow["Estimert tid"] = estimertTid;
             sumRow["Brukt tid"] = bruktTid;
             sumRow["Gjenstående tid"] = gjenstaendeTid;
             dt.Rows.Add(sumRow);
-
             return dt;
 
             
@@ -84,6 +91,7 @@ namespace SysUt14Gr03.Classes
         public static DataTable ProductBacklogProsjekt(Prosjekt prosjekt)
         {
             DataTable dt = new DataTable();
+            dt.Columns.Add(new DataColumn("Prosjektnavn", typeof(System.String)));
             dt.Columns.Add(new DataColumn("Oppgave-Id", typeof(System.String)));
             dt.Columns.Add(new DataColumn("Oppgavenavn", typeof(System.String)));
             dt.Columns.Add(new DataColumn("Fase", typeof(System.String)));
@@ -92,6 +100,7 @@ namespace SysUt14Gr03.Classes
             foreach (Oppgave o in prosjekt.Oppgaver)
             {
                 DataRow row = dt.NewRow();
+                row["Prosjektnavn"] = o.Prosjekt.Navn;
                 row["Oppgave-Id"] = o.RefOppgaveId;
                 row["Oppgavenavn"] = o.Tittel;
                 row["Fase"] = o.Fase.Navn;
@@ -107,16 +116,23 @@ namespace SysUt14Gr03.Classes
             DataTable dt = new DataTable();
             dt.Columns.Add(new DataColumn("Logg id", typeof(System.Int32)));
             dt.Columns.Add(new DataColumn("Hendelse", typeof(System.String)));
+            dt.Columns.Add(new DataColumn("Bruker navn", typeof(System.String)));
+            dt.Columns.Add(new DataColumn("Prosjekt navn", typeof(System.String))); 
             dt.Columns.Add(new DataColumn("Dato opprettet", typeof(System.DateTime)));
-            dt.Columns.Add(new DataColumn("Bruker id", typeof(System.Int32)));
 
             foreach (Logg bruker in query)
             {
                 DataRow row = dt.NewRow();
                 row["Logg id"] = bruker.Logg_id;
                 row["Hendelse"] = bruker.Hendelse;
+                row["Bruker navn"] = bruker.Bruker.Brukernavn;
+                if (bruker.Prosjekt_id != null)
+                {
+                    Prosjekt prosjekt = Queries.GetProsjekt((int)bruker.Prosjekt_id);
+                    row["Prosjekt navn"] = prosjekt.Navn;
+                }
                 row["Dato opprettet"] = bruker.Opprettet;
-                row["Bruker id"] = bruker.bruker_id;
+                
 
                 dt.Rows.Add(row);
             }
@@ -511,8 +527,12 @@ namespace SysUt14Gr03.Classes
         public static DataTable BurnDownChartForFase(int faseId)
         {
             DataTable datatabell = new DataTable();
+    //        Chart chart = BurnDownChartForFase.g
 
             Fase fase = Queries.GetFase(faseId);
+            TimeSpan estimatForFase = new TimeSpan();
+            TimeSpan totalSluttTid = new TimeSpan();
+            TimeSpan totalAvvik = new TimeSpan();
             List<Oppgave> oppgaverForFase = Queries.getOppgaverIFase(faseId);
 
             List<DateTime> range = Enumerable.Range(0, (fase.Stopp - fase.Start).Days + 1)
@@ -530,9 +550,23 @@ namespace SysUt14Gr03.Classes
             datatabell.Columns.Add("Slutt", typeof(System.String));
             datatabell.Columns.Add("Avvik", typeof(System.String));
 
+            DataRow luftRow1 = datatabell.NewRow();
+            luftRow1["Oppgavenavn"] = "";
+            datatabell.Rows.Add(luftRow1);
+
+            DataRow totalRow = datatabell.NewRow();
+            totalRow["Oppgavenavn"] = "Total tid for " + fase.Navn;
+
+            List<TimeSpan> totalTider = new List<TimeSpan>();
+            foreach (DateTime d in range)
+            {
+                totalTider.Add(new TimeSpan(0));
+            }
+
             foreach (Oppgave o in oppgaverForFase)
             {
                 TimeSpan resterendeTid = (TimeSpan)o.Estimat;
+                estimatForFase = estimatForFase + resterendeTid;
                 List<Time> registrerteTimerPaaOppgave = Queries.GetTimerForOppgave(o.Oppgave_id);
 
                 String utviklere = "";
@@ -559,13 +593,33 @@ namespace SysUt14Gr03.Classes
 
                     oppgaveRow[range.ElementAt(i).ToString()] = resterendeTid;
 
+                    totalTider[i] = totalTider[i] + resterendeTid;
+
+                }
+
+                for (int i = 0; i < totalTider.Count; i++)
+                {
+                    totalRow[range.ElementAt(i).ToString()] = totalTider[i].ToString();
                 }
 
                 oppgaveRow["Slutt"] = o.BruktTid.ToString();
+                totalSluttTid = totalSluttTid + (TimeSpan)o.BruktTid;
                 oppgaveRow["Avvik"] = (o.BruktTid - o.Estimat).ToString();
+                totalAvvik = totalAvvik + (TimeSpan)(o.BruktTid - o.Estimat);
 
                 datatabell.Rows.Add(oppgaveRow);
             }
+
+            totalRow["Estimat"] = estimatForFase.ToString();
+            totalRow["Slutt"] = totalSluttTid.ToString();
+            totalRow["Avvik"] = totalAvvik.ToString();
+
+            DataRow luftRow2 = datatabell.NewRow();
+            luftRow2["Oppgavenavn"] = "";
+            datatabell.Rows.Add(luftRow2);
+            datatabell.Rows.Add(totalRow);
+
+
             return datatabell;
         }
 

@@ -178,6 +178,7 @@ namespace SysUt14Gr03.Classes
                 var timeListe = context.Timer
                             .Where(t => t.Bruker_id == bruker_id)
                             .Where(tid => tid.Aktiv == true)
+                            .OrderByDescending(t => t.Stopp)
                             .ToList<Time>();
                 return timeListe;
             }
@@ -193,6 +194,7 @@ namespace SysUt14Gr03.Classes
                             .Where(t => t.Aktiv == true)
                             .Where(t => t.Manuell == true)
                             .Where(t => t.IsFerdig == false)
+                            .OrderByDescending(t => t.Stopp)
                             .ToList<Time>();
                 return timeListe;
             }
@@ -204,6 +206,20 @@ namespace SysUt14Gr03.Classes
             {
                 var timeListe = context.Timer
                             .Where(t => t.Oppgave_id == oppgave_id)
+                            .OrderByDescending(t => t.Stopp)
+                            .ToList<Time>();
+                return timeListe;
+            }
+        }
+
+        static public List<Time> GetTimerForOppgaveOgBruker(int oppgave_id, int bruker_id)
+        {
+            using (var context = new Context())
+            {
+                var timeListe = context.Timer
+                            .Where(t => t.Oppgave_id == oppgave_id)
+                            .Where(t => t.Bruker_id == bruker_id)
+                            .OrderByDescending(t => t.Stopp)
                             .ToList<Time>();
                 return timeListe;
             }
@@ -312,6 +328,17 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        static public List<Bruker> GetBrukereForOppgave(int oppgave_id)
+        {
+            using (var context = new Context())
+            {
+                var brukerListe = context.Brukere
+                                       .Where(bruker => bruker.Oppgaver.Any(oppgave => oppgave.Oppgave_id == oppgave_id))
+                                       .ToList();
+                return brukerListe;
+            }
+        }
+
         static public Oppgave GetOppgave(int oppgave_id)
         {
             using (var context = new Context())
@@ -329,14 +356,19 @@ namespace SysUt14Gr03.Classes
             }
         }
 
-        static public List<Bruker> GetBrukereForOppgave(int oppgave_id)
+        static public List<Oppgave> GetOppgaveIProsjekt(int prosjekt_id)
         {
             using (var context = new Context())
             {
-                var brukerListe = context.Brukere
-                                       .Where(bruker => bruker.Oppgaver.Any(oppgave => oppgave.Oppgave_id == oppgave_id))
-                                       .ToList();
-                return brukerListe;
+                var oppgaver = context.Oppgaver
+                                  .Include("Brukere")
+                                  .Include("Prioritering")
+                                  .Include("Status")
+                                  .Include("Prosjekt")
+                                  .Include("Timer")
+                                  .Where(o => o.Prosjekt_id == prosjekt_id)
+                                  .ToList<Oppgave>();
+                return oppgaver;
             }
         }
 
@@ -934,11 +966,28 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        public static Fase GetPresentFase(int _prosjekt_id)
+        {
+            using (var context = new Context())
+            {
+                DateTime now = DateTime.Now;
+                var fasen = context.Faser
+                            .Where(fase => fase.Prosjekt_id == _prosjekt_id)
+                            .Where(fase => fase.Start <= now)
+                            .Where(fase => fase.Stopp >= now)
+                            .FirstOrDefault();
+                return fasen;
+            }
+        }
+
+
         public static List<Logg> GetLoggForAdministrator()
         {
             using (var context = new Context())
             {
-                List<Logg> loggListe = context.Logger.OrderByDescending(logg => logg.Opprettet).ToList();
+                List<Logg> loggListe = context.Logger
+                    .Include("Bruker")
+                    .OrderByDescending(logg => logg.Opprettet).ToList();
                 return loggListe;
             }      
         }

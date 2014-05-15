@@ -8,6 +8,12 @@ using System.Web.UI.WebControls;
 using SysUt14Gr03.Classes;
 using SysUt14Gr03.Models;
 
+/// <summary>
+/// Forsiden til administratoren i systemet. Får man ut alle logger fra alt som er blitt gjort på hele systemet fra alle prosjektene. 
+/// Hvor man ser id, beskrivelse, bruker som har loggen, prosjekt den er i og når tid hendelsen skjedde. Denne listen kan man også eksportere til excel om man ønsker det.
+/// Står også at dette er administrator forsiden.
+/// </summary>
+
 namespace SysUt14Gr03
 {
     public partial class DefaultAdministrator : System.Web.UI.Page
@@ -16,7 +22,13 @@ namespace SysUt14Gr03
         private Table tabell = new Table();
         private int bruker_id;
         private List<Logg> query = Queries.GetLoggForAdministrator();
-        
+
+        protected void Page_PreInit(Object sener, EventArgs e)
+        {
+            string master = SessionSjekk.findMaster();
+            this.MasterPageFile = master;
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Administrator);

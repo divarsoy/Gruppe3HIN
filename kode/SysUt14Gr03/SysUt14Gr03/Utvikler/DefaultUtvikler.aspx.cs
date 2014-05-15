@@ -9,6 +9,10 @@ using SysUt14Gr03;
 using SysUt14Gr03.Classes;
 using SysUt14Gr03.Models;
 
+/// <summary>
+/// Forsiden for utvikler/faseleder. Man kan se kalenderen, velge et prosjekt og se hvilken prosjekt som er valgt. Står også at dette er utvikler forsiden :P 
+/// </summary>
+
 namespace SysUt14Gr03
 {
     public partial class BrukerForside : System.Web.UI.Page
@@ -20,6 +24,29 @@ namespace SysUt14Gr03
         {
             string master = SessionSjekk.findMaster();
             this.MasterPageFile = master;
+            
+            if (Session["prosjekt_id"] != null)
+            {
+
+                int prosjekt_id = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
+                if (SessionSjekk.IsFaseleder(prosjekt_id))
+                {
+                    List<Oppgave> oppgaveListe = Queries.GetAlleAktiveOppgaverForProsjekt(prosjekt_id);
+                    List<Time> timeListe = new List<Time>();
+                    List<string> infoListe = new List<string>();
+
+                    foreach (Oppgave o in oppgaveListe)
+                    {
+                        timeListe.AddRange(Queries.GetTimerForGodkjenning(o.Oppgave_id));
+                    }
+
+                    if (timeListe.Count > 0)
+                    {
+                        Session["flashMelding"] = "Det finnes timeregistreringer i prosjektet som må godkjennes. <a href=\"../GodkjennTimer.aspx\">Vis oversikt</a>";
+                        Session["flashStatus"] = Konstanter.notifikasjonsTyper.info.ToString();
+                    }
+                }
+            }
         }
 
         protected void Page_Load(object sender, EventArgs e)

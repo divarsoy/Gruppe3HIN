@@ -1,5 +1,4 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Master.cs" Inherits="SysUt14Gr03.SiteMaster" %>
-
 <!DOCTYPE html>
 
 <html lang="en">
@@ -16,7 +15,7 @@
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
 </head>
-<body>
+<body runat="server" id="body">
     <div class="headerPadding"></div>
     <form runat="server">
         <asp:ScriptManager runat="server">
@@ -42,10 +41,9 @@
 
         <asp:ContentPlaceHolder ID="testSheep" runat="server">
 
-
         </asp:ContentPlaceHolder>
 
-        <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar navbar-inverse navbar-default" id="morild-nav">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -75,6 +73,7 @@
         </div>
 
         <div class="container body-content">
+            <h4><asp:Label ID="lblInfo" CssClass="prosjektInfo" runat="server" Text=""></asp:Label></h4>
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />

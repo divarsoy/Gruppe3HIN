@@ -20,7 +20,7 @@ namespace SysUt14Gr03
         public string antallNotifikasjoner = "";
         private int i = 0;
         private int bruker_id;
-
+         
         protected void Page_Init(object sender, EventArgs e)
         {
             // The code below helps to protect against XSRF attacks
@@ -84,11 +84,28 @@ namespace SysUt14Gr03
         {
             //if (!IsPostBack)
             //{
+            body.ID = Page.GetType().BaseType.Name;
 
             if (Session["bruker_id"] != null)
             {
                 bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
-                //Response.Redirect("~/Login");
+
+                if (Session["prosjekt_id"] !=null )
+                {
+                    int prosjekt_id = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
+                    Prosjekt prosjekt = Queries.GetProsjekt(prosjekt_id);
+                    var fase = Queries.GetPresentFase(prosjekt_id);
+                    string fasenavn = "";
+                    string faseleder = "";
+                    string fasestring = "";
+                    if (fase != null ){
+                        fasenavn = fase.Navn; 
+                        Bruker bruker = Queries.GetBruker(fase.Bruker_id);
+                        faseleder = bruker.Brukernavn;
+                        fasestring = string.Format("- Nåværende fase: {0} - Faseleder: {1}", fase.Navn, bruker.Brukernavn);
+                    }
+                    lblInfo.Text = string.Format("Prosjekt: {0} {1}", prosjekt.Navn, fasestring);
+                }
 
 
                 int antallNotifikasjonerInt = Queries.GetNotifikasjon(bruker_id).Count;
@@ -101,6 +118,16 @@ namespace SysUt14Gr03
                 btnLoggin.Text = "Logg ut";               
             }
             //}
+
+        }
+        protected void OnLoadComplete(Object sender, EventArgs e)
+        {
+
+        }
+
+        protected void OnPreRender(object sender, EventArgs e)
+        {
+
 
         }
 
@@ -173,6 +200,7 @@ namespace SysUt14Gr03
             int antallNotifikasjonerInt = Queries.GetNotifikasjon(bruker_id).Count;
             if (antallNotifikasjonerInt > 0)
                 antallNotifikasjoner = String.Format("({0})", antallNotifikasjonerInt.ToString());
+            Response.Redirect(Request.RawUrl);
         }
 
     }

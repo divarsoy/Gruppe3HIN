@@ -8,6 +8,11 @@ using System.Web.UI.WebControls;
 using SysUt14Gr03.Classes;
 using SysUt14Gr03.Models;
 
+/// <summary>
+/// Viser all informasjon om en valgt oppgave + hvilken deltagere som er med på den og demmes totalt registrert tid på den,
+/// og alle kommentarer til oppgaven + at man kan legge til en kommentar til oppgaven. 
+/// </summary>
+
 namespace SysUt14Gr03
 {
     public partial class VisOppgave : System.Web.UI.Page
@@ -35,6 +40,8 @@ namespace SysUt14Gr03
                 oppgave = Queries.GetOppgave(oppgave_id);
                 if (oppgave != null)
                 {
+                    bool isFerdig = (oppgave.Status_id == 3);
+
                     bool isDeltaker = false;
                     foreach (Bruker bruker in oppgave.Brukere)
                     {
@@ -42,17 +49,18 @@ namespace SysUt14Gr03
                             isDeltaker = true;
                     }
 
-                    if (isDeltaker)
+                    if (isDeltaker && !isFerdig)
                     {
                         btnInviter.Visible = true;
                         btnReturn.Visible = true;
                         btnTimer.Visible = true;
+                        btnFullfor.Visible = true;
                     }
                     else
                     {
                         btnPameld.Visible = true;
                     }
-
+                    
                     lblNavn.Text = oppgave.Tittel;
                     lblInfo.Text = "";
                     lblInfo.Text += "<p><b>User story: </b>" + oppgave.UserStory + "</p>\n";
@@ -61,19 +69,62 @@ namespace SysUt14Gr03
                     lblInfo.Text += "<p><b>" + "Estimat: </b>" + oppgave.Estimat + " timer</p>\n";
                     lblInfo.Text += "<p><b>" + "Resterende tid: </b>" + oppgave.RemainingTime.ToString() + " timer</p>\n";
                     lblInfo.Text += "<p><b>" + "Brukt tid: </b>" + oppgave.BruktTid.ToString() + " timer</p>\n";
-                    lblInfo.Text += "<p><b>" + "Tidsfrist: </b>" + oppgave.Tidsfrist == null ? "Nei</p>\n" : oppgave.Tidsfrist.ToString() + "</p>\n";
+
+                    string frist = "Tidsfrist: </b>";
+                    if (oppgave.Tidsfrist == null)
+                    {
+                        frist += "-";
+                    }
+                    else
+                    {
+                        if ((DateTime)oppgave.Tidsfrist < DateTime.Now) 
+                        {
+                            frist += "<span style=\"color:red\">" + oppgave.Tidsfrist.ToString() + "</span>";
+                        }
+                        else
+                        {
+                            frist += oppgave.Tidsfrist.ToString();
+                        }
+                    }
+                    frist += "</p>\n";
+
+                    lblInfo.Text += "<p><b>" + frist;
                     lblInfo.Text += "<p><b>" + "Status: </b>" + oppgave.Status.Navn + "</p>\n";
                     lblInfo.Text += "<p><b>" + "Prioritet: </b>" + oppgave.Prioritering_id + "</p>\n";
+
                     int avhengigOppgave = Validator.SjekkAvhengighet(oppgave_id);
-                    lblInfo.Text += "<p><b>" + "Avhengighet: </b>" + (avhengigOppgave == -1 ? "Nei</p>\n" : "<a href=\"visOppgave?oppgave_id=" + avhengigOppgave + "\">" + "Ja, vis oppgave" + "</a></p>\n");
+                    Oppgave avhengig = null;
+                    // Gjør noen sjekker ang. avhengighet
+                    if (avhengigOppgave != -1)
+                    {
+                        avhengig = Queries.GetOppgave(avhengigOppgave);
+                        btnInviter.Enabled = false;
+                        btnInviter.ToolTip = "Oppgaven er avhengig av " + avhengig.Tittel;
+                        btnPameld.Enabled = false;
+                        btnPameld.ToolTip = "Oppgaven er avhengig av " + avhengig.Tittel;
+                        btnTimer.Enabled = false;
+                        btnTimer.ToolTip = "Oppgaven er avhengig av " + avhengig.Tittel;
+                        btnFullfor.Visible = false;
+                        
+                    }
+
+                    lblInfo.Text += "<p><b>" + "Avhengighet: </b>" + (avhengigOppgave == -1 ? "Nei</p>\n" : "<a href=\"visOppgave?oppgave_id=" + avhengigOppgave + "\">" + avhengig.Tittel + "</a></p>\n");
                     lblInfo.Text += "<p><b>" + "Dato opprettet: </b>" + oppgave.Opprettet + "</p>\n";
-                    lblInfo.Text += "<p><b>" + "Dato endret: </b>" + oppgave.Oppdatert == null ? "Ikke endret" : oppgave.Oppdatert.ToString();
+                    lblInfo.Text += "<p><b>" + "Dato endret: </b>" + (oppgave.Oppdatert == null ? "Ikke endret" : oppgave.Oppdatert.ToString());
                     lblInfo.Text += "</p>\n";
                     lblInfo.Text += "<p><b>" + "Prosjekt: </b>" + "<a href=\"visProsjekt?Prosjekt_id=" + oppgave.Prosjekt_id + "\">" + oppgave.Prosjekt.Navn + "</a></p>\n";
                     lblInfo.Text += "<hr />" + "<b>Deltaker(e) </b>";
+                    // Innsyn i annen brukers registrerte timer
                     foreach (Bruker bruker in oppgave.Brukere)
                     {
-                        lblInfo.Text += "<p><a href=\"VisBruker.aspx?bruker_id=" + bruker.Bruker_id + "\">" + bruker.IM + "</a></p>\n";
+                        TimeSpan sum = new TimeSpan(0);
+                        List<Time> timeListe = Queries.GetTimerForOppgaveOgBruker(oppgave_id, bruker.Bruker_id);
+                        foreach (Time t in timeListe)
+                            sum += t.Tid;
+
+                        lblInfo.Text += "<p><a href=\"VisBruker.aspx?bruker_id=" + bruker.Bruker_id + "\">" + bruker.IM + "</a>";
+                        lblInfo.Text += ": " + (int)sum.TotalHours + "t " + sum.Minutes + "m";
+                        lblInfo.Text += "</p>\n";
                     }
                     //lblInfo.Text += "<br />" + "Dato endret: " + oppgave.Oppdatert == null ? "Ikke endret" : oppgave.Oppdatert.ToString();
                     //txtInfo.Wrap = true;
@@ -219,7 +270,20 @@ namespace SysUt14Gr03
 
         protected void btnTimer_Click(object sender, EventArgs e)
         {
-            Response.Redirect("ManuellTimeregistrering.aspx?oppgave_id=" + oppgave_id, true);
+            Response.Redirect("Timeregistrering.aspx?oppgave_id=" + oppgave_id, true);
+        }
+
+        protected void btnFullfor_Click(object sender, EventArgs e)
+        {
+            using (var context = new Context())
+            {
+                Oppgave oppgave = context.Oppgaver.FirstOrDefault(o => o.Oppgave_id == oppgave_id);
+                Status status = context.Statuser.FirstOrDefault(s => s.Status_id == 3);
+
+                oppgave.Status = status;
+                context.SaveChanges();
+            }
+            Response.Redirect("/OversiktOppgaver.aspx?mine=true");
         }
     }
 }

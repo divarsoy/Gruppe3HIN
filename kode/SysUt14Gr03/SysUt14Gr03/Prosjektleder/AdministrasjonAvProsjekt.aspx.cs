@@ -9,6 +9,12 @@ using System.Web.UI.WebControls;
 using SysUt14Gr03.Classes;
 using SysUt14Gr03.Models;
 
+/// <summary>
+/// Som prosjektleder får man opp alle prosjekter som han er prosjektleder for. Ser informasjonen om prosjektene i en gridview med muligheter for å redigere på all 
+/// informasjonen. Endre han prosjekt leder til noen andre blir siden loadet på nytt og det prosjektet er borte fra siden. Det ligger også linker til endring av team
+/// i prosjektet og endring/legge til fase og link til visProsjekt.
+/// </summary>
+
 namespace SysUt14Gr03
 {
     public partial class AdministrasjonAvProsjekt : System.Web.UI.Page
@@ -17,29 +23,56 @@ namespace SysUt14Gr03
         private List<Team> teamListe = null;
         private List<Bruker> prosjektLeder;
         private int bruker_id;
+        private int prosjekt_id;
+        private Rettighet rettighet;
+
+        protected void Page_PreInit(Object sener, EventArgs e)
+        {
+            string master = SessionSjekk.findMaster();
+            this.MasterPageFile = master;
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
             bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
-            if (!IsPostBack)
+            rettighet = Queries.GetRettighet(bruker_id);
+            if (rettighet.Rettighet_id == 3)
+                prosjekt_id = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
+
+            if (Validator.SjekkRettighet(Validator.KonverterTilTall(Session["bruker_id"].ToString()), Konstanter.rettighet.Prosjektleder) || SessionSjekk.IsFaseleder())
             {
-                visProsjekt();
+                if (!IsPostBack)
+                {
+                    visProsjekt();
+                }
             }
         }
 
+        /// <summary>
+        /// Henter og viser informasjon om prosjektet. Sjekker også om det er fase leder eller prosjektleder som er logget inn siden faseleder ikke skal
+        /// kunne endre på prosjektet, men ha tilgang til administrasjon av team/fase og lese informasjon av prosjektet.
+        /// </summary>
+        
         private void visProsjekt()
         {
             using (var context = new Context())
             {
                 System.Windows.Forms.BindingSource bindingSource1 = new System.Windows.Forms.BindingSource();
-                bindingSource1.DataSource = context.Prosjekter.Where(P => P.Aktiv == true).Where(p => p.Bruker_id == bruker_id).ToList<Prosjekt>();
+                if (rettighet.Rettighet_id == 3)
+                {
+                    bindingSource1.DataSource = context.Prosjekter.Where(P => P.Aktiv == true).Where(p => p.Prosjekt_id == prosjekt_id).ToList<Prosjekt>();
+                    gridViewProsjekt.Columns[8].Visible = false;
+                }
+                else if (rettighet.Rettighet_id == 2)
+                    bindingSource1.DataSource = context.Prosjekter.Where(P => P.Aktiv == true).Where(p => p.Bruker_id == bruker_id).ToList<Prosjekt>();
                 gridViewProsjekt.DataSource = bindingSource1;
                 gridViewProsjekt.DataBind();
 
             }
         }
 
+        //Oppdatere gridviewen etter den er blitt endret
         protected void gridViewProsjekt_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             try
@@ -173,11 +206,11 @@ namespace SysUt14Gr03
                     Prosjekt prosjekt = context.Prosjekter.Where(p => p.Prosjekt_id == prosjekt_id).First();
                     HyperLink prosjektLink = e.Row.FindControl("pLink") as HyperLink;
                     prosjektLink.Text = prosjekt.Navn;
-                    prosjektLink.NavigateUrl = "visProsjekt?Prosjekt_id=" + prosjekt_id;
+                    prosjektLink.NavigateUrl = "~/visProsjekt?Prosjekt_id=" + prosjekt_id;
                     HyperLink link = e.Row.FindControl("asp") as HyperLink;
                     link.NavigateUrl = "AdministrasjonAvTeamBrukere?Team_id=" + team_id;
                     HyperLink linkFase = e.Row.FindControl("hlFase") as HyperLink;
-                    linkFase.NavigateUrl = "AdministrasjonAvFase?prosjekt_id=" + prosjekt_id;
+                    linkFase.NavigateUrl = "~/AdministrasjonAvFase?prosjekt_id=" + prosjekt_id;
                    
                 }
             }

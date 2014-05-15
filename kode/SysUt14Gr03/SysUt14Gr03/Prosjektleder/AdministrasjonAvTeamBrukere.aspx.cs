@@ -7,6 +7,12 @@ using System.Web.UI.WebControls;
 using SysUt14Gr03.Classes;
 using SysUt14Gr03.Models;
 
+/// <summary>
+/// Tilgjengelig for prosjekt leder. Får opp to checkbox lister med brukere. Den til venstre er bruker liste som allerede er i teamet, den lista til høyre 
+/// er en liste over alle brukere som eksistere i databasen minus brukere som allerede er i teamet. Så er det muligheter for å legge til og fjerne brukere
+/// for teamet og endre navnet til teamet. 
+/// </summary>
+
 namespace SysUt14Gr03
 {
     public partial class AdministrasjonAvTeamBrukere : System.Web.UI.Page
@@ -15,7 +21,12 @@ namespace SysUt14Gr03
         static List<Bruker> team_brukerListe;
         static List<Bruker> brukerListe;
         static Team tempTeam;
-        
+
+        protected void Page_PreInit(Object sener, EventArgs e)
+        {
+            string master = SessionSjekk.findMaster();
+            this.MasterPageFile = master;
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -23,13 +34,12 @@ namespace SysUt14Gr03
 
             if (!Page.IsPostBack)
             {
-                team_brukerListe = Queries.GetAlleBrukerePaaTeam(teamId);
                 brukerListe = Queries.GetAlleAktiveBrukere();
 
                 if (Request.QueryString["Team_id"] != null)
                 {
                     teamId = Validator.KonverterTilTall(Request.QueryString["Team_id"]);
-
+                    team_brukerListe = Queries.GetAlleBrukerePaaTeam(teamId);
                 }
 
                 // slå sammen med if over

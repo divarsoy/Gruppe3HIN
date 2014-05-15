@@ -7,6 +7,10 @@ using System.Web.UI.WebControls;
 using SysUt14Gr03.Classes;
 using SysUt14Gr03.Models;
 
+/// <summary>
+/// Henter ut informasjon om teamet som ligger i prosjektet, for så å skrive ut alle team medlemmene det valgte teamet i en tabell. 
+/// </summary>
+
 namespace SysUt14Gr03
 {
     public partial class VisTeam : System.Web.UI.Page
@@ -36,7 +40,6 @@ namespace SysUt14Gr03
             {
                 prosjekt_id = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
                 Prosjekt prosjekt = Queries.GetProsjekt(prosjekt_id);
-                lblProsjekt.Text = string.Format("Prosjekt: {0}", prosjekt.Navn); 
                 team = Queries.GetTeamByProsjekt(prosjekt_id);
                 teamId = team.Team_id;
             }

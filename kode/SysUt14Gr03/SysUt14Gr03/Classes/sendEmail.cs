@@ -23,7 +23,7 @@ namespace SysUt14Gr03.Classes
                 SmtpClient smtp = new SmtpClient();
 
                 //bruker gruppe eposten som avsender
-                msg.From = new MailAddress("sysut14gr03@gmail.com");
+                msg.From = new MailAddress("Admin@gmail.com");
                 /* Tips: bruk overload-metoder i stedet for if-tester              
                  * sendEpost(string epost, string message, string subject) {
                  * sendEpost(epost, message, subject, null, null, null);

@@ -18,6 +18,13 @@ namespace SysUt14Gr03
         private int oppgaveid;
         private int brukerid;
         private Bruker innloggetbruker;
+
+        protected void Page_PreInit(Object sener, EventArgs e)
+        {
+            string master = SessionSjekk.findMaster();
+            this.MasterPageFile = master;
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             SessionSjekk.sjekkForBruker_id();

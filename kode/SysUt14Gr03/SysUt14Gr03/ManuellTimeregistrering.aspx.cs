@@ -6,23 +6,37 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using SysUt14Gr03.Models;
 using SysUt14Gr03.Classes;
+using System.Drawing;
 
 namespace SysUt14Gr03
 {
+    /// <summary>
+    /// Dette er klassen som bruker kan registrere timer manuellt, med pauser.
+    /// Siden trenger en oppgave_id, og brukeren kan legge til så mange pauser han
+    /// vil. Hvis timeregistreringen er utenfor tillatte intervaller må faseleder
+    /// godkjenne timen.
+    /// </summary>
     public partial class ManuellTimeregistrering : System.Web.UI.Page
     {
-        private int pauseTeller;
-        private int bruker_id;
-        private int oppgave_id;
-        private Oppgave oppgave;
-        private TimeSpan bruktTid;
-        private List<Pause> pauseListe;
+        private int pauseTeller; // Antall pauser
+        private int bruker_id; // Brukeren
+        private int oppgave_id; // Oppgaven
+        private Oppgave oppgave; //ditto
+        private TimeSpan bruktTid; // Tiden som er brukt
+        // Eez good
+        private List<DateTime> pauseStartListe = new List<DateTime>();
+        private List<DateTime> pauseStoppListe = new List<DateTime>();
+
+        protected void Page_PreInit(Object sener, EventArgs e)
+        {
+            string master = SessionSjekk.findMaster();
+            this.MasterPageFile = master;
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Utvikler);
             bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
-             //bruker_id = 2;
 
             if (Request.QueryString["oppgave_id"] != null)
             {
@@ -37,7 +51,8 @@ namespace SysUt14Gr03
                     {
 
                         DateTime dato = DateTime.Now;
-                        txtDato.Text = dato.ToShortDateString();
+                        txtDato.Text = dato.ToString("yyyy-MM-dd");
+                        txtStart.Text = dato.ToShortTimeString();
 
                     }
 
@@ -52,8 +67,6 @@ namespace SysUt14Gr03
                             Lagre();
                             // Rydd opp
                             RyddOpp();
-                            
-                            Response.Redirect(Request.Url.ToString());
 
                         }
 
@@ -98,6 +111,9 @@ namespace SysUt14Gr03
 
         }
 
+        /// <summary>
+        /// Metode som rydder opp i tekstfelter
+        /// </summary>
         private void RyddOpp()
         {
             txtStart.Text = "";
@@ -124,46 +140,89 @@ namespace SysUt14Gr03
 
         }
 
-        // Note to self: Husk å rydde opp i dette...
+        // Legger til et pausefelt
         private void LeggTilPausefelt()
         {
             Label lblPST = new Label();
             lblPST.Text = "Pause start:";
+            lblPST.ID = "lblPST" + pauseTeller;
             Label lblPSL = new Label();
             lblPSL.Text = "Pause slutt:";
+            lblPSL.ID = "lblPSL" + pauseTeller;
             TextBox txtPST = new TextBox();
             TextBox txtPSL = new TextBox();
             txtPST.TextMode = TextBoxMode.Time;
             txtPSL.TextMode = TextBoxMode.Time;
             txtPST.ID = "txtPauseStart" + pauseTeller;
             txtPSL.ID = "txtPauseSlutt" + pauseTeller;
+            Button btnFjernPause = new Button();
+            btnFjernPause.Text = "X";
+            btnFjernPause.ID = "btnFjernPause" + pauseTeller;
+            btnFjernPause.CssClass = "btn btn-danger";
+            btnFjernPause.Click += btnFjernPause_Click;
             pnlPauser.Controls.Add(lblPST);
             pnlPauser.Controls.Add(txtPST);
             pnlPauser.Controls.Add(lblPSL);
             pnlPauser.Controls.Add(txtPSL);
+            pnlPauser.Controls.Add(btnFjernPause);
             pnlPauser.Controls.Add(new LiteralControl("<br />"));
         }
 
+        // Legger til alle pausefelt
         private void LeggTilPausefelt(int p)
         {
             for (int i = 0; i < p; i++)
             {
                 Label lblPST = new Label();
                 lblPST.Text = "Pause start:";
+                lblPST.ID = "lblPST" + i;
                 Label lblPSL = new Label();
                 lblPSL.Text = "Pause slutt:";
+                lblPSL.ID = "lblPSL" + i;
                 TextBox txtPST = new TextBox();
                 TextBox txtPSL = new TextBox();
                 txtPST.TextMode = TextBoxMode.Time;
                 txtPSL.TextMode = TextBoxMode.Time;
                 txtPST.ID = "txtPauseStart" + i;
                 txtPSL.ID = "txtPauseSlutt" + i;
+                Button btnFjernPause = new Button();
+                btnFjernPause.Text = "X"; // so hardcore
+                btnFjernPause.CssClass = "btn btn-danger";
+                btnFjernPause.ID = "btnFjernPause" + i;
+                btnFjernPause.Click += btnFjernPause_Click;
                 pnlPauser.Controls.Add(lblPST);
                 pnlPauser.Controls.Add(txtPST);
                 pnlPauser.Controls.Add(lblPSL);
                 pnlPauser.Controls.Add(txtPSL);
+                pnlPauser.Controls.Add(btnFjernPause);
                 pnlPauser.Controls.Add(new LiteralControl("<br />"));
             }
+        }
+
+        protected void btnFjernPause_Click(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            string buttonID = button.ID;
+            // Får tak i ID'en til pausen som skal fjernes
+            int pauseID = Validator.KonverterTilTall(buttonID[buttonID.Length - 1].ToString());
+
+            TextBox txtPST = pnlPauser.FindControl("txtPauseStart" + pauseID) as TextBox;
+            TextBox txtPSL = pnlPauser.FindControl("txtPauseSlutt" + pauseID) as TextBox;
+            Label lblPST = pnlPauser.FindControl("lblPST" + pauseID) as Label;
+            Label lblPSL = pnlPauser.FindControl("lblPSL" + pauseID) as Label;
+            txtPST.Text = "";
+            txtPSL.Text = "";
+            txtPST.Visible = false;
+            txtPSL.Visible = false;
+            lblPST.Visible = false;
+            lblPSL.Visible = false;
+            button.Visible = false;
+            txtPST.Height = 0;
+            txtPSL.Height = 0;
+            lblPST.Height = 0;
+            lblPSL.Height = 0;
+            button.Height = 0;
+            
         }
 
         protected void btnLagre_Click(object sender, EventArgs e)
@@ -192,7 +251,7 @@ namespace SysUt14Gr03
                         TimeSpan pauser = new TimeSpan();
                         bruktTid = sluttTid - startTid;
                         bool innenforOkt = true;
-                        pauseListe = new List<Pause>();
+                        
 
                         for (int i = 0; i < pauseTeller; i++)
                         {
@@ -223,7 +282,9 @@ namespace SysUt14Gr03
                                         pause.IsFerdig = true;
                                         pause.Start = pauseStartTid;
                                         pause.Stopp = pauseSluttTid;
-                                        pauseListe.Add(pause);
+                                        //pauseListe.Add(pause);
+                                        pauseStartListe.Add(pauseStartTid);
+                                        pauseStoppListe.Add(pauseSluttTid);
                                         
                                     }
                                 }
@@ -237,6 +298,8 @@ namespace SysUt14Gr03
                             ViewState["bruktTid"] = bruktTid;
                             ViewState["startTid"] = startTid;
                             ViewState["sluttTid"] = sluttTid;
+                            ViewState["pauseStartListe"] = pauseStartListe;
+                            ViewState["pauseStoppListe"] = pauseStoppListe;
 
                             confirmMessage = "Følgende timetall vil bli registrert: " + bruktTid.Hours;
                             confirmMessage += (bruktTid.Hours == 1 ? " time" : " timer") + " og ";
@@ -251,31 +314,31 @@ namespace SysUt14Gr03
                         }
                         else
                         {
-                            Session["flashMelding"] = "Pauser kan ikke være utenfor arbeidsøkten";
-                            Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
+                            // Må bruke label for tilbakemelding, ellers mister jeg info
+                            VisFeilmelding("Pauser kan ikke være utenfor arbeidsøkten");
+                            
 
                         }
                     }
                     else
                     {
-                        Session["flashMelding"] = "Sluttid kan ikke være før starttid";
-                        Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
+                        VisFeilmelding("Sluttid kan ikke være før starttid");
 
                     }
                 }
                 else
                 {
-                    Session["flashMelding"] = "Vennligst oppgi start- og sluttid";
-                    Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
+                    VisFeilmelding("Vennligst oppgi start- og sluttid");
                 }
 
             }
             else
             {
-                Session["flashMelding"] = "Vennligst oppgi start- og sluttid";
-                Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
+                VisFeilmelding("Vennligst oppgi start-, sluttid og dato");
+                
             }
 
+            // Setter opp script
             if (isConfirmNeeded)
             {
                 System.Text.StringBuilder javaScript = new System.Text.StringBuilder();
@@ -294,16 +357,44 @@ namespace SysUt14Gr03
 
         }
 
+        private void VisFeilmelding(string melding)
+        {
+            lblFeilmelding.Text = melding;
+            lblFeilmelding.Visible = true;
+            lblFeilmelding.ForeColor = Color.Red;
+        }
+
         private void Lagre()
         {
             bruktTid = (TimeSpan)ViewState["bruktTid"];
             DateTime startTid = (DateTime)ViewState["startTid"];
             DateTime sluttTid = (DateTime)ViewState["sluttTid"];
-            pauseListe = ViewState["pauseListe"] as List<Pause>;
+            List<Pause> pauseListe = new List<Pause>();
+
+            if (ViewState["pauseStartListe"] != null)
+            {
+                pauseStartListe = ViewState["pauseStartListe"] as List<DateTime>;
+                pauseStoppListe = ViewState["pauseStoppListe"] as List<DateTime>;
+            }
+
+            for (int i = 0; i < pauseStartListe.Count; i++)
+            {
+                Pause p = new Pause();
+                p.Start = pauseStartListe[i];
+                p.Stopp = pauseStoppListe[i];
+                p.Oppgave_id = oppgave_id;
+                p.IsFerdig = true;
+                pauseListe.Add(p);
+            }
+            
             DateTime dato = DateTime.Parse(txtDato.Text);
             bool godkjent = true;
             if (dato > DateTime.Now || dato < DateTime.Now.AddDays(-1))
+            { // Sjekker om han er utenfor tillatt intervall {
+                int prosjekt_id = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
                 godkjent = false;
+
+            }
 
             using (var context = new Context())
             {
@@ -316,6 +407,7 @@ namespace SysUt14Gr03
                     Manuell = true,
                     Aktiv = true,
                     IsFerdig = godkjent,
+                    Pause = pauseListe,
                     Bruker = bruker,
                     Oppgave = oppgave,
                     Start = startTid,
@@ -323,7 +415,12 @@ namespace SysUt14Gr03
                 };
 
                 oppgave.BruktTid += bruktTid;
-                oppgave.RemainingTime -= bruktTid;
+                if (oppgave.RemainingTime >= bruktTid)
+                    oppgave.RemainingTime -= bruktTid;
+                else
+                    oppgave.RemainingTime = new TimeSpan(0);
+
+                oppgave.Status = context.Statuser.Where(s => s.Status_id == 2).FirstOrDefault(); // Setter status til under arbeid
                 context.Timer.Add(time);
                 context.SaveChanges();
             }

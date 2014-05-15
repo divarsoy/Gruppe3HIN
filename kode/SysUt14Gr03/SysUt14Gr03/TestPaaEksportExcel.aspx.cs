@@ -14,7 +14,13 @@ namespace SysUt14Gr03
     public partial class TestPaaEksportExcel : System.Web.UI.Page
     {
         DataTable dt = new DataTable();
-           
+
+        protected void Page_PreInit(Object sener, EventArgs e)
+        {
+            string master = SessionSjekk.findMaster();
+            this.MasterPageFile = master;
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
 

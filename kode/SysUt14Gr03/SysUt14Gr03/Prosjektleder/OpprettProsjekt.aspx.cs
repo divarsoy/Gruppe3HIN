@@ -19,6 +19,7 @@ namespace SysUt14Gr03
         private List<Bruker> brukerListe;
         private List<Team> teamListe;
         private DataTable dtFaser = new DataTable();
+        private DataRow row;
     
         private int team_id;
         private int bruker_id;
@@ -27,6 +28,12 @@ namespace SysUt14Gr03
         private const string BTN_SLUTT = "btnSlutt";
         private const string BTN_FASE_START = "btnFaseStart";
         private const string BTN_FASE_SLUTT = "btnFaseSlutt";
+
+        protected void Page_PreInit(Object sener, EventArgs e)
+        {
+            string master = SessionSjekk.findMaster();
+            this.MasterPageFile = master;
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -195,8 +202,39 @@ namespace SysUt14Gr03
         {
             if (tbFasenavn.Text != string.Empty && tbFaseStart.Text != string.Empty && tbFaseSlutt.Text != string.Empty && ddFaseLeder.SelectedValue != "0")
             {
-                AddNewFaseRow();
-                lblFaseFeil.Visible = false;
+                if (Session["Slutt"] != null)
+                {
+                    DateTime start = Convert.ToDateTime(tbFaseStart.Text);
+                    DateTime slutt = Convert.ToDateTime(Session["Slutt"]);
+                    if (slutt < start)
+                    {
+                        AddNewFaseRow();
+                        lblFaseFeil.Visible = false;
+                    }
+                    else
+                    {
+                        string confirmMessage = "Fasen: " + tbFasenavn.Text + " er i ferd med å overlappe fasen: " + Session["FaseNavn"];
+                        System.Text.StringBuilder javaScript = new System.Text.StringBuilder();
+
+                        javaScript.Append("\n<script type=text/javascript>\n");
+                        javaScript.Append("<!--\n");
+
+                        javaScript.Append("var userConfirmation = window.alert('" + confirmMessage + "');\n");
+
+                        javaScript.Append("// -->\n");
+                        javaScript.Append("</script>\n");
+
+                        ClientScript.RegisterStartupScript(GetType(), "confirmScript", javaScript.ToString());
+
+                        AddNewFaseRow();
+                        lblFaseFeil.Visible = false;
+                    }
+                }
+                else
+                {
+                    AddNewFaseRow();
+                    lblFaseFeil.Visible = false;
+                }
             }
             else
             {
@@ -221,12 +259,14 @@ namespace SysUt14Gr03
             {
                 dtFaser = Session["FaseTable"] as DataTable;
 
-                DataRow row = dtFaser.NewRow();
+                row = dtFaser.NewRow();
                 row["bruker_id"] = ddFaseLeder.SelectedValue;
                 row["Fasenavn"] = tbFasenavn.Text;
                 row["Faseleder"] = ddFaseLeder.SelectedItem.Text;
                 row["Start"] = tbFaseStart.Text;
                 row["Slutt"] = tbFaseSlutt.Text;
+                Session["Slutt"] = tbFaseSlutt.Text;
+                Session["FaseNavn"] = tbFasenavn.Text;
                 dtFaser.Rows.Add(row);
 
                 BindGrid();

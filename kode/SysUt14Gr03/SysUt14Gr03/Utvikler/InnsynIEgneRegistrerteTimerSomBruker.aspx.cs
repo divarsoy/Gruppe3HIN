@@ -7,10 +7,20 @@ using System.Web.UI.WebControls;
 using SysUt14Gr03.Models;
 using SysUt14Gr03.Classes;
 
+/// <summary>
+/// Lister ut alle registrerte timer for en utvikler i et prosjekt. 
+/// </summary>
+
 namespace SysUt14Gr03.Utvikler
 {
     public partial class InnsynIEgneRegistrerteTimerSomBruker : System.Web.UI.Page
     {
+        protected void Page_PreInit(Object sener, EventArgs e)
+        {
+            string master = SessionSjekk.findMaster();
+            this.MasterPageFile = master;
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             SessionSjekk.sjekkForBruker_id();
@@ -18,6 +28,7 @@ namespace SysUt14Gr03.Utvikler
 
             int brukerId = Validator.KonverterTilTall(Session["bruker_id"].ToString());
             List<Time> timer = Queries.GetTimerForBruker(brukerId);
+            //timer.OrderBy(t => t.Stopp.Value.Date).Reverse();
             int prosjektId = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
             Prosjekt prosjekt = Queries.GetProsjekt(prosjektId);
 

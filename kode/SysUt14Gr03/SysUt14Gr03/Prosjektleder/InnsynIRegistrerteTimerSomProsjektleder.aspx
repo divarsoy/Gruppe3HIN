@@ -5,6 +5,6 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
     <div class="table">
-    <asp:PlaceHolder ID="PlaceHolderTable" runat="server"></asp:PlaceHolder>
+        <asp:PlaceHolder ID="PlaceHolderTable" runat="server"></asp:PlaceHolder>
     </div>
 </asp:Content>

@@ -7,10 +7,11 @@
     <div class="clearfix"></div>
     <h1>
       <asp:Label ID="lblTittel" runat="server"></asp:Label>
+
     </h1>
     <div class="form-group">
             <div class="row">
-                <div style="display: inline-block" class="col-md-4">
+                <div style="display: inline-block" class="col-md-2">
                     <asp:Label ID="Label1" runat="server" Text="Registrer timer for..." Visible="false"></asp:Label>
                     <br />
                     <asp:TextBox ID="txtDato" runat="server" Visible="false" CssClass="form-control" TextMode="Date"></asp:TextBox>
@@ -22,15 +23,20 @@
                     <asp:TextBox ID="txtSlutt" CssClass="form-control" runat="server" TextMode="Time" Visible="false"></asp:TextBox>
                     <br />
                     <asp:Button ID="btnAddPause" runat="server" CssClass="btn btn-primary" Text="Legg til pause" OnClick="btnAddPause_Click" Visible="false"/>
+                    
                     <br />
-                    <asp:Panel ID="pnlPauser" runat="server">
-                    </asp:Panel>
+                    
                     <br />
                  </div>
+                
             </div>
+        <div class="clearfix" />
+        <asp:Panel ID="pnlPauser" runat="server">
+                    </asp:Panel>
         </div>
     <asp:HiddenField ID="lagreTime" runat="server" value="" />
     <asp:HiddenField ID="infoField" runat="server" value="" />
     <br />
     <asp:Button ID="btnLagre" runat="server" CssClass="btn btn-success" Text="Lagre timer" Visible="false" OnClick="btnLagre_Click" />
+    <asp:Label ID="lblFeilmelding" runat="server" Visible="false"></asp:Label>
     </asp:Content>

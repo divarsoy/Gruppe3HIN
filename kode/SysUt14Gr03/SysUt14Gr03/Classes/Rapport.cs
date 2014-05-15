@@ -54,15 +54,21 @@ namespace SysUt14Gr03.Classes
                             info += "<br /><h3>Deltakere:</h3>";
                             foreach (Bruker b in team.Brukere)
                                 info += "<br /><t />" + b.ToString();
-
+                            
                             info += "<br /><h3>Prosjekter:</h3>";
+                            info += "<p>";
+
                             foreach (Prosjekt p in team.Prosjekter)
                             {
+                            
                                 info += "<br /><t />" + p.Navn;
                                 Bruker faseleder = SessionSjekk.GetFaseleder(p.Prosjekt_id);
                                 if(faseleder != null)   
                                     info += "<br />Faseleder: " + SessionSjekk.GetFaseleder(p.Prosjekt_id).ToString();
                             }
+                            info += "</p>";
+
+                            info += "<br />";
                                 antallDeltakerePaTeam = team.Brukere.Count;
                             
                         }
@@ -83,30 +89,30 @@ namespace SysUt14Gr03.Classes
                             Bruker prosjektLeder = Queries.GetBruker(prosjekt.Bruker_id);
                             info += "<br />Prosjektleder: " + prosjektLeder.ToString();
 
-                            info += "<br /><h3>Team:</h3>";
-                            info += "<br /><t />" + prosjekt.Team.Navn;
+                            info += "<br />Team: " + prosjekt.Team.Navn;
 
-                            info += "<br /><h3>Faser:</h3>";
+                            info += "<br /><h2>Faser:</h2>";
 
                             antallFaser = faseListe.Count;
 
                             foreach (Fase f in faseListe)
                             {
-                                info += "<br /><tb />Navn: " + f.Navn;
-                                info += "<br /><tb />Faseleder: " + f.Bruker.ToString();
-                                info += "<br /><tb />Opprettet: " + f.Opprettet.ToShortDateString();
-                                info += "<br /><tb />Startdato: " + f.Start.ToShortDateString();
-                                info += "<br /><tb />Sluttdato: " + f.Stopp.ToShortDateString();
+                                info += "<h3>Navn: " + f.Navn + "</h3>";
+                                info += "Faseleder: " + f.Bruker.ToString();
+                                info += " | Opprettet: " + f.Opprettet.ToShortDateString();
+                                info += " | Startdato: " + f.Start.ToShortDateString();
+                                info += " | Sluttdato: " + f.Stopp.ToShortDateString();
+                                info += "<div class=\"rapport2\">";
                                 foreach (Oppgave o in f.Oppgaver)
                                 {
-                                    info += "<br /><tb /><h4>Navn: " + o.Tittel + "</h4>";
-                                    info += "<br /><t />ID: " + o.RefOppgaveId;
-                                    info += "<br /><t />Opprettet: " + o.Opprettet.ToShortDateString();
-                                    info += "<br /><t />User story: " + o.UserStory;
-                                    info += "<br /><t />Krav: " + o.Krav;
+                                    info += "<br /><h4>Navn: " + o.Tittel + "</h4>";
+                                    info += "ID: " + o.RefOppgaveId;
+                                    info += " | Opprettet: " + o.Opprettet.ToShortDateString();
+                                    info += " | User story: " + o.UserStory;
+                                    info += " | Krav: " + o.Krav;
                                     int avhengigOppgave = Validator.SjekkAvhengighet(o.Oppgave_id);
-                                    info += "<br />" + "Avhengighet: " + (avhengigOppgave == -1 ? "Nei" : "Ja");
-                                    info += "<br /><t />Estimat: " + o.Estimat;
+                                    info += " | Avhengighet: " + (avhengigOppgave == -1 ? "Nei" : "Ja");
+                                    info += "<br />Estimat: " + o.Estimat;
 
                                     int test1 = o.Oppgave_id;
                                     List<Time> timeListe = Queries.GetTimerForOppgave(o.Oppgave_id);
@@ -118,12 +124,13 @@ namespace SysUt14Gr03.Classes
 
                                     }
                                         
-                                    info += "<br /><t />Brukt tid: " + bruktTid.ToString();
+                                    info += " | Brukt tid: " + bruktTid.ToString();
                                     Status status = Queries.GetStatus(o.Status_id);
-                                    info += "<br /><t />Status: " + status.Navn;
+                                    info += " | Status: " + status.Navn;
                                     estimertTidProsjekt += (TimeSpan)o.Estimat;
                                     
                                 }
+                                info += "</div>";
                                 info += "<hr />";
 
                             }
@@ -141,26 +148,30 @@ namespace SysUt14Gr03.Classes
                             info += "<br />Internt brukernavn: " + bruker.Brukernavn;
                             info += "<br />Lagt til: " + bruker.Opprettet.ToShortDateString();
                             info += "<br />E-post: " + bruker.Epost;
-
+                            
                             info += "<br /><h3>Prosjekter:</h3>";
+                            info += "<div class=\"rapport2\">";
                             List<Prosjekt> prosjektListe = Queries.GetAlleAktiveProsjekterForBruker(_id);
                             foreach (Prosjekt p in prosjektListe)
                             {
-                                info += "<br /><t /><h4>" + p.Navn + "</h4>";
+                                info += p.Navn + "<br />";
                                 prosjektRapportForBruker += "<br />Navn: " + p.Navn;
                                 // vi tar det sia
                                 if (SessionSjekk.IsFaseleder(_id, p.Prosjekt_id))
-                                    prosjektRapportForBruker += "<br />" + "Min rolle: faseleder. ";
+                                    prosjektRapportForBruker += " | " + "Min rolle: faseleder. ";
                                 else
-                                    prosjektRapportForBruker += "<br />" + "Min rolle: " + (_id == p.Bruker_id ? "Prosjektleder" : "Utvikler");
-                            }      
-
+                                    prosjektRapportForBruker += " | " + "Min rolle: " + (_id == p.Bruker_id ? "Prosjektleder" : "Utvikler");
+                            }
+                            info += "</div>";
+                            
                             info += "<br /><h3>Team:</h3>";
+                            info += "<div class=\"rapport2\">";
                             foreach (Team t in bruker.Teams)
-                                info += "<br /><t />" + t.Navn;
+                                info += t.Navn + "<br />";
+                            info += "</div>";
 
-                            info += "<br /><h3>Oppgaver:</h3>";
-
+                            info += "<h3>Oppgaver:</h3>";
+                            info += "<div class=\"rapport2\">";
                             List<Time> timeListe = Queries.GetTimerForBruker(_id);
                             if (timeListe != null)
                             {
@@ -176,24 +187,26 @@ namespace SysUt14Gr03.Classes
                                             sumTimerForBruker += time.Tid;
                                         }
                                     }
-                                    info += "<br /><t /><h4>" + oppgave.Tittel + " Brukt tid: " + sumTimerForBruker.ToString() + "</h4>";
-                                    prosjektRapportForBruker += "<br /><t />" + oppgave.Tittel + " Brukt tid: " + sumTimerForBruker.ToString();
-                                    info += "<br />Prosjekt: " + oppgave.Prosjekt.Navn;
-                                    info += "<br />Fase: " + oppgave.Fase.Navn;
+                                    info += "<h4>" + oppgave.Tittel + " Brukt tid: " + sumTimerForBruker.ToString() + "</h4>";
+                                    prosjektRapportForBruker += oppgave.Tittel + " Brukt tid: " + sumTimerForBruker.ToString();
+                                    info += "Prosjekt: " + oppgave.Prosjekt.Navn;
+                                    info += " | Fase: " + oppgave.Fase.Navn;
 
                                 }
                             }
+                            info += "</div>";
 
                             List<Oppgave> ferdigeOppgaver = Queries.GetAlleFerdigeOppgaverForBruker(_id);
                             antallFerdigeOppgaver = ferdigeOppgaver.Count;
                             foreach (Oppgave o in ferdigeOppgaver)
                                 sumFullforteTimerForBruker += (TimeSpan) o.BruktTid;
 
-                            info += "<br /><h3>Hendelser:</h3>";
+                            info += "<h3>Hendelser:</h3>";
+                            info += "<p>";
                             List<Logg> loggListe = Queries.GetLoggForBruker(_id);
                             foreach (Logg l in loggListe)
-                                info += "<br /><t />" + l.Hendelse;
-                            
+                                info += l.Hendelse + "<br />";
+                            info += "</p>";
                         }
                     }
                     break;

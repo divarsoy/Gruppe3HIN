@@ -16,13 +16,24 @@ namespace SysUt14Gr03
         private int bruker_id;
         private MailMessage msg;
         private sendEmail sendMsg;
+        private Rettighet rettighet;
+
+        protected void Page_PreInit(Object sener, EventArgs e)
+        {
+            string master = SessionSjekk.findMaster();
+            this.MasterPageFile = master;
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
+
             msg = new MailMessage();
             sendMsg = new sendEmail();
             if (!IsPostBack)
             {
+                bruker_id = Validator.KonverterTilTall(Request.QueryString["bruker_id"]);
+                rettighet = Queries.GetRettighet(bruker_id);
                 visBrukere();
             }
         }
@@ -32,7 +43,14 @@ namespace SysUt14Gr03
             using (var context = new Context())
             {
                 System.Windows.Forms.BindingSource bindingSource1 = new System.Windows.Forms.BindingSource();
-                bindingSource1.DataSource = context.Brukere.ToList<Bruker>();
+                if(rettighet.Rettighet_id == 3)
+                    bindingSource1.DataSource = context.Brukere.Where(b => b.Bruker_id == bruker_id).ToList<Bruker>();
+                else
+                {
+                    Session["flashMelding"] = "Kan bare endre for utviklere";
+                    Session["flashStatus"] = Konstanter.notifikasjonsTyper.info;
+                    Response.Redirect(Request.RawUrl);
+                }
                 gridViewEndre.DataSource = bindingSource1;
                 gridViewEndre.DataBind();
             }
@@ -53,7 +71,8 @@ namespace SysUt14Gr03
 
         protected void gridViewEndre_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
-            bruker_id = (int)gridViewEndre.DataKeys[e.RowIndex].Value;
+            //bruker_id = (int)gridViewEndre.DataKeys[e.RowIndex].Value;
+            bruker_id = Validator.KonverterTilTall(Request.QueryString["bruker_id"]);
             System.Web.UI.WebControls.TextBox tbEtternavn = (TextBox)gridViewEndre.Rows[e.RowIndex].FindControl("tbEtternavn");
             System.Web.UI.WebControls.TextBox tbFornavn = (TextBox)gridViewEndre.Rows[e.RowIndex].FindControl("tbFornavn");
             System.Web.UI.WebControls.TextBox tbEpost = (TextBox)gridViewEndre.Rows[e.RowIndex].FindControl("tbEpost");

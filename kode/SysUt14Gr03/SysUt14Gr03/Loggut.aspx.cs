@@ -17,6 +17,7 @@ namespace SysUt14Gr03
             Session["fornavn"] = null;
             Session["brukernavn"] = null;
             Session["loggedIn"] = null;
+            Session["prosjekt_id"] = null;
             Session["flashMelding"] = "Du er nå logget ut av systemet";
             Session["flashStatus"] = Konstanter.notifikasjonsTyper.info.ToString();
             Response.Redirect("~/Default", true);

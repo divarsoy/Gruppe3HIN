@@ -7,45 +7,36 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SysUt14Gr03 {
+namespace SysUt14Gr03.Prosjektleder {
     
     
-    public partial class Fremdriftsdiagram {
+    public partial class BurnDownChartFase {
         
         /// <summary>
-        /// ddlFaser control.
+        /// ddlfaser control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlFaser;
+        protected global::System.Web.UI.WebControls.DropDownList ddlfaser;
         
         /// <summary>
-        /// Chart control.
+        /// ChartPlaceHolder control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Chart;
+        protected global::System.Web.UI.WebControls.PlaceHolder ChartPlaceHolder;
         
         /// <summary>
-        /// ChartHolder control.
+        /// PlaceHolderTable control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.DataVisualization.Charting.Chart ChartHolder;
-        
-        /// <summary>
-        /// hei control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label hei;
+        protected global::System.Web.UI.WebControls.PlaceHolder PlaceHolderTable;
     }
 }

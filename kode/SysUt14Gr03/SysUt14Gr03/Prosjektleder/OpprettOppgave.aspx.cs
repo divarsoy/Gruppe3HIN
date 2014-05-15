@@ -20,6 +20,12 @@ namespace SysUt14Gr03
         private DateTime tidsfrist;
         private int bruker_id = -1;
 
+        protected void Page_PreInit(Object sener, EventArgs e)
+        {
+            string master = SessionSjekk.findMaster();
+            this.MasterPageFile = master;
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
@@ -40,8 +46,6 @@ namespace SysUt14Gr03
                     {
 
                         brukerListe = Queries.GetAlleAktiveBrukere();
-                        string prosjektNavn = Queries.GetProsjekt(prosjekt_id).Navn;
-                        lblProsjekt.Text = prosjektNavn;
                         pri = Queries.GetAllePrioriteringer();
                         visStatus = Queries.GetAlleStatuser();
                         List<Fase> faseListe = Queries.GetFaseForProsjekt(prosjekt_id);
@@ -169,7 +173,6 @@ namespace SysUt14Gr03
 
         protected void btnFjernBruker_Click(object sender, EventArgs e)
         {
-            
             lbBrukere.Items.Remove(lbBrukere.SelectedItem);
         }
     }

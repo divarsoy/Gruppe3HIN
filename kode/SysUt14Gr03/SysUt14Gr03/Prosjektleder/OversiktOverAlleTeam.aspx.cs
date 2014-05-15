@@ -12,8 +12,17 @@ namespace SysUt14Gr03
     public partial class OversiktOverTeam : System.Web.UI.Page
     {
         private Table brukerTabell;
+
+        protected void Page_PreInit(Object sener, EventArgs e)
+        {
+            string master = SessionSjekk.findMaster();
+            this.MasterPageFile = master;
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
+
             List<Team> teamene = Queries.GetAlleAktiveTeam();
 
             foreach (Team t in teamene)
@@ -22,12 +31,18 @@ namespace SysUt14Gr03
 
                 if (!IsPostBack)
                 {
+                    
                     foreach (Prosjekt p in t.Prosjekter)
                     {
                         brukerTabell = Tabeller.HentBrukerTabellForTeam(query, t, p.Prosjekt_id);
+                        brukerTabell.CssClass = "table";
+
                     }
-                        PlaceHolderTable.Controls.Add(brukerTabell);
-                    
+                    Label label = new Label();
+                    label.Text =  "<h3>" + t.Navn + "</h3>";
+                    label.Font.Bold = true;
+                    PlaceHolderTable.Controls.Add(label);
+                    PlaceHolderTable.Controls.Add(brukerTabell);
                 }
             }
         }

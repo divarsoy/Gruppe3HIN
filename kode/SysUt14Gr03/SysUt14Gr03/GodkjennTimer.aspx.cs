@@ -57,6 +57,12 @@ namespace SysUt14Gr03
                         + " | varighet: " + ((int)t.Tid.TotalHours) + "t " + t.Tid.Minutes + "m");
                 }
 
+                if (infoListe.Count == 0)
+                {
+                    lblInfo.Text = "Ingen elementer";
+                    lblInfo.Visible = true;
+                }
+
                 if (!IsPostBack)
                 {
                     BindingSource bindingsource = new BindingSource();
@@ -92,6 +98,9 @@ namespace SysUt14Gr03
                     time.IsFerdig = true;
                     context.SaveChanges();
                 }
+                Session["flashMelding"] = "Timeregistrering godkjent";
+                Session["flashStatus"] = Konstanter.notifikasjonsTyper.info.ToString();
+                Response.Redirect(Request.RawUrl, true);
 
             }
 
