@@ -12,9 +12,15 @@ namespace SysUt14Gr03
 {
     public partial class SprintBacklogFase : System.Web.UI.Page
     {
+
+        /// <summary>
+        /// Tar inn en prosjekt_id og Viser en sprintbacklog for hver fase
+        /// i det prosjektet som har den id'en, kan bytte mellom faser ved hjelp av en dropdownlist og 
+        /// så er det metoder for å eksportere sprintbacklogen til excell format.
+        /// </summary>
         private Fase fase;
         private DataTable dt = new DataTable();
-
+        
         // Laster inn riktig masterfil
         protected void Page_PreInit(Object sener, EventArgs e)
         {
@@ -41,7 +47,7 @@ namespace SysUt14Gr03
            phFase.Controls.Add(FaseTabell);
 
         }
-
+        
         protected void btnExport_Click(object sender, EventArgs e)
         {
             dt = DataTabeller.SprintBacklogFase(fase);
