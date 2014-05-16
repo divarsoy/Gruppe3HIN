@@ -13,7 +13,7 @@ using DocumentFormat.OpenXml;
 
 namespace SysUt14Gr03.Classes
 {
-    //
+    // Hentet fra nett.
     //  November 2013
     //  http://www.mikesknowledgebase.com
     //
