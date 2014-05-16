@@ -8,6 +8,10 @@ using SysUt14Gr03.Classes;
 using SysUt14Gr03.Models;
 using System.Diagnostics;
 
+/// <summary>
+/// Lister ut informasjon om brukeren, samt statestikk, aktivitet(historikk) og epost instillingene.
+/// </summary>
+
 namespace SysUt14Gr03
 {
     public partial class VisBruker : System.Web.UI.Page

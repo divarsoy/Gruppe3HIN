@@ -13,6 +13,14 @@ using System.Web.UI.WebControls;
 using SysUt14Gr03.Models;
 using SysUt14Gr03.Classes;
 
+/// <summary>
+/// Festet til innlogging siden. Hvis man nu har mistet/glemt passordet sitt, så kan man få et nytt et. 
+/// Webformen her får inn et bruker navn hvor han da henter ut resten av brukeren sin informasjon fra databasen utfra det bruker navnet. 
+/// hvis han da får hentet ut fra databasen (bruker != null), så betyr det at brukeren eksisterer. Han setter da det nye passordet til en random 
+/// 10 strings lengde med store/små bokstaver og tall. Salter og hasher passordet og oppdatere databasen. også sende den en email til brukeren 
+/// om det nye passordet i klar tekst. 
+/// </summary>
+
 namespace SysUt14Gr03
 {
     public partial class lostPassword : System.Web.UI.Page
@@ -38,24 +46,36 @@ namespace SysUt14Gr03
             msg = new MailMessage();
             sendMsg = new Classes.sendEmail();
         }
+
         protected void sendPasswordButton_Click(object sender, EventArgs e)
         {
-            newPassword = CreatePassword(10);
-            string email = bruker.Epost;
-            msg.Subject = "Tilsendt nytt passord";
-            msg.Body = "Hei " + email + "!\n" + "Her har du et nytt passord for din bruker: " + newPassword + "\nVi vil anbefale deg å å skifte passord når du får logget deg inn til noe som er mer personlig";
-            updatePassword(email, newPassword);
-            if (updated)
+            if (bruker != null)
             {
-                sendMsg.sendEpost(email, msg.Body, msg.Subject, null, null, null);
-                Response.Redirect("Login.aspx");
+                newPassword = CreatePassword(10);
+                string email = bruker.Epost;
+                msg.Subject = "Tilsendt nytt passord";
+                msg.Body = "Hei " + email + "!\n" + "Her har du et nytt passord for din bruker: " + newPassword + "\nVi vil anbefale deg å å skifte passord når du får logget deg inn til noe som er mer personlig";
+                updatePassword(email, newPassword);
+                if (updated)
+                {
+                    sendMsg.sendEpost(email, msg.Body, msg.Subject, null, null, null);
+                    Session["flashMelding"] = "Du har nu fått en epost om ditt nye passord";
+                    Session["flashStatus"] = Konstanter.notifikasjonsTyper.success.ToString();
+                    Response.Redirect("Login.aspx");
+                }
+                else
+                {
+                    Session["flashMelding"] = "Ville ikke oppdateres i databasen";
+                    Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
+                }
             }
             else
             {
-                Session["flashMelding"] = "Ville ikke oppdateres i databasen";
+                Session["flashMelding"] = "Brukeren eksisterer ikke!";
                 Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger.ToString();
             }
         }
+
         public static string CreatePassword(int length)
         {
             string valid = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
@@ -65,6 +85,7 @@ namespace SysUt14Gr03
                 res += valid[rnd.Next(valid.Length)];
             return res;
         }
+
         public void updatePassword(string email, string passord)
         {
             if (email != null)

@@ -31,11 +31,17 @@ namespace SysUt14Gr03
 
                 if (!IsPostBack)
                 {
+                    
                     foreach (Prosjekt p in t.Prosjekter)
                     {
                         brukerTabell = Tabeller.HentBrukerTabellForTeam(query, t, p.Prosjekt_id);
-                      
+                        brukerTabell.CssClass = "table";
+
                     }
+                    Label label = new Label();
+                    label.Text =  "<h3>" + t.Navn + "</h3>";
+                    label.Font.Bold = true;
+                    PlaceHolderTable.Controls.Add(label);
                     PlaceHolderTable.Controls.Add(brukerTabell);
                 }
             }

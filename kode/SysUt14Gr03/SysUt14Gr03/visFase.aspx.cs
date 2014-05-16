@@ -7,6 +7,11 @@ using System.Web.UI.WebControls;
 using SysUt14Gr03.Classes;
 using SysUt14Gr03.Models;
 
+/// <summary>
+/// Lister ut informasjon som fase leder, start/stopp/opprettet dato. Oppgaver til fasen med informasjon om oppgaven som tidsbruk, status og hvem som har oppgaven.
+/// Så liste den også ut totalt tidsbruk på fasen.
+/// </summary>
+
 namespace SysUt14Gr03
 {
     public partial class visFase : System.Web.UI.Page

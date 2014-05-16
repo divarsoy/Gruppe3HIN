@@ -7,8 +7,15 @@ using System.Web.UI.WebControls;
 using SysUt14Gr03.Classes;
 using SysUt14Gr03.Models;
 
+/// <summary>
+/// Denne klassen tar og henter ut alle teamene som ikke er aktiv i en checkbox liste så du kan sette en merke ved de teamene som du 
+/// vil aktivere igjen. Hvis det er sucsessful, så vil du få en flashmelding om det og hvilken team som er blitt aktivert 
+/// igjen før du da blir sendt videre til administrasjon av team siden igjen.
+/// Er det ingen team som ikke er satt som aktiv vil du få en beskjed om det.
+/// </summary>
+
 namespace SysUt14Gr03.Prosjektleder
-{
+{    
     public partial class AktiveringAvTeam : System.Web.UI.Page
     {
         private List<Team> teamListe;

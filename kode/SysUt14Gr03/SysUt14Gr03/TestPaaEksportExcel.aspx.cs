@@ -10,6 +10,7 @@ using SysUt14Gr03.Models;
 
 namespace SysUt14Gr03
 {
+    
     public partial class TestPaaEksportExcel : System.Web.UI.Page
     {
         DataTable dt = new DataTable();
@@ -28,9 +29,9 @@ namespace SysUt14Gr03
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-//            var query = Queries.GetAlleBrukere();
-//            dt = DataTabeller.OversiktBrukere(query); 
-            dt = DataTabeller.BurnDownChartForFase(10);
+            var query = Queries.GetAlleBrukere();
+            dt = DataTabeller.OversiktBrukere(query); 
+//            dt = DataTabeller.BurnDownChartForFase(10);
             EksporterTilExcel.CreateExcelDocument(dt, "reg.xlsx", Response); 
 
 

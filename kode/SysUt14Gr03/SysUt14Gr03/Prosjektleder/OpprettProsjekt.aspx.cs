@@ -213,7 +213,7 @@ namespace SysUt14Gr03
                     }
                     else
                     {
-                        string confirmMessage = "Fasen: " + tbFasenavn.Text + " er i ferd med og overlapper fasen: " + Session["FaseNavn"];
+                        string confirmMessage = "Fasen: " + tbFasenavn.Text + " er i ferd med å overlappe fasen: " + Session["FaseNavn"];
                         System.Text.StringBuilder javaScript = new System.Text.StringBuilder();
 
                         javaScript.Append("\n<script type=text/javascript>\n");

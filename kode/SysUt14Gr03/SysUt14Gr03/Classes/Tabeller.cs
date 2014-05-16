@@ -169,8 +169,8 @@ namespace SysUt14Gr03.Classes
         public static Table HentBrukerTabellForTeam(List<Bruker> query, Team nesteTeam, int prosjekt_id)
         {
             Table tabell = new Table();
+          
             TableHeaderRow headerRow = new TableHeaderRow();
-            TableHeaderRow teamNavnHeader = new TableHeaderRow();
             TableHeaderCell teamNavnCell = new TableHeaderCell();
             TableHeaderCell forNavnHeaderCell = new TableHeaderCell();
             TableHeaderCell etterNavnHeaderCell = new TableHeaderCell();
@@ -179,17 +179,14 @@ namespace SysUt14Gr03.Classes
             TableHeaderCell IMHeaderCell = new TableHeaderCell();
             TableHeaderCell rolleHeaderCell = new TableHeaderCell();
 
-            string teamLink = teamNavnCell.ResolveUrl("~/VisTeam?team_id=" + nesteTeam.Team_id.ToString());
+         
+            
             forNavnHeaderCell.Text = "Fornavn";
             etterNavnHeaderCell.Text = "Etternavn";
             brukerNavnHeaderCell.Text = "Brukernavn";
             epostHeaderCell.Text = "Epost";
             IMHeaderCell.Text = "IM";
-            teamNavnCell.Text = String.Format("<a href='{0}'>{1}</a>", teamLink, nesteTeam.Navn.ToString());
             rolleHeaderCell.Text = "Rolle";
-               
-            teamNavnHeader.Cells.Add(teamNavnCell);
-            tabell.Rows.Add(teamNavnHeader);
 
             headerRow.Cells.Add(forNavnHeaderCell);
             headerRow.Cells.Add(etterNavnHeaderCell);
@@ -234,7 +231,7 @@ namespace SysUt14Gr03.Classes
                 tabell.Rows.Add(tRow);
             }
 
-            tabell.CssClass = "table";
+            //tabell.CssClass = "table";
             return tabell;
         }
 
@@ -600,7 +597,8 @@ namespace SysUt14Gr03.Classes
             sumBruktCell.Text = "Sum Brukt tid: " + Convert.ToString(sumBrukt);
             TimeSpan remainingTime = new TimeSpan(0);
             remainingTime = sumEst - sumBrukt;
-            sumGjenstaendeCell.Text = "Sum Gjenstående tid: " + (sumGjenstaende == null ? Convert.ToString(sumGjenstaende) : Convert.ToString(remainingTime));
+            string sumGjen = Convert.ToString(sumGjenstaende);
+            sumGjenstaendeCell.Text = "Sum Gjenstående tid: " + (sumGjenstaende == null ? sumGjen : Convert.ToString(remainingTime));
             sumRow.Cells.Add(sumEstimertCell);
             sumRow.Cells.Add(sumBruktCell);
             sumRow.Cells.Add(sumGjenstaendeCell);
@@ -754,6 +752,7 @@ namespace SysUt14Gr03.Classes
             TableHeaderCell stoppHeaderCell = new TableHeaderCell();
             TableHeaderCell tidHeaderCell = new TableHeaderCell();
             TableHeaderCell manuellHeaderCell = new TableHeaderCell();
+            TableHeaderCell feilHeaderCell = new TableHeaderCell();
 
             headerCell.Text = bruker.Brukernavn.ToString();
             oppgaveIdHeaderCell.Text = "Oppgave ID";
@@ -763,15 +762,22 @@ namespace SysUt14Gr03.Classes
             stoppHeaderCell.Text = "Stopp";
             tidHeaderCell.Text = "Brukt tid";
             manuellHeaderCell.Text = "Registrert Manuelt";
+            feilHeaderCell.Text = string.Format("<h4><font color='red'>Det finnes ingen oppgaver for denne brukeren</font></h4>");
 
-            timeHeaderRow.Cells.Add(oppgaveIdHeaderCell);
-            timeHeaderRow.Cells.Add(oppgaveHeaderCell);
-            timeHeaderRow.Cells.Add(opprettetHeaderCell);
-            timeHeaderRow.Cells.Add(startHeaderCell);
-            timeHeaderRow.Cells.Add(stoppHeaderCell);
-            timeHeaderRow.Cells.Add(tidHeaderCell);
-            timeHeaderRow.Cells.Add(manuellHeaderCell);
+            if (time_list.Count > 0)
+            {
+                timeHeaderRow.Cells.Add(oppgaveIdHeaderCell);
+                timeHeaderRow.Cells.Add(oppgaveHeaderCell);
+                timeHeaderRow.Cells.Add(opprettetHeaderCell);
+                timeHeaderRow.Cells.Add(startHeaderCell);
+                timeHeaderRow.Cells.Add(stoppHeaderCell);
+                timeHeaderRow.Cells.Add(tidHeaderCell);
+                timeHeaderRow.Cells.Add(manuellHeaderCell);
+            }
+            else
+                timeHeaderRow.Cells.Add(feilHeaderCell);
             headerRow.Cells.Add(headerCell);
+            
             tabell.Rows.Add(headerRow);
             tabell.Rows.Add(timeHeaderRow);
 

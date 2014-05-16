@@ -7,6 +7,7 @@
     <div class="clearfix"></div>
     <h1>
       <asp:Label ID="lblTittel" runat="server"></asp:Label>
+
     </h1>
     <div class="form-group">
             <div class="row">
@@ -22,6 +23,7 @@
                     <asp:TextBox ID="txtSlutt" CssClass="form-control" runat="server" TextMode="Time" Visible="false"></asp:TextBox>
                     <br />
                     <asp:Button ID="btnAddPause" runat="server" CssClass="btn btn-primary" Text="Legg til pause" OnClick="btnAddPause_Click" Visible="false"/>
+                    
                     <br />
                     
                     <br />

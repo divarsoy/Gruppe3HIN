@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using SysUt14Gr03.Models;
 using SysUt14Gr03.Classes;
+using System.Web.UI.HtmlControls;
 
 namespace SysUt14Gr03.Prosjektleder
 {
@@ -36,15 +37,16 @@ namespace SysUt14Gr03.Prosjektleder
 
             List<Bruker> brukerePaProsjekt = Queries.GetAlleBrukereIEtProjekt(prosjektId);
             Prosjekt prosjekt = Queries.GetProsjekt(prosjektId);
-            lblProsjekt.Text = String.Format("<a href='../VisProsjekt?prosjekt_id={0}'>{1} </a>", prosjektId, prosjekt.Navn);
 
             foreach (Bruker b in brukerePaProsjekt)
             {
                 List<Time> timer = Queries.GetTimerForBruker(b.Bruker_id);
                 if (!IsPostBack)
                 {
+                    string navn = b.Brukernavn;
                     Table timeTabell = Tabeller.HentTimerForProsjektleder(timer, b, prosjekt);
-
+                    var brControl3 = new LiteralControl("<br />");
+                    PlaceHolderTable.Controls.Add(brControl3);
                     PlaceHolderTable.Controls.Add(timeTabell);
                 }
             }

@@ -9,6 +9,12 @@ using System.Web.UI.WebControls;
 using SysUt14Gr03.Classes;
 using SysUt14Gr03.Models;
 
+/// <summary>
+/// Som prosjektleder får man opp alle prosjekter som han er prosjektleder for. Ser informasjonen om prosjektene i en gridview med muligheter for å redigere på all 
+/// informasjonen. Endre han prosjekt leder til noen andre blir siden loadet på nytt og det prosjektet er borte fra siden. Det ligger også linker til endring av team
+/// i prosjektet og endring/legge til fase og link til visProsjekt.
+/// </summary>
+
 namespace SysUt14Gr03
 {
     public partial class AdministrasjonAvProsjekt : System.Web.UI.Page
@@ -28,14 +34,12 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            SessionSjekk.sjekkForBruker_id();
+            SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
             bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
             rettighet = Queries.GetRettighet(bruker_id);
             if (rettighet.Rettighet_id == 3)
-            {
                 prosjekt_id = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
 
-            }
             if (Validator.SjekkRettighet(Validator.KonverterTilTall(Session["bruker_id"].ToString()), Konstanter.rettighet.Prosjektleder) || SessionSjekk.IsFaseleder())
             {
                 if (!IsPostBack)
@@ -45,6 +49,11 @@ namespace SysUt14Gr03
             }
         }
 
+        /// <summary>
+        /// Henter og viser informasjon om prosjektet. Sjekker også om det er fase leder eller prosjektleder som er logget inn siden faseleder ikke skal
+        /// kunne endre på prosjektet, men ha tilgang til administrasjon av team/fase og lese informasjon av prosjektet.
+        /// </summary>
+        
         private void visProsjekt()
         {
             using (var context = new Context())
@@ -63,6 +72,7 @@ namespace SysUt14Gr03
             }
         }
 
+        //Oppdatere gridviewen etter den er blitt endret
         protected void gridViewProsjekt_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             try
@@ -200,7 +210,7 @@ namespace SysUt14Gr03
                     HyperLink link = e.Row.FindControl("asp") as HyperLink;
                     link.NavigateUrl = "AdministrasjonAvTeamBrukere?Team_id=" + team_id;
                     HyperLink linkFase = e.Row.FindControl("hlFase") as HyperLink;
-                    linkFase.NavigateUrl = "AdministrasjonAvFase?prosjekt_id=" + prosjekt_id;
+                    linkFase.NavigateUrl = "~/AdministrasjonAvFase?prosjekt_id=" + prosjekt_id;
                    
                 }
             }

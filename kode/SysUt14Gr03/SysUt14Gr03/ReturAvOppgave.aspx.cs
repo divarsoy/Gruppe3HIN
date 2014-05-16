@@ -10,6 +10,10 @@ using System.Drawing;
 
 namespace SysUt14Gr03
 {
+    /// <summary>
+    /// Side som lar en bruker sende melding til faseleder om at han ikke
+    /// ønsker å delta på oppgaven
+    /// </summary>
     public partial class ReturAvOppgave : System.Web.UI.Page
     {
         private int bruker_id;
@@ -36,6 +40,7 @@ namespace SysUt14Gr03
                 oppgave = Queries.GetOppgave(oppgave_id);
                 lblNavn.Text += ": " + oppgave.Tittel;
 
+                // Henter automatisk nåværende fasleder
                 Bruker faseleder = SessionSjekk.GetFaseleder(prosjekt_id);
                 if (faseleder != null)
                     faseleder_id = faseleder.Bruker_id;
@@ -53,6 +58,7 @@ namespace SysUt14Gr03
             string melding = txtSvar.Text;
             if (melding != string.Empty)
             {   
+                // Setter opp meldingen som vises for faseleder, med link for enkel tilgang
                 Bruker bruker = Queries.GetBruker(bruker_id);
                 melding = "Bruker " + bruker.ToString() + " har returnert <a href=\"http://malmen.hin.no/SysUt14Gr03/VisOppgave.aspx?oppgave_id="
                     + oppgave.RefOppgaveId + " " + oppgave.Oppgave_id + "\">" + oppgave.Tittel + "</a>. Begrunnelse: \"" + melding + "\"";

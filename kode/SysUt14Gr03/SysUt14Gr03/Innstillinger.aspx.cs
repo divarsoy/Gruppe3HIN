@@ -9,14 +9,16 @@ using SysUt14Gr03.Classes;
 
 namespace SysUt14Gr03
 {
+    /// <summary>
+    /// Siden der bruker kan endre sine egne instillinger
+    /// </summary>
     public partial class Innstillinger : System.Web.UI.Page
     {
-        private int bruker_id = 1;
-        private Bruker bruker;
-        private List<string> elementer = new List<string>();
-        private BrukerPreferanse brukerPrefs;
+        private int bruker_id = 1; // Hardkodet for testing
+        private Bruker bruker; // Brukeren som skal endres
+        private BrukerPreferanse brukerPrefs; // Brukerpreferansene som skal endres
         public bool[] selectedItems { get; set; }
-        public string brukernavn { get; set; }
+        public string brukernavn { get; set; } // Brukes til testing
 
         protected void Page_PreInit(Object sener, EventArgs e)
         {
@@ -40,7 +42,7 @@ namespace SysUt14Gr03
                     txtIM.Text = bruker.IM;
                 }
                 
-
+                // Hvis han er admin skal han ikke se e-postvarsler
                 if (Validator.SjekkRettighet(bruker_id, Konstanter.rettighet.Administrator)) {
                     cblElementer.Visible = false;
                     Label1.Visible = false;
@@ -61,7 +63,7 @@ namespace SysUt14Gr03
 
                     if (brukerPrefs != null)
                     {
-                        // Setter valgte verdier
+                        // Setter valgte verdier fra databasen
                         cblElementer.Items[0].Selected = brukerPrefs.EpostTeam;
                         cblElementer.Items[1].Selected = brukerPrefs.EpostProsjekt;
                         cblElementer.Items[2].Selected = brukerPrefs.EpostOppgave;
@@ -118,7 +120,7 @@ namespace SysUt14Gr03
 
         protected void btnLagrePassord_Click(object sender, EventArgs e)
         {
-
+            // Endrer passord
             if (txtPassord.Text != string.Empty &&
                 txtNyPass.Text != string.Empty &&
                 txtNyPass1.Text != string.Empty)
@@ -209,7 +211,7 @@ namespace SysUt14Gr03
 
             using (var db = new Context())
             {
-
+                // Lagrer brukerpreferanser
                 BrukerPreferanse brukerPref = db.BrukerPreferanser.FirstOrDefault(o => o.Bruker_id == bruker_id);
                 if (brukerPref != null)
                 {

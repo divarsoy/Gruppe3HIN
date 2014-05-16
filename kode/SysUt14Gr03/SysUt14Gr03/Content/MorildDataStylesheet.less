@@ -1,5 +1,8 @@
 ﻿
 @defaultmargleft: 10px;
+@red: red;
+@meny-farge: #D2322D;
+
 
 .listbox {
 	height: 50px;
@@ -39,6 +42,11 @@ button, input, select, textarea, .checkbox {
 		margin-bottom: 20px;
 	}    
 }
+
+.removeTime {
+
+}
+
 .no-padding {
 	padding: 0;
 }
@@ -76,11 +84,11 @@ button, input, select, textarea, .checkbox {
 		}
 	}
 	.feilMelding {
-		color: red;
+		color: @red;
 		padding-left: 15px;
 	}
 .sheperd-link {
-	background-color: #D3D3D3;
+	background-color: #F1F1F1;
 	display: block;
 	font-size: 0.75em !important;
 	line-height: 1.3em;
@@ -91,7 +99,7 @@ button, input, select, textarea, .checkbox {
 	color: white;
 }
 .red {
-	color: red;
+	color: @red;
 }
 
 .rapport {
@@ -106,9 +114,23 @@ button, input, select, textarea, .checkbox {
 	
 		padding-left : 5%;  
 }
+
+.prosjektInfo {
+	color: @meny-farge; // #3276B1;
+	font-weight: normal;
+	padding-left: 15px;
+}
+
+.faseleder-nav {
+	background-color: @red;
+}
+
+.glyphicon-remove:before {
+    content:"\e014";
+
+}
+
 .navbar-right {float: right !important;}
-
-
 @media (max-width: 1200px) {
 	.navbar-header {
 		float: none;

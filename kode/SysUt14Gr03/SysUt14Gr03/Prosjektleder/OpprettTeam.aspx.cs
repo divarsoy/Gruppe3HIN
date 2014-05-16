@@ -9,13 +9,18 @@ using SysUt14Gr03.Models;
 
 namespace SysUt14Gr03
 {
+    /// <summary>
+    /// Dette er siden som bruke for å opprette team. Brukeren får presentert en liste
+    /// med tilgjengelige utviklere, og velger de som skal med. Brukeren må skrive inn
+    /// et navn på teamet for å fortsette
+    /// </summary>
     public partial class OpprettTeam : System.Web.UI.Page
     {
-        private List<Bruker> brukerListe;
-        List<Bruker> selectedBrukers;
-        private string teamNavn;
-        private List<Prosjekt> prosjekter;
-        private Prosjekt prosjekt;
+        private List<Bruker> brukerListe; // Liste med brukere
+        List<Bruker> selectedBrukers; // Brukere som er valgt
+        private string teamNavn; // Navnet på teamet
+        private List<Prosjekt> prosjekter; // Tilgjengelige prosjekter
+        private Prosjekt prosjekt; // Prosjektet de skal med på
 
         protected void Page_PreInit(Object sener, EventArgs e)
         {
@@ -32,12 +37,14 @@ namespace SysUt14Gr03
 
             if (cblBrukere.Items.Count == 0)
             {
+                // Legger brukerne til i checkboxlistens
                 for (int i = 0; i < brukerListe.Count(); i++)
                 {
                     Bruker bruker = brukerListe[i];
                     cblBrukere.Items.Add(bruker.Etternavn + ", " + bruker.Fornavn);
                 }
             }
+            // Legger prosjektene inn i dropdownliste
             for(int i = 0; i < prosjekter.Count; i++)
                 ddlProsjekt.Items.Add(new ListItem(prosjekter[i].Navn, prosjekter[i].Prosjekt_id.ToString()));
         }
@@ -47,7 +54,6 @@ namespace SysUt14Gr03
             // http://stackoverflow.com/questions/18924147/how-to-get-values-of-selected-items-in-checkboxlist-with-foreach-in-asp-net-c
 
             // Hvor mange brukere er valgt
-            //int numberSelected = 0;
             List<Bruker> selectedUsers = new List<Bruker>();
             selectedBrukers = new List<Bruker>();
 
@@ -57,7 +63,6 @@ namespace SysUt14Gr03
                 if (cblBrukere.Items[i].Selected)
                 {
                     selectedUsers.Add(brukerListe[i]);
-                    //numberSelected++;
                 }
             }
 
@@ -65,7 +70,7 @@ namespace SysUt14Gr03
 
             using (var context = new Context())
             {
-
+                // Henter alle valgte brukere
                 for (int i = 0; i < selectedUsers.Count; i++)
                 {
                     int id = selectedUsers[i].Bruker_id;

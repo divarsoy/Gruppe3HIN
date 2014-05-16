@@ -7,7 +7,11 @@
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="table table-responsive">
-     <asp:PlaceHolder ID="PlaceHolderTable"  runat="server"></asp:PlaceHolder>
-        </div>       
+    <div class="col-sm-3">
+        <asp:DropDownList ID="ddlfaser" CssClass="form-control" AutoPostBack="true" runat="server"></asp:DropDownList>
+    </div>
+     <asp:PlaceHolder ID="ChartPlaceHolder"  runat="server"></asp:PlaceHolder>
+     <div class="table table-responsive">   
+        <asp:PlaceHolder ID="PlaceHolderTable"  runat="server"></asp:PlaceHolder>
+     </div>  
 </asp:Content>  

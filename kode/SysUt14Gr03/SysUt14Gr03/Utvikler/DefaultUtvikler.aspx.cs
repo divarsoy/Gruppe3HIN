@@ -9,6 +9,10 @@ using SysUt14Gr03;
 using SysUt14Gr03.Classes;
 using SysUt14Gr03.Models;
 
+/// <summary>
+/// Forsiden for utvikler/faseleder. Man kan se kalenderen, velge et prosjekt og se hvilken prosjekt som er valgt. Står også at dette er utvikler forsiden :P 
+/// </summary>
+
 namespace SysUt14Gr03
 {
     public partial class BrukerForside : System.Web.UI.Page
@@ -62,9 +66,16 @@ namespace SysUt14Gr03
             {
                 Bruker bruker = Queries.GetBruker(bruker_id);
 
-                //Sjekker om Sheperd skal aktiveres
-                BrukerPreferanse brukerpreferanse = Queries.GetBrukerPreferanse(bruker_id);
-                SheperdBool.Value = brukerpreferanse.Sheperd.ToString();
+                //Sjekker om sheperd skal deaktiveres eller vises
+                if (Request.QueryString["sheperd"] != null)
+                {
+                    Queries.SetSheperd(bruker_id);
+                }
+                else if (Queries.GetBrukerPreferanse(bruker_id).Sheperd)
+                {
+                    ScriptManager.RegisterClientScriptInclude(this.Page, this.GetType(), "jquery", "../Scripts/jquery-1.10.2.js");
+                    ScriptManager.RegisterClientScriptInclude(this.Page, this.GetType(), "SheperdScript", "../Scripts/MorildShepherdUtvikler.js");
+                }
                 
                 // Henter alle aktive prosjekter for innlogget bruker
                 if (ListBoxProsjekt.SelectedValue != null && ListBoxProsjekt.SelectedValue == "0")

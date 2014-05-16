@@ -12,6 +12,10 @@ using System.Data;
 
 namespace SysUt14Gr03
 {
+    /// <summary>
+    /// Rapportsiden, avhengig av hvilken rolle innlogget bruker har får de
+    /// opp ulike knapper for å vise og laste ned relevante rapporter
+    /// </summary>
     public partial class VisRapport : System.Web.UI.Page
     {
         private int bruker_id;
@@ -32,7 +36,7 @@ namespace SysUt14Gr03
             bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
             if (bruker_id != -1)
             {
-
+                // Sjekker rettigheter, endrer funksjonalitet deretter
                 bruker = Queries.GetBruker(bruker_id);
                 rettighet = Queries.GetRettighet(bruker_id);
                 if (rettighet.Rettighet_id == 2)
@@ -102,7 +106,8 @@ namespace SysUt14Gr03
 
         protected void btnProsjekt_Click(object sender, EventArgs e)
         {
-
+            // Leger et kakediagram
+            // Kakemonsteret sier "Me like cookies!"
             crtKake.Series.Add("Default");
             crtKake.ChartAreas.Add("ChartArea1");
 
@@ -114,6 +119,7 @@ namespace SysUt14Gr03
                 TimeSpan test1 = rapport.GetEstimatForProsjekt();
                 TimeSpan test2 = rapport.GetBruktTidPaProsjekt();
 
+                // Setter opp strenger som skal vises
                 string estimert = "Estimert tid: ";
                 estimert += (int) rapport.GetEstimatForProsjekt().TotalHours + " timer ";
                 estimert += rapport.GetEstimatForProsjekt().Minutes + " minutter ";
@@ -126,7 +132,7 @@ namespace SysUt14Gr03
                 gjenstaende += (int)(rapport.GetEstimatForProsjekt() - rapport.GetBruktTidPaProsjekt()).TotalHours + " timer ";
                 gjenstaende += (rapport.GetEstimatForProsjekt() - rapport.GetBruktTidPaProsjekt()).Minutes + " minutter ";
 
-
+                // Tabeller med x- og y-verdier
                 double[] yValues = {Convert.ToDouble(rapport.GetBruktTidPaProsjekt().TotalMilliseconds),
                                        Convert.ToDouble(rapport.GetEstimatForProsjekt().TotalMilliseconds -  rapport.GetBruktTidPaProsjekt().TotalMilliseconds)};
                 string[] xValues = {brukt, gjenstaende};
@@ -141,11 +147,7 @@ namespace SysUt14Gr03
 
                 crtKake.Series["Default"].ChartType = SeriesChartType.Pie;
 
-                // crtKake.Series["Default"]["PieLabelStyle"] = "Disabled";
-
                 crtKake.ChartAreas["ChartArea1"].Area3DStyle.Enable3D = true;
-
-                // crtKake.Legends[0].Enabled = true;
 
                 // http://www.thebestcsharpprogrammerintheworld.com/blogs/how-to-create-a-pie-chart-using-aspnet-and-c-sharp.aspx
    
@@ -176,12 +178,7 @@ namespace SysUt14Gr03
 
                 crtKake.Series["Default"].ChartType = SeriesChartType.Pie;
 
-                // crtKake.Series["Default"]["PieLabelStyle"] = "Disabled";
-
                 crtKake.ChartAreas["ChartArea1"].Area3DStyle.Enable3D = true;
-
-
-                // crtKake.Legends[0].Enabled = true;
 
                 Chart testChart = new Chart();
 
@@ -206,13 +203,9 @@ namespace SysUt14Gr03
 
                 testChart.Series["Default2"].ChartType = SeriesChartType.Pie;
 
-                // testChart.Series["Default2"]["PieLabelStyle"] = "Disabled";
-
                 testChart.ChartAreas["ChartArea2"].Area3DStyle.Enable3D = true;
                 testChart.Width = 300;
                 testChart.Height = 300;
-
-                // testChart.Legends[0].Enabled = true;
 
                 pnlGrafikk.Controls.Add(testChart);
                 
@@ -227,12 +220,13 @@ namespace SysUt14Gr03
             crtKake.Visible = true;
             lblTest.Visible = true;
             pnlGrafikk.Visible = true;
-            pnlGrafikk.Controls.Add(crtKake);
+            pnlGrafikk.Controls.Add(crtKake); // Setter ting til synlig etter de er fylt med data
                 
         }
 
         protected void btnIndivid_Click(object sender, EventArgs e)
         {
+            // Sjekker rettigheter
             if (rettighet.Rettighet_id == 2)
             {
                 Rapport rapport = new Rapport(Rapport.INDIVIDRAPPORT, Validator.KonverterTilTall(ddlBrukere.SelectedValue));
@@ -262,6 +256,7 @@ namespace SysUt14Gr03
             EksporterTilExcel.CreateExcelDocument(dt, filnavn, Response);
         }
 
+        // Knapper for å eksportere data til excel
         protected void btnLastNedProsjekt_Click(object sender, EventArgs e)
         {
             if (rettighet.Rettighet_id == 2)

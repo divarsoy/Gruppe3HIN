@@ -10,6 +10,10 @@ using System.Drawing;
 
 namespace SysUt14Gr03
 {
+    /// <summary>
+    /// Sider der brukeren kan velge å godta, og bli med på, oppgaven eller
+    /// avslå. I så fall får avsender beskjed om hva brukeren har svart
+    /// </summary>
     public partial class MottaOppgave : System.Web.UI.Page
     {
         private int avsender_id;
@@ -46,6 +50,7 @@ namespace SysUt14Gr03
 
                 if (oppgave != null && avsender != null)
                 {
+                    // Setter opp string
                     lblMessage.Text = "Bruker " + avsender.IM + " ønsker hjelp på oppgave "
                     + oppgave.Tittel + "." + Environment.NewLine + "Ved å godta invitasjonen blir du lagt til "
                     + "på denne oppgaven.";

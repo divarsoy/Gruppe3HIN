@@ -10,15 +10,20 @@ using System.Web.UI.WebControls;
 using SysUt14Gr03.Classes;
 using SysUt14Gr03.Models;
 
+/// <summary>
+/// klasse som sender ut invitasjon om hjelp til en oppgave, tar inn en oppgave_id for å vite 
+/// hvilken oppgave det trengs hjelp til for så å sende ut ved hjelp av varsel klassen.
+/// </summary>
+
 namespace SysUt14Gr03
 {
     public partial class InvitasjonAvBruker : System.Web.UI.Page
     {
-        private List<Bruker> brukerListe;
-        private int oppgaveid;
-        private int brukerid;
-        private Bruker innloggetbruker;
-
+        private List<Bruker> brukerListe; //liste med brukere
+        private int oppgaveid; //Oppgave id til oppgaven
+        private int brukerid; //brukerid til innlogget bruker
+        private Bruker innloggetbruker; //bruker objekt til innlogget bruker
+        
         protected void Page_PreInit(Object sener, EventArgs e)
         {
             string master = SessionSjekk.findMaster();
@@ -61,11 +66,8 @@ namespace SysUt14Gr03
             brukerid = Convert.ToInt32(ddlBrukere.SelectedValue);
             int oppgave_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
             // Sorry Eivind
-            // Varsel.SendVarsel(brukerid, Varsel.OPPGAVEVARSEL, "Hjelp", innloggetbruker.ToString() + " trenger hjelp til oppgaven: ", oppgaveid, 1);
             Varsel.SendInvitasjon(brukerid, innloggetbruker.Bruker_id, oppgave_id, innloggetbruker.ToString() + " trenger hjelp til oppgaven: ");
-           // lblInvitasjon.ForeColor = Color.Green;
             Oppgave oppgave = Queries.GetOppgave(oppgaveid);
-            //lblInvitasjon.Text = "Invitasjon sendt til: " + ddlBrukere.SelectedItem.ToString();
             Session["flashMelding"] = "Invitasjon til hjelp av oppgave " + oppgave.Tittel + " er sendt til " + ddlBrukere.SelectedItem.ToString();
             Session["flashStatus"] = Konstanter.notifikasjonsTyper.info.ToString();
             Response.Redirect(Request.RawUrl);

@@ -9,6 +9,11 @@ using System.Web.UI.WebControls;
 using SysUt14Gr03.Classes;
 using SysUt14Gr03.Models;
 
+/// <summary>
+/// Får en oversikt over alle brukere på hele systemet i en gridview hvor man kan endre på alt av brukeren sin informasjon for utenom på brukernavn og im feltet 
+/// i samme gridview. Man kan også sende ny aktiverings link viss man nu har gjort brukeren inaktiv. 
+/// </summary>
+
 namespace SysUt14Gr03
 {
     public partial class EndreBrukerinformasjonSomAdministrator : System.Web.UI.Page
@@ -35,6 +40,7 @@ namespace SysUt14Gr03
             }            
         }
 
+        //Fyller gridview med rett data
         private void visBrukere()
         {
             using (var context = new Context())
@@ -45,6 +51,7 @@ namespace SysUt14Gr03
                 gridViewEndre.DataBind();
             }
         }
+
         protected void gridViewEndre_RowEditing(object sender, GridViewEditEventArgs e)
         {
             gridViewEndre.EditIndex = e.NewEditIndex;

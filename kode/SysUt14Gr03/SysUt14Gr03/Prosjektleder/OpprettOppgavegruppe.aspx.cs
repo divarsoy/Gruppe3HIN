@@ -11,6 +11,11 @@ using System.Drawing;
 
 namespace SysUt14Gr03
 {
+    /// <summary>
+    /// Her velger prosjektleder oppgaver som skal linkes sammen med avhengighet.
+    /// Brukeren ser en gridview med oppgaver i prosjektet, velger prioritet fra
+    /// én til ti, og et navn på gruppen
+    /// </summary>
     public partial class OpprettOppgavegruppe : System.Web.UI.Page
     {
         private int prosjekt_id;
@@ -18,7 +23,6 @@ namespace SysUt14Gr03
         private List<Oppgave> oppgaveListe;
         private List<Oppgave> valgteOppgaver;
         private DropDownList ddlPrioritet;
-        //private DropDownList ddlPrioritet;
 
         protected void Page_PreInit(Object sener, EventArgs e)
         {
@@ -61,7 +65,7 @@ namespace SysUt14Gr03
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 DropDownList ddlPrioritet = (e.Row.FindControl("ddlPrioritet") as DropDownList);
-
+                // Fyller listen med tall
                 for (int i = 1; i < 11; i++)
                 {
                     ddlPrioritet.Items.Add(i.ToString());
@@ -71,7 +75,6 @@ namespace SysUt14Gr03
 
         protected void btnOpprett_Click(object sender, EventArgs e)
         {
-            //DropDownList ddlPrioritet;
 
             for (int i = 0; i < gvwOppgaver.Rows.Count; i++)
             {
@@ -87,6 +90,7 @@ namespace SysUt14Gr03
                     }
                 }
             }
+            // Sjekker hvilke oppgaver som er valgt
             if (txtNavn.Text != string.Empty)
             {
                 if (valgteOppgaver.Count < 10)
