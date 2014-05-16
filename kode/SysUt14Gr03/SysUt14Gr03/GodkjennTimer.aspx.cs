@@ -10,6 +10,11 @@ using System.Windows.Forms;
 
 namespace SysUt14Gr03
 {
+    /// <summary>
+    /// Dette er siden som viser alle timeregistreringer i valgt prosjekt som trenger godkjenning.
+    /// Faseleder kan trykke på "godkjenn" for å godkjenne timen, eller "korriger" for å
+    /// bli sendt videre til en side der han kan korrigere tidsregistreringen.
+    /// </summary>
     public partial class GodkjennTimer : System.Web.UI.Page
     {
         private int bruker_id = 1;
@@ -48,6 +53,7 @@ namespace SysUt14Gr03
                     timeListe.AddRange(Queries.GetTimerForGodkjenning(o.Oppgave_id));
                 }
 
+                // Skriver ut alle timene til en gridview
                 foreach (Time t in timeListe)
                 {
                     infoListe.Add("Bruker: " + t.Bruker.ToString()
@@ -75,12 +81,12 @@ namespace SysUt14Gr03
 
         protected void gvwTimer_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-
+            // just another day in the life of jimmy nutrin
         }
 
 
         // http://msdn.microsoft.com/en-us/library/vstudio/bb907626(v=vs.100).aspx
-
+        // Kalles når man trykker på en knapp i gridview
         protected void gvwTimer_RowCommand(object sender, GridViewCommandEventArgs e)
         {
 

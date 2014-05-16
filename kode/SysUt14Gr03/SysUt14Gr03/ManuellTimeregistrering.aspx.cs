@@ -414,11 +414,16 @@ namespace SysUt14Gr03
                     Stopp = sluttTid
                 };
 
-                oppgave.BruktTid += bruktTid;
-                if (oppgave.RemainingTime >= bruktTid)
-                    oppgave.RemainingTime -= bruktTid;
-                else
-                    oppgave.RemainingTime = new TimeSpan(0);
+                // Hvis timen ikke er godkjent oppdateres ikke brukt tid på oppgaven
+                if (godkjent)
+                {
+                    oppgave.BruktTid += bruktTid;
+                    if (oppgave.RemainingTime >= bruktTid)
+                        oppgave.RemainingTime -= bruktTid;
+                    else
+                        oppgave.RemainingTime = new TimeSpan(0);
+                }
+                
 
                 oppgave.Status = context.Statuser.Where(s => s.Status_id == 2).FirstOrDefault(); // Setter status til under arbeid
                 context.Timer.Add(time);
