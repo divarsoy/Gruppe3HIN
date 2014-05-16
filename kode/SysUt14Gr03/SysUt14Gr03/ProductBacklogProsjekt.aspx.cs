@@ -8,12 +8,17 @@ using SysUt14Gr03.Models;
 using SysUt14Gr03.Classes;
 using System.Data;
 
+/// <summary>
+/// Klasse som viser productBacklog for et prosjekt, henter ut alle oppgavene
+/// til det prosjektet som er valgt. Etter det kan du eksportere productbacklogen til ei excell fil.
+/// </summary>
 namespace SysUt14Gr03
 {
     public partial class ProductBacklogProsjekt : System.Web.UI.Page
     {
-        private Prosjekt prosjekt;
-        private DataTable dt = new DataTable();
+     
+        private Prosjekt prosjekt; //Prosjekt 
+        private DataTable dt = new DataTable(); //datatabell for oppgavene(excell)
 
         // Laster inn riktig masterfil
         protected void Page_PreInit(Object sener, EventArgs e)
@@ -32,7 +37,9 @@ namespace SysUt14Gr03
             prosjektTable.CssClass = "table";
             phProsjekt.Controls.Add(prosjektTable);
         }
-
+        /// <summary>
+        /// Eksporterer til Excell
+        /// </summary>
         protected void btnExport_Click(object sender, EventArgs e)
         {
             dt = DataTabeller.ProductBacklogProsjekt(prosjekt);

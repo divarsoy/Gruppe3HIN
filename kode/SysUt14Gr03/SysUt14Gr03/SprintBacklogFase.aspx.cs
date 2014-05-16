@@ -8,18 +8,19 @@ using SysUt14Gr03.Models;
 using SysUt14Gr03.Classes;
 using System.Data;
 
+/// <summary>
+/// Tar inn en prosjekt_id og Viser en sprintbacklog for hver fase
+/// i det prosjektet som har den id'en, kan bytte mellom faser ved hjelp av en dropdownlist og 
+/// så er det metoder for å eksportere sprintbacklogen til excell format.
+/// </summary>
 namespace SysUt14Gr03
 {
     public partial class SprintBacklogFase : System.Web.UI.Page
     {
 
-        /// <summary>
-        /// Tar inn en prosjekt_id og Viser en sprintbacklog for hver fase
-        /// i det prosjektet som har den id'en, kan bytte mellom faser ved hjelp av en dropdownlist og 
-        /// så er det metoder for å eksportere sprintbacklogen til excell format.
-        /// </summary>
-        private Fase fase;
-        private DataTable dt = new DataTable();
+       
+        private Fase fase; //inneholder fasen
+        private DataTable dt = new DataTable(); //Datatabell for bruk av eksportering(excell)
         
         // Laster inn riktig masterfil
         protected void Page_PreInit(Object sener, EventArgs e)
