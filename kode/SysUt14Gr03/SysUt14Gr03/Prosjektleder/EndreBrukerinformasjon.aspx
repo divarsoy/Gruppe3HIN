@@ -7,7 +7,7 @@
     <h2>Endre Brukerinformasjon</h2>
     <p></p>
     
-    <asp:GridView RowStyle-HorizontalAlign="Center" ID="gridViewEndre" runat="server" AutoGenerateColumns="false" DataKeyNames="Bruker_id" OnRowEditing="gridViewEndre_RowEditing" OnRowCancelingEdit="gridViewEndre_RowCancelingEdit" OnRowUpdating="gridViewEndre_RowUpdating" OnRowCommand="gridViewEndre_RowCommand" ShowFooter="False" ShowHeader="True">
+    <asp:GridView RowStyle-HorizontalAlign="Center" cssClass="table table-hover  table-bordered" ID="gridViewEndre" runat="server" AutoGenerateColumns="false" DataKeyNames="Bruker_id" OnRowEditing="gridViewEndre_RowEditing" OnRowCancelingEdit="gridViewEndre_RowCancelingEdit" OnRowUpdating="gridViewEndre_RowUpdating" OnRowCommand="gridViewEndre_RowCommand" ShowFooter="False" ShowHeader="True">
 
         <Columns>
             <asp:TemplateField HeaderText="Etternavn">

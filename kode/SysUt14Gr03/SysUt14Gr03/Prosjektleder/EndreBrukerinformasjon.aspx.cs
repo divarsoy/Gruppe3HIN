@@ -9,31 +9,36 @@ using System.Web.UI.WebControls;
 using SysUt14Gr03.Classes;
 using SysUt14Gr03.Models;
 
+
+/// <summary>
+/// Klasse for å endre brukerinformasjon for brukere i et prosjekt. Tar inn en bruker_id for den brukeren prosjektlederen
+/// skal endre informasjon på. Informasjonen prosjektleder kan endre er Etternavn, Fornavn, Epost og om brukeren er Aktiv.
+/// </summary>
+
 namespace SysUt14Gr03
 {
     public partial class EndreBrukerinformasjon : System.Web.UI.Page
     {
-        private int bruker_id;
+        private int bruker_id; //Bruker_id
         private MailMessage msg;
         private sendEmail sendMsg;
-        private Rettighet rettighet;
+        private Rettighet rettighet; //rettighet
 
         protected void Page_PreInit(Object sener, EventArgs e)
         {
             string master = SessionSjekk.findMaster();
             this.MasterPageFile = master;
         }
-
+    
         protected void Page_Load(object sender, EventArgs e)
         {
             SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
 
             msg = new MailMessage();
             sendMsg = new sendEmail();
+            bruker_id = Validator.KonverterTilTall(Request.QueryString["bruker_id"]);
             if (!IsPostBack)
-            {
-                bruker_id = Validator.KonverterTilTall(Request.QueryString["bruker_id"]);
-                rettighet = Queries.GetRettighet(bruker_id);
+            {        
                 visBrukere();
             }
         }
@@ -42,6 +47,7 @@ namespace SysUt14Gr03
         {
             using (var context = new Context())
             {
+                rettighet = Queries.GetRettighet(bruker_id);
                 System.Windows.Forms.BindingSource bindingSource1 = new System.Windows.Forms.BindingSource();
                 if(rettighet.Rettighet_id == 3)
                     bindingSource1.DataSource = context.Brukere.Where(b => b.Bruker_id == bruker_id).ToList<Bruker>();
