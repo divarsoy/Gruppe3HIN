@@ -546,6 +546,8 @@ namespace SysUt14Gr03.Classes
             TimeSpan estimatForFase = new TimeSpan();
             TimeSpan totalSluttTid = new TimeSpan();
             TimeSpan totalAvvik = new TimeSpan();
+            TimeSpan nullTimeSpan = new TimeSpan(0);
+            List<TimeSpan> nyEstimertTidFase = new List<TimeSpan>();
             List<Oppgave> oppgaverForFase = Queries.getOppgaverIFase(faseId);
 
             List<DateTime> range = Enumerable.Range(0, (fase.Stopp - fase.Start).Days + 1)
@@ -571,15 +573,20 @@ namespace SysUt14Gr03.Classes
             totalRow["Oppgavenavn"] = "Total tid for " + fase.Navn;
 
             List<TimeSpan> totalTider = new List<TimeSpan>();
+            foreach (Oppgave o in oppgaverForFase)
+            {
+                estimatForFase = estimatForFase + (TimeSpan)o.Estimat;
+            }
             foreach (DateTime d in range)
             {
                 totalTider.Add(new TimeSpan(0));
+                nyEstimertTidFase.Add(estimatForFase);
             }
 
             foreach (Oppgave o in oppgaverForFase)
             {
                 TimeSpan resterendeTid = (TimeSpan)o.Estimat;
-                estimatForFase = estimatForFase + resterendeTid;
+           //     estimatForFase = estimatForFase + resterendeTid;
                 List<Time> registrerteTimerPaaOppgave = Queries.GetTimerForOppgave(o.Oppgave_id);
 
                 String utviklere = "";
@@ -604,16 +611,37 @@ namespace SysUt14Gr03.Classes
                             resterendeTid = resterendeTid - (TimeSpan)registrerteTimerPaaOppgave.ElementAt(j).Tid;
                     }
 
-                    oppgaveRow[range.ElementAt(i).ToString()] = resterendeTid;
+                    oppgaveRow[range.ElementAt(i).ToShortDateString()] = resterendeTid;
 
                     totalTider[i] = totalTider[i] + resterendeTid;
 
+                    if (resterendeTid < nullTimeSpan)
+                    {
+                        nyEstimertTidFase[i] = nyEstimertTidFase[i] - resterendeTid;
+                    }
+
+                    if (o.Avsluttet != null)
+                    {
+                        DateTime sluttDato = (DateTime)o.Avsluttet;
+
+                        if (o.Status_id == 3 && sluttDato.Date == range[i].Date)
+                        {
+                            for (int j = i; j < range.Count; j++)
+                            {
+                                nyEstimertTidFase[j] = nyEstimertTidFase[j] - resterendeTid;
+                            }
+                        } 
+
+                    } 
+                    
                 }
 
                 for (int i = 0; i < totalTider.Count; i++)
                 {
-                    totalRow[range.ElementAt(i).ToString()] = totalTider[i].ToString();
+                    totalRow[range.ElementAt(i).ToShortDateString()] = totalTider[i].ToString();
                 }
+
+                
 
                 oppgaveRow["Slutt"] = o.BruktTid.ToString();
                 totalSluttTid = totalSluttTid + (TimeSpan)o.BruktTid;
@@ -651,14 +679,27 @@ namespace SysUt14Gr03.Classes
 
                 TimeSpan ideellTidTimeSpan = new TimeSpan(ideelleTimer, ideelleMinutter, 0);
 
-                ideellTidsbruk[range.ElementAt(i).ToString()] = ideellTidTimeSpan.ToString();
+                ideellTidsbruk[range.ElementAt(i).ToShortDateString()] = ideellTidTimeSpan.ToString();
             }
 
-            /*   DataRow beregnetTid = datatabell.NewRow();
-               beregnetTid["Oppgavenavn"] = "Beregnet totaltid (fase)";
-               beregnetTid["Estimat"] = estimatForFase.ToString(); */
+            ideellTidsbruk["Slutt"] = estimatForFase.ToString();
+            ideellTidsbruk["Avvik"] = nullTimeSpan.ToString();
 
+            datatabell.Rows.Add(ideellTidsbruk);
 
+            DataRow beregnetTid = datatabell.NewRow();
+            beregnetTid["Oppgavenavn"] = "Beregnet totaltid (fase)";
+            beregnetTid["Estimat"] = estimatForFase.ToString();
+
+            for (int i = 0; i < range.Count; i++)
+            {
+                beregnetTid[range.ElementAt(i).ToShortDateString()] = nyEstimertTidFase[i];
+            }
+
+            beregnetTid["Slutt"] = totalSluttTid.ToString();
+            beregnetTid["Avvik"] = totalAvvik.ToString();
+
+            datatabell.Rows.Add(beregnetTid);
 
             return datatabell;
         }

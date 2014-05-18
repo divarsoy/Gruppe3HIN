@@ -15,11 +15,11 @@ namespace SysUt14Gr03
     {
         DataTable dt = new DataTable();
 
-        protected void Page_PreInit(Object sener, EventArgs e)
+ /*       protected void Page_PreInit(Object sener, EventArgs e)
         {
             string master = SessionSjekk.findMaster();
             this.MasterPageFile = master;
-        }
+        } */
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -30,8 +30,8 @@ namespace SysUt14Gr03
         protected void Button1_Click(object sender, EventArgs e)
         {
             var query = Queries.GetAlleBrukere();
-            dt = DataTabeller.OversiktBrukere(query); 
-//            dt = DataTabeller.BurnDownChartForFase(10);
+ //           dt = DataTabeller.OversiktBrukere(query); 
+            dt = DataTabeller.BurnDownChartForFase(10);
             EksporterTilExcel.CreateExcelDocument(dt, "reg.xlsx", Response); 
 
 
