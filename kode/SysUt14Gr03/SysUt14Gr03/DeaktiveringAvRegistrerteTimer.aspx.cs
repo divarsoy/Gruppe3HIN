@@ -7,13 +7,18 @@ using System.Web.UI.WebControls;
 using SysUt14Gr03.Classes;
 using SysUt14Gr03.Models;
 
+/// <summary>
+/// Klasse som gjør at du som bruker kan deaktivere en registrert tid som var feil eller du kan korrigere den her.
+/// </summary>
 namespace SysUt14Gr03
 {
     public partial class DeaktiveringAvRegistrerteTimer : System.Web.UI.Page
     {
-        private int bruker_id;
-        private List<Time> timeListe = null;
+   
+        private int bruker_id; //Bruker id til innlogget bruker
+        private List<Time> timeListe = null; //Timeliste
 
+        //Sjekker etter rett masterfil
         protected void Page_PreInit(Object sener, EventArgs e)
         {
             string master = SessionSjekk.findMaster();
@@ -26,7 +31,7 @@ namespace SysUt14Gr03
             {
                 SessionSjekk.sjekkForBruker_id();
                 bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
-                timeListe = Queries.GetTimerForBruker((int)bruker_id);
+                timeListe = Queries.GetTimerForBruker((int)bruker_id); //timer for innlogget bruker
 
                 if (timeListe.Count != 0)
                 {
@@ -54,7 +59,7 @@ namespace SysUt14Gr03
                 }
             }
         }
-
+        //Deaktiverer tiden på en oppgave som var registrert feil
         protected void btnDeaktiver_Click(object sender, EventArgs e)
         {
             int oppg_id;
@@ -75,7 +80,7 @@ namespace SysUt14Gr03
             Response.Redirect(Request.RawUrl);
 
         }
-
+        //Her kan du se oppgaven, du blir viderendt til VisOppgave
         protected void btnSeOppg_Click(object sender, EventArgs e)
         {
             int oppg_id = Validator.KonverterTilTall(ddlTimer.SelectedValue);
