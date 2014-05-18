@@ -524,6 +524,9 @@ namespace SysUt14Gr03.Classes
             return dt;
         }
 
+        /// <summary>
+        /// Denne tabellen er for å eksportere burndownchart til excell
+        /// </summary>
         public static DataTable BurnDownChartForFase(int faseId)
         {
             DataTable datatabell = new DataTable();
@@ -545,7 +548,7 @@ namespace SysUt14Gr03.Classes
             datatabell.Columns.Add("Estimat", typeof(System.String));
             for (int i = 0; i < range.Count; i++)
             {
-                datatabell.Columns.Add(range.ElementAt(i).ToString(), typeof(System.String));
+                datatabell.Columns.Add(range.ElementAt(i).ToShortDateString(), typeof(System.String));
             }
             datatabell.Columns.Add("Slutt", typeof(System.String));
             datatabell.Columns.Add("Avvik", typeof(System.String));
@@ -618,6 +621,33 @@ namespace SysUt14Gr03.Classes
             luftRow2["Oppgavenavn"] = "";
             datatabell.Rows.Add(luftRow2);
             datatabell.Rows.Add(totalRow);
+
+            DataRow ideellTidsbruk = datatabell.NewRow();
+            ideellTidsbruk["Oppgavenavn"] = "Ideell tidsbruk";
+            ideellTidsbruk["Estimat"] = estimatForFase.ToString();
+
+            double estimatSomDouble = (double) estimatForFase.TotalHours;
+            double ideellTid = estimatSomDouble;
+            double ideellTidRest;
+            int ideelleTimer;
+            int ideelleMinutter;
+
+            for (int i = 0; i < range.Count; i++)
+            {
+                ideellTid = ideellTid - (estimatSomDouble / range.Count);
+                ideelleTimer = (int)ideellTid;
+                ideellTidRest = ideellTid - (double)ideelleTimer;
+                ideelleMinutter = (int)(ideellTidRest * 60);
+
+                TimeSpan ideellTidTimeSpan = new TimeSpan(ideelleTimer, ideelleMinutter, 0);
+
+                ideellTidsbruk[range.ElementAt(i).ToString()] = ideellTidTimeSpan.ToString();
+            }
+
+            /*   DataRow beregnetTid = datatabell.NewRow();
+               beregnetTid["Oppgavenavn"] = "Beregnet totaltid (fase)";
+               beregnetTid["Estimat"] = estimatForFase.ToString(); */
+
 
 
             return datatabell;
