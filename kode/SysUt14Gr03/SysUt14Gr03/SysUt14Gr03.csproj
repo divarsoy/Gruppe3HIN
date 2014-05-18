@@ -561,6 +561,7 @@
     </Compile>
     <Compile Include="Classes\BurnDownDiagram.cs" />
     <Compile Include="Classes\DataTabeller.cs" />
+    <Compile Include="Classes\EksporterChartTilPdf.cs" />
     <Compile Include="Classes\EksporterTilExcel.cs" />
     <Compile Include="Classes\OppretteLogg.cs" />
     <Compile Include="Classes\Rapport.cs" />
