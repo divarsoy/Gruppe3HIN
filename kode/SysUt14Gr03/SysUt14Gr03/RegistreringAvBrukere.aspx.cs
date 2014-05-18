@@ -35,6 +35,8 @@ namespace SysUt14Gr03
         private string email;
         private List<Rettighet> rettighetListe = null; //rettighetsliste
         private int rettighet_id; //rettighets id
+        Guid token = Guid.NewGuid();
+
 
         protected void Page_PreInit(Object sener, EventArgs e)
         {
@@ -106,7 +108,7 @@ namespace SysUt14Gr03
                     Epost = epost,
                     Brukernavn = "",
                     IM = "",
-                    Token = "",
+                    Token = token.ToString(),
                     Aktivert = false,
                     Aktiv = false,
                     Opprettet = DateTime.Now,
@@ -252,7 +254,6 @@ namespace SysUt14Gr03
         {
             try
             {
-                Guid token = Guid.NewGuid();
                 email = tb_reg_epost.Text;
                 subject = "Bekreftelses epost for konto aktivering";
 

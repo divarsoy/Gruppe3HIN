@@ -171,6 +171,7 @@
     <Content Include="Account\OpenAuthProviders.ascx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\RegisterExternalLogin.aspx" />
+    <Content Include="Administrator\HjelpAdmin.aspx" />
     <Content Include="bin\Antlr3.Runtime.dll" />
     <Content Include="bin\AspNet.ScriptManager.bootstrap.dll" />
     <Content Include="bin\AspNet.ScriptManager.jQuery.dll" />
@@ -500,6 +501,7 @@
     <Content Include="TidsestimerProsjekt.aspx" />
     <Content Include="Timeregistrering.aspx" />
     <Content Include="Utvikler\InnsynIEgneRegistrerteTimerSomBruker.aspx" />
+    <Content Include="video\Hvordan_se_databasen.mp4" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="VisBruker.aspx" />
     <Content Include="visFase.aspx" />
@@ -559,9 +561,15 @@
     <Compile Include="Account\RegisterExternalLogin.aspx.designer.cs">
       <DependentUpon>RegisterExternalLogin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Administrator\HjelpAdmin.aspx.cs">
+      <DependentUpon>HjelpAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrator\HjelpAdmin.aspx.designer.cs">
+      <DependentUpon>HjelpAdmin.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Classes\BurnDownDiagram.cs" />
     <Compile Include="Classes\DataTabeller.cs" />
-    <Compile Include="Classes\EksporterChartTilPdf.cs" />
     <Compile Include="Classes\EksporterTilExcel.cs" />
     <Compile Include="Classes\OppretteLogg.cs" />
     <Compile Include="Classes\Rapport.cs" />

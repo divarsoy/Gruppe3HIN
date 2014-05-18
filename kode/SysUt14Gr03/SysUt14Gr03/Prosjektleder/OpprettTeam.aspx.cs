@@ -32,7 +32,7 @@ namespace SysUt14Gr03
         {
             SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
 
-            brukerListe = Queries.GetAlleAktiveBrukere();
+            brukerListe = Queries.GetAlleBrukere(); //Henter ut alle brukerne. Både aktive og ikke aktive for å kunne starte et prosjekt umiddelbart
             prosjekter = Queries.GetAlleAktiveProsjekter();
 
             if (cblBrukere.Items.Count == 0)

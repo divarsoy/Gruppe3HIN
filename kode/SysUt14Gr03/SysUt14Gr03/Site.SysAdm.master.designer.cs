@@ -67,6 +67,15 @@ namespace SysUt14Gr03 {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor Adm5;
         
         /// <summary>
+        /// Adm6 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor Adm6;
+        
+        /// <summary>
         /// MainContent control.
         /// </summary>
         /// <remarks>
