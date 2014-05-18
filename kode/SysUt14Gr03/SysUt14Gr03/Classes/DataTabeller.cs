@@ -36,6 +36,11 @@ namespace SysUt14Gr03.Classes
             }
             return dt;
         }
+        /// <summary>
+        /// Datatabell for sprintbacklog for en fase
+        /// </summary>
+        /// <param name="fase">fase</param>
+        /// <returns></returns>
         public static DataTable SprintBacklogFase(Fase fase)
         {
             DataTable dt = new DataTable();
@@ -88,6 +93,11 @@ namespace SysUt14Gr03.Classes
 
             
         }
+        /// <summary>
+        /// ProductBacklog for et prosjekt
+        /// </summary>
+        /// <param name="prosjekt">prosjekt</param>
+        /// <returns></returns>
         public static DataTable ProductBacklogProsjekt(Prosjekt prosjekt)
         {
             DataTable dt = new DataTable();
