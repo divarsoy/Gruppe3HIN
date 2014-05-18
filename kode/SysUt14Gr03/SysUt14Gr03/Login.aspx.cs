@@ -13,6 +13,12 @@ using SysUt14Gr03.Models;
 
 namespace SysUt14Gr03
 {
+    /// <summary>
+    /// Dette er siden som brukeren logger seg inn på. Brukeren oppgir brukernavn og passord,
+    /// og relevant info blir lagret i et Session-objekt. Brukeren får tilbakemelding om
+    /// brukernavnet og passordet er ukorrekt. Brukeren kan også lage et nytt passord ved å
+    /// trykke på en knapp.
+    /// </summary>
     public partial class Login : Page
     {
 
@@ -26,6 +32,7 @@ namespace SysUt14Gr03
             string brukernavn = Brukernavn.Text;
             string oppgittPassord = Password.Text;
 
+            // Sjekker om feltene er fylt ut
             if (brukernavn != string.Empty && oppgittPassord != string.Empty)
             {
                 Bruker bruker = Queries.GetBrukerVedBrukernavn(brukernavn);
@@ -34,10 +41,9 @@ namespace SysUt14Gr03
                 {
                     string salt = bruker.Salt;
                     string hash = bruker.Passord;
-                    if (Hash.CheckPassord(oppgittPassord, hash, salt))
+                    if (Hash.CheckPassord(oppgittPassord, hash, salt)) // Bruker Hash-klassen for å sjekke passord
                     {
                         // Logg inn bruker
-                        // IdentityHelper.SignIn(manager, user, RememberMe.Checked);
 
                         // http://stackoverflow.com/questions/3140341/how-to-create-persistent-cookies-in-asp-net
                         HttpCookie persist = new HttpCookie("persist");
@@ -49,7 +55,7 @@ namespace SysUt14Gr03
                         Session["bruker"] = bruker.ToString();
                         Session["fornavn"] = bruker.Fornavn;
                         Session["brukernavn"] = bruker.Brukernavn;
-                        Session["loggedIn"] = true;
+                        Session["loggedIn"] = true; // Lagrer relevant info
 
                         // Legger tidspunkt for siste logginn i databasen.
                         using (var context = new Context())
@@ -59,6 +65,7 @@ namespace SysUt14Gr03
                             context.SaveChanges();
                         }
 
+                        // Sjekker rettigheter og sender brukeren videre til riktig hovedside
                         if (Validator.SjekkRettighet(bruker.Bruker_id, Konstanter.rettighet.Administrator))
                         {
                             Session["rettighet"] = Konstanter.rettighet.Administrator.ToString();
@@ -101,7 +108,7 @@ namespace SysUt14Gr03
             }
         }
 
-
+        // Brukeren kan trykke her hvis de har glemt passordet
         protected void btnGlemtPassord_Click(object sender, EventArgs e)
         {
             Response.Redirect("lostPassword", true);

@@ -46,8 +46,10 @@ namespace SysUt14Gr03.Classes
             List<Oppgave> oppgaverIGruppe = Queries.GetOppgaverIOppgaveGruppe(oppgaveGruppeId);
             foreach (Oppgave o in oppgaverIGruppe)
             {
+                // Sjekker prioritet på alle oppgavene i gruppen
                 if (o.Prioritering_id < oppgave.Prioritering_id)
-                    result = o.Oppgave_id;
+                    if (o.Status_id != 3) // Hvis denne oppgaven ikke er ferdig
+                        result = o.Oppgave_id;
             }
             return result;
         }
