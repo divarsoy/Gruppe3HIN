@@ -11,24 +11,30 @@ using SysUt14Gr03.Models;
 using System.Drawing;
 using System.Text.RegularExpressions;
 
+
+/// <summary>
+/// Klasse for å registrere brukere. Denne siden er for prosjektleder og administrator. Er en sjekk som sjekker om du er 
+/// prosjektleder eller administrator. Når det blir registrert en bruker, så
+/// blir det sendt ut en link med epost og token til den brukeren. I databasen blir det lagret info som etternavn, fornavn, rettighet og epost 
+/// som dukker opp når brukeren skal aktivere kontoen sin.
+/// </summary>
 namespace SysUt14Gr03
 {
     public partial class RegistreringAvBrukere : System.Web.UI.Page
     {
-        private string etternavn;
-        private string fornavn;
-        private string epost;
+        
+        private string etternavn; //etternavn
+        private string fornavn; //fornavn
+        private string epost; //epost
         private int bruker_id;
-//        private bool emailUnq = true;
-        private string password = "blahimmel";
+        private string password = "blahimmel"; //Passord til avsender
         private MailMessage msg;
    
         private string subject;
-        //private Classes.sendEmail sendMsg
-        private string ActivationUrl;
+        private string ActivationUrl; //Aktiverings link
         private string email;
-        private List<Rettighet> rettighetListe = null;
-        private int rettighet_id;
+        private List<Rettighet> rettighetListe = null; //rettighetsliste
+        private int rettighet_id; //rettighets id
 
         protected void Page_PreInit(Object sener, EventArgs e)
         {
@@ -247,13 +253,11 @@ namespace SysUt14Gr03
             try
             {
                 Guid token = Guid.NewGuid();
-                //   msg = new MailMessage();
                 email = tb_reg_epost.Text;
                 subject = "Bekreftelses epost for konto aktivering";
 
-                //Rett link tips?
+                
                 ActivationUrl = Server.HtmlEncode("http://malmen.hin.no/SysUt14Gr03/AktiverKonto?Epost=" + email + "&Token=" + token);
-                //sendEmail.sendEpost(email, msg, subject, ActivationUrl, null, null);
                 msg = new MailMessage();
                 SmtpClient smtp = new SmtpClient();
 

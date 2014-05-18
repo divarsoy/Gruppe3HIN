@@ -8,18 +8,23 @@ using System.Web.UI.WebControls;
 using SysUt14Gr03.Classes;
 using SysUt14Gr03.Models;
 
+/// <summary>
+/// Klasse for å opprette en oppgave for det valgte prosjektet. 
+/// </summary>
 namespace SysUt14Gr03
 {
     public partial class OpprettOppgave : System.Web.UI.Page
     {
-        private List<Bruker> brukerListe;
-        private List<Prioritering> pri;
-        private List<Status> visStatus;
+     
+        private List<Bruker> brukerListe; //liste med brukere
+        private List<Prioritering> pri; //liste med prioriteringer
+        private List<Status> visStatus; //Status
         private List<int> valgtBrukerid = new List<int>();
-        private int prosjekt_id = -1;
+        private int prosjekt_id = -1; //prosjekt_id til valgt prosjekt
         private DateTime tidsfrist;
-        private int bruker_id = -1;
+        private int bruker_id = -1; //bruker id til prosjektleder
 
+        //Sjekker etter rett masterfil
         protected void Page_PreInit(Object sener, EventArgs e)
         {
             string master = SessionSjekk.findMaster();
@@ -28,7 +33,7 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
+            SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder); //sjekker for rettighet prosjektleder
             SessionSjekk.sjekkForProsjekt_id();
 
             if (!IsPostBack)
