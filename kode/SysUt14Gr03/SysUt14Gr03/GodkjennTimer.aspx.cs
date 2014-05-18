@@ -100,6 +100,13 @@ namespace SysUt14Gr03
                 {
                     Time time = context.Timer.Where(t => t.Time_id 
                         == time_id).FirstOrDefault();
+                    Oppgave oppgave = time.Oppgave;
+                    // Oppdaterer oppgavens brukte tid
+                    oppgave.BruktTid += time.Tid;
+                    if (oppgave.RemainingTime >= time.Tid)
+                        oppgave.RemainingTime -= time.Tid;
+                    else
+                        oppgave.RemainingTime = new TimeSpan(0);
 
                     time.IsFerdig = true;
                     context.SaveChanges();

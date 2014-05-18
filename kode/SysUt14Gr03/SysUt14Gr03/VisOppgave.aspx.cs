@@ -9,7 +9,7 @@ using SysUt14Gr03.Classes;
 using SysUt14Gr03.Models;
 
 /// <summary>
-/// Viser all informasjon om en valgt oppgave + hvilken deltagere som er med på den og demmes totalt registrert tid på den,
+/// Viser all informasjon om en valgt oppgave + hvilke deltagere som er med på den og deres totalt registrert tid,
 /// og alle kommentarer til oppgaven + at man kan legge til en kommentar til oppgaven. 
 /// </summary>
 

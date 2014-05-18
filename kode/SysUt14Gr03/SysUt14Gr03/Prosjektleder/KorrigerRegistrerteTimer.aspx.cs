@@ -445,11 +445,9 @@ namespace SysUt14Gr03.Prosjektleder
 
                 time.IsFerdig = godkjent;
 
-                TimeSpan differanse = (bruktTid - bruktTidOrig).Duration();
-
-                oppgave.BruktTid += differanse;
-                if (oppgave.RemainingTime >= differanse)
-                    oppgave.RemainingTime -= differanse;
+                oppgave.BruktTid += bruktTid;
+                if (oppgave.RemainingTime >= bruktTid)
+                    oppgave.RemainingTime -= bruktTid;
                 else
                     oppgave.RemainingTime = new TimeSpan(0);
 
