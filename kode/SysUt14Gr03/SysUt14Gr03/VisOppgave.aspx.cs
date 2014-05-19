@@ -283,7 +283,7 @@ namespace SysUt14Gr03
                 oppgave.Status = status;
                 context.SaveChanges();
             }
-            Response.Redirect("/OversiktOppgaver.aspx?mine=true");
+            Response.Redirect("OversiktOppgaver.aspx?mine=true");
         }
     }
 }
