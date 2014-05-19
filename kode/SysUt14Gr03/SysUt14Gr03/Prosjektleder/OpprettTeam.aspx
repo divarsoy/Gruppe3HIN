@@ -12,7 +12,6 @@
             <asp:CheckBoxList ID="cblBrukere" CssClass="epost_pref_tabell" runat="server">
             </asp:CheckBoxList>
         </asp:Panel>
-        <asp:DropDownList ID="ddlProsjekt" runat="server"></asp:DropDownList>
         <br />
         <asp:Button ID="btnOK" class="btn btn-primary" runat="server" Text="Opprett team" OnClick="btnOK_Click" />
             &nbsp;&nbsp;&nbsp;

@@ -20,7 +20,6 @@ namespace SysUt14Gr03
         List<Bruker> selectedBrukers; // Brukere som er valgt
         private string teamNavn; // Navnet på teamet
         private List<Prosjekt> prosjekter; // Tilgjengelige prosjekter
-        private Prosjekt prosjekt; // Prosjektet de skal med på
 
         protected void Page_PreInit(Object sener, EventArgs e)
         {
@@ -44,9 +43,6 @@ namespace SysUt14Gr03
                     cblBrukere.Items.Add(bruker.Etternavn + ", " + bruker.Fornavn);
                 }
             }
-            // Legger prosjektene inn i dropdownliste
-            for(int i = 0; i < prosjekter.Count; i++)
-                ddlProsjekt.Items.Add(new ListItem(prosjekter[i].Navn, prosjekter[i].Prosjekt_id.ToString()));
         }
 
         protected void btnOK_Click(object sender, EventArgs e)
@@ -80,12 +76,7 @@ namespace SysUt14Gr03
 
                 if (teamNavn != string.Empty && selectedUsers.Count > 0)
                 {
-                    Session["flashMelding"] = "Team opprettet!";
-                    Session["flashStatus"] = Konstanter.notifikasjonsTyper.success.ToString();
-                    int prosjektID = Convert.ToInt32(ddlProsjekt.SelectedValue);
-                    prosjekt = context.Prosjekter.Where(p => p.Prosjekt_id == prosjektID).FirstOrDefault();
-                    List<Prosjekt> prosjektList = new List<Prosjekt>();
-                    prosjektList.Add(prosjekt);
+
                     // Legger teamet inn i databasen:
                     var nyttTeam = new Team
                     {
@@ -93,11 +84,13 @@ namespace SysUt14Gr03
                         Aktiv = true,
                         Opprettet = DateTime.Now,
                         Brukere = selectedBrukers,
-                        Prosjekter = prosjektList
                     };
 
                     context.Teams.Add(nyttTeam);
                     context.SaveChanges();
+
+                    Session["flashMelding"] = "Team opprettet!";
+                    Session["flashStatus"] = Konstanter.notifikasjonsTyper.success.ToString();
                     
                     //Oppretter log for hendelsen
                     OppretteLogg.opprettLoggForBruker("Team " + teamNavn + " ble opprettet.", DateTime.Now, (int)Session["bruker_id"]);

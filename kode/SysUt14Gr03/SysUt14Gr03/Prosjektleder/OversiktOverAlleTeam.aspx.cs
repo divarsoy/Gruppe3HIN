@@ -42,7 +42,14 @@ namespace SysUt14Gr03
                     label.Text =  "<h3>" + t.Navn + "</h3>";
                     label.Font.Bold = true;
                     PlaceHolderTable.Controls.Add(label);
-                    PlaceHolderTable.Controls.Add(brukerTabell);
+                    if (brukerTabell != null)
+                    {
+                        PlaceHolderTable.Controls.Add(brukerTabell);
+                    }
+                    else
+                    {
+                        label.Text = "<p>Ingen team er opprettet</p>";
+                    }
                 }
             }
         }
