@@ -152,7 +152,7 @@ namespace SysUt14Gr03
         private void EndreOppg()
         {
             List<Bruker> selectedBruker = new List<Bruker>();
-            if (tbKrav.Text != String.Empty && tbTittel.Text != String.Empty && tbBeskrivelse.Text != String.Empty && TbEstimering.Text != String.Empty)
+            if (tbTittel.Text != String.Empty && tbBeskrivelse.Text != String.Empty && TbEstimering.Text != String.Empty)
             {
                 using (var context = new Context())
                 {
@@ -196,8 +196,13 @@ namespace SysUt14Gr03
                         endres.Estimat = estimering;
                         endres.BruktTid = TimeSpan.Parse(tbBruktTid.Text);
                         endres.RemainingTime = TimeSpan.Parse(tbRemainingTime.Text);
-                        endres.Tidsfrist = Convert.ToDateTime(tbTidsfristSlutt.Text);
                     }
+                    DateTime tidsFrist;
+                    if (DateTime.TryParse(tbTidsfristSlutt.Text, out tidsFrist))
+                    {
+                        endres.Tidsfrist = tidsFrist;
+                    }
+
 
                     try {
                         context.SaveChanges();
@@ -213,7 +218,10 @@ namespace SysUt14Gr03
                             hendelse = "Oppgave " + oppgaveTittel + "ble arkivert";
 
                         OppretteLogg.opprettLoggForBruker(hendelse, DateTime.Now, (int)Session["bruker_id"]);
-                        Response.Redirect("FerdigstillelsAvOppgave.aspx");
+
+                        Session["flashMelding"] = string.Format("Oppgaven '{0} {1} ble oppdatert'",endres.RefOppgaveId, endres.Tittel);
+                        Session["flashStatus"] = Konstanter.notifikasjonsTyper.success;
+                        Response.Redirect("~/OversiktOppgaver");
                     }
                     catch (System.Data.Entity.Infrastructure.DbUpdateException ex) {
                         Session["flashMelding"] = ex.Message + "\n" + ex.InnerException.Message;
