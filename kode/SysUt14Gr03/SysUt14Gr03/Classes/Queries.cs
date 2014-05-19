@@ -641,9 +641,11 @@ namespace SysUt14Gr03.Classes
         {
             using (var context = new Context())
             {
-                var teamListe = (from teams in context.Teams.Include("Prosjekter")
-                                   where teams.Aktiv == true
-                                   select teams).ToList<Team>();
+                var teamListe = context.Teams
+                                .Include("Prosjekter")
+                                .Include("Brukere")
+                                .Where(team => team.Aktiv == true)                                
+                                .ToList();
                 return teamListe;
             }
         }
