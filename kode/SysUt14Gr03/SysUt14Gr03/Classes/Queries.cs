@@ -346,6 +346,7 @@ namespace SysUt14Gr03.Classes
                 var oppgave = context.Oppgaver
                                   .Include("Brukere")
                                   .Include("Prioritering")
+                                  .Include("Fase")
                                   .Include("Status")
                                   .Include("Prosjekt")
                                   .Include("Timer")

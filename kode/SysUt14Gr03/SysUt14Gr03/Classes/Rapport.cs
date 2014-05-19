@@ -180,15 +180,17 @@ namespace SysUt14Gr03.Classes
 
                                 foreach (Oppgave oppgave in oppgaverTilBruker)
                                 {
+                                    TimeSpan sumTimerForBrukerOppgave = new TimeSpan(0);
                                     foreach (Time time in timeListe)
                                     {
                                         if (time.Oppgave_id == oppgave.Oppgave_id)
                                         {
+                                            sumTimerForBrukerOppgave += time.Tid;
                                             sumTimerForBruker += time.Tid;
                                         }
                                     }
-                                    info += "<h4>" + oppgave.Tittel + " Brukt tid: " + sumTimerForBruker.ToString() + "</h4>";
-                                    prosjektRapportForBruker += oppgave.Tittel + " Brukt tid: " + sumTimerForBruker.ToString();
+                                    info += "<h4>" + oppgave.Tittel + " Brukt tid: " + sumTimerForBrukerOppgave.ToString() + "</h4>";
+                                    prosjektRapportForBruker += "<br/>" + oppgave.Tittel + " | Brukt tid: " + sumTimerForBrukerOppgave.ToString();
                                     info += "Prosjekt: " + oppgave.Prosjekt.Navn;
                                     info += " | Fase: " + oppgave.Fase.Navn;
 
