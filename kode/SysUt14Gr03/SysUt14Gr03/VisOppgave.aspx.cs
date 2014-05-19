@@ -65,6 +65,7 @@ namespace SysUt14Gr03
                     lblInfo.Text = "";
                     lblInfo.Text += "<p><b>User story: </b>" + oppgave.UserStory + "</p>\n";
                     lblInfo.Text += "<p><b>" + "Oppgave-ID: </b>" + oppgave.RefOppgaveId + "</p>\n";
+                    lblInfo.Text += "<p><b>" + "Fase: </b>" + oppgave.Fase.Navn + "</p>\n";
                     lblInfo.Text += "<p><b>" + "Krav: </b>" + oppgave.Krav + "</p>\n";
                     lblInfo.Text += "<p><b>" + "Estimat: </b>" + oppgave.Estimat + " timer</p>\n";
                     lblInfo.Text += "<p><b>" + "Resterende tid: </b>" + oppgave.RemainingTime.ToString() + " timer</p>\n";
