@@ -23,6 +23,8 @@ namespace SysUt14Gr03
         private int prosjekt_id = -1; //prosjekt_id til valgt prosjekt
         private DateTime tidsfrist;
         private int bruker_id = -1; //bruker id til prosjektleder
+        private TimeSpan estimering = new TimeSpan(0, 0, 0);
+
 
         //Sjekker etter rett masterfil
         protected void Page_PreInit(Object sener, EventArgs e)
@@ -89,13 +91,13 @@ namespace SysUt14Gr03
         private void OpprettOppg()
         {
             List<Bruker> selectedBruker = new List<Bruker>();
-            if (tbTittel.Text != String.Empty && tbBeskrivelse.Text != String.Empty && TbEstimering.Text != String.Empty && ddlFaser.SelectedValue != "0")
+
+            if (TimeSpan.TryParse(TbEstimering.Text, out estimering) && tbTittel.Text != String.Empty && tbBeskrivelse.Text != String.Empty && TbEstimering.Text != String.Empty && ddlFaser.SelectedValue != "0")
             {   
             using (var context = new Context())
             {
                 string oppgave_navn = tbTittel.Text;
                 int priorietring_id = Convert.ToInt32(ddlPrioritet.SelectedValue);
-                TimeSpan estimering = new TimeSpan(0,0,0);
                 TimeSpan.TryParse(TbEstimering.Text, out estimering);
                 int status_id = Convert.ToInt32(ddlStatus.SelectedValue);
                               
