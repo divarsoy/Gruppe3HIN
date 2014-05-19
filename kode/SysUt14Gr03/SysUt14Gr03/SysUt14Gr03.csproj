@@ -303,7 +303,6 @@
     <Content Include="obj\Release\Package\PackageTmp\Prosjektleder\AdministrasjonAvTeamBrukere.aspx" />
     <Content Include="obj\Release\Package\PackageTmp\Prosjektleder\DefaultProsjektleder.aspx" />
     <Content Include="obj\Release\Package\PackageTmp\Prosjektleder\InnsynIRegistrerteTimerSomProsjektleder.aspx" />
-    <Content Include="obj\Release\Package\PackageTmp\Prosjektleder\OpprettOppgave.aspx" />
     <Content Include="obj\Release\Package\PackageTmp\Prosjektleder\OpprettOppgavegruppe.aspx" />
     <Content Include="obj\Release\Package\PackageTmp\Prosjektleder\OpprettProsjekt.aspx" />
     <Content Include="obj\Release\Package\PackageTmp\Prosjektleder\OpprettTeam.aspx" />
@@ -406,7 +405,7 @@
     <Content Include="KommentarPaOppgave.aspx" />
     <Content Include="ListboxTest.aspx" />
     <Content Include="MottaOppgave.aspx" />
-    <Content Include="Prosjektleder\OpprettOppgave.aspx" />
+    <Content Include="OpprettOppgave.aspx" />
     <Content Include="Prosjektleder\OpprettOppgavegruppe.aspx" />
     <Content Include="Prosjektleder\OpprettProsjekt.aspx" />
     <Content Include="Administrator\OversiktBrukereSomAdministrator.aspx" />
@@ -942,11 +941,11 @@
     <Compile Include="EpostPreferanser.aspx.designer.cs">
       <DependentUpon>EpostPreferanser.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Prosjektleder\OpprettOppgave.aspx.cs">
+    <Compile Include="OpprettOppgave.aspx.cs">
       <DependentUpon>OpprettOppgave.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Prosjektleder\OpprettOppgave.aspx.designer.cs">
+    <Compile Include="OpprettOppgave.aspx.designer.cs">
       <DependentUpon>OpprettOppgave.aspx</DependentUpon>
     </Compile>
     <Compile Include="Prosjektleder\OpprettProsjekt.aspx.cs">

@@ -434,9 +434,9 @@ namespace SysUt14Gr03.Classes
         {
             using (var context = new Context())
             {
-                var brukerListe = (from bruker in context.Brukere
-                                   where bruker.Aktiv == true
-                                   select bruker).ToList<Bruker>();
+                var brukerListe = context.Brukere
+                                    .Where(bruker => bruker.Aktiv == true)
+                                    .ToList();
                 return brukerListe;
             
             }
@@ -552,9 +552,8 @@ namespace SysUt14Gr03.Classes
         {
             using (var context = new Context())
             {
-                var status = (from statuser in context.Statuser
-                              select statuser).ToList<Status>();
-                return status;
+                var statusListe = context.Statuser.ToList();
+                return statusListe;
             }
         }
         static public List<Prioritering> GetAllePrioriteringer(){

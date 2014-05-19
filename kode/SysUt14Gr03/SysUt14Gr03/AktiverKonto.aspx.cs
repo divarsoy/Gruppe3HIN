@@ -113,7 +113,7 @@ namespace SysUt14Gr03
             //sjekker om passordene er like
             if (Password.Text == ConfirmPassword.Text)
             {
-                token = Request.QueryString["Token"];
+                //token = Request.QueryString["Token"];
                 //passord = MD5Hash(Password.Text);
                 //passord = Passord.HashPassord(Password.Text);
                 string salt = Hash.GetSalt();
@@ -127,8 +127,9 @@ namespace SysUt14Gr03
 
                 using (var db = new Context())
                 {
-                    var Bruker = (from bruker in db.Brukere
+                    var brukerSomSkalLagres = (from bruker in db.Brukere
                                   where bruker.Epost == epost
+                                  where bruker.Token == token
                                   where bruker.Aktiv == false
                                   select bruker).FirstOrDefault();
 
@@ -150,21 +151,21 @@ namespace SysUt14Gr03
                     }
                     if (check)
                     {
-                        Bruker.Aktiv = true;
-                        Bruker.Brukernavn = brukernavn;
-                        Bruker.Epost = epost;
-                        Bruker.Etternavn = etternavn;
-                        Bruker.IM = imAdresse;
-                        Bruker.Passord = hash;
-                        Bruker.Token = token;
-                        Bruker.Salt = salt;
+                        brukerSomSkalLagres.Aktiv = true;
+                        brukerSomSkalLagres.Brukernavn = brukernavn;
+                        brukerSomSkalLagres.Epost = epost;
+                        brukerSomSkalLagres.Etternavn = etternavn;
+                        brukerSomSkalLagres.IM = imAdresse;
+                        brukerSomSkalLagres.Passord = hash;
+                        brukerSomSkalLagres.Token = token;
+                        brukerSomSkalLagres.Salt = salt;
                         db.SaveChanges();
                        
                       //  ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('Kontoen din er aktivert, du vil bli videresendt til logg inn siden');", true);
                         Session["flashMelding"] += "Kontoen din er aktivert, du kan nå logge inn";
                         Session["flashStatus"] = Konstanter.notifikasjonsTyper.success;
                         //Response.AddHeader("REFRESH", "2;URL=Login.aspx");
-                        Response.Redirect("Login.aspx",true);
+                        Response.Redirect("Login.aspx");
                     }
                 }
             }
