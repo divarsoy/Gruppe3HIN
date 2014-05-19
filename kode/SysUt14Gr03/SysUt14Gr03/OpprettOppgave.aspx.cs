@@ -47,43 +47,39 @@ namespace SysUt14Gr03
                     {
                         Prosjekt prosjekt = Queries.GetProsjekt(prosjekt_id);
 
-                        // Sjekk om prosjektleder er prosjektleder for valgt prosjekt
-                        if (prosjekt.Bruker_id == bruker_id)
+                        brukerListe = Queries.GetAlleAktiveBrukere();
+                        pri = Queries.GetAllePrioriteringer();
+                        visStatus = Queries.GetAlleStatuser();
+                        List<Fase> faseListe = Queries.GetFaseForProsjekt(prosjekt_id);
+                        ddlFaser.Items.Add(new ListItem("Velg Fase", "0"));
+                        foreach (Fase fase in faseListe)
                         {
-
-                            brukerListe = Queries.GetAlleAktiveBrukere();
-                            pri = Queries.GetAllePrioriteringer();
-                            visStatus = Queries.GetAlleStatuser();
-                            List<Fase> faseListe = Queries.GetFaseForProsjekt(prosjekt_id);
-                            ddlFaser.Items.Add(new ListItem("Velg Fase", "0"));
-                            foreach (Fase fase in faseListe)
-                            {
-                                ddlFaser.Items.Add(new ListItem(fase.Navn, fase.Fase_id.ToString()));
-                            }
-                            for (int i = 0; i < visStatus.Count; i++)
-                            {
-                                Status status = visStatus[i];
-                                ddlStatus.Items.Add(new ListItem(status.Navn, status.Status_id.ToString()));
-                            }
-                            using (var context = new Context())
-                            {
-                                System.Windows.Forms.BindingSource bindingSource1 = new System.Windows.Forms.BindingSource();
-                                bindingSource1.DataSource = context.Oppgaver.Where(o => o.Prosjekt_id == prosjekt_id).ToList<Oppgave>();
-                                GridViewOppg.DataSource = bindingSource1;
-                                GridViewOppg.DataBind();
-                            }
-                            for (int i = 0; i < brukerListe.Count; i++)
-                            {
-                                Bruker bruker = brukerListe[i];
-                                ddlBrukere.Items.Add(new ListItem(bruker.ToString(), bruker.Bruker_id.ToString()));
-                            }
-                            for (int i = 0; i < pri.Count; i++)
-                            {
-                                Prioritering priori = pri[i];
-                                ddlPrioritet.Items.Add(new ListItem(priori.Navn, priori.Prioritering_id.ToString()));
-                            }
+                            ddlFaser.Items.Add(new ListItem(fase.Navn, fase.Fase_id.ToString()));
+                        }
+                        for (int i = 0; i < visStatus.Count; i++)
+                        {
+                            Status status = visStatus[i];
+                            ddlStatus.Items.Add(new ListItem(status.Navn, status.Status_id.ToString()));
+                        }
+                        using (var context = new Context())
+                        {
+                            System.Windows.Forms.BindingSource bindingSource1 = new System.Windows.Forms.BindingSource();
+                            bindingSource1.DataSource = context.Oppgaver.Where(o => o.Prosjekt_id == prosjekt_id).ToList<Oppgave>();
+                            GridViewOppg.DataSource = bindingSource1;
+                            GridViewOppg.DataBind();
+                        }
+                        for (int i = 0; i < brukerListe.Count; i++)
+                        {
+                            Bruker bruker = brukerListe[i];
+                            ddlBrukere.Items.Add(new ListItem(bruker.ToString(), bruker.Bruker_id.ToString()));
+                        }
+                        for (int i = 0; i < pri.Count; i++)
+                        {
+                            Prioritering priori = pri[i];
+                            ddlPrioritet.Items.Add(new ListItem(priori.Navn, priori.Prioritering_id.ToString()));
                         }
                     }
+
                 }
             }
         }
