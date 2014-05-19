@@ -52,13 +52,24 @@ namespace SysUt14Gr03
                 Session["flashMelding"] = "<h2 align=center>Det skjedde noe galt, Kontoen din ble ikke aktivert!</h2>";
                 Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger;
             }
-        } 
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
-                ActivateMyAccount();
+                if ((!string.IsNullOrEmpty(Request.QueryString["Epost"])) & (!string.IsNullOrEmpty(Request.QueryString["Token"])))
+                {
+                    epost = Request.QueryString["Epost"];
+                    token = Request.QueryString["Token"];
+                    ActivateMyAccount();
+                }
+                else
+                {
+                    Session["flashMelding"] = "<h2 align=center>Det skjedde noe galt, Kontoen din ble ikke aktivert!</h2>";
+                    Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger;
+                    Response.Redirect("~/Default");
+                }
             }
         }
 
@@ -73,15 +84,15 @@ namespace SysUt14Gr03
 
             try
             {
-                if ((!string.IsNullOrEmpty(epost)) & (!string.IsNullOrEmpty(token)))
+                if ((!string.IsNullOrEmpty(epost)) && (!string.IsNullOrEmpty(token)))
                 {
                     using (var context = new Context())
                     {
-                        Bruker bruk = context.Brukere
-                                        .Where(b => b.Epost == epost)
-                                        .Where(bruker => bruker.Token == token)
-                                        .Where(b => b.Aktiv == false)
-                                        .FirstOrDefault();
+                        var bruk = context.Brukere
+                                    .Where(bruker => bruker.Epost == epost)
+                                    .Where(bruker => bruker.Token == token)
+                                    .Where(bruker => bruker.Aktivert == false)
+                                    .FirstOrDefault();
 
                         bruker_id = bruk.Bruker_id;
                         Email.Text = epost;
@@ -100,7 +111,7 @@ namespace SysUt14Gr03
             catch (Exception ex)
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('Error occured : " + ex.Message.ToString() + "');", true);
-                Response.Redirect("RegistreringAvBrukere.aspx");
+                Response.Redirect("~/Default");
                 return;
                 
             }
@@ -118,7 +129,7 @@ namespace SysUt14Gr03
                 //passord = Passord.HashPassord(Password.Text);
                 string salt = Hash.GetSalt();
                 string hash = Hash.GetHash(Password.Text, salt);
-                epost = Email.Text;
+                string nyEpost = Email.Text;
                 brukernavn = Username.Text;
                 etternavn = Aftername.Text;
                 fornavn = Firstname.Text;
@@ -127,11 +138,11 @@ namespace SysUt14Gr03
 
                 using (var db = new Context())
                 {
-                    var brukerSomSkalLagres = (from bruker in db.Brukere
-                                  where bruker.Epost == epost
-                                  where bruker.Token == token
-                                  where bruker.Aktiv == false
-                                  select bruker).FirstOrDefault();
+                    var brukerSomSkalLagres = db.Brukere
+                                                .Where(bruker => bruker.Epost == epost)
+                                                .Where(bruker => bruker.Token == token)
+                                                .Where(bruker => bruker.Aktivert == false)
+                                                .FirstOrDefault();
 
                     // Default rettighet er utvikler
                     // string rettighetUtviklerString = Konstanter.rettighet.Utvikler.ToString();
@@ -152,12 +163,12 @@ namespace SysUt14Gr03
                     if (check)
                     {
                         brukerSomSkalLagres.Aktiv = true;
+                        brukerSomSkalLagres.Aktivert = true;
                         brukerSomSkalLagres.Brukernavn = brukernavn;
-                        brukerSomSkalLagres.Epost = epost;
+                        brukerSomSkalLagres.Epost = nyEpost;
                         brukerSomSkalLagres.Etternavn = etternavn;
                         brukerSomSkalLagres.IM = imAdresse;
                         brukerSomSkalLagres.Passord = hash;
-                        brukerSomSkalLagres.Token = token;
                         brukerSomSkalLagres.Salt = salt;
                         db.SaveChanges();
                        
