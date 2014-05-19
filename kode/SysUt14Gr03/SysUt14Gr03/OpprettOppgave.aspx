@@ -8,27 +8,47 @@
         <div class="form-group">
             <div class="row">
                 <div style="display: inline-block" class="col-md-4">
-                    
-                        <asp:TextBox ID="tbID" CssClass="form-control" runat="server" placeholder="ID på oppgave!"></asp:TextBox>
-                        <asp:TextBox ID="tbTittel" CssClass="form-control" runat="server" placeholder="Tittel på oppgave!"></asp:TextBox>
-                        <asp:Textbox ID="tbBeskrivelse" CssClass="form-control" TextMode="MultiLine" runat="server" placeholder="Beskrivelse av oppgaven!"></asp:Textbox>
-                        <asp:TextBox ID="tbKrav" CssClass="form-control" runat="server"  placeholder="Krav til oppgaven!"></asp:TextBox>
-                        <asp:TextBox ID="TbEstimering" TextMode="Time" CssClass="form-control" runat="server"  placeholder="Estimering av tid på oppgave! 00:00"></asp:TextBox>
+                        <label for="tbID">Oppgave ID</label>
+                        <asp:TextBox ID="tbID" CssClass="form-control" runat="server" placeholder="ID på oppgaven"></asp:TextBox>
+                        <asp:RequiredFieldValidator id="RequiredFieldValidatorOppgaveID" Display="Dynamic" runat="server" CssClass="feilMelding" ErrorMessage="Må fylles ut!<br />" ControlToValidate="tbID"></asp:RequiredFieldValidator>
+                        
+                        <label for="tbTittel">Oppgave Tittel</label>
+                        <asp:TextBox ID="tbTittel" CssClass="form-control" runat="server" placeholder="Tittel på oppgaven"></asp:TextBox>
+                        <asp:RequiredFieldValidator id="RequiredFieldValidatorTittel" Display="Dynamic" runat="server" CssClass="feilMelding" ErrorMessage="Må fylles ut!<br />" ControlToValidate="tbTittel"></asp:RequiredFieldValidator>
+                        
+                        <label for ="tbBeskrivelse">Beskrivelse</label>    
+                        <asp:Textbox ID="tbBeskrivelse" CssClass="form-control" TextMode="MultiLine" runat="server" placeholder="Beskrivelse av oppgaven"></asp:Textbox>
+                        <asp:RequiredFieldValidator id="RequiredFieldValidatorBeskrivelse" Display="Dynamic" runat="server" CssClass="feilMelding" ErrorMessage="Må fylles ut!<br />" ControlToValidate="tbBeskrivelse"></asp:RequiredFieldValidator>
+
+                        <label for="tbKrav">Krav</label>    
+                        <asp:TextBox ID="tbKrav" CssClass="form-control" runat="server"  placeholder="Krav til oppgaven"></asp:TextBox>
+
+                        <label for="TbEstimering">Estimert tid</label>
+                        <asp:TextBox ID="TbEstimering" TextMode="Time" CssClass="form-control" runat="server"  placeholder="Tid i formatet 00:00"></asp:TextBox>
+                        <asp:RequiredFieldValidator id="RequiredFieldValidatorEstimering" Display="Dynamic" runat="server" CssClass="feilMelding" ErrorMessage="Må fylles ut!<br />" ControlToValidate="tbEstimering"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator id="RegularExpressionValidatorEstimertTid" Display="Dynamic" runat="server" CssClass="feilMelding" ControlToValidate="tbEstimering" ErrorMessage="Tidsestimatet må være riktig format!<br />" ValidationExpression="^(2[0-3]|1[0-2]|0[1-9]):[0-5][0-9]$"></asp:RegularExpressionValidator>
+
+                        <label for ="ddlFaser">Fase</label>
                         <asp:DropDownList ID="ddlFaser" CssClass="form-control" runat="server"></asp:DropDownList>
-                        &nbsp&nbsp&nbsp<label>Tilgjengelige Brukere</label>
+                        <asp:RequiredFieldValidator id="RequiredFieldValidatorFaser" runat="server" ErrorMessage="Fase må velges!</br>" CssClass="feilMelding" ControlToValidate="ddlFaser" InitialValue="0"></asp:RequiredFieldValidator>
+
+                        <label for="ddlBrukere">Tilgjengelige Brukere</label>
                         <asp:DropDownList ID="ddlBrukere" CssClass="form-control" runat="server"></asp:DropDownList>
+                        <label for="lbBrukere">Valgte brukere</label>
                         <asp:ListBox ID="lbBrukere" CssClass="form-control" runat="server" Height="100px"  Enabled="True"></asp:ListBox>
                         <asp:Button ID="btnBrukere" CssClass="btn btn-primary" Text="Legg Til Brukere" runat="server" OnClick="btnBrukere_Click" />
                         <asp:Button ID="btnFjernBruker" CssClass="btn btn-warning" runat="server" Text="Fjern bruker" OnClick="btnFjernBruker_Click" />
                         <br />
-                        &nbsp&nbsp&nbsp<asp:Label ID="lblFeil" runat="server" Visible="false" Text=""></asp:Label>
+                        <asp:Label ID="lblFeil" runat="server" Visible="false" Text=""></asp:Label>
+                        <br />
                     
                 </div>
         
                 <div class="col-md-4 col-md-offset-1">
                     <asp:Calendar Width="300px" ID="cal" BorderColor="Blue" ShowGridLines="true" NextMonthText="Neste" PrevMonthText="Forrige" TodayDayStyle-BackColor="Blue" TodayDayStyle-ForeColor="White" WeekendDayStyle-ForeColor="Red" runat="server" ></asp:Calendar>
                     <br />
-                    <asp:TextBox ID="tbFrist" CssClass="form-control" width="280px" runat="server" placeholder="Tidsfrist på oppgave!"></asp:TextBox>
+                    <label for="tbFrist">Tidsfrist på oppgaven</label>
+                    <asp:TextBox ID="tbFrist" CssClass="form-control" width="280px" runat="server" placeholder="Dato i formatet 31.12.2014"></asp:TextBox>
                     <asp:CompareValidator id="CompareValidator6" runat="server" Display="Dynamic" Type="Date" Operator="DataTypeCheck" ControlToValidate="tbFrist"
                         ErrorMessage="<br />Du må taste inn en gyldig dato" CssClass="feilMelding"></asp:CompareValidator>
                     <br />
@@ -50,19 +70,6 @@
         </div>
     <br />
     <h3>Oversikt over oppgaver i prosjektet</h3>
-        
-       <asp:GridView ID="GridViewOppg" AutoGenerateColumns="false" runat="server" CssClass="table table-striped">
-           <Columns>
-               <asp:TemplateField HeaderText="Prosjekt">
-                   <ItemTemplate>
-                       <asp:Label ID="lbProsjekt" runat="server" Text='<%#Bind("Prosjekt.Navn") %>'></asp:Label>
-                   </ItemTemplate>
-               </asp:TemplateField>
-                <asp:TemplateField HeaderText="Oppgaver i valgt prosjekt">
-                   <ItemTemplate>
-                       <asp:Label ID="lbTittel" runat="server" Text='<%#Bind("Tittel") %>'></asp:Label>
-                   </ItemTemplate>
-               </asp:TemplateField>
-           </Columns>
-       </asp:GridView>        
+    <asp:PlaceHolder runat="server" ID="oppgaveListeTable"></asp:PlaceHolder>
+             
 </asp:Content>

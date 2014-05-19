@@ -43,6 +43,16 @@ namespace SysUt14Gr03
 
             if (Validator.SjekkRettighet(bruker_id, Konstanter.rettighet.Prosjektleder) || SessionSjekk.IsFaseleder())
             {
+                var oppgaveListe = Queries.GetAlleOppgaverForProsjektSortertLast(prosjekt_id);
+
+                //Setter opp en tabell med alle oppgavene i prosjektet
+                if (oppgaveListe != null)
+                {
+                    Table oppgaveTable = Tabeller.HentOppgaveTabell(oppgaveListe);
+                    oppgaveTable.CssClass = "table";
+                    oppgaveListeTable.Controls.Add(oppgaveTable);
+                }
+
                 if (!IsPostBack)
                 {
                     if (prosjekt_id != -1 && bruker_id != -1)
@@ -63,16 +73,7 @@ namespace SysUt14Gr03
                             Status status = visStatus[i];
                             ddlStatus.Items.Add(new ListItem(status.Navn, status.Status_id.ToString()));
                         }
-                        using (var context = new Context())
-                        {
-                            System.Windows.Forms.BindingSource bindingSource1 = new System.Windows.Forms.BindingSource();
-                            bindingSource1.DataSource = context.Oppgaver
-                                                        .Where(o => o.Prosjekt_id == prosjekt_id)
-                                                        .OrderByDescending(oppgave => oppgave.Opprettet)
-                                                        .ToList<Oppgave>();
-                            GridViewOppg.DataSource = bindingSource1;
-                            GridViewOppg.DataBind();
-                        }
+                                              
                         for (int i = 0; i < brukerListe.Count; i++)
                         {
                             Bruker bruker = brukerListe[i];

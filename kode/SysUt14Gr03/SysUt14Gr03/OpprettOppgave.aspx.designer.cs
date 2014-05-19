@@ -22,6 +22,15 @@ namespace SysUt14Gr03 {
         protected global::System.Web.UI.WebControls.TextBox tbID;
         
         /// <summary>
+        /// RequiredFieldValidatorOppgaveID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorOppgaveID;
+        
+        /// <summary>
         /// tbTittel control.
         /// </summary>
         /// <remarks>
@@ -31,6 +40,15 @@ namespace SysUt14Gr03 {
         protected global::System.Web.UI.WebControls.TextBox tbTittel;
         
         /// <summary>
+        /// RequiredFieldValidatorTittel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorTittel;
+        
+        /// <summary>
         /// tbBeskrivelse control.
         /// </summary>
         /// <remarks>
@@ -38,6 +56,15 @@ namespace SysUt14Gr03 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tbBeskrivelse;
+        
+        /// <summary>
+        /// RequiredFieldValidatorBeskrivelse control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorBeskrivelse;
         
         /// <summary>
         /// tbKrav control.
@@ -58,6 +85,24 @@ namespace SysUt14Gr03 {
         protected global::System.Web.UI.WebControls.TextBox TbEstimering;
         
         /// <summary>
+        /// RequiredFieldValidatorEstimering control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorEstimering;
+        
+        /// <summary>
+        /// RegularExpressionValidatorEstimertTid control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidatorEstimertTid;
+        
+        /// <summary>
         /// ddlFaser control.
         /// </summary>
         /// <remarks>
@@ -65,6 +110,15 @@ namespace SysUt14Gr03 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlFaser;
+        
+        /// <summary>
+        /// RequiredFieldValidatorFaser control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorFaser;
         
         /// <summary>
         /// ddlBrukere control.
@@ -175,12 +229,12 @@ namespace SysUt14Gr03 {
         protected global::System.Web.UI.WebControls.Button btnOpprett;
         
         /// <summary>
-        /// GridViewOppg control.
+        /// oppgaveListeTable control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewOppg;
+        protected global::System.Web.UI.WebControls.PlaceHolder oppgaveListeTable;
     }
 }
