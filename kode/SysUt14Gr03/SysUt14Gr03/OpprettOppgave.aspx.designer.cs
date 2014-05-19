@@ -148,15 +148,6 @@ namespace SysUt14Gr03 {
         protected global::System.Web.UI.WebControls.Button btnSett;
         
         /// <summary>
-        /// GridViewOppg control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewOppg;
-        
-        /// <summary>
         /// ddlStatus control.
         /// </summary>
         /// <remarks>
@@ -182,5 +173,14 @@ namespace SysUt14Gr03 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnOpprett;
+        
+        /// <summary>
+        /// GridViewOppg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridViewOppg;
     }
 }

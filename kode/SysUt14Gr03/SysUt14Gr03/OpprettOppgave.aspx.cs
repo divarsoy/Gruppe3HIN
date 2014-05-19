@@ -46,8 +46,8 @@ namespace SysUt14Gr03
                     if (prosjekt_id != -1 && bruker_id != -1)
                     {
                         Prosjekt prosjekt = Queries.GetProsjekt(prosjekt_id);
+                        brukerListe = Queries.GetAlleBrukereIEtProjekt(prosjekt_id);
 
-                        brukerListe = Queries.GetAlleAktiveBrukere();
                         pri = Queries.GetAllePrioriteringer();
                         visStatus = Queries.GetAlleStatuser();
                         List<Fase> faseListe = Queries.GetFaseForProsjekt(prosjekt_id);
@@ -64,7 +64,10 @@ namespace SysUt14Gr03
                         using (var context = new Context())
                         {
                             System.Windows.Forms.BindingSource bindingSource1 = new System.Windows.Forms.BindingSource();
-                            bindingSource1.DataSource = context.Oppgaver.Where(o => o.Prosjekt_id == prosjekt_id).ToList<Oppgave>();
+                            bindingSource1.DataSource = context.Oppgaver
+                                                        .Where(o => o.Prosjekt_id == prosjekt_id)
+                                                        .OrderByDescending(oppgave => oppgave.Opprettet)
+                                                        .ToList<Oppgave>();
                             GridViewOppg.DataSource = bindingSource1;
                             GridViewOppg.DataBind();
                         }
@@ -86,16 +89,16 @@ namespace SysUt14Gr03
         private void OpprettOppg()
         {
             List<Bruker> selectedBruker = new List<Bruker>();
-            if (tbKrav.Text != String.Empty && tbTittel.Text != String.Empty && tbBeskrivelse.Text != String.Empty && TbEstimering.Text != String.Empty && tbFrist.Text != String.Empty && ddlFaser.SelectedValue != "0")
+            if (tbTittel.Text != String.Empty && tbBeskrivelse.Text != String.Empty && TbEstimering.Text != String.Empty && ddlFaser.SelectedValue != "0")
             {   
             using (var context = new Context())
             {
                 string oppgave_navn = tbTittel.Text;
                 int priorietring_id = Convert.ToInt32(ddlPrioritet.SelectedValue);
-                // TimeSpan estimering = TimeSpan.Parse(TbEstimering.Text);
-                TimeSpan estimering = new TimeSpan(Validator.KonverterTilTall(TbEstimering.Text), 0, 0);
+                TimeSpan estimering = new TimeSpan(0,0,0);
+                TimeSpan.TryParse(TbEstimering.Text, out estimering);
                 int status_id = Convert.ToInt32(ddlStatus.SelectedValue);
-                tidsfrist = Convert.ToDateTime(tbFrist.Text);
+                              
                 foreach (ListItem s in lbBrukere.Items)
                 {
                     int navn = Convert.ToInt32(s.Value);
@@ -103,10 +106,9 @@ namespace SysUt14Gr03
                     selectedBruker.Add(bruk);
                 }
                 prosjekt_id = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
-                
+
                 var oppgave = new Oppgave
                 {
-
                     Krav = tbKrav.Text,
                     Opprettet = DateTime.Now,
                     Tittel = tbTittel.Text,
@@ -121,9 +123,15 @@ namespace SysUt14Gr03
                     Prosjekt_id = prosjekt_id,
                     Prioritering_id = priorietring_id,
                     RemainingTime = estimering,
-                    Tidsfrist = tidsfrist
-                    
                 };
+
+                if (!string.IsNullOrEmpty(tbFrist.Text)){
+                    if (DateTime.TryParse(tbFrist.Text, out tidsfrist))
+                    {
+                        oppgave.Tidsfrist = tidsfrist;
+                    }
+
+                }
 
                 context.Oppgaver.Add(oppgave);
                 context.SaveChanges();

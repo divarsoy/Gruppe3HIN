@@ -13,7 +13,7 @@
                         <asp:TextBox ID="tbTittel" CssClass="form-control" runat="server" placeholder="Tittel på oppgave!"></asp:TextBox>
                         <asp:Textbox ID="tbBeskrivelse" CssClass="form-control" TextMode="MultiLine" runat="server" placeholder="Beskrivelse av oppgaven!"></asp:Textbox>
                         <asp:TextBox ID="tbKrav" CssClass="form-control" runat="server"  placeholder="Krav til oppgaven!"></asp:TextBox>
-                        <asp:TextBox ID="TbEstimering" TextMode="Number" CssClass="form-control" runat="server"  placeholder="Estimering av tid på oppgave!"></asp:TextBox>
+                        <asp:TextBox ID="TbEstimering" TextMode="Number" Step="any" CssClass="form-control" runat="server"  placeholder="Estimering av tid på oppgave!"></asp:TextBox>
                         <asp:DropDownList ID="ddlFaser" CssClass="form-control" runat="server"></asp:DropDownList>
                         &nbsp&nbsp&nbsp<label>Tilgjengelige Brukere</label>
                         <asp:DropDownList ID="ddlBrukere" CssClass="form-control" runat="server"></asp:DropDownList>
@@ -36,6 +36,18 @@
                 </div>
             </div>
         </div>
+        <div class="col-sm-2">
+            <label >Status på oppgave</label>
+        </div>
+        <asp:DropDownList ID="ddlStatus" style="display: inline-block" CssClass="form-control" Width="150px" runat="server"></asp:DropDownList>
+            <br />
+        <div class="col-sm-2">
+            <label >Prioritet</label>
+        </div>
+            <asp:DropDownList ID="ddlPrioritet" style="display: inline-block" CssClass="form-control" Width="80px" runat="server"></asp:DropDownList>
+            <br />
+            <asp:Button ID="btnOpprett" CssClass="btn btn-primary" runat="server" OnClick="btnOpprett_Click" Text="Opprett Oppgave" />   
+        </div>
     <br />
     <h3>Oversikt over oppgaver i prosjektet</h3>
         
@@ -52,26 +64,5 @@
                    </ItemTemplate>
                </asp:TemplateField>
            </Columns>
-       </asp:GridView>
-
-        
-
-                
-            
-        <div class="col-sm-2">
-            <label >Status på oppgave</label>
-        </div>
-        <asp:DropDownList ID="ddlStatus" style="display: inline-block" CssClass="form-control" Width="150px" runat="server"></asp:DropDownList>
-            <br />
-        <div class="col-sm-2">
-            <label >Prioritet</label>
-        </div>
-            <asp:DropDownList ID="ddlPrioritet" style="display: inline-block" CssClass="form-control" Width="80px" runat="server"></asp:DropDownList>
-            <br />
-            <asp:Button ID="btnOpprett" CssClass="btn btn-primary" runat="server" OnClick="btnOpprett_Click" Text="Opprett Oppgave" />
-            
-       
- </div>
-   
-        
+       </asp:GridView>        
 </asp:Content>
