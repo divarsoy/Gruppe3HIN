@@ -37,6 +37,58 @@ namespace SysUt14Gr03.Migrations
             rettigheter.ForEach(element => context.Rettigheter.AddOrUpdate(rettighet => rettighet.RettighetNavn, element));
             context.SaveChanges();
 
+            var statuser = new List<Status> {
+                new Status {
+                    Navn = "Klar"
+                },
+                new Status {
+                    Navn = "Igangsatt"
+                },
+                new Status {
+                    Navn = "Ferdig"
+                },
+                new Status {
+                    Navn = "Utgår"
+                }
+            };
+            statuser.ForEach(element => context.Statuser.AddOrUpdate(status => status.Navn, element));
+            context.SaveChanges();
+
+            var prioriteringer = new List<Prioritering> {
+                new Prioritering {
+                    Navn = "1"
+                },
+                new Prioritering {
+                    Navn = "2"
+                },
+                new Prioritering {
+                    Navn = "3"
+                },
+                new Prioritering {
+                    Navn = "4"
+                },
+                new Prioritering {
+                    Navn = "5"
+                },
+                new Prioritering {
+                    Navn = "6"
+                },
+                new Prioritering {
+                    Navn = "7"
+                },
+                new Prioritering {
+                    Navn = "8"
+                },
+                new Prioritering {
+                    Navn = "9"
+                },
+                new Prioritering {
+                    Navn = "10"
+                }
+            };
+            prioriteringer.ForEach(element => context.Prioriteringer.AddOrUpdate(prioritering => prioritering.Navn, element));
+            context.SaveChanges();
+
             var notifikasjonsTyper = new List<NotifikasjonsType> {
                 new NotifikasjonsType {
                     Type = "alert-success"
@@ -55,7 +107,10 @@ namespace SysUt14Gr03.Migrations
             notifikasjonsTyper.ForEach(element => context.NotifikasjonsType.AddOrUpdate(notifikasjonstype => notifikasjonstype.Type, element));
             context.SaveChanges();
 
-            
+            //Opprettelse av tokens for brukerne
+            Guid bruker1token = new Guid();
+            Guid bruker2token = new Guid();
+            Guid bruker3token = new Guid();
 
             Hashtable HashAndSaltBruker1 = Hash.GetHashAndSalt(Konstanter.FELLES_TEST_PASSORD);
             string HashBruker1 = (string)HashAndSaltBruker1["hash"];
@@ -64,6 +119,7 @@ namespace SysUt14Gr03.Migrations
             string SaltBruker2 = (string)HashAndSaltBruker1["salt"];
             string HashBruker3 = (string)HashAndSaltBruker1["hash"];
             string SaltBruker3 = (string)HashAndSaltBruker1["salt"];
+            /*
             string HashBruker4 = (string)HashAndSaltBruker1["hash"];
             string SaltBruker4 = (string)HashAndSaltBruker1["salt"];
             string HashBruker5 = (string)HashAndSaltBruker1["hash"];
@@ -72,6 +128,7 @@ namespace SysUt14Gr03.Migrations
             string SaltBruker6 = (string)HashAndSaltBruker1["salt"];
             string HashBruker7 = (string)HashAndSaltBruker1["hash"];
             string SaltBruker7 = (string)HashAndSaltBruker1["salt"];
+            */
 
             var brukere = new List<Bruker> {
                new Bruker {
@@ -82,7 +139,7 @@ namespace SysUt14Gr03.Migrations
                     Passord = HashBruker1,
                     Salt = SaltBruker1,
                     IM = "jaasgaard",
-                    Token = "Må generere Token!",
+                    Token = bruker1token.ToString(),
                     Aktivert = true,
                     Aktiv = true,
                     Opprettet = DateTime.Now.AddDays(-60),
@@ -97,14 +154,14 @@ namespace SysUt14Gr03.Migrations
                     Teams = new List<Team>()
                 },
                 new Bruker {
-                    Etternavn = "Larsen",
-                    Fornavn = "Martin",
+                    Etternavn = "Karlsen",
+                    Fornavn = "Håvard",
                     Brukernavn = "prosjektleder",
                     Epost = "prosjektleder@gmail.com",
                     Passord = HashBruker3,
                     Salt = SaltBruker3,
-                    IM = "mlarsen",
-                    Token = "Må generere Token!",
+                    IM = "hKarlsen",
+                    Token = bruker2token.ToString(),
                     Aktivert = true,
                     Aktiv = true,
                     Opprettet = DateTime.Now.AddDays(-40),
@@ -126,7 +183,7 @@ namespace SysUt14Gr03.Migrations
                     Passord = HashBruker2,
                     Salt = SaltBruker2,
                     IM = "lmartinsen",
-                    Token = "Må generere Token!",
+                    Token = bruker3token.ToString(),
                     Aktivert = true,
                     Aktiv = true,
                     Opprettet = DateTime.Now.AddDays(-50),
@@ -140,6 +197,7 @@ namespace SysUt14Gr03.Migrations
                     Prosjekter = new List<Prosjekt>(),
                     Teams = new List<Team>()
                 },
+                /*
                 new Bruker {
                     Etternavn = "Karlsen",
                     Fornavn = "Vibeke",
@@ -250,6 +308,7 @@ namespace SysUt14Gr03.Migrations
                     Prosjekter = new List<Prosjekt>(),
                     Teams = new List<Team>()
                 }
+                 * */
             };
 
             brukere.ForEach(element => context.Brukere.AddOrUpdate(bruker => bruker.Etternavn, element));
@@ -283,6 +342,8 @@ namespace SysUt14Gr03.Migrations
                     Sheperd = true,
                     Bruker_id = brukere.Single(bruker => bruker.Brukernavn == "utvikler" ).Bruker_id
                 },
+
+                /*
                 new BrukerPreferanse {
                     EpostTeam = true,
                     EpostProsjekt = true,
@@ -328,6 +389,7 @@ namespace SysUt14Gr03.Migrations
                     Sheperd = true,
                     Bruker_id = brukere.Single(bruker => bruker.Brukernavn == "pholm" ).Bruker_id
                 }
+                 * */
             };
 
             brukerPreferanser.ForEach(element => context.BrukerPreferanser.AddOrUpdate(brukerpreferanse => brukerpreferanse.Bruker_id, element));
@@ -351,6 +413,9 @@ namespace SysUt14Gr03.Migrations
             Bruker utvikler = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "utvikler");
             utvikler.Rettigheter.Add(BrukerRettighetUtvikler);
 
+            context.SaveChanges();
+
+            /*
             Bruker vkarlsen = context.Brukere.FirstOrDefault(bruker => bruker.Brukernavn == "vkarlsen");
             vkarlsen.Rettigheter.Add(BrukerRettighetUtvikler);
 
@@ -1445,7 +1510,7 @@ namespace SysUt14Gr03.Migrations
             };
             notifikasjon.ForEach(element => context.Notifikasjoner.AddOrUpdate(notifikasjoner => notifikasjoner.Melding, element));
             context.SaveChanges();
-            
+            */
         }
     }
 }

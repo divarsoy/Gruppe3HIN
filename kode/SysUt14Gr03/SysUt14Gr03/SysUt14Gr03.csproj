@@ -171,6 +171,7 @@
     <Content Include="Account\OpenAuthProviders.ascx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\RegisterExternalLogin.aspx" />
+    <Content Include="Administrator\HjelpAdmin.aspx" />
     <Content Include="bin\Antlr3.Runtime.dll" />
     <Content Include="bin\AspNet.ScriptManager.bootstrap.dll" />
     <Content Include="bin\AspNet.ScriptManager.jQuery.dll" />
@@ -302,7 +303,6 @@
     <Content Include="obj\Release\Package\PackageTmp\Prosjektleder\AdministrasjonAvTeamBrukere.aspx" />
     <Content Include="obj\Release\Package\PackageTmp\Prosjektleder\DefaultProsjektleder.aspx" />
     <Content Include="obj\Release\Package\PackageTmp\Prosjektleder\InnsynIRegistrerteTimerSomProsjektleder.aspx" />
-    <Content Include="obj\Release\Package\PackageTmp\Prosjektleder\OpprettOppgave.aspx" />
     <Content Include="obj\Release\Package\PackageTmp\Prosjektleder\OpprettOppgavegruppe.aspx" />
     <Content Include="obj\Release\Package\PackageTmp\Prosjektleder\OpprettProsjekt.aspx" />
     <Content Include="obj\Release\Package\PackageTmp\Prosjektleder\OpprettTeam.aspx" />
@@ -405,7 +405,7 @@
     <Content Include="KommentarPaOppgave.aspx" />
     <Content Include="ListboxTest.aspx" />
     <Content Include="MottaOppgave.aspx" />
-    <Content Include="Prosjektleder\OpprettOppgave.aspx" />
+    <Content Include="OpprettOppgave.aspx" />
     <Content Include="Prosjektleder\OpprettOppgavegruppe.aspx" />
     <Content Include="Prosjektleder\OpprettProsjekt.aspx" />
     <Content Include="Administrator\OversiktBrukereSomAdministrator.aspx" />
@@ -500,6 +500,7 @@
     <Content Include="TidsestimerProsjekt.aspx" />
     <Content Include="Timeregistrering.aspx" />
     <Content Include="Utvikler\InnsynIEgneRegistrerteTimerSomBruker.aspx" />
+    <Content Include="video\Hvordan_se_databasen.mp4" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="VisBruker.aspx" />
     <Content Include="visFase.aspx" />
@@ -559,9 +560,15 @@
     <Compile Include="Account\RegisterExternalLogin.aspx.designer.cs">
       <DependentUpon>RegisterExternalLogin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Administrator\HjelpAdmin.aspx.cs">
+      <DependentUpon>HjelpAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrator\HjelpAdmin.aspx.designer.cs">
+      <DependentUpon>HjelpAdmin.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Classes\BurnDownDiagram.cs" />
     <Compile Include="Classes\DataTabeller.cs" />
-    <Compile Include="Classes\EksporterChartTilPdf.cs" />
     <Compile Include="Classes\EksporterTilExcel.cs" />
     <Compile Include="Classes\OppretteLogg.cs" />
     <Compile Include="Classes\Rapport.cs" />
@@ -934,11 +941,11 @@
     <Compile Include="EpostPreferanser.aspx.designer.cs">
       <DependentUpon>EpostPreferanser.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Prosjektleder\OpprettOppgave.aspx.cs">
+    <Compile Include="OpprettOppgave.aspx.cs">
       <DependentUpon>OpprettOppgave.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Prosjektleder\OpprettOppgave.aspx.designer.cs">
+    <Compile Include="OpprettOppgave.aspx.designer.cs">
       <DependentUpon>OpprettOppgave.aspx</DependentUpon>
     </Compile>
     <Compile Include="Prosjektleder\OpprettProsjekt.aspx.cs">

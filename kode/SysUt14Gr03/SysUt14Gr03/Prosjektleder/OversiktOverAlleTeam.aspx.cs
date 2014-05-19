@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -23,27 +24,40 @@ namespace SysUt14Gr03
         {
             SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
 
-            List<Team> teamene = Queries.GetAlleAktiveTeam();
-
-            foreach (Team t in teamene)
-            {
-                List<Bruker> query = Queries.GetAlleBrukerePaaTeam(t.Team_id);
+            
 
                 if (!IsPostBack)
                 {
-                    
-                    foreach (Prosjekt p in t.Prosjekter)
-                    {
-                        brukerTabell = Tabeller.HentBrukerTabellForTeam(query, t, p.Prosjekt_id);
-                        brukerTabell.CssClass = "table";
+                    List<Team> teamene = Queries.GetAlleAktiveTeam();
 
+                    foreach (Team team in teamene)
+                    {
+//                        StringBuilder prosjektliste = new StringBuilder();
+
+//                        foreach (Prosjekt prosjekt in team.Prosjekter)
+//                        {
+//                            prosjektliste.Append(prosjekt.Navn + " ");
+ //                       }
+
+                        List<Bruker> query = Queries.GetAlleBrukerePaaTeam(team.Team_id);
+
+                        foreach (Bruker bruker in team.Brukere)
+                        {
+                            brukerTabell = Tabeller.HentBrukerTabellForTeam(query, team);
+                        }
+                        Label label = new Label();
+                        label.Text = "<h3>" + team.Navn + "</h3>";
+                        label.Font.Bold = true;
+                        PlaceHolderTable.Controls.Add(label);
+                        if (brukerTabell != null)
+                        {
+                            PlaceHolderTable.Controls.Add(brukerTabell);
+                        }
+                        else
+                        {
+                            label.Text = "<p>Ingen team er opprettet</p>";
+                        }
                     }
-                    Label label = new Label();
-                    label.Text =  "<h3>" + t.Navn + "</h3>";
-                    label.Font.Bold = true;
-                    PlaceHolderTable.Controls.Add(label);
-                    PlaceHolderTable.Controls.Add(brukerTabell);
-                }
             }
         }
     }

@@ -36,7 +36,7 @@
                 <ul class="dropdown-menu">
                     <li> <a runat="server" href="~/OversiktOppgaver?mine=true">Oversikt Mine Oppgaver</a></li>
                     <li> <a runat="server" href="~/OversiktOppgaver">Oversikt Alle Oppgaver</a></li>
-                    <li> <a runat="server" href="~/AdministrasjonAvOppgave">Administrer Oppgaver i prosjekt</a></li>
+                    <li> <a runat="server" href="~/OpprettOppgave">Opprett Oppgave</a></li>
                 </ul> 
     </ul>
 

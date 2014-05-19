@@ -166,7 +166,7 @@ namespace SysUt14Gr03.Classes
 
         }
 
-        public static Table HentBrukerTabellForTeam(List<Bruker> query, Team nesteTeam, int prosjekt_id)
+        public static Table HentBrukerTabellForTeam(List<Bruker> query, Team nesteTeam)
         {
             Table tabell = new Table();
           
@@ -178,9 +178,7 @@ namespace SysUt14Gr03.Classes
             TableHeaderCell epostHeaderCell = new TableHeaderCell();
             TableHeaderCell IMHeaderCell = new TableHeaderCell();
             TableHeaderCell rolleHeaderCell = new TableHeaderCell();
-
-         
-            
+                                 
             forNavnHeaderCell.Text = "Fornavn";
             etterNavnHeaderCell.Text = "Etternavn";
             brukerNavnHeaderCell.Text = "Brukernavn";
@@ -216,9 +214,9 @@ namespace SysUt14Gr03.Classes
 
                 string rettighet = Queries.GetRettighet(bruker.Bruker_id).RettighetNavn;
 
-                if (SessionSjekk.IsFaseleder(bruker.Bruker_id, prosjekt_id))
-                    rolleCell.Text = "Faseleder";
-                else
+               // if (SessionSjekk.IsFaseleder(bruker.Bruker_id, prosjekt_id))
+               //     rolleCell.Text = "Faseleder";
+               // else
                     rolleCell.Text = rettighet;
 
                 tRow.Cells.Add(forNavnCell);
@@ -230,8 +228,7 @@ namespace SysUt14Gr03.Classes
                
                 tabell.Rows.Add(tRow);
             }
-
-            //tabell.CssClass = "table";
+            tabell.CssClass = "table";
             return tabell;
         }
 

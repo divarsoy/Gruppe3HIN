@@ -22,6 +22,8 @@
         <li><a id="Adm1" class="adm1" runat="server" href="~/RegistreringAvBrukere">Opprett bruker</a></li>
         <li><a id="Adm3" class="adm3" runat="server" href="~/Administrator/EndreBrukerinformasjonSomAdministrator">Oversikt Over Brukere</a></li>
         <li><a id="Adm5" class="adm5" runat="server" href="~/Innstillinger">Innstillinger</a></li>
+        <li><a id="Adm6" class="adm6" runat="server" href="~/Administrator/HjelpAdmin">Hjelp</a></li>
+
     </ul>
      
 </asp:Content>

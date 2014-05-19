@@ -42,6 +42,8 @@ namespace SysUt14Gr03
         {
             if ((!string.IsNullOrEmpty(Request.QueryString["Epost"])) & (!string.IsNullOrEmpty(Request.QueryString["Token"])))
             {
+                epost = Request.QueryString["Epost"];
+                token = Request.QueryString["Token"];
                 Session["flashMelding"] = "<h2 align=center> Fyll ut resterende felt for å aktivere kontoen din</h2>";
                 Session["flashStatus"] = Konstanter.notifikasjonsTyper.info;
             }
@@ -50,13 +52,24 @@ namespace SysUt14Gr03
                 Session["flashMelding"] = "<h2 align=center>Det skjedde noe galt, Kontoen din ble ikke aktivert!</h2>";
                 Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger;
             }
-        } 
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
-                ActivateMyAccount();
+                if ((!string.IsNullOrEmpty(Request.QueryString["Epost"])) & (!string.IsNullOrEmpty(Request.QueryString["Token"])))
+                {
+                    epost = Request.QueryString["Epost"];
+                    token = Request.QueryString["Token"];
+                    ActivateMyAccount();
+                }
+                else
+                {
+                    Session["flashMelding"] = "<h2 align=center>Det skjedde noe galt, Kontoen din ble ikke aktivert!</h2>";
+                    Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger;
+                    Response.Redirect("~/Default");
+                }
             }
         }
 
@@ -71,13 +84,18 @@ namespace SysUt14Gr03
 
             try
             {
-                if ((!string.IsNullOrEmpty(Request.QueryString["Epost"])) & (!string.IsNullOrEmpty(Request.QueryString["Token"])))
+                if ((!string.IsNullOrEmpty(epost)) && (!string.IsNullOrEmpty(token)))
                 {
                     using (var context = new Context())
                     {
-                        epost = Email.Text = Request.QueryString["Epost"];
-                        Bruker bruk = context.Brukere.Where(b => b.Epost == epost).Where(b => b.Aktiv == false).FirstOrDefault();
+                        var bruk = context.Brukere
+                                    .Where(bruker => bruker.Epost == epost)
+                                    .Where(bruker => bruker.Token == token)
+                                    .Where(bruker => bruker.Aktivert == false)
+                                    .FirstOrDefault();
+
                         bruker_id = bruk.Bruker_id;
+                        Email.Text = epost;
                         Firstname.Text = bruk.Fornavn;
                         Aftername.Text = bruk.Etternavn;
                     }
@@ -85,15 +103,15 @@ namespace SysUt14Gr03
                 }
                 else
                 {
-                    disable();
-                  
-                    //Response.Write("<h2 align=center>Det skjedde noe galt, Kontoen din ble ikke aktivert!</h2>");
+                    Session["flashMelding"] = "Det skjedde noe galt ved aktivering av din konto. Ta kontakt med <a href='mailto:SysUt14Gr03@gmail.com'>SysUt14Gr03@gmail.com</a>";
+                    Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger;
+                    Response.Redirect("~/Default", true);
                 }
             }
             catch (Exception ex)
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('Error occured : " + ex.Message.ToString() + "');", true);
-                Response.Redirect("RegistreringAvBrukere.aspx");
+                Response.Redirect("~/Default");
                 return;
                 
             }
@@ -106,12 +124,12 @@ namespace SysUt14Gr03
             //sjekker om passordene er like
             if (Password.Text == ConfirmPassword.Text)
             {
-                token = Request.QueryString["Token"];
+                //token = Request.QueryString["Token"];
                 //passord = MD5Hash(Password.Text);
                 //passord = Passord.HashPassord(Password.Text);
                 string salt = Hash.GetSalt();
                 string hash = Hash.GetHash(Password.Text, salt);
-                epost = Email.Text;
+                string nyEpost = Email.Text;
                 brukernavn = Username.Text;
                 etternavn = Aftername.Text;
                 fornavn = Firstname.Text;
@@ -120,10 +138,11 @@ namespace SysUt14Gr03
 
                 using (var db = new Context())
                 {
-                    var Bruker = (from bruker in db.Brukere
-                                  where bruker.Epost == epost
-                                  where bruker.Aktiv == false
-                                  select bruker).FirstOrDefault();
+                    var brukerSomSkalLagres = db.Brukere
+                                                .Where(bruker => bruker.Epost == epost)
+                                                .Where(bruker => bruker.Token == token)
+                                                .Where(bruker => bruker.Aktivert == false)
+                                                .FirstOrDefault();
 
                     // Default rettighet er utvikler
                     // string rettighetUtviklerString = Konstanter.rettighet.Utvikler.ToString();
@@ -143,14 +162,14 @@ namespace SysUt14Gr03
                     }
                     if (check)
                     {
-                        Bruker.Aktiv = true;
-                        Bruker.Brukernavn = brukernavn;
-                        Bruker.Epost = epost;
-                        Bruker.Etternavn = etternavn;
-                        Bruker.IM = imAdresse;
-                        Bruker.Passord = hash;
-                        Bruker.Token = token;
-                        Bruker.Salt = salt;
+                        brukerSomSkalLagres.Aktiv = true;
+                        brukerSomSkalLagres.Aktivert = true;
+                        brukerSomSkalLagres.Brukernavn = brukernavn;
+                        brukerSomSkalLagres.Epost = nyEpost;
+                        brukerSomSkalLagres.Etternavn = etternavn;
+                        brukerSomSkalLagres.IM = imAdresse;
+                        brukerSomSkalLagres.Passord = hash;
+                        brukerSomSkalLagres.Salt = salt;
                         db.SaveChanges();
                        
                       //  ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('Kontoen din er aktivert, du vil bli videresendt til logg inn siden');", true);
@@ -158,7 +177,6 @@ namespace SysUt14Gr03
                         Session["flashStatus"] = Konstanter.notifikasjonsTyper.success;
                         //Response.AddHeader("REFRESH", "2;URL=Login.aspx");
                         Response.Redirect("Login.aspx");
-                        disable();
                     }
                 }
             }
@@ -176,24 +194,6 @@ namespace SysUt14Gr03
                 //Response.Redirect(Request.RawUrl);
             }
         }
-
-        protected void disable()
-        {
-            Username.Visible = false;
-            lblUsername.Visible = false;
-            Aftername.Visible = false;
-            lblAftername.Visible = false;
-            Firstname.Visible = false;
-            lblFirstname.Visible = false;
-            Email.Visible = false;
-            lblEmail.Visible = false;
-            Im_adress.Visible = false;
-            lblImadress.Visible = false;
-            Password.Visible = false;
-            ConfirmPassword.Visible = false;
-            lblPassword.Visible = false;
-            lblConfirmPassword.Visible = false;
-            ConfirmButton.Visible = false;
-        }
+                
     } 
 }

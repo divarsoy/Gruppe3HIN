@@ -34,7 +34,7 @@ namespace SysUt14Gr03
 
             if (!Page.IsPostBack)
             {
-                brukerListe = Queries.GetAlleAktiveBrukere();
+                brukerListe = Queries.GetAlleBrukere(); // Henter ut alle brukere (både aktive og ikke aktive, så prosjektleder kan starte et prosjekt umiddelbart)
 
                 if (Request.QueryString["Team_id"] != null)
                 {

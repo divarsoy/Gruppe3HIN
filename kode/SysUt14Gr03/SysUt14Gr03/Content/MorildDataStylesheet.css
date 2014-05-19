@@ -7,6 +7,14 @@
 .epost_pref_tabell label {
   margin-left: 10px;
 }
+p {
+  width: auto;
+  height: auto;
+}
+video {
+  width: 100%;
+  margin-bottom: 10px;
+}
 .alert {
   margin-bottom: 0;
 }
@@ -66,7 +74,7 @@ textarea,
   padding-left: 15px;
 }
 .sheperd-link {
-  background-color: #D3D3D3;
+  background-color: #F1F1F1;
   display: block;
   font-size: 0.75em !important;
   line-height: 1.3em;
@@ -92,6 +100,9 @@ textarea,
 }
 .faseleder-nav {
   background-color: #ff0000;
+}
+.glyphicon-remove:before {
+  content: "\e014";
 }
 .navbar-right {
   float: right !important;
