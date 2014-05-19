@@ -37,6 +37,58 @@ namespace SysUt14Gr03.Migrations
             rettigheter.ForEach(element => context.Rettigheter.AddOrUpdate(rettighet => rettighet.RettighetNavn, element));
             context.SaveChanges();
 
+            var statuser = new List<Status> {
+                new Status {
+                    Navn = "Klar"
+                },
+                new Status {
+                    Navn = "Igangsatt"
+                },
+                new Status {
+                    Navn = "Ferdig"
+                },
+                new Status {
+                    Navn = "Utgår"
+                }
+            };
+            statuser.ForEach(element => context.Statuser.AddOrUpdate(status => status.Navn, element));
+            context.SaveChanges();
+
+            var prioriteringer = new List<Prioritering> {
+                new Prioritering {
+                    Navn = "1"
+                },
+                new Prioritering {
+                    Navn = "2"
+                },
+                new Prioritering {
+                    Navn = "3"
+                },
+                new Prioritering {
+                    Navn = "4"
+                },
+                new Prioritering {
+                    Navn = "5"
+                },
+                new Prioritering {
+                    Navn = "6"
+                },
+                new Prioritering {
+                    Navn = "7"
+                },
+                new Prioritering {
+                    Navn = "8"
+                },
+                new Prioritering {
+                    Navn = "9"
+                },
+                new Prioritering {
+                    Navn = "10"
+                }
+            };
+            prioriteringer.ForEach(element => context.Prioriteringer.AddOrUpdate(prioritering => prioritering.Navn, element));
+            context.SaveChanges();
+
             var notifikasjonsTyper = new List<NotifikasjonsType> {
                 new NotifikasjonsType {
                     Type = "alert-success"
