@@ -167,11 +167,13 @@ namespace SysUt14Gr03.Classes
             // Genererer melding + tittel
             string tittel = mottaker.ToString() + " ønsker hjelp";
 
-                Oppgave o = Queries.GetOppgave(oppgave_id);
+            Oppgave o = Queries.GetOppgave(oppgave_id);
+            if (o != null)
+            {
                 melding += "<a href=\"http://malmen.hin.no/SysUt14Gr03/MottaOppgave.aspx?oppgave_id="
                     + oppgave_id + "&bruker_id=" + avsender_id + "\">" + o.Tittel + "</a>";
-
-
+            }
+                
             if (oppgaveVarsel)
             {
                 string epost = mottaker.Epost;

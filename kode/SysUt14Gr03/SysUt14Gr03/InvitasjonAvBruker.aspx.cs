@@ -64,9 +64,8 @@ namespace SysUt14Gr03
         {
             
             brukerid = Convert.ToInt32(ddlBrukere.SelectedValue);
-            int oppgave_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
             // Sorry Eivind
-            Varsel.SendInvitasjon(brukerid, innloggetbruker.Bruker_id, oppgave_id, innloggetbruker.ToString() + " trenger hjelp til oppgaven: ");
+            Varsel.SendInvitasjon(brukerid, innloggetbruker.Bruker_id, oppgaveid, innloggetbruker.ToString() + " trenger hjelp til oppgaven: ");
             Oppgave oppgave = Queries.GetOppgave(oppgaveid);
             Session["flashMelding"] = "Invitasjon til hjelp av oppgave " + oppgave.Tittel + " er sendt til " + ddlBrukere.SelectedItem.ToString();
             Session["flashStatus"] = Konstanter.notifikasjonsTyper.info.ToString();
