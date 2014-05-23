@@ -28,7 +28,7 @@ namespace SysUt14Gr03
                 bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
                 prosjekt_id = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
                 Prosjekt prosjekt = Queries.GetProsjekt(prosjekt_id);
-
+                prosjektNavn = prosjekt.Navn;
                 // Legger til Opprett oppgave knapp om innlogget bruker er prosjektlederen for prosjektet.
                 if (prosjekt.Bruker_id == bruker_id)
                 {

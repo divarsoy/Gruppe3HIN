@@ -508,7 +508,7 @@
     <Content Include="VisProsjekt.aspx" />
     <Content Include="VisRapport.aspx" />
     <Content Include="VisTeam.aspx" />
-    <Content Include="Web.config" />
+    <None Include="Web.config" />
     <Content Include="Bundle.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
