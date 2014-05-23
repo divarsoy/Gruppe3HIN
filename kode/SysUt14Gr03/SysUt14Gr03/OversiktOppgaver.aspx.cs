@@ -85,7 +85,7 @@ namespace SysUt14Gr03
 
         protected void btnOpprettOppgave_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Prosjektleder/OpprettOppgave", true);
+            Response.Redirect("~/OpprettOppgave", true);
         }
     }
 }
