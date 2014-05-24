@@ -77,7 +77,21 @@ namespace SysUt14Gr03
 
                     }
 
-                    lblTittel.Text = "Manuell timeregistrering på oppgave " + oppgave.Tittel;
+                    lblTittel.Text = "Manuell timeregistrering på " + oppgave.RefOppgaveId + " " + oppgave.Tittel;
+
+                    lblInfo.Text = "Deltakere: ";
+                    foreach (Bruker bruker in oppgave.Brukere)
+                    {
+                        TimeSpan sum = new TimeSpan(0);
+                        List<Time> timeListe = Queries.GetTimerForOppgaveOgBruker(oppgave_id, bruker.Bruker_id);
+                        foreach (Time t in timeListe)
+                            sum += t.Tid;
+
+                        lblInfo.Text += "<p><a href=\"VisBruker.aspx?bruker_id=" + bruker.Bruker_id + "\">" + bruker.IM + "</a>";
+                        lblInfo.Text += ": " + (int)sum.TotalHours + "t " + sum.Minutes + "m";
+                        lblInfo.Text += "</p>\n";
+                    }
+                    lblInfo.Visible = true;
 
                     if (ViewState["pauseteller"] != null)
                     {
@@ -396,6 +410,9 @@ namespace SysUt14Gr03
 
             }
 
+            DateTime startDate = new DateTime(dato.Year, dato.Month, dato.Day, startTid.Hour, startTid.Minute, startTid.Second);
+            DateTime sluttDate = new DateTime(dato.Year, dato.Month, dato.Day, sluttTid.Hour, sluttTid.Minute, sluttTid.Second);
+
             using (var context = new Context())
             {
                 oppgave = context.Oppgaver.Where(o => o.Oppgave_id == oppgave_id).FirstOrDefault();
@@ -403,15 +420,15 @@ namespace SysUt14Gr03
                 var time = new Time
                 {
                     Tid = bruktTid,
-                    Opprettet = dato,
+                    Opprettet = DateTime.Now,
                     Manuell = true,
                     Aktiv = true,
                     IsFerdig = godkjent,
                     Pause = pauseListe,
                     Bruker = bruker,
                     Oppgave = oppgave,
-                    Start = startTid,
-                    Stopp = sluttTid
+                    Start = startDate,
+                    Stopp = sluttDate
                 };
 
                 // Hvis timen ikke er godkjent oppdateres ikke brukt tid på oppgaven

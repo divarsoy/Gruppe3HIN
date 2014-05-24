@@ -9,6 +9,8 @@
       <asp:Label ID="lblTittel" runat="server"></asp:Label>
 
     </h1>
+
+    <asp:Label ID="lblInfo" runat="server" Text="Label" Visible="false"></asp:Label>
     <div class="form-group">
             <div class="row">
                 <div style="display: inline-block" class="col-md-2">

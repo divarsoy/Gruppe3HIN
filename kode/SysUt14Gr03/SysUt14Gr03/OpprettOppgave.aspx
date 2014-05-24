@@ -26,7 +26,7 @@
                         <label for="TbEstimering">Estimert tid</label>
                         <asp:TextBox ID="TbEstimering" TextMode="Time" CssClass="form-control" runat="server"  placeholder="Tid i formatet 00:00"></asp:TextBox>
                         <asp:RequiredFieldValidator id="RequiredFieldValidatorEstimering" Display="Dynamic" runat="server" CssClass="feilMelding" ErrorMessage="Må fylles ut!<br />" ControlToValidate="tbEstimering"></asp:RequiredFieldValidator>
-                        <asp:RegularExpressionValidator id="RegularExpressionValidatorEstimertTid" Display="Dynamic" runat="server" CssClass="feilMelding" ControlToValidate="tbEstimering" ErrorMessage="Tidsestimatet må være riktig format!<br />" ValidationExpression="^(2[0-3]|1[0-2]|0[1-9]):[0-5][0-9]$"></asp:RegularExpressionValidator>
+                        <asp:RegularExpressionValidator id="RegularExpressionValidatorEstimertTid" Display="Dynamic" runat="server" CssClass="feilMelding" ControlToValidate="tbEstimering" ErrorMessage="Tidsestimatet må være riktig format!<br />" ValidationExpression="^(2[0-3]|1[0-2]|0[0-9]):[0-5][0-9]$"></asp:RegularExpressionValidator>
 
                         <label for ="ddlFaser">Fase</label>
                         <asp:DropDownList ID="ddlFaser" CssClass="form-control" runat="server"></asp:DropDownList>
