@@ -396,6 +396,9 @@ namespace SysUt14Gr03
 
             }
 
+            DateTime startDate = new DateTime(dato.Year, dato.Month, dato.Day, startTid.Hour, startTid.Minute, startTid.Second);
+            DateTime sluttDate = new DateTime(dato.Year, dato.Month, dato.Day, sluttTid.Hour, sluttTid.Minute, sluttTid.Second);
+
             using (var context = new Context())
             {
                 oppgave = context.Oppgaver.Where(o => o.Oppgave_id == oppgave_id).FirstOrDefault();
@@ -403,15 +406,15 @@ namespace SysUt14Gr03
                 var time = new Time
                 {
                     Tid = bruktTid,
-                    Opprettet = dato,
+                    Opprettet = DateTime.Now,
                     Manuell = true,
                     Aktiv = true,
                     IsFerdig = godkjent,
                     Pause = pauseListe,
                     Bruker = bruker,
                     Oppgave = oppgave,
-                    Start = startTid,
-                    Stopp = sluttTid
+                    Start = startDate,
+                    Stopp = sluttDate
                 };
 
                 // Hvis timen ikke er godkjent oppdateres ikke brukt tid på oppgaven

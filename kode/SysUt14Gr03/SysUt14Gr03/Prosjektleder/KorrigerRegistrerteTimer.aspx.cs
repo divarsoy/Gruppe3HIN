@@ -382,6 +382,10 @@ namespace SysUt14Gr03.Prosjektleder
             DateTime startTid = (DateTime)ViewState["startTid"];
             DateTime sluttTid = (DateTime)ViewState["sluttTid"];
             DateTime dato = DateTime.Parse(txtDato.Text);
+
+            DateTime startDate = new DateTime(dato.Year, dato.Month, dato.Day, startTid.Hour, startTid.Minute, startTid.Second);
+            DateTime sluttDate = new DateTime(dato.Year, dato.Month, dato.Day, sluttTid.Hour, sluttTid.Minute, sluttTid.Second);
+
             if (ViewState["pauseStartListe"] != null)
             {
                 pauseStartListe = ViewState["pauseStartListe"] as List<DateTime>;
@@ -417,10 +421,9 @@ namespace SysUt14Gr03.Prosjektleder
 
                 // http://www.codeproject.com/Tips/61339/Replace-an-Entity-in-Entity-Framework-Context
 
-                time.Opprettet = dato;
                 time.Tid = bruktTid;
-                time.Start = startTid;
-                time.Stopp = sluttTid;
+                time.Start = startDate;
+                time.Stopp = sluttDate;
                 foreach (Pause p in pauseListe)
                 {
                     Pause pausex = context.Pauser.Where(c => c.Pause_id == p.Pause_id).FirstOrDefault();
