@@ -8,6 +8,11 @@ using SysUt14Gr03.Classes;
 
 namespace SysUt14Gr03
 {
+    /// <summary>
+    /// Når man logger ut så setter man alle session til null så dem ikke enda er aktiv. viss ikke kan andre som 
+    /// er med personens pc bare gå rett inn uten å logge seg på. Stort sikkerhets glipp viss ikke session hadde 
+    /// blitt stengt. 
+    /// </summary>
     public partial class Loggut : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)

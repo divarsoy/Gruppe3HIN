@@ -11,6 +11,11 @@ using SysUt14Gr03.Models;
 
 namespace SysUt14Gr03.Classes
 {
+    /// <summary>
+    /// Her lage vi alle tabellene vi bruker i dette prosjektet så frem til at vi ikke har brukt gridview. 
+    /// Legger til alle linkene som vi har bruker i de forskjellige tabellene også.
+    /// Alle tabeller som vi bruker til vanlige html tabeller
+    /// </summary>
     public class Tabeller
     {
         public static Table HentOppgaveTabell (List<Oppgave> query)

@@ -10,6 +10,9 @@ using SysUt14Gr03.Models;
 
 namespace SysUt14Gr03.Classes
 {
+    /// <summary>
+    /// Dette er en default email klasse som vi bruker til sending av email. Kan sende til flere eller bare en bruker samtidig. 
+    /// </summary>
     public class sendEmail : System.Web.UI.Page // (bør bruke stor forbokstav i klassenavn)
     {
         private string password = "blahimmel";
@@ -32,9 +35,9 @@ namespace SysUt14Gr03.Classes
                 if(users != null)
                     for (int i = 0; i < users.Count; i++)
                         msg.To.Add(users[i].Epost);
-                else if(brukere != null)
+                /*else if(brukere != null)
                     for (int i = 0; i < users.Count; i++)
-                        msg.To.Add(brukere[i].ToString());
+                        msg.To.Add(brukere[i].ToString());*/
                 else
                     msg.To.Add(epost);
 

@@ -10,10 +10,12 @@ using System.Web.UI.DataVisualization.Charting;
 
 namespace SysUt14Gr03.Classes
 {
-
+    /// <summary>
+    /// datatabeller og tabeller har forskjellige bruksområder, 
+    /// datatabellene har vi brukt til eksport til excel blant annet
+    /// </summary>
     public class DataTabeller
     {
-
         public static DataTable OversiktBrukere(List<Bruker> query)
         {
             DataTable dt = new DataTable();

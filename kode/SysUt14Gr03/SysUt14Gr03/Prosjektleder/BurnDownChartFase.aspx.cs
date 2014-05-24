@@ -10,15 +10,20 @@ using System.Web.UI.DataVisualization.Charting;
 
 namespace SysUt14Gr03.Prosjektleder
 {
+    /// <summary>
+    /// Her henter man ut burndown diagrammet for en fase. Henter ut alle fasene i et prosjekt, setter dem i en
+    /// dropdown liste før man velge hvilken fase hvor man sender inn iden til fasen man vil se diagrammet i
+    /// </summary>
     public partial class BurnDownChartFase : System.Web.UI.Page
     {
         Chart chart = new Chart();
         private Fase fase;
-    /*    protected void Page_PreInit(Object sener, EventArgs e)
+        
+        protected void Page_PreInit(Object sener, EventArgs e)
         {
             string master = SessionSjekk.findMaster();
             this.MasterPageFile = master;
-        } */
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {

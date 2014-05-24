@@ -6,6 +6,10 @@ using SysUt14Gr03.Models;
 
 namespace SysUt14Gr03
 {
+    /// <summary>
+    /// Henter ut alle oppgaver for et prosjekt viss man er prosjekt leder eller viss du er bruker får du bare dine 
+    /// oppgaver i prosjektet, også sette det i en tabell
+    /// </summary>
     public partial class OversiktOppgaver : System.Web.UI.Page
     {
         private List<Oppgave> query = null;
@@ -21,13 +25,12 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
-
                 SessionSjekk.sjekkForBruker_id();
                 SessionSjekk.sjekkForProsjekt_id();
                 bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
                 prosjekt_id = Validator.KonverterTilTall(Session["prosjekt_id"].ToString());
                 Prosjekt prosjekt = Queries.GetProsjekt(prosjekt_id);
+                prosjektNavn = prosjekt.Navn;
 
                 // Legger til Opprett oppgave knapp om innlogget bruker er prosjektlederen for prosjektet.
                 if (prosjekt.Bruker_id == bruker_id)
@@ -77,9 +80,6 @@ namespace SysUt14Gr03
                     Session["flashStatus"] = Konstanter.notifikasjonsTyper.danger;
                     Response.Redirect(Request.UrlReferrer.ToString(), true);
                 }
-
-
-
             }
         }
 

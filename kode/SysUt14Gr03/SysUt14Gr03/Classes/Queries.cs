@@ -8,8 +8,13 @@ using SysUt14Gr03.Models;
 
 namespace SysUt14Gr03.Classes
 {
+    /// <summary>
+    /// Her har vi alle querisene vi bruker for å hente ting ut av databasen. Overskriftene til hver metode
+    /// er rimelig selvforklarende. 
+    /// </summary>
     public class Queries
     {
+        //Henter en bruker
         static public Bruker GetBruker(int _bruker_id)
         {
             using (var context = new Context())
@@ -24,6 +29,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Enter en bruker med en rettighet(utvikler, prosjektleder eller admin)
         static public Bruker GetBrukerMedRettighet(int _bruker_id, Konstanter.rettighet _rettighet)
         {
             using (var context = new Context())
@@ -38,6 +44,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Henter en bruker med en epost
         static public Bruker GetBrukerVedEpost(string epost)
         {
             using (var context = new Context())
@@ -46,6 +53,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Henter en bruker med en IM
         static public Bruker GetBrukerVedIM(string IM)
         {
             using (var context = new Context())
@@ -58,6 +66,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Henter ut en bruker med et brukernavn
         static public Bruker GetBrukerVedBrukernavn(string brukernavn)
         {
             using (var context = new Context())
@@ -66,6 +75,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Henter ut alle brukere med rettigheten prosjektleder
         static public List<Bruker> GetProsjektledere(Konstanter.rettighet _rettighet)
         {
             using (var context = new Context())
@@ -78,6 +88,8 @@ namespace SysUt14Gr03.Classes
                 return prosjektLedere;
             }
         }
+
+        //Henter ut alle fase for et prosjekt
         static public List<Fase> GetFaseForProsjekt(int prosjekt_id)
         {
             using (var context = new Context())
@@ -90,6 +102,8 @@ namespace SysUt14Gr03.Classes
                 return faseListe;
             }
         }
+
+        //Henter ut en fase
         static public Fase GetFase(int fase_id)
         {
             using (var context = new Context())
@@ -103,6 +117,8 @@ namespace SysUt14Gr03.Classes
                 return fase;
             }
         }
+
+        //Henter ut en timer
         static public Time GetTimer(int time_id)
         {
             using (var context = new Context())
@@ -116,6 +132,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Henter ut en timer med en oppgave og at den ikke er ferdig
         static public Time GetTimerMedOppgaveIDBoolean(int oppgaveID, bool isFerdig)
         {
             using (var context = new Context())
@@ -128,6 +145,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //hente ut en pause 
         static public Pause GetPauseMedPauseID(int pause_id)
         {
             using (var context = new Context())
@@ -139,6 +157,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Henter ut alle pause for en timer
         static public List<Pause> GetPauseMedTimeID(int time_id)
         {
             using (var context = new Context())
@@ -149,6 +168,8 @@ namespace SysUt14Gr03.Classes
                 return pause;
             }
         }
+
+        //Henter ut en pause for en oppgave
         static public Pause GetPauseMedOppgaveID(int oppgave_id, bool isFerdig)
         {
             using (var context = new Context())
@@ -160,6 +181,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Henter ut alle pause for en oppgave
         static public List<Pause> GetPauserMedOppgaveID(int oppgave_id)
         {
             using(var context = new Context())
@@ -171,6 +193,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Henter ut alle timere for en bruker
         static public List<Time> GetTimerForBruker(int bruker_id)
         {
             using (var context = new Context())
@@ -184,6 +207,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Henter ut alle timere som skal godkjennes
         static public List<Time> GetTimerForGodkjenning(int oppgave_id)
         {
             using (var context = new Context())
@@ -200,6 +224,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //henter ut alle timere for en oppgave
         static public List<Time> GetTimerForOppgave(int oppgave_id)
         {
             using (var context = new Context())
@@ -212,6 +237,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Henter ut alle timere for en oppgave og bruker
         static public List<Time> GetTimerForOppgaveOgBruker(int oppgave_id, int bruker_id)
         {
             using (var context = new Context())
@@ -225,6 +251,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Henter ut alle notifikasjoner fra en bruker
         static public List<Notifikasjon> GetNotifikasjon(int bruker_id)
         {
             using (var context = new Context())
@@ -237,6 +264,8 @@ namespace SysUt14Gr03.Classes
                 return notifikasjonsListe;
             }
         }
+
+        //Henter ut en notifikasjons type
         static public NotifikasjonsType GetNotifikasjonsType(int notifikasjonsType_id)
         {
             using (var context = new Context())
@@ -277,6 +306,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Henter ut et prosjekt
         static public Prosjekt GetProsjekt(int prosjekt_id)
         {
             using (var context = new Context())
@@ -289,6 +319,8 @@ namespace SysUt14Gr03.Classes
                 return prosjekt;
             }
         }
+
+        //Henter ut alle aktive prosjekter for en prosjektleder
         static public List<Prosjekt> GetAlleAktiveProsjekterForProsjektLeder(int bruker_id) 
         {
             using (var context = new Context()) {
@@ -300,6 +332,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Henter ut alle kommentarer til en oppgave
         static public List<Kommentar> GetAlleKommentarerTilOppgave(int oppgave_id)
         {
             using (var context = new Context())
@@ -310,6 +343,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Henter ut en status
         static public Status GetStatus(int _status_id)
         {
             using (var context = new Context())
@@ -319,6 +353,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Henter ut en prioritering
         static public Prioritering GetPrioritering(int _prioritering_id)
         {
             using (var context = new Context())
@@ -327,7 +362,8 @@ namespace SysUt14Gr03.Classes
                 return result;
             }
         }
-
+        
+        //Henter ut alle oppgaver som står på denne oppgaven
         static public List<Bruker> GetBrukereForOppgave(int oppgave_id)
         {
             using (var context = new Context())
@@ -338,7 +374,8 @@ namespace SysUt14Gr03.Classes
                 return brukerListe;
             }
         }
-
+        
+        //Henter ut en oppgave
         static public Oppgave GetOppgave(int oppgave_id)
         {
             using (var context = new Context())
@@ -357,6 +394,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Henter ut alle oppgaver for et prosjekt
         static public List<Oppgave> GetOppgaveIProsjekt(int prosjekt_id)
         {
             using (var context = new Context())
@@ -373,6 +411,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Henter ut alle oppgaver i en fase
         static public List<Oppgave> getOppgaverIFase(int fase_id)
         {
             using (var context = new Context())
@@ -384,6 +423,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Henter ut alle oppgaver i en oppgavegruppe
         static public List<Oppgave> GetOppgaverIOppgaveGruppe(int oppgaveGruppe_id)
         {
             using (var context = new Context())
@@ -395,6 +435,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Henter ut en oppgave med en timeregistrering id
         public static Oppgave GetOppgaveMedTimer(int time_id)
         {
             using (var context = new Context())
@@ -408,6 +449,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Henter ut alle logger for en bruker
         static public List<Logg> GetLoggForBruker(int bruker_id)
         {
             using (var context = new Context())
@@ -420,6 +462,7 @@ namespace SysUt14Gr03.Classes
             }
         }
         
+        //Henter ut prosjektlederen for prosjektet
         static public List<Prosjekt> GetProsjektLeder(int prosjekt_id)
         {
             using (var context = new Context())
@@ -431,6 +474,8 @@ namespace SysUt14Gr03.Classes
             
             }
         }
+
+        //Henter ut alle aktive brukere
         static public List<Bruker> GetAlleAktiveBrukere()
         {
             using (var context = new Context())
@@ -443,6 +488,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Henter ut alle brukere
         static public List<Bruker> GetAlleBrukere()
         {
             using (var context = new Context())
@@ -451,6 +497,8 @@ namespace SysUt14Gr03.Classes
                 return brukerListe;
             }
         }
+
+        //Henter ut en aktive bruker og legger den i en liste
         static public List<Bruker> GetAlleAktiveBrukereID(int bruker_id)
         {
             using (var context = new Context())
@@ -462,6 +510,8 @@ namespace SysUt14Gr03.Classes
 
             }
         }
+
+        //Henter ut alle brukere på et team
         static public List<Bruker> GetAlleBrukerePaaTeam(int valgtTeam_id)
         {
             using (var context = new Context())
@@ -474,7 +524,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
-
+        //Henter ut alle aktive prosjekt
         static public List<Prosjekt> GetAlleAktiveProsjekter()
         {
             using (var context = new Context())
@@ -487,6 +537,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Henter alle påbegynte oppgaver for en bruker
         static public List<Oppgave> GetAllePabegynteOppgaverForBruker(int bruker_id)
         {
             using (var context = new Context())
@@ -502,6 +553,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Henter ut alle ferdige oppgaver for en bruker
         static public List<Oppgave> GetAlleFerdigeOppgaverForBruker(int bruker_id)
         {
             using (var context = new Context())
@@ -517,6 +569,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Henter ut alle aktive prosjekter for en bruker
         static public List<Prosjekt> GetAlleAktiveProsjekterForBruker(int bruker_id) 
         {
             using (var context = new Context()) 
@@ -529,6 +582,8 @@ namespace SysUt14Gr03.Classes
                 return prosjektListe;      
             }
         }
+
+        //Henter ut alle prosjekter for en av prosjektlederene
         static public List<Prosjekt> GetAlleProsjekterForLeder(int bruker_id)
         {
             using (var context = new Context())
@@ -539,6 +594,8 @@ namespace SysUt14Gr03.Classes
                 return prosjektListe;
             }
         }
+
+        //Henter ut alle brukere i et prosjekt som har et team
         static public List<Prosjekt> GetAlleBrukereProsjektTeam(int team_id)
         {
             using (var context = new Context())
@@ -549,6 +606,8 @@ namespace SysUt14Gr03.Classes
                 return prosjektListe;
             }
         }
+
+        //Henter ut alle statusene
         static public List<Status> GetAlleStatuser()
         {
             using (var context = new Context())
@@ -557,6 +616,8 @@ namespace SysUt14Gr03.Classes
                 return statusListe;
             }
         }
+
+        //Henter ut alle prioriteringer 
         static public List<Prioritering> GetAllePrioriteringer(){
 
             using (var context = new Context())
@@ -567,26 +628,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
-        /*
-         * Ikke klar
-        static public List<Team> GetTeamFromGruppe(int _gruppe_id)
-        {
-            using (var context = new Context())
-            {
-                var IQueryList = context.Teams.Where(p => p. == _gruppe_id);
-                if (IQueryList.Any())
-                {
-                    return IQueryList.ToList<Bruker>();
-                }
-                else
-                {
-                    return null;
-                }
-
-            }
-        }
-         * */
-
+        //Henter ut et team
         static public Team GetTeam(int team_id)
         {
             using (var context = new Context())
@@ -596,6 +638,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Henter ut en rettighet
         static public Rettighet GetRettighet(int bruker_id)
         {
             using (var context = new Context())
@@ -607,6 +650,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Henter ut en rettighet med en id
         static public Rettighet GetRettighetId(int rettighet_id)
         {
             using (var context = new Context())
@@ -617,6 +661,8 @@ namespace SysUt14Gr03.Classes
                 return rettighet;
             }
         }
+
+        //Henter ut alle rettighetene
         static public List<Rettighet> GetAlleRettigheter()
         {
             using (var context = new Context())
@@ -626,6 +672,8 @@ namespace SysUt14Gr03.Classes
                 return rettigheter;
             }
         }
+
+        //Henter ut rettigheten utvikler
         static public List<Rettighet> GetNoenRettigheter()
         {
             using (var context = new Context())
@@ -637,6 +685,8 @@ namespace SysUt14Gr03.Classes
                 return rettigheter;
             }
         }
+
+        //Hente ut alle aktive team
         static public List<Team> GetAlleAktiveTeam()
         {
             using (var context = new Context())
@@ -650,6 +700,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Henter ut alle arkiverte team
         static public List<Team> GetAlleArkiverteTeam()
         {
             using (var context = new Context())
@@ -661,6 +712,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Henter ut et team med navn
         static public Team GetTeamByName(string teamName)
         {
             using (var context = new Context())
@@ -671,6 +723,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Henter ut et team med prosjekt_id
         static public Team GetTeamByProsjekt(int prosjekt_id)
         {
             using (var context = new Context())
@@ -680,6 +733,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Henter ut et team ved team_id
         static public Team GetTeamById(int teamId)
         {
             using (var context = new Context())
@@ -689,6 +743,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Henter ut alle aktive oppgaver
         static public List<Oppgave> GetAlleAktiveOppgaver()
         {
             using (var context = new Context())
@@ -701,6 +756,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Henter alle aktive oppgaver for et prosjekt
         static public List<Oppgave> GetAlleAktiveOppgaverForProsjekt(int _prosjekt_id)
         {
             using (var context = new Context())
@@ -716,6 +772,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Henter alle oppgaver for en bruker i prosjekte personen er med i
         static public List<Oppgave> GetAlleAktiveOppgaverForProsjektOgBruker(int _prosjekt_id, int _bruker_id)
         {
             using (var context = new Context())
@@ -732,6 +789,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Henter alle oppgaver for et prosjekt
         static public List<Oppgave> GetAlleOppgaverForProsjekt(int _prosjekt_id)
         {
             using (var context = new Context())
@@ -746,6 +804,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Henter alle oppgaver for et prosjekt som er sortert med den siste først
         static public List<Oppgave> GetAlleOppgaverForProsjektSortertLast(int _prosjekt_id)
         {
             using (var context = new Context())
@@ -759,6 +818,8 @@ namespace SysUt14Gr03.Classes
                 return oppgaveListe;
             }
         }
+
+        //Henter alle aktive oppgaver for en bruker
         static public List<Oppgave> GetAlleAktiveOppgaverForBruker(int _bruker_id)
         {
             using (var context = new Context())
@@ -776,7 +837,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
-
+        //Henter alle brukerene i et team
         static public List<Bruker> GetAlleBrukereIEtTeam(int _team_id)
         {
             int team_id = _team_id;
@@ -790,6 +851,8 @@ namespace SysUt14Gr03.Classes
                 return brukerListe;
             }
         }
+
+        //Henter alle brukerene i et team
         static public List<Bruker> GetAlleBrukereEtTeam(int _team_id)
         {
             int team_id = _team_id;
@@ -804,6 +867,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Henter alle brukere i et prosjekt
         static public List<Bruker> GetAlleBrukereIEtProjekt(int prosjekt_id)
         {
             using (var context = new Context())
@@ -819,6 +883,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Henter alle prosjekter som en bruker er med i
         static public List<Prosjekt> GetAlleProsjektEnBrukerErMedI(int bruker_id)
         {
             using (var context = new Context())
@@ -830,6 +895,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Henter alle kommentarer til en bruker
         static public List<Kommentar> GetAlleKommentarTilBruker(int brukder_id)
         {
             using (var context = new Context())
@@ -842,6 +908,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Henter ut alle møter en bruker er satt opp til
         static public List<Moete> GetAlleMoeterFraBrukerErMedI(int bruker_id)
         {
             using (var context = new Context())
@@ -853,6 +920,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Henter ut alle teamene som en bruker er med i
         static public List<Team> GetAlleTeamsEnBrukerErMedI(int _bruker_id)
         {
             int bruker_id = _bruker_id;
@@ -864,6 +932,7 @@ namespace SysUt14Gr03.Classes
                 return teamListe;
             }
         }
+
         static public List<Team> GetTeamMedList(int team_id)
         {
             using (var context = new Context())
@@ -872,59 +941,6 @@ namespace SysUt14Gr03.Classes
                                  where team.Team_id == team_id
                                  select team).ToList<Team>();
                 return teamListe;
-            }
-        }
-        public static string GetProsjektNavn(int prosjekt_id)
-        {
-            using (SqlCommand command = new SqlCommand())
-            {
-                string prosjektNavn = string.Empty;
-                string query = "SELECT * FROM Prosjekt WHERE Bruker_id = " + prosjekt_id + "'";
-                command.Connection = new SqlConnection(ConfigurationManager.ConnectionStrings["sysUt14Gr03"].ConnectionString);
-                
-                var reader = command.ExecuteReader();
-                
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        prosjektNavn = reader.GetString(1);
-                    }
-                }
-                else
-                {
-                    prosjektNavn = "Fikk ikke hentet ut informasjon fra tabellen Prosjekt";
-                }
-                reader.Close();
-                command.Connection.Close();
-                return prosjektNavn;
-            }
-        }
-        // Fungerer ikke pls fix
-        public static string getStatusNavn(int status_id)
-        {
-            using (SqlCommand command = new SqlCommand())
-            {
-                string statusNavn = string.Empty;
-                string query = "SELECT * FROM Status WHERE Bruker_id = " + status_id + "'";
-                command.Connection = new SqlConnection(ConfigurationManager.ConnectionStrings["sysUt14Gr03"].ConnectionString);
-
-                var reader = command.ExecuteReader();
-
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        statusNavn = reader.GetString(1);
-                    }
-                }
-                else
-                {
-                    statusNavn = "Fikk ikke hentet ut informasjon fra tabellen Prosjekt";
-                }
-                reader.Close();
-                command.Connection.Close();
-                return statusNavn;
             }
         }
 
@@ -948,6 +964,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Arkivere et team
         public static void ArkiverTeam(Team t)
         {
             using (var context = new Context())
@@ -958,6 +975,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Aktivere et team
         public static void AktiverTeam(Team t)
         {
             using (var context = new Context())
@@ -968,6 +986,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Henter ut alle faser som er aktiv for en bruker og prosjekt
         public static List<Fase> GetAlleAktiveFaserForBrukerOgProsjekt(int bruker_id, int prosjekt_id)
         {
             using (var context = new Context())
@@ -982,6 +1001,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
+        //Får ut fasen man er i dette øyeblikket
         public static Fase GetPresentFase(int _prosjekt_id)
         {
             using (var context = new Context())
@@ -996,7 +1016,7 @@ namespace SysUt14Gr03.Classes
             }
         }
 
-
+        //Henter ut loggen for en med administrator rettigheter
         public static List<Logg> GetLoggForAdministrator()
         {
             using (var context = new Context())
@@ -1019,7 +1039,5 @@ namespace SysUt14Gr03.Classes
                 context.SaveChanges();
             }
         }
-
-
     }
 }

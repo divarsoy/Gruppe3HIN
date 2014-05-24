@@ -10,6 +10,10 @@ using SysUt14Gr03.Models;
 
 namespace SysUt14Gr03
 {
+    /// <summary>
+    /// Alle brukere/utviklere i et prosjekt kan se på denne listen og vite hvem som er i sitt prosjekt. Evt bli redirektet til hver og 
+    /// en sin bruker informasjon via linker i tabellen som alle brukerene blir lagt i. 
+    /// </summary>
     public partial class OversiktBrukerSomUtvikler : System.Web.UI.Page
     {
         private List<Bruker> queryProsjekt = null;

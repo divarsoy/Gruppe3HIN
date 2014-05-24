@@ -7,6 +7,10 @@ using SysUt14Gr03.Models;
 
 namespace SysUt14Gr03.Classes
 {
+    /// <summary>
+    /// Forskjellige sjekker for session. Slik at ingen er på sider eller steder de ikke skal være
+    /// Sikkerhets årsaker har vi disse. 
+    /// </summary>
     public class SessionSjekk : System.Web.HttpApplication
     {
         public static void sjekkForBruker_id (){

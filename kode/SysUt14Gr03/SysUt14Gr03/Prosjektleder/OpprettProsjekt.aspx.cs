@@ -12,6 +12,11 @@ using SysUt14Gr03.Models;
 
 namespace SysUt14Gr03
 {
+    /// <summary>
+    /// Her opprette vi et prosjekt, setter alle verdier for et prosjekt trenger og legger til så 
+    /// mange faser man vil og verdiene for fasen setter man også her. 
+    /// Verdier slik som navn, leder, start/stopp dato osv.
+    /// </summary>
     public partial class OpprettProsjekt : System.Web.UI.Page
     {
         private DateTime dtStart;

@@ -10,6 +10,11 @@ using SysUt14Gr03.Models;
 
 namespace SysUt14Gr03
 {
+    /// <summary>
+    /// Sjekker at man er prosjektleder også henter man ut alle aktive team også henter man ut alle brukerene
+    /// per team før man setter alle i en tabell
+    /// </summary>
+
     public partial class OversiktOverTeam : System.Web.UI.Page
     {
         private Table brukerTabell;
@@ -24,21 +29,12 @@ namespace SysUt14Gr03
         {
             SessionSjekk.sjekkForRettighetPaaInnloggetBruker(Konstanter.rettighet.Prosjektleder);
 
-            
-
                 if (!IsPostBack)
                 {
                     List<Team> teamene = Queries.GetAlleAktiveTeam();
 
                     foreach (Team team in teamene)
                     {
-//                        StringBuilder prosjektliste = new StringBuilder();
-
-//                        foreach (Prosjekt prosjekt in team.Prosjekter)
-//                        {
-//                            prosjektliste.Append(prosjekt.Navn + " ");
- //                       }
-
                         List<Bruker> query = Queries.GetAlleBrukerePaaTeam(team.Team_id);
 
                         foreach (Bruker bruker in team.Brukere)

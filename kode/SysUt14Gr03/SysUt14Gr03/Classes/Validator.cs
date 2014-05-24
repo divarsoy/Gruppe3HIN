@@ -9,6 +9,10 @@ using SysUt14Gr03.Classes;
 
 namespace SysUt14Gr03.Classes
 {
+    /// <summary>
+    /// Forskjellliger validatorer som sjekker at vi ikke skriver inn feil inn i tekstboksene eller får inn 
+    /// feile type verdier på feil plass. 
+    /// </summary>
     public static class Validator
     {
         public static int KonverterTilTall (string tekst){

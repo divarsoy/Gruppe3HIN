@@ -9,9 +9,12 @@ using SysUt14Gr03.Models;
 
 namespace SysUt14Gr03
 {
+    /// <summary>
+    /// Her får man oversikt over alle aktive prosjekter for en prosjektleder. Som blir lagt til i hver sin tabell. 
+    /// Så kan man også komme seg til opprett et prosjekt her i fra ved en knapp.
+    /// </summary>
     public partial class OversiktProsjekter : System.Web.UI.Page
     {
-
         private int bruker_id;
         private List<Prosjekt> prosjektListe;
 

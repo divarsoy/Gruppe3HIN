@@ -10,11 +10,13 @@ using SysUt14Gr03.Models;
 
 namespace SysUt14Gr03
 {
+    /// <summary>
+    /// Denne klassen tar seg av aktivering av kommentarer. man kan bare kommentere dem man selv har laget. 
+    /// </summary>
     public partial class ArkiveringAvKommentarer : System.Web.UI.Page
     {
         private List<Kommentar> kommentarList;
-        //hardkodet brukerid siden det er bare den brukeren som har kommentert
-        private int bruker_id = 2;
+        private int bruker_id;
         private int komm_id;
         private int oppg_id;
 
@@ -28,7 +30,7 @@ namespace SysUt14Gr03
         {
             if (!IsPostBack)
             {
-            
+                bruker_id = Validator.KonverterTilTall(Session["bruker_id"].ToString());
                 kommentarList = Queries.GetAlleKommentarTilBruker(bruker_id);
 
                 for (int i = 0; i < kommentarList.Count; i++)

@@ -10,6 +10,10 @@ using System.Web.UI.HtmlControls;
 
 namespace SysUt14Gr03.Prosjektleder
 {
+    /// <summary>
+    /// Som faseleder eller prosjekt leder skal man kunne ha kontroll at det faktisk blir gjort no. så her kan dem se
+    /// alle registrerte timer i prosjektet til alle brukere. satt opp ryddig i tabeller. hver bruker får sin tabell.
+    /// </summary>
     public partial class InnsynIRegistrerteTimerSomProsjektleder : System.Web.UI.Page
     {
         protected void Page_PreInit(Object sener, EventArgs e)

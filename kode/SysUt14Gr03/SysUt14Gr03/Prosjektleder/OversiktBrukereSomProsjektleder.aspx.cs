@@ -9,9 +9,12 @@ using SysUt14Gr03.Models;
 
 namespace SysUt14Gr03
 {
+    /// <summary>
+    /// Hennter ut alle brukere i teamet som er i prosjektet med prosjektleder rettigheter.
+    /// Så sette dem ut grafisk i en tabell.
+    /// </summary>
     public partial class OversiktBrukereSomProsjektleder : System.Web.UI.Page
     {
-   
         private List<Bruker> brukerProsjekt;
         private Table table;
         private int brukerid;

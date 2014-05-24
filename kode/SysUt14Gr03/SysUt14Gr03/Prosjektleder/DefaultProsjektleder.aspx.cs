@@ -11,6 +11,11 @@ using System.Data;
 
 namespace SysUt14Gr03
 {
+    /// <summary>
+    /// Forsiden for prosjektlederen. Man kan velge hvilken prosjekt man skal jobbe med. bare de prosjektene den personen
+    /// er leder for selvfølgelig. Har en kalender så man kan se datoen for i dag. Står med store bokstaver at man 
+    /// er prosjektleder, også har man prosjektleder nav baren hvor alt er.
+    /// </summary>
     public partial class DefaultProsjektleder : System.Web.UI.Page
     {
         private int bruker_id;

@@ -8,10 +8,12 @@ using System.Web.UI.DataVisualization.Charting;
 
 namespace SysUt14Gr03.Classes
 {
+    /// <summary>
+    /// Her lager vi hele burndown charte som vi bruker i prosjeket. Alt med det diagrammet blir opprettet her.
+    /// Henter og setter inn. Alt som trengs er en fase id som blir sendt inn hit.
+    /// </summary>
     public class BurnDownDiagram
     {
-
-
         public static Chart getChartForFase(int fase_id)
         {
             TimeSpan estimatForFase = new TimeSpan(0);
@@ -163,7 +165,6 @@ namespace SysUt14Gr03.Classes
             chart.Series["Ideell Tidsbruk"].Points.DataBindXY(xVerdier, idelleYVerdier);
             chart.Series["Burndown"].Points.DataBindXY(xVerdier, yVerdier);
             chart.Series["Beregnet Totaltid (fase)"].Points.DataBindXY(xVerdier, yVerdierTotal);
-
 
             return chart;
         }

@@ -9,6 +9,9 @@ using SysUt14Gr03.Classes;
 
 namespace SysUt14Gr03
 {
+    /// <summary>
+    /// Her kan man adminstrere alt som har med oppgave grupper og gjøre. Legge til/endre dem. 
+    /// </summary>
     public partial class AdministrerOppgavegruppe : System.Web.UI.Page
     {
         private int prosjekt_id = 1;

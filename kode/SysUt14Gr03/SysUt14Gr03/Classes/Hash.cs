@@ -8,6 +8,9 @@ using System.Collections;
 
 namespace SysUt14Gr03.Classes
 {
+    /// <summary>
+    /// Setter hash og salte passordet her og retunere den saltet/hashet stringen tilbake
+    /// </summary>
     static public class Hash
     {
         private static RNGCryptoServiceProvider randomGenerator = new RNGCryptoServiceProvider();

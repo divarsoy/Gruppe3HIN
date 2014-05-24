@@ -9,6 +9,10 @@ using SysUt14Gr03.Models;
 
 namespace SysUt14Gr03
 {
+    /// <summary>
+    /// Her ser man tidsestimeringen av prosjektet hvor man også kan endre den. Legge til eller trekke fra tid på 
+    /// prosjektet.
+    /// </summary>
     public partial class TidsestimerProsjekt : System.Web.UI.Page
     {
 

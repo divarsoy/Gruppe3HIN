@@ -9,6 +9,10 @@ using SysUt14Gr03.Models;
 
 namespace SysUt14Gr03
 {
+    /// <summary>
+    /// Denne ble laget helt i starten bare for oss siden vi alle var nybegynner med MSQL databasen. så denne
+    /// skulle bare være en bruksanvisning for oss for å kunne hente ting ut av databasen.
+    /// </summary>
     public partial class HowToQueryTheDatabase : System.Web.UI.Page
     {
         public Bruker bruker;
