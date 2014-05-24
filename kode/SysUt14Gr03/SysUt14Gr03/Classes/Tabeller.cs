@@ -708,9 +708,10 @@ namespace SysUt14Gr03.Classes
                 TableCell tidCell = new TableCell();
                 TableCell manuellCell = new TableCell();
 
-                oppgaveIdCell.Text = String.Format(t.Oppgave_id.ToString());
+                Oppgave oppgave = Queries.GetOppgaveMedTimer(t.Time_id);
+                oppgaveIdCell.Text = String.Format(oppgave.RefOppgaveId.ToString());
                 //oppgaveCell.Text = String.Format("<a href='VisOppgave?oppgave_id={0}'>{1}</a>", t.Oppgave_id.ToString(), t.Oppgave.ToString());
-                oppgaveCell.Text = Queries.GetOppgaveMedTimer(t.Time_id).Tittel.ToString();
+                oppgaveCell.Text = oppgave.Tittel.ToString();
                 //oppgaveCell.Text = "Oppgave";
                 opprettetCell.Text = String.Format(t.Opprettet.ToString());
                 startCell.Text = String.Format(t.Start.ToString());
