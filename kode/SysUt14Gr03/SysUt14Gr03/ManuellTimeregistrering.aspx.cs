@@ -77,7 +77,21 @@ namespace SysUt14Gr03
 
                     }
 
-                    lblTittel.Text = "Manuell timeregistrering på oppgave " + oppgave.Tittel;
+                    lblTittel.Text = "Manuell timeregistrering på " + oppgave.RefOppgaveId + " " + oppgave.Tittel;
+
+                    lblInfo.Text = "Deltakere: "
+                    foreach (Bruker bruker in oppgave.Brukere)
+                    {
+                        TimeSpan sum = new TimeSpan(0);
+                        List<Time> timeListe = Queries.GetTimerForOppgaveOgBruker(oppgave_id, bruker.Bruker_id);
+                        foreach (Time t in timeListe)
+                            sum += t.Tid;
+
+                        lblInfo.Text += "<p><a href=\"VisBruker.aspx?bruker_id=" + bruker.Bruker_id + "\">" + bruker.IM + "</a>";
+                        lblInfo.Text += ": " + (int)sum.TotalHours + "t " + sum.Minutes + "m";
+                        lblInfo.Text += "</p>\n";
+                    }
+                    lblInfo.Visible = true;
 
                     if (ViewState["pauseteller"] != null)
                     {

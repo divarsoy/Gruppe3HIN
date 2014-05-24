@@ -84,7 +84,7 @@ namespace SysUt14Gr03.Prosjektleder
 
                         }
 
-                        lblTittel.Text = "Korriger timeregistrering på oppgave " + time.Oppgave.Tittel;
+                        lblTittel.Text = "Korriger timeregistrering på " + time.Oppgave.RefOppgaveId + " " + time.Oppgave.Tittel;
 
                         if (ViewState["pauseteller"] != null)
                         {
