@@ -20,7 +20,7 @@ namespace SysUt14Gr03
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Chart chart = BurnDownDiagram.getChartForFase(10);
+            Chart chart = BurnDownDiagram.getChartForFase(7);
 
             ChartPlaceHolder.Controls.Add(chart);
         }

@@ -79,7 +79,7 @@ namespace SysUt14Gr03
 
                     lblTittel.Text = "Manuell timeregistrering på " + oppgave.RefOppgaveId + " " + oppgave.Tittel;
 
-                    lblInfo.Text = "Deltakere: "
+                    lblInfo.Text = "Deltakere: ";
                     foreach (Bruker bruker in oppgave.Brukere)
                     {
                         TimeSpan sum = new TimeSpan(0);
