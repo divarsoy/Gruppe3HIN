@@ -460,7 +460,6 @@
     <Content Include="obj\Release\Package\PackageTmp\Site.Prosjektleder.master" />
     <Content Include="obj\Release\Package\PackageTmp\Site.SysAdm.master" />
     <Content Include="obj\Release\Package\PackageTmp\Site.Utvikler.Master" />
-    <Content Include="obj\Release\Package\PackageTmp\Web.config" />
     <Content Include="obj\Release\TransformWebConfig\assist\Web.config" />
     <Content Include="obj\Release\TransformWebConfig\original\Web.config" />
     <Content Include="obj\Release\TransformWebConfig\transformed\Web.config" />
