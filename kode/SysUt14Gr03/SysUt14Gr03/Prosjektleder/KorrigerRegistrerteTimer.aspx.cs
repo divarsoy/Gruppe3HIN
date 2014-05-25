@@ -448,11 +448,15 @@ namespace SysUt14Gr03.Prosjektleder
 
                 time.IsFerdig = godkjent;
 
-                oppgave.BruktTid += bruktTid;
-                if (oppgave.RemainingTime >= bruktTid)
-                    oppgave.RemainingTime -= bruktTid;
-                else
-                    oppgave.RemainingTime = new TimeSpan(0);
+                if (godkjent)
+                {
+                    oppgave.BruktTid += bruktTid;
+                    if (oppgave.RemainingTime >= bruktTid)
+                        oppgave.RemainingTime -= bruktTid;
+                    else
+                        oppgave.RemainingTime = new TimeSpan(0);
+                }
+                
 
                 context.SaveChanges();
             }

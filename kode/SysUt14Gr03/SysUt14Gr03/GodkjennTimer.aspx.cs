@@ -57,7 +57,7 @@ namespace SysUt14Gr03
                 foreach (Time t in timeListe)
                 {
                     infoListe.Add("Bruker: " + t.Bruker.ToString()
-                        + " | dato: " + t.Opprettet.ToShortDateString()
+                        + " | dato: " + ((DateTime)t.Start).ToShortDateString()
                         + " | starttidspunkt: " + ((DateTime)t.Start).ToShortTimeString()
                         + " | sluttidspunkt: " + ((DateTime)t.Stopp).ToShortTimeString()
                         + " | varighet: " + ((int)t.Tid.TotalHours) + "t " + t.Tid.Minutes + "m");

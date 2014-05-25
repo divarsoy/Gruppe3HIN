@@ -282,6 +282,7 @@ namespace SysUt14Gr03
                 Status status = context.Statuser.FirstOrDefault(s => s.Status_id == 3);
 
                 oppgave.Status = status;
+                oppgave.Avsluttet = DateTime.Now;
                 context.SaveChanges();
             }
             Response.Redirect("OversiktOppgaver.aspx?mine=true");
